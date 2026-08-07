@@ -1,0 +1,333 @@
+<?php
+declare(strict_types=1);
+
+/**
+ * Zentrale Helfer-Funktionen für URLs, Escaping, Redirects, CSRF, Flash-Messages
+ * und deutsche Datumsformate. Werden in praktisch jedem View/Controller genutzt.
+ */
+
+/**
+ * Erzeugt eine absolute URL inkl. BASE_PATH.
+ * IMMER für interne Links/Assets verwenden, damit der Sub-Pfad-Betrieb funktioniert.
+ */
+function url(string $path = '/'): string
+{
+    if ($path === '' || $path[0] !== '/') {
+        $path = '/' . $path;
+    }
+    return BASE_PATH . $path;
+}
+
+/** Asset-URL (public/assets/...). */
+function asset(string $path): string
+{
+    return url('/assets/' . ltrim($path, '/'));
+}
+
+/**
+ * Absolute URL inkl. Schema und Host.
+ * Nur dort nötig, wo relative Pfade nicht reichen – etwa bei Open-Graph-Bildern,
+ * die Facebook/WhatsApp & Co. von außen abrufen.
+ */
+function absolute_url(string $path = '/'): string
+{
+    $host = (string) ($_SERVER['HTTP_HOST'] ?? '');
+    if ($host === '') {
+        return url($path);
+    }
+    $https  = $_SERVER['HTTPS'] ?? '';
+    $scheme = ($https !== '' && $https !== 'off') ? 'https' : 'http';
+
+    return $scheme . '://' . $host . url($path);
+}
+
+/** HTML-Escaping für die Ausgabe. IMMER bei der Ausgabe von Daten verwenden. */
+function e(?string $value): string
+{
+    return htmlspecialchars((string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+
+/** HTTP-Redirect auf eine interne Route (inkl. BASE_PATH) und beendet das Skript. */
+function redirect(string $path): never
+{
+    header('Location: ' . url($path));
+    exit;
+}
+
+// ---------------------------------------------------------------------------
+// Session, Flash, CSRF
+// ---------------------------------------------------------------------------
+
+/** Startet die Session, falls noch nicht geschehen. */
+function ensure_session(): void
+{
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+}
+
+/** Setzt eine Flash-Message (überlebt einen Redirect). Typ: success|error|info */
+function set_flash(string $type, string $message): void
+{
+    ensure_session();
+    $_SESSION['_flash'][$type] = $message;
+}
+
+/** Liest und verwirft alle Flash-Messages. */
+function take_flashes(): array
+{
+    ensure_session();
+    $flashes = $_SESSION['_flash'] ?? [];
+    unset($_SESSION['_flash']);
+    return $flashes;
+}
+
+/** Gibt den aktuellen CSRF-Token zurück (erzeugt ihn bei Bedarf). */
+function csrf_token(): string
+{
+    ensure_session();
+    if (empty($_SESSION['_csrf'])) {
+        $_SESSION['_csrf'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['_csrf'];
+}
+
+/** Verstecktes Formularfeld mit CSRF-Token. */
+function csrf_field(): string
+{
+    return '<input type="hidden" name="_csrf" value="' . e(csrf_token()) . '">';
+}
+
+/** Prüft den übermittelten CSRF-Token; bricht bei Fehlschlag mit 419 ab. */
+function verify_csrf(): void
+{
+    $sent = $_POST['_csrf'] ?? '';
+    if (!is_string($sent) || !hash_equals(csrf_token(), $sent)) {
+        http_response_code(419);
+        exit('Sitzung abgelaufen oder ungültiges Formular. Bitte erneut versuchen.');
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Views
+// ---------------------------------------------------------------------------
+
+/** Rendert einen View mit Layout. $data wird als Variablen extrahiert. */
+function view(string $template, array $data = [], string $layout = 'layout'): string
+{
+    extract($data, EXTR_SKIP);
+    ob_start();
+    require APP_ROOT . '/app/Views/' . $template . '.php';
+    $content = ob_get_clean();
+
+    if ($layout === '') {
+        return $content;
+    }
+
+    ob_start();
+    require APP_ROOT . '/app/Views/' . $layout . '.php';
+    return ob_get_clean();
+}
+
+/** Gibt einen View aus (Shortcut). */
+function render(string $template, array $data = [], string $layout = 'layout'): void
+{
+    echo view($template, $data, $layout);
+}
+
+/** Der angefragte Pfad ohne BASE_PATH und ohne Query-String. */
+function current_path(): string
+{
+    $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+    if (BASE_PATH !== '' && str_starts_with($path, BASE_PATH)) {
+        $path = substr($path, strlen(BASE_PATH));
+    }
+
+    return '/' . trim($path, '/');
+}
+
+/** Markiert die aktive Navigation (auch für Unterseiten des Pfads). */
+function nav_active(string $path): string
+{
+    $current = current_path();
+    $target  = '/' . trim($path, '/');
+
+    if ($target === '/') {
+        return $current === '/' ? ' is-active' : '';
+    }
+
+    return str_starts_with($current, $target) ? ' is-active' : '';
+}
+
+/** Markiert die aktive Navigation nur bei exakt diesem Pfad. */
+function nav_exact(string $path): string
+{
+    return current_path() === '/' . trim($path, '/') ? ' is-active' : '';
+}
+
+/**
+ * Liefert ein Inline-SVG-Icon (stroke = currentColor) aus einem festen Satz.
+ * Reine Deko – die Farbe kommt aus dem umgebenden Element, deshalb kein
+ * einziger Farbwert im Markup.
+ */
+function icon(string $name): string
+{
+    $paths = [
+        'car'       => '<path d="M3 13l1.8-4.5A2 2 0 0 1 6.6 7h10.8a2 2 0 0 1 1.8 1.3L21 13v4a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H6v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Z"/><path d="M5 13h14"/><circle cx="7.5" cy="15.3" r="1"/><circle cx="16.5" cy="15.3" r="1"/>',
+        'calendar'  => '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="8.5" cy="14.5" r="1"/><circle cx="12" cy="14.5" r="1"/>',
+        'clock'     => '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/>',
+        'heart'     => '<path d="M20.8 6.6a5.1 5.1 0 0 0-7.2 0L12 8.2l-1.6-1.6a5.1 5.1 0 1 0-7.2 7.2l8.8 8.8 8.8-8.8a5.1 5.1 0 0 0 0-7.2Z"/>',
+        'road'      => '<path d="M5 21 8 3M19 21 16 3"/><path d="M12 4v3M12 11v3M12 18v3"/>',
+        'trailer'   => '<path d="M2 14V9a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v5"/><path d="M2 14h9"/><circle cx="6.5" cy="16.2" r="2.2"/><path d="M11 11h3l1.6 3H22v3h-2.6"/><circle cx="17.6" cy="17.2" r="2.2"/><path d="M8.7 17h6.7"/>',
+        'shield'    => '<path d="M12 3l7.5 3v5.4c0 4.6-3.1 8.8-7.5 10.1-4.4-1.3-7.5-5.5-7.5-10.1V6Z"/><path d="m9.2 12.2 2 2 3.6-3.8"/>',
+        'sparkles'  => '<path d="m12 3 1.7 4.6L18.3 9l-4.6 1.4L12 15l-1.7-4.6L5.7 9l4.6-1.4Z"/><path d="m18 15 .8 2.2 2.2.8-2.2.8L18 21l-.8-2.2-2.2-.8 2.2-.8Z"/>',
+        'chat'      => '<path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-5.6A8 8 0 0 1 13 4a8 8 0 0 1 8 8Z"/>',
+        'phone'     => '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/>',
+        'mail'      => '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+        'pin'       => '<path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/>',
+        'tiktok'    => '<path d="M16 4c.4 2.4 2 4 4.4 4.2v3.1c-1.7.1-3.2-.4-4.4-1.3v5.6a5.9 5.9 0 1 1-5.1-5.8v3.2a2.7 2.7 0 1 0 1.9 2.6V4Z"/>',
+        'instagram' => '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/>',
+        'default'   => '<circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2"/>',
+    ];
+
+    $inner = $paths[$name] ?? $paths['default'];
+
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" '
+        . 'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' . $inner . '</svg>';
+}
+
+/**
+ * Das Einzugsgebiet als lesbarer Satzteil: "Neu Wulmstorf, Buxtehude, Stade und Hamburg".
+ * Für Aufzählungen mit Trennzeichen stattdessen implode() auf config('contact.area').
+ */
+function area_sentence(string $conjunction = 'und'): string
+{
+    $orte = config('contact.area', []);
+    if (!$orte) {
+        return '';
+    }
+    if (count($orte) === 1) {
+        return $orte[0];
+    }
+    $last = array_pop($orte);
+
+    return implode(', ', $orte) . ' ' . $conjunction . ' ' . $last;
+}
+
+/** Profil-URL zu Sarahs TikTok-Kanal. */
+function tiktok_url(): string
+{
+    return 'https://www.tiktok.com/@' . config('social.tiktok_handle');
+}
+
+/** Profil-URL zu Sarahs Instagram-Kanal. */
+function instagram_url(): string
+{
+    return 'https://www.instagram.com/' . config('social.instagram_handle');
+}
+
+/** Liest alten Formularwert nach Validierungsfehler. */
+function old(string $key, array $values, string $default = ''): string
+{
+    return e((string) ($values[$key] ?? $default));
+}
+
+// ---------------------------------------------------------------------------
+// Datum & Zeit (deutsch, ohne intl-Extension)
+// ---------------------------------------------------------------------------
+
+const WEEKDAYS_SHORT = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
+const WEEKDAYS_LONG  = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
+const MONTHS_LONG    = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+                        'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+
+/** Wandelt einen DB-Zeitstempel ("2026-08-10 14:00:00") in ein DateTimeImmutable. */
+function dt(string $value): DateTimeImmutable
+{
+    return new DateTimeImmutable($value);
+}
+
+/** Kurzer Wochentag zu einem Datum, z.B. "Mo". */
+function weekday_short(DateTimeInterface $date): string
+{
+    return WEEKDAYS_SHORT[(int) $date->format('N') - 1];
+}
+
+/** Ausgeschriebener Wochentag, z.B. "Montag". */
+function weekday_long(DateTimeInterface $date): string
+{
+    return WEEKDAYS_LONG[(int) $date->format('N') - 1];
+}
+
+/** Datum deutsch, z.B. "Mo, 10.08.2026". */
+function format_date(DateTimeInterface $date): string
+{
+    return weekday_short($date) . ', ' . $date->format('d.m.Y');
+}
+
+/** Datum lang, z.B. "10. August 2026". */
+function format_date_long(DateTimeInterface $date): string
+{
+    return (int) $date->format('j') . '. ' . MONTHS_LONG[(int) $date->format('n') - 1]
+        . ' ' . $date->format('Y');
+}
+
+/** Uhrzeit, z.B. "14:00 Uhr". */
+function format_time(DateTimeInterface $date): string
+{
+    return $date->format('H:i') . ' Uhr';
+}
+
+/** Termin komplett, z.B. "Mo, 10.08.2026 · 14:00 Uhr". */
+function format_datetime(DateTimeInterface $date): string
+{
+    return format_date($date) . ' · ' . format_time($date);
+}
+
+/** Montag der Woche, in der $date liegt (00:00 Uhr). */
+function week_start(DateTimeInterface $date): DateTimeImmutable
+{
+    $d = DateTimeImmutable::createFromInterface($date);
+    return $d->modify('monday this week')->setTime(0, 0);
+}
+
+/**
+ * Übersetzt den ?woche=-Parameter (Offset in Wochen ab dieser Woche)
+ * in den Montag der gewünschten Woche. Begrenzt auf -1 … +12 Wochen.
+ */
+function week_from_offset(mixed $offset): DateTimeImmutable
+{
+    $weeks = max(-1, min(12, (int) $offset));
+    return week_start(new DateTimeImmutable('now'))->modify(sprintf('%+d weeks', $weeks));
+}
+
+/**
+ * Verteilt Termine auf die sieben Tage einer Woche.
+ * Ergebnis: [['date' => DateTimeImmutable, 'slots' => [...]], … ] – immer
+ * sieben Einträge, auch wenn ein Tag leer bleibt.
+ */
+function group_slots_by_day(array $slots, DateTimeInterface $monday): array
+{
+    $days  = [];
+    $start = DateTimeImmutable::createFromInterface($monday)->setTime(0, 0);
+
+    for ($i = 0; $i < 7; $i++) {
+        $day = $start->modify("+$i days");
+        $days[$day->format('Y-m-d')] = ['date' => $day, 'slots' => []];
+    }
+
+    foreach ($slots as $slot) {
+        $key = dt($slot['starts_at'])->format('Y-m-d');
+        if (isset($days[$key])) {
+            $days[$key]['slots'][] = $slot;
+        }
+    }
+
+    return array_values($days);
+}
+
+/** Liegt das Datum heute? */
+function is_today(DateTimeInterface $date): bool
+{
+    return $date->format('Y-m-d') === (new DateTimeImmutable('now'))->format('Y-m-d');
+}

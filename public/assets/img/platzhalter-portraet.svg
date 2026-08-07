@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600" role="img"
+     aria-label="Platzhalter: hier kommt ein Foto von Sarah hin">
+    <!-- PLATZHALTER für Sarahs Porträtfoto.
+         Bewusst abstrakt: kein erfundenes Gesicht, sondern eine erkennbare
+         Leerstelle, die nach dem echten Foto verlangt. -->
+    <defs>
+        <clipPath id="pt-frame"><rect width="480" height="600" rx="18"/></clipPath>
+    </defs>
+
+    <g clip-path="url(#pt-frame)">
+        <rect width="480" height="600" fill="#F6EDDF"/>
+
+        <!-- Farbige Kreise als Hintergrund, angelehnt an die Regenbogenpalette -->
+        <circle cx="86"  cy="94"  r="120" fill="#8B5CF6" opacity=".10"/>
+        <circle cx="410" cy="180" r="150" fill="#189A9C" opacity=".10"/>
+        <circle cx="240" cy="540" r="180" fill="#F08A24" opacity=".10"/>
+
+        <!-- Schulter- und Kopfsilhouette -->
+        <path d="M240 560c-118 0-176-44-176-102 0-52 62-84 176-84s176 32 176 84c0 58-58 102-176 102Z" fill="#2B2434" opacity=".14"/>
+        <circle cx="240" cy="268" r="92" fill="#2B2434" opacity=".14"/>
+
+        <!-- Kamera-Symbol in der Mitte -->
+        <g transform="translate(240 268)" fill="none" stroke="#2B2434" stroke-opacity=".45"
+           stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M-52-16h22l10-14h40l10 14h22a10 10 0 0 1 10 10v46a10 10 0 0 1-10 10h-104a10 10 0 0 1-10-10v-46a10 10 0 0 1 10-10Z"/>
+            <circle cx="0" cy="18" r="20"/>
+        </g>
+
+        <!-- Kein Text im Bild: die Bildunterschrift steht im HTML (figcaption),
+             sonst überlagern sich beide. -->
+
+        <!-- Regenbogenkante unten -->
+        <g>
+            <rect y="592" width="68.6" height="8" fill="#E4572E"/>
+            <rect x="68.6"  y="592" width="68.6" height="8" fill="#F08A24"/>
+            <rect x="137.2" y="592" width="68.6" height="8" fill="#E8B517"/>
+            <rect x="205.8" y="592" width="68.6" height="8" fill="#3EA55B"/>
+            <rect x="274.4" y="592" width="68.6" height="8" fill="#189A9C"/>
+            <rect x="343"   y="592" width="68.6" height="8" fill="#3B7DD8"/>
+            <rect x="411.6" y="592" width="68.6" height="8" fill="#7C3AED"/>
+        </g>
+    </g>
+</svg>

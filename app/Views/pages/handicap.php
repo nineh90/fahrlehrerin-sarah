@@ -1,0 +1,198 @@
+<?php $school = (string) config('school.name'); ?>
+<section class="page-head">
+    <div class="container">
+        <h1>Fahren mit Handicap</h1>
+        <p class="page-lead">
+            Mit Prothese, nach einer Amputation, nach einem Unfall oder mit einer
+            Einschränkung, die dir jemand als Ausschlussgrund verkauft hat:
+            Lass uns darüber reden, bevor du es abhakst.
+        </p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="duo">
+            <div class="duo-media photo-wrap" style="--card-accent: var(--c-teal);">
+                <figure class="photo">
+                    <img src="<?= asset('img/handicap-linksgas.jpg') ?>"
+                         alt="Fußraum eines Fahrschulautos mit Linksgas-Umbau: links neben der
+                              Bremse sitzt ein zusätzliches Gaspedal, das über ein grünes
+                              Gestänge mit dem originalen Gaspedal verbunden ist"
+                         width="1400" height="1050">
+                    <figcaption>So sieht ein Linksgas-Umbau aus – mehr braucht es nicht</figcaption>
+                </figure>
+            </div>
+
+            <div class="duo-text">
+                <h2>Ein angepasstes Auto fährt sich anders, nicht schwerer</h2>
+                <p>
+                    Die meisten, die zu mir kommen, haben denselben Satz im Kopf: „Ob das
+                    überhaupt geht?" Meistens geht es. Manchmal braucht es eine andere
+                    Technik, oft ein paar Stunden mehr – aber fast nie ein Nein.
+                </p>
+                <p>
+                    Das Foto zeigt einen Linksgas-Umbau: ein zusätzliches Gaspedal links
+                    der Bremse. Mehr Unterschied zum normalen Fahrschulauto ist da nicht.
+                </p>
+                <p>
+                    Ich erkläre dir die Bedienelemente in Ruhe und wir fahren so lange
+                    damit, bis du nicht mehr überlegen musst, sondern einfach machst.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section--alt">
+    <div class="container">
+        <div class="section-head">
+            <div class="section-head-text">
+                <span class="section-eyebrow">Technik im Fahrzeug</span>
+                <h2>Womit wir arbeiten</h2>
+            </div>
+        </div>
+
+        <div class="card-grid">
+            <article class="feature-card">
+                <span class="feature-icon"><?= icon('car') ?></span>
+                <h3>Linksgas</h3>
+                <p>
+                    Ein zweites Gaspedal links der Bremse, wenn der rechte Fuß nicht
+                    mitmacht. Der Umbau ist klein, die Umstellung überraschend schnell –
+                    schwierig ist am Anfang nur, den rechten Fuß stillhalten zu lassen.
+                </p>
+            </article>
+
+            <article class="feature-card">
+                <span class="feature-icon"><?= icon('shield') ?></span>
+                <h3>Lenkraddrehknopf</h3>
+                <p>
+                    Lenken mit einer Hand – der Klassiker, wenn die zweite Hand nicht
+                    mitarbeiten kann. Nach zwei, drei Stunden fühlt es sich normal an.
+                </p>
+            </article>
+
+            <article class="feature-card">
+                <span class="feature-icon"><?= icon('clock') ?></span>
+                <h3>Handbedienung</h3>
+                <p>
+                    Gas und Bremse über einen Hebel statt über die Pedale. Braucht am
+                    Anfang Konzentration, wird aber schnell zur Gewohnheit.
+                </p>
+            </article>
+
+            <article class="feature-card">
+                <span class="feature-icon"><?= icon('sparkles') ?></span>
+                <h3>Prothesenfahren</h3>
+                <p>
+                    Ob Bein- oder Armprothese: Wir schauen zuerst, was mit deiner Prothese
+                    gut geht, und suchen dann die passende Technik dazu – nicht umgekehrt.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="duo duo--text-first">
+            <div class="duo-media photo-wrap" style="--card-accent: var(--c-violet);">
+                <figure class="photo photo--right">
+                    <img src="<?= asset('img/platzhalter-handicap.svg') ?>"
+                         alt="Lenkrad mit Lenkraddrehknopf und Handbedienteil für Gas und Bremse"
+                         width="640" height="480" loading="lazy" decoding="async">
+                    <figcaption>Platzhalter – hier fehlt noch ein Foto von Lenkhilfe und Handbedienteil</figcaption>
+                </figure>
+            </div>
+
+            <div class="duo-text">
+                <h2>Welche Technik zu dir passt, entscheiden wir gemeinsam</h2>
+                <p>
+                    Nicht jeder Umbau passt zu jedem. Manchmal reicht Linksgas, manchmal
+                    braucht es die komplette Handbedienung, manchmal nur eine Automatik und
+                    einen anders eingestellten Sitz.
+                </p>
+                <p>
+                    In der ersten Stunde probieren wir aus, was sich für dich am
+                    natürlichsten anfühlt – und danach richtet sich alles Weitere.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-head">
+            <div class="section-head-text">
+                <span class="section-eyebrow">Der Weg dahin</span>
+                <h2>So läuft es ab</h2>
+            </div>
+        </div>
+
+        <ol class="process">
+            <li class="process-step">
+                <span class="process-num">1</span>
+                <h3>Wir telefonieren</h3>
+                <p>Du erzählst mir, worum es geht. Ich sage dir ehrlich, was ich einschätzen
+                   kann und was ein Gutachten klären muss.</p>
+            </li>
+            <li class="process-step">
+                <span class="process-num">2</span>
+                <h3>Gutachten &amp; Auflagen</h3>
+                <p>Für die Fahrerlaubnis wird meist ein medizinisches oder verkehrsmedizinisches
+                   Gutachten gebraucht. Daraus ergeben sich die Auflagen für dein Fahrzeug.</p>
+            </li>
+            <li class="process-step">
+                <span class="process-num">3</span>
+                <h3>Erste Stunde</h3>
+                <p>Wir setzen uns ins angepasste Fahrzeug, stellen alles auf dich ein
+                   und fahren erstmal nur, damit du ein Gefühl bekommst.</p>
+            </li>
+            <li class="process-step">
+                <span class="process-num">4</span>
+                <h3>Üben bis es sitzt</h3>
+                <p>Wie bei jedem anderen auch: so lange, bis du sicher bist. Der einzige
+                   Unterschied ist der Weg, nicht das Ziel.</p>
+            </li>
+        </ol>
+    </div>
+</section>
+
+<section class="section section--alt">
+    <div class="container">
+        <div class="notice" style="--card-accent: var(--c-yellow);">
+            <?= icon('clock') ?>
+            <div>
+                <h3>Was ich nicht beurteilen kann</h3>
+                <p>
+                    Ob du fahren darfst, entscheidet nicht die Fahrschule und schon gar
+                    nicht ich, sondern die Führerscheinstelle auf Basis eines Gutachtens.
+                    Was ich dir sagen kann: wie das Fahren mit der jeweiligen Technik
+                    praktisch funktioniert und worauf du dich einstellen kannst.
+                </p>
+                <p>
+                    Anmeldung, Vertrag und Preise laufen über
+                    <?= $school !== '' ? e($school) : 'die Fahrschule, bei der ich angestellt bin' ?> –
+                    ich bin deine Fahrlehrerin, nicht deine Vertragspartnerin.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-band">
+    <div class="container">
+        <div class="cta-inner">
+            <div class="cta-text">
+                <h2>Unsicher, ob das bei dir klappt?</h2>
+                <p>
+                    Genau dafür ist das erste Telefonat da. Es kostet nichts und
+                    du bist danach schlauer.
+                </p>
+            </div>
+            <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Lass uns reden</a>
+        </div>
+    </div>
+</section>

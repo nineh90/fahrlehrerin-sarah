@@ -1,0 +1,21 @@
+# Alle Anfragen an existierende Dateien direkt ausliefern,
+# alles andere an den Front Controller (index.php) weiterleiten.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Vorhandene Dateien/Verzeichnisse nicht umschreiben (Assets)
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Alles Übrige an den Front Controller
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Verzeichnis-Listing deaktivieren
+Options -Indexes
+
+# Zugriff auf sensible Dateien blockieren
+<FilesMatch "\.(env|sql|sqlite|md|log)$">
+    Require all denied
+</FilesMatch>

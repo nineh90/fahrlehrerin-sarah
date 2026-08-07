@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img"
+     aria-label="Platzhalter: Lenkrad mit Lenkhilfe und Handbedienung für Gas und Bremse">
+    <!-- PLATZHALTER. Zeigt die tatsächliche Technik (Lenkraddrehknopf und
+         Handbedienteil), nicht einen Menschen – sachlich statt bebildert.
+         Ersetzen durch ein Foto aus dem angepassten Fahrzeug. -->
+    <defs>
+        <clipPath id="hc-frame"><rect width="640" height="480" rx="18"/></clipPath>
+    </defs>
+
+    <g clip-path="url(#hc-frame)">
+        <rect width="640" height="480" fill="#F6EDDF"/>
+        <circle cx="120" cy="90"  r="130" fill="#189A9C" opacity=".10"/>
+        <circle cx="540" cy="410" r="150" fill="#7C3AED" opacity=".10"/>
+
+        <!-- Lenkrad -->
+        <g transform="translate(300 250)">
+            <circle r="150" fill="none" stroke="#2B2434" stroke-width="26"/>
+            <circle r="150" fill="none" stroke="#544B60" stroke-width="10"/>
+            <!-- Speichen -->
+            <g stroke="#2B2434" stroke-width="20" stroke-linecap="round">
+                <path d="M-138 20 -46 34"/>
+                <path d="M138 20 46 34"/>
+                <path d="M0 138v-96"/>
+            </g>
+            <circle r="48" fill="#2B2434"/>
+            <circle r="48" fill="none" stroke="#544B60" stroke-width="6"/>
+
+            <!-- Lenkraddrehknopf (Lenkhilfe) auf 10 Uhr -->
+            <g transform="translate(-106 -106)">
+                <circle r="34" fill="#3EA55B"/>
+                <circle r="34" fill="none" stroke="#2B2434" stroke-width="6" stroke-opacity=".35"/>
+                <circle r="13" fill="#FDF8F0" opacity=".9"/>
+            </g>
+        </g>
+
+        <!-- Handbedienteil für Gas und Bremse -->
+        <g transform="translate(486 250)">
+            <rect x="-16" y="-30" width="32" height="180" rx="16" fill="#2B2434"/>
+            <rect x="-8"  y="-14" width="16" height="150" rx="8" fill="#544B60"/>
+            <g transform="translate(0 -60)">
+                <rect x="-56" y="-26" width="112" height="52" rx="26" fill="#3B7DD8"/>
+                <rect x="-56" y="-26" width="112" height="52" rx="26" fill="none"
+                      stroke="#2B2434" stroke-width="5" stroke-opacity=".3"/>
+                <path d="M-22 0h44M0-22v44" stroke="#FDF8F0" stroke-width="7" stroke-linecap="round"/>
+            </g>
+            <path d="M0 150v34" stroke="#2B2434" stroke-width="14" stroke-linecap="round"/>
+        </g>
+
+        <!-- Kein Text im Bild: die Bildunterschrift steht im HTML (figcaption),
+             sonst überlagern sich beide. -->
+
+        <g>
+            <rect y="472" width="91.4" height="8" fill="#E4572E"/>
+            <rect x="91.4"  y="472" width="91.4" height="8" fill="#F08A24"/>
+            <rect x="182.8" y="472" width="91.4" height="8" fill="#E8B517"/>
+            <rect x="274.2" y="472" width="91.4" height="8" fill="#3EA55B"/>
+            <rect x="365.6" y="472" width="91.4" height="8" fill="#189A9C"/>
+            <rect x="457"   y="472" width="91.4" height="8" fill="#3B7DD8"/>
+            <rect x="548.4" y="472" width="91.6" height="8" fill="#7C3AED"/>
+        </g>
+    </g>
+</svg>

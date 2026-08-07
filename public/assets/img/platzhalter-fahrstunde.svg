@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img"
+     aria-label="Platzhalter: Blick durch die Windschutzscheibe auf die Straße">
+    <!-- PLATZHALTER. Ersetzen durch ein echtes Foto aus Sarahs Fahrschulauto.
+         Bewusst als Illustration gehalten, damit klar ist: hier fehlt noch ein Bild. -->
+    <defs>
+        <clipPath id="fs-frame"><rect width="640" height="480" rx="18"/></clipPath>
+        <linearGradient id="fs-sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#BFDBF7"/>
+            <stop offset="1" stop-color="#F7E9CE"/>
+        </linearGradient>
+    </defs>
+
+    <g clip-path="url(#fs-frame)">
+        <rect width="640" height="480" fill="url(#fs-sky)"/>
+
+        <!-- Sonne -->
+        <circle cx="482" cy="112" r="42" fill="#FFD97D" opacity=".85"/>
+
+        <!-- Hügel im Hintergrund -->
+        <path d="M0 236c86-38 142 6 214-16s118-44 196-20 158 10 230-14v54H0Z" fill="#8FBF9F" opacity=".55"/>
+        <path d="M0 262c92-26 150 12 232-6s136-34 214-12 130 8 194-8v46H0Z" fill="#6BA87E" opacity=".5"/>
+
+        <!-- Straße -->
+        <path d="M236 258h168l150 222H86Z" fill="#4A4453"/>
+        <path d="M236 258h168l150 222H86Z" fill="#000" opacity=".08"/>
+
+        <!-- Mittelstreifen, perspektivisch -->
+        <g fill="#FDF8F0">
+            <path d="M317 262h6l-1 22h-8Z"/>
+            <path d="M314 300h12l-2 32h-14Z"/>
+            <path d="M310 348h20l-3 44h-22Z"/>
+            <path d="M304 408h32l-5 72h-36Z"/>
+        </g>
+
+        <!-- Seitenmarkierungen -->
+        <path d="M232 262h7L96 480h-16Z" fill="#FDF8F0" opacity=".7"/>
+        <path d="M401 262h7l152 218h-16Z" fill="#FDF8F0" opacity=".7"/>
+
+        <!-- Leitpfosten -->
+        <g fill="#FDF8F0">
+            <rect x="196" y="256" width="8" height="26" rx="3"/>
+            <rect x="150" y="288" width="10" height="34" rx="3"/>
+            <rect x="82" y="336" width="12" height="46" rx="4"/>
+        </g>
+        <g fill="#E4572E">
+            <rect x="196" y="262" width="8" height="6"/>
+            <rect x="150" y="296" width="10" height="7"/>
+            <rect x="82" y="348" width="12" height="9"/>
+        </g>
+
+        <!-- Armaturenbrett + Lenkrad (Innenraum-Rahmen) -->
+        <path d="M0 392c118-34 214-48 320-48s202 14 320 48v88H0Z" fill="#2B2434"/>
+        <g transform="translate(320 452)">
+            <circle r="96" fill="none" stroke="#3E3648" stroke-width="20"/>
+            <circle r="96" fill="none" stroke="#544B60" stroke-width="8"/>
+            <rect x="-96" y="-10" width="192" height="16" rx="8" fill="#3E3648"/>
+            <circle r="26" fill="#3E3648"/>
+        </g>
+
+        <!-- Regenbogen-Anhänger am Rückspiegel: Sarahs Handschrift -->
+        <g transform="translate(452 66)">
+            <path d="M0 0v34" stroke="#FDF8F0" stroke-width="3" stroke-linecap="round"/>
+            <g transform="translate(0 34)">
+                <circle cy="10" r="10" fill="#E4572E"/>
+                <circle cy="26" r="10" fill="#E8B517"/>
+                <circle cy="42" r="10" fill="#3EA55B"/>
+                <circle cy="58" r="10" fill="#3B7DD8"/>
+            </g>
+        </g>
+    </g>
+</svg>

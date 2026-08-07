@@ -1,0 +1,25 @@
+<?php /** @var string $content @var string $title */ ?>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= e($title ?? 'Anmelden') ?> · Fahrlehrerin Sarah</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?= asset('css/nd-base.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/theme.css') ?>">
+    <link rel="icon" href="<?= asset('img/favicon.png') ?>" sizes="48x48" type="image/png">
+    <link rel="apple-touch-icon" href="<?= asset('img/apple-touch-icon.png') ?>">
+</head>
+<body class="admin-auth-body">
+    <div class="admin-auth">
+        <div class="login-card">
+            <?php require APP_ROOT . '/app/Views/partials/flash.php'; ?>
+            <?= $content ?>
+        </div>
+    </div>
+</body>
+</html>

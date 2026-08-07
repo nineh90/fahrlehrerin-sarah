@@ -1,0 +1,31 @@
+# Zugangsdaten und Kontaktdaten – .env.example bleibt die Vorlage im Repo
+.env*
+!.env.example
+
+# Laufzeitdaten. Database.php nutzt WAL, dabei entstehen -wal und -shm daneben.
+storage/*
+!storage/.gitkeep
+
+# Sarahs Rohfotos von der Messe. Das Repo ist öffentlich – Aufnahmen einer realen
+# Person gehören da nicht hinein, und auf beiden steht „FAHRSCHULE SANDER" auf dem
+# Stehtisch. Die Zuschnitte, die auf der Website laufen, liegen in public/assets/img.
+# Die Logo-Master daneben bleiben im Repo, sonst lassen sich die Ableitungen nicht bauen.
+assets-quellen/fahrlehrerin_sarah.jpeg
+assets-quellen/fahrlehrerin_sarah_ausgeschnitten.png
+
+# Interne Arbeitsdokumente. Das Repo ist öffentlich; die CLAUDE.md nennt außerdem den
+# Namen der Fahrschule im Klartext. Beide Dateien bleiben lokal im Kundenordner liegen.
+CLAUDE.md
+projekt.md
+
+# Editoren
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Betriebssysteme
+.DS_Store
+Thumbs.db
+desktop.ini

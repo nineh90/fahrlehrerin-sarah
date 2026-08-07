@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($title ?? 'Fahrlehrerin Sarah') ?> · Fahrlehrerin Sarah</title>
     <meta name="description" content="<?= e($metaDescription ?? 'Sarah ist Fahrlehrerin in ' . config('contact.city') . ' – mit Geduld, klaren Ansagen und Erfahrung im Fahren mit Handicap.') ?>">
+
+    <?php /* Solange die Seite nicht offiziell live ist, soll sie in keiner
+             Suchmaschine auftauchen. Ein Meta allein reicht nicht – dazu gehört
+             /robots.txt (RobotsController). Umschalten über ALLOW_INDEXING. */ ?>
+    <?php if (!config('allow_indexing')): ?>
+        <meta name="robots" content="noindex, nofollow">
+    <?php endif; ?>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">

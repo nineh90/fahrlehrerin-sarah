@@ -36,6 +36,7 @@ $router->get('/kontakt',             [PageController::class, 'contact']);
 $router->get('/meine-website',       [PageController::class, 'website']);
 $router->get('/impressum',           [PageController::class, 'impressum']);
 $router->get('/datenschutz',         [PageController::class, 'datenschutz']);
+$router->get('/robots.txt',          [RobotsController::class, 'index']);
 
 // ---------------------------------------------------------------------------
 // Schüler-Bereich: Login + Terminbuchung

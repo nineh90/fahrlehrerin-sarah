@@ -99,10 +99,11 @@
         <div class="duo duo--text-first">
             <div class="duo-media photo-wrap" style="--card-accent: var(--c-violet);">
                 <figure class="photo photo--right">
-                    <img src="<?= asset('img/platzhalter-handicap.svg') ?>"
-                         alt="Lenkrad mit Lenkraddrehknopf und Handbedienteil für Gas und Bremse"
-                         width="640" height="480" loading="lazy" decoding="async">
-                    <figcaption>Platzhalter – hier fehlt noch ein Foto von Lenkhilfe und Handbedienteil</figcaption>
+                    <img src="<?= asset('img/handicap-handbedienung.jpg') ?>"
+                         alt="Fußraum mit eingebauter Handbedienung: ein grün lackierter Hebel am Boden, verbunden über grüne Gestänge, daneben eine grüne Abdeckung vor den Pedalen"
+                         width="1200" height="1484" loading="lazy" decoding="async">
+                    <figcaption>Handbedienung im Einbau: Der Hebel unten überträgt Gas und
+                        Bremse über das grüne Gestänge, die Abdeckung hält die Pedale frei</figcaption>
                 </figure>
             </div>
 

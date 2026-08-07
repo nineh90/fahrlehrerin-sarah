@@ -59,6 +59,12 @@ $config = [
     'app_name'  => env('APP_NAME', 'Fahrlehrerin Sarah'),
     // BASE_PATH ohne abschließenden Slash, leer = Root-Domain
     'base_path' => rtrim((string) env('BASE_PATH', ''), '/'),
+    // Darf die Seite in Suchmaschinen auftauchen?
+    // Standard ist NEIN – die sichere Richtung. Solange die Seite nur zum
+    // Zeigen online steht, soll sie niemand über Google finden. Erst zum
+    // Livegang auf true. Wirkt auf das robots-Meta jeder Seite UND auf
+    // /robots.txt (siehe RobotsController).
+    'allow_indexing' => (bool) env('ALLOW_INDEXING', false),
     'db' => [
         'sqlite_path' => env('DB_SQLITE_PATH', APP_ROOT . '/storage/database.sqlite'),
     ],

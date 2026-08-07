@@ -1,0 +1,72 @@
+# fahrlehrerinsarah.de
+#
+# Hängt sich an den vorhandenen Traefik des n8n-Stacks (Netz n8n_default) –
+# genauso wie kein-einzelfall. Es wird KEIN Port veröffentlicht, Traefik ist
+# der einzige Weg hinein. An Traefik selbst wird dabei nichts geändert: Der
+# Docker-Provider läuft mit exposedbydefault=false, jeder Container bringt
+# seine eigene Route als Label mit. Bestehende Projekte merken davon nichts.
+#
+# Aufruf auf dem Server (aus /docker/fahrlehrerin-sarah):
+#   docker compose -f deploy/docker-compose.yml up -d --build
+name: fahrlehrerin-sarah
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    image: fahrlehrerin-sarah:latest
+    container_name: fahrlehrerin-sarah
+    restart: unless-stopped
+
+    environment:
+      # NICHT weglassen. Die Models fragen SQLite mit
+      # datetime('now','localtime') ab, und "localtime" richtet sich nach der
+      # SYSTEMzeit des Containers – nicht nach date_default_timezone_set() in
+      # der config.php. Ohne diese Zeile läuft der Container auf UTC und alle
+      # "ab jetzt"-Vergleiche liegen im Sommer zwei Stunden daneben:
+      # freie Termine, Pflichtfahrten-Zählung, Dashboard-Zahlen.
+      TZ: Europe/Berlin
+
+    volumes:
+      # Der komplette Auscheckstand liegt im Container. Damit ist ein
+      # "git pull" auf dem Server schon der ganze Deploy – reines PHP braucht
+      # keinen Build-Schritt.
+      #
+      # .env und storage/ liegen mit in diesem Verzeichnis, sind aber in der
+      # .gitignore. Deshalb fasst git sie bei einem pull nie an, und es braucht
+      # keine getrennten Volumes: Zugangsdaten und Datenbank überleben jeden
+      # Deploy einfach dadurch, dass git sie nicht kennt.
+      - ..:/var/www/html
+
+    networks:
+      - n8n_default
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=n8n_default"
+
+      - "traefik.http.routers.fls.rule=Host(`fahrlehrerinsarah.de`) || Host(`www.fahrlehrerinsarah.de`)"
+      - "traefik.http.routers.fls.entrypoints=web,websecure"
+      - "traefik.http.routers.fls.tls=true"
+      - "traefik.http.routers.fls.tls.certresolver=mytlschallenge"
+      - "traefik.http.services.fls.loadbalancer.server.port=80"
+
+      # www -> ohne www, damit es genau eine Adresse gibt.
+      # Das doppelte $$ ist Absicht: Compose würde ein einfaches $ als eigene
+      # Variable lesen und leer ersetzen.
+      - "traefik.http.middlewares.fls-www.redirectregex.regex=^https?://www\\.fahrlehrerinsarah\\.de/(.*)"
+      - "traefik.http.middlewares.fls-www.redirectregex.replacement=https://fahrlehrerinsarah.de/$${1}"
+      - "traefik.http.middlewares.fls-www.redirectregex.permanent=true"
+
+      # Zweiter Riegel gegen Suchmaschinen, zusätzlich zum noindex in der
+      # Anwendung (ALLOW_INDEXING). Kostet nichts und wirkt auch dann, wenn
+      # jemand die .env auf dem Server versehentlich umstellt.
+      # ZUM LIVEGANG: diese Zeile und den Eintrag in middlewares entfernen.
+      - "traefik.http.middlewares.fls-noindex.headers.customresponseheaders.X-Robots-Tag=noindex, nofollow"
+
+      - "traefik.http.routers.fls.middlewares=fls-www@docker,fls-noindex@docker"
+
+networks:
+  n8n_default:
+    external: true

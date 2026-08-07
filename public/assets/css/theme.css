@@ -260,11 +260,35 @@
 /* Der Schriftzug übernimmt die untere Hälfte des Bogens, wie im Original. */
 .hero-lockup-word { bottom: 12%; left: 31%; width: 62%; }
 
+/* --- Bogen mit Sarah darin (Hero auf /ueber-mich) ------------------------
+   Dieselbe Bühne wie das Lockup, aber ohne Wortmarke: Auf einer Seite, die
+   „Über mich" heißt, gehört Sarah in den Bogen und nicht der Name – der steht
+   schon im Header und in der Überschrift. Deshalb steht die Figur hier auch
+   tiefer und größer als im Lockup, wo sie sich den Platz mit dem Schriftzug
+   teilt. Gleiches Seitenverhältnis, damit beide Heros gleich hoch bauen. */
+.hero-arc {
+    position: relative;
+    aspect-ratio: 1000 / 1155;
+    background: url("../img/logo-bogen.webp") no-repeat center / contain;
+}
+.hero-arc img {
+    position: absolute; display: block; height: auto;
+    /* Mittig in der gemalten Öffnung (deren Mitte liegt bei 60 % der
+       Bogenbreite, siehe CLAUDE.md) und deutlich größer als im Lockup –
+       hier teilt sie sich den Platz mit niemandem. */
+    left: 38%; top: 14%; width: 44%;
+    /* Derselbe weiche Auslauf wie im Lockup, damit die Schnittkante an der
+       Taille nicht als Strich steht. */
+    -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent 99%);
+    mask-image: linear-gradient(180deg, #000 78%, transparent 99%);
+}
+
 /* Gestapelter Hero: Das Lockup bekäme sonst die volle Spaltenbreite und würde
    die Überschrift erschlagen. Gedeckelt und mittig – die Innenaufteilung bleibt
    durch die Prozentangaben unverändert. */
 @media (max-width: 820px) {
-    .hero-lockup { max-width: 420px; margin-inline: auto; }
+    .hero-lockup,
+    .hero-arc { max-width: 420px; margin-inline: auto; }
 }
 
 /* --- Kleine Freundlichkeiten ------------------------------------------- */

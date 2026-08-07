@@ -1,11 +1,37 @@
 <?php $school = (string) config('school.name'); ?>
-<section class="page-head">
-    <div class="container">
-        <h1>Über mich</h1>
-        <p class="page-lead">
-            Fahren lernt man nicht durch Druck, sondern durch Wiederholung –
-            und durch das Gefühl, dass einem jemand etwas zutraut.
-        </p>
+
+<?php /* Hero im Stil der Startseite, aber bewusst NICHT dasselbe Lockup:
+         Dort steht die Wortmarke im Bogen, hier steht Sarah drin. Der Name
+         steht schon im Header und in der Überschrift – ein zweites Mal wäre
+         Logo-Doppelung. Anderer Ausschnitt derselben Aufnahme, damit die
+         beiden Seiten nicht wie eine Kopie voneinander wirken. */ ?>
+<section class="hero">
+    <div class="container hero-inner">
+        <div class="duo duo--narrow-media">
+            <div class="hero-content">
+                <h1>Hallo,<br>ich bin Sarah.</h1>
+                <p class="hero-lead">
+                    Fahren lernt man nicht durch Druck, sondern durch Wiederholung –
+                    und durch das Gefühl, dass einem jemand etwas zutraut.
+                </p>
+                <p class="hero-meta">
+                    <?= icon('pin') ?>
+                    <span>Unterwegs in <?= e(area_sentence()) ?></span>
+                </p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary btn-lg" href="<?= url('/termine') ?>">Meine freien Zeiten</a>
+                    <a class="btn btn-ghost btn-lg" href="<?= url('/kontakt') ?>">Schreib mir</a>
+                </div>
+            </div>
+
+            <div class="duo-media">
+                <div class="hero-arc">
+                    <img src="<?= asset('img/sarah-lockup.webp') ?>"
+                         alt="Sarah, lächelnd, mit hochgestrecktem Daumen"
+                         width="620" height="1130">
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -22,7 +48,7 @@
             </div>
 
             <div class="duo-text">
-                <h2>Hallo, ich bin Sarah</h2>
+                <h2>Wie ich dazu gekommen bin</h2>
                 <p>
                     Ich bin Fahrlehrerin für die Klassen B und BE und unterrichte rund um
                     <?= e(area_sentence()) ?>.

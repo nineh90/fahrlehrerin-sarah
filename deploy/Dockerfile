@@ -33,3 +33,9 @@ Header always set X-Frame-Options "SAMEORIGIN"\n\
 Header always set Referrer-Policy "strict-origin-when-cross-origin"\n' \
     > /etc/apache2/conf-available/z-haerten.conf \
  && a2enconf z-haerten
+
+# Ausgeliefert wird per Cronjob auf dem Server:
+#   /usr/local/bin/deploy-fahrlehrerin-sarah  (jede Minute)
+# Der holt origin/main und setzt den Auscheckstand hart darauf. Reine
+# PHP-Änderungen sind damit sofort live; nur wenn sich deploy/ ändert, baut
+# das Skript den Container neu.

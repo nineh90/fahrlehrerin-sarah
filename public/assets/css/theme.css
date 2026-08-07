@@ -159,6 +159,17 @@
 .card-grid > *:nth-child(7n+6), .process > *:nth-child(7n+6), .stat-grid > *:nth-child(7n+6) { --card-accent: var(--c-blue);   --card-accent-soft: rgba(59, 125, 216, 0.13); }
 .card-grid > *:nth-child(7n+7), .process > *:nth-child(7n+7), .stat-grid > *:nth-child(7n+7) { --card-accent: var(--c-violet); --card-accent-soft: rgba(124, 58, 237, 0.12); }
 
+/* Ausnahme: Raster, in denen jede Karte dasselbe bedeutet.
+   Auf einer Terminübersicht liest sich die Rotation als Ampel – Rot „belegt",
+   Gelb „knapp", Grün „frei" –, obwohl alle Karten denselben Zustand zeigen:
+   eine freie Stunde. Farbe würde hier etwas behaupten, was sie nicht meint.
+   Deshalb eine ruhige Farbe für alle. Der Regenbogen bleibt den Abschnitten
+   vorbehalten, in denen die Karten wirklich verschiedene Dinge sind. */
+.card-grid.card-grid--plain > * {
+    --card-accent: var(--accent);
+    --card-accent-soft: var(--accent-soft);
+}
+
 /* Wochenkalender: jeder Wochentag trägt seine eigene Farbe im Kopf */
 .week-grid > *:nth-child(7n+1) { --day-head-bg: rgba(228, 87, 46, 0.12); }
 .week-grid > *:nth-child(7n+2) { --day-head-bg: rgba(240, 138, 36, 0.14); }

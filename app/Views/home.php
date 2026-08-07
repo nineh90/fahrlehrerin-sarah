@@ -236,7 +236,9 @@ $school = (string) config('school.name');
                 <a class="btn btn-ghost" href="<?= url('/kontakt') ?>">Schreib mir</a>
             </div>
         <?php else: ?>
-            <div class="card-grid">
+            <?php /* --plain: keine Regenbogen-Rotation. Hier ist jede Karte dieselbe
+                     Sache – eine freie Stunde. Siehe theme.css. */ ?>
+            <div class="card-grid card-grid--plain">
                 <?php foreach ($freeSlots as $slot): ?>
                     <?php $start = dt($slot['starts_at']); ?>
                     <article class="feature-card">

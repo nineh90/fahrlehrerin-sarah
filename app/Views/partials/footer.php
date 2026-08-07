@@ -2,7 +2,7 @@
 <footer class="site-footer">
     <div class="container">
         <div class="footer-grid">
-            <div>
+            <div class="footer-brand">
                 <?php /* Helle Logo-Variante: auf dem dunklen Fuß wäre der schwarze
                          Schriftzug des Originals nicht lesbar. */ ?>
                 <img class="footer-logo" src="<?= asset('img/logo-sarah-hell.webp') ?>"

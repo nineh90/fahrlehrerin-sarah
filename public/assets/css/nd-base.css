@@ -533,6 +533,15 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 .footer-grid .brand-mark { color: var(--footer-text); }
 .footer-logo { width: 168px; height: auto; display: block; }
 .footer-tagline { font-size: .9rem; margin-top: 1rem; max-width: 320px; }
+/* Nur im vierspaltigen Footer: das Logo steht mittig über dem Text statt links
+   daneben. Linksbündig wirkt es verrutscht, weil der Textblock darunter breiter
+   ist als das Logo (168 px gegen 320 px). Zentriert wird auf die Textbreite,
+   nicht auf die Rasterspalte – sonst wandert das Logo vom Text weg.
+   Ab 880 px spannt der Markenblock über die volle Breite, dort passt es nicht. */
+@media (min-width: 881px) {
+    .footer-brand { max-width: 320px; }
+    .footer-brand .footer-logo { margin-inline: auto; }
+}
 .footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .6rem; }
 .footer-links a { color: var(--footer-muted); font-size: .9rem; }
 .footer-links a:hover { color: var(--footer-accent); text-decoration: none; }

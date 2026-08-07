@@ -184,6 +184,8 @@ function icon(string $name): string
         'chat'      => '<path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-5.6A8 8 0 0 1 13 4a8 8 0 0 1 8 8Z"/>',
         'phone'     => '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/>',
         'mail'      => '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+        'bell'      => '<path d="M18 8a6 6 0 1 0-12 0c0 5-2 6.5-2 6.5h16S18 13 18 8Z"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/>',
+        'check'     => '<path d="m5 12.5 4.5 4.5L19 7"/>',
         'pin'       => '<path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/>',
         'tiktok'    => '<path d="M16 4c.4 2.4 2 4 4.4 4.2v3.1c-1.7.1-3.2-.4-4.4-1.3v5.6a5.9 5.9 0 1 1-5.1-5.8v3.2a2.7 2.7 0 1 0 1.9 2.6V4Z"/>',
         'instagram' => '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/>',
@@ -214,6 +216,34 @@ function area_sentence(string $conjunction = 'und'): string
     return implode(', ', $orte) . ' ' . $conjunction . ' ' . $last;
 }
 
+/**
+ * Der Name von Sarahs Fahrschule, verlinkt – oder leer.
+ *
+ * Sarah ist angestellt: Anmeldung, Vertrag, Theorie und Preise laufen über die
+ * Fahrschule. Überall, wo das im Text vorkommt, soll der Name stehen und
+ * anklickbar sein. Ist `SCHOOL_NAME` leer, gibt die Funktion einen leeren
+ * String zurück – die Templates prüfen darauf und formulieren dann ohne Namen.
+ *
+ * Gibt fertiges HTML zurück (deshalb NICHT noch einmal durch e() schicken).
+ */
+function school_link(): string
+{
+    $name = trim((string) config('school.name'));
+    if ($name === '') {
+        return '';
+    }
+    $url = trim((string) config('school.url'));
+    if ($url === '' || !filter_var($url, FILTER_VALIDATE_URL)) {
+        return e($name);
+    }
+
+    return sprintf(
+        '<a href="%s" target="_blank" rel="noopener">%s</a>',
+        e($url),
+        e($name)
+    );
+}
+
 /** Profil-URL zu Sarahs TikTok-Kanal. */
 function tiktok_url(): string
 {
@@ -224,6 +254,28 @@ function tiktok_url(): string
 function instagram_url(): string
 {
     return 'https://www.instagram.com/' . config('social.instagram_handle');
+}
+
+/**
+ * Anzahl ungelesener Meldungen für das Zählerchen in der Admin-Navigation.
+ *
+ * Steht hier und nicht im View, damit das Layout kein Model direkt befragt.
+ * Pro Request nur eine Abfrage. Fehlt die Tabelle (Datenbank älter als das
+ * Benachrichtigungs-Modul), ist die Antwort 0 statt eines Fehlers – die
+ * Schaltzentrale soll deswegen nicht stehen bleiben.
+ */
+function admin_unread_count(): int
+{
+    static $count = null;
+    if ($count === null) {
+        try {
+            $count = Notification::unreadCount();
+        } catch (Throwable) {
+            $count = 0;
+        }
+    }
+
+    return $count;
 }
 
 /** Liest alten Formularwert nach Validierungsfehler. */
@@ -284,6 +336,32 @@ function format_datetime(DateTimeInterface $date): string
     return format_date($date) . ' · ' . format_time($date);
 }
 
+/**
+ * Grober Abstand zu jetzt, z.B. "gerade eben", "vor 3 Std.", "vor 2 Tagen".
+ * Für Meldungslisten: dort zählt „wie frisch ist das", nicht das genaue Datum.
+ * Ab einer Woche wird wieder das Datum ausgegeben.
+ */
+function time_ago(DateTimeInterface $date): string
+{
+    $seconds = (new DateTimeImmutable('now'))->getTimestamp() - $date->getTimestamp();
+    if ($seconds < 0) {
+        return format_datetime($date);
+    }
+
+    $minutes = intdiv($seconds, 60);
+    $hours   = intdiv($minutes, 60);
+    $days    = intdiv($hours, 24);
+
+    return match (true) {
+        $minutes < 1 => 'gerade eben',
+        $minutes < 60 => 'vor ' . $minutes . ' Min.',
+        $hours   < 24 => 'vor ' . $hours . ' Std.',
+        $days    === 1 => 'gestern',
+        $days    < 7 => 'vor ' . $days . ' Tagen',
+        default => format_date($date),
+    };
+}
+
 /** Montag der Woche, in der $date liegt (00:00 Uhr). */
 function week_start(DateTimeInterface $date): DateTimeImmutable
 {
@@ -299,6 +377,20 @@ function week_from_offset(mixed $offset): DateTimeImmutable
 {
     $weeks = max(-1, min(12, (int) $offset));
     return week_start(new DateTimeImmutable('now'))->modify(sprintf('%+d weeks', $weeks));
+}
+
+/**
+ * Umkehrung von week_from_offset(): In wie vielen Wochen ab dieser Woche liegt
+ * das Datum? Damit lässt sich zu einem Termin der passende ?woche=-Link bauen.
+ */
+function week_offset_of(DateTimeInterface $date): int
+{
+    $current = week_start(new DateTimeImmutable('now'));
+    $target  = week_start($date);
+
+    // Über die Zeitstempel und gerundet: Bei der Zeitumstellung ist eine Woche
+    // 23 bzw. 25 Stunden lang, eine Ganzzahldivision würde dann danebenliegen.
+    return (int) round(($target->getTimestamp() - $current->getTimestamp()) / (7 * 86400));
 }
 
 /**

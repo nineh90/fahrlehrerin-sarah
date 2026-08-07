@@ -1,4 +1,4 @@
-<?php /** @var array $values */ ?>
+<?php /** @var array $values @var array $students */ ?>
 
 <div class="admin-card">
     <div class="admin-card-head">
@@ -33,7 +33,7 @@
             </label>
             <label>
                 Art des Termins
-                <select name="type">
+                <select name="type" data-toggle-target="#sonderfahrtArt" data-toggle-value="sonderfahrt">
                     <?php foreach (Slot::TYPES as $key => $label): ?>
                         <option value="<?= e($key) ?>" <?= $key === ($values['type'] ?? '') ? 'selected' : '' ?>>
                             <?= e($label) ?>
@@ -42,6 +42,43 @@
                 </select>
             </label>
         </div>
+
+        <?php /* Nur bei Sonderfahrten relevant – per JS ein-/ausgeblendet, ohne JS
+                 bleibt es sichtbar und der Controller ignoriert es bei anderen Arten. */ ?>
+        <div class="form-row" id="sonderfahrtArt">
+            <label>
+                Welche Pflichtfahrt?
+                <select name="sonderfahrt_art">
+                    <option value="">– keine Zuordnung –</option>
+                    <?php foreach (Slot::SONDERFAHRT_ARTEN as $key => $label): ?>
+                        <option value="<?= e($key) ?>"
+                            <?= $key === ($values['sonderfahrt_art'] ?? '') ? 'selected' : '' ?>>
+                            <?= e($label) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <span class="form-hint">
+                    Zählt beim Ausbildungsstand mit, sobald der Termin vorbei ist.
+                </span>
+            </label>
+        </div>
+
+        <label>
+            Zuweisen an
+            <select name="student_id">
+                <option value="">– niemanden, der Termin steht allen offen –</option>
+                <?php foreach ($students as $person): ?>
+                    <option value="<?= (int) $person['id'] ?>"
+                        <?= (string) $person['id'] === (string) ($values['student_id'] ?? '') ? 'selected' : '' ?>>
+                        <?= e($person['name']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <span class="form-hint">
+                Für Prüfungstermine: Der Termin ist damit sofort vergeben und
+                taucht bei niemand anderem als frei auf.
+            </span>
+        </label>
 
         <label>
             Treffpunkt

@@ -39,6 +39,27 @@
         });
     }
 
+    // Felder, die nur zu einer bestimmten Auswahl gehören (z. B. die Art der
+    // Sonderfahrt nur bei "Sonderfahrt"). Ohne JS bleibt alles sichtbar –
+    // der Controller wirft die unpassende Angabe ohnehin weg.
+    document.querySelectorAll('[data-toggle-target]').forEach(function (select) {
+        var target = document.querySelector(select.getAttribute('data-toggle-target'));
+        var wanted = select.getAttribute('data-toggle-value');
+        if (!target) return;
+
+        var sync = function () { target.hidden = select.value !== wanted; };
+        select.addEventListener('change', sync);
+        sync();
+    });
+
+    // Auswahl, die sich selbst abschickt (Termin im Kalender zuweisen).
+    // Ohne JS steht daneben ein Knopf im <noscript>.
+    document.querySelectorAll('select[data-autosubmit]').forEach(function (select) {
+        select.addEventListener('change', function () {
+            if (select.value !== '') select.form.requestSubmit();
+        });
+    });
+
     // Rückfrage vor endgültigen Aktionen (Stornieren, Löschen).
     // Kein window.confirm-Ersatz nötig – ein klarer Satz genügt.
     document.querySelectorAll('[data-confirm]').forEach(function (form) {

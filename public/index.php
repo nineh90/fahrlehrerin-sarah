@@ -61,6 +61,9 @@ $router->post('/admin/logout', [AdminAuthController::class, 'logout']);
 
 $router->get('/admin', [AdminDashboardController::class, 'index']);
 
+$router->get('/admin/passwort',  [AdminAccountController::class, 'edit']);
+$router->post('/admin/passwort', [AdminAccountController::class, 'update']);
+
 $router->get('/admin/termine',                 [AdminSlotController::class, 'index']);
 $router->get('/admin/termine/neu',             [AdminSlotController::class, 'create']);
 $router->post('/admin/termine',                [AdminSlotController::class, 'store']);
@@ -68,6 +71,7 @@ $router->get('/admin/termine/serie',           [AdminSlotController::class, 'cre
 $router->post('/admin/termine/serie',          [AdminSlotController::class, 'storeSeries']);
 $router->post('/admin/termine/{id}/loeschen',  [AdminSlotController::class, 'destroy']);
 $router->post('/admin/termine/{id}/sperren',   [AdminSlotController::class, 'toggleBlocked']);
+$router->post('/admin/termine/{id}/zuweisen',  [AdminSlotController::class, 'assign']);
 
 $router->get('/admin/schueler',                [AdminStudentController::class, 'index']);
 $router->get('/admin/schueler/neu',            [AdminStudentController::class, 'create']);
@@ -79,6 +83,10 @@ $router->post('/admin/schueler/{id}/loeschen', [AdminStudentController::class, '
 
 $router->get('/admin/buchungen',                    [AdminBookingController::class, 'index']);
 $router->post('/admin/buchungen/{id}/stornieren',   [AdminBookingController::class, 'cancel']);
+
+$router->get('/admin/benachrichtigungen',                  [AdminNotificationController::class, 'index']);
+$router->post('/admin/benachrichtigungen/gelesen',         [AdminNotificationController::class, 'markAllRead']);
+$router->post('/admin/benachrichtigungen/{id}/gelesen',    [AdminNotificationController::class, 'markRead']);
 
 try {
     $router->dispatch();

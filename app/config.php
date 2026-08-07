@@ -65,6 +65,11 @@ $config = [
     'admin' => [
         'email'    => env('ADMIN_EMAIL', 'admin@example.com'),
         'password' => env('ADMIN_PASSWORD', 'admin12345'),
+        // Muss Sarah beim ersten Anmelden ein eigenes Passwort vergeben?
+        // Im Testbetrieb aus, sonst sperrt sie beim Ausprobieren aus Versehen
+        // alle anderen aus. Vor dem Livegang auf true.
+        // Fehlt der Wert, wird erzwungen – die sichere Richtung.
+        'force_password_change' => (bool) env('ADMIN_FORCE_PASSWORD_CHANGE', true),
     ],
     'booking' => [
         // Bis wie viele Stunden vor Terminbeginn darf storniert/verschoben werden
@@ -83,7 +88,7 @@ $config = [
     ],
     'contact' => [
         'phone' => env('CONTACT_PHONE', '0123 456789'),
-        'email' => env('CONTACT_EMAIL', 'hallo@fahrlehrerin-sarah.de'),
+        'email' => env('CONTACT_EMAIL', 'hallo@fahrlehrerinsarah.de'),
         'city'  => env('CONTACT_CITY', 'Neu Wulmstorf'),
         // Einzugsgebiet als Liste, in der .env mit Komma getrennt
         'area'  => array_values(array_filter(array_map(
@@ -95,6 +100,19 @@ $config = [
         'driver' => env('MAIL_DRIVER', 'log'),
         'to'     => env('MAIL_TO', 'info@example.com'),
         'from'   => env('MAIL_FROM', 'noreply@example.com'),
+    ],
+    // Wie Sarah von Buchungen erfährt (siehe app/Notifier.php).
+    // Der Posteingang in der Schaltzentrale läuft immer – das hier sind die
+    // zusätzlichen Wege nach draußen.
+    'notify' => [
+        'mail'           => (bool) env('NOTIFY_MAIL', true),
+        // leer = an mail.to
+        'to'             => env('NOTIFY_TO', ''),
+        // Mails an die Fahrschüler:innen selbst (bisher nur die PIN)
+        'student_mail'   => (bool) env('NOTIFY_STUDENT_MAIL', true),
+        // z.B. ein n8n-Webhook. Leer = kein Versand nach außen.
+        'webhook_url'    => env('NOTIFY_WEBHOOK_URL', ''),
+        'webhook_secret' => env('NOTIFY_WEBHOOK_SECRET', ''),
     ],
 ];
 

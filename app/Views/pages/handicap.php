@@ -174,7 +174,7 @@
                 </p>
                 <p>
                     Anmeldung, Vertrag und Preise laufen über
-                    <?= $school !== '' ? e($school) : 'die Fahrschule, bei der ich angestellt bin' ?> –
+                    <?= $school !== '' ? 'die ' . school_link() : 'die Fahrschule, bei der ich angestellt bin' ?> –
                     ich bin deine Fahrlehrerin, nicht deine Vertragspartnerin.
                 </p>
             </div>

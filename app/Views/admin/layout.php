@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= e($title ?? 'Verwaltung') ?> · Fahrlehrerin Sarah</title>
+    <title><?= e($title ?? 'Schaltzentrale') ?> · Fahrlehrerin Sarah</title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,17 +20,26 @@
         <a class="brand admin-brand" href="<?= url('/admin') ?>">
             <img class="admin-brand-logo" src="<?= asset('img/logo-sarah-hell.webp') ?>"
                  alt="Fahrlehrerin Sarah" width="400" height="462">
-            <span class="brand-sub">Verwaltung</span>
+            <span class="brand-sub">Schaltzentrale</span>
         </a>
 
         <nav class="admin-nav">
+            <?php $unread = admin_unread_count(); ?>
             <a class="<?= trim(nav_exact('/admin')) ?>" href="<?= url('/admin') ?>">Übersicht</a>
+            <a class="<?= trim(nav_active('/admin/benachrichtigungen')) ?>"
+               href="<?= url('/admin/benachrichtigungen') ?>">
+                Posteingang
+                <?php if ($unread > 0): ?>
+                    <span class="nav-badge" aria-label="<?= $unread ?> ungelesen"><?= $unread ?></span>
+                <?php endif; ?>
+            </a>
             <a class="<?= trim(nav_active('/admin/termine')) ?>" href="<?= url('/admin/termine') ?>">Termine</a>
             <a class="<?= trim(nav_active('/admin/buchungen')) ?>" href="<?= url('/admin/buchungen') ?>">Buchungen</a>
             <a class="<?= trim(nav_active('/admin/schueler')) ?>" href="<?= url('/admin/schueler') ?>">Fahrschüler:innen</a>
         </nav>
 
         <div class="admin-sidebar-foot">
+            <a href="<?= url('/admin/passwort') ?>">Mein Zugang</a>
             <a href="<?= url('/') ?>" target="_blank" rel="noopener">Website ansehen &nearr;</a>
             <form method="post" action="<?= url('/admin/logout') ?>">
                 <?= csrf_field() ?>
@@ -48,9 +57,20 @@
                         aria-expanded="false" aria-controls="adminSidebar">
                     <span></span><span></span><span></span>
                 </button>
-                <h1><?= e($title ?? 'Verwaltung') ?></h1>
+                <h1><?= e($title ?? 'Schaltzentrale') ?></h1>
             </div>
-            <span class="admin-user"><?= e(Auth::user()['email'] ?? '') ?></span>
+            <div class="admin-topbar-right">
+                <?php $unreadTop = admin_unread_count(); ?>
+                <a class="topbar-bell<?= $unreadTop > 0 ? ' has-unread' : '' ?>"
+                   href="<?= url('/admin/benachrichtigungen') ?>"
+                   aria-label="Posteingang<?= $unreadTop > 0 ? ': ' . $unreadTop . ' ungelesen' : '' ?>">
+                    <?= icon('bell') ?>
+                    <?php if ($unreadTop > 0): ?>
+                        <span class="bell-dot"><?= $unreadTop > 9 ? '9+' : $unreadTop ?></span>
+                    <?php endif; ?>
+                </a>
+                <span class="admin-user"><?= e(Auth::user()['email'] ?? '') ?></span>
+            </div>
         </div>
 
         <div class="admin-content">

@@ -21,22 +21,36 @@ function out(string $msg): void
     fwrite(STDOUT, $msg . PHP_EOL);
 }
 
-/** Legt Demo-Schüler:innen an und gibt [email => pin] zurück. */
+/**
+ * Legt Demo-Schüler:innen an und gibt [email => pin] zurück.
+ * Die start_*-Werte sind der Anfangsstand der Pflichtfahrten – so ist der
+ * Fortschritt in der Demo nicht überall bei null.
+ */
 function seed_students(PDO $pdo): array
 {
     $students = [
-        ['Lena Hoffmann', 'lena@example.de',  '0170 1111111', '111111', 'Klasse B, Fahrstunden seit Mai'],
-        ['Tim Brauer',    'tim@example.de',   '0170 2222222', '222222', 'Klasse B, braucht noch Autobahnfahrten'],
-        ['Mia Sander',    'mia@example.de',   '0170 3333333', '333333', 'Klasse B, Prüfung im Herbst geplant'],
+        // name, email, telefon, pin, klasse, [überland, autobahn, nacht], notiz
+        ['Lena Hoffmann', 'lena@example.de', '0170 1111111', '111111', 'B',
+            [3, 2, 1], 'Fahrstunden seit Mai'],
+        ['Tim Brauer', 'tim@example.de', '0170 2222222', '222222', 'B',
+            [1, 0, 0], 'braucht noch Autobahnfahrten'],
+        ['Mia Sander', 'mia@example.de', '0170 3333333', '333333', 'BE',
+            [3, 1, 1], 'Prüfung im Herbst geplant'],
     ];
 
     $stmt = $pdo->prepare(
-        'INSERT INTO students (name, email, phone, pin_hash, note) VALUES (?, ?, ?, ?, ?)'
+        'INSERT INTO students
+            (name, email, phone, pin_hash, pin_changed_at, klasse,
+             start_ueberland, start_autobahn, start_nacht, note)
+         VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP, ?, ?, ?, ?, ?)'
     );
 
     $pins = [];
-    foreach ($students as [$name, $email, $phone, $pin, $note]) {
-        $stmt->execute([$name, $email, $phone, password_hash($pin, PASSWORD_DEFAULT), $note]);
+    foreach ($students as [$name, $email, $phone, $pin, $klasse, $start, $note]) {
+        $stmt->execute([
+            $name, $email, $phone, password_hash($pin, PASSWORD_DEFAULT),
+            $klasse, $start[0], $start[1], $start[2], $note,
+        ]);
         $pins[$email] = $pin;
     }
 
@@ -61,13 +75,17 @@ function seed_slots(PDO $pdo): array
     ];
 
     $stmt = $pdo->prepare(
-        'INSERT INTO slots (starts_at, duration_min, type, location, note) VALUES (?, ?, ?, ?, ?)'
+        'INSERT INTO slots (starts_at, duration_min, type, sonderfahrt_art, location, note)
+         VALUES (?, ?, ?, ?, ?, ?)'
     );
 
     $duration = (int) config('booking.slot_duration_min', 45);
     $monday   = week_start(new DateTimeImmutable('now'));
     $now      = new DateTimeImmutable('now');
     $ids      = [];
+    // Die Samstags-Sonderfahrten reihum: so sind in der Demo alle drei
+    // Pflichtfahrt-Arten vertreten
+    $arten    = ['ueberland', 'autobahn', 'nacht'];
 
     for ($week = 0; $week < 3; $week++) {
         $weekStart = $monday->modify("+$week weeks");
@@ -85,13 +103,15 @@ function seed_slots(PDO $pdo): array
 
                 // Ein Samstagstermin pro Woche ist eine längere Sonderfahrt
                 $isSpecial = $weekday === 6 && $time === '10:00';
+                $art       = $isSpecial ? $arten[$week % count($arten)] : null;
 
                 $stmt->execute([
                     $start->format('Y-m-d H:i:s'),
                     $isSpecial ? 90 : $duration,
                     $isSpecial ? 'sonderfahrt' : 'fahrstunde',
+                    $art,
                     'Treffpunkt Fahrschule',
-                    $isSpecial ? 'Überland- oder Autobahnfahrt' : null,
+                    $isSpecial ? 'Pflichtfahrt' : null,
                 ]);
                 $ids[] = (int) $pdo->lastInsertId();
             }
@@ -140,6 +160,77 @@ function seed_bookings(PDO $pdo, array $slotIds): int
     return $count;
 }
 
+/**
+ * Ein paar Meldungen für Sarahs Posteingang, damit Übersicht und Posteingang
+ * in der Demo nicht leer sind. Im echten Betrieb entstehen sie ausschließlich
+ * durch den Notifier, wenn wirklich jemand bucht.
+ */
+function seed_notifications(PDO $pdo): int
+{
+    $bookings = $pdo->query(
+        "SELECT b.id, s.starts_at, st.name
+           FROM bookings b
+           JOIN slots s     ON s.id = b.slot_id
+           JOIN students st ON st.id = b.student_id
+          WHERE b.status = 'gebucht'
+          ORDER BY s.starts_at LIMIT 3"
+    )->fetchAll();
+
+    if (!$bookings) {
+        return 0;
+    }
+
+    $stmt = $pdo->prepare(
+        'INSERT INTO notifications
+            (event, actor, booking_id, student_name, starts_at, from_starts_at,
+             title, body, channels, read_at, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+    );
+
+    $now   = new DateTimeImmutable('now');
+    $count = 0;
+
+    foreach ($bookings as $i => $booking) {
+        $start = dt($booking['starts_at']);
+        $name  = $booking['name'];
+        // Älteste zuerst einfügen, damit die Reihenfolge der IDs der Zeit
+        // entspricht – die Liste sortiert nach ID absteigend.
+        $age = $now->modify('-' . ((count($bookings) - $i) * 19 + 6) . ' minutes');
+        // Nur die jüngste Meldung wartet noch ungelesen
+        $unread = $i === count($bookings) - 1;
+
+        if ($i === 1) {
+            // Eine verschobene Stunde – zeigt die Vorher/Nachher-Zeile
+            $from = $start->modify('-1 day');
+            $stmt->execute([
+                'verschoben', 'schueler', $booking['id'], $name,
+                $start->format('Y-m-d H:i:s'), $from->format('Y-m-d H:i:s'),
+                $name . ' hat eine Stunde verschoben',
+                sprintf(
+                    "Die Stunde von %s wurde verschoben.\nVorher: %s\nJetzt:  %s",
+                    $name,
+                    format_datetime($from),
+                    format_datetime($start)
+                ),
+                'mail', $age->format('Y-m-d H:i:s'), $age->format('Y-m-d H:i:s'),
+            ]);
+        } else {
+            $stmt->execute([
+                'gebucht', 'schueler', $booking['id'], $name,
+                $start->format('Y-m-d H:i:s'), null,
+                $name . ' hat sich eingetragen',
+                sprintf('%s hat sich für %s eingetragen.', $name, format_datetime($start)),
+                'mail',
+                $unread ? null : $age->format('Y-m-d H:i:s'),
+                $age->format('Y-m-d H:i:s'),
+            ]);
+        }
+        $count++;
+    }
+
+    return $count;
+}
+
 try {
     $withDemo = !in_array('--ohne-demo', $argv, true);
 
@@ -150,12 +241,16 @@ try {
     $pdo->exec(file_get_contents(APP_ROOT . '/database/schema.sqlite.sql'));
     out('✓ Schema eingespielt.');
 
-    // 2) Admin-Zugang für Sarah aus der .env
+    // 2) Admin-Zugang für Sarah aus der .env.
+    //    Das Passwort steht dort im Klartext, ist also ein EINMALpasswort:
+    //    must_change_password = 1 zwingt Sarah beim ersten Anmelden zum Wechsel.
     $email = (string) config('admin.email');
     $hash  = password_hash((string) config('admin.password'), PASSWORD_DEFAULT);
-    $pdo->prepare('INSERT OR REPLACE INTO admins (email, password_hash) VALUES (?, ?)')
-        ->execute([$email, $hash]);
-    out("✓ Admin-Zugang '$email' angelegt.");
+    $pdo->prepare(
+        'INSERT OR REPLACE INTO admins (email, password_hash, must_change_password)
+         VALUES (?, ?, 1)'
+    )->execute([$email, $hash]);
+    out("✓ Admin-Zugang '$email' angelegt (Passwortwechsel beim ersten Anmelden).");
 
     // 3) Demo-Daten
     $pins = [];
@@ -163,8 +258,9 @@ try {
         $pins    = seed_students($pdo);
         $slotIds = seed_slots($pdo);
         $booked  = seed_bookings($pdo, $slotIds);
+        $notes   = seed_notifications($pdo);
         out('✓ Demo-Daten: ' . count($pins) . ' Schüler, ' . count($slotIds)
-            . ' Termine (davon ' . $booked . ' gebucht).');
+            . ' Termine (davon ' . $booked . ' gebucht), ' . $notes . ' Meldungen.');
     } else {
         out('· Demo-Daten übersprungen (--ohne-demo).');
     }

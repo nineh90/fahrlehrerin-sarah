@@ -1,5 +1,8 @@
 <?php
-/** @var DateTimeImmutable $monday @var int $weekOffset @var array $slotsByDay */
+/**
+ * @var DateTimeImmutable $monday @var int $weekOffset
+ * @var array $slotsByDay @var array $students
+ */
 $sunday = $monday->modify('+6 days');
 ?>
 
@@ -64,6 +67,25 @@ $sunday = $monday->modify('+6 days');
 
                             <?php if ($slot['status'] !== 'gebucht'): ?>
                                 <span class="cell-actions">
+                                    <?php /* Direkt vergeben – auch gesperrte Zeiten, die hat
+                                             Sarah selbst blockiert (etwa für eine Prüfung). */ ?>
+                                    <?php if ($students && !Slot::isPast($slot)): ?>
+                                        <form class="inline-form slot-assign" method="post"
+                                              action="<?= url('/admin/termine/' . $slot['id'] . '/zuweisen') ?>">
+                                            <?= csrf_field() ?>
+                                            <input type="hidden" name="woche" value="<?= (int) $weekOffset ?>">
+                                            <select name="student_id" aria-label="Termin zuweisen an"
+                                                    data-autosubmit>
+                                                <option value="">Zuweisen …</option>
+                                                <?php foreach ($students as $person): ?>
+                                                    <option value="<?= (int) $person['id'] ?>"><?= e($person['name']) ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <noscript>
+                                                <button class="btn btn-ghost btn-sm" type="submit">OK</button>
+                                            </noscript>
+                                        </form>
+                                    <?php endif; ?>
                                     <form class="inline-form" method="post"
                                           action="<?= url('/admin/termine/' . $slot['id'] . '/sperren') ?>">
                                         <?= csrf_field() ?>

@@ -1,4 +1,4 @@
-<?php /** @var array $students @var array $counts */ ?>
+<?php /** @var array $students @var array $counts @var array $stand */ ?>
 
 <div class="admin-card">
     <div class="admin-card-head">
@@ -18,6 +18,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Kontakt</th>
+                    <th>Pflichtfahrten</th>
                     <th>Termine</th>
                     <th>Status</th>
                     <th></th>
@@ -26,16 +27,33 @@
             <tbody>
                 <?php foreach ($students as $student): ?>
                     <tr>
+                        <?php
+                        $eigen  = $stand[$student['id']] ?? [];
+                        $gesamt = array_sum(array_column($eigen, 'gesamt'));
+                        $ziel   = array_sum(array_column($eigen, 'soll'));
+                        ?>
                         <td data-label="Name">
-                            <strong><?= e($student['name']) ?></strong>
-                            <?php if ($student['note']): ?>
-                                <br><span class="muted" style="font-size:.82rem;"><?= e($student['note']) ?></span>
-                            <?php endif; ?>
+                            <a href="<?= url('/admin/schueler/' . $student['id'] . '/bearbeiten') ?>">
+                                <strong><?= e($student['name']) ?></strong>
+                            </a>
+                            <br><span class="muted" style="font-size:.82rem;">
+                                <?= e(Student::KLASSEN[$student['klasse']] ?? $student['klasse']) ?>
+                                <?php if ($student['note']): ?>
+                                    &middot; <?= e($student['note']) ?>
+                                <?php endif; ?>
+                            </span>
                         </td>
                         <td data-label="Kontakt">
                             <a href="mailto:<?= e($student['email']) ?>"><?= e($student['email']) ?></a>
                             <?php if ($student['phone']): ?>
                                 <br><a href="tel:<?= e(preg_replace('/\s+/', '', (string) $student['phone'])) ?>"><?= e($student['phone']) ?></a>
+                            <?php endif; ?>
+                        </td>
+                        <td data-label="Pflichtfahrten">
+                            <?php if ($ziel > 0 && $gesamt >= $ziel): ?>
+                                <span class="pill pill-success"><?= $gesamt ?> von <?= $ziel ?></span>
+                            <?php else: ?>
+                                <span class="pill pill-neutral"><?= $gesamt ?> von <?= $ziel ?></span>
                             <?php endif; ?>
                         </td>
                         <td data-label="Termine">
@@ -50,10 +68,10 @@
                         </td>
                         <td class="cell-actions" data-label="Aktionen">
                             <a class="btn btn-ghost btn-sm"
-                               href="<?= url('/admin/schueler/' . $student['id'] . '/bearbeiten') ?>">Bearbeiten</a>
+                               href="<?= url('/admin/schueler/' . $student['id'] . '/bearbeiten') ?>">Öffnen</a>
                             <form class="inline-form" method="post"
                                   action="<?= url('/admin/schueler/' . $student['id'] . '/pin') ?>"
-                                  data-confirm="Neue PIN erzeugen? Die alte funktioniert danach nicht mehr.">
+                                  data-confirm="Neue PIN erzeugen und per E-Mail verschicken? Die alte funktioniert danach nicht mehr.">
                                 <?= csrf_field() ?>
                                 <button class="btn btn-ghost btn-sm" type="submit">Neue PIN</button>
                             </form>
@@ -74,9 +92,12 @@
 <div class="admin-card">
     <h3>Wie der Zugang funktioniert</h3>
     <ul class="check-list" style="margin-top:1rem;">
-        <li>Beim Anlegen erzeugt das System eine 6-stellige PIN und zeigt sie <strong>einmalig</strong> an.</li>
-        <li>Notiere sie dir und gib sie persönlich weiter – gespeichert wird sie nur verschlüsselt.</li>
-        <li>PIN vergessen? Über „Neue PIN" erzeugst du jederzeit eine neue.</li>
+        <li>Beim Anlegen erzeugt das System eine 6-stellige PIN, schickt sie per
+            E-Mail an die Person und zeigt sie dir <strong>einmalig</strong> an.</li>
+        <li>Nachschlagen geht nicht: Die PIN wird nur verschlüsselt gespeichert –
+            genau wie ein Passwort. Auch du kommst nicht mehr an sie heran.</li>
+        <li>PIN vergessen? Über „Neue PIN" erzeugst du jederzeit eine neue.
+            Sie geht sofort per Mail raus, die alte gilt dann nicht mehr.</li>
         <li>Wer pausiert, wird auf „inaktiv" gesetzt: Der Zugang ist gesperrt, die Historie bleibt.</li>
     </ul>
 </div>

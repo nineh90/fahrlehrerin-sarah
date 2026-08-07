@@ -170,6 +170,20 @@
     --card-accent-soft: var(--accent-soft);
 }
 
+/* Pflichtfahrten: jede Fahrtart ihre eigene Farbe – so erkennt Sarah die
+   Zeile am Balken, ohne die Beschriftung zu lesen. Feste Zuordnung, keine
+   Rotation: die Farbe gehört zur Sache, nicht zur Reihenfolge. */
+.progress-ueberland { --progress-accent: var(--c-green); }
+.progress-autobahn  { --progress-accent: var(--c-blue); }
+.progress-nacht     { --progress-accent: var(--c-violet); }
+
+/* Posteingang: Die Farbe steht hier für das Ereignis, nicht für die Position
+   in der Liste – deshalb keine Rotation, sondern eine feste Zuordnung.
+   Grün heißt „kommt dazu", Blau „hat sich geändert", Rot „fällt weg". */
+.feed-gebucht    { --feed-accent: var(--c-green); }
+.feed-verschoben { --feed-accent: var(--c-blue); }
+.feed-storniert  { --feed-accent: var(--c-red); }
+
 /* Wochenkalender: jeder Wochentag trägt seine eigene Farbe im Kopf */
 .week-grid > *:nth-child(7n+1) { --day-head-bg: rgba(228, 87, 46, 0.12); }
 .week-grid > *:nth-child(7n+2) { --day-head-bg: rgba(240, 138, 36, 0.14); }

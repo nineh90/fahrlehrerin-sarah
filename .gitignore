@@ -13,6 +13,13 @@ storage/*
 assets-quellen/fahrlehrerin_sarah.jpeg
 assets-quellen/fahrlehrerin_sarah_ausgeschnitten.png
 
+# Vorlage des Fahrschulautos: eine Folie aus dem Theoriematerial der Fahrschule,
+# also deren Material und nicht Sarahs. Der ausgelieferte Freisteller
+# (public/assets/img/fahrschulauto.webp) steht ohnehin auf der Website – die
+# Originalfolie muss deshalb nicht zusätzlich in einem öffentlichen Repo liegen.
+# Sie bleibt lokal, damit sich der Freisteller neu bauen lässt.
+assets-quellen/fahrschulwagen_sander_fahrlehrerin_sarah.jpeg
+
 # Interne Arbeitsdokumente. Das Repo ist öffentlich; die CLAUDE.md nennt außerdem den
 # Namen der Fahrschule im Klartext. Beide Dateien bleiben lokal im Kundenordner liegen.
 CLAUDE.md

@@ -6,7 +6,10 @@ declare(strict_types=1);
  * die PIN – eine Selbstregistrierung gibt es bewusst nicht.
  *
  * Die PIN wird ausschließlich direkt nach dem Erzeugen im Klartext angezeigt
- * (über eine Flash-Message). Danach existiert nur noch der Hash.
+ * (über eine Flash-Message) und gleichzeitig per Mail an die Person geschickt.
+ * Danach existiert nur noch der Hash: Sarah kann eine PIN nicht nachschlagen,
+ * sondern nur eine neue erzeugen. Das ist Absicht und der Grund, warum es
+ * überall „Neue PIN" heißt und nirgends „PIN anzeigen".
  */
 final class AdminStudentController
 {
@@ -14,10 +17,19 @@ final class AdminStudentController
     {
         Auth::require();
 
+        $students = Student::all();
+
+        // Kurzstand der Pflichtfahrten je Person – in der Liste reicht "7 von 12"
+        $stand = [];
+        foreach ($students as $person) {
+            $stand[$person['id']] = Student::pflichtfahrten((int) $person['id']);
+        }
+
         render('admin/schueler/index', [
             'title'    => 'Fahrschüler:innen',
-            'students' => Student::all(),
+            'students' => $students,
             'counts'   => Student::upcomingCounts(),
+            'stand'    => $stand,
         ], 'admin/layout');
     }
 
@@ -28,7 +40,8 @@ final class AdminStudentController
         render('admin/schueler/form', [
             'title'   => 'Fahrschüler:in anlegen',
             'student' => null,
-            'values'  => ['active' => '1'],
+            'values'  => ['active' => '1', 'klasse' => 'B'],
+            'stand'   => null,
         ], 'admin/layout');
     }
 
@@ -46,19 +59,15 @@ final class AdminStudentController
                 'title'   => 'Fahrschüler:in anlegen',
                 'student' => null,
                 'values'  => $values,
+                'stand'   => null,
             ], 'admin/layout');
             return;
         }
 
         $pin = StudentAuth::generatePin();
-        Student::create($values, $pin);
+        $id  = Student::create($values, $pin);
 
-        set_flash('success', sprintf(
-            '%s angelegt. PIN: %s – bitte jetzt notieren und weitergeben, '
-            . 'sie wird nicht noch einmal angezeigt.',
-            $values['name'],
-            $pin
-        ));
+        set_flash('success', $this->pinMessage($values['name'], $values['email'], $pin, $id));
         redirect('/admin/schueler');
     }
 
@@ -72,9 +81,10 @@ final class AdminStudentController
         }
 
         render('admin/schueler/form', [
-            'title'   => $student['name'] . ' bearbeiten',
+            'title'   => $student['name'],
             'student' => $student,
             'values'  => $student,
+            'stand'   => Student::pflichtfahrten((int) $id),
         ], 'admin/layout');
     }
 
@@ -94,18 +104,24 @@ final class AdminStudentController
         if ($error !== null) {
             set_flash('error', $error);
             render('admin/schueler/form', [
-                'title'   => $student['name'] . ' bearbeiten',
+                'title'   => $student['name'],
                 'student' => $student,
                 'values'  => $values,
+                'stand'   => Student::pflichtfahrten((int) $id),
             ], 'admin/layout');
             return;
         }
 
         Student::update((int) $id, $values);
         set_flash('success', 'Änderungen gespeichert.');
-        redirect('/admin/schueler');
+        redirect('/admin/schueler/' . (int) $id . '/bearbeiten');
     }
 
+    /**
+     * Erzeugt eine neue PIN und schickt sie der Person.
+     * Angezeigt wird sie zusätzlich – falls die Mail nicht ankommt, hat Sarah
+     * sie so trotzdem einmal gesehen und kann sie persönlich weitergeben.
+     */
     public function resetPin(string $id): void
     {
         Auth::require();
@@ -117,12 +133,18 @@ final class AdminStudentController
         }
 
         $pin = Student::resetPin((int) $id);
-        set_flash('success', sprintf(
-            'Neue PIN für %s: %s – bitte jetzt notieren, sie wird nicht noch einmal angezeigt.',
+        set_flash('success', $this->pinMessage(
             $student['name'],
-            $pin
+            $student['email'],
+            $pin,
+            (int) $id
         ));
-        redirect('/admin/schueler');
+
+        // Kein freier Pfad aus dem Formular – nur die zwei Orte, an denen der
+        // Knopf steht. Sonst wäre das eine offene Weiterleitung.
+        redirect(($_POST['zurueck'] ?? '') === 'detail'
+            ? '/admin/schueler/' . (int) $id . '/bearbeiten'
+            : '/admin/schueler');
     }
 
     public function destroy(string $id): void
@@ -142,15 +164,47 @@ final class AdminStudentController
 
     // -----------------------------------------------------------------------
 
+    /**
+     * Verschickt die PIN und baut die Meldung für Sarah.
+     * Die PIN steht bewusst AUCH in der Meldung: geht die Mail nicht raus
+     * (Tippfehler in der Adresse, Versand aus), ist sie sonst verloren.
+     */
+    private function pinMessage(string $name, string $email, string $pin, int $id): string
+    {
+        $verschickt = Notifier::pinToStudent(['name' => $name, 'email' => $email], $pin);
+        if ($verschickt) {
+            Student::markPinSent($id);
+        }
+
+        return sprintf(
+            'PIN für %s: %s – %s Notiere sie dir jetzt, sie wird nicht noch einmal angezeigt.',
+            $name,
+            $pin,
+            $verschickt
+                ? 'per E-Mail an ' . $email . ' verschickt.'
+                : 'die E-Mail konnte nicht verschickt werden, bitte persönlich weitergeben.'
+        );
+    }
+
     private function input(): array
     {
         return [
-            'name'   => trim((string) ($_POST['name'] ?? '')),
-            'email'  => trim((string) ($_POST['email'] ?? '')),
-            'phone'  => trim((string) ($_POST['phone'] ?? '')),
-            'note'   => trim((string) ($_POST['note'] ?? '')),
-            'active' => isset($_POST['active']) ? '1' : '0',
+            'name'            => trim((string) ($_POST['name'] ?? '')),
+            'email'           => trim((string) ($_POST['email'] ?? '')),
+            'phone'           => trim((string) ($_POST['phone'] ?? '')),
+            'klasse'          => (string) ($_POST['klasse'] ?? 'B'),
+            'note'            => trim((string) ($_POST['note'] ?? '')),
+            'active'          => isset($_POST['active']) ? '1' : '0',
+            // Anfangsstand der Pflichtfahrten – nie negativ, nie absurd hoch
+            'start_ueberland' => $this->startwert('start_ueberland'),
+            'start_autobahn'  => $this->startwert('start_autobahn'),
+            'start_nacht'     => $this->startwert('start_nacht'),
         ];
+    }
+
+    private function startwert(string $feld): int
+    {
+        return max(0, min(99, (int) ($_POST[$feld] ?? 0)));
     }
 
     private function validate(array $values, ?int $exceptId = null): ?string
@@ -163,6 +217,9 @@ final class AdminStudentController
         }
         if (Student::emailTaken($values['email'], $exceptId)) {
             return 'Diese E-Mail-Adresse ist bereits vergeben.';
+        }
+        if (!isset(Student::KLASSEN[$values['klasse']])) {
+            return 'Bitte eine gültige Führerscheinklasse wählen.';
         }
 
         return null;

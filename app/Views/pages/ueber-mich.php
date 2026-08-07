@@ -26,7 +26,7 @@
                 <p>
                     Ich bin Fahrlehrerin für die Klassen B und BE und unterrichte rund um
                     <?= e(area_sentence()) ?>.
-                    Angestellt<?= $school !== '' ? ' bei ' . e($school) : '' ?>, nicht
+                    Angestellt<?= $school !== '' ? ' bei der ' . school_link() : '' ?>, nicht
                     selbstständig – diese Seite ist mein persönliches Schaufenster, keine
                     Fahrschul-Website.
                 </p>
@@ -88,11 +88,11 @@
     <div class="container">
         <div class="duo">
             <div class="duo-media photo-wrap" style="--card-accent: var(--c-blue);">
-                <figure class="photo photo--right">
-                    <img src="<?= asset('img/platzhalter-fahrstunde.svg') ?>"
-                         alt="Blick durch die Windschutzscheibe während einer Fahrstunde"
-                         width="640" height="480">
-                    <figcaption>Platzhalter – ersetzen durch ein Foto aus dem Fahrschulauto</figcaption>
+                <figure class="photo photo--right photo--cutout">
+                    <img src="<?= asset('img/fahrschulauto.webp') ?>"
+                         alt="Das Fahrschulauto: ein weißer VW T-Roc"
+                         width="1200" height="637" loading="lazy" decoding="async">
+                    <figcaption>Das Auto, in dem wir unterwegs sind</figcaption>
                 </figure>
             </div>
 

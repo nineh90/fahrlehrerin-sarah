@@ -47,11 +47,15 @@
             <div class="notice" style="--card-accent: var(--c-blue); margin-bottom: 1.6rem;">
                 <?= icon('shield') ?>
                 <div>
-                    <h3>Anmelden musst du dich bei der Fahrschule</h3>
+                    <h3>
+                        Anmelden musst du dich
+                        <?= $school !== '' ? 'bei der ' . e($school) : 'bei der Fahrschule' ?>
+                    </h3>
                     <p>
-                        Ich bin angestellte Fahrlehrerin<?= $school !== '' ? ' bei ' . e($school) : '' ?>.
+                        Ich bin angestellte Fahrlehrerin<?= $school !== '' ? ' bei der ' . school_link() : '' ?>.
                         Vertrag, Anmeldung, Theorieunterricht und Preise laufen dort –
-                        mich fragst du, wenn es ums Fahren geht.
+                        mich fragst du, wenn es ums Fahren geht. Sag bei der Anmeldung
+                        einfach, dass du bei mir fahren möchtest.
                     </p>
                 </div>
             </div>

@@ -15,7 +15,7 @@
                 </p>
                 <?php if ($school !== ''): ?>
                     <p class="footer-tagline">
-                        Ich unterrichte bei <?= e($school) ?>.
+                        Ich unterrichte bei der <?= school_link() ?>.
                         Anmeldung und Preise laufen über die Fahrschule.
                     </p>
                 <?php endif; ?>
@@ -58,7 +58,7 @@
                 <span class="sep">·</span>
                 <a href="<?= url('/meine-website') ?>">Diese Website</a>
                 <span class="sep">·</span>
-                <a href="<?= url('/admin/login') ?>">Sarahs Planung</a>
+                <a href="<?= url('/admin/login') ?>">Sarahs Schaltzentrale</a>
             </nav>
             <p class="footer-copy">&copy; <?= date('Y') ?> Sarah <?= e(config('contact.city')) ?></p>
 

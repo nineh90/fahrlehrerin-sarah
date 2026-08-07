@@ -8,7 +8,11 @@
                  alt="" width="200" height="231">
             <span class="brand-text">
                 <span class="brand-mark">Fahrlehrerin Sarah</span>
-                <span class="brand-sub">Ich sitze rechts neben dir</span>
+                <?php /* „Fahrlehrerin" steht schon eine Zeile höher im Namen – hier
+                         nur die Klassen. Die Zeile läuft in Versalien mit weitem
+                         Sperrsatz, jedes Wort mehr bricht den Header auf dem Handy
+                         in eine dritte Zeile um. */ ?>
+                <span class="brand-sub">Klasse B · BE · Handicap</span>
             </span>
         </a>
 

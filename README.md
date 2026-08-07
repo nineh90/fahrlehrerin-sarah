@@ -25,7 +25,7 @@ Dann <http://localhost:8000> öffnen.
 
 | Rolle | Adresse | Zugangsdaten |
 |---|---|---|
-| Sarah (Verwaltung) | `/admin/login` | `sarah@fahrlehrerin-sarah.de` · `sarah12345` |
+| Sarah (Schaltzentrale) | `/admin/login` | `sarah@fahrlehrerinsarah.de` · `sarah12345` |
 | Fahrschülerin Lena | `/login` | `lena@example.de` · PIN `111111` |
 | Fahrschüler Tim | `/login` | `tim@example.de` · PIN `222222` |
 | Fahrschülerin Mia | `/login` | `mia@example.de` · PIN `333333` |

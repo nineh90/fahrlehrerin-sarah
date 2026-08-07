@@ -1,12 +1,17 @@
 <?php
 /** @var array $freeSlots */
-$school = (string) config('school.name');
+$school    = (string) config('school.name');
+$schoolUrl = trim((string) config('school.url'));
 ?>
 <section class="hero">
     <div class="container hero-inner">
         <div class="duo duo--narrow-media">
+            <?php /* Ohne Augenbraue: Die Klassen stehen seit 07.08.2026 im Header
+                     unter der Wortmarke und stünden hier ein zweites Mal, nur
+                     zwei Zentimeter tiefer. Der Hero fängt jetzt direkt mit der
+                     Aussage an. `.hero-eyebrow` bleibt in nd-base.css – die
+                     Signatur nutzt sie in anderen Projekten weiter. */ ?>
             <div class="hero-content">
-                <p class="hero-eyebrow">Fahrlehrerin · Klasse B, BE &amp; Handicap</p>
                 <h1>Hinterm Steuer<br>ist Platz für alle.</h1>
                 <p class="hero-lead">
                     Ich bin Sarah und bringe Menschen das Autofahren bei – Fahranfänger:innen
@@ -48,9 +53,9 @@ $school = (string) config('school.name');
             <div>
                 <h3>Kurz vorweg: Das hier ist meine persönliche Seite.</h3>
                 <p>
-                    Ich bin angestellte Fahrlehrerin<?= $school !== '' ? ' bei ' . e($school) : '' ?> –
-                    keine eigene Fahrschule. Anmeldung, Vertrag und Preise laufen über die
-                    Fahrschule. Hier erfährst du, wie ich arbeite und wann ich Zeit habe.
+                    Ich bin angestellte Fahrlehrerin<?= $school !== '' ? ' bei der ' . school_link() : '' ?> –
+                    keine eigene Fahrschule. Anmeldung, Vertrag und Preise laufen dort.
+                    Hier erfährst du, wie ich arbeite und wann ich Zeit habe.
                 </p>
             </div>
         </div>
@@ -256,6 +261,60 @@ $school = (string) config('school.name');
                     </article>
                 <?php endforeach; ?>
             </div>
+        <?php endif; ?>
+    </div>
+</section>
+
+<?php /* Der praktische nächste Schritt. Steht bewusst HIER und nicht weiter oben:
+         Wer bis hierhin gelesen hat, ist überzeugt und fragt sich, wie es geht.
+         Die Arbeitsteilung nebeneinander zu zeigen ist ehrlicher als ein Satz –
+         Sarah verkauft nichts, sie fährt. */ ?>
+<section class="section">
+    <div class="container">
+        <div class="section-head">
+            <div class="section-head-text">
+                <span class="section-eyebrow">Der erste Schritt</span>
+                <h2>Wie du bei mir Fahrschüler:in wirst</h2>
+            </div>
+        </div>
+
+        <p class="muted" style="max-width:660px;margin:-1.4rem 0 2rem;">
+            Ich bin angestellte Fahrlehrerin, keine eigene Fahrschule. Die Anmeldung
+            läuft deshalb nicht über diese Seite, sondern über
+            <?= $school !== '' ? school_link() : 'meine Fahrschule' ?>. Sag dort einfach,
+            dass du bei mir fahren möchtest.
+        </p>
+
+        <div class="split-grid">
+            <article class="card" style="--card-accent: var(--c-green);">
+                <h3 style="margin-top:0;">
+                    <?= $school !== '' ? e($school) : 'Die Fahrschule' ?> übernimmt
+                </h3>
+                <ul class="check-list" style="margin-bottom:0;">
+                    <li>Anmeldung und Ausbildungsvertrag</li>
+                    <li>Theorieunterricht und Lernmaterial</li>
+                    <li>Preise und Abrechnung</li>
+                    <li>Anmeldung zur Prüfung bei der Führerscheinstelle</li>
+                </ul>
+            </article>
+
+            <article class="card" style="--card-accent: var(--c-violet);">
+                <h3 style="margin-top:0;">Bei mir sitzt du im Auto</h3>
+                <ul class="check-list" style="margin-bottom:0;">
+                    <li>Alle Fahrstunden, von der ersten bis zur Prüfung</li>
+                    <li>Die Pflichtfahrten: Überland, Autobahn, bei Dunkelheit</li>
+                    <li>Ausbildung mit Prothese, Lenkhilfe oder Handbedienung</li>
+                    <li>Deine Termine – hier auf der Seite, ohne Telefonieren</li>
+                </ul>
+            </article>
+        </div>
+
+        <?php if ($school !== '' && $schoolUrl !== ''): ?>
+            <p style="margin:2rem 0 0;">
+                <a class="btn btn-ghost" href="<?= e($schoolUrl) ?>" target="_blank" rel="noopener">
+                    Zur <?= e($school) ?> &nearr;
+                </a>
+            </p>
         <?php endif; ?>
     </div>
 </section>

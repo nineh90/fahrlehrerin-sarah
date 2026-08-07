@@ -23,6 +23,8 @@ final class AdminSlotController
             'monday'     => $monday,
             'weekOffset' => (int) $offset,
             'slotsByDay' => group_slots_by_day(Slot::forWeek($monday), $monday),
+            // Für das Zuweisen direkt aus dem Kalender
+            'students'   => Student::activeOptions(),
         ], 'admin/layout');
     }
 
@@ -35,13 +37,15 @@ final class AdminSlotController
         Auth::require();
 
         render('admin/slots/form', [
-            'title'  => 'Termin anlegen',
-            'values' => [
+            'title'    => 'Termin anlegen',
+            'students' => Student::activeOptions(),
+            'values'   => [
                 'date'         => (new DateTimeImmutable('tomorrow'))->format('Y-m-d'),
                 'time'         => '14:00',
                 'duration_min' => (string) config('booking.slot_duration_min'),
                 'type'         => 'fahrstunde',
                 'location'     => 'Treffpunkt Fahrschule',
+                'student_id'   => '',
             ],
         ], 'admin/layout');
     }
@@ -52,38 +56,89 @@ final class AdminSlotController
         verify_csrf();
 
         $values = [
-            'date'         => trim((string) ($_POST['date'] ?? '')),
-            'time'         => trim((string) ($_POST['time'] ?? '')),
-            'duration_min' => (string) ($_POST['duration_min'] ?? ''),
-            'type'         => (string) ($_POST['type'] ?? 'fahrstunde'),
-            'location'     => trim((string) ($_POST['location'] ?? '')),
-            'note'         => trim((string) ($_POST['note'] ?? '')),
+            'date'            => trim((string) ($_POST['date'] ?? '')),
+            'time'            => trim((string) ($_POST['time'] ?? '')),
+            'duration_min'    => (string) ($_POST['duration_min'] ?? ''),
+            'type'            => (string) ($_POST['type'] ?? 'fahrstunde'),
+            'sonderfahrt_art' => (string) ($_POST['sonderfahrt_art'] ?? ''),
+            'location'        => trim((string) ($_POST['location'] ?? '')),
+            'note'            => trim((string) ($_POST['note'] ?? '')),
+            // Leer = der Termin steht allen offen
+            'student_id'      => (string) ($_POST['student_id'] ?? ''),
         ];
 
         $start = $this->parseDateTime($values['date'], $values['time']);
 
         if (!$start || !isset(Slot::TYPES[$values['type']])) {
-            set_flash('error', 'Bitte Datum, Uhrzeit und Art des Termins korrekt angeben.');
-            render('admin/slots/form', ['title' => 'Termin anlegen', 'values' => $values], 'admin/layout');
-            return;
+            $this->backToForm('Bitte Datum, Uhrzeit und Art des Termins korrekt angeben.', $values);
+        }
+        if ($values['sonderfahrt_art'] !== '' && !isset(Slot::SONDERFAHRT_ARTEN[$values['sonderfahrt_art']])) {
+            $this->backToForm('Bitte eine gültige Art der Sonderfahrt wählen.', $values);
         }
 
         $id = Slot::create([
-            'starts_at'    => $start->format('Y-m-d H:i:s'),
-            'duration_min' => max(15, (int) $values['duration_min']),
-            'type'         => $values['type'],
-            'location'     => $values['location'],
-            'note'         => $values['note'],
+            'starts_at'       => $start->format('Y-m-d H:i:s'),
+            'duration_min'    => max(15, (int) $values['duration_min']),
+            'type'            => $values['type'],
+            'sonderfahrt_art' => $values['sonderfahrt_art'],
+            'location'        => $values['location'],
+            'note'            => $values['note'],
         ]);
 
         if ($id === null) {
-            set_flash('error', 'Zu dieser Uhrzeit gibt es bereits einen Termin.');
-            render('admin/slots/form', ['title' => 'Termin anlegen', 'values' => $values], 'admin/layout');
-            return;
+            $this->backToForm('Zu dieser Uhrzeit gibt es bereits einen Termin.', $values);
         }
 
-        set_flash('success', 'Termin am ' . format_datetime($start) . ' angelegt.');
+        $meldung = 'Termin am ' . format_datetime($start) . ' angelegt.';
+        $fehler  = null;
+
+        // Direkt zuweisen? Dann in einem Rutsch buchen. Schlägt das fehl, bleibt
+        // der Termin trotzdem bestehen – er ist dann eben frei für alle.
+        if ($values['student_id'] !== '') {
+            $fehler = Booking::book($id, (int) $values['student_id'], 'admin');
+            $person = Student::find((int) $values['student_id']);
+
+            $meldung .= $fehler === null
+                ? ' ' . ($person['name'] ?? 'Die Person') . ' ist eingetragen.'
+                : ' Zuweisen hat nicht geklappt: ' . $fehler . ' Der Termin ist frei buchbar.';
+        }
+
+        set_flash($fehler === null ? 'success' : 'info', $meldung);
         redirect('/admin/termine?woche=' . $this->weekOffsetOf($start));
+    }
+
+    /** Weist einen bestehenden Termin direkt zu (aus dem Kalender heraus). */
+    public function assign(string $id): void
+    {
+        Auth::require();
+        verify_csrf();
+
+        $studentId = (int) ($_POST['student_id'] ?? 0);
+        $slot      = Slot::find((int) $id);
+
+        if (!$slot) {
+            set_flash('error', 'Diesen Termin gibt es nicht (mehr).');
+            redirect($this->backToWeek());
+        }
+        if ($studentId === 0) {
+            set_flash('error', 'Bitte auswählen, wer den Termin bekommen soll.');
+            redirect($this->backToWeek());
+        }
+
+        $fehler = Booking::book((int) $id, $studentId, 'admin');
+
+        if ($fehler !== null) {
+            set_flash('error', $fehler);
+        } else {
+            $person = Student::find($studentId);
+            set_flash('success', sprintf(
+                '%s ist für %s eingetragen.',
+                $person['name'] ?? 'Die Person',
+                format_datetime(dt($slot['starts_at']))
+            ));
+        }
+
+        redirect($this->backToWeek());
     }
 
     // -----------------------------------------------------------------------
@@ -104,10 +159,11 @@ final class AdminSlotController
                 'weekdays'     => ['1', '2', '3', '4', '5'],
                 'time_from'    => '14:00',
                 'time_to'      => '18:00',
-                'interval'     => '60',
-                'duration_min' => (string) config('booking.slot_duration_min'),
-                'type'         => 'fahrstunde',
-                'location'     => 'Treffpunkt Fahrschule',
+                'interval'        => '60',
+                'duration_min'    => (string) config('booking.slot_duration_min'),
+                'type'            => 'fahrstunde',
+                'sonderfahrt_art' => '',
+                'location'        => 'Treffpunkt Fahrschule',
             ],
         ], 'admin/layout');
     }
@@ -124,9 +180,10 @@ final class AdminSlotController
             'time_from'    => trim((string) ($_POST['time_from'] ?? '')),
             'time_to'      => trim((string) ($_POST['time_to'] ?? '')),
             'interval'     => (string) ($_POST['interval'] ?? '60'),
-            'duration_min' => (string) ($_POST['duration_min'] ?? '45'),
-            'type'         => (string) ($_POST['type'] ?? 'fahrstunde'),
-            'location'     => trim((string) ($_POST['location'] ?? '')),
+            'duration_min'    => (string) ($_POST['duration_min'] ?? '45'),
+            'type'            => (string) ($_POST['type'] ?? 'fahrstunde'),
+            'sonderfahrt_art' => (string) ($_POST['sonderfahrt_art'] ?? ''),
+            'location'        => trim((string) ($_POST['location'] ?? '')),
         ];
 
         $error = $this->validateSeries($values);
@@ -168,6 +225,9 @@ final class AdminSlotController
         }
         if (!isset(Slot::TYPES[$v['type']])) {
             return 'Bitte eine gültige Art des Termins wählen.';
+        }
+        if ($v['sonderfahrt_art'] !== '' && !isset(Slot::SONDERFAHRT_ARTEN[$v['sonderfahrt_art']])) {
+            return 'Bitte eine gültige Art der Sonderfahrt wählen.';
         }
 
         $from = $this->parseDateTime($v['from'], $v['time_from']);
@@ -220,11 +280,12 @@ final class AdminSlotController
                     // Vergangenes überspringen – dort kann ohnehin niemand buchen
                     if ($start > $now) {
                         $id = Slot::create([
-                            'starts_at'    => $start->format('Y-m-d H:i:s'),
-                            'duration_min' => $duration,
-                            'type'         => $v['type'],
-                            'location'     => $v['location'],
-                            'note'         => '',
+                            'starts_at'       => $start->format('Y-m-d H:i:s'),
+                            'duration_min'    => $duration,
+                            'type'            => $v['type'],
+                            'sonderfahrt_art' => $v['sonderfahrt_art'],
+                            'location'        => $v['location'],
+                            'note'            => '',
                         ]);
                         $id === null ? $skipped++ : $created++;
                     }
@@ -273,6 +334,18 @@ final class AdminSlotController
     // -----------------------------------------------------------------------
     // Hilfen
     // -----------------------------------------------------------------------
+
+    /** Zeigt das Formular mit Fehlermeldung und den bisherigen Eingaben erneut. */
+    private function backToForm(string $message, array $values): never
+    {
+        set_flash('error', $message);
+        render('admin/slots/form', [
+            'title'    => 'Termin anlegen',
+            'students' => Student::activeOptions(),
+            'values'   => $values,
+        ], 'admin/layout');
+        exit;
+    }
 
     /** Baut aus "2026-08-10" + "14:00" ein DateTimeImmutable – oder null. */
     private function parseDateTime(string $date, string $time): ?DateTimeImmutable

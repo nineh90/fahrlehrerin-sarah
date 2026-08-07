@@ -1,5 +1,8 @@
 <?php
-/** @var DateTimeImmutable $monday @var int $weekOffset @var array $slotsByDay @var bool $isLoggedIn */
+/**
+ * @var DateTimeImmutable $monday @var int $weekOffset @var array $slotsByDay
+ * @var bool $isLoggedIn @var ?array $nextFree @var ?int $nextFreeWeek
+ */
 $sunday = $monday->modify('+6 days');
 ?>
 <section class="page-head">
@@ -34,6 +37,32 @@ $sunday = $monday->modify('+6 days');
                 <?php endif; ?>
             </div>
         </div>
+
+        <?php /* In dieser Woche ist nichts (mehr) frei – dann sagen, wo es weitergeht.
+                 Ohne den Hinweis endet die Suche an der ersten leeren Woche. */ ?>
+        <?php if ($nextFree !== null): ?>
+            <?php $nextStart = dt($nextFree['starts_at']); ?>
+            <div class="notice" style="--card-accent: var(--c-green); margin-bottom: 1.8rem;">
+                <?= icon('calendar') ?>
+                <div>
+                    <h3>In dieser Woche ist nichts frei</h3>
+                    <p>
+                        Meine nächste freie Zeit ist am
+                        <strong><?= e(weekday_long($nextStart)) ?>, <?= e(format_date_long($nextStart)) ?></strong>
+                        um <?= e(format_time($nextStart)) ?>.
+                    </p>
+                    <?php /* Der Kalender reicht 12 Wochen weit (week_from_offset).
+                             Was dahinter liegt, wird genannt, aber nicht verlinkt –
+                             sonst führt der Knopf auf dieselbe leere Woche zurück. */ ?>
+                    <?php if ($nextFreeWeek <= 12): ?>
+                        <p>
+                            <a class="btn btn-primary btn-sm"
+                               href="<?= url('/termine?woche=' . $nextFreeWeek) ?>">Diese Woche anzeigen &rarr;</a>
+                        </p>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php endif; ?>
 
         <?php if (!$isLoggedIn): ?>
             <div class="notice" style="--card-accent: var(--c-blue); margin-bottom: 1.8rem;">

@@ -24,6 +24,16 @@ final class Slot
         'pruefung'    => 'Prüfung',
     ];
 
+    /**
+     * Die drei Pflichtfahrten (§5 FahrschAusbO). Nur bei type='sonderfahrt'
+     * relevant – aus ihnen errechnet sich der Ausbildungsstand.
+     */
+    public const SONDERFAHRT_ARTEN = [
+        'ueberland' => 'Überlandfahrt',
+        'autobahn'  => 'Autobahnfahrt',
+        'nacht'     => 'Nachtfahrt',
+    ];
+
     public static function find(int $id): ?array
     {
         $stmt = Database::connection()->prepare('SELECT * FROM slots WHERE id = ? LIMIT 1');
@@ -74,6 +84,31 @@ final class Slot
         return $slots;
     }
 
+    /**
+     * Alle Termine eines Tages inkl. Schülerdaten – der Tagesplan im Dashboard.
+     * Bewusst mit den freien und gesperrten Zeiten: Sarah soll ihren Tag sehen,
+     * nicht nur die belegten Stunden.
+     */
+    public static function forDay(DateTimeInterface $day): array
+    {
+        $start = DateTimeImmutable::createFromInterface($day)->setTime(0, 0);
+
+        $stmt = Database::connection()->prepare(
+            'SELECT s.*, st.name AS student_name, st.phone AS student_phone, b.id AS booking_id
+               FROM slots s
+               LEFT JOIN bookings b  ON b.slot_id = s.id AND b.status = \'gebucht\'
+               LEFT JOIN students st ON st.id = b.student_id
+              WHERE s.starts_at >= ? AND s.starts_at < ?
+              ORDER BY s.starts_at'
+        );
+        $stmt->execute([
+            $start->format('Y-m-d H:i:s'),
+            $start->modify('+1 day')->format('Y-m-d H:i:s'),
+        ]);
+
+        return $stmt->fetchAll();
+    }
+
     /** Alle künftigen freien Termine – Auswahlliste beim Verschieben. */
     public static function upcomingFree(int $limit = 60): array
     {
@@ -85,6 +120,26 @@ final class Slot
         $stmt->execute([$limit]);
 
         return $stmt->fetchAll();
+    }
+
+    /**
+     * Die nächste freie Zeit ab einem Zeitpunkt.
+     *
+     * Der Wochenkalender zeigt immer nur sieben Tage. Gibt Sarah eine Woche
+     * weiter vorn frei und dazwischen liegt eine leere Woche, sieht die Seite
+     * aus, als wäre nichts da – man müsste blind weiterklicken. Damit kann die
+     * Ansicht stattdessen sagen, wo es weitergeht.
+     */
+    public static function nextFreeFrom(DateTimeInterface $from): ?array
+    {
+        $stmt = Database::connection()->prepare(
+            "SELECT * FROM slots
+              WHERE status = 'frei' AND starts_at >= ?
+              ORDER BY starts_at LIMIT 1"
+        );
+        $stmt->execute([DateTimeImmutable::createFromInterface($from)->format('Y-m-d H:i:s')]);
+
+        return $stmt->fetch() ?: null;
     }
 
     /** Nächste belegte Termine – für Sarahs Dashboard. */
@@ -120,6 +175,12 @@ final class Slot
                   WHERE starts_at >= datetime('now','localtime')
                     AND starts_at < datetime('now','localtime','+7 days')"
             )->fetchColumn(),
+            'woche_gebucht' => (int) $pdo->query(
+                "SELECT COUNT(*) FROM slots
+                  WHERE status = 'gebucht'
+                    AND starts_at >= datetime('now','localtime')
+                    AND starts_at < datetime('now','localtime','+7 days')"
+            )->fetchColumn(),
             'schueler' => (int) $pdo->query('SELECT COUNT(*) FROM students WHERE active = 1')->fetchColumn(),
         ];
     }
@@ -133,11 +194,15 @@ final class Slot
         $pdo = Database::connection();
         try {
             $pdo->prepare(
-                'INSERT INTO slots (starts_at, duration_min, type, location, note) VALUES (?, ?, ?, ?, ?)'
+                'INSERT INTO slots (starts_at, duration_min, type, sonderfahrt_art, location, note)
+                 VALUES (?, ?, ?, ?, ?, ?)'
             )->execute([
                 $data['starts_at'],
                 (int) $data['duration_min'],
                 $data['type'],
+                // Die Art gehört nur zur Sonderfahrt – sonst bliebe eine
+                // Autobahnfahrt an einer Prüfung kleben und würde mitgezählt
+                $data['type'] === 'sonderfahrt' ? ($data['sonderfahrt_art'] ?: null) : null,
                 $data['location'] ?: null,
                 $data['note'] ?: null,
             ]);
@@ -186,10 +251,19 @@ final class Slot
         return dt($slot['starts_at']) < new DateTimeImmutable('now');
     }
 
-    /** Anzeigetext für Typ + Dauer, z.B. "Fahrstunde · 45 Min.". */
+    /**
+     * Anzeigetext für Typ + Dauer, z.B. "Fahrstunde · 45 Min.".
+     * Sonderfahrten nennen ihre Art statt des Oberbegriffs: "Autobahnfahrt"
+     * sagt mehr als "Sonderfahrt".
+     */
     public static function label(array $slot): string
     {
-        return (self::TYPES[$slot['type']] ?? $slot['type']) . ' · ' . (int) $slot['duration_min'] . ' Min.';
+        $art = $slot['sonderfahrt_art'] ?? null;
+        $typ = $art !== null && isset(self::SONDERFAHRT_ARTEN[$art])
+            ? self::SONDERFAHRT_ARTEN[$art]
+            : (self::TYPES[$slot['type']] ?? $slot['type']);
+
+        return $typ . ' · ' . (int) $slot['duration_min'] . ' Min.';
     }
 
     /** @return array{0:string,1:string} Start und Ende der Woche als DB-Zeitstempel. */

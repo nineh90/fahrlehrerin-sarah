@@ -82,7 +82,7 @@ $selectedDays = (array) ($values['weekdays'] ?? []);
         <div class="form-row">
             <label>
                 Art des Termins
-                <select name="type">
+                <select name="type" data-toggle-target="#serieSonderfahrtArt" data-toggle-value="sonderfahrt">
                     <?php foreach (Slot::TYPES as $key => $label): ?>
                         <option value="<?= e($key) ?>" <?= $key === ($values['type'] ?? '') ? 'selected' : '' ?>>
                             <?= e($label) ?>
@@ -94,6 +94,24 @@ $selectedDays = (array) ($values['weekdays'] ?? []);
                 Treffpunkt
                 <input type="text" name="location" value="<?= old('location', $values) ?>"
                        placeholder="z. B. Treffpunkt Fahrschule">
+            </label>
+        </div>
+
+        <div class="form-row" id="serieSonderfahrtArt">
+            <label>
+                Welche Pflichtfahrt?
+                <select name="sonderfahrt_art">
+                    <option value="">– keine Zuordnung –</option>
+                    <?php foreach (Slot::SONDERFAHRT_ARTEN as $key => $label): ?>
+                        <option value="<?= e($key) ?>"
+                            <?= $key === ($values['sonderfahrt_art'] ?? '') ? 'selected' : '' ?>>
+                            <?= e($label) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <span class="form-hint">
+                    Gilt dann für alle Termine dieser Serie.
+                </span>
             </label>
         </div>
 

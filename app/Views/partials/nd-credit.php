@@ -21,7 +21,7 @@
             </a>
 
             <div class="nd-credit-text">
-                <h2>Diese Website wurde von Nils-Digital gebaut</h2>
+                <h2>Diese Website wurde von Nils-Digital erstellt</h2>
                 <p>
                     Websites für kleine Betriebe und Selbstständige – handgemacht,
                     schnell und ohne Baukasten. Gefällt dir, was du hier siehst?

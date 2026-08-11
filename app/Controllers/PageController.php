@@ -38,7 +38,7 @@ final class PageController
     }
 
     /**
-     * Referenzseite: Sarah erzählt, wer ihre Website gebaut hat.
+     * Referenzseite: Sarah erzählt, wer ihre Website erstellt hat.
      * Bewusst in ihrer Stimme und nicht als Werbetext von Nils-Digital –
      * eine Kopie von nils-digital.de wäre für beide Seiten schlechter
      * (doppelte Inhalte, und eine Empfehlung wirkt nur aus ihrem Mund).
@@ -46,7 +46,7 @@ final class PageController
     public function website(): void
     {
         render('pages/meine-website', [
-            'title'           => 'Wer diese Seite gebaut hat',
+            'title'           => 'Wer diese Seite erstellt hat',
             'metaDescription' => 'Warum Sarah eine eigene Website wollte und wer sie '
                 . 'umgesetzt hat – eine Referenz für Nils-Digital.',
             // Kein Credit-Band: die ganze Seite ist bereits der Credit

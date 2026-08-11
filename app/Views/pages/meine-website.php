@@ -1,6 +1,6 @@
 <section class="page-head">
     <div class="container">
-        <h1>Wer diese Seite gebaut hat</h1>
+        <h1>Wer diese Seite erstellt hat</h1>
         <p class="page-lead">
             Ich werde regelmäßig gefragt, wo die Website herkommt – deshalb steht
             es hier statt in jeder einzelnen Nachricht.
@@ -56,8 +56,8 @@
             <div class="duo-text">
                 <h2>Wie es gelaufen ist</h2>
                 <p>
-                    Gebaut hat die Seite <strong>Nils-Digital</strong>. Wir haben besprochen,
-                    was ich brauche, und ein paar Wochen später stand sie – inklusive der
+                    Erstellt hat die Seite <strong>Nils-Digital</strong>. Wir haben besprochen,
+                    was ich brauche, und ein paar Wochen später war sie fertig – inklusive der
                     Terminplanung, die ich mir sonst nirgends hätte leisten können.
                 </p>
                 <p>

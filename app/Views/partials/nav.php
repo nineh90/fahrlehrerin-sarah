@@ -1,11 +1,34 @@
 <header class="site-header">
     <div class="container header-inner">
-        <a class="brand" href="<?= url('/') ?>">
-            <?php /* Im Header steht das Signet (Bogen + Lenkrad) statt des vollen Logos:
-                     Auf 54 px wäre der Schriftzug im Logo nur noch Matsch. Den Namen
-                     trägt der Text daneben, deshalb alt="". */ ?>
-            <img class="brand-logo" src="<?= asset('img/logo-signet.webp') ?>"
-                 alt="" width="200" height="231">
+        <?php /* ZWEI ZUSTÄNDE, und das ist der Kern der Sache.
+
+                 Ganz oben steht Sarahs volles Logo groß – der Bogen mit dem
+                 Schriftzug, so wie sie es gezeichnet hat. Vorher war es nur im
+                 Footer zu sehen und hat sich dadurch nie eingeprägt.
+
+                 Beim Scrollen wird daraus der reine Bogen mit der Wortmarke
+                 als Text daneben. Bewusst NUR der Bogen: Das frühere Signet
+                 hatte das Lenkrad in die Bogenmitte einkomponiert – eine
+                 Neuzeichnung, die im Original so nicht vorkommt. Sie ist auf
+                 Wunsch von Nils am 11.08.2026 komplett entfallen. Der Bogen
+                 allein ist Sarahs echte Form, und eine Fläche ohne Schrift
+                 bleibt auch bei 46 px lesbar. Das ist KEIN
+                 bloßes Verkleinern des vollen Logos, sondern ein Austausch,
+                 und dafür gibt es einen gemessenen Grund: Nachgestellt bei
+                 54, 72, 88, 104, 120 px liest sich der Schriftzug erst ab
+                 rund 104 px sauber, darunter wird „Klasse B · Klasse BE"
+                 zu Matsch. Ein Logo, das beim Scrollen unleserlich wird,
+                 wäre schlechter als das, was vorher da war.
+
+                 Beide Bilder tragen alt="" – den Namen trägt das aria-label
+                 am Link, damit Vorlesesoftware in beiden Zuständen denselben
+                 einen Satz hört und nicht je nach Scrollposition etwas
+                 anderes. */ ?>
+        <a class="brand" href="<?= url('/') ?>" aria-label="Fahrlehrerin Sarah – zur Startseite">
+            <img class="brand-logo brand-logo--full" src="<?= asset('img/logo-sarah-klein.webp') ?>"
+                 alt="" width="260" height="300">
+            <img class="brand-logo brand-logo--compact" src="<?= asset('img/logo-bogen-klein.webp') ?>"
+                 alt="" width="160" height="185">
             <span class="brand-text">
                 <span class="brand-mark">Fahrlehrerin Sarah</span>
                 <?php /* „Fahrlehrerin" steht schon eine Zeile höher im Namen – hier

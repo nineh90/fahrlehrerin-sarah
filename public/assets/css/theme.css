@@ -168,6 +168,34 @@
     /* =====================================================================
        9. FORM & TYPOGRAFIE
        ===================================================================== */
+    /* --- Header und Marke ------------------------------------------------
+       Der Header schrumpft beim Scrollen (Mechanik in nd-base.css). Diese
+       fünf Werte hängen zusammen, wer einen anfasst, prüft die anderen mit:
+
+       --header-h          Höhe oben. Bestimmt zugleich das padding-top am
+                           Body, das den fixierten Header ausgleicht.
+       --header-h-compact  Höhe nach dem Scrollen.
+       --brand-full-h      Sarahs volles Logo. 132 px sind gemessen und nicht
+                           gegriffen: Nachgestellt bei 54/72/88/104/120/140 px
+                           liest sich „Klasse B · Klasse BE" erst ab rund
+                           104 px sauber. Darunter wird der Schriftzug Matsch –
+                           genau deshalb trägt der kompakte Zustand gar keine
+                           Schrift im Bild. Wer hier kleiner geht, macht das Logo
+                           wieder unleserlich und kann es dann auch weglassen.
+       --brand-full-top    Abstand von der Oberkante des Headers.
+                           132 + 8 - 88 = 52 px stehen unten heraus. Genau das
+                           ist der Effekt: Die Leiste bleibt schlank, das Logo
+                           bricht daraus hervor. Steht es zu weit heraus,
+                           knallt es in die Hero-Überschrift.
+       --brand-compact-h    Der reine Bogen im kompakten Zustand (ohne
+                           Lenkrad, ohne Schrift).
+       --------------------------------------------------------------------- */
+    --header-h:         88px;
+    --header-h-compact: 68px;
+    --brand-full-h:     132px;
+    --brand-full-top:   8px;
+    --brand-compact-h:   46px;
+
     --radius:    18px;
     --radius-sm: 12px;
     --shadow:    0 6px 22px rgba(43, 36, 52, 0.07);
@@ -246,12 +274,31 @@
     color: transparent;
 }
 
-/* --- Regenbogen-Streifen unter dem Header ------------------------------ */
+/* --- Regenbogen-Streifen unter dem Header ------------------------------
+   Absolut an der Unterkante und nicht als Block im Fluss: Der Header hat
+   seit dem Schrumpfen eine feste Höhe, ein mitfließender Streifen würde
+   diese Höhe um seine 4 px überschreiten und den Ausgleich am Body
+   verfälschen. So bleibt die Kante genau da, wo die Höhe endet. */
 .site-header::after {
     content: "";
-    display: block;
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
     height: 4px;
     background: var(--gradient-rainbow);
+}
+
+/* Header auf dem Handy: Dieselbe Mechanik, kleinere Zahlen. Das Logo bleibt
+   bei 108 px und damit knapp über der gemessenen Lesbarkeitsgrenze von rund
+   104 px – kleiner wäre der Schriftzug auch hier wieder Matsch. Der Überstand
+   schrumpft dafür von 52 auf 34 px, sonst reicht das Logo auf einem
+   Telefondisplay bis in die Überschrift. */
+@media (max-width: 740px) {
+    :root {
+        --header-h:         80px;
+        --header-h-compact: 64px;
+        --brand-full-h:     108px;
+        --brand-full-top:   6px;
+    }
 }
 
 /* --- Sanft schwebende Hero-Farbwolken ---------------------------------- */

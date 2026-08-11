@@ -7,6 +7,58 @@
     // schiefgehen könnte – sichtbar ist sie danach auf jeden Fall.
     initTypewriter();
 
+    /* Header schrumpfen lassen, sobald man scrollt: Oben trägt er Sarahs
+       volles Logo, das unter der Leiste hervorsteht, danach die kompakte
+       Marke. Aussehen und Maße stehen im CSS (.site-header.is-compact),
+       hier steht nur, WANN umgeschaltet wird.
+
+       Die beiden Schwellen sind mit Absicht verschieden (48 hinunter, 12
+       hinauf). Bei einem einzelnen Wert flackert der Header, sobald jemand
+       genau auf der Grenze stehen bleibt – das Umschalten ändert die Höhe,
+       und auf einem Trackpad reicht die kleinste Bewegung, um die Grenze
+       wieder zu kreuzen. Der Abstand dazwischen macht daraus eine klare
+       Entscheidung.
+
+       Gelesen wird nur in requestAnimationFrame: scrollY im Scroll-Ereignis
+       selbst abzufragen zwingt den Browser zur Layout-Neuberechnung, und das
+       bei jedem einzelnen Tick. */
+    var header = document.querySelector('.site-header');
+    if (header) {
+        var kompakt = false;
+        var wartet = false;
+
+        var pruefe = function () {
+            wartet = false;
+            var y = window.scrollY || document.documentElement.scrollTop;
+            if (!kompakt && y > 48) {
+                kompakt = true;
+                header.classList.add('is-compact');
+            } else if (kompakt && y < 12) {
+                kompakt = false;
+                header.classList.remove('is-compact');
+            }
+        };
+
+        window.addEventListener('scroll', function () {
+            if (wartet) return;
+            wartet = true;
+            window.requestAnimationFrame(pruefe);
+        }, { passive: true });
+
+        // Wer die Seite mitten im Dokument neu lädt (oder mit einem Anker
+        // kommt), startet sonst mit der großen Marke über dem Fließtext.
+        // Dreimal, weil der Zustand auf drei Wegen falsch werden kann:
+        // jetzt sofort; nach `load`, weil der Browser die alte Scrollposition
+        // erst danach wiederherstellt; und beim Zurückwechseln auf den Tab,
+        // weil im Hintergrund weder requestAnimationFrame noch Scroll-
+        // Ereignisse zuverlässig laufen.
+        pruefe();
+        window.addEventListener('load', pruefe);
+        document.addEventListener('visibilitychange', function () {
+            if (!document.hidden) pruefe();
+        });
+    }
+
     // Mobile-Navigation umschalten
     var toggle = document.querySelector('.nav-toggle');
     var nav = document.querySelector('.main-nav');

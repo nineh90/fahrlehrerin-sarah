@@ -16,7 +16,12 @@
    dafür, dass die bewegte Hintergrundebene (.page-aurora, weiter unten) mit
    z-index:-1 hinter den Inhalt, aber vor die Grundfläche rutschen kann – hätte
    der Body eine eigene Farbe, läge sie darüber und man sähe nichts davon. */
-html { scroll-behavior: smooth; background: var(--bg); }
+html {
+    scroll-behavior: smooth; background: var(--bg);
+    /* Der Header liegt fest über der Seite. Ohne das würde ein
+       Ankersprung sein Ziel darunter parken. */
+    scroll-padding-top: calc(var(--header-h-compact, 72px) + 12px);
+}
 
 /* hidden muss gewinnen. Ohne das überstimmt jede eigene display-Regel
    (etwa .form-row { display: grid }) das Attribut aus dem Browser-Stylesheet –
@@ -88,18 +93,69 @@ img { max-width: 100%; display: block; }
 .btn-sm { padding: .45rem .85rem; font-size: .85rem; }
 .btn-block { width: 100%; }
 
-/* ---------- Header / Nav ---------- */
+/* ---------- Header / Nav ----------
+   Der Header schrumpft beim Scrollen: oben trägt er die große Marke, danach
+   eine kompakte Zeile. main.js setzt dafür `.is-compact`.
+
+   Er ist deshalb `fixed` und NICHT `sticky`, und das ist kein Geschmack:
+   Ein sticky Header steht im Textfluss. Ändert er beim Scrollen seine Höhe,
+   rutscht der gesamte Inhalt darunter um die Differenz nach oben – ein
+   sichtbarer Sprung genau in dem Moment, in dem man zu scrollen anfängt.
+   Fixed nimmt ihn aus dem Fluss; den Platz hält stattdessen das
+   padding-top am <body>, und das bleibt konstant auf der GROSSEN Höhe.
+   Deshalb springt nichts, egal wie oft der Header seine Größe wechselt.
+
+   Die Höhe kommt als Token, weil sie zweimal gebraucht wird (hier und am
+   Body) und beide Werte zwingend zusammenpassen müssen. */
 .site-header {
-    position: sticky; top: 0; z-index: 50;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    height: var(--header-h, 72px);
     background: var(--header-bg); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border);
+    transition: height .28s cubic-bezier(.22, .61, .36, 1);
 }
-.header-inner { display: flex; align-items: center; justify-content: space-between; min-height: 72px; gap: 1rem; }
+.site-header.is-compact { height: var(--header-h-compact, 72px); }
+
+/* Der Platz, den der fixierte Header sonst einnehmen würde. Bleibt bewusst
+   auf der großen Höhe stehen – siehe oben. Der Admin hat keinen solchen
+   Header und muss den Platz deshalb wieder abziehen. */
+body { padding-top: var(--header-h, 0px); }
+.admin-body, .admin-auth-body { padding-top: 0; }
+
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; gap: 1rem; }
 /* Marke = Bildmarke + Wortmarke nebeneinander. Das Logo bleibt dekorativ (alt=""),
    den Namen trägt der Text daneben – klein skaliert ist die Schrift im Logo nicht lesbar. */
-.brand { display: flex; flex-direction: row; align-items: center; gap: .7rem; line-height: 1; text-decoration: none; }
+/* Der Markenblock spannt sich über die volle Headerhöhe (align-self: stretch).
+   Das ist die Voraussetzung dafür, dass die große Marke darunter mit einem
+   festen Abstand von OBEN sitzen kann, statt an der wechselnden Mitte zu
+   kleben – sonst müsste jede Höhenänderung des Headers nachgerechnet werden. */
+.brand { position: relative; align-self: stretch; display: flex; flex-direction: row; align-items: center; gap: .7rem; line-height: 1; text-decoration: none; }
 .brand-text { display: flex; flex-direction: column; line-height: 1; }
-.brand-logo { height: 54px; width: auto; flex-shrink: 0; display: block; }
+.brand-logo { width: auto; flex-shrink: 0; display: block; }
+
+/* ZWEI MARKEN, EIN PLATZ.
+   Oben die große Marke, die unter der Leiste HERVORSTEHT – sie liegt absolut
+   und zieht deshalb den Header nicht in die Höhe. Beim Scrollen blendet sie
+   weg und die kompakte Marke (reiner Bogen + Wortmarke) blendet auf.
+
+   Die kompakte Marke steht auch oben schon im Fluss, nur unsichtbar. Das ist
+   Absicht: Sie hält die Breite des Markenblocks: Damit ändert sich beim
+   Umschalten nur die Deckkraft und nichts an der Anordnung – die Navigation
+   daneben bleibt, wo sie ist.
+
+   Ohne JavaScript kommt `.is-compact` nie, dann bleibt es beim vollen Logo.
+   Das ist der richtige Rückfall: Es trägt den Namen selbst. */
+.brand-logo--full {
+    position: absolute; left: 0; top: var(--brand-full-top, 8px);
+    height: var(--brand-full-h, 54px);
+    transition: opacity .25s ease, height .28s cubic-bezier(.22, .61, .36, 1);
+}
+.brand-logo--compact { height: var(--brand-compact-h, 54px); }
+.brand-logo--compact, .brand-text { opacity: 0; transition: opacity .25s ease; }
+
+.site-header.is-compact .brand-logo--full { opacity: 0; height: var(--brand-compact-h, 54px); pointer-events: none; }
+.site-header.is-compact .brand-logo--compact,
+.site-header.is-compact .brand-text { opacity: 1; }
 .brand-mark { font-family: var(--font-head); color: var(--text); font-weight: 700; font-size: 1.4rem; letter-spacing: .3px; }
 .brand-mark::after { content: "."; color: var(--accent); }
 .brand-sub { color: var(--accent); font-size: .68rem; text-transform: uppercase; letter-spacing: 2.5px; margin-top: 2px; }
@@ -1077,7 +1133,9 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 @media (max-width: 740px) {
     .nav-toggle { display: flex; }
     .main-nav {
-        position: absolute; top: 72px; left: 0; right: 0; background: var(--bg-card);
+        /* 100% statt fester 72px: Der Header wechselt seine Höhe, das Menü
+           muss an seiner Unterkante hängen bleiben. */
+        position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-card);
         flex-direction: column; align-items: stretch; padding: .8rem 22px 1.2rem; gap: .2rem;
         box-shadow: var(--shadow-lg); border-bottom: 1px solid var(--border); display: none;
     }
@@ -1134,7 +1192,10 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 /* Auf schmalen Screens teilen sich Logo, Wortmarke und Hamburger 100 % Breite –
    das Logo gibt zuerst nach, damit der Name lesbar bleibt. */
 @media (max-width: 420px) {
-    .brand-logo { height: 42px; }
+    /* Nur die kompakte Marke. Stünde hier .brand-logo, träfe die Regel auch
+       die große – sie steht später in der Datei und würde deren Token-Höhe
+       überschreiben, also genau das Logo kleinrechnen, um das es geht. */
+    .brand-logo--compact { height: 42px; }
     .brand-mark { font-size: 1.18rem; }
     .brand-sub { font-size: .6rem; letter-spacing: 1.8px; }
 }

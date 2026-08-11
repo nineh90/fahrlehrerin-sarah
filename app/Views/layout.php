@@ -13,13 +13,23 @@
     <?php if (!config('allow_indexing')): ?>
         <meta name="robots" content="noindex, nofollow">
     <?php endif; ?>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <?php /* Schriften kommen vom eigenen Server (public/assets/fonts/), nicht von
+             Google. Vorgeladen wird nur das latin-Subset – das trägt den Text;
+             latin-ext holt der Browser bei Bedarf selbst. */ ?>
+    <link rel="preload" href="<?= asset('fonts/fredoka-latin.woff2') ?>" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="<?= asset('fonts/roboto-mono-latin.woff2') ?>" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="<?= asset('css/fonts.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/nd-base.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/theme.css') ?>">
     <link rel="icon" href="<?= asset('img/favicon.png') ?>" sizes="48x48" type="image/png">
     <link rel="apple-touch-icon" href="<?= asset('img/apple-touch-icon.png') ?>">
+
+    <?php /* Die getippte Überschrift (data-typewriter, nur auf der Startseite)
+             ist bis zum Start des Skripts unsichtbar – sonst stünde sie einen
+             Wimpernschlag lang vollständig da und verschwände wieder. Ohne
+             JavaScript kommt das Skript nie, deshalb hebt <noscript> die Regel
+             hier wieder auf. Muss NACH den Stylesheets stehen, sonst verliert es. */ ?>
+    <noscript><style>[data-typewriter] { visibility: visible !important; }</style></noscript>
 
     <?php /* Vorschaubild beim Teilen (WhatsApp, Facebook, Signal) – braucht eine
              absolute URL, deshalb absolute_url() statt asset(). */ ?>
@@ -33,6 +43,15 @@
     <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
+    <?php /* Bewegter Hintergrund: vier langsam ziehende Farbwolken hinter der
+             ganzen Seite. Reine Dekoration – deshalb aria-hidden und leere
+             <span>, es gibt hier nichts vorzulesen. Gestaltung in nd-base.css
+             (.page-aurora), Farben in theme.css (--aurora-1 … -4).
+             Steht bewusst nur hier und nicht im Admin-Layout. */ ?>
+    <div class="page-aurora" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+    </div>
+
     <?php require APP_ROOT . '/app/Views/partials/nav.php'; ?>
 
     <?php require APP_ROOT . '/app/Views/partials/flash.php'; ?>

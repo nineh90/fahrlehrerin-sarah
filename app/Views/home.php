@@ -12,7 +12,13 @@ $schoolUrl = trim((string) config('school.url'));
                      Aussage an. `.hero-eyebrow` bleibt in nd-base.css – die
                      Signatur nutzt sie in anderen Projekten weiter. */ ?>
             <div class="hero-content">
-                <h1>Hinterm Steuer<br>ist Platz für alle.</h1>
+                <?php /* data-typewriter: main.js baut diese eine Überschrift beim
+                         Laden Zeichen für Zeichen auf. Der Satz steht trotzdem
+                         vollständig hier im HTML – für Suchmaschinen, für
+                         Vorlesesoftware und für alle ohne JavaScript.
+                         Bewusst nur hier: Eine tippende Überschrift trägt einmal.
+                         Auf jeder Unterseite noch einmal wäre sie ein Tic. */ ?>
+                <h1 data-typewriter>Hinterm Steuer<br>ist Platz für alle.</h1>
                 <p class="hero-lead">
                     Ich bin Sarah und bringe Menschen das Autofahren bei – Fahranfänger:innen
                     genauso wie Leute, denen andere gesagt haben, das klappe bei ihnen nicht.

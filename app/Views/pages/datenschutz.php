@@ -48,10 +48,9 @@
 
         <h2>Schriftarten</h2>
         <p>
-            Die verwendeten Schriftarten werden derzeit von Google Fonts geladen. Dabei
-            wird die IP-Adresse an Google übertragen.
-            <em>Vor dem Livegang zu klären: Schriften lokal ausliefern – dann entfällt
-            diese Übertragung ersatzlos.</em>
+            Die verwendeten Schriftarten liegen auf dem Server dieser Website und werden
+            von dort geladen. Es wird keine Verbindung zu Google Fonts oder einem anderen
+            fremden Anbieter aufgebaut, deine IP-Adresse verlässt diese Seite also nicht.
         </p>
 
         <h2>TikTok und Instagram</h2>

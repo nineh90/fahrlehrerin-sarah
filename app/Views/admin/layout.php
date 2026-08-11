@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($title ?? 'Schaltzentrale') ?> · Fahrlehrerin Sarah</title>
     <meta name="robots" content="noindex, nofollow">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preload" href="<?= asset('fonts/fredoka-latin.woff2') ?>" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="<?= asset('fonts/roboto-mono-latin.woff2') ?>" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="<?= asset('css/fonts.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/nd-base.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/theme.css') ?>">
     <link rel="icon" href="<?= asset('img/favicon.png') ?>" sizes="48x48" type="image/png">

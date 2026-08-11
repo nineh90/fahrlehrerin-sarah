@@ -44,6 +44,22 @@
     --bg-card:      #FFFFFF;   /* Karten, Formulare */
     --bg-footer:    #2B2434;   /* dunkler Fuß + Admin-Sidebar */
 
+    /* Abgesetzte Sektionen liegen leicht durchscheinend über der bewegten
+       Hintergrundebene – sonst wären die Farbwolken auf jeder zweiten
+       Sektion abgeschnitten. Wer die Aurora abschaltet, setzt hier den
+       vollen Wert #F6EDDF ein und alles sieht aus wie vorher. */
+    --section-alt-bg: rgba(246, 237, 223, 0.80);
+
+    /* Die vier Farbwolken der bewegten Hintergrundebene (.page-aurora).
+       Vier von sieben Regenbogenfarben, sehr blass: Über diesen Flächen
+       steht Fließtext, der Kontrast darf nicht ins Rutschen kommen.
+       Mehr Deckkraft als hier wird schnell unruhig – lieber die Wolken
+       größer machen (Breite in nd-base.css) als kräftiger. */
+    --aurora-1: rgba(124, 58, 237, 0.15);   /* Violett – die Leitfarbe */
+    --aurora-2: rgba(24, 154, 156, 0.14);   /* Türkis */
+    --aurora-3: rgba(240, 138, 36, 0.12);   /* Orange */
+    --aurora-4: rgba(59, 125, 216, 0.12);   /* Blau */
+
     /* =====================================================================
        3. TEXT
        ===================================================================== */

@@ -8,8 +8,11 @@
 FROM php:8.3-apache
 
 # mod_rewrite für den Front Controller (public/.htaccess),
-# mod_headers für die Sicherheitskopfzeilen weiter unten.
-RUN a2enmod rewrite headers
+# mod_headers für die Sicherheitskopfzeilen weiter unten,
+# mod_expires für die Cache-Zeiten in public/.htaccess – ohne das Modul greift
+# der dortige <IfModule>-Block stillschweigend nicht, und die Schriften würden
+# bei jedem Seitenaufruf neu geladen.
+RUN a2enmod rewrite headers expires
 
 # Docroot ist public/. Alles darüber – app/, storage/, .env – liegt damit
 # außerhalb der Reichweite des Webservers und ist nicht abrufbar.

@@ -144,11 +144,12 @@
        Sackgasse – bei Besucher:innen, die von TikTok kommen, ist das die
        ganze Aufmerksamkeitsspanne.
 
-       Der FLIESSTEXT TIPPT DOPPELT SO SCHNELL wie die Überschrift
-       (data-typewriter="fast"). 42 ms je Zeichen sind rund 285 Wörter pro
-       Minute, also ungefähr Lesegeschwindigkeit – das fühlt sich an wie
-       Bremsen. 20 ms sind etwa 600: Der Text ist immer schneller fertig, als
-       man ihm folgen kann, und wirkt deshalb nie wie Warten.
+       Der FLIESSTEXT TIPPT RUND DOPPELT SO SCHNELL wie die Überschrift
+       (data-typewriter="fast"): 14 statt 34 ms je Zeichen. Der Grund ist die
+       Lesegeschwindigkeit – bei etwa 285 Wörtern pro Minute tippt die Seite
+       so schnell, wie man liest, und das fühlt sich an wie Bremsen. Der
+       Fließtext liegt mit rund 850 deutlich darüber und ist immer fertig,
+       bevor man ihm folgen konnte.
        ===================================================================== */
     function initTypewriter() {
         var felder = Array.prototype.slice.call(document.querySelectorAll('[data-typewriter]'));
@@ -160,8 +161,13 @@
         felder.forEach(function (el) { el.style.visibility = 'visible'; });
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-        var TEMPO = { fast: 20 };
-        var STANDARD = 42;
+        // Tempo je Zeichen. Am 11.08.2026 von 42/20 auf 34/14 gezogen – der
+        // Hero brauchte davor 6,3 s bis zum letzten Zeichen und wirkte zäh.
+        // Untergrenze ist nicht das Auge, sondern die Uhr des Browsers: Unter
+        // etwa 10 ms je Zeichen kommen die Timer nicht mehr sauber durch, das
+        // Tippen wird ruckelig statt schneller.
+        var TEMPO = { fast: 14 };
+        var STANDARD = 34;
 
         var schritte = [];
         felder.forEach(function (el) {
@@ -231,7 +237,7 @@
                     // Atemzug zwischen zwei Absätzen.
                     schritt.el.classList.remove('is-typing');
                     schritt.el.removeAttribute('aria-label');
-                    window.setTimeout(naechsterBlock, 140);
+                    window.setTimeout(naechsterBlock, 70);
                     return;
                 }
                 var zeichen = schritt.teile[i++];
@@ -241,8 +247,10 @@
 
                 // Nach einem Satzzeichen kurz absetzen. Das ist der Unterschied
                 // zwischen „da tippt jemand" und „da läuft ein Zähler".
+                // Faktor 3 statt 5: Bei vier Satzzeichen im Fließtext summierte
+                // sich allein das Absetzen auf eine halbe Sekunde.
                 window.setTimeout(tippe,
-                    /[.,!?:–]/.test(zeichen) ? schritt.tempo * 5 : schritt.tempo);
+                    /[.,!?:–]/.test(zeichen) ? schritt.tempo * 3 : schritt.tempo);
             })();
         })();
     }

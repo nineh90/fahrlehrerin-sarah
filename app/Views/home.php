@@ -33,8 +33,7 @@ $schoolUrl = trim((string) config('school.url'));
                          Für die Überschrift bleibt es beim langsamen Tempo,
                          die ist der Akzent und kurz genug. */ ?>
                 <p class="hero-lead" data-typewriter="fast">
-                    Ich bin Sarah, Fahrlehrerin für Klasse B und BE. Mein Schwerpunkt: Fahren
-                    mit Handicap.
+                    Ich bin Sarah. Mein Schwerpunkt: Fahren mit Handicap.
                 </p>
                 <p class="hero-meta">
                     <?= icon('pin') ?>

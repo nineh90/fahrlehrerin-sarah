@@ -146,7 +146,7 @@ $schoolUrl = trim((string) config('school.url'));
             </article>
 
             <article class="feature-card">
-                <span class="feature-icon"><?= icon('shield') ?></span>
+                <span class="feature-icon"><?= icon('wheelchair') ?></span>
                 <h3>Ausbildung mit Handicap</h3>
                 <p>
                     Fahren mit Prothese, Lenkhilfe oder Handbedienung. Ich kenne die
@@ -155,7 +155,7 @@ $schoolUrl = trim((string) config('school.url'));
             </article>
 
             <article class="feature-card">
-                <span class="feature-icon"><?= icon('heart') ?></span>
+                <span class="feature-icon"><?= icon('thumb') ?></span>
                 <h3>Angstfrei ans Steuer</h3>
                 <p>
                     Prüfung mehrfach nicht bestanden? Seit dem Unfall nicht mehr gefahren?

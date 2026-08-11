@@ -72,7 +72,7 @@
                         </span>
                     </li>
                     <li>
-                        <?= icon('shield') ?>
+                        <?= icon('wheelchair') ?>
                         <span>
                             <strong>Ausbildung mit Handicap</strong>
                             <span>Prothese, Lenkhilfe, Handbedienung für Gas und Bremse</span>

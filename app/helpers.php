@@ -177,8 +177,24 @@ function icon(string $name): string
         'calendar'  => '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="8.5" cy="14.5" r="1"/><circle cx="12" cy="14.5" r="1"/>',
         'clock'     => '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/>',
         'heart'     => '<path d="M20.8 6.6a5.1 5.1 0 0 0-7.2 0L12 8.2l-1.6-1.6a5.1 5.1 0 1 0-7.2 7.2l8.8 8.8 8.8-8.8a5.1 5.1 0 0 0 0-7.2Z"/>',
+        /* Für „Angstfrei ans Steuer". Die Nachbarkarten tragen alle Fahrzeug-
+           und Technik-Icons; diese eine handelt vom Menschen und nicht von
+           einer Führerscheinklasse, deshalb bricht sie die Reihe bewusst auf.
+           Es ist außerdem die Geste, die Sarah auf dem Hero-Foto macht. */
+        'thumb'     => '<path d="M7 21H4.6A1.6 1.6 0 0 1 3 19.4v-6.2A1.6 1.6 0 0 1 4.6 11.6H7"/><path d="M7 11.6l3.8-8.1a1.4 1.4 0 0 1 2.6.7v5.1h5.2a2 2 0 0 1 2 2.4l-1.3 6.4A2 2 0 0 1 17.3 21H7Z"/>',
         'road'      => '<path d="M5 21 8 3M19 21 16 3"/><path d="M12 4v3M12 11v3M12 18v3"/>',
-        'trailer'   => '<path d="M2 14V9a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v5"/><path d="M2 14h9"/><circle cx="6.5" cy="16.2" r="2.2"/><path d="M11 11h3l1.6 3H22v3h-2.6"/><circle cx="17.6" cy="17.2" r="2.2"/><path d="M8.7 17h6.7"/>',
+        /* Klasse BE = Auto MIT Anhänger. Der Vorgänger zeigte einen großen
+           Kasten mit einer Fahrerkabine daneben und las sich dadurch als
+           Pickup – also als ein Fahrzeug statt als Gespann. Jetzt sind es
+           zwei getrennte Körper mit einer Deichsel dazwischen; genau das
+           ist der Unterschied, um den es in der Klasse geht. */
+        'trailer'   => '<path d="M1.4 15.6v-2.4l1.5-3.3a1.5 1.5 0 0 1 1.4-.9h3.9a1.5 1.5 0 0 1 1.3.7l2 3.5v2.4z"/><path d="M2.9 13.2h8.6"/><circle cx="3.9" cy="15.6" r="1.4"/><circle cx="9.6" cy="15.6" r="1.4"/><path d="M11.5 14.4h2.7"/><path d="M14.2 15.6v-4.6a.9.9 0 0 1 .9-.9h6.6a.9.9 0 0 1 .9.9v4.6z"/><circle cx="18.4" cy="15.6" r="1.4"/>',
+        /* Bewusst das bekannte Zugänglichkeits-Piktogramm (Person im Rad) und
+           kein Rollstuhl von der Seite: Es ist dieselbe Form, die im Lenkrad
+           von Sarahs Logo sitzt, und es steht für Handicap allgemein. Ihr
+           Schwerpunkt umfasst auch Prothese und Handbedienung – ein reiner
+           Rollstuhl würde das Thema enger machen, als es ist. */
+        'wheelchair' => '<circle cx="9.6" cy="4.2" r="2"/><path d="M8.8 8.2v4.6h5"/><path d="M13.8 12.8l3.3 1.5-1.1 2.9"/><circle cx="11.4" cy="15.4" r="5.4"/>',
         'shield'    => '<path d="M12 3l7.5 3v5.4c0 4.6-3.1 8.8-7.5 10.1-4.4-1.3-7.5-5.5-7.5-10.1V6Z"/><path d="m9.2 12.2 2 2 3.6-3.8"/>',
         'sparkles'  => '<path d="m12 3 1.7 4.6L18.3 9l-4.6 1.4L12 15l-1.7-4.6L5.7 9l4.6-1.4Z"/><path d="m18 15 .8 2.2 2.2.8-2.2.8L18 21l-.8-2.2-2.2-.8 2.2-.8Z"/>',
         'chat'      => '<path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-5.6A8 8 0 0 1 13 4a8 8 0 0 1 8 8Z"/>',

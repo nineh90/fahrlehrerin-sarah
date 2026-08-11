@@ -6,20 +6,18 @@ $schoolUrl = trim((string) config('school.url'));
 <section class="hero">
     <div class="container hero-inner">
         <div class="duo duo--narrow-media">
-            <?php /* Ohne Augenbraue: Der Hero fängt direkt mit der Aussage an.
-                     `.hero-eyebrow` bleibt in nd-base.css – die Signatur nutzt
-                     sie in anderen Projekten weiter.
+            <?php /* Die Augenbraue war am 07.08.2026 entfallen, weil die Klassen
+                     im Header unter der Wortmarke standen und hier ein zweites
+                     Mal gestanden hätten.
 
-                     Die Klassen standen deshalb eine Weile nur im Header unter
-                     der Wortmarke (Entscheidung 07.08.2026). Seit 11.08.2026
-                     stehen sie zusätzlich im Fließtext darunter, zusammen mit
-                     dem Handicap-Schwerpunkt – das ist kein Rückfall, sondern
-                     ein Unterschied: Die Versalzeile im Header ist Branding und
-                     wird überflogen, der Fließtext wird gelesen und steht im
-                     Suchergebnis. Und der Schwerpunkt, wegen dem viele
-                     überhaupt herkommen, stand vorher erst in der dritten
-                     Sektion. */ ?>
+                     Seit dem Header-Umbau am 11.08.2026 stimmt diese Begründung
+                     nicht mehr: Ganz oben zeigt der Header nur noch Sarahs
+                     Logo, die Versalzeile „Klasse B · BE · Handicap" blendet
+                     erst beim Scrollen ein. Genau dann, wenn jemand die Seite
+                     öffnet, steht sie also nirgends – und deshalb steht sie
+                     jetzt wieder hier. */ ?>
             <div class="hero-content">
+                <p class="hero-eyebrow" data-typewriter="fast">Fahrlehrerin · Klasse B + BE · Handicap</p>
                 <?php /* data-typewriter: main.js baut diese eine Überschrift beim
                          Laden Zeichen für Zeichen auf. Der Satz steht trotzdem
                          vollständig hier im HTML – für Suchmaschinen, für

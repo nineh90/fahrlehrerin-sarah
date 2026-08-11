@@ -183,31 +183,37 @@
                            Schrift im Bild. Wer hier kleiner geht, macht das Logo
                            wieder unleserlich und kann es dann auch weglassen.
        --brand-full-top    Abstand von der Oberkante des Headers.
+                           108 + 4 - 94 = 18 px stehen unten heraus.
 
-                           DER ÜBERSTAND IST DIE HEIKELSTE ZAHL AM GANZEN
-                           HEADER: 98 + 4 - 94 = 8 px. Der Regenbogenstreifen
-                           an der Headerkante trennt Header und Hero und läuft
-                           quer über alles, was heraussteht. Nachgestellt bei
-                           20, 14, 8 und 2 px Überstand:
-                             20 px – der Streifen schneidet durch die Zeile
-                                     „Klasse B · Klasse BE"
-                             14 px – er schneidet durch „Handicapausbildung"
-                              8 px – er läuft UNTER der Schrift durch und
-                                     kreuzt nur den Bogen  ✅
-                              2 px – kaum noch ein Überstand
-                           Bei 8 px bleibt das Logo vollständig lesbar und die
-                           beiden Regenbögen laufen ineinander. Wer den
-                           Überstand vergrößert, schneidet zwangsläufig wieder
-                           Schrift an – die Textzeilen reichen im Logo fast bis
-                           zur Unterkante.
-       --brand-compact-h    Der reine Bogen im kompakten Zustand (ohne
-                           Lenkrad, ohne Schrift).
+                           Dass das geht, hängt an EINER Zeile in nd-base.css:
+                           `.brand { z-index: 1 }`. Der Regenbogenstreifen ist
+                           ein ::after am Header, steht im Baum nach dem Inhalt
+                           und wurde deshalb ÜBER das herausragende Logo
+                           gezeichnet – quer durch „Klasse B · Klasse BE".
+                           Genau das ließ die erste Fassung abgeschnitten
+                           wirken. Mit dem z-index läuft der Streifen dahinter
+                           durch, das Logo bleibt vollständig sichtbar, und die
+                           Linie trifft es, statt es zu zerteilen.
+
+                           Ohne diesen z-index gilt wieder die alte Grenze:
+                           Dann darf der Überstand höchstens 8 px betragen,
+                           weil die Textzeilen im Logo fast bis zur Unterkante
+                           reichen.
+       --brand-compact-h    Dasselbe Logo, nur kleiner. Es wird NICHT gegen
+                           eine andere Grafik getauscht – ein Logo, das sich
+                           beim Scrollen verwandelt, prägt sich nicht ein.
+                           Bei 72 px ist der Schriftzug darin nicht mehr zu
+                           lesen; deshalb blendet dann die Wortmarke als
+                           echter Text daneben ein.
+       --brand-compact-top  Damit das kleinere Logo im flacheren Header
+                           mittig sitzt (78 - 72 = 6, also 3 oben).
        --------------------------------------------------------------------- */
-    --header-h:         94px;
-    --header-h-compact: 68px;
-    --brand-full-h:      98px;
-    --brand-full-top:    4px;
-    --brand-compact-h:  46px;
+    --header-h:          94px;
+    --header-h-compact:  78px;
+    --brand-full-h:     108px;
+    --brand-full-top:     4px;
+    --brand-compact-h:   72px;
+    --brand-compact-top:  3px;
 
     --radius:    18px;
     --radius-sm: 12px;
@@ -307,10 +313,12 @@
    Telefondisplay bis in die Überschrift. */
 @media (max-width: 740px) {
     :root {
-        --header-h:         88px;
-        --header-h-compact: 64px;
-        --brand-full-h:      92px;
-        --brand-full-top:    4px;
+        --header-h:          88px;
+        --header-h-compact:  70px;
+        --brand-full-h:     100px;
+        --brand-full-top:     4px;
+        --brand-compact-h:   64px;
+        --brand-compact-top:  3px;
     }
 }
 

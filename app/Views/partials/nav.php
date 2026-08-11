@@ -1,34 +1,26 @@
 <header class="site-header">
     <div class="container header-inner">
-        <?php /* ZWEI ZUSTÄNDE, und das ist der Kern der Sache.
+        <?php /* EIN LOGO, ZWEI GRÖSSEN.
 
-                 Ganz oben steht Sarahs volles Logo groß – der Bogen mit dem
-                 Schriftzug, so wie sie es gezeichnet hat. Vorher war es nur im
-                 Footer zu sehen und hat sich dadurch nie eingeprägt.
+                 Sarahs volles Logo steht oben groß und ragt unter der Leiste
+                 hervor; beim Scrollen wird es kleiner. Mehr passiert nicht –
+                 das Logo selbst bleibt in jedem Zustand dasselbe Bild.
+                 Eine frühere Fassung tauschte es beim Scrollen gegen den
+                 reinen Bogen aus; das war auf Wunsch von Nils falsch: Ein
+                 Logo, das sich beim Scrollen verwandelt, prägt sich nicht ein.
 
-                 Beim Scrollen wird daraus der reine Bogen mit der Wortmarke
-                 als Text daneben. Bewusst NUR der Bogen: Das frühere Signet
-                 hatte das Lenkrad in die Bogenmitte einkomponiert – eine
-                 Neuzeichnung, die im Original so nicht vorkommt. Sie ist auf
-                 Wunsch von Nils am 11.08.2026 komplett entfallen. Der Bogen
-                 allein ist Sarahs echte Form, und eine Fläche ohne Schrift
-                 bleibt auch bei 46 px lesbar. Das ist KEIN
-                 bloßes Verkleinern des vollen Logos, sondern ein Austausch,
-                 und dafür gibt es einen gemessenen Grund: Nachgestellt bei
-                 54, 72, 88, 104, 120 px liest sich der Schriftzug erst ab
-                 rund 104 px sauber, darunter wird „Klasse B · Klasse BE"
-                 zu Matsch. Ein Logo, das beim Scrollen unleserlich wird,
-                 wäre schlechter als das, was vorher da war.
+                 Weil der Schriftzug im Logo klein nicht mehr lesbar ist,
+                 blendet beim Scrollen die Wortmarke als echter Text daneben
+                 ein. Sie steht auch oben schon im Fluss, nur unsichtbar – so
+                 hält sie die Breite des Markenblocks und die Navigation
+                 daneben verrutscht beim Umschalten nicht.
 
-                 Beide Bilder tragen alt="" – den Namen trägt das aria-label
-                 am Link, damit Vorlesesoftware in beiden Zuständen denselben
-                 einen Satz hört und nicht je nach Scrollposition etwas
-                 anderes. */ ?>
+                 Das Bild trägt alt="" – den Namen trägt das aria-label am
+                 Link, damit Vorlesesoftware in beiden Zuständen denselben
+                 einen Satz hört. */ ?>
         <a class="brand" href="<?= url('/') ?>" aria-label="Fahrlehrerin Sarah – zur Startseite">
             <img class="brand-logo brand-logo--full" src="<?= asset('img/logo-sarah-klein.webp') ?>"
                  alt="" width="260" height="300">
-            <img class="brand-logo brand-logo--compact" src="<?= asset('img/logo-bogen-klein.webp') ?>"
-                 alt="" width="160" height="185">
             <span class="brand-text">
                 <span class="brand-mark">Fahrlehrerin Sarah</span>
                 <?php /* „Fahrlehrerin" steht schon eine Zeile höher im Namen – hier

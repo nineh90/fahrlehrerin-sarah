@@ -129,32 +129,45 @@ body { padding-top: var(--header-h, 0px); }
    Das ist die Voraussetzung dafür, dass die große Marke darunter mit einem
    festen Abstand von OBEN sitzen kann, statt an der wechselnden Mitte zu
    kleben – sonst müsste jede Höhenänderung des Headers nachgerechnet werden. */
-.brand { position: relative; align-self: stretch; display: flex; flex-direction: row; align-items: center; gap: .7rem; line-height: 1; text-decoration: none; }
+/* z-index: 1 ist hier keine Kosmetik. Der Header trägt an seiner Unterkante
+   eine Zierlinie als ::after (im Theme der Regenbogenstreifen). Die steht im
+   Baum NACH dem Inhalt und wird deshalb ÜBER allem gezeichnet, was aus dem
+   Header herausragt – also quer über die große Marke. Mit z-index läuft die
+   Linie dahinter durch und das Logo bleibt vollständig sichtbar. */
+.brand { position: relative; z-index: 1; align-self: stretch; display: flex; flex-direction: row; align-items: center; gap: .7rem; line-height: 1; text-decoration: none; }
 .brand-text { display: flex; flex-direction: column; line-height: 1; }
 .brand-logo { width: auto; flex-shrink: 0; display: block; }
 
-/* ZWEI MARKEN, EIN PLATZ.
-   Oben die große Marke, die unter der Leiste HERVORSTEHT – sie liegt absolut
-   und zieht deshalb den Header nicht in die Höhe. Beim Scrollen blendet sie
-   weg und die kompakte Marke (reiner Bogen + Wortmarke) blendet auf.
+/* EIN LOGO, ZWEI GRÖSSEN.
+   Oben groß und unter der Leiste HERAUSSTEHEND, beim Scrollen kleiner. Das
+   Bild bleibt dabei dasselbe – ein Logo, das sich beim Scrollen verwandelt,
+   prägt sich nicht ein.
 
-   Die kompakte Marke steht auch oben schon im Fluss, nur unsichtbar. Das ist
-   Absicht: Sie hält die Breite des Markenblocks: Damit ändert sich beim
-   Umschalten nur die Deckkraft und nichts an der Anordnung – die Navigation
-   daneben bleibt, wo sie ist.
+   Es steht als ganz normales Flex-Kind im Fluss und darf höher sein als der
+   Header; `align-self: flex-start` verhindert, dass die Flexbox es auf die
+   Headerhöhe zusammenstaucht, und der Überstand fällt unten heraus.
 
-   Ohne JavaScript kommt `.is-compact` nie, dann bleibt es beim vollen Logo.
-   Das ist der richtige Rückfall: Es trägt den Namen selbst. */
+   Die Wortmarke daneben steht auch oben schon im Fluss, nur unsichtbar. Das
+   ist Absicht: Sie hält die Breite des Markenblocks, damit sich beim
+   Umschalten nur Deckkraft und Höhe ändern und die Navigation nicht wandert.
+   Sichtbar wird sie erst im kompakten Zustand – dann ist der Schriftzug IM
+   Logo zu klein zum Lesen und der Name braucht eine zweite Quelle.
+
+   Ohne JavaScript kommt `.is-compact` nie: Dann bleibt es beim großen Logo,
+   und das trägt den Namen selbst. */
 .brand-logo--full {
-    position: absolute; left: 0; top: var(--brand-full-top, 8px);
+    align-self: flex-start;
+    margin-top: var(--brand-full-top, 4px);
     height: var(--brand-full-h, 54px);
-    transition: opacity .25s ease, height .28s cubic-bezier(.22, .61, .36, 1);
+    transition: height .28s cubic-bezier(.22, .61, .36, 1),
+                margin-top .28s cubic-bezier(.22, .61, .36, 1);
 }
-.brand-logo--compact { height: var(--brand-compact-h, 54px); }
-.brand-logo--compact, .brand-text { opacity: 0; transition: opacity .25s ease; }
+.brand-text { opacity: 0; transition: opacity .25s ease; }
 
-.site-header.is-compact .brand-logo--full { opacity: 0; height: var(--brand-compact-h, 54px); pointer-events: none; }
-.site-header.is-compact .brand-logo--compact,
+.site-header.is-compact .brand-logo--full {
+    height: var(--brand-compact-h, 54px);
+    margin-top: var(--brand-compact-top, 0px);
+}
 .site-header.is-compact .brand-text { opacity: 1; }
 .brand-mark { font-family: var(--font-head); color: var(--text); font-weight: 700; font-size: 1.4rem; letter-spacing: .3px; }
 .brand-mark::after { content: "."; color: var(--accent); }
@@ -1192,10 +1205,6 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 /* Auf schmalen Screens teilen sich Logo, Wortmarke und Hamburger 100 % Breite –
    das Logo gibt zuerst nach, damit der Name lesbar bleibt. */
 @media (max-width: 420px) {
-    /* Nur die kompakte Marke. Stünde hier .brand-logo, träfe die Regel auch
-       die große – sie steht später in der Datei und würde deren Token-Höhe
-       überschreiben, also genau das Logo kleinrechnen, um das es geht. */
-    .brand-logo--compact { height: 42px; }
     .brand-mark { font-size: 1.18rem; }
     .brand-sub { font-size: .6rem; letter-spacing: 1.8px; }
 }

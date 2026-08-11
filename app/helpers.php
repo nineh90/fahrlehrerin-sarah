@@ -18,10 +18,38 @@ function url(string $path = '/'): string
     return BASE_PATH . $path;
 }
 
-/** Asset-URL (public/assets/...). */
+/**
+ * Asset-URL (public/assets/...) mit Fingerabdruck gegen alte Browser-Caches.
+ *
+ * Angehängt wird die Änderungszeit der Datei als ?v=… – ändert sich die Datei,
+ * ändert sich die URL, und der Browser holt sie neu. Ohne das ist die
+ * Cache-Vorgabe aus public/.htaccess eine Falle: CSS liegt dort einen Tag im
+ * Browser, und ein Besucher, der gestern da war, sieht die heutige Änderung
+ * schlicht nicht. Genau das ist am 11.08.2026 passiert.
+ *
+ * SCHRIFTEN SIND AUSGENOMMEN, und zwar zwingend: Das Layout lädt sie per
+ * <link rel="preload"> vor, angefordert werden sie danach aber von fonts.css
+ * über einen festen relativen Pfad ohne Parameter. Zwei verschiedene URLs für
+ * dieselbe Datei heißt: einmal vorgeladen, einmal noch mal geholt. Die
+ * Schriften brauchen den Fingerabdruck auch nicht – sie ändern sich nie, und
+ * wenn doch, bekommen sie einen neuen Dateinamen.
+ *
+ * Fehlt die Datei (falscher Pfad, noch nicht deployt), gibt es einfach keinen
+ * Parameter. Ein Tippfehler im Pfad soll eine 404 auslösen und keinen Fehler.
+ */
 function asset(string $path): string
 {
-    return url('/assets/' . ltrim($path, '/'));
+    $path = ltrim($path, '/');
+    $url  = url('/assets/' . $path);
+
+    if (str_starts_with($path, 'fonts/')) {
+        return $url;
+    }
+
+    $datei = APP_ROOT . '/public/assets/' . $path;
+    $stand = is_file($datei) ? filemtime($datei) : false;
+
+    return $stand === false ? $url : $url . '?v=' . $stand;
 }
 
 /**

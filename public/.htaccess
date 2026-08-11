@@ -31,7 +31,14 @@ Options -Indexes
 
 # Die Schriften liegen seit dem Wechsel weg von Google Fonts hier lokal. Sie
 # ändern sich praktisch nie – ein Jahr Cache spart bei jedem Folgebesuch vier
-# Anfragen. CSS und JS bewusst kürzer, die ändern sich bei jedem Deploy.
+# Anfragen.
+#
+# WICHTIG: Alles außer den Schriften wird nur deshalb gecacht, weil asset() in
+# app/helpers.php die Änderungszeit der Datei als ?v=… anhängt. Ändert sich
+# eine Datei, ändert sich ihre URL und der Browser holt sie neu. Wer diese
+# Zeiten anfasst, muss wissen: OHNE diesen Fingerabdruck sieht ein Besucher,
+# der gestern hier war, die heutige Änderung einen Tag lang nicht. Genau so ist
+# es am 11.08.2026 auf einem Handy passiert, bevor asset() das gelernt hat.
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresByType font/woff2               "access plus 1 year"

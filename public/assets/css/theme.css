@@ -183,18 +183,31 @@
                            Schrift im Bild. Wer hier kleiner geht, macht das Logo
                            wieder unleserlich und kann es dann auch weglassen.
        --brand-full-top    Abstand von der Oberkante des Headers.
-                           132 + 8 - 88 = 52 px stehen unten heraus. Genau das
-                           ist der Effekt: Die Leiste bleibt schlank, das Logo
-                           bricht daraus hervor. Steht es zu weit heraus,
-                           knallt es in die Hero-Überschrift.
+
+                           DER ÜBERSTAND IST DIE HEIKELSTE ZAHL AM GANZEN
+                           HEADER: 98 + 4 - 94 = 8 px. Der Regenbogenstreifen
+                           an der Headerkante trennt Header und Hero und läuft
+                           quer über alles, was heraussteht. Nachgestellt bei
+                           20, 14, 8 und 2 px Überstand:
+                             20 px – der Streifen schneidet durch die Zeile
+                                     „Klasse B · Klasse BE"
+                             14 px – er schneidet durch „Handicapausbildung"
+                              8 px – er läuft UNTER der Schrift durch und
+                                     kreuzt nur den Bogen  ✅
+                              2 px – kaum noch ein Überstand
+                           Bei 8 px bleibt das Logo vollständig lesbar und die
+                           beiden Regenbögen laufen ineinander. Wer den
+                           Überstand vergrößert, schneidet zwangsläufig wieder
+                           Schrift an – die Textzeilen reichen im Logo fast bis
+                           zur Unterkante.
        --brand-compact-h    Der reine Bogen im kompakten Zustand (ohne
                            Lenkrad, ohne Schrift).
        --------------------------------------------------------------------- */
-    --header-h:         88px;
+    --header-h:         94px;
     --header-h-compact: 68px;
-    --brand-full-h:     132px;
-    --brand-full-top:   8px;
-    --brand-compact-h:   46px;
+    --brand-full-h:      98px;
+    --brand-full-top:    4px;
+    --brand-compact-h:  46px;
 
     --radius:    18px;
     --radius-sm: 12px;
@@ -294,10 +307,10 @@
    Telefondisplay bis in die Überschrift. */
 @media (max-width: 740px) {
     :root {
-        --header-h:         80px;
+        --header-h:         88px;
         --header-h-compact: 64px;
-        --brand-full-h:     108px;
-        --brand-full-top:   6px;
+        --brand-full-h:      92px;
+        --brand-full-top:    4px;
     }
 }
 

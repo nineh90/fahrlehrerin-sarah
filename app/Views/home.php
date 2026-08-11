@@ -36,7 +36,7 @@ $schoolUrl = trim((string) config('school.url'));
                          die ist der Akzent und kurz genug. */ ?>
                 <p class="hero-lead" data-typewriter="fast">
                     Ich bin Sarah, Fahrlehrerin für Klasse B und BE. Mein Schwerpunkt: Fahren
-                    mit Prothese, Lenkhilfe oder Handbedienung.
+                    mit Handicap.
                 </p>
                 <p class="hero-meta">
                     <?= icon('pin') ?>

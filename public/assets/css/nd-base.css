@@ -501,6 +501,52 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
        um und beide Zeilen stehen mittig. */
     .hero-meta { display: block; }
     .hero-meta svg { display: inline-block; vertical-align: -4px; margin-right: .35rem; }
+
+    /* --- Die Hero-Abbildung wird zur Bühne ----------------------------------
+       Nebeneinander sind Text und Bild zwei Spalten. Gestapelt wären sie zwei
+       Blöcke untereinander: Der Hero würde doppelt so hoch, und man müsste am
+       Bild vorbeiscrollen, um zu den Knöpfen zu kommen. Also legt sich die
+       Abbildung hinter den Text, statt sich darunter zu stellen.
+
+       Hier steht nur die Mechanik – was in der Medienspalte liegt, wird zur
+       Fläche. WIE die Abbildung dabei aussehen muss, ist Sache des Projekts
+       und steht in theme.css: Bei Sarah fällt zum Beispiel die Wortmarke aus
+       dem Logo weg, weil zwei Textebenen übereinander kein Overlay der Welt
+       auseinanderbekommt. */
+    .hero .duo-media {
+        position: absolute;          /* Bezug ist .hero-inner (position: relative) */
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 0;
+        /* Für den Finger nicht vorhanden, sonst fängt die Fläche Tapser ab,
+           die den Knöpfen darüber gelten. */
+        pointer-events: none;
+    }
+    /* Die Abbildung darf breiter sein als die Spalte – als Flex-Kind würde sie
+       sich sonst brav auf die Spaltenbreite zurückstauchen. `.hero` hat
+       overflow: hidden und hält sie im Rahmen. */
+    .hero .duo-media > * { flex-shrink: 0; }
+    .hero-content { position: relative; z-index: 1; }
+
+    /* Schleier zwischen Bild und Schrift. Sitzt am .duo-media und nicht am
+       Bild, weil er darüber liegen muss. Die Farbe kommt als Token, weil sie
+       zum Seitenhintergrund passen muss und der je Projekt anders ist. */
+    .hero .duo-media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--hero-media-scrim, none);
+    }
+
+    /* Die Ortszeile läuft in --muted, und das ist der leiseste Ton im ganzen
+       Theme. Auf glattem Creme trägt er gerade so; über einer Abbildung fällt
+       er durch – nachgemessen 2,74:1 an der dunkelsten Stelle, gefordert sind
+       4,5. Eine Stufe kräftiger sind es 4,8. Gilt nur hier, weil nur hier ein
+       Bild dahinterliegt: Sobald die Zeile wieder auf glattem Grund steht,
+       darf sie auch wieder zurücktreten. */
+    .hero-meta { color: var(--text-soft); }
 }
 
 /* ---------- Prose ---------- */

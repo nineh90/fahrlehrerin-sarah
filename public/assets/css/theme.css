@@ -138,6 +138,24 @@
         rgba(253, 248, 240, 0.55) 55%,
         var(--bg) 100%);
 
+    /* Hero auf schmalen Screens, wo das Lockup hinter den Text rutscht
+       (siehe nd-base.css, Block ab 820 px). Zwei Stellschrauben:
+       die Deckkraft des Bildes und der Schleier darüber.
+       Der Schleier ist in der Mitte am dichtesten – dort steht die Schrift –
+       und läuft zum Rand hin aus, damit der Bogen dort seine Farbe behält.
+       0.38 ist nicht geraten, sondern ausgerechnet: Sarahs Poloshirt ist
+       nahezu schwarz (rgb(5,4,7)), und darüber steht Fließtext. Bei dieser
+       Deckkraft plus Schleier kommt die ungünstigste Stelle auf 4,8:1 – über
+       den 4,5, die für Fließtext gefordert sind. Bei 0.42 sind es 4,53, also
+       keine Reserve mehr; bei 0.5 fällt es auf 4,03 durch. Wer hier hochdreht,
+       muss also nachmessen und nicht nur hinsehen: Auf einem hellen Monitor
+       sieht auch 3:1 noch „geht schon" aus. */
+    --hero-media-opacity: 0.38;
+    --hero-media-scrim: radial-gradient(125% 95% at 50% 46%,
+        rgba(253, 248, 240, 0.62) 0%,
+        rgba(253, 248, 240, 0.34) 58%,
+        rgba(253, 248, 240, 0.00) 100%);
+
     --page-head-bg:
         radial-gradient(700px 300px at 88% -40%, rgba(124, 58, 237, 0.20), transparent 65%),
         radial-gradient(600px 280px at 10% -20%, rgba(24, 154, 156, 0.16), transparent 65%),
@@ -299,12 +317,41 @@
     mask-image: linear-gradient(180deg, #000 78%, transparent 99%);
 }
 
-/* Gestapelter Hero: Das Lockup bekäme sonst die volle Spaltenbreite und würde
-   die Überschrift erschlagen. Gedeckelt und mittig – die Innenaufteilung bleibt
-   durch die Prozentangaben unverändert. */
+/* --- Hero auf schmalen Screens: das Logo wird zur Bühne --------------------
+   Untereinander gestapelt brauchten Text und Lockup den doppelten Platz, und
+   man scrollte an Sarah vorbei, um zu den Knöpfen zu kommen. Deshalb legt
+   nd-base.css die Medienspalte ab 820 px hinter den Text (`.hero .duo-media`
+   wird absolut). Hier steht, wie das Logo dabei aussehen muss.
+
+   DIE WORTMARKE FÄLLT WEG, und das ist der Kern der Sache. Genau ihr
+   Schriftzug ist der Grund, warum das Logo laut Logo-Regel sonst nicht als
+   Hintergrund taugt: Zwei Textebenen übereinander bekommt kein Overlay
+   auseinander. Ohne sie bleibt die reine Form – der Bogen als Bühne, Sarah
+   darin –, und der Name geht nirgends verloren: Er steht im Header direkt
+   darüber, samt „Klasse B · BE · Handicap".
+
+   Achtung Spezifität: `.hero-lockup img` weiter oben ist 0-1-1 und schlägt
+   eine einzelne Klasse. Die beiden Regeln unten brauchen deshalb zwingend
+   den Elternselektor davor, sonst passiert schlicht nichts. */
 @media (max-width: 820px) {
     .hero-lockup,
-    .hero-arc { max-width: 420px; margin-inline: auto; }
+    .hero-arc {
+        /* Breiter als die Spalte: Der Bogen soll die Fläche tragen und an den
+           Rändern angeschnitten sein, nicht als Briefmarke in der Mitte
+           schweben. */
+        max-width: none;
+        width: min(115%, 520px);
+        margin-inline: 0;
+        opacity: var(--hero-media-opacity);
+    }
+
+    .hero-lockup .hero-lockup-word { display: none; }
+
+    /* Ohne den Schriftzug wäre die untere Bogenhälfte leer und Sarah säße
+       klein in der oberen Ecke – im Lockup teilt sie sich den Platz mit ihm.
+       Als Bühne gehört sie in die Mitte, also dieselbe Geometrie wie im
+       Bogen auf /ueber-mich (.hero-arc img). */
+    .hero-lockup .hero-lockup-photo { top: 14%; left: 38%; width: 44%; }
 }
 
 /* --- Kleine Freundlichkeiten ------------------------------------------- */

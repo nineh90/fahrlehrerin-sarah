@@ -195,6 +195,42 @@ function icon(string $name): string
            Schwerpunkt umfasst auch Prothese und Handbedienung – ein reiner
            Rollstuhl würde das Thema enger machen, als es ist. */
         'wheelchair' => '<circle cx="9.6" cy="4.2" r="2"/><path d="M8.8 8.2v4.6h5"/><path d="M13.8 12.8l3.3 1.5-1.1 2.9"/><circle cx="11.4" cy="15.4" r="5.4"/>',
+
+        /* ---- Die vier Umbauten auf /fahren-mit-handicap -------------------
+           Vorher liefen die Karten mit Auto, Schild, Uhr und Funkeln – also
+           mit dem, was gerade im Satz übrig war. Auf einer Seite, die von
+           Technik handelt, muss man die Technik erkennen. */
+
+        /* Linksgas: zwei Pedale, das linke geriffelt (das neue Gaspedal), und
+           ein Pfeil, der nach links zeigt. Ohne den Pfeil sind es nur zwei
+           Pedale – die Aussage steckt in der Seite, auf die das Gas wandert. */
+        'pedal'     => '<rect x="3" y="8.4" width="6.6" height="11.4" rx="2.2"/><rect x="13.4" y="8.4" width="6.6" height="11.4" rx="2.2"/><path d="M5.1 11.6h2.4M5.1 14.1h2.4M5.1 16.6h2.4"/><path d="M17.4 4.8H7.3"/><path d="m9.4 2.7-2.1 2.1 2.1 2.1"/>',
+
+        /* Lenkraddrehknopf: Lenkrad mit dem Knauf auf dem Kranz. Der Knauf ist
+           als einziges Element gefüllt – offen gezeichnet liest er sich als
+           Loch im Lenkrad statt als etwas, das darauf sitzt. */
+        'knob'      => '<circle cx="12" cy="12" r="7.8"/><circle cx="12" cy="12" r="2.5"/><path d="M12 4.2v5.3"/><path d="m5.4 15.6 4.4-2.5"/><path d="m18.6 15.6-4.4-2.5"/><circle cx="6.5" cy="6.5" r="2.1" fill="currentColor" stroke="none"/>',
+
+        /* Handbedienung: Hebel mit Griff auf einer Grundplatte. Der Vorgänger
+           hatte zusätzlich einen Doppelpfeil für „Gas und Bremse über dieselbe
+           Bewegung" – inhaltlich richtig, bei 26 px aber tödlich: Der schräge
+           Hebel zerfiel neben dem Pfeil in lauter einzelne Striche und Punkte.
+           Jetzt drei große, ruhige Formen. Was der Pfeil erklärt hätte, steht
+           ohnehin im Text der Karte darunter. */
+        'lever'     => '<path d="M6.4 20.4h11.2"/><path d="M12 20.4v-7.6"/><path d="M8.6 8.2a3.4 3.4 0 0 1 6.8 0v1.2a3.4 3.4 0 0 1-3.4 3.4 3.4 3.4 0 0 1-3.4-3.4Z"/>',
+
+        /* Prothese: Schaft, Kniegelenk, Fuß. Zwei Dinge sind hier hart
+           erarbeitet und sollten so bleiben:
+           Der Fuß MUSS zur Seite zeigen – jeder symmetrische Entwurf (Schaft
+           oben, Sockel unten) las sich als Pokal. Erst die asymmetrische
+           Silhouette macht daraus ein Bein.
+           Und das GELENK zwischen Schaft und Fuß muss sichtbar bleiben: Ohne
+           es verschmelzen Schaft und Fuß bei 26 px zu einem Stiefel. Der Kreis
+           ist das einzige, was aus dem Bein eine Prothese macht.
+           Gezeigt ist das Bein, obwohl die Karte auch Arme nennt – es ist die
+           bei Weitem lesbarere Form, und die Umbauten auf dieser Seite drehen
+           sich ohnehin überwiegend um die Beine. */
+        'prosthesis' => '<path d="M8.6 2.8h6.8a1.6 1.6 0 0 1 1.6 1.8l-.5 3.6a2.6 2.6 0 0 1-2.6 2.2h-3.8A2.6 2.6 0 0 1 7.5 8.2L7 4.6a1.6 1.6 0 0 1 1.6-1.8Z"/><circle cx="12" cy="12.8" r="2"/><path d="M12 14.8v2.8"/><path d="M9.6 17.6h5a1.5 1.5 0 0 1 1.5 1.5v.4h2.2a1.2 1.2 0 0 1 0 2.4H9.6a1.4 1.4 0 0 1-1.4-1.4v-1.5a1.4 1.4 0 0 1 1.4-1.4Z"/>',
         'shield'    => '<path d="M12 3l7.5 3v5.4c0 4.6-3.1 8.8-7.5 10.1-4.4-1.3-7.5-5.5-7.5-10.1V6Z"/><path d="m9.2 12.2 2 2 3.6-3.8"/>',
         'sparkles'  => '<path d="m12 3 1.7 4.6L18.3 9l-4.6 1.4L12 15l-1.7-4.6L5.7 9l4.6-1.4Z"/><path d="m18 15 .8 2.2 2.2.8-2.2.8L18 21l-.8-2.2-2.2-.8 2.2-.8Z"/>',
         'chat'      => '<path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-5.6A8 8 0 0 1 13 4a8 8 0 0 1 8 8Z"/>',

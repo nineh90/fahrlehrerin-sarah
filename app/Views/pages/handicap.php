@@ -55,7 +55,7 @@
 
         <div class="card-grid">
             <article class="feature-card">
-                <span class="feature-icon"><?= icon('car') ?></span>
+                <span class="feature-icon"><?= icon('pedal') ?></span>
                 <h3>Linksgas</h3>
                 <p>
                     Ein zweites Gaspedal links der Bremse, wenn der rechte Fuß nicht
@@ -65,7 +65,7 @@
             </article>
 
             <article class="feature-card">
-                <span class="feature-icon"><?= icon('shield') ?></span>
+                <span class="feature-icon"><?= icon('knob') ?></span>
                 <h3>Lenkraddrehknopf</h3>
                 <p>
                     Lenken mit einer Hand – der Klassiker, wenn die zweite Hand nicht
@@ -74,7 +74,7 @@
             </article>
 
             <article class="feature-card">
-                <span class="feature-icon"><?= icon('clock') ?></span>
+                <span class="feature-icon"><?= icon('lever') ?></span>
                 <h3>Handbedienung</h3>
                 <p>
                     Gas und Bremse über einen Hebel statt über die Pedale. Braucht am
@@ -83,7 +83,7 @@
             </article>
 
             <article class="feature-card">
-                <span class="feature-icon"><?= icon('sparkles') ?></span>
+                <span class="feature-icon"><?= icon('prosthesis') ?></span>
                 <h3>Prothesenfahren</h3>
                 <p>
                     Ob Bein- oder Armprothese: Wir schauen zuerst, was mit deiner Prothese

@@ -6,11 +6,19 @@ $schoolUrl = trim((string) config('school.url'));
 <section class="hero">
     <div class="container hero-inner">
         <div class="duo duo--narrow-media">
-            <?php /* Ohne Augenbraue: Die Klassen stehen seit 07.08.2026 im Header
-                     unter der Wortmarke und stünden hier ein zweites Mal, nur
-                     zwei Zentimeter tiefer. Der Hero fängt jetzt direkt mit der
-                     Aussage an. `.hero-eyebrow` bleibt in nd-base.css – die
-                     Signatur nutzt sie in anderen Projekten weiter. */ ?>
+            <?php /* Ohne Augenbraue: Der Hero fängt direkt mit der Aussage an.
+                     `.hero-eyebrow` bleibt in nd-base.css – die Signatur nutzt
+                     sie in anderen Projekten weiter.
+
+                     Die Klassen standen deshalb eine Weile nur im Header unter
+                     der Wortmarke (Entscheidung 07.08.2026). Seit 11.08.2026
+                     stehen sie zusätzlich im Fließtext darunter, zusammen mit
+                     dem Handicap-Schwerpunkt – das ist kein Rückfall, sondern
+                     ein Unterschied: Die Versalzeile im Header ist Branding und
+                     wird überflogen, der Fließtext wird gelesen und steht im
+                     Suchergebnis. Und der Schwerpunkt, wegen dem viele
+                     überhaupt herkommen, stand vorher erst in der dritten
+                     Sektion. */ ?>
             <div class="hero-content">
                 <?php /* data-typewriter: main.js baut diese eine Überschrift beim
                          Laden Zeichen für Zeichen auf. Der Satz steht trotzdem
@@ -19,13 +27,21 @@ $schoolUrl = trim((string) config('school.url'));
                          Bewusst nur hier: Eine tippende Überschrift trägt einmal.
                          Auf jeder Unterseite noch einmal wäre sie ein Tic. */ ?>
                 <h1 data-typewriter>Hinterm Steuer<br>ist Platz für alle.</h1>
-                <p class="hero-lead">
-                    Ich bin Sarah und bringe Menschen das Autofahren bei – Fahranfänger:innen
-                    genauso wie Leute, denen andere gesagt haben, das klappe bei ihnen nicht.
+                <?php /* "fast" = doppeltes Tempo. Das ist kein Detail: Bei 42 ms
+                         je Zeichen tippt die Seite mit rund 285 Wörtern pro
+                         Minute, also ungefähr Lesegeschwindigkeit – dann fühlt
+                         es sich wie Bremsen an. Bei 20 ms sind es etwa 600, der
+                         Text ist immer schneller fertig, als man ihm folgt.
+                         Für die Überschrift bleibt es beim langsamen Tempo,
+                         die ist der Akzent und kurz genug. */ ?>
+                <p class="hero-lead" data-typewriter="fast">
+                    Ich bin Sarah, Fahrlehrerin für Klasse B und BE. Mein Schwerpunkt: Fahren
+                    mit Prothese, Lenkhilfe oder Handbedienung – auch wenn dir jemand gesagt
+                    hat, dass das bei dir nicht geht.
                 </p>
                 <p class="hero-meta">
                     <?= icon('pin') ?>
-                    <span>Unterwegs in <?= e(area_sentence()) ?></span>
+                    <span data-typewriter="fast">Unterwegs in <?= e(area_sentence()) ?></span>
                 </p>
                 <div class="hero-actions">
                     <a class="btn btn-primary btn-lg" href="<?= url('/ueber-mich') ?>">Mehr über mich</a>

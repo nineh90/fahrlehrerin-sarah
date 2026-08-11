@@ -76,66 +76,122 @@
     });
 
     /* =====================================================================
-       GETIPPTE ÜBERSCHRIFT  ·  [data-typewriter]
+       GETIPPTER HERO  ·  [data-typewriter]
        ---------------------------------------------------------------------
-       Nur die H1 der Startseite, nur einmal beim Laden. Der Satz steht
+       Der Hero der Startseite schreibt sich beim Laden selbst: erst die
+       Überschrift, dann der Fließtext, dann die Ortszeile. Jeder Text steht
        vollständig im Template – hier wird er geleert und Zeichen für Zeichen
        wieder aufgebaut. Suchmaschinen und Vorlesesoftware sehen also immer
-       die ganze Überschrift, egal ob das Skript läuft.
+       den ganzen Satz, egal ob das Skript läuft.
+
+       Zwei Dinge halten das erträglich, und beide sind Absicht:
+
+       Die KNÖPFE TIPPEN NICHT MIT. Sie stehen von Anfang an da und sind nach
+       knapp einer Sekunde klickbar, während der Text noch läuft. Ließe man
+       sie auf das Ende warten, wäre der Hero dreizehn Sekunden lang eine
+       Sackgasse – bei Besucher:innen, die von TikTok kommen, ist das die
+       ganze Aufmerksamkeitsspanne.
+
+       Der FLIESSTEXT TIPPT DOPPELT SO SCHNELL wie die Überschrift
+       (data-typewriter="fast"). 42 ms je Zeichen sind rund 285 Wörter pro
+       Minute, also ungefähr Lesegeschwindigkeit – das fühlt sich an wie
+       Bremsen. 20 ms sind etwa 600: Der Text ist immer schneller fertig, als
+       man ihm folgen kann, und wirkt deshalb nie wie Warten.
        ===================================================================== */
     function initTypewriter() {
-        var head = document.querySelector('[data-typewriter]');
-        if (!head) return;
+        var felder = Array.prototype.slice.call(document.querySelectorAll('[data-typewriter]'));
+        if (!felder.length) return;
 
-        // Erste Amtshandlung: sichtbar machen. Das CSS versteckt die
-        // Überschrift, damit sie nicht kurz vollständig aufblitzt – ab hier
-        // liegt die Verantwortung dafür bei diesem Skript.
-        head.style.visibility = 'visible';
+        // Erste Amtshandlung: sichtbar machen. Das CSS versteckt die Texte,
+        // damit sie nicht kurz vollständig aufblitzen – ab hier liegt die
+        // Verantwortung dafür bei diesem Skript.
+        felder.forEach(function (el) { el.style.visibility = 'visible'; });
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-        // Zeichen und Zeilenumbrüche in der Reihenfolge des Originals. Der
-        // Umbruch wird als "\n" gemerkt und später wieder zum <br> – ihn
-        // einfach wegzulassen würde die Überschrift einzeilig machen und den
-        // Hero in der Höhe verschieben.
-        var parts = [];
-        Array.prototype.forEach.call(head.childNodes, function (node) {
-            if (node.nodeType === 3) {
-                Array.prototype.push.apply(parts, node.textContent.split(''));
-            } else if (node.nodeName === 'BR') {
-                parts.push('\n');
-            }
+        var TEMPO = { fast: 20 };
+        var STANDARD = 42;
+
+        var schritte = [];
+        felder.forEach(function (el) {
+            // Zeichen und Zeilenumbrüche in der Reihenfolge des Originals. Der
+            // Umbruch wird als "\n" gemerkt und später wieder zum <br> – ihn
+            // wegzulassen würde die Überschrift einzeilig machen.
+            var teile = [];
+            Array.prototype.forEach.call(el.childNodes, function (node) {
+                if (node.nodeType === 3) {
+                    // Leerraum zusammenfassen. Das ist nicht kosmetisch: Ein
+                    // Absatz im Template steht eingerückt und über mehrere
+                    // Zeilen, sein Textknoten enthält also Zeilenumbrüche und
+                    // zwanzig Leerzeichen am Stück. Ungefiltert tippt das
+                    // Skript die alle einzeln mit – sichtbar als sekundenlanger
+                    // Hänger mitten im Satz, bei dem sich nichts tut. Der
+                    // Browser fasst denselben Leerraum beim Rendern ohnehin zu
+                    // einem Leerzeichen zusammen; hier passiert nur dasselbe.
+                    Array.prototype.push.apply(
+                        teile,
+                        node.textContent.replace(/\s+/g, ' ').split('')
+                    );
+                } else if (node.nodeName === 'BR') {
+                    teile.push('\n');
+                }
+            });
+            // Der Rest der Einrückung: das Leerzeichen vor dem ersten und nach
+            // dem letzten Wort.
+            while (teile[0] === ' ') { teile.shift(); }
+            while (teile[teile.length - 1] === ' ') { teile.pop(); }
+            if (!teile.length) return;
+
+            // Höhe festnageln, BEVOR der Text verschwindet. Ohne das klappt der
+            // Hero beim Tippen Zeile für Zeile auf und schiebt alles darunter
+            // vor sich her – der Fehler, an dem dieser Effekt sonst scheitert.
+            // Inline-Elemente (das <span> in der Ortszeile) nehmen keine
+            // min-height an; dort hält der umgebende Block die Höhe.
+            var traeger = window.getComputedStyle(el).display === 'inline'
+                ? el.parentElement
+                : el;
+            traeger.style.minHeight = traeger.getBoundingClientRect().height + 'px';
+
+            // Vollständiger Satz als Beschriftung, solange getippt wird: So
+            // liest Vorlesesoftware ihn am Stück und stolpert nicht über jedes
+            // einzelne Zeichen.
+            el.setAttribute('aria-label', teile.join('').replace(/\n/g, ' ').trim());
+            el.textContent = '';
+
+            schritte.push({
+                el: el,
+                teile: teile,
+                tempo: TEMPO[el.getAttribute('data-typewriter')] || STANDARD
+            });
         });
-        if (!parts.length) return;
 
-        // Höhe festnageln, BEVOR der Text verschwindet. Ohne das klappt der
-        // Hero beim Tippen Zeile für Zeile auf und schiebt alles darunter vor
-        // sich her – der Fehler, an dem dieser Effekt sonst immer scheitert.
-        head.style.minHeight = head.getBoundingClientRect().height + 'px';
+        // Ein Block nach dem anderen, in der Reihenfolge im HTML.
+        (function naechsterBlock() {
+            var schritt = schritte.shift();
+            if (!schritt) return;
 
-        // Vollständiger Satz als Beschriftung, solange getippt wird: So liest
-        // Vorlesesoftware die Überschrift am Stück und stolpert nicht über
-        // jedes einzelne Zeichen.
-        head.setAttribute('aria-label', parts.join('').replace('\n', ' ').trim());
-        head.textContent = '';
-        head.classList.add('is-typing');
+            var i = 0;
+            schritt.el.classList.add('is-typing');
 
-        var i = 0;
-        (function type() {
-            if (i >= parts.length) {
-                // Cursor weg, Beschriftung weg – ab jetzt ist es wieder eine
-                // ganz normale Überschrift.
-                head.classList.remove('is-typing');
-                head.removeAttribute('aria-label');
-                return;
-            }
-            var part = parts[i++];
-            head.appendChild(part === '\n'
-                ? document.createElement('br')
-                : document.createTextNode(part));
+            (function tippe() {
+                if (i >= schritt.teile.length) {
+                    // Cursor weg, Beschriftung weg – ab jetzt ist es wieder
+                    // ganz normaler Text. Die kurze Pause danach ist der
+                    // Atemzug zwischen zwei Absätzen.
+                    schritt.el.classList.remove('is-typing');
+                    schritt.el.removeAttribute('aria-label');
+                    window.setTimeout(naechsterBlock, 140);
+                    return;
+                }
+                var zeichen = schritt.teile[i++];
+                schritt.el.appendChild(zeichen === '\n'
+                    ? document.createElement('br')
+                    : document.createTextNode(zeichen));
 
-            // Nach einem Satzzeichen kurz absetzen. Das ist der Unterschied
-            // zwischen „da tippt jemand" und „da läuft ein Zähler".
-            window.setTimeout(type, /[.,!?–]/.test(part) ? 250 : 42);
+                // Nach einem Satzzeichen kurz absetzen. Das ist der Unterschied
+                // zwischen „da tippt jemand" und „da läuft ein Zähler".
+                window.setTimeout(tippe,
+                    /[.,!?:–]/.test(zeichen) ? schritt.tempo * 5 : schritt.tempo);
+            })();
         })();
     }
 

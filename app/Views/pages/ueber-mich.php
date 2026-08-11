@@ -16,7 +16,14 @@
                 </p>
                 <p class="hero-meta">
                     <?= icon('pin') ?>
-                    <span>Unterwegs in <?= e(area_sentence()) ?></span>
+                    <?php /* „Unterwegs in" steht nur noch für Vorlesesoftware da:
+                             Sichtbar sagt das Pin-Symbol schon, dass es um Orte
+                             geht, und die Zeile liest sich ohne die Einleitung
+                             ruhiger. Vorgelesen wären es sonst vier Ortsnamen
+                             ohne jeden Zusammenhang – das Symbol ist
+                             aria-hidden. */ ?>
+                    <span class="sr-only">Unterwegs in </span>
+                    <span><?= e(area_sentence()) ?></span>
                 </p>
                 <div class="hero-actions">
                     <a class="btn btn-primary btn-lg" href="<?= url('/termine') ?>">Meine freien Zeiten</a>

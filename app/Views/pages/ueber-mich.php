@@ -53,7 +53,6 @@ $schoolUrl = trim((string) config('school.url'));
                     <img src="<?= asset('img/sarah-messe.jpg') ?>"
                          alt="Sarah an einem Messestand, lächelnd, mit hochgestrecktem Daumen"
                          width="640" height="800">
-                    <figcaption>Auf einer Messe für Mobilität und Reha</figcaption>
                 </figure>
             </div>
 
@@ -128,7 +127,6 @@ $schoolUrl = trim((string) config('school.url'));
                     <img src="<?= asset('img/fahrschulauto.webp') ?>"
                          alt="Das Fahrschulauto: ein weißer VW T-Roc"
                          width="1200" height="637" loading="lazy" decoding="async">
-                    <figcaption>Das Auto, in dem wir unterwegs sind</figcaption>
                 </figure>
             </div>
 

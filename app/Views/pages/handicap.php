@@ -20,7 +20,6 @@
                               Bremse sitzt ein zusätzliches Gaspedal, das über ein grünes
                               Gestänge mit dem originalen Gaspedal verbunden ist"
                          width="1400" height="1050">
-                    <figcaption>So sieht ein Linksgas-Umbau aus – mehr braucht es nicht</figcaption>
                 </figure>
             </div>
 
@@ -99,11 +98,15 @@
         <div class="duo duo--text-first">
             <div class="duo-media photo-wrap" style="--card-accent: var(--c-violet);">
                 <figure class="photo photo--right">
+                    <?php /* „während des Umbaus" trug bis zum 12.08.2026 die
+                             Bildunterschrift. Die ist auf Sarahs Wunsch weg (keine
+                             Erklärtexte unter den Fotos mehr), deshalb steht die
+                             Einordnung jetzt im alt-Text: Auf dem Bild liegen Teile
+                             herum, und ohne den Hinweis liest sich das als Pfusch
+                             statt als Zwischenstand. */ ?>
                     <img src="<?= asset('img/handicap-handbedienung.jpg') ?>"
-                         alt="Fußraum mit eingebauter Handbedienung: ein grün lackierter Hebel am Boden, verbunden über grüne Gestänge, daneben eine grüne Abdeckung vor den Pedalen"
+                         alt="Fußraum während des Umbaus auf Handbedienung: ein grün lackierter Hebel am Boden, verbunden über grüne Gestänge, daneben eine grüne Abdeckung vor den Pedalen"
                          width="1200" height="1484" loading="lazy" decoding="async">
-                    <figcaption>Handbedienung im Einbau: Der Hebel unten überträgt Gas und
-                        Bremse über das grüne Gestänge, die Abdeckung hält die Pedale frei</figcaption>
                 </figure>
             </div>
 

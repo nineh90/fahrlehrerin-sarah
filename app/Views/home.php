@@ -127,10 +127,11 @@ $schoolUrl = trim((string) config('school.url'));
          bleibt sichtbar, dieselbe Entscheidung wie beim Fahrschulauto
          (Nils, 12.08.2026): Es zeigt, wo sie unterwegs ist.
 
-         Keine Bildunterschrift: Was genau die Veranstaltung war, weiß hier
-         niemand sicher, und eine erfundene Unterschrift ist dasselbe Problem
-         wie ein erfundenes Zitat. Wenn Sarah einen Satz dazu liefert, kommt
-         er als <figcaption> ins Bild. */ ?>
+         Keine Bildunterschrift – und das ist seit dem 12.08.2026 die Regel
+         für die ganze Seite, nicht die Ausnahme: Sarah will unter den Fotos
+         keine Erklärtexte mehr. Ein Foto, das eine Erklärung braucht, ist
+         das falsche Foto. Was das Bild zeigt, steht im alt-Attribut, und das
+         liest nur vor, wer es braucht. */ ?>
 <section class="section section--alt">
     <div class="container">
         <div class="duo duo--text-first">

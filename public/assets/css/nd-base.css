@@ -597,6 +597,35 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     line-height: 1.45; color: var(--text);
 }
 
+/* Zwei Marken nebeneinander: Kundin und Werkstatt. Steht auf der Referenzseite
+   an der Stelle, an der sonst ein Foto stünde.
+
+   Aus den echten Logo-Dateien zusammengesetzt statt als fertige Grafik – so
+   bleiben beide scharf, es gibt keine Datei, die bei einer Logo-Änderung
+   veraltet, und kein Logo wird dabei verändert.
+
+   Die Höhen sind verschieden und das ist Absicht: Sarahs Logo ist hoch (Bogen
+   über Schriftzug), das ND-Logo breit. Auf gleiche Höhe gezwungen wirkt das
+   breite Logo winzig; auf gleiche BREITE gezwungen überragt das hohe alles.
+   Deshalb bekommt jedes den Wert, bei dem es optisch gleich schwer wiegt. */
+.cooperation {
+    display: flex; align-items: center; justify-content: center;
+    gap: clamp(.8rem, 4vw, 2rem);
+    padding: clamp(1.6rem, 5vw, 2.6rem);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+.cooperation-mark { width: auto; height: clamp(88px, 18vw, 130px); display: block; }
+/* Das breite Logo über die Breite steuern, nicht über die Höhe – sonst wächst
+   es beim Skalieren aus dem Block heraus. */
+.cooperation-mark--nd { height: auto; width: clamp(96px, 22vw, 150px); }
+.cooperation-x {
+    font-family: var(--font-head); font-size: clamp(1.1rem, 3vw, 1.5rem);
+    color: var(--muted); line-height: 1; flex-shrink: 0;
+}
+
 /* Das Wichtigste auf einen Blick – ein abgesetzter Block für alles, was jemand
    sucht, der nicht den ganzen Text liest. Bewusst als Fläche mit Kante und
    nicht als weitere Absatzfolge: Sie soll sich beim Überfliegen vom Fließtext

@@ -102,46 +102,73 @@ $schoolUrl = trim((string) config('school.url'));
                     verzichten zu müssen.
                 </p>
 
-                <?php /* Die ersten beiden Punkte stehen ohne Erklärzeile (Sarah,
-                         12.08.2026). „Klasse B und BE" und „Ausbildung mit Handicap"
-                         erklären sich selbst – und was dahintersteckt, steht
-                         ausführlich auf /fahren-mit-handicap. Die letzten beiden
-                         behalten ihre Zeile: Ein Ort und ein Kanal sind ohne die
-                         Angabe, welcher, keine Information. */ ?>
-                <ul class="facts">
-                    <li>
-                        <?= icon('car') ?>
-                        <span><strong>Klasse B und BE</strong></span>
-                    </li>
-                    <li>
-                        <?= icon('wheelchair') ?>
-                        <span><strong>Ausbildung mit Handicap</strong></span>
-                    </li>
-                    <li>
-                        <?= icon('pin') ?>
-                        <span>
-                            <strong>Unterwegs in</strong>
-                            <span><?= e(implode(' · ', config('contact.area'))) ?></span>
-                        </span>
-                    </li>
-                    <li>
-                        <?= icon('chat') ?>
-                        <span>
-                            <strong>Auch online</strong>
-                            <?php /* Die Kanalnamen sind die Links, nicht ein „hier"
-                                     daneben: Wer „TikTok" liest, klickt darauf.
-                                     Ziele kommen aus der Konfiguration (tiktok_url(),
-                                     instagram_url()) – dieselben Adressen wie im
-                                     Fuß und auf der Kontaktseite. */ ?>
-                            <span>
-                                Auf <a href="<?= e(tiktok_url()) ?>" target="_blank" rel="noopener noreferrer">TikTok</a>
-                                und <a href="<?= e(instagram_url()) ?>" target="_blank" rel="noopener noreferrer">Instagram</a>
-                                zeige ich, wie der Alltag aussieht
-                            </span>
-                        </span>
-                    </li>
-                </ul>
             </div>
+        </div>
+
+        <?php /* DAS WICHTIGSTE ÜBER SARAH AUF EINEN BLICK.
+
+                 Ihr Text daneben liest sich in fünf Minuten – diese Box in fünf
+                 Sekunden. Beides hat seine Leser: Wer wissen will, wer sie ist,
+                 liest den Text; wer prüfen will, ob sie die Richtige ist, sucht
+                 Klasse, Gebiet und Schwerpunkt.
+
+                 Die Punkte sind KEINE Erfindung, sondern die Fakten aus ihrem
+                 eigenen Text – Heilerziehungspflegerin, Schwerpunkt Handicap,
+                 das Netzwerk über die Fahrstunde hinaus. Wer hier etwas ergänzt,
+                 muss es dort belegen können.
+
+                 Steht unter der Spalte und nicht darin: Neben dem Foto wäre die
+                 Liste eine sechste Zeile im Fließtext geworden, quer über die
+                 Breite ist sie ein eigener Block, den man auch überspringen kann.
+
+                 Die ersten drei Punkte tragen bewusst keine Erklärzeile (Sarah,
+                 12.08.2026) – sie erklären sich selbst. Die letzten drei brauchen
+                 eine: Ein Ort, ein Netzwerk und ein Kanal sind ohne die Angabe,
+                 welcher, keine Information. */ ?>
+        <div class="info-box">
+            <ul class="facts">
+                <li>
+                    <?= icon('heart') ?>
+                    <span><strong>Fahrlehrerin und Heilerziehungspflegerin</strong></span>
+                </li>
+                <li>
+                    <?= icon('car') ?>
+                    <span><strong>Klasse B und BE</strong></span>
+                </li>
+                <li>
+                    <?= icon('wheelchair') ?>
+                    <span><strong>Ausbildung mit Handicap</strong></span>
+                </li>
+                <li>
+                    <?= icon('shield') ?>
+                    <span>
+                        <strong>Netzwerk aus Fachstellen</strong>
+                        <span>Unterstützung auch über die Fahrstunde hinaus</span>
+                    </span>
+                </li>
+                <li>
+                    <?= icon('pin') ?>
+                    <span>
+                        <strong>Unterwegs in</strong>
+                        <span><?= e(implode(' · ', config('contact.area'))) ?></span>
+                    </span>
+                </li>
+                <li>
+                    <?= icon('chat') ?>
+                    <span>
+                        <strong>Auch online</strong>
+                        <?php /* Die Kanalnamen sind die Links, nicht ein „hier"
+                                 daneben: Wer „TikTok" liest, klickt darauf.
+                                 Ziele kommen aus der Konfiguration (tiktok_url(),
+                                 instagram_url()) – dieselben Adressen wie im
+                                 Fuß und auf der Kontaktseite. */ ?>
+                        <span>
+                            Auf <a href="<?= e(tiktok_url()) ?>" target="_blank" rel="noopener noreferrer">TikTok</a>
+                            und <a href="<?= e(instagram_url()) ?>" target="_blank" rel="noopener noreferrer">Instagram</a>
+                        </span>
+                    </span>
+                </li>
+            </ul>
         </div>
     </div>
 </section>

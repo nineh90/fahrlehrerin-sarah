@@ -597,6 +597,30 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     line-height: 1.45; color: var(--text);
 }
 
+/* Das Wichtigste auf einen Blick – ein abgesetzter Block für alles, was jemand
+   sucht, der nicht den ganzen Text liest. Bewusst als Fläche mit Kante und
+   nicht als weitere Absatzfolge: Sie soll sich beim Überfliegen vom Fließtext
+   abheben, und genau das macht sie überspringbar für alle, die lesen.
+
+   Innen liegt die vorhandene `.facts`-Liste, nur mehrspaltig – ihre Einträge
+   sind kurz, untereinander stünde eine schmale Säule in einem breiten Kasten.
+   `min(100%, 280px)` statt bloß `280px`: Auf einem schmalen Telefon ist der
+   Container keine 280 px breit, und eine Mindestbreite, die größer ist als der
+   Platz, sprengt das Raster nach rechts heraus. */
+.info-box {
+    margin-top: clamp(2rem, 4vw, 2.8rem);
+    padding: clamp(1.4rem, 3vw, 2rem);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+.info-box .facts {
+    margin: 0;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 1.2rem 2rem;
+}
+
 /* Kompakte Faktenliste, z.B. „Das bringe ich mit" */
 .facts { list-style: none; padding: 0; margin: 1.6rem 0 0; display: grid; gap: .9rem; }
 .facts li { display: grid; grid-template-columns: auto 1fr; gap: .9rem; align-items: start; }

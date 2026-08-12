@@ -1,4 +1,3 @@
-<?php $school = (string) config('school.name'); ?>
 <footer class="site-footer">
     <div class="container">
         <div class="footer-grid">
@@ -8,17 +7,13 @@
                 <img class="footer-logo" src="<?= asset('img/logo-sarah-hell.webp') ?>"
                      alt="Fahrlehrerin Sarah" width="400" height="462"
                      loading="lazy" decoding="async">
-                <p class="footer-tagline">
-                    Ich bin Fahrlehrerin aus Überzeugung – für alle, die zum ersten Mal
-                    hinterm Steuer sitzen, und für alle, denen man das Fahren mal
-                    ausgeredet hat.
-                </p>
-                <?php if ($school !== ''): ?>
-                    <p class="footer-tagline">
-                        Ich unterrichte bei der <?= school_link() ?>.
-                        Anmeldung und Preise laufen über die Fahrschule.
-                    </p>
-                <?php endif; ?>
+                <?php /* Hier standen zwei Absätze: eine Selbstbeschreibung („Fahrlehrerin
+                         aus Überzeugung …", ein Entwurf) und der Hinweis auf die
+                         Fahrschule. Beide sind am 12.08.2026 entfallen, weil direkt
+                         darüber Sarahs eigene Einordnung steht (site-note.php) und
+                         dasselbe sagt – in ihren Worten statt in geliehenen.
+                         Drei Selbstbeschreibungen auf 20 cm Bildschirm sind zwei zu
+                         viel. Der Fuß trägt jetzt Logo und Wege, sonst nichts. */ ?>
             </div>
 
             <div>

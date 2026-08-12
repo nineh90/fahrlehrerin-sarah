@@ -164,6 +164,41 @@
     </div>
 </section>
 
+<?php /* Der Ablauf einer einzelnen Fahrstunde. Stand bis zum 12.08.2026 auf
+         /ueber-mich; dort ist er auf Sarahs Wunsch entfallen und hierher
+         gewandert („Wie die Stunde abläuft vielleicht bei fahren mit handicap").
+
+         An dieser Stelle, weil der Abschnitt darüber den Weg zum Führerschein
+         beschreibt und dieser hier die einzelne Stunde darin – vom Großen ins
+         Kleine. Ohne das Foto des Fahrschulautos, das vorher danebenstand: Auf
+         dieser Seite gibt es schon zwei Fotos, ein drittes macht sie zur Galerie.
+
+         ENTWURF, nicht von Sarah – wie alles, was hier nicht ausdrücklich als
+         ihr Text markiert ist. */ ?>
+<section class="section">
+    <div class="container">
+        <div class="prose">
+            <h2>Wie eine Stunde bei mir abläuft</h2>
+            <p>
+                Zu Beginn sagen wir beide, was heute dran ist – du, was du üben willst,
+                ich, was ich für nötig halte. Am Ende bekommst du eine ehrliche
+                Einschätzung: was saß, was noch nicht, und was wir beim nächsten Mal
+                machen.
+            </p>
+            <p>
+                Ich rede während der Fahrt wenig, aber früh. Lieber eine Ansage zwei
+                Sekunden vorher als ein Kommentar hinterher.
+            </p>
+            <ul class="check-list">
+                <li>Klare Ansagen, kein Anschreien</li>
+                <li>Feste Ansprechpartnerin – du fährst immer mit mir</li>
+                <li>Ehrliche Rückmeldung zu deinem Stand</li>
+                <li>Termine, die zu Schule, Ausbildung oder Schicht passen</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
 <section class="section section--alt">
     <div class="container">
         <div class="notice" style="--card-accent: var(--c-yellow);">

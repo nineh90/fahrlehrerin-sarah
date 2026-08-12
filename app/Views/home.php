@@ -87,22 +87,11 @@ $schoolUrl = trim((string) config('school.url'));
     </div>
 </section>
 
-<!-- Einordnung: Sarah ist Fahrlehrerin, keine Fahrschule -->
-<section class="section">
-    <div class="container">
-        <div class="notice" style="--card-accent: var(--c-blue);">
-            <?= icon('shield') ?>
-            <div>
-                <h3>Kurz vorweg: Das hier ist meine persönliche Seite.</h3>
-                <p>
-                    Ich bin angestellte Fahrlehrerin<?= $school !== '' ? ' bei der ' . school_link() : '' ?> –
-                    keine eigene Fahrschule. Anmeldung, Vertrag und Preise laufen dort.
-                    Hier erfährst du, wie ich arbeite und wann ich Zeit habe.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
+<?php /* Hier stand bis zum 12.08.2026 ein Kasten „Kurz vorweg: Das hier ist meine
+         persönliche Seite" – dieselbe Einordnung, die seit Sarahs Wunsch unten auf
+         jeder Seite steht (partials/site-note.php). Zweimal auf einer Seite wäre
+         sie einmal zu viel, und direkt unter dem Hero las sie sich wie eine
+         Entschuldigung dafür, dass hier keine Fahrschule steht. */ ?>
 
 <?php /* Fahren mit Handicap: Sarahs Schwerpunkt.
 

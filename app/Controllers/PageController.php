@@ -14,9 +14,13 @@ final class PageController
     {
         render('pages/ueber-mich', [
             'title'           => 'Über mich',
+            // „Heilerziehungspflegerin" steht hier, seit Sarahs eigener Text auf der
+            // Seite ist: Die Ausbildung ist der Grund, warum sie diesen Schwerpunkt
+            // hat, und in der Suche unterscheidet sie sie von jeder anderen Fahrschule.
             'metaDescription' => 'Sarah ist angestellte Fahrlehrerin für die Klassen B und BE '
-                . 'in ' . implode(', ', config('contact.area')) . ' – mit Schwerpunkt auf der '
-                . 'Ausbildung von Menschen mit Handicap.',
+                . 'in ' . implode(', ', config('contact.area')) . ' – ausgebildete '
+                . 'Heilerziehungspflegerin mit Schwerpunkt auf der Ausbildung von '
+                . 'Menschen mit Handicap.',
         ]);
     }
 

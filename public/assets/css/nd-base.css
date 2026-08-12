@@ -495,9 +495,22 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
    Spalte dagegen bis zur vollen Breite und wird dadurch anderthalbmal so hoch
    wie der Text: Die Spaltenhöhe richtet sich dann nach dem Bild, und der Text
    steht verloren daneben. Die Begrenzung hält beide auf einer Höhe.
-   Am Element und nicht am Bild, damit ein Rahmen (`.photo` ohne `--cutout`)
-   mitwandert statt um ein zentriertes Bild herum stehen zu bleiben. */
-.photo--portrait { max-width: 360px; margin-inline: auto; }
+
+   ZWEI Grenzen, weil eine nicht reicht: Die Breite fängt normale Hochformate
+   (3:4), die Höhe die schlanken. Ein Freisteller einer stehenden Person ist
+   schnell doppelt so hoch wie breit – bei 360 px Breite wären das 765 px Höhe
+   neben 510 px Text. Erst `max-height` bindet auch diesen Fall.
+
+   `width: fit-content` gehört zwingend dazu: Sobald die Höhe greift, wird das
+   Bild schmaler als die Spalte. Ohne fit-content behielte die <figure> ihre
+   volle Breite – bei `.photo` mit Rahmen stünde der dann als leerer Kasten um
+   ein zentriertes Bild herum. */
+.photo--portrait {
+    max-width: 360px;
+    width: fit-content;
+    margin-inline: auto;
+}
+.photo--portrait img { max-height: 560px; width: auto; }
 
 /* Hochkant-Video (Kanal-Format). Nicht gedreht wie die Fotorahmen – ein
    schiefes Video wirkt versehentlich, nicht gestaltet. */
@@ -528,6 +541,21 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 .photo-wrap > .photo,
 .photo-wrap > .video-frame { position: relative; }
 
+/* Selbstauskunft über dem Fuß – steht auf jeder Seite und sagt überall
+   dasselbe. Bewusst leise: Sie soll gefunden werden von dem, der sie sucht,
+   und nicht gelesen werden müssen von allen anderen. Deshalb schmal, mittig
+   und im ruhigen Ton – lauter gesetzt wäre sie eine zweite Überschrift kurz
+   vor dem Fuß der Seite. */
+.site-note {
+    border-top: 1px solid var(--border);
+    padding: 2.2rem 0;
+}
+.site-note p {
+    max-width: 64ch; margin: 0 auto;
+    text-align: center; text-wrap: pretty;
+    color: var(--text-soft); font-size: .92rem; line-height: 1.7;
+}
+
 /* Der eine Satz, der einen Abschnitt trägt: tritt aus dem Fließtext heraus,
    bleibt aber Teil davon. Bewusst KEIN Rahmen und keine Anführungszeichen –
    dafür gibt es `.quote` gleich darunter, und wo beides in einem Abschnitt
@@ -556,6 +584,18 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     font-size: clamp(1.25rem, 2.6vw, 1.75rem); line-height: 1.35; color: var(--text);
 }
 .quote footer { margin-top: .9rem; color: var(--muted); font-size: .9rem; }
+
+/* Offene Fragen, die jemand mitbringt – untereinander, jede an einem kurzen
+   Strich. Bewusst OHNE Häkchen oder Punkte davor: Ein Häkchen macht aus einer
+   Frage ein Merkmal („haben wir"), und das Gegenteil ist gemeint. Hier steht
+   das, was jemand noch nicht weiß. */
+.question-list { list-style: none; padding: 0; margin: 1.5rem 0; display: grid; gap: .75rem; }
+.question-list li {
+    padding-left: 1rem;
+    border-left: 2px solid var(--card-accent, var(--accent));
+    font-family: var(--font-head); font-weight: 500; font-size: 1.02rem;
+    line-height: 1.45; color: var(--text);
+}
 
 /* Kompakte Faktenliste, z.B. „Das bringe ich mit" */
 .facts { list-style: none; padding: 0; margin: 1.6rem 0 0; display: grid; gap: .9rem; }
@@ -653,6 +693,10 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 
 /* ---------- Prose ---------- */
 .prose { max-width: 780px; }
+/* Der erste Block sitzt am Abschnittsanfang – der Abstand kommt dort schon vom
+   Abschnitt selbst. Ohne diese Zeile addiert sich der Vorlauf der Überschrift
+   dazu und der Text rutscht sichtbar tiefer als in Abschnitten ohne Prose. */
+.prose > :first-child { margin-top: 0; }
 .prose h2 { margin: 2.2rem 0 .8rem; font-size: 1.4rem; }
 .prose p { margin: 0 0 1rem; color: var(--text-soft); }
 .prose a { text-decoration: underline; }

@@ -22,9 +22,13 @@ assets-quellen/sarah-rollistammtisch.jpeg
 assets-quellen/fahrschulwagen_sander_fahrlehrerin_sarah.jpeg
 
 # Interne Arbeitsdokumente. Das Repo ist öffentlich; die CLAUDE.md nennt außerdem den
-# Namen der Fahrschule im Klartext. Beide Dateien bleiben lokal im Kundenordner liegen.
+# Namen der Fahrschule im Klartext. Die Dateien bleiben lokal im Kundenordner liegen.
+# texte-von-sarah.md sammelt ihre eigenen Texte im Wortlaut – auch die, die noch nicht
+# auf der Seite stehen. Unveröffentlichte Entwürfe einer realen Person gehören nicht in
+# ein öffentliches Repo.
 CLAUDE.md
 projekt.md
+texte-von-sarah.md
 
 # Editoren
 .idea/

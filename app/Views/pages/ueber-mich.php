@@ -13,9 +13,13 @@ $schoolUrl = trim((string) config('school.url'));
         <div class="duo duo--narrow-media">
             <div class="hero-content">
                 <h1>Hallo,<br>ich bin Sarah.</h1>
+                <?php /* Der Leitsatz, mit dem Sarahs eigener Text anfängt. Er stand
+                         in ihrer Fassung als erste Zeile unter der Überschrift
+                         „Über mich" – hier oben trägt er die ganze Seite. Vorher
+                         stand an dieser Stelle ein Entwurf („Fahren lernt man nicht
+                         durch Druck …"), der nie von ihr war. */ ?>
                 <p class="hero-lead">
-                    Fahren lernt man nicht durch Druck, sondern durch Wiederholung –
-                    und durch das Gefühl, dass einem jemand etwas zutraut.
+                    Mobilität bedeutet Freiheit, Selbstständigkeit und Teilhabe.
                 </p>
                 <p class="hero-meta">
                     <?= icon('pin') ?>
@@ -49,43 +53,69 @@ $schoolUrl = trim((string) config('school.url'));
     <div class="container">
         <div class="duo duo--text-first">
             <div class="duo-media photo-wrap" style="--card-accent: var(--c-orange);">
-                <figure class="photo">
-                    <img src="<?= asset('img/sarah-messe.jpg') ?>"
-                         alt="Sarah an einem Messestand, lächelnd, mit hochgestrecktem Daumen"
-                         width="640" height="800">
+                <?php /* Derselbe Moment wie im Schwerpunkt-Abschnitt der Startseite,
+                         aber ein deutlich engerer Ausschnitt aus demselben Original –
+                         nah an Sarah, mit Tischlampe und etwas Deko (Nils, 12.08.2026).
+                         Zwei Zuschnitte eines Fotos auf zwei Seiten lesen sich nicht
+                         als Wiederholung, solange sie verschieden genug sind: dort
+                         der ganze Tisch, hier ihr Gesicht.
+
+                         Hier lagen zwischenzeitlich zwei andere Bilder – `sarah-messe.jpg`
+                         (Ausschnitt mit Messe-Umgebung) und der Freisteller am Fass
+                         (`sarah-fass.webp`, entstanden aus Nils' Wunsch, die Aufschrift
+                         zu zeigen). Beide liegen weiter im Ordner, falls die
+                         Entscheidung noch einmal kippt.
+
+                         Kein Freisteller mehr, also wieder der normale .photo-Rahmen;
+                         .photo--portrait bleibt, weil das Hochformat sonst die
+                         Spaltenhöhe bestimmt. */ ?>
+                <figure class="photo photo--portrait">
+                    <img src="<?= asset('img/sarah-rollistammtisch-nah.jpg') ?>"
+                         alt="Sarah sitzt lächelnd an ihrem Infotisch, davor eine Tischlampe
+                              und ein Schild mit der Aufschrift „Die Rollistammtische“"
+                         width="680" height="900">
                 </figure>
             </div>
 
             <div class="duo-text">
-                <h2>Wie ich dazu gekommen bin</h2>
+                <?php /* AB HIER SARAHS EIGENER TEXT (11.08.2026), wörtlich.
+                         Nicht glätten, nicht kürzen, nicht „schöner" formulieren –
+                         siehe texte-von-sarah.md und die Offenen Punkte in der
+                         CLAUDE.md. Hier stand vorher ein Entwurf mit einer
+                         erfundenen Geschichte („weil jemand vor mir saß, dem drei
+                         andere abgesagt hatten"). Ihre echte Geschichte steht eine
+                         Sektion weiter unten und ist eine völlig andere. */ ?>
+                <h2>Über mich</h2>
                 <p>
-                    Ich bin Fahrlehrerin für die Klassen B und BE und unterrichte rund um
-                    <?= e(area_sentence()) ?>.
-                    Angestellt<?= $school !== '' ? ' bei der ' . school_link() : '' ?>, nicht
-                    selbstständig – diese Seite ist mein persönliches Schaufenster, keine
-                    Fahrschul-Website.
+                    Ich bin ausgebildete Heilerziehungspflegerin und Fahrlehrerin aus
+                    Leidenschaft. In meiner Arbeit verbinde ich pädagogisches Fachwissen
+                    mit fahrpraktischer Kompetenz und einem Erfahrungsschatz, der mich
+                    bereits mein ganzes Leben begleitet.
                 </p>
                 <p>
-                    Neben dem normalen Führerschein bilde ich Menschen mit Handicap aus.
-                    Das kam nicht durch einen Lehrgang, sondern weil jemand vor mir saß,
-                    dem drei andere abgesagt hatten. Seitdem ist es der Teil meiner Arbeit,
-                    auf den ich am meisten Lust habe.
+                    Mein besonderer Schwerpunkt liegt in der Fahrausbildung von Menschen
+                    mit Handicap und individuellen Beeinträchtigungen.
+                </p>
+                <p>
+                    Denn ich bin überzeugt: Ein Handicap sollte nicht automatisch
+                    bedeuten, auf persönliche Mobilität und die damit verbundene Freiheit
+                    verzichten zu müssen.
                 </p>
 
+                <?php /* Die ersten beiden Punkte stehen ohne Erklärzeile (Sarah,
+                         12.08.2026). „Klasse B und BE" und „Ausbildung mit Handicap"
+                         erklären sich selbst – und was dahintersteckt, steht
+                         ausführlich auf /fahren-mit-handicap. Die letzten beiden
+                         behalten ihre Zeile: Ein Ort und ein Kanal sind ohne die
+                         Angabe, welcher, keine Information. */ ?>
                 <ul class="facts">
                     <li>
                         <?= icon('car') ?>
-                        <span>
-                            <strong>Klasse B und BE</strong>
-                            <span>PKW und Gespanne – inklusive Anhänger-Rangieren</span>
-                        </span>
+                        <span><strong>Klasse B und BE</strong></span>
                     </li>
                     <li>
                         <?= icon('wheelchair') ?>
-                        <span>
-                            <strong>Ausbildung mit Handicap</strong>
-                            <span>Prothese, Lenkhilfe, Handbedienung für Gas und Bremse</span>
-                        </span>
+                        <span><strong>Ausbildung mit Handicap</strong></span>
                     </li>
                     <li>
                         <?= icon('pin') ?>
@@ -98,7 +128,16 @@ $schoolUrl = trim((string) config('school.url'));
                         <?= icon('chat') ?>
                         <span>
                             <strong>Auch online</strong>
-                            <span>Auf TikTok und Instagram zeige ich, wie der Alltag aussieht</span>
+                            <?php /* Die Kanalnamen sind die Links, nicht ein „hier"
+                                     daneben: Wer „TikTok" liest, klickt darauf.
+                                     Ziele kommen aus der Konfiguration (tiktok_url(),
+                                     instagram_url()) – dieselben Adressen wie im
+                                     Fuß und auf der Kontaktseite. */ ?>
+                            <span>
+                                Auf <a href="<?= e(tiktok_url()) ?>" target="_blank" rel="noopener noreferrer">TikTok</a>
+                                und <a href="<?= e(instagram_url()) ?>" target="_blank" rel="noopener noreferrer">Instagram</a>
+                                zeige ich, wie der Alltag aussieht
+                            </span>
                         </span>
                     </li>
                 </ul>
@@ -107,51 +146,146 @@ $schoolUrl = trim((string) config('school.url'));
     </div>
 </section>
 
+<?php /* An dieser Stelle stand ein Zitat in Anführungszeichen unter Sarahs
+         Namen – erfunden, wie alle Zitate auf der Seite. Es ist entfallen, weil
+         ab hier ihre echten Sätze stehen. Ein erfundener daneben wäre nicht nur
+         überflüssig, sondern peinlich.
+
+         Ab hier folgen ihre vier Kapitel in ihrer Reihenfolge und ihrem
+         Wortlaut. Getönte und ungetönte Abschnitte wechseln sich ab, damit die
+         Seite beim Lesen nicht zur Textwand wird. */ ?>
 <section class="section section--alt">
     <div class="container">
-        <blockquote class="quote">
+        <div class="prose">
+            <h2>Warum mir diese Arbeit besonders am Herzen liegt</h2>
             <p>
-                „Ich sage niemandem, dass es leicht wird. Aber ich sage auch niemandem,
-                dass es nicht geht, bevor wir es nicht probiert haben."
+                Aufgewachsen bin ich im schönen Hannover als ältestes von drei Kindern.
+                Meine beiden jüngeren Geschwister kamen mit geistigen und körperlichen
+                Beeinträchtigungen zur Welt.
             </p>
-            <footer>Sarah</footer>
-        </blockquote>
+            <p>
+                Dadurch durfte ich schon sehr früh lernen, dass Menschen unterschiedliche
+                Voraussetzungen mitbringen – und dass manchmal einfach ein anderer Weg
+                notwendig ist, um das gleiche Ziel zu erreichen.
+            </p>
+            <p>Diese Erfahrung prägt meine Arbeit bis heute.</p>
+            <p class="statement">
+                Ich sehe nicht zuerst die Einschränkung. Ich schaue auf den Menschen,
+                seine Fähigkeiten, seine Möglichkeiten und darauf, was wir gemeinsam
+                erreichen können.
+            </p>
+        </div>
     </div>
 </section>
 
 <section class="section">
     <div class="container">
-        <div class="duo">
-            <div class="duo-media photo-wrap" style="--card-accent: var(--c-blue);">
-                <figure class="photo photo--right photo--cutout">
-                    <img src="<?= asset('img/fahrschulauto.webp') ?>"
-                         alt="Das Fahrschulauto: ein weißer VW T-Roc"
-                         width="1200" height="637" loading="lazy" decoding="async">
-                </figure>
-            </div>
-
-            <div class="duo-text">
-                <h2>Wie eine Stunde bei mir abläuft</h2>
-                <p>
-                    Zu Beginn sagen wir beide, was heute dran ist – du, was du üben willst,
-                    ich, was ich für nötig halte. Am Ende bekommst du eine ehrliche
-                    Einschätzung: was saß, was noch nicht, und was wir beim nächsten Mal
-                    machen.
-                </p>
-                <p>
-                    Ich rede während der Fahrt wenig, aber früh. Lieber eine Ansage zwei
-                    Sekunden vorher als ein Kommentar hinterher.
-                </p>
-                <ul class="check-list">
-                    <li>Klare Ansagen, kein Anschreien</li>
-                    <li>Feste Ansprechpartnerin – du fährst immer mit mir</li>
-                    <li>Ehrliche Rückmeldung zu deinem Stand</li>
-                    <li>Termine, die zu Schule, Ausbildung oder Schicht passen</li>
-                </ul>
-            </div>
+        <div class="prose">
+            <h2>Fahrlehrerin und Pädagogin – eine besondere Kombination</h2>
+            <p>
+                Meine Ausbildung zur Heilerziehungspflegerin und meine Erfahrung im
+                pädagogischen Bereich ermöglichen es mir, Fahrausbildung noch einmal aus
+                einer anderen Perspektive zu betrachten.
+            </p>
+            <p>
+                Menschen lernen unterschiedlich. Manche benötigen mehr Zeit, andere eine
+                besondere Form der Erklärung, mehr Wiederholungen, klare Strukturen oder
+                individuell angepasste Lernwege.
+            </p>
+            <p>Genau darauf kann ich eingehen.</p>
+            <p>
+                Für mich geht es deshalb nicht darum, eine klassische Fahrausbildung
+                einfach auf einen Menschen mit Handicap zu übertragen. Es geht darum, die
+                Fahrausbildung an den Menschen anzupassen.
+            </p>
+            <p>
+                Mit Geduld, Ruhe, Empathie und der notwendigen fachlichen Kompetenz möchte
+                ich meinen Fahrschülerinnen und Fahrschülern einen geschützten Rahmen
+                geben, in dem sie lernen, Sicherheit gewinnen und Vertrauen in die eigenen
+                Fähigkeiten entwickeln können.
+            </p>
         </div>
     </div>
 </section>
+
+<section class="section section--alt">
+    <div class="container">
+        <div class="prose" style="--card-accent: var(--c-teal);">
+            <h2>Gemeinsam schauen wir, was möglich ist</h2>
+            <p>
+                Eine körperliche, geistige oder andere Beeinträchtigung kann viele Fragen
+                rund um den Führerschein mit sich bringen.
+            </p>
+            <?php /* Sarah hat die fünf Fragen als eigene Zeilen geschrieben, nicht
+                     als Fließtext – also stehen sie auch hier untereinander. Ohne
+                     Häkchen davor: Häkchen machen aus Fragen Merkmale, und das
+                     sind es nicht. */ ?>
+            <ul class="question-list">
+                <li>Kann ich überhaupt einen Führerschein machen?</li>
+                <li>Welche Voraussetzungen muss ich erfüllen?</li>
+                <li>Benötige ich ein speziell angepasstes Fahrzeug?</li>
+                <li>Welche Gutachten oder Genehmigungen sind notwendig?</li>
+                <li>Und wer kann mich auf diesem Weg unterstützen?</li>
+            </ul>
+            <p>
+                Mit diesen Fragen müssen meine Fahrschülerinnen und Fahrschüler und ihre
+                Familien nicht allein bleiben.
+            </p>
+            <p>
+                Durch meinen langjährigen Erfahrungsschatz und mein breit gefächertes
+                Netzwerk aus Fachstellen, Hilfsorganisationen und kompetenten Partnern
+                kann ich auch über die eigentliche Fahrstunde hinaus unterstützen,
+                Orientierung geben und bei Bedarf die richtigen Ansprechpartner
+                zusammenbringen.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="prose">
+            <h2>Mein Ziel: Dein Weg zum Führerschein</h2>
+            <p>Ein Führerschein ist weit mehr als ein Dokument.</p>
+            <p>
+                Er kann ein großes Stück Freiheit, Unabhängigkeit, Selbstbestimmung und
+                gesellschaftliche Teilhabe bedeuten.
+            </p>
+            <p>
+                Deshalb steht für mich nicht das Handicap im Mittelpunkt, sondern der
+                Mensch hinter dem Lenkrad.
+            </p>
+            <p>
+                Ich möchte gemeinsam mit dir herausfinden, welcher Weg für dich der
+                richtige ist und was du brauchst, um dein persönliches Ziel zu erreichen.
+            </p>
+            <p>
+                Individuell. Auf Augenhöhe. Mit Geduld, Fachwissen und dem Blick für das,
+                was möglich ist.
+            </p>
+            <?php /* Ihre beiden Schlusszeilen. Sie stehen bei ihr getrennt und
+                     tragen genau dadurch – zusammengezogen zu einem Satz wären sie
+                     eine Floskel. */ ?>
+            <p class="statement">
+                Denn manchmal braucht es keinen einfacheren Weg.<br>
+                Sondern einen Weg, der zu dir passt.
+            </p>
+        </div>
+    </div>
+</section>
+
+<?php /* Hier stand „Wie eine Stunde bei mir abläuft", daneben das Foto des
+         Fahrschulautos. Beides ist am 12.08.2026 auf Sarahs Wunsch entfallen:
+         Nach ihrem eigenen Text las sich der Ablauf einer einzelnen Fahrstunde
+         wie ein Anhang, und diese Seite soll von ihr handeln, nicht von der
+         Organisation.
+
+         Der Ablauf steht jetzt auf /fahren-mit-handicap – ihr Vorschlag –, dort
+         direkt hinter „So läuft es ab": erst der Weg zum Führerschein, dann die
+         einzelne Stunde. Das Foto des Fahrschulautos ist damit vorerst nirgends
+         eingebunden; die Datei bleibt liegen.
+
+         Achtung, der Text dort ist weiter ein ENTWURF und nicht von Sarah. */ ?>
 
 <?php /* Die Arbeitsteilung stand auf dieser Seite bisher nirgends. In der
          Prosa oben heißt es nur „angestellt" – dass Anmeldung, Vertrag,

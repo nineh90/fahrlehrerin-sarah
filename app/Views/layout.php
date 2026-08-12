@@ -60,6 +60,11 @@
         <?= $content ?>
     </main>
 
+    <?php /* Sarahs Einordnung in eigenen Worten. Steht ÜBER dem Credit-Band und
+             ohne Schalter: Ihre Sache zuerst, und „auf jeder Seite" heißt auf
+             jeder – auch dort, wo der Credit bewusst schweigt. */ ?>
+    <?php require APP_ROOT . '/app/Views/partials/site-note.php'; ?>
+
     <?php
     /* Credit-Band auf den Info-Seiten. Auf den Seiten, auf denen jemand gerade
        eine Fahrstunde einträgt (Login, Kalender, eigene Stunden), bleibt es

@@ -167,10 +167,27 @@ $schoolUrl = trim((string) config('school.url'));
 <!-- Zitat: bricht den Rhythmus, gibt Sarah eine Stimme -->
 <section class="section">
     <div class="container">
+        <?php /* ECHTES ZITAT, wörtlich aus Sarahs eigenem Text (11.08.2026,
+                 Abschnitt „Warum mir diese Arbeit besonders am Herzen liegt",
+                 Wortlaut in texte-von-sarah.md). Bis zum 12.08.2026 stand hier
+                 ein erfundener Satz – „Die meisten kommen nicht mit einem
+                 Fahrproblem zu mir …" –, der neben ihrem echten Text eine
+                 Sektion höher nicht mehr zu halten war.
+
+                 Nicht kürzen und nicht umstellen: Sobald ein Satz in
+                 Anführungszeichen unter ihrem Namen steht, ist jede Änderung
+                 daran eine Behauptung darüber, was sie gesagt hat. Wer ein
+                 anderes Zitat will, sucht sich einen anderen ihrer Sätze –
+                 er formuliert diesen nicht um.
+
+                 Derselbe Satz steht auf /ueber-mich mitten in ihrem Fließtext,
+                 dort hervorgehoben. Das ist Absicht: Ein Kernsatz darf zweimal
+                 vorkommen, hier als Zitat, dort im Zusammenhang. */ ?>
         <blockquote class="quote">
             <p>
-                „Die meisten kommen nicht mit einem Fahrproblem zu mir, sondern mit einem
-                Satz im Kopf, den ihnen jemand gesagt hat. Den fahren wir als Erstes weg."
+                „Ich sehe nicht zuerst die Einschränkung. Ich schaue auf den Menschen,
+                seine Fähigkeiten, seine Möglichkeiten und darauf, was wir gemeinsam
+                erreichen können."
             </p>
             <footer>Sarah</footer>
         </blockquote>

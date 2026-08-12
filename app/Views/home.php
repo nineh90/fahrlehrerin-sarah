@@ -51,18 +51,36 @@ $schoolUrl = trim((string) config('school.url'));
                 </div>
             </div>
 
-            <?php /* Lockup aus drei Ebenen: Bogen (Hintergrund), Sarah freigestellt
-                     und der Schriftzug aus dem Logo. Zusammen ergeben sie das Logo
-                     mit Sarah darin – statt Foto und Marke nebeneinander.
-                     Maße/Positionen stehen in theme.css, alles in Prozent. */ ?>
+            <?php /* Hier stand bis zum 12.08.2026 ein Lockup aus drei Ebenen: der
+                     Bogen als Bühne, Sarah freigestellt an der Stelle des Lenkrads
+                     und darunter der Schriftzug – das Logo mit ihrem Foto darin.
+
+                     Sarahs Wunsch, und er ist der bessere: an dieser Stelle ihr
+                     Logo, so wie sie es gezeichnet hat, mit dem Lenkrad statt
+                     ihrem Foto. Ihr Bild folgt weiter unten ohnehin gleich noch
+                     einmal; zweimal dieselbe Person auf einem Bildschirm nimmt
+                     beiden Auftritten die Wirkung.
+
+                     Ein Bild statt drei Ebenen: Das Logo ist final, es wird nicht
+                     mehr zusammengesetzt (siehe CLAUDE.md). Damit entfällt auch
+                     jedes Nachrechnen von Positionen.
+
+                     Auf schmalen Screens legt sich die Abbildung hinter den Text
+                     (nd-base.css) – dort trägt das <picture> nur den Bogen aus.
+                     Der Grund steht in theme.css: Zwei Textebenen übereinander
+                     bekommt kein Overlay auseinander. Beide Dateien haben dasselbe
+                     Seitenverhältnis, deshalb springt beim Wechsel nichts.
+
+                     alt="": Das Logo sagt „Fahrlehrerin Sarah" – derselbe Name
+                     steht drei Zeilen weiter im Fließtext und noch einmal im
+                     Header. Vorgelesen wäre er hier schlicht doppelt. */ ?>
             <div class="duo-media">
-                <div class="hero-lockup">
-                    <img class="hero-lockup-photo" src="<?= asset('img/sarah-lockup.webp') ?>"
-                         alt="Sarah lächelt und streckt den Daumen hoch"
-                         width="620" height="1130">
-                    <img class="hero-lockup-word" src="<?= asset('img/logo-wortmarke.webp') ?>"
-                         alt="Fahrlehrerin Sarah – Klasse B, Klasse BE, Handicapausbildung"
-                         width="600" height="486">
+                <div class="hero-logo">
+                    <picture>
+                        <source media="(max-width: 820px)" srcset="<?= asset('img/logo-bogen.webp') ?>">
+                        <img src="<?= asset('img/logo-sarah-hero.webp') ?>" alt=""
+                             width="820" height="947">
+                    </picture>
                 </div>
             </div>
         </div>

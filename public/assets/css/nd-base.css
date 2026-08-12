@@ -59,7 +59,10 @@ img { max-width: 100%; display: block; }
     border-radius: 4px;
 }
 
-.container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 22px; }
+/* Die seitliche Einrückung steht als Variable da, weil sie zweimal gebraucht
+   wird: hier und beim Markenblock im Header, der sich auf dem Handy aus dem
+   Container löst und trotzdem an dessen linker Kante landen muss. */
+.container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 var(--container-pad, 22px); }
 .muted { color: var(--muted); }
 .center { text-align: center; }
 .ta-right { text-align: right; }
@@ -1149,6 +1152,50 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 
 @media (max-width: 740px) {
     .nav-toggle { display: flex; }
+
+    /* --- Die Marke steht oben in der Mitte --------------------------------
+       Auf dem Handy trägt der Header nur noch Logo und Hamburger. Links in
+       der Ecke sieht das große Logo neben der leeren Fläche daneben aus wie
+       verrutscht – also steht es beim Öffnen der Seite mittig und wandert
+       beim Scrollen auf seinen Platz nach links, während es schrumpft.
+
+       Absolut positioniert und nicht per Flex zentriert, weil die Bewegung
+       laufen und nicht springen soll: `left` lässt sich animieren, ein
+       `margin: auto` nicht. Bezug ist der Header selbst (er ist `fixed`),
+       damit die Mitte die echte Bildschirmmitte ist und nicht die Mitte des
+       Restplatzes neben dem Hamburger. Der landet dafür per `flex-end`
+       rechts – er ist jetzt das einzige Kind im Fluss.
+
+       Der Text daneben hält hier oben KEINE Breite, anders als auf dem
+       Desktop: Sonst säße nicht das Logo in der Mitte, sondern das Logo
+       samt unsichtbarem Text daneben – das Logo stünde sichtbar zu weit
+       links. Wandern darf die Breite hier, weil rechts nur der Hamburger
+       steht und der hängt ohnehin am Rand.
+
+       Der Abstand zwischen beiden muss aus demselben Grund mit weg: Ein
+       Flex-Gap zählt auch dann zur Breite, wenn das Element daneben null
+       breit ist. Nachgemessen stand das Logo dadurch 13 px zu weit links –
+       genau die 11 px Abstand plus Rundung. */
+    .header-inner { justify-content: flex-end; }
+    .brand {
+        position: absolute; top: 0; height: 100%;
+        left: 50%; translate: -50% 0; gap: 0;
+        transition: left .34s cubic-bezier(.22, .61, .36, 1),
+                    translate .34s cubic-bezier(.22, .61, .36, 1),
+                    gap .34s cubic-bezier(.22, .61, .36, 1);
+    }
+    .brand-text {
+        max-width: 0; overflow: hidden;
+        transition: opacity .25s ease, max-width .34s cubic-bezier(.22, .61, .36, 1);
+    }
+    .site-header.is-compact .brand { left: var(--container-pad, 22px); translate: 0 0; gap: .7rem; }
+    /* Erst wandern und schrumpfen, dann der Text. Ohne die Verzögerung
+       erscheint er, während das Logo noch groß in der Mitte steht, und
+       drängt sich für einen Moment an dessen rechte Kante. Nur beim
+       Einblenden – rückwärts soll er sofort verschwinden, sonst steht er
+       noch da, wenn das Logo schon wieder unter ihm liegt. */
+    .site-header.is-compact .brand-text { max-width: 62vw; transition-delay: .14s; }
+
     .main-nav {
         /* 100% statt fester 72px: Der Header wechselt seine Höhe, das Menü
            muss an seiner Unterkante hängen bleiben. */

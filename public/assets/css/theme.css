@@ -297,25 +297,50 @@
    Absolut an der Unterkante und nicht als Block im Fluss: Der Header hat
    seit dem Schrumpfen eine feste Höhe, ein mitfließender Streifen würde
    diese Höhe um seine 4 px überschreiten und den Ausgleich am Body
-   verfälschen. So bleibt die Kante genau da, wo die Höhe endet. */
+   verfälschen. So bleibt die Kante genau da, wo die Höhe endet.
+
+   OBEN IST ER NICHT DA, und das ist der Kern der Sache: Solange das große
+   Logo unter der Leiste hervorsteht, läuft der Streifen quer durch seine
+   untere Hälfte. Der z-index am Markenblock schiebt ihn zwar dahinter, das
+   Logo bleibt also vollständig – aber optisch legt sich trotzdem ein
+   Farbbalken über den Bogen und die Marke wirkt zerschnitten. Statt den
+   Überstand kleinzurechnen, bis beides zusammenpasst, tritt der Streifen
+   einfach erst auf, wenn das Logo geschrumpft ist und ihn nicht mehr
+   berührt.
+
+   Er läuft dabei von rechts ein: `scale: 0 1` mit dem Ursprung am rechten
+   Rand. Also `scale` und nicht `transform` – auf demselben Element könnte
+   später eine weitere Transformation liegen, und über `transform` würden
+   sich beide gegenseitig auslöschen (siehe Bewegungs-Ebenen in CLAUDE.md).
+   Bei `prefers-reduced-motion` greift das Netz in nd-base.css und setzt die
+   Dauer auf null: Der Streifen ist dann sofort da, statt zu laufen. */
 .site-header::after {
     content: "";
     position: absolute;
     left: 0; right: 0; bottom: 0;
     height: 4px;
     background: var(--gradient-rainbow);
+    scale: 0 1;
+    transform-origin: right center;
+    transition: scale .55s cubic-bezier(.22, .61, .36, 1);
 }
+.site-header.is-compact::after { scale: 1 1; }
 
 /* Header auf dem Handy: Dieselbe Mechanik, kleinere Zahlen. Das Logo bleibt
-   bei 108 px und damit knapp über der gemessenen Lesbarkeitsgrenze von rund
-   104 px – kleiner wäre der Schriftzug auch hier wieder Matsch. Der Überstand
-   schrumpft dafür von 52 auf 34 px, sonst reicht das Logo auf einem
-   Telefondisplay bis in die Überschrift. */
+   deutlich über der gemessenen Lesbarkeitsgrenze von rund 104 px – kleiner
+   wäre der Schriftzug auch hier wieder Matsch.
+
+   112 statt 100 px, seit die Marke oben mittig steht (Mechanik in
+   nd-base.css): In der Mitte hat sie Platz nach beiden Seiten, und der
+   Regenbogenstreifen liegt oben nicht mehr an, kann das Logo also auch nicht
+   mehr anschneiden. Der Überstand von 24 px ist damit gewollt sichtbar und
+   nicht mehr das Maß, das gerade noch geht. Weiter darf er trotzdem nicht
+   wachsen – darunter beginnt der Hero. */
 @media (max-width: 740px) {
     :root {
         --header-h:          88px;
         --header-h-compact:  70px;
-        --brand-full-h:     100px;
+        --brand-full-h:     112px;
         --brand-full-top:     4px;
         --brand-compact-h:   64px;
         --brand-compact-top:  3px;
@@ -331,36 +356,24 @@
     to   { transform: scale(1.08) translate3d(-1.5%, 1%, 0); }
 }
 
-/* --- Hero-Lockup: Bogen + Foto + Wortmarke ------------------------------
-   Vorher lag der Bogen nur als blasse Deko hinter dem Foto. Jetzt bilden die
-   drei Teile des Logos eine Einheit: der Bogen als Bühne, Sarah an der Stelle,
-   an der im Logo das Lenkrad sitzt, und darunter der Schriftzug. Das Logo
-   umschließt damit das Foto, statt daneben zu stehen.
+/* --- Hero: Sarahs Logo --------------------------------------------------
+   Bis zum 12.08.2026 stand hier ein Lockup aus drei Ebenen – Bogen, Sarah
+   freigestellt an der Stelle des Lenkrads, Schriftzug darunter. Das Logo
+   umschloss damit ihr Foto. Auf Sarahs Wunsch steht hier jetzt einfach ihr
+   Logo, unverändert, mit dem Lenkrad an seinem Platz: Ihr Foto folgt weiter
+   unten ohnehin gleich noch einmal.
 
-   Alle Maße in Prozent des Containers, der über `aspect-ratio` die Proportion
-   des Bogens hält – so bleiben die drei Ebenen in jeder Breite zueinander
-   stehen, ohne eigene Breakpoints.
-
-   Der Schriftzug ist ein Bild, weil die Schreibschrift in „Sarah" zum Logo
-   gehört und als Webfont nicht vorliegt. Deshalb trägt er den vollen Text im
-   alt-Attribut; die Überschrift der Seite bleibt echtes <h1> daneben. */
-.hero-lockup {
-    position: relative;
-    aspect-ratio: 1000 / 1155;
-    background: url("../img/logo-bogen.webp") no-repeat center / contain;
+   Damit fällt die ganze Prozentrechnerei weg – ein Bild, eine Datei, keine
+   Ebenen, die zueinander stehen müssen. `logo-sarah-hero.webp` ist der
+   getrimmte Master bei 820 px und hat exakt dieselbe Proportion wie der
+   Bogen (970 : 1120 = 1000 : 1155), weil der Bogen das breiteste und
+   höchste Element des Logos ist. Deshalb passt derselbe Platz für beide
+   Fassungen und beim Wechsel auf schmale Screens springt nichts. */
+.hero-logo img {
+    display: block;
+    width: 100%;
+    height: auto;
 }
-.hero-lockup img { position: absolute; display: block; height: auto; }
-/* Sarah sitzt im oberen Rund des Bogens – dort, wo im Logo das Lenkrad steht.
-   Für das Lockup ist sie an der Taille beschnitten (sarah-lockup.webp): mit dem
-   Stehtisch lag ein breiter weißer Block quer über dem Schriftzug. */
-.hero-lockup-photo {
-    top: 1%; left: 45%; width: 29%;
-    /* Weicher Auslauf statt gerader Schnittkante an der Taille. */
-    -webkit-mask-image: linear-gradient(180deg, #000 80%, transparent 99%);
-    mask-image: linear-gradient(180deg, #000 80%, transparent 99%);
-}
-/* Der Schriftzug übernimmt die untere Hälfte des Bogens, wie im Original. */
-.hero-lockup-word { bottom: 12%; left: 31%; width: 62%; }
 
 /* --- Bogen mit Sarah darin (Hero auf /ueber-mich) ------------------------
    Dieselbe Bühne wie das Lockup, aber ohne Wortmarke: Auf einer Seite, die
@@ -391,18 +404,20 @@
    nd-base.css die Medienspalte ab 820 px hinter den Text (`.hero .duo-media`
    wird absolut). Hier steht, wie das Logo dabei aussehen muss.
 
-   DIE WORTMARKE FÄLLT WEG, und das ist der Kern der Sache. Genau ihr
-   Schriftzug ist der Grund, warum das Logo laut Logo-Regel sonst nicht als
-   Hintergrund taugt: Zwei Textebenen übereinander bekommt kein Overlay
-   auseinander. Ohne sie bleibt die reine Form – der Bogen als Bühne, Sarah
-   darin –, und der Name geht nirgends verloren: Er steht im Header direkt
-   darüber, samt „Klasse B · BE · Handicap".
+   DER SCHRIFTZUG FÄLLT WEG, und das ist der Kern der Sache. Genau er ist der
+   Grund, warum das Logo laut Logo-Regel sonst nicht als Hintergrund taugt:
+   Zwei Textebenen übereinander bekommt kein Overlay auseinander. Deshalb
+   trägt das <picture> auf der Startseite hier unten nicht mehr das volle
+   Logo aus, sondern `logo-bogen.webp` – die reine Form, die Bühne. Der Name
+   geht dabei nirgends verloren: Er steht im Header direkt darüber, samt
+   „Klasse B · BE · Handicap", und eine Zeile weiter im Fließtext.
 
-   Achtung Spezifität: `.hero-lockup img` weiter oben ist 0-1-1 und schlägt
-   eine einzelne Klasse. Die beiden Regeln unten brauchen deshalb zwingend
-   den Elternselektor davor, sonst passiert schlicht nichts. */
+   Der Umschaltpunkt steht deshalb zweimal da – als `media` am <source> in
+   home.php und als Breakpoint hier. Wer ihn verschiebt, muss beide anfassen,
+   sonst liegt entweder der Schriftzug wieder unter dem Text oder der Bogen
+   sitzt als Briefmarke in der Spalte. */
 @media (max-width: 820px) {
-    .hero-lockup,
+    .hero-logo,
     .hero-arc {
         /* Breiter als die Spalte: Der Bogen soll die Fläche tragen und an den
            Rändern angeschnitten sein, nicht als Briefmarke in der Mitte
@@ -412,14 +427,50 @@
         margin-inline: 0;
         opacity: var(--hero-media-opacity);
     }
+}
 
-    .hero-lockup .hero-lockup-word { display: none; }
+/* --- Der Bogen wird zum Akzent, sobald die Marke mittig steht -------------
+   Ab hier steht die Marke im Header mittig (Mechanik in nd-base.css) – und
+   genau darunter lag der Bogen des Heros, ebenfalls mittig und über die
+   volle Breite. Bogen auf Bogen: Das Logo verlor seine Kontur, weil hinter
+   ihm dieselbe Form gleich noch einmal begann.
 
-    /* Ohne den Schriftzug wäre die untere Bogenhälfte leer und Sarah säße
-       klein in der oberen Ecke – im Lockup teilt sie sich den Platz mit ihm.
-       Als Bühne gehört sie in die Mitte, also dieselbe Geometrie wie im
-       Bogen auf /ueber-mich (.hero-arc img). */
-    .hero-lockup .hero-lockup-photo { top: 14%; left: 38%; width: 44%; }
+   Verschieben allein half nicht. Über die ganze Breite gezogen läuft die
+   Kurve irgendwo immer unter dem Logo durch, egal wohin man sie rückt. Erst
+   als der Bogen klein wird, hört er auf, das Logo zu wiederholen: Statt der
+   Bühne für den ganzen Hero ist er unten rechts ein Akzent, den die Knöpfe
+   überlagern dürfen. Etwas kräftiger als die große Fassung, weil eine kleine
+   Form bei 0,38 gar nicht mehr auffällt.
+
+   Mehr Luft nach oben wäre die naheliegende Alternative gewesen und ist es
+   nicht: Sie macht den Hero auf dem Handy nur höher und schiebt die Knöpfe
+   nach unten – die beiden Formen lägen weiter übereinander, nur mit Abstand.
+
+   `translate` statt `transform`: Auf derselben Fläche liegt der Hero-Auftritt
+   (heroDrop), über `transform` würden sich beide gegenseitig auslöschen.
+
+   Auf /ueber-mich geht derselbe Konflikt anders aus: Dort sitzt Sarah im
+   Bogen, und klein wäre sie nicht mehr zu erkennen. Also fällt hier der
+   Bogen weg statt zu schrumpfen – er war ohnehin nur ihre Bühne, und auf
+   einer Seite, die „Über mich" heißt, trägt die Fläche besser sie selbst
+   als eine Form, die das Logo darüber wiederholt. */
+@media (max-width: 740px) {
+    .hero .duo-media { justify-content: flex-end; align-items: flex-end; }
+
+    .hero-logo {
+        width: 250px;
+        translate: 18% 14%;
+        opacity: .5;
+    }
+
+    /* Ohne Bogen braucht die Figur keine Bogen-Proportion mehr: Sie steht
+       jetzt frei in der Fläche, deshalb schmaler und größer. `top` hält sie
+       unter dem Logo, das von oben in den Hero hineinragt. */
+    .hero-arc {
+        background: none;
+        width: min(100%, 420px);
+    }
+    .hero-arc img { top: 12%; left: 22%; width: 64%; }
 }
 
 /* --- Kleine Freundlichkeiten ------------------------------------------- */

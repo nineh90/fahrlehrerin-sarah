@@ -104,32 +104,67 @@ $schoolUrl = trim((string) config('school.url'));
     </div>
 </section>
 
-<!-- Fahren mit Handicap: Sarahs Schwerpunkt, prominent und mit Bild -->
+<?php /* Fahren mit Handicap: Sarahs Schwerpunkt.
+
+         DIESER TEXT IST VON SARAH – der erste auf der Seite, der wirklich von
+         ihr stammt (11.08.2026, wörtlich übernommen). Nicht „glätten": Die
+         Auslassungspunkte nach der Technik-Aufzählung, das „normal" in
+         Anführungszeichen und der direkte Satz über das gute Gefühl sind ihr
+         Ton. Wer hier umformuliert, macht daraus wieder einen Entwurf.
+
+         Geändert wurde genau eines: Sie schreibt „DU musst ein gutes Gefühl
+         haben". Versalien lesen sich im Web als Schreien, die Betonung trägt
+         hier <strong>. Falls sie die Großbuchstaben ausdrücklich will, ist das
+         ihre Entscheidung – dann zurückändern.
+
+         Neben dem Text stand bis zum 12.08.2026 das Linksgas-Foto. Sarahs
+         Wunsch: Die Technikfotos gehören auf die Unterseite, hier steht sie
+         selbst.
+
+         Das Foto zeigt sie am Infotisch beim Rollistammtisch – also genau in
+         dem Umfeld, um das es im Text daneben geht. Das fremde Branding im
+         Hintergrund (Wandmuster des Veranstalters, das Schild auf dem Tisch)
+         bleibt sichtbar, dieselbe Entscheidung wie beim Fahrschulauto
+         (Nils, 12.08.2026): Es zeigt, wo sie unterwegs ist.
+
+         Keine Bildunterschrift: Was genau die Veranstaltung war, weiß hier
+         niemand sicher, und eine erfundene Unterschrift ist dasselbe Problem
+         wie ein erfundenes Zitat. Wenn Sarah einen Satz dazu liefert, kommt
+         er als <figcaption> ins Bild. */ ?>
 <section class="section section--alt">
     <div class="container">
         <div class="duo duo--text-first">
             <div class="duo-media photo-wrap" style="--card-accent: var(--c-teal);">
-                <figure class="photo">
-                    <img src="<?= asset('img/handicap-linksgas.jpg') ?>"
-                         alt="Fußraum eines Fahrschulautos mit Linksgas-Umbau: links neben der
-                              Bremse sitzt ein zusätzliches Gaspedal, das über ein grünes
-                              Gestänge mit dem originalen Gaspedal verbunden ist"
-                         width="1400" height="1050" loading="lazy" decoding="async">
-                    <figcaption>Linksgas: das zusätzliche Pedal links der Bremse, das originale rechts bleibt bedienbar</figcaption>
+                <?php /* Hochformat, deshalb .photo--portrait: Ohne die Begrenzung
+                         bestimmt das Bild die Spaltenhöhe und der Text daneben
+                         steht verloren in der Leere. */ ?>
+                <figure class="photo photo--portrait">
+                    <img src="<?= asset('img/sarah-rollistammtisch.jpg') ?>"
+                         alt="Sarah sitzt lächelnd an einem Infotisch; davor liegen Karten
+                              der Fahrschule, eine Schale Bonbons und ein Schild mit der
+                              Aufschrift „Die Rollistammtische“"
+                         width="900" height="1021" loading="lazy" decoding="async">
                 </figure>
             </div>
 
             <div class="duo-text">
                 <span class="section-eyebrow" style="padding-left:0;">Mein Schwerpunkt</span>
-                <h2>Fahren mit Prothese, Handicap oder nach einem Unfall</h2>
+                <h2>Fahren mit Handicap</h2>
                 <p>
-                    Ein angepasstes Fahrzeug fährt sich anders – nicht schwerer. Linksgas,
-                    Lenkraddrehknopf, Handbedienung für Gas und Bremse: Ich kenne die Technik
-                    und weiß, wie lange es dauert, bis sie sich selbstverständlich anfühlt.
+                    Ein angepasstes Fahrzeug fährt sich anders als üblich – nicht schwerer.
                 </p>
                 <p>
-                    Was ich nicht mache: dich anders behandeln als alle anderen. Wir üben,
-                    bis es sitzt. Genau wie bei jedem anderen auch.
+                    Linksgas, Lenkraddrehknopf, Handbedienung für Gas und Bremse …
+                    Ich kenne die Technik und weiß, dass es länger dauern kann, bis es
+                    sich „normal“ anfühlt.
+                </p>
+                <p class="statement">
+                    Nicht ich muss mich wohl fühlen – <strong>du</strong> musst ein gutes
+                    Gefühl haben.
+                </p>
+                <p>
+                    Wir arbeiten auf Augenhöhe miteinander, ich gebe dir nur die
+                    Hilfestellung, es selbst zu schaffen.
                 </p>
                 <div class="duo-actions">
                     <a class="btn btn-primary" href="<?= url('/fahren-mit-handicap') ?>">Wie das abläuft</a>

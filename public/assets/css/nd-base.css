@@ -490,6 +490,15 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     padding: .7rem 0 0; text-align: center;
 }
 
+/* Hochformat neben Fließtext. Die Fotos in den Duo-Spalten sind sonst quer
+   (4:3) und bauen flacher als der Text daneben. Ein Hochformat füllt die
+   Spalte dagegen bis zur vollen Breite und wird dadurch anderthalbmal so hoch
+   wie der Text: Die Spaltenhöhe richtet sich dann nach dem Bild, und der Text
+   steht verloren daneben. Die Begrenzung hält beide auf einer Höhe.
+   Am Element und nicht am Bild, damit ein Rahmen (`.photo` ohne `--cutout`)
+   mitwandert statt um ein zentriertes Bild herum stehen zu bleiben. */
+.photo--portrait { max-width: 360px; margin-inline: auto; }
+
 /* Hochkant-Video (Kanal-Format). Nicht gedreht wie die Fotorahmen – ein
    schiefes Video wirkt versehentlich, nicht gestaltet. */
 .video-frame {
@@ -518,6 +527,23 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
    den Fleck darüber und tönt Bild bzw. Video ein. */
 .photo-wrap > .photo,
 .photo-wrap > .video-frame { position: relative; }
+
+/* Der eine Satz, der einen Abschnitt trägt: tritt aus dem Fließtext heraus,
+   bleibt aber Teil davon. Bewusst KEIN Rahmen und keine Anführungszeichen –
+   dafür gibt es `.quote` gleich darunter, und wo beides in einem Abschnitt
+   aufeinanderträfe, sähe es nach zwei Zitaten aus. Hier ist es kein Zitat,
+   sondern der Text selbst, nur lauter. */
+.statement {
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: clamp(1.08rem, 2.2vw, 1.25rem);
+    line-height: 1.45;
+    color: var(--text);
+    margin: 1.5rem 0;
+}
+/* Die Betonung im Satz trägt die Akzentfarbe statt noch mehr Fettung – bei
+   600 als Grundgewicht fiele ein <strong> sonst gar nicht mehr auf. */
+.statement strong { color: var(--accent-text, var(--accent)); font-weight: 700; }
 
 /* Ein Satz in Sarahs Stimme – bricht den Rhythmus der Textblöcke */
 .quote {

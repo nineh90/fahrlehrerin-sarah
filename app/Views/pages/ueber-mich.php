@@ -1,4 +1,7 @@
-<?php $school = (string) config('school.name'); ?>
+<?php
+$school    = (string) config('school.name');
+$schoolUrl = trim((string) config('school.url'));
+?>
 
 <?php /* Hero im Stil der Startseite, aber bewusst NICHT dasselbe Lockup:
          Dort steht die Wortmarke im Bogen, hier steht Sarah drin. Der Name
@@ -152,6 +155,34 @@
     </div>
 </section>
 
+<?php /* Die Arbeitsteilung stand auf dieser Seite bisher nirgends. In der
+         Prosa oben heißt es nur „angestellt" – dass Anmeldung, Vertrag,
+         Theorie und Preise über die Fahrschule laufen und nicht über Sarah,
+         erfuhr man ausschließlich auf der Startseite. Wer über eine Suche
+         direkt hier landet, hat diese Sektion nie gesehen.
+
+         Bewusst kurz gehalten und nicht die ganze Startseiten-Sektion
+         wiederholt: Hier geht es um Sarah, die Fahrschule ist die Fußnote
+         dazu. Prüft auf leeren SCHOOL_NAME, wie alle anderen Stellen auch. */ ?>
+<section class="section">
+    <div class="container">
+        <div class="notice" style="--card-accent: var(--c-blue);">
+            <?= icon('shield') ?>
+            <div>
+                <h3>Anmelden kannst du dich nicht bei mir</h3>
+                <p>
+                    Ich bin angestellte Fahrlehrerin<?= $school !== '' ? ' bei der ' . school_link() : '' ?> –
+                    Anmeldung, Ausbildungsvertrag, Theorieunterricht und Preise laufen dort.
+                    Bei mir sitzt du im Auto: alle Fahrstunden von der ersten bis zur Prüfung.
+                </p>
+                <p>
+                    Sag bei der Anmeldung einfach, dass du bei mir fahren möchtest.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="cta-band">
     <div class="container">
         <div class="cta-inner">
@@ -159,7 +190,18 @@
                 <h2>Klingt nach dir?</h2>
                 <p>Dann melde dich – am besten kurz telefonisch, das geht am schnellsten.</p>
             </div>
-            <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Kontakt</a>
+            <?php /* Zwei Wege nebeneinander, in dieser Reihenfolge: Wer gerade
+                     über Sarah gelesen hat, will SIE fragen und nicht ein
+                     Sekretariat – deshalb bleibt der Kontakt der Hauptknopf.
+                     Der Weg zur Fahrschule steht daneben, ruhiger, für alle,
+                     die schon entschieden sind. */ ?>
+            <div class="cta-actions">
+                <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Kontakt</a>
+                <?php if ($school !== '' && $schoolUrl !== ''): ?>
+                    <a class="btn btn-ghost btn-lg" href="<?= e($schoolUrl) ?>"
+                       target="_blank" rel="noopener">Zur <?= e($school) ?> &nearr;</a>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 </section>

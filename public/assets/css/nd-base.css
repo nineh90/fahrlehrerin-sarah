@@ -316,6 +316,10 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 .cta-inner::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--gradient-rainbow-v, var(--accent)); }
 .cta-text { position: relative; z-index: 1; max-width: 640px; }
 .cta-band .btn { position: relative; z-index: 1; }
+/* Zwei Wege nebeneinander im Abschlussband. Ohne eigenen Container wären es
+   zwei Flex-Kinder von .cta-inner (space-between) – die Knöpfe würden dann
+   auseinandergerissen, einer links am Text, einer rechts am Rand. */
+.cta-actions { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: .8rem; }
 .cta-band h2 { margin: 0 0 .4rem; }
 .cta-band p { margin: 0; color: var(--text-soft); }
 

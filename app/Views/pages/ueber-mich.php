@@ -179,124 +179,191 @@ $schoolUrl = trim((string) config('school.url'));
          überflüssig, sondern peinlich.
 
          Ab hier folgen ihre vier Kapitel in ihrer Reihenfolge und ihrem
-         Wortlaut. Getönte und ungetönte Abschnitte wechseln sich ab, damit die
-         Seite beim Lesen nicht zur Textwand wird. */ ?>
+         Wortlaut.
+
+         SIE STEHEN SEIT DEM 13.08.2026 ZUM ANLESEN DA (Sarahs Wunsch: „zu
+         viel Text macht es unübersichtlich … vielleicht Reiter, die man
+         anklickt"). Vorher waren es vier volle Abschnitte untereinander,
+         abwechselnd getönt – rund 370 Wörter am Stück und mehrere
+         Bildschirmlängen Scrollen. Jetzt zeigt jedes Kapitel Überschrift und
+         ersten Absatz, der Rest kommt über „Mehr lesen".
+
+         Drei Entscheidungen dahinter, die nicht willkürlich sind:
+
+         · IHR WORTLAUT IST UNVERÄNDERT. Gekürzt wurde nichts, geschrieben
+           wurde nichts – nur die Verpackung ist eine andere. Ihre Sätze,
+           ihre Absatzbrüche, ihre Reihenfolge. Wer hier beim Umbauen
+           „strafft", macht aus ihrem Text wieder einen Entwurf (siehe
+           CLAUDE.md, Offene Punkte).
+
+         · DER TEASER IST IHR ERSTER ABSATZ, nicht eine Zusammenfassung
+           davon. Das ist der ganze Punkt: Eine Zusammenfassung wäre eine
+           fremde Stimme über ihrer, und genau die soll auf dieser Seite
+           nirgends stehen. Wo der Schnitt liegt, ist deshalb keine
+           Geschmacksfrage – er liegt hinter dem ersten Absatz, weil das die
+           einzige Stelle ist, die niemand erfunden hat.
+
+         · REINE ÜBERSCHRIFTEN REICHTEN NICHT. Eine erste Fassung klappte die
+           Kapitel komplett zu; „Über mich" bestand dann aus vier Zeilen, die
+           nichts über ihren Inhalt verrieten. Angelesen entscheidet man, ob
+           man weiterliest – bei einer bloßen Überschrift entscheidet man nur,
+           ob man einen Klick riskiert.
+
+         Was NICHT hinter den Klick gewandert ist: ihr Einstiegstext und die
+         Info-Box weiter oben. Die tragen die Seite und dürfen niemanden einen
+         Klick kosten.
+
+         Kein `name`-Attribut, die Abschnitte sind also unabhängig: Bei einem
+         echten Akkordeon fällt das gerade Gelesene zu, sobald man das nächste
+         öffnet – die Seite springt einem unter dem Finger weg. Kurz bleibt
+         sie hier ohnehin, weil zugeklappt schon jedes Kapitel etwas zeigt. */ ?>
 <section class="section section--alt">
     <div class="container">
-        <div class="prose">
-            <h2>Warum mir diese Arbeit besonders am Herzen liegt</h2>
-            <p>
-                Aufgewachsen bin ich im schönen Hannover als ältestes von drei Kindern.
-                Meine beiden jüngeren Geschwister kamen mit geistigen und körperlichen
-                Beeinträchtigungen zur Welt.
-            </p>
-            <p>
-                Dadurch durfte ich schon sehr früh lernen, dass Menschen unterschiedliche
-                Voraussetzungen mitbringen – und dass manchmal einfach ein anderer Weg
-                notwendig ist, um das gleiche Ziel zu erreichen.
-            </p>
-            <p>Diese Erfahrung prägt meine Arbeit bis heute.</p>
-            <p class="statement">
-                Ich sehe nicht zuerst die Einschränkung. Ich schaue auf den Menschen,
-                seine Fähigkeiten, seine Möglichkeiten und darauf, was wir gemeinsam
-                erreichen können.
-            </p>
-        </div>
-    </div>
-</section>
+        <div class="accordion">
+            <article class="accordion-item">
+                <h2 class="accordion-title">Warum mir diese Arbeit besonders am Herzen liegt</h2>
+                <p class="accordion-teaser">
+                    Aufgewachsen bin ich im schönen Hannover als ältestes von drei Kindern.
+                    Meine beiden jüngeren Geschwister kamen mit geistigen und körperlichen
+                    Beeinträchtigungen zur Welt.
+                </p>
+                <details>
+                    <summary class="accordion-more">
+                        <span class="accordion-more-open">Mehr lesen</span>
+                        <span class="accordion-more-close">Weniger anzeigen</span>
+                        <span class="accordion-chevron" aria-hidden="true"></span>
+                    </summary>
+                    <div class="accordion-body">
+                        <p>
+                            Dadurch durfte ich schon sehr früh lernen, dass Menschen unterschiedliche
+                            Voraussetzungen mitbringen – und dass manchmal einfach ein anderer Weg
+                            notwendig ist, um das gleiche Ziel zu erreichen.
+                        </p>
+                        <p>Diese Erfahrung prägt meine Arbeit bis heute.</p>
+                        <p class="statement">
+                            Ich sehe nicht zuerst die Einschränkung. Ich schaue auf den Menschen,
+                            seine Fähigkeiten, seine Möglichkeiten und darauf, was wir gemeinsam
+                            erreichen können.
+                        </p>
+                    </div>
+                </details>
+            </article>
 
-<section class="section">
-    <div class="container">
-        <div class="prose">
-            <h2>Fahrlehrerin und Pädagogin – eine besondere Kombination</h2>
-            <p>
-                Meine Ausbildung zur Heilerziehungspflegerin und meine Erfahrung im
-                pädagogischen Bereich ermöglichen es mir, Fahrausbildung noch einmal aus
-                einer anderen Perspektive zu betrachten.
-            </p>
-            <p>
-                Menschen lernen unterschiedlich. Manche benötigen mehr Zeit, andere eine
-                besondere Form der Erklärung, mehr Wiederholungen, klare Strukturen oder
-                individuell angepasste Lernwege.
-            </p>
-            <p>Genau darauf kann ich eingehen.</p>
-            <p>
-                Für mich geht es deshalb nicht darum, eine klassische Fahrausbildung
-                einfach auf einen Menschen mit Handicap zu übertragen. Es geht darum, die
-                Fahrausbildung an den Menschen anzupassen.
-            </p>
-            <p>
-                Mit Geduld, Ruhe, Empathie und der notwendigen fachlichen Kompetenz möchte
-                ich meinen Fahrschülerinnen und Fahrschülern einen geschützten Rahmen
-                geben, in dem sie lernen, Sicherheit gewinnen und Vertrauen in die eigenen
-                Fähigkeiten entwickeln können.
-            </p>
-        </div>
-    </div>
-</section>
+            <article class="accordion-item">
+                <h2 class="accordion-title">Fahrlehrerin und Pädagogin – eine besondere Kombination</h2>
+                <p class="accordion-teaser">
+                    Meine Ausbildung zur Heilerziehungspflegerin und meine Erfahrung im
+                    pädagogischen Bereich ermöglichen es mir, Fahrausbildung noch einmal aus
+                    einer anderen Perspektive zu betrachten.
+                </p>
+                <details>
+                    <summary class="accordion-more">
+                        <span class="accordion-more-open">Mehr lesen</span>
+                        <span class="accordion-more-close">Weniger anzeigen</span>
+                        <span class="accordion-chevron" aria-hidden="true"></span>
+                    </summary>
+                    <div class="accordion-body">
+                        <p>
+                            Menschen lernen unterschiedlich. Manche benötigen mehr Zeit, andere eine
+                            besondere Form der Erklärung, mehr Wiederholungen, klare Strukturen oder
+                            individuell angepasste Lernwege.
+                        </p>
+                        <p>Genau darauf kann ich eingehen.</p>
+                        <p>
+                            Für mich geht es deshalb nicht darum, eine klassische Fahrausbildung
+                            einfach auf einen Menschen mit Handicap zu übertragen. Es geht darum, die
+                            Fahrausbildung an den Menschen anzupassen.
+                        </p>
+                        <p>
+                            Mit Geduld, Ruhe, Empathie und der notwendigen fachlichen Kompetenz möchte
+                            ich meinen Fahrschülerinnen und Fahrschülern einen geschützten Rahmen
+                            geben, in dem sie lernen, Sicherheit gewinnen und Vertrauen in die eigenen
+                            Fähigkeiten entwickeln können.
+                        </p>
+                    </div>
+                </details>
+            </article>
 
-<section class="section section--alt">
-    <div class="container">
-        <div class="prose" style="--card-accent: var(--c-teal);">
-            <h2>Gemeinsam schauen wir, was möglich ist</h2>
-            <p>
-                Eine körperliche, geistige oder andere Beeinträchtigung kann viele Fragen
-                rund um den Führerschein mit sich bringen.
-            </p>
-            <?php /* Sarah hat die fünf Fragen als eigene Zeilen geschrieben, nicht
-                     als Fließtext – also stehen sie auch hier untereinander. Ohne
-                     Häkchen davor: Häkchen machen aus Fragen Merkmale, und das
-                     sind es nicht. */ ?>
-            <ul class="question-list">
-                <li>Kann ich überhaupt einen Führerschein machen?</li>
-                <li>Welche Voraussetzungen muss ich erfüllen?</li>
-                <li>Benötige ich ein speziell angepasstes Fahrzeug?</li>
-                <li>Welche Gutachten oder Genehmigungen sind notwendig?</li>
-                <li>Und wer kann mich auf diesem Weg unterstützen?</li>
-            </ul>
-            <p>
-                Mit diesen Fragen müssen meine Fahrschülerinnen und Fahrschüler und ihre
-                Familien nicht allein bleiben.
-            </p>
-            <p>
-                Durch meinen langjährigen Erfahrungsschatz und mein breit gefächertes
-                Netzwerk aus Fachstellen, Hilfsorganisationen und kompetenten Partnern
-                kann ich auch über die eigentliche Fahrstunde hinaus unterstützen,
-                Orientierung geben und bei Bedarf die richtigen Ansprechpartner
-                zusammenbringen.
-            </p>
-        </div>
-    </div>
-</section>
+            <article class="accordion-item">
+                <h2 class="accordion-title">Gemeinsam schauen wir, was möglich ist</h2>
+                <p class="accordion-teaser">
+                    Eine körperliche, geistige oder andere Beeinträchtigung kann viele Fragen
+                    rund um den Führerschein mit sich bringen.
+                </p>
+                <details>
+                    <summary class="accordion-more">
+                        <span class="accordion-more-open">Mehr lesen</span>
+                        <span class="accordion-more-close">Weniger anzeigen</span>
+                        <span class="accordion-chevron" aria-hidden="true"></span>
+                    </summary>
+                    <div class="accordion-body">
+                        <?php /* Sarah hat die fünf Fragen als eigene Zeilen geschrieben, nicht
+                                 als Fließtext – also stehen sie auch hier untereinander. Ohne
+                                 Häkchen davor: Häkchen machen aus Fragen Merkmale, und das
+                                 sind es nicht. */ ?>
+                        <ul class="question-list">
+                            <li>Kann ich überhaupt einen Führerschein machen?</li>
+                            <li>Welche Voraussetzungen muss ich erfüllen?</li>
+                            <li>Benötige ich ein speziell angepasstes Fahrzeug?</li>
+                            <li>Welche Gutachten oder Genehmigungen sind notwendig?</li>
+                            <li>Und wer kann mich auf diesem Weg unterstützen?</li>
+                        </ul>
+                        <p>
+                            Mit diesen Fragen müssen meine Fahrschülerinnen und Fahrschüler und ihre
+                            Familien nicht allein bleiben.
+                        </p>
+                        <p>
+                            Durch meinen langjährigen Erfahrungsschatz und mein breit gefächertes
+                            Netzwerk aus Fachstellen, Hilfsorganisationen und kompetenten Partnern
+                            kann ich auch über die eigentliche Fahrstunde hinaus unterstützen,
+                            Orientierung geben und bei Bedarf die richtigen Ansprechpartner
+                            zusammenbringen.
+                        </p>
+                    </div>
+                </details>
+            </article>
 
-<section class="section">
-    <div class="container">
-        <div class="prose">
-            <h2>Mein Ziel: Dein Weg zum Führerschein</h2>
-            <p>Ein Führerschein ist weit mehr als ein Dokument.</p>
-            <p>
-                Er kann ein großes Stück Freiheit, Unabhängigkeit, Selbstbestimmung und
-                gesellschaftliche Teilhabe bedeuten.
-            </p>
-            <p>
-                Deshalb steht für mich nicht das Handicap im Mittelpunkt, sondern der
-                Mensch hinter dem Lenkrad.
-            </p>
-            <p>
-                Ich möchte gemeinsam mit dir herausfinden, welcher Weg für dich der
-                richtige ist und was du brauchst, um dein persönliches Ziel zu erreichen.
-            </p>
-            <p>
-                Individuell. Auf Augenhöhe. Mit Geduld, Fachwissen und dem Blick für das,
-                was möglich ist.
-            </p>
-            <?php /* Ihre beiden Schlusszeilen. Sie stehen bei ihr getrennt und
-                     tragen genau dadurch – zusammengezogen zu einem Satz wären sie
-                     eine Floskel. */ ?>
-            <p class="statement">
-                Denn manchmal braucht es keinen einfacheren Weg.<br>
-                Sondern einen Weg, der zu dir passt.
-            </p>
+            <article class="accordion-item">
+                <h2 class="accordion-title">Mein Ziel: Dein Weg zum Führerschein</h2>
+                <?php /* Ihr kürzester Kapitelanfang – ein einzelner Satz. Er bleibt
+                         trotzdem allein stehen, obwohl der Teaser damit kürzer ist als
+                         die drei anderen: Der Satz stellt eine Behauptung auf, deren
+                         Begründung im nächsten Absatz steht. Genau das ist ein
+                         Anlesetext. */ ?>
+                <p class="accordion-teaser">Ein Führerschein ist weit mehr als ein Dokument.</p>
+                <details>
+                    <summary class="accordion-more">
+                        <span class="accordion-more-open">Mehr lesen</span>
+                        <span class="accordion-more-close">Weniger anzeigen</span>
+                        <span class="accordion-chevron" aria-hidden="true"></span>
+                    </summary>
+                    <div class="accordion-body">
+                        <p>
+                            Er kann ein großes Stück Freiheit, Unabhängigkeit, Selbstbestimmung und
+                            gesellschaftliche Teilhabe bedeuten.
+                        </p>
+                        <p>
+                            Deshalb steht für mich nicht das Handicap im Mittelpunkt, sondern der
+                            Mensch hinter dem Lenkrad.
+                        </p>
+                        <p>
+                            Ich möchte gemeinsam mit dir herausfinden, welcher Weg für dich der
+                            richtige ist und was du brauchst, um dein persönliches Ziel zu erreichen.
+                        </p>
+                        <p>
+                            Individuell. Auf Augenhöhe. Mit Geduld, Fachwissen und dem Blick für das,
+                            was möglich ist.
+                        </p>
+                        <?php /* Ihre beiden Schlusszeilen. Sie stehen bei ihr getrennt und
+                                 tragen genau dadurch – zusammengezogen zu einem Satz wären sie
+                                 eine Floskel. */ ?>
+                        <p class="statement">
+                            Denn manchmal braucht es keinen einfacheren Weg.<br>
+                            Sondern einen Weg, der zu dir passt.
+                        </p>
+                    </div>
+                </details>
+            </article>
         </div>
     </div>
 </section>

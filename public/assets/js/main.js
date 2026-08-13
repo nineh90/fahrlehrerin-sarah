@@ -288,12 +288,17 @@
             '.duo-text', '.duo-media',
             '.card-grid > *', '.split-grid > *', '.process > *',
             '.section-head', '.notice', '.quote', '.cta-inner',
-            '.empty-state', '.prose', '.week-grid', '.card',
+            // Die Anlese-Abschnitte kommen einzeln und nacheinander herein,
+            // wie Karten in einem Raster. Wichtig ist dabei nur, dass hier
+            // der ABSCHNITT steht und nicht sein aufklappbarer Inhalt: Der
+            // hat zugeklappt keine Höhe, der Beobachter sähe ihn nie, und
+            // beim Aufklappen bliebe der Text auf `opacity: 0` stehen.
+            '.empty-state', '.accordion > *', '.prose', '.week-grid', '.card',
             '.container > p', '.container > h2', '.container > figure', '.container > ul'
         ].join(', ');
 
         var ZOOM           = '.quote, .cta-inner';
-        var STAGGER_PARENT = '.card-grid, .split-grid, .process';
+        var STAGGER_PARENT = '.card-grid, .split-grid, .process, .accordion';
 
         var found = Array.prototype.slice.call(main.querySelectorAll(BLOCKS))
             // Der Hero hat seinen eigenen Auftritt beim Laden (heroDrop /

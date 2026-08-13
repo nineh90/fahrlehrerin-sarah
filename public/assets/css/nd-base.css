@@ -597,6 +597,142 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     line-height: 1.45; color: var(--text);
 }
 
+/* =========================================================================
+   ANLESE-ABSCHNITTE  ·  .accordion
+   -------------------------------------------------------------------------
+   Für lange, gegliederte Texte. Jeder Abschnitt zeigt seine Überschrift und
+   seinen ERSTEN ABSATZ; der Rest kommt über „Mehr lesen". Man sieht also
+   die Gliederung UND bekommt von jedem Kapitel eine Kostprobe, statt vor
+   einer Liste aus Überschriften zu stehen, die nichts über ihren Inhalt
+   verrät.
+
+   Der Teaser ist bewusst KEINE geschriebene Zusammenfassung, sondern der
+   unveränderte Anfang des Textes. Bei einem Text, der von einer echten
+   Person stammt, ist das der Unterschied zwischen Anlesen und Nacherzählen –
+   eine Zusammenfassung wäre eine fremde Stimme über ihrer.
+
+   Gebaut auf <details>/<summary> und NICHT auf JavaScript. Das ist die
+   Bedingung dafür, dass man Text überhaupt verstecken darf: Der Browser
+   bringt Tastaturbedienung, Vorlesesoftware und das Aufklappen bei „Auf
+   Seite suchen" (Strg+F) von sich aus mit, und ohne JavaScript steht
+   ohnehin alles da. Selbstgebaut wäre jeder dieser vier Punkte ein eigener
+   Fehler.
+
+   Die Überschrift steht AUSSERHALB des <summary> und bleibt damit eine
+   normale Überschrift. Zöge man sie in die Schaltfläche hinein, läse
+   Vorlesesoftware bei jedem Abschnitt die ganze Überschrift als Knopftext
+   vor – der Knopf heißt „Mehr lesen", und mehr soll er auch nicht heißen.
+   ========================================================================= */
+.accordion { max-width: 780px; display: grid; gap: .9rem; }
+
+.accordion-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--card-accent, var(--accent));
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: clamp(1.1rem, 3vw, 1.5rem);
+}
+
+.accordion-title {
+    margin: 0 0 .6rem;
+    font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+    line-height: 1.3;
+    text-wrap: balance;
+}
+
+.accordion-item p { margin: 0 0 1rem; color: var(--text-soft); }
+.accordion-item > details > :last-child,
+.accordion-body > :last-child { margin-bottom: 0; }
+.accordion-teaser { margin-bottom: 0; }
+
+/* `list-style: none` ist die Fassung für Firefox, das ::-webkit-Pseudoelement
+   die für Safari – beide brauchen ihre eigene, sonst steht neben dem eigenen
+   Winkel noch das Standard-Dreieck.
+
+   Der Knopf sieht aus wie ein Link und nicht wie eine Schaltfläche: Er sitzt
+   am Ende eines Absatzes und ist eine Einladung weiterzulesen, kein
+   Formularelement. `width: fit-content` ist dabei wichtig – ein <summary> ist
+   von Haus aus so breit wie der Block, und dann läge die Klickfläche über die
+   ganze Zeile, ohne dass man das sieht. */
+.accordion-more {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    width: fit-content;
+    margin-top: .9rem;
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: .95rem;
+    color: var(--accent-text, var(--accent));
+    border-radius: var(--radius-sm);
+}
+.accordion-more::-webkit-details-marker { display: none; }
+.accordion-more:hover { text-decoration: underline; }
+.accordion-more:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+}
+
+/* Zwei echte Beschriftungen statt einer, die per CSS ihren Text wechselt:
+   Inhalt aus `content:` wird nicht von jeder Vorlesesoftware zuverlässig
+   ausgegeben, und ein Knopf ohne Beschriftung ist kein Knopf. */
+.accordion-more-close { display: none; }
+.accordion-item > details[open] > .accordion-more .accordion-more-open  { display: none; }
+.accordion-item > details[open] > .accordion-more .accordion-more-close { display: inline; }
+
+/* Offen wird der Knopf leiser. Er steht dann zwischen dem Anlesetext und dem
+   Rest – also mitten im Fließtext –, und in Akzentfarbe unterbricht er dort
+   genau das Lesen, das er gerade ermöglicht hat. Zugeklappt ist er eine
+   Einladung und darf auffallen, offen ist er nur noch ein Rückweg.
+
+   Er bleibt dabei an seinem Platz und wandert NICHT unter den Text: Er sitzt
+   dort, wo eben geklickt wurde. Ein Knopf, der nach dem Klick ans Ende eines
+   langen Absatzes springt, ist für den Finger, der ihn gerade getroffen hat,
+   verschwunden. */
+.accordion-item > details[open] > .accordion-more {
+    font-weight: 500;
+    font-size: .88rem;
+    color: var(--muted);
+    margin-top: .4rem;
+}
+
+/* Der Winkel ist gezeichnet und kein Zeichen aus einer Schrift: Ein „+" oder
+   „›" aus dem Text wandert bei jeder Schriftumstellung mit und lässt sich
+   nicht sauber drehen. Zwei Kanten eines Quadrats, um 45° gekippt. */
+.accordion-chevron {
+    width: 8px; height: 8px;
+    flex-shrink: 0;
+    margin-top: -4px;
+    border-right: 2.5px solid currentColor;
+    border-bottom: 2.5px solid currentColor;
+    rotate: 45deg;
+    transition: rotate .25s ease, margin-top .25s ease;
+}
+.accordion-item > details[open] > .accordion-more .accordion-chevron {
+    rotate: 225deg;
+    margin-top: 3px;
+}
+
+.accordion-body { padding-top: 1rem; }
+
+/* Der Inhalt gleitet beim Öffnen herein. Bewusst nur der Inhalt und nicht die
+   Höhe des Kastens: Eine echte Höhenanimation bräuchte `::details-content`
+   und wird längst nicht überall unterstützt – der Kasten springt also auf,
+   und der Text kommt eine Spur danach. Das liest sich als Absicht, während
+   eine halb funktionierende Höhenanimation nach Fehler aussieht. */
+@media (prefers-reduced-motion: no-preference) {
+    .accordion-item > details[open] > .accordion-body {
+        animation: accordionOpen .3s cubic-bezier(.22, .61, .36, 1);
+    }
+}
+@keyframes accordionOpen {
+    from { opacity: 0; translate: 0 -.5rem; }
+    to   { opacity: 1; translate: 0 0; }
+}
+
 /* Zwei Marken nebeneinander: Kundin und Werkstatt. Steht auf der Referenzseite
    an der Stelle, an der sonst ein Foto stünde.
 

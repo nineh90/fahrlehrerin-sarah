@@ -240,6 +240,18 @@
 .card-grid > *:nth-child(7n+6), .process > *:nth-child(7n+6), .stat-grid > *:nth-child(7n+6) { --card-accent: var(--c-blue);   --card-accent-soft: rgba(59, 125, 216, 0.13); }
 .card-grid > *:nth-child(7n+7), .process > *:nth-child(7n+7), .stat-grid > *:nth-child(7n+7) { --card-accent: var(--c-violet); --card-accent-soft: rgba(124, 58, 237, 0.12); }
 
+/* Dieselbe Rotation für die Aufklapper. Sie stehen untereinander statt
+   nebeneinander, aber es gilt derselbe Gedanke: Jeder Abschnitt ist ein
+   eigenes Thema, und die Farbe an der Kante macht die Gliederung auf einen
+   Blick sichtbar – gerade dann, wenn der Text darunter zugeklappt ist. */
+.accordion > *:nth-child(7n+1) { --card-accent: var(--c-red); }
+.accordion > *:nth-child(7n+2) { --card-accent: var(--c-orange); }
+.accordion > *:nth-child(7n+3) { --card-accent: var(--c-yellow); }
+.accordion > *:nth-child(7n+4) { --card-accent: var(--c-green); }
+.accordion > *:nth-child(7n+5) { --card-accent: var(--c-teal); }
+.accordion > *:nth-child(7n+6) { --card-accent: var(--c-blue); }
+.accordion > *:nth-child(7n+7) { --card-accent: var(--c-violet); }
+
 /* Ausnahme: Raster, in denen jede Karte dasselbe bedeutet.
    Auf einer Terminübersicht liest sich die Rotation als Ampel – Rot „belegt",
    Gelb „knapp", Grün „frei" –, obwohl alle Karten denselben Zustand zeigen:

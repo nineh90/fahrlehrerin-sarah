@@ -51,7 +51,17 @@ $schoolUrl = trim((string) config('school.url'));
 
 <section class="section">
     <div class="container">
-        <div class="duo duo--text-first">
+        <?php /* Bild links, Text rechts (Nils, 14.08.2026). Vorher stand es über
+                 `duo--text-first` rechts neben dem Text – dieselbe Seite hat aber
+                 direkt darüber schon eine Abbildung rechts, nämlich Sarah im Bogen
+                 des Heros. Zwei Bilder untereinander an derselben Kante lasen sich
+                 wie eine Spalte, links blieb nur Text.
+
+                 `duo--stack-text-first` regelt den anderen Fall: Auf schmalen
+                 Screens fällt die Spalte weg, und ohne den Modifier stünde das
+                 Foto direkt unter der Hero-Abbildung. So kommt erst ihr Text und
+                 das Foto danach. */ ?>
+        <div class="duo duo--stack-text-first">
             <div class="duo-media photo-wrap" style="--card-accent: var(--c-orange);">
                 <?php /* Derselbe Moment wie im Schwerpunkt-Abschnitt der Startseite,
                          aber ein deutlich engerer Ausschnitt aus demselben Original –

@@ -293,6 +293,13 @@
             // der ABSCHNITT steht und nicht sein aufklappbarer Inhalt: Der
             // hat zugeklappt keine Höhe, der Beobachter sähe ihn nie, und
             // beim Aufklappen bliebe der Text auf `opacity: 0` stehen.
+            // Die Info-Box kommt als Ganzes herein, nicht Punkt für Punkt: Sie
+            // ist eine Zusammenfassung, die man in fünf Sekunden überfliegt –
+            // gestaffelte Zeilen würden das Überfliegen ausbremsen. Sie stand
+            // lange in keiner Zeile dieser Liste und war damit der einzige
+            // Block der Seite ohne Einblendung (`.container > ul` greift nicht,
+            // ihre Liste ist ein Enkel des Containers, kein Kind).
+            '.info-box',
             '.empty-state', '.accordion > *', '.prose', '.week-grid', '.card',
             '.container > p', '.container > h2', '.container > figure', '.container > ul'
         ].join(', ');
@@ -336,6 +343,25 @@
         var columns  = [];   // Blöcke, deren Richtung von der Breite abhängt
         var viewport = window.innerHeight || document.documentElement.clientHeight;
 
+        // Die Auslöselinie: Ein Block blendet ein, sobald er diesen Anteil des
+        // Bildschirms überschritten hat – gemessen von oben. 78 % heißt: Die
+        // unteren 22 % sind Anlaufstrecke, dort passiert noch nichts.
+        //
+        // Der Wert stand vorher bei 92 % und war damit zu tief. Ein Abschnitt,
+        // der beim Laden nur mit seiner obersten Pixelreihe unter den Hero
+        // lugte, galt schon als „im Bild": Er stand fertig eingeblendet da,
+        // während man noch auf den Hero sah, und beim Hinunterscrollen bewegte
+        // sich nichts mehr. Genau das war auf /ueber-mich beim Foto und bei
+        // der Info-Box zu sehen.
+        //
+        // Nach unten ist der Wert nicht beliebig: Die Zahl ist die Strecke,
+        // die der UNTERSTE Block einer Seite noch hochscrollen können muss.
+        // Nachgemessen hat die knappste Seite (/meine-website) dafür 130 %
+        // Luft – die Blöcke liegen alle in <main>, und darunter kommen noch
+        // Einordnung, Credit-Band und Fuß. Wer hier über ~50 % geht, prüft
+        // das nach, sonst bleibt der letzte Block einer Seite unsichtbar.
+        var REVEAL_LINE = 0.78;
+
         blocks.forEach(function (el) {
             // .hero-content ist die Textspalte des Heros – sie heißt nur
             // anders, weil sie im Hero eine eigene Breitenbegrenzung hat.
@@ -362,7 +388,14 @@
             // fertig gezeichnet, würde verschwinden und wieder auftauchen.
             // Dieses Zucken wiegt schwerer als die eingesparte Animation;
             // beim Zurückscrollen animiert der Block dann ganz normal mit.
-            if (el.getBoundingClientRect().top < viewport) {
+            //
+            // „Im Bild" muss dabei DASSELBE heißen wie für den Beobachter
+            // unten, sonst widersprechen sich die beiden: Ein Block, der hier
+            // als sichtbar gilt, dort aber noch unter der Linie liegt, bekommt
+            // `is-in` und verliert es im selben Moment wieder durch den ersten
+            // Aufruf des Beobachters. Deshalb steht in beiden Zeilen
+            // REVEAL_LINE und keine zweite Zahl.
+            if (el.getBoundingClientRect().top < viewport * REVEAL_LINE) {
                 el.classList.add('is-in');
             }
         });
@@ -384,7 +417,13 @@
             // Der eingezogene Rand sorgt dafür, dass die Einblendung startet,
             // wenn der Block ein Stück im Bild ist – und nicht schon, wenn
             // seine erste Pixelreihe die Kante streift.
-            rootMargin: '-8% 0px -8% 0px'
+            //
+            // Unten die Anlaufstrecke aus REVEAL_LINE. Oben bleibt es bei
+            // 8 %, und die beiden Werte dürfen sich ruhig unterscheiden: Der
+            // untere entscheidet, wie spät ein Block hereinkommt, der obere,
+            // wie früh er wieder geht. Zöge man oben ebenfalls 22 % ein, wäre
+            // Text schon ausgeblendet, während man ihn oben am Rand noch liest.
+            rootMargin: '-8% 0px -' + Math.round((1 - REVEAL_LINE) * 100) + '% 0px'
         });
 
         blocks.forEach(function (el) { observer.observe(el); });

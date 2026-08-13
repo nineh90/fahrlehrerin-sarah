@@ -458,6 +458,9 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 .duo { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
 .duo--text-first .duo-media { order: 2; }
 .duo--narrow-media { grid-template-columns: 1.15fr .85fr; }
+/* `.duo--stack-text-first` steht bewusst nicht hier: Nebeneinander ändert der
+   Modifier nichts, das Bild bleibt links wie im Markup. Er greift erst
+   gestapelt – die Regel steht im 820er-Block ganz unten. */
 .duo-text > :first-child { margin-top: 0; }
 .duo-text h2 { margin: 0 0 1rem; }
 .duo-text p { color: var(--text-soft); }
@@ -815,6 +818,15 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 @media (max-width: 820px) {
     .duo, .duo--narrow-media { grid-template-columns: 1fr; }
     .duo--text-first .duo-media { order: 0; }
+
+    /* Gestapelt zuerst der Text, dann das Bild – die Ausnahme von der Regel
+       eine Zeile darüber. Der Normalfall ist Bild oben: Es führt in den
+       Abschnitt ein, bevor der Text anfängt. Steht direkt darüber aber schon
+       eine Abbildung – auf /ueber-mich der Hero, in dem Sarah im Bogen sitzt –,
+       dann stoßen genau an dieser Kante zwei Bilder aneinander, ohne eine Zeile
+       dazwischen. Der Text muss dann nach oben, nicht das Bild weg. */
+    .duo--stack-text-first .duo-media { order: 2; }
+
     .photo, .photo--right { transform: none; }
 
     /* Gestapelt sitzt das Bild mittig unter dem Text. Linksbündiger Text über

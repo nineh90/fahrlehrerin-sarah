@@ -94,7 +94,7 @@ $config = [
     ],
     'contact' => [
         'phone' => env('CONTACT_PHONE', '0123 456789'),
-        'email' => env('CONTACT_EMAIL', 'hallo@fahrlehrerinsarah.de'),
+        'email' => env('CONTACT_EMAIL', 'info@fahrlehrerinsarah.de'),
         'city'  => env('CONTACT_CITY', 'Neu Wulmstorf'),
         // Einzugsgebiet als Liste, in der .env mit Komma getrennt
         'area'  => array_values(array_filter(array_map(

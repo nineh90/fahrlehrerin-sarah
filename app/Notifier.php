@@ -52,12 +52,18 @@ final class Notifier
             $text    = self::compose($event, $booking, $actor, $newStartsAt);
 
             $channels = [];
-            // Was Sarah selbst ausgelöst hat, muss ihr niemand mailen. Der
-            // Webhook bekommt es trotzdem: eine Absage von ihr muss genauso im
-            // Kalender landen wie eine vom Schüler.
-            $mail = $actor !== 'admin'
-                ? self::sendMail($text['subject'], $text['body'])
-                : null;
+
+            // IMMER die ANDERE Seite benachrichtigen. Wer die Änderung selbst
+            // ausgelöst hat, weiß Bescheid – die andere Seite erfährt es sonst
+            // gar nicht, und im schlimmsten Fall steht jemand am Treffpunkt
+            // für eine Stunde, die es nicht mehr gibt.
+            //
+            // Der Webhook läuft unabhängig davon in beide Richtungen: Eine
+            // Absage von Sarah muss genauso im Kalender landen wie eine vom
+            // Schüler.
+            $mail = $actor === 'admin'
+                ? self::sendToStudent($event, $booking, $newStartsAt)
+                : self::sendMail($text['subject'], $text['body']);
 
             if ($mail === true) {
                 $channels[] = 'mail';
@@ -72,10 +78,22 @@ final class Notifier
             // Ereignisart und damit eine Schemaänderung bräuchte.
             $body = $text['body'];
             if ($mail === false) {
-                $body .= "\n\n---\n"
-                    . "Hinweis: Diese Meldung konnte nicht per E-Mail zugestellt werden.\n"
-                    . "Du liest sie hier im Posteingang, aber sie liegt nicht in deinem\n"
-                    . "Postfach. Kommt das öfter vor, sag Nils Bescheid.";
+                // Die beiden Fälle sind unterschiedlich dringend, deshalb
+                // stehen hier zwei Texte. Kommt Sarahs eigene Kopie nicht an,
+                // liest sie es trotzdem hier. Erreicht die Person die Mail
+                // nicht, weiß sie NICHTS – und das muss Sarah sofort sehen,
+                // weil sie dann selbst anrufen muss.
+                $body .= "\n\n---\n" . ($actor === 'admin'
+                    ? "ACHTUNG: " . (string) $booking['student_name']
+                        . " konnte NICHT benachrichtigt werden.\n"
+                        . "Die E-Mail ging nicht raus – bitte selbst Bescheid geben."
+                        . (!empty($booking['student_phone'])
+                            ? "\nTelefon: " . $booking['student_phone']
+                            : '')
+                    : "Hinweis: Diese Meldung konnte nicht per E-Mail zugestellt werden.\n"
+                        . "Du liest sie hier im Posteingang, aber sie liegt nicht in deinem\n"
+                        . "Postfach. Kommt das öfter vor, sag Nils Bescheid.");
+
                 $grund = Mailer::lastError();
                 if ($grund !== '') {
                     $body .= "\nTechnischer Grund: " . $grund;
@@ -153,9 +171,107 @@ final class Notifier
         return Mailer::send($to, 'Dein Zugang zu meinen Fahrstunden', $body);
     }
 
+    /**
+     * Benachrichtigt die Fahrschüler:in, wenn SARAH etwas geändert hat.
+     *
+     * Absage und Verschiebung sind dieselbe Gefahr: Wer es nicht erfährt,
+     * steht am Treffpunkt – einmal umsonst, einmal zur falschen Zeit. Deshalb
+     * hängt hier nicht nur die Absage dran, obwohl nur nach ihr gefragt war.
+     *
+     * Rückgabe wie sendMail(): null = nicht versucht, true/false = Ergebnis.
+     */
+    private static function sendToStudent(string $event, array $booking, ?string $newStartsAt): ?bool
+    {
+        if (!config('notify.student_mail')) {
+            return null;
+        }
+        $to = trim((string) ($booking['student_email'] ?? ''));
+        if ($to === '') {
+            return null;
+        }
+
+        $text = self::composeForStudent($event, $booking, $newStartsAt);
+
+        return Mailer::send($to, $text['subject'], $text['body']);
+    }
+
     // -----------------------------------------------------------------------
     // Texte
     // -----------------------------------------------------------------------
+
+    /**
+     * Was die Fahrschüler:in liest. Bewusst NICHT derselbe Text wie für Sarah:
+     * Der spricht Sarah an („Du hast die Stunde von Lena abgesagt"), hier
+     * schreibt Sarah an die Person.
+     *
+     * ENTWURF, wie fast alle Texte hier – von Sarah nicht gegengelesen.
+     * Siehe die Offenen Punkte in der CLAUDE.md.
+     *
+     * @return array{subject:string,body:string}
+     */
+    private static function composeForStudent(
+        string $event,
+        array $booking,
+        ?string $newStartsAt
+    ): array {
+        // Nur der Vorname, wie in der PIN-Mail – so klingt es wie von Sarah
+        // und nicht wie aus einem Formular.
+        $vorname = explode(' ', trim((string) $booking['student_name']))[0];
+        $alt     = format_datetime(dt((string) $booking['starts_at']));
+        $neu     = $newStartsAt !== null ? format_datetime(dt($newStartsAt)) : $alt;
+        $telefon = (string) config('contact.phone');
+
+        [$subject, $kern] = match ($event) {
+            'storniert' => [
+                'Unsere Fahrstunde am ' . $alt . ' fällt aus',
+                sprintf(
+                    "ich muss unsere Fahrstunde am %s leider absagen.\n\n"
+                    . "Such dir gern direkt eine neue Zeit aus:\n  %s\n\n"
+                    . "Wenn du lieber kurz mit mir sprichst, ruf mich an: %s",
+                    $alt,
+                    absolute_url('/termine'),
+                    $telefon
+                ),
+            ],
+            'verschoben' => [
+                'Neue Zeit für unsere Fahrstunde',
+                sprintf(
+                    "ich habe unsere Fahrstunde verschoben.\n\n"
+                    . "  Vorher:  %s\n  Jetzt:   %s\n\n"
+                    . "Passt dir die neue Zeit nicht? Dann sag mir Bescheid: %s",
+                    $alt,
+                    $neu,
+                    $telefon
+                ),
+            ],
+            default => [
+                'Ich habe dir eine Fahrstunde eingetragen',
+                sprintf(
+                    "ich habe dir eine Fahrstunde eingetragen:\n\n  %s\n\n"
+                    . "Passt dir die Zeit nicht? Dann sag mir Bescheid: %s",
+                    $neu,
+                    $telefon
+                ),
+            ],
+        };
+
+        $extra = [];
+        if (!empty($booking['type'])) {
+            $extra[] = Slot::label($booking);
+        }
+        if (!empty($booking['location'])) {
+            $extra[] = 'Treffpunkt: ' . $booking['location'];
+        }
+
+        $body = 'Hallo ' . $vorname . ",\n\n" . $kern;
+        if ($extra !== [] && $event !== 'storniert') {
+            $body .= "\n\n" . implode("\n", $extra);
+        }
+        $body .= "\n\nDeine Termine: " . absolute_url('/meine-termine')
+            . "\n\nBis bald\nSarah";
+
+        return ['subject' => $subject, 'body' => $body];
+    }
 
     /** @return array{title:string,subject:string,body:string} */
     private static function compose(

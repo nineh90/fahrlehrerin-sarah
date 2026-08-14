@@ -231,11 +231,113 @@ function seed_notifications(PDO $pdo): int
     return $count;
 }
 
+/**
+ * Zählt, was an Bestand da ist. Tabellen, die es noch nicht gibt (erster
+ * Lauf), zählen als null – deshalb je Tabelle ein eigenes try.
+ *
+ * @return array<string,int> nur die Tabellen, in denen etwas steht
+ */
+function bestand(PDO $pdo): array
+{
+    $tabellen = [
+        'students'      => 'Fahrschüler:innen',
+        'slots'         => 'Termine',
+        'bookings'      => 'Buchungen',
+        'notifications' => 'Meldungen im Posteingang',
+    ];
+
+    $gefunden = [];
+    foreach ($tabellen as $tabelle => $bezeichnung) {
+        try {
+            $anzahl = (int) $pdo->query("SELECT COUNT(*) FROM $tabelle")->fetchColumn();
+            if ($anzahl > 0) {
+                $gefunden[$bezeichnung] = $anzahl;
+            }
+        } catch (Throwable) {
+            // Tabelle gibt es noch nicht – dann steht dort auch nichts drin.
+        }
+    }
+
+    return $gefunden;
+}
+
+/**
+ * Fragt nach, bevor Bestand gelöscht wird.
+ *
+ * Drei Ausgänge, und der dritte ist der wichtigste:
+ *   - leere Datenbank        -> läuft ohne Rückfrage durch (erster Aufbau)
+ *   - Bestand + Eingabe      -> es muss "LÖSCHEN" getippt werden
+ *   - Bestand + keine Eingabe (Cronjob, Skript, docker exec ohne -it)
+ *                            -> Abbruch. NICHT durchlaufen lassen: Genau so
+ *                               sieht ein versehentlicher Aufruf aus.
+ *
+ * `--ja-wirklich` überspringt die Frage für den bewussten Skriptbetrieb.
+ */
+function bestaetigung_einholen(PDO $pdo, array $argv): void
+{
+    $vorhanden = bestand($pdo);
+    if ($vorhanden === []) {
+        return;   // nichts zu verlieren
+    }
+
+    out('');
+    out('╭─ ACHTUNG ─────────────────────────────────────────────────╮');
+    out('│ In dieser Datenbank stehen bereits Daten. Dieses Skript    │');
+    out('│ spielt das Schema mit DROP TABLE ein – ALLES davon geht    │');
+    out('│ verloren, es wird nichts ergänzt und nichts behalten.      │');
+    out('╰───────────────────────────────────────────────────────────╯');
+    out('');
+    out('  Datenbank: ' . config('db.sqlite_path'));
+    foreach ($vorhanden as $bezeichnung => $anzahl) {
+        // sprintf polstert nach BYTES, nicht nach Zeichen. „Fahrschüler:innen"
+        // hat wegen des Umlauts ein Byte mehr als Zeichen und stünde sonst um
+        // genau diese Stelle versetzt. Also die Sollbreite um die Differenz
+        // erhöhen.
+        $zeichen = preg_split('//u', $bezeichnung, -1, PREG_SPLIT_NO_EMPTY) ?: [];
+        $breite  = 28 + (strlen($bezeichnung) - count($zeichen));
+        out(sprintf('  %-' . $breite . 's %d', $bezeichnung, $anzahl));
+    }
+    out('');
+
+    if (in_array('--ja-wirklich', $argv, true)) {
+        out('· --ja-wirklich angegeben, es wird nicht nachgefragt.');
+
+        return;
+    }
+
+    // Ohne Eingabemöglichkeit wird NICHT gelöscht. Ein Cronjob oder ein
+    // `docker compose exec` ohne -it landet hier – und beides ist mit
+    // Sicherheit kein bewusster Löschbefehl.
+    if (!stream_isatty(STDIN)) {
+        out('✗ Abgebrochen: keine Eingabe möglich (kein Terminal).');
+        out('  Gewollt? Dann mit --ja-wirklich noch einmal aufrufen.');
+        exit(1);
+    }
+
+    fwrite(STDOUT, 'Wirklich alles löschen? Tippe LÖSCHEN: ');
+    $antwort = trim((string) fgets(STDIN));
+
+    if ($antwort !== 'LÖSCHEN') {
+        out('✗ Abgebrochen, es wurde nichts verändert.');
+        exit(1);
+    }
+
+    out('');
+}
+
 try {
     $withDemo = !in_array('--ohne-demo', $argv, true);
 
     $pdo = Database::connection();
     out('✓ SQLite-Datenbank: ' . config('db.sqlite_path'));
+
+    // 0) Bremse. Das Schema kommt mit DROP TABLE herein – dieser Aufruf ist
+    //    also immer ein Totalverlust, nie eine Ergänzung. Solange nur
+    //    Demo-Daten drinstehen, ist das gewollt; sobald Sarah echte Termine
+    //    einträgt, ist es der Super-GAU. Der Unterschied ist von außen nicht
+    //    zu sehen, und der zwischen `migrate.php` und `migrate.php --ohne-demo`
+    //    ist im Eifer schnell übersehen.
+    bestaetigung_einholen($pdo, $argv);
 
     // 1) Schema einspielen (setzt die Datenbank neu auf)
     $pdo->exec(file_get_contents(APP_ROOT . '/database/schema.sqlite.sql'));

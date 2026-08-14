@@ -45,6 +45,26 @@ Wochen leer, einfach `php scripts/migrate.php` erneut ausführen – das setzt a
 | Änderungsfrist fürs Absagen (Standard 24 h) | `.env` → `CANCEL_DEADLINE_HOURS` |
 | Texte | `app/Views/` (Plain PHP, keine Templatesprache) |
 | Bilder | `public/assets/img/` – echte Fotos direkt, Fehlendes als `platzhalter-*.svg` |
+| Mailversand | `.env` → `MAIL_DRIVER`, `SMTP_*` (siehe unten) |
+
+### Mailversand
+
+`MAIL_DRIVER=log` ist der Standard: Es geht nichts raus, alles landet in
+`storage/mail.log`. **Zum Entwickeln so lassen** – dann liegt lokal auch kein
+Mailpasswort.
+
+Im Betrieb `MAIL_DRIVER=smtp` und die `SMTP_*`-Werte in der `.env` des Servers
+setzen. `SMTP_PASSWORD` gehört ausschließlich dorthin: Die Datei ist
+gitignored, liegt außerhalb des Webroots und wird vom Deploy nicht angefasst.
+
+`MAIL_DRIVER=mail` (PHP `mail()`) funktioniert im Docker-Container **nicht** –
+das Image enthält kein Mailprogramm.
+
+Versand ausprobieren, ohne eine Buchung auszulösen:
+
+```bash
+php scripts/mailtest.php empfaenger@example.de
+```
 
 ---
 

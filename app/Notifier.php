@@ -55,11 +55,31 @@ final class Notifier
             // Was Sarah selbst ausgelöst hat, muss ihr niemand mailen. Der
             // Webhook bekommt es trotzdem: eine Absage von ihr muss genauso im
             // Kalender landen wie eine vom Schüler.
-            if ($actor !== 'admin' && self::sendMail($text['subject'], $text['body'])) {
+            $mail = $actor !== 'admin'
+                ? self::sendMail($text['subject'], $text['body'])
+                : null;
+
+            if ($mail === true) {
                 $channels[] = 'mail';
             }
             if (self::sendWebhook($payload)) {
                 $channels[] = 'webhook';
+            }
+
+            // Ein fehlgeschlagener Versand darf nicht still verschwinden. Er
+            // hängt sich an die Meldung, die ohnehin geschrieben wird – so
+            // steht er da, wo Sarah ihn sieht, ohne dass es dafür eine neue
+            // Ereignisart und damit eine Schemaänderung bräuchte.
+            $body = $text['body'];
+            if ($mail === false) {
+                $body .= "\n\n---\n"
+                    . "Hinweis: Diese Meldung konnte nicht per E-Mail zugestellt werden.\n"
+                    . "Du liest sie hier im Posteingang, aber sie liegt nicht in deinem\n"
+                    . "Postfach. Kommt das öfter vor, sag Nils Bescheid.";
+                $grund = Mailer::lastError();
+                if ($grund !== '') {
+                    $body .= "\nTechnischer Grund: " . $grund;
+                }
             }
 
             Notification::create([
@@ -70,7 +90,7 @@ final class Notifier
                 'starts_at'      => $newStartsAt ?? $booking['starts_at'],
                 'from_starts_at' => $newStartsAt !== null ? $booking['starts_at'] : null,
                 'title'          => $text['title'],
-                'body'           => $text['body'],
+                'body'           => $body,
                 'channels'       => $channels ? implode(',', $channels) : null,
                 // Was Sarah selbst getan hat, muss sie nicht mehr lesen –
                 // es bleibt aber als Verlauf stehen.
@@ -203,14 +223,23 @@ final class Notifier
     // Kanäle
     // -----------------------------------------------------------------------
 
-    private static function sendMail(string $subject, string $body): bool
+    /**
+     * Drei Ausgänge, und der Unterschied zwischen den letzten beiden zählt:
+     * null  = gar nicht versucht (abgeschaltet oder keine Adresse hinterlegt)
+     * true  = raus
+     * false = versucht und gescheitert – nur DAS ist meldenswert.
+     */
+    private static function sendMail(string $subject, string $body): ?bool
     {
         if (!config('notify.mail')) {
-            return false;
+            return null;
         }
         $to = (string) (config('notify.to') ?: config('mail.to'));
+        if ($to === '') {
+            return null;
+        }
 
-        return $to !== '' && Mailer::send($to, $subject, $body);
+        return Mailer::send($to, $subject, $body);
     }
 
     /**

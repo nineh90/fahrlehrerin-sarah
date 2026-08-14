@@ -103,9 +103,28 @@ $config = [
         ))),
     ],
     'mail' => [
+        // log | smtp | mail  – siehe app/Mailer.php
         'driver' => env('MAIL_DRIVER', 'log'),
         'to'     => env('MAIL_TO', 'info@example.com'),
         'from'   => env('MAIL_FROM', 'noreply@example.com'),
+        // Klarname vor der Adresse ("Fahrlehrerin Sarah <info@…>"). Leer = nur
+        // die Adresse. Steht hier etwas mit Umlaut, wird es kodiert.
+        'from_name' => env('MAIL_FROM_NAME', ''),
+        // Wohin Antworten gehen, wenn das nicht die Absenderadresse sein soll.
+        // Genau dafür gedacht, wenn from eine Adresse ist, die niemand liest.
+        'reply_to'  => env('MAIL_REPLY_TO', ''),
+        'smtp' => [
+            'host'     => env('SMTP_HOST', ''),
+            'port'     => (int) env('SMTP_PORT', 465),
+            'user'     => env('SMTP_USER', ''),
+            'password' => env('SMTP_PASSWORD', ''),
+            // tls      = ab dem ersten Byte verschlüsselt (üblich auf Port 465)
+            // starttls = im Klartext verbinden und dann hochstufen (Port 587)
+            // none     = unverschlüsselt. Nur für einen Testserver im eigenen
+            //            Netz – über das Internet geht damit das Passwort offen
+            //            über die Leitung.
+            'security' => env('SMTP_SECURITY', 'tls'),
+        ],
     ],
     // Wie Sarah von Buchungen erfährt (siehe app/Notifier.php).
     // Der Posteingang in der Schaltzentrale läuft immer – das hier sind die

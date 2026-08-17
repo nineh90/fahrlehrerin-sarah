@@ -3,12 +3,23 @@ $school    = (string) config('school.name');
 $schoolUrl = trim((string) config('school.url'));
 ?>
 
-<?php /* Hero im Stil der Startseite, aber bewusst NICHT dasselbe Lockup:
-         Dort steht die Wortmarke im Bogen, hier steht Sarah drin. Der Name
-         steht schon im Header und in der Überschrift – ein zweites Mal wäre
-         Logo-Doppelung. Anderer Ausschnitt derselben Aufnahme, damit die
-         beiden Seiten nicht wie eine Kopie voneinander wirken. */ ?>
-<section class="hero">
+<?php /* Im Hero steht seit dem 17.08.2026 Sarahs Video (SAR-38). Vorher saß
+         hier Sarah im Regenbogenbogen; die Abbildung ist nicht weg, sondern
+         eine Sektion tiefer gewandert und trägt jetzt „Über mich" – dort stand
+         bis dahin das Rollistammtisch-Foto.
+
+         `hero--video` ist kein Schmuck, sondern nötig: nd-base.css legt die
+         Medienspalte eines Heros ab 820 px absolut HINTER den Text, macht sie
+         durchscheinend und setzt `pointer-events: none`. Das ist für eine
+         dekorative Fläche gedacht. Bei einem Video wäre es doppelt falsch –
+         halbtransparent hinter Schrift sieht es nach Fehler aus, und ohne
+         Zeigerereignisse ist der Abspielknopf nicht mehr zu treffen. Der
+         Modifier schaltet die Mechanik ab, genau wie `hero--photo` auf der
+         Startseite (Regeln in theme.css).
+
+         Das Video liegt weiterhin AUCH auf der Startseite, dort mit Text und
+         den Kanal-Knöpfen daneben (SAR-28). Hier steht es ohne. */ ?>
+<section class="hero hero--video">
     <div class="container hero-inner">
         <div class="duo duo--narrow-media">
             <div class="hero-content">
@@ -47,12 +58,31 @@ $schoolUrl = trim((string) config('school.url'));
                 </div>
             </div>
 
-            <div class="duo-media">
-                <div class="hero-arc">
-                    <img src="<?= asset('img/sarah-lockup.webp') ?>"
-                         alt="Sarah, lächelnd, mit hochgestrecktem Daumen"
-                         width="620" height="1130">
-                </div>
+            <div class="duo-media photo-wrap" style="--card-accent: var(--c-violet);">
+                <?php /* Dasselbe Video wie auf der Startseite, dieselbe Auszeichnung.
+                         Kein autoplay: Das Video hat Ton und startet nur auf Wunsch.
+                         `preload="metadata"` lädt bloß die Kopfdaten und nicht die
+                         5,7 MB – hier oben im Hero wichtiger als irgendwo sonst,
+                         weil der Abschnitt immer im ersten Bildschirm liegt.
+
+                         Die Bildunterschrift bleibt: Sie gehört zum Rahmen und sagt,
+                         woher der Ausschnitt kommt. „Ohne Text" im Ticket meinte die
+                         Textspalte daneben, nicht sie. */ ?>
+                <figure class="video-frame">
+                    <video controls playsinline preload="metadata"
+                           poster="<?= asset('img/sarah-vorstellung-poster.jpg') ?>"
+                           width="576" height="1024">
+                        <source src="<?= asset('video/sarah-vorstellung.mp4') ?>" type="video/mp4">
+                        Dein Browser kann dieses Video nicht abspielen.
+                        <a href="<?= e(tiktok_url()) ?>" target="_blank" rel="noopener noreferrer">
+                            Schau es dir direkt auf TikTok an.
+                        </a>
+                    </video>
+                    <figcaption>
+                        „Mit einem Handicap ist der Weg zum Führerschein oftmals steinig und
+                        schwer" – ein Ausschnitt von meinem Kanal
+                    </figcaption>
+                </figure>
             </div>
         </div>
     </div>
@@ -62,38 +92,38 @@ $schoolUrl = trim((string) config('school.url'));
     <div class="container">
         <?php /* Bild links, Text rechts (Nils, 14.08.2026). Vorher stand es über
                  `duo--text-first` rechts neben dem Text – dieselbe Seite hat aber
-                 direkt darüber schon eine Abbildung rechts, nämlich Sarah im Bogen
-                 des Heros. Zwei Bilder untereinander an derselben Kante lasen sich
-                 wie eine Spalte, links blieb nur Text.
+                 direkt darüber schon eine Abbildung rechts: bis SAR-38 Sarah im
+                 Bogen des Heros, seitdem ihr Video. Zwei Abbildungen untereinander
+                 an derselben Kante lasen sich wie eine Spalte, links blieb nur
+                 Text. Der Wechsel gilt also weiter.
 
                  `duo--stack-text-first` regelt den anderen Fall: Auf schmalen
                  Screens fällt die Spalte weg, und ohne den Modifier stünde das
                  Foto direkt unter der Hero-Abbildung. So kommt erst ihr Text und
                  das Foto danach. */ ?>
         <div class="duo duo--stack-text-first">
-            <div class="duo-media photo-wrap" style="--card-accent: var(--c-orange);">
-                <?php /* Derselbe Moment wie im Schwerpunkt-Abschnitt der Startseite,
-                         aber ein deutlich engerer Ausschnitt aus demselben Original –
-                         nah an Sarah, mit Tischlampe und etwas Deko (Nils, 12.08.2026).
-                         Zwei Zuschnitte eines Fotos auf zwei Seiten lesen sich nicht
-                         als Wiederholung, solange sie verschieden genug sind: dort
-                         der ganze Tisch, hier ihr Gesicht.
+            <div class="duo-media">
+                <?php /* Sarah freigestellt – seit dem 17.08.2026 hier (SAR-38).
+                         Dieselbe Abbildung, die vorher im Hero dieser Seite stand,
+                         aber OHNE den Regenbogenbogen dahinter (ausdrücklich so
+                         gewünscht). An dieser Stelle lag zuletzt das
+                         Rollistammtisch-Foto im engen Ausschnitt; davor
+                         `sarah-messe.jpg` und der Freisteller am Fass
+                         (`sarah-fass.webp`). Alle drei liegen weiter in
+                         public/assets/img, falls die Entscheidung kippt.
 
-                         Hier lagen zwischenzeitlich zwei andere Bilder – `sarah-messe.jpg`
-                         (Ausschnitt mit Messe-Umgebung) und der Freisteller am Fass
-                         (`sarah-fass.webp`, entstanden aus Nils' Wunsch, die Aufschrift
-                         zu zeigen). Beide liegen weiter im Ordner, falls die
-                         Entscheidung noch einmal kippt.
+                         Kein Rahmen und kein `.photo-wrap`: Beides ist für ein
+                         rechteckiges Foto gedacht. Um einen Freisteller gezogen wäre
+                         der Rahmen ein Kasten um eine Silhouette, und der farbige
+                         Fleck läge als getönte Fläche daneben statt dahinter.
 
-                         Kein Freisteller mehr, also wieder der normale .photo-Rahmen;
-                         .photo--portrait bleibt, weil das Hochformat sonst die
-                         Spaltenhöhe bestimmt. */ ?>
-                <figure class="photo photo--portrait">
-                    <img src="<?= asset('img/sarah-rollistammtisch-nah.jpg') ?>"
-                         alt="Sarah sitzt lächelnd an ihrem Infotisch, davor eine Tischlampe
-                              und ein Schild mit der Aufschrift „Die Rollistammtische“"
-                         width="680" height="900">
-                </figure>
+                         Der weiche Auslauf nach unten ist nötig und keine Zierde:
+                         Die Freistellung endet an der Hüfte, und ohne ihn steht die
+                         Schnittkante als waagerechter Strich im Bild. Regel dazu in
+                         theme.css (.sarah-cutout). */ ?>
+                <img class="sarah-cutout" src="<?= asset('img/sarah-lockup.webp') ?>"
+                     alt="Sarah, lächelnd, mit hochgestrecktem Daumen"
+                     width="620" height="1130">
             </div>
 
             <div class="duo-text">

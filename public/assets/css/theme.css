@@ -412,27 +412,34 @@
     margin-inline: auto;
 }
 
-/* --- Bogen mit Sarah darin (Hero auf /ueber-mich) ------------------------
-   Dieselbe Bühne wie das Lockup, aber ohne Wortmarke: Auf einer Seite, die
-   „Über mich" heißt, gehört Sarah in den Bogen und nicht der Name – der steht
-   schon im Header und in der Überschrift. Deshalb steht die Figur hier auch
-   tiefer und größer als im Lockup, wo sie sich den Platz mit dem Schriftzug
-   teilt. Gleiches Seitenverhältnis, damit beide Heros gleich hoch bauen. */
-.hero-arc {
-    position: relative;
-    aspect-ratio: 983 / 1155;
-    background: url("../img/logo-bogen.webp") no-repeat center / contain;
-}
-.hero-arc img {
-    position: absolute; display: block; height: auto;
-    /* Mittig in der gemalten Öffnung (deren Mitte liegt bei 60 % der
-       Bogenbreite, siehe CLAUDE.md) und deutlich größer als im Lockup –
-       hier teilt sie sich den Platz mit niemandem. */
-    left: 38%; top: 14%; width: 44%;
-    /* Derselbe weiche Auslauf wie im Lockup, damit die Schnittkante an der
-       Taille nicht als Strich steht. */
-    -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent 99%);
-    mask-image: linear-gradient(180deg, #000 78%, transparent 99%);
+/* --- Sarah freigestellt (Abschnitt „Über mich" auf /ueber-mich) -----------
+   HIER STAND BIS ZUM 17.08.2026 `.hero-arc`: Sarah im Regenbogenbogen, im Hero
+   dieser Seite. Mit SAR-38 läuft im Hero das Video, und Sarah steht eine
+   Sektion tiefer – ausdrücklich OHNE Bogen. Damit sind drei Sachen entfallen:
+   der Bogen als Hintergrundbild, die absolute Positionierung der Figur darin
+   (`left: 38%; top: 14%; width: 44%` – sie saß in der gemalten Öffnung) und
+   zwei Sonderregeln, die nur im Hero Sinn hatten. Sie stehen in der
+   Versionsgeschichte, falls der Bogen zurückkommt.
+
+   `logo-bogen.webp` wird dadurch von keinem Stylesheet mehr geladen. Die Datei
+   BLEIBT trotzdem: scripts/logo-ableitungen.py baut daraus das Favicon.
+
+   Geblieben ist der weiche Auslauf nach unten, und der ist keine Zierde: Die
+   Freistellung endet an der Hüfte. Ohne ihn steht dort ein waagerechter Strich
+   im Bild – im Bogen war er es genauso, nur fiel er dort weniger auf.
+
+   Die Breite ist begrenzt, weil die Spalte halb so breit ist wie die Seite.
+   340 px liegen in der Größenordnung des Fotos, das vorher hier stand (max.
+   560 px hoch); der Freisteller ist hochformatiger und käme sonst auf über
+   600 px. */
+.sarah-cutout {
+    display: block;
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    margin-inline: auto;
+    -webkit-mask-image: linear-gradient(180deg, #000 82%, transparent 99%);
+    mask-image: linear-gradient(180deg, #000 82%, transparent 99%);
 }
 
 /* --- Hero auf schmalen Screens ---------------------------------------------
@@ -459,14 +466,21 @@
    beide an, sonst liegt das Foto entweder halbtransparent hinter der Schrift
    oder es stapelt sich schon in der zweispaltigen Ansicht. */
 @media (max-width: 820px) {
-    .hero--photo .duo-media {
+    /* `hero--video` seit SAR-38 gleichberechtigt neben `hero--photo`: Auf
+       /ueber-mich liegt in der Medienspalte ein Video. Für das gilt dasselbe
+       wie für ein Foto und noch etwas mehr – hinter dem Text wäre es nicht nur
+       halbtransparent, sondern wegen `pointer-events: none` auch nicht mehr
+       bedienbar. Der Abspielknopf ist dann nicht zu treffen. */
+    .hero--photo .duo-media,
+    .hero--video .duo-media {
         position: static;
         display: block;
         pointer-events: auto;
     }
     /* Der Schleier gehört zur Fläche hinter dem Text – hier liegt nichts
        hinter dem Text, also nichts zu verschleiern. */
-    .hero--photo .duo-media::after { content: none; }
+    .hero--photo .duo-media::after,
+    .hero--video .duo-media::after { content: none; }
     .hero--photo .hero-photo img {
         max-height: 44vh;
         object-fit: cover;
@@ -476,15 +490,11 @@
         object-position: 34% 24%;
     }
 
-    .hero-arc {
-        /* Breiter als die Spalte: Der Bogen soll die Fläche tragen und an den
-           Rändern angeschnitten sein, nicht als Briefmarke in der Mitte
-           schweben. */
-        max-width: none;
-        width: min(115%, 520px);
-        margin-inline: 0;
-        opacity: var(--hero-media-opacity);
-    }
+    /* Hier stand die Regel für `.hero-arc`: breiter als die Spalte und auf
+       `--hero-media-opacity` aufgehellt, weil der Bogen ab hier hinter dem Text
+       lag. Mit SAR-38 gibt es im Hero keinen Bogen mehr. Das Token
+       `--hero-media-opacity` bleibt in :root – es steuert weiter den Schleier,
+       den nd-base.css über eine Hero-Fläche legt. */
 }
 
 /* --- Bogen auf Bogen: der Hero weicht aus, sobald die Marke mittig steht ---
@@ -505,25 +515,20 @@
    ihm entfallen. Bleibt es je bei einem Bogen auf der Startseite, steht sie
    in der Versionsgeschichte.
 
-   Auf /ueber-mich bleibt der Konflikt und geht anders aus: Dort sitzt Sarah
-   im Bogen, und klein wäre sie nicht mehr zu erkennen. Also fällt der Bogen
-   weg statt zu schrumpfen – er war ohnehin nur ihre Bühne, und auf einer
-   Seite, die „Über mich" heißt, trägt die Fläche besser sie selbst als eine
-   Form, die das Logo darüber wiederholt. */
+   AUCH /ueber-mich HAT DEN KONFLIKT NICHT MEHR: Dort läuft seit SAR-38 im Hero
+   das Video, und Videos stehen im Fluss statt hinter dem Text (`hero--video`,
+   siehe oben). Damit ist keine Seite mehr betroffen und die Regeln, die den
+   Bogen hier abschalteten und die Figur darin neu setzten, sind entfallen. Der
+   Absatz bleibt als Warnung stehen: Wer einen Bogen in einen Hero zurückholt,
+   holt sich diesen Konflikt mit zurück und findet die Lösung in der
+   Versionsgeschichte. */
 @media (max-width: 740px) {
-    /* Nur für die Abbildung, die hinter dem Text liegt. Sarahs Foto auf der
-       Startseite steht im Fluss (`hero--photo`, siehe oben) – dort ist die
-       Spalte kein Flex-Container mehr und die Zeile wirkungslos. */
-    .hero:not(.hero--photo) .duo-media { justify-content: flex-end; align-items: flex-end; }
-
-    /* Ohne Bogen braucht die Figur keine Bogen-Proportion mehr: Sie steht
-       jetzt frei in der Fläche, deshalb schmaler und größer. `top` hält sie
-       unter dem Logo, das von oben in den Hero hineinragt. */
-    .hero-arc {
-        background: none;
-        width: min(100%, 420px);
-    }
-    .hero-arc img { top: 12%; left: 22%; width: 64%; }
+    /* Nur für eine Abbildung, die hinter dem Text liegt. Beide Heros der Seite
+       stehen inzwischen im Fluss (`hero--photo` auf der Startseite,
+       `hero--video` auf /ueber-mich) – dort ist die Spalte kein Flex-Container
+       mehr und die Zeile wirkungslos. Sie bleibt für jeden künftigen Hero, der
+       wieder eine Fläche trägt. */
+    .hero:not(.hero--photo):not(.hero--video) .duo-media { justify-content: flex-end; align-items: flex-end; }
 }
 
 /* --- Kleine Freundlichkeiten ------------------------------------------- */

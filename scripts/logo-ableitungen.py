@@ -15,7 +15,7 @@ WAS HIER ENTSTEHT
     logo-sarah-klein.webp                 Header, Login, Referenzseite
     logo-sarah-hero.webp                  große Fassung in Reserve
     logo-sarah-hell.webp                  für den dunklen Fuß und die Sidebar
-    logo-bogen.webp                       nur der Bogen (Bühne auf /ueber-mich)
+    logo-bogen.webp                       nur der Bogen – Vorlage fürs Favicon
     logo-signet.webp                      Bogen + Lenkrad, ohne Schrift
     logo-wortmarke.webp                   nur der Schriftzug
     favicon.png, apple-touch-icon.png     Browser-Symbole
@@ -27,8 +27,11 @@ dadurch die Breite, gehören diese Stellen mit angefasst, sonst springt das
 Layout beim Laden:
 
     width=… height=… an den <img>-Tags in partials/nav.php, partials/footer.php,
-    admin/layout.php, admin/login.php, pages/meine-website.php
-    theme.css → .hero-arc { aspect-ratio: … } (Maße von logo-bogen.webp)
+    admin/layout.php, admin/login.php
+
+Kein Stylesheet lädt logo-bogen.webp mehr (bis SAR-38 war es die Bühne im Hero
+von /ueber-mich, siehe theme.css). Die Datei bleibt trotzdem: Aus ihr entsteht
+hier das Favicon.
 
 Das Skript gibt die neuen Maße am Ende aus.
 """
@@ -128,9 +131,13 @@ def teile(voll: Image.Image):
 def nur(voll: Image.Image, behalten: np.ndarray) -> Image.Image:
     """Blendet alles aus, was nicht in der Maske steht – ohne zu beschneiden.
 
-    Der Zuschnitt bleibt bewusst der des vollen Logos: logo-bogen.webp ist die
-    Bühne, auf der Sarahs Foto in prozentualen Koordinaten sitzt (theme.css,
-    .hero-arc img). Neu getrimmt würden diese Prozente auf etwas anderes zeigen.
+    Der Zuschnitt bleibt bewusst der des vollen Logos. Das war ursprünglich
+    Pflicht: logo-bogen.webp war die Bühne, auf der Sarahs Foto in prozentualen
+    Koordinaten saß – neu getrimmt hätten die Prozente auf etwas anderes
+    gezeigt. Seit SAR-38 gibt es diese Bühne nicht mehr, aber der ungetrimmte
+    Zuschnitt bleibt richtig: Das Favicon setzt den Bogen über die Höhe mittig
+    auf eine quadratische Fläche, und dafür muss die Leinwand dieselbe sein wie
+    beim vollen Logo. Sonst sitzt das Symbol anders im Rahmen als die Marke.
     """
     a = np.array(voll).copy()
     a[..., 3] = np.where(behalten, a[..., 3], 0)

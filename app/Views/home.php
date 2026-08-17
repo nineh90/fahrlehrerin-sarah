@@ -131,36 +131,20 @@ $schoolUrl = trim((string) config('school.url'));
          Abschnitt jetzt fast immer im ersten Scrollbereich liegt. */ ?>
 <section class="section">
     <div class="container">
-        <div class="duo duo--narrow-media">
-            <div class="duo-text">
-                <h2>Was im Fahrschulauto wirklich passiert</h2>
-                <p>
-                    Auf meinen Kanälen zeige ich meinen Arbeitsalltag: Situationen, die in
-                    der Prüfung immer wieder schiefgehen, Fragen, die mir jede Woche
-                    gestellt werden, und wie ein angepasstes Fahrzeug von innen aussieht.
-                </p>
-                <p>
-                    Kein Hochglanz, keine Werbung – einfach das, was ich sowieso den
-                    ganzen Tag erkläre. Ein Beispiel siehst du hier direkt.
-                </p>
-                <div class="duo-actions">
-                    <a class="btn btn-primary" href="<?= e(tiktok_url()) ?>"
-                       target="_blank" rel="noopener noreferrer">
-                        <?= icon('tiktok') ?> @<?= e(config('social.tiktok_handle')) ?>
-                    </a>
-                    <a class="btn btn-ghost" href="<?= e(instagram_url()) ?>"
-                       target="_blank" rel="noopener noreferrer">
-                        <?= icon('instagram') ?> Instagram
-                    </a>
-                </div>
-                <?php /*
-                    Später möglich: offizielles TikTok-Embed statt Link.
-                    Bewusst noch nicht eingebaut – das Embed-Script lädt Fremdcode und
-                    braucht vorher einen Hinweis in der Datenschutzerklärung sowie eine
-                    Einwilligung. Handle steht in der .env (TIKTOK_HANDLE).
-                */ ?>
-            </div>
+        <?php /* Video links, Text rechts (Sarah, 17.08.2026).
 
+                 Die Spalte steht im Markup vorn und nicht per CSS-`order`
+                 gedreht: Beim Grid hängen die Spaltenbreiten an der Position
+                 im Raster, nicht am Element. Über `order` gedreht bekäme das
+                 Hochformat-Video die breite Spalte (1.15fr) und der Text die
+                 schmale – deshalb `duo--narrow-media-left`, die gespiegelte
+                 Fassung der Klasse.
+
+                 Weil die Videospalte damit auch im Markup vorn steht, kommt
+                 sie auf schmalen Screens obendrauf: Auf dem Handy sieht man
+                 jetzt zuerst das Video und dann den Text dazu. Das war der
+                 zweite Teil von SAR-28 und ist hier gratis mitgekommen. */ ?>
+        <div class="duo duo--narrow-media-left">
             <div class="duo-media photo-wrap" style="--card-accent: var(--c-red);">
                 <figure class="video-frame">
                     <?php /* Kein autoplay: das Video hat Ton und startet nur auf Wunsch.
@@ -179,6 +163,46 @@ $schoolUrl = trim((string) config('school.url'));
                         schwer" – ein Ausschnitt von meinem Kanal
                     </figcaption>
                 </figure>
+            </div>
+
+            <div class="duo-text">
+                <h2>Was im Fahrschulauto wirklich passiert</h2>
+                <p>
+                    Auf meinen Kanälen zeige ich meinen Arbeitsalltag: Situationen, die in
+                    der Prüfung immer wieder schiefgehen, Fragen, die mir jede Woche
+                    gestellt werden, und wie ein angepasstes Fahrzeug von innen aussieht.
+                </p>
+                <p>
+                    Kein Hochglanz, keine Werbung – einfach das, was ich sowieso den
+                    ganzen Tag erkläre. Ein Beispiel siehst du hier direkt.
+                </p>
+                <?php /* Beide Knöpfe tragen den Namen der Plattform, nicht den
+                         Handle (Sarah, 17.08.2026). Vorher stand auf dem einen
+                         „@fahrlehrerin_sarah" und auf dem anderen „Instagram" –
+                         zwei verschiedene Sorten Beschriftung nebeneinander,
+                         und der Handle ist auf Instagram ohnehin ein anderer.
+                         Dieselbe Regel wie bei den Menü-Knöpfen (SAR-22): Ein
+                         Ziel, ein Name.
+
+                         Der Handle bleibt in der .env (TIKTOK_HANDLE) und
+                         steckt weiter in der verlinkten Adresse – nur
+                         ausgeschrieben steht er hier nicht mehr. */ ?>
+                <div class="duo-actions">
+                    <a class="btn btn-primary" href="<?= e(tiktok_url()) ?>"
+                       target="_blank" rel="noopener noreferrer">
+                        <?= icon('tiktok') ?> TikTok
+                    </a>
+                    <a class="btn btn-ghost" href="<?= e(instagram_url()) ?>"
+                       target="_blank" rel="noopener noreferrer">
+                        <?= icon('instagram') ?> Instagram
+                    </a>
+                </div>
+                <?php /*
+                    Später möglich: offizielles TikTok-Embed statt Link.
+                    Bewusst noch nicht eingebaut – das Embed-Script lädt Fremdcode und
+                    braucht vorher einen Hinweis in der Datenschutzerklärung sowie eine
+                    Einwilligung. Handle steht in der .env (TIKTOK_HANDLE).
+                */ ?>
             </div>
         </div>
     </div>

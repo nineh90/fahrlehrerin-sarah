@@ -458,6 +458,13 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 .duo { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
 .duo--text-first .duo-media { order: 2; }
 .duo--narrow-media { grid-template-columns: 1.15fr .85fr; }
+/* Dasselbe gespiegelt: schmale Medienspalte LINKS. Kein `order`-Trick,
+   sondern das Medium steht im Markup vorn – nur so bekommt es auch die
+   schmale Spalte. Über `order` gedreht landete es in der breiten (die
+   Spaltenbreiten hängen an der Position im Raster, nicht am Element) und
+   ein Hochformat würde die halbe Seite füllen. Nebeneffekt, der hier
+   erwünscht ist: Gestapelt steht das Medium dadurch oben. */
+.duo--narrow-media-left { grid-template-columns: .85fr 1.15fr; }
 /* `.duo--stack-text-first` steht bewusst nicht hier: Nebeneinander ändert der
    Modifier nichts, das Bild bleibt links wie im Markup. Er greift erst
    gestapelt – die Regel steht im 820er-Block ganz unten. */
@@ -816,7 +823,7 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 .notice p + p { margin-top: .5rem; }
 
 @media (max-width: 820px) {
-    .duo, .duo--narrow-media { grid-template-columns: 1fr; }
+    .duo, .duo--narrow-media, .duo--narrow-media-left { grid-template-columns: 1fr; }
     .duo--text-first .duo-media { order: 0; }
 
     /* Gestapelt zuerst der Text, dann das Bild – die Ausnahme von der Regel

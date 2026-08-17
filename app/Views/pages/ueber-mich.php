@@ -188,8 +188,11 @@ $schoolUrl = trim((string) config('school.url'));
          ab hier ihre echten Sätze stehen. Ein erfundener daneben wäre nicht nur
          überflüssig, sondern peinlich.
 
-         Ab hier folgen ihre vier Kapitel in ihrer Reihenfolge und ihrem
-         Wortlaut.
+         Ab hier folgen ihre Kapitel in ihrer Reihenfolge und ihrem Wortlaut.
+         Es sind seit dem 17.08.2026 drei; das vierte („Mein Ziel: Dein Weg zum
+         Führerschein") ist mit SAR-41 entfallen, siehe die Notiz unten am
+         Akkordeon. Wo unten von „vier" die Rede ist, ist die Vorgeschichte
+         gemeint und nicht der heutige Stand.
 
          SIE STEHEN SEIT DEM 13.08.2026 ZUM ANLESEN DA (Sarahs Wunsch: „zu
          viel Text macht es unübersichtlich … vielleicht Reiter, die man
@@ -333,47 +336,23 @@ $schoolUrl = trim((string) config('school.url'));
                 </details>
             </article>
 
-            <article class="accordion-item">
-                <h2 class="accordion-title">Mein Ziel: Dein Weg zum Führerschein</h2>
-                <?php /* Ihr kürzester Kapitelanfang – ein einzelner Satz. Er bleibt
-                         trotzdem allein stehen, obwohl der Teaser damit kürzer ist als
-                         die drei anderen: Der Satz stellt eine Behauptung auf, deren
-                         Begründung im nächsten Absatz steht. Genau das ist ein
-                         Anlesetext. */ ?>
-                <p class="accordion-teaser">Ein Führerschein ist weit mehr als ein Dokument.</p>
-                <details>
-                    <summary class="accordion-more">
-                        <span class="accordion-more-open">Mehr lesen</span>
-                        <span class="accordion-more-close">Weniger anzeigen</span>
-                        <span class="accordion-chevron" aria-hidden="true"></span>
-                    </summary>
-                    <div class="accordion-body">
-                        <p>
-                            Er kann ein großes Stück Freiheit, Unabhängigkeit, Selbstbestimmung und
-                            gesellschaftliche Teilhabe bedeuten.
-                        </p>
-                        <p>
-                            Deshalb steht für mich nicht das Handicap im Mittelpunkt, sondern der
-                            Mensch hinter dem Lenkrad.
-                        </p>
-                        <p>
-                            Ich möchte gemeinsam mit dir herausfinden, welcher Weg für dich der
-                            richtige ist und was du brauchst, um dein persönliches Ziel zu erreichen.
-                        </p>
-                        <p>
-                            Individuell. Auf Augenhöhe. Mit Geduld, Fachwissen und dem Blick für das,
-                            was möglich ist.
-                        </p>
-                        <?php /* Ihre beiden Schlusszeilen. Sie stehen bei ihr getrennt und
-                                 tragen genau dadurch – zusammengezogen zu einem Satz wären sie
-                                 eine Floskel. */ ?>
-                        <p class="statement">
-                            Denn manchmal braucht es keinen einfacheren Weg.<br>
-                            Sondern einen Weg, der zu dir passt.
-                        </p>
-                    </div>
-                </details>
-            </article>
+            <?php /* Hier stand bis zum 17.08.2026 ihr viertes Kapitel „Mein Ziel:
+                     Dein Weg zum Führerschein" (Ticket SAR-41 – entfallen).
+
+                     WAS DABEI VON DER SEITE VERSCHWUNDEN IST, denn es stand
+                     nirgends sonst: „Ein Führerschein ist weit mehr als ein
+                     Dokument", der Satz über den Menschen hinter dem Lenkrad
+                     statt dem Handicap, „Individuell. Auf Augenhöhe." und ihre
+                     beiden Schlusszeilen über den Weg, der zu dir passt. Alles
+                     ihr Wortlaut und in keinem anderen Abschnitt gespiegelt.
+                     Wer eine der Zeilen zurückholen will, findet sie in der
+                     Versionsgeschichte und in texte-von-sarah.md.
+
+                     Damit endet das Akkordeon jetzt mit „Gemeinsam schauen wir,
+                     was möglich ist". Das trägt: Der Abschnitt endet auf ihrem
+                     Netzwerk und den Ansprechpartnern, also auf einem Angebot,
+                     und nicht mitten im Erzählen. Die Farben der Kapitel rücken
+                     von allein nach (Rotation in theme.css). */ ?>
         </div>
     </div>
 </section>

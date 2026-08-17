@@ -168,6 +168,62 @@
     /* =====================================================================
        9. FORM & TYPOGRAFIE
        ===================================================================== */
+
+    /* --- DIE SCHRIFTGRÖSSEN-SKALA (SAR-34) -------------------------------
+       ZEHN GRÖSSEN FÜR DIE GANZE SEITE. Vorher waren es 46 Werte im CSS und
+       28 verschiedene Größen im gerenderten Frontend – gemessen, nicht
+       geschätzt. Darunter Gruppen wie 14,1 / 14,4 / 14,7 / 14,9 / 15,2 px:
+       fünf Größen innerhalb eines Pixels. Solche Unterschiede sieht niemand,
+       aber jeder erbt sie: Wer eine neue Komponente baut, greift sich
+       irgendeinen dieser Werte und der Wildwuchs wächst weiter.
+
+       WICHTIGER ALS DIE ANZAHL WAR DIE UNTERGRENZE. Neun der 28 Größen lagen
+       unter 14 px, die kleinste bei 11,8. Das ist der Punkt, an dem aus
+       „unsauber" ein Zugänglichkeitsproblem wird – und diese Seite wendet
+       sich an Menschen, die auf Lesbarkeit angewiesen sind.
+       --fs-xs IST DESHALB EINE HARTE GRENZE: 14 px, nichts darunter. Wer
+       einen kleineren Wert braucht, hat ein Layoutproblem und kein
+       Typografieproblem.
+
+       Alles in rem und kein px: Stellt jemand im Browser eine größere
+       Grundschrift ein, wächst die ganze Seite mit. Mit px täte sie das nicht.
+
+       Rollen – wer eine Größe sucht, sucht sie hier und nicht im Fließtext
+       von nd-base.css:
+
+       --fs-xs      14 px  Meta, Labels, Versalzeilen, Bildunterschriften,
+                           Tabellenköpfe. Die Untergrenze.
+       --fs-sm      15 px  Sekundärtext: Kartentexte, Fußzeilen-Links,
+                           Formularhilfen, kleine Listen.
+       --fs-md      16 px  Fließtext, Knöpfe, Navigation. Der Normalfall.
+       --fs-lg      18 px  Anlesetexte (Hero, Seitenkopf, Sektionen),
+                           Kartenüberschriften.
+       --fs-xl      20 px  h3, hervorgehobene Sätze, Akkordeon-Titel.
+       --fs-2xl     24 px  kompakte h2 (Admin-Karten, Zitate, Prosa).
+       --fs-3xl            h2 im Fluss – wächst mit der Fensterbreite.
+       --fs-4xl            h1 auf Unterseiten.
+       --fs-hero           h1 im Hero, eine Stufe größer.
+       --fs-hero-sm        derselbe h1 unter 500 px. Eigener Wert, weil die
+                           Kurve dort sonst zu spät greift und die Zeile auf
+                           kleinen Geräten aus dem Rahmen läuft.
+
+       Zwei Ausnahmen, bewusst außerhalb der Skala, weil sie Ziffern und
+       keine Schrift sind – jeweils genau eine Verwendung:
+       --fs-stat     Kennzahl im Admin-Dashboard.
+       --fs-display  Fehlercode auf den 404/500-Seiten. */
+    --fs-xs:       0.875rem;
+    --fs-sm:       0.9375rem;
+    --fs-md:       1rem;
+    --fs-lg:       1.125rem;
+    --fs-xl:       1.25rem;
+    --fs-2xl:      1.5rem;
+    --fs-3xl:      clamp(1.6rem, 3vw, 2.1rem);
+    --fs-4xl:      clamp(2rem, 4.5vw, 3rem);
+    --fs-hero:     clamp(2.1rem, 5.2vw, 3.5rem);
+    --fs-hero-sm:  clamp(1.8rem, 8.5vw, 2.4rem);
+    --fs-stat:     2.25rem;
+    --fs-display:  4.5rem;
+
     /* --- Header und Marke ------------------------------------------------
        Der Header schrumpft beim Scrollen (Mechanik in nd-base.css). Diese
        fünf Werte hängen zusammen, wer einen anfasst, prüft die anderen mit:
@@ -564,7 +620,7 @@
 .tiktok-band .btn-light { background: var(--footer-text); border-color: var(--footer-text); color: var(--bg-footer); }
 .tiktok-band .btn-light:hover { color: var(--accent-text); }
 .tiktok-handle {
-    display: inline-block; margin-top: .8rem; font-size: .9rem;
+    display: inline-block; margin-top: .8rem; font-size: var(--fs-sm);
     color: var(--footer-accent); font-family: var(--font-body);
 }
 
@@ -619,7 +675,7 @@
 
 /* Mehr Luft unter der Überschrift als in einer Text-Kachel: Darunter beginnt
    eine Liste und keine Fließzeile. */
-.enroll h3 { margin: 0 0 1.5rem; font-size: 1.18rem; }
+.enroll h3 { margin: 0 0 1.5rem; font-size: var(--fs-lg); }
 
 .enroll-formal .check-list { margin-bottom: 0; }
 .enroll-formal .check-list li::before { color: var(--card-accent, var(--accent)); }
@@ -650,7 +706,7 @@
     background: var(--card-accent-soft, var(--accent-soft));
     border: 2px solid var(--card-accent, var(--accent));
     color: var(--text);
-    font-family: var(--font-head); font-weight: 700; font-size: 1.05rem;
+    font-family: var(--font-head); font-weight: 700; font-size: var(--fs-md);
 }
 
 /* Läuft von der Unterkante des Kreises bis kurz über den nächsten. Der
@@ -666,9 +722,9 @@
 
 .enroll-steps strong {
     display: block; margin-bottom: .3rem;
-    font-family: var(--font-head); color: var(--text); font-size: 1.04rem;
+    font-family: var(--font-head); color: var(--text); font-size: var(--fs-md);
 }
-.enroll-steps p { margin: 0; color: var(--text-soft); font-size: .93rem; line-height: 1.6; }
+.enroll-steps p { margin: 0; color: var(--text-soft); font-size: var(--fs-md); line-height: 1.6; }
 
 /* Unter 900 px stehen die beiden Spalten untereinander. Die Reihenfolge im
    Markup ist dafür schon die richtige: erst der Ablauf, dann das Formale. */

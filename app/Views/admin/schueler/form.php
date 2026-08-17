@@ -46,7 +46,7 @@ $soll   = Student::PFLICHT_SOLL[$klasse] ?? Student::PFLICHT_SOLL['B'];
                 <?php endforeach; ?>
             </ul>
 
-            <p class="muted" style="margin-bottom:0; font-size:.85rem;">
+            <p class="muted" style="margin-bottom:0; font-size:var(--fs-xs);">
                 Gezählt werden Sonderfahrten mit gesetzter Art, sobald der Termin
                 vorbei ist. Trag die Art beim Anlegen des Termins ein – dann läuft
                 der Stand von allein mit.
@@ -95,7 +95,7 @@ $soll   = Student::PFLICHT_SOLL[$klasse] ?? Student::PFLICHT_SOLL['B'];
                 <button class="btn btn-primary btn-block" type="submit">Neue PIN erzeugen &amp; mailen</button>
             </form>
 
-            <p class="muted" style="margin:.9rem 0 0; font-size:.85rem;">
+            <p class="muted" style="margin:.9rem 0 0; font-size:var(--fs-xs);">
                 Die PIN lässt sich nicht nachschlagen – sie steht nirgends im
                 Klartext. Vergessen? Dann erzeugst du hier eine neue: sie geht
                 sofort per Mail raus und wird dir einmalig angezeigt.

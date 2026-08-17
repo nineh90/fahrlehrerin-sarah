@@ -36,7 +36,7 @@
                             <a href="<?= url('/admin/schueler/' . $student['id'] . '/bearbeiten') ?>">
                                 <strong><?= e($student['name']) ?></strong>
                             </a>
-                            <br><span class="muted" style="font-size:.82rem;">
+                            <br><span class="muted" style="font-size:var(--fs-xs);">
                                 <?= e(Student::KLASSEN[$student['klasse']] ?? $student['klasse']) ?>
                                 <?php if ($student['note']): ?>
                                     &middot; <?= e($student['note']) ?>

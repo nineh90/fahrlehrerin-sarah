@@ -38,14 +38,14 @@
                         <td data-label="Termin">
                             <strong><?= e(format_datetime($start)) ?></strong>
                             <?php if ($isPast): ?>
-                                <br><span class="muted" style="font-size:.82rem;">vergangen</span>
+                                <br><span class="muted" style="font-size:var(--fs-xs);">vergangen</span>
                             <?php endif; ?>
                         </td>
                         <td data-label="Fahrschüler:in">
                             <?= e($booking['student_name']) ?>
                             <?php if ($booking['student_phone']): ?>
                                 <br><a href="tel:<?= e(preg_replace('/\s+/', '', (string) $booking['student_phone'])) ?>"
-                                       style="font-size:.85rem;"><?= e($booking['student_phone']) ?></a>
+                                       style="font-size:var(--fs-xs);"><?= e($booking['student_phone']) ?></a>
                             <?php endif; ?>
                         </td>
                         <td data-label="Art"><?= e(Slot::label($booking)) ?></td>

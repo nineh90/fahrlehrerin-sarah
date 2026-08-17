@@ -70,7 +70,7 @@
             <dd><?= e(Auth::user()['email'] ?? '') ?></dd>
         </dl>
 
-        <p class="muted" style="margin:0; font-size:.85rem;">
+        <p class="muted" style="margin:0; font-size:var(--fs-xs);">
             Die E-Mail-Adresse für die Anmeldung lässt sich hier nicht ändern –
             dafür bin ich zuständig. Sag mir Bescheid, wenn sie anders lauten soll.
         </p>

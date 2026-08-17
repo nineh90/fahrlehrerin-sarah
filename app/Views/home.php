@@ -109,6 +109,81 @@ $schoolUrl = trim((string) config('school.url'));
     </div>
 </section>
 
+<?php /* SARAHS VIDEO – steht seit dem 17.08.2026 hier oben, direkt hinter dem
+         Hero (ihr Wunsch, Ticket SAR-28: „an eine bessere Stelle").
+
+         Vorher lag der Abschnitt an vierter Stelle von sechs. Nachgemessen
+         hieß das auf einem Handy (390 × 844): Das Video begann 3,9
+         Bildschirme weit unten – fast viermal wischen. Auf dem Desktop 2,3.
+         Der Grund war die Spalte: Gestapelt kommt erst der ganze Text samt
+         beider Knöpfe, dann erst das Video.
+
+         Warum ausgerechnet dieser Abschnitt nach oben gehört: Das Video ist
+         der einzige Inhalt der Startseite, der nachweislich von Sarah ist –
+         ihre Stimme, ihr Gesicht, ihre Worte. Die Texte drumherum sind zum
+         großen Teil noch Entwürfe (siehe „Offene Punkte" in CLAUDE.md). Und
+         ihr Publikum kommt von TikTok: Wer von dort kommt, erwartet
+         Bewegtbild und wischt nicht vier Bildschirme weit danach.
+
+         Kein autoplay, das bleibt auch hier oben so – das Video hat Ton.
+         `preload="metadata"` ist an dieser Stelle wichtiger als vorher: Der
+         Browser lädt nur die Kopfdaten, nicht die 5,7 MB, obwohl der
+         Abschnitt jetzt fast immer im ersten Scrollbereich liegt. */ ?>
+<section class="section">
+    <div class="container">
+        <div class="duo duo--narrow-media">
+            <div class="duo-text">
+                <h2>Was im Fahrschulauto wirklich passiert</h2>
+                <p>
+                    Auf meinen Kanälen zeige ich meinen Arbeitsalltag: Situationen, die in
+                    der Prüfung immer wieder schiefgehen, Fragen, die mir jede Woche
+                    gestellt werden, und wie ein angepasstes Fahrzeug von innen aussieht.
+                </p>
+                <p>
+                    Kein Hochglanz, keine Werbung – einfach das, was ich sowieso den
+                    ganzen Tag erkläre. Ein Beispiel siehst du hier direkt.
+                </p>
+                <div class="duo-actions">
+                    <a class="btn btn-primary" href="<?= e(tiktok_url()) ?>"
+                       target="_blank" rel="noopener noreferrer">
+                        <?= icon('tiktok') ?> @<?= e(config('social.tiktok_handle')) ?>
+                    </a>
+                    <a class="btn btn-ghost" href="<?= e(instagram_url()) ?>"
+                       target="_blank" rel="noopener noreferrer">
+                        <?= icon('instagram') ?> Instagram
+                    </a>
+                </div>
+                <?php /*
+                    Später möglich: offizielles TikTok-Embed statt Link.
+                    Bewusst noch nicht eingebaut – das Embed-Script lädt Fremdcode und
+                    braucht vorher einen Hinweis in der Datenschutzerklärung sowie eine
+                    Einwilligung. Handle steht in der .env (TIKTOK_HANDLE).
+                */ ?>
+            </div>
+
+            <div class="duo-media photo-wrap" style="--card-accent: var(--c-red);">
+                <figure class="video-frame">
+                    <?php /* Kein autoplay: das Video hat Ton und startet nur auf Wunsch.
+                             preload="metadata" lädt bloß die Kopfdaten, nicht die 5,7 MB. */ ?>
+                    <video controls playsinline preload="metadata"
+                           poster="<?= asset('img/sarah-vorstellung-poster.jpg') ?>"
+                           width="576" height="1024">
+                        <source src="<?= asset('video/sarah-vorstellung.mp4') ?>" type="video/mp4">
+                        Dein Browser kann dieses Video nicht abspielen.
+                        <a href="<?= e(tiktok_url()) ?>" target="_blank" rel="noopener noreferrer">
+                            Schau es dir direkt auf TikTok an.
+                        </a>
+                    </video>
+                    <figcaption>
+                        „Mit einem Handicap ist der Weg zum Führerschein oftmals steinig und
+                        schwer" – ein Ausschnitt von meinem Kanal
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+
 <?php /* Hier stand bis zum 12.08.2026 ein Kasten „Kurz vorweg: Das hier ist meine
          persönliche Seite" – dieselbe Einordnung, die seit Sarahs Wunsch unten auf
          jeder Seite steht (partials/site-note.php). Zweimal auf einer Seite wäre
@@ -132,7 +207,7 @@ $schoolUrl = trim((string) config('school.url'));
          Fotos, keinen Bildschirm auseinander. */ ?>
 
 <!-- Zitat: bricht den Rhythmus, gibt Sarah eine Stimme -->
-<section class="section">
+<section class="section section--alt">
     <div class="container">
         <?php /* ECHTES ZITAT, wörtlich aus Sarahs eigenem Text (11.08.2026,
                  Abschnitt „Warum mir diese Arbeit besonders am Herzen liegt",
@@ -162,7 +237,7 @@ $schoolUrl = trim((string) config('school.url'));
 </section>
 
 <!-- Schwerpunkte -->
-<section class="section section--alt">
+<section class="section">
     <div class="container">
         <div class="section-head">
             <div class="section-head-text">
@@ -224,62 +299,6 @@ $schoolUrl = trim((string) config('school.url'));
                     Wir fangen da an, wo es sich noch machbar anfühlt.
                 </p>
             </article>
-        </div>
-    </div>
-</section>
-
-<!-- TikTok mit Bild -->
-<section class="section">
-    <div class="container">
-        <div class="duo duo--narrow-media">
-            <div class="duo-text">
-                <h2>Was im Fahrschulauto wirklich passiert</h2>
-                <p>
-                    Auf meinen Kanälen zeige ich meinen Arbeitsalltag: Situationen, die in
-                    der Prüfung immer wieder schiefgehen, Fragen, die mir jede Woche
-                    gestellt werden, und wie ein angepasstes Fahrzeug von innen aussieht.
-                </p>
-                <p>
-                    Kein Hochglanz, keine Werbung – einfach das, was ich sowieso den
-                    ganzen Tag erkläre. Ein Beispiel siehst du hier direkt.
-                </p>
-                <div class="duo-actions">
-                    <a class="btn btn-primary" href="<?= e(tiktok_url()) ?>"
-                       target="_blank" rel="noopener noreferrer">
-                        <?= icon('tiktok') ?> @<?= e(config('social.tiktok_handle')) ?>
-                    </a>
-                    <a class="btn btn-ghost" href="<?= e(instagram_url()) ?>"
-                       target="_blank" rel="noopener noreferrer">
-                        <?= icon('instagram') ?> Instagram
-                    </a>
-                </div>
-                <?php /*
-                    Später möglich: offizielles TikTok-Embed statt Link.
-                    Bewusst noch nicht eingebaut – das Embed-Script lädt Fremdcode und
-                    braucht vorher einen Hinweis in der Datenschutzerklärung sowie eine
-                    Einwilligung. Handle steht in der .env (TIKTOK_HANDLE).
-                */ ?>
-            </div>
-
-            <div class="duo-media photo-wrap" style="--card-accent: var(--c-red);">
-                <figure class="video-frame">
-                    <?php /* Kein autoplay: das Video hat Ton und startet nur auf Wunsch.
-                             preload="metadata" lädt bloß die Kopfdaten, nicht die 5,7 MB. */ ?>
-                    <video controls playsinline preload="metadata"
-                           poster="<?= asset('img/sarah-vorstellung-poster.jpg') ?>"
-                           width="576" height="1024">
-                        <source src="<?= asset('video/sarah-vorstellung.mp4') ?>" type="video/mp4">
-                        Dein Browser kann dieses Video nicht abspielen.
-                        <a href="<?= e(tiktok_url()) ?>" target="_blank" rel="noopener noreferrer">
-                            Schau es dir direkt auf TikTok an.
-                        </a>
-                    </video>
-                    <figcaption>
-                        „Mit einem Handicap ist der Weg zum Führerschein oftmals steinig und
-                        schwer" – ein Ausschnitt von meinem Kanal
-                    </figcaption>
-                </figure>
-            </div>
         </div>
     </div>
 </section>

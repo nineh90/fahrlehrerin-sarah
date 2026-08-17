@@ -356,18 +356,20 @@ $schoolUrl = trim((string) config('school.url'));
                      Anweisung als Verkehrszeichen auf dem Gerät der Schülerin,
                      farbcodiert nach Dringlichkeit, Empfängerschirm ohne
                      bedienbare Elemente. Aber sie ist NICHT veröffentlicht.
-                     Deshalb steht hier „entsteht gerade" und kein Satz, der
-                     eine fertige App verspricht. Wer die Karte anfasst, prüft
-                     vorher den Stand des Projekts – ein Werbesatz für etwas,
-                     das es noch nicht gibt, wäre auf einer Seite, die sonst
-                     nichts verspricht, der einzige Bruch. */ ?>
+                     Deshalb steht hier „in der Testphase" (bis zum 17.08.2026
+                     „entsteht gerade") und kein Satz, der eine fertige App
+                     verspricht. Der Halbsatz ist die einzige Stelle der Seite,
+                     die vom Stand eines anderen Projekts abhängt: Wer die Karte
+                     anfasst, prüft ihn vorher – ein Werbesatz für etwas, das es
+                     noch nicht gibt, wäre auf einer Seite, die sonst nichts
+                     verspricht, der einzige Bruch. */ ?>
             <article class="feature-card">
                 <span class="feature-icon"><?= icon('ear') ?></span>
                 <h3>Ausbildung mit Hörschädigung</h3>
                 <p>
                     Was ich sage, hörst du nicht – also zeige ich es dir. Meine Anweisungen
                     erscheinen als Schild auf einem Gerät im Auto, farbig nach Dringlichkeit.
-                    Die App dafür heißt FahrSignal und entsteht gerade.
+                    Die App dafür heißt FahrSignal und ist gerade in der Testphase.
                 </p>
             </article>
 

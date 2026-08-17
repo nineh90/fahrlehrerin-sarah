@@ -65,16 +65,27 @@
              jeder – auch dort, wo der Credit bewusst schweigt. */ ?>
     <?php require APP_ROOT . '/app/Views/partials/site-note.php'; ?>
 
-    <?php
-    /* Credit-Band auf den Info-Seiten. Auf den Seiten, auf denen jemand gerade
-       eine Fahrstunde einträgt (Login, Kalender, eigene Stunden), bleibt es
-       bewusst weg – dort wäre es nur im Weg. */
-    if ($showNdCredit ?? true) {
-        require APP_ROOT . '/app/Views/partials/nd-credit.php';
-    }
-    ?>
+    <?php /* Hier stand bis zum 17.08.2026 das große Credit-Band von
+             Nils-Digital (partials/nd-credit.php): Logo, Überschrift,
+             Werbetext und zwei Knöpfe, zwischen Sarahs Inhalt und ihrem Fuß.
+             Es lief über den Schalter `showNdCredit`, den fünf Controller auf
+             false setzten – auf Login, Kalender, „Meine Stunden" und beim
+             Verschieben wäre es im Weg gewesen.
 
+             Auf Sarahs Wunsch entfallen (Ticket SAR-32). An seine Stelle tritt
+             ein schmaler Streifen UNTER dem Fuß, dafür ohne Ausnahme auf jeder
+             Seite. Der Schalter ist damit weg, auch aus den Controllern – ein
+             Flag, das nichts mehr bewirkt, ist eine Falle für den Nächsten.
+
+             `nd-credit.php` liegt weiter im Ordner. Sie ist die Vorlage für
+             das, was Sarah „später als Wegbegleiter" genannt hat; wer das Band
+             zurückholt, braucht hier wieder ein `require` und in den fünf
+             Controllern wieder ein `showNdCredit => false`. */ ?>
     <?php require APP_ROOT . '/app/Views/partials/footer.php'; ?>
+
+    <?php /* Nach dem Fuß, nicht darin: Der Fuß gehört Sarah, was darunter
+             steht, ist die Signatur dessen, der die Seite gebaut hat. */ ?>
+    <?php require APP_ROOT . '/app/Views/partials/nd-banner.php'; ?>
 
     <script src="<?= asset('js/main.js') ?>" defer></script>
 </body>

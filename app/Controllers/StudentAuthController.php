@@ -13,7 +13,6 @@ final class StudentAuthController
         render('student/login', [
             'title'        => 'Anmelden',
             'values'       => [],
-            'showNdCredit' => false,
         ]);
     }
 
@@ -38,7 +37,6 @@ final class StudentAuthController
         render('student/login', [
             'title'        => 'Anmelden',
             'values'       => ['email' => $email],
-            'showNdCredit' => false,
         ]);
     }
 

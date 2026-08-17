@@ -33,8 +33,6 @@ final class SlotController
             'isLoggedIn'   => StudentAuth::check(),
             'nextFree'     => $nextFree,
             'nextFreeWeek' => $nextFree !== null ? week_offset_of(dt($nextFree['starts_at'])) : null,
-            // Wer gerade eine Fahrstunde einträgt, soll nicht abgelenkt werden
-            'showNdCredit' => false,
         ]);
     }
 }

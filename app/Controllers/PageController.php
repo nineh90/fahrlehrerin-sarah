@@ -53,8 +53,6 @@ final class PageController
             'title'           => 'Wer diese Seite erstellt hat',
             'metaDescription' => 'Warum Sarah eine eigene Website wollte und wer sie '
                 . 'umgesetzt hat – eine Referenz für Nils-Digital.',
-            // Kein Credit-Band: die ganze Seite ist bereits der Credit
-            'showNdCredit'    => false,
         ]);
     }
 

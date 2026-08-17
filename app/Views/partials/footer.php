@@ -57,14 +57,13 @@
             </nav>
             <p class="footer-copy">&copy; <?= date('Y') ?> Sarah <?= e(config('contact.city')) ?></p>
 
-            <a class="footer-credit" href="https://nils-digital.de" target="_blank" rel="noopener">
-                <img class="footer-credit-mark" src="<?= asset('img/nils-digital-logo.png') ?>"
-                     alt="" width="320" height="233" loading="lazy" decoding="async">
-                <span>
-                    Gemacht mit <span class="heart">&hearts;</span> von
-                    <strong>Nils-Digital</strong>
-                </span>
-            </a>
+            <?php /* Hier stand bis zum 17.08.2026 „Gemacht mit ♥ von
+                     Nils-Digital" samt Logo. Entfallen mit SAR-32: Der Streifen
+                     unter dem Fuß sagt dasselbe, und zweimal derselbe Hinweis
+                     auf 10 cm Bildschirm ist einmal zu viel. Der Fuß trägt
+                     jetzt Sarahs Wege, ihr Rechtliches und ihr Copyright –
+                     sonst nichts. Das CSS (.footer-credit) bleibt in
+                     nd-base.css, es gehört zur ND-Signatur. */ ?>
         </div>
     </div>
 </footer>

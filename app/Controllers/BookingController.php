@@ -31,7 +31,6 @@ final class BookingController
         render('booking/index', [
             'title'    => 'Meine Termine',
             'student'      => StudentAuth::user(),
-            'showNdCredit' => false,
             'upcoming' => $upcoming,
             'past'     => $past,
         ]);
@@ -88,7 +87,6 @@ final class BookingController
             'title'   => 'Termin verschieben',
             'booking'      => $booking,
             'options'      => Slot::upcomingFree(),
-            'showNdCredit' => false,
         ]);
     }
 

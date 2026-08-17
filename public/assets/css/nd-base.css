@@ -1001,6 +1001,10 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 .footer-legal a:hover { color: var(--footer-accent); text-decoration: none; }
 .footer-legal .sep { color: var(--footer-border); }
 .footer-copy { font-size: .86rem; color: var(--footer-muted); margin: 0; }
+/* Die Zeile „Gemacht mit ♥ von Nils-Digital" IM Fuß ist am 17.08.2026
+   entfallen (SAR-32) – ihre Aufgabe übernimmt der Banner unter dem Fuß, siehe
+   unten. Die Regeln bleiben, weil .footer-credit zur ND-Signatur gehört und in
+   anderen Kundenprojekten im Fuß steht. */
 .footer-credit {
     display: inline-flex; align-items: center; gap: .6rem;
     font-size: .86rem; margin: 0; color: var(--footer-muted); text-decoration: none;
@@ -1009,6 +1013,45 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 .footer-credit strong { color: var(--footer-accent); font-family: var(--font-head); font-weight: 600; }
 .footer-credit-mark { width: 30px; height: auto; flex-shrink: 0; }
 .footer-credit .heart { color: var(--red); }
+
+/* ---------- Nils-Digital-Banner (unter dem Fuß) ----------
+   Ein schmaler Streifen ganz am Ende, auf jeder öffentlichen Seite.
+
+   Der HELLE GRUND ist der ganze Trick: Der Fuß darüber ist dunkel, hier wird
+   es wieder hell. Diese Kante ist die Aussage – oberhalb endet Sarahs Seite,
+   was darunter steht, ist die Signatur dessen, der sie gebaut hat. Ein
+   dunkler Streifen unter einem dunklen Fuß sähe dagegen aus wie ein
+   abgerutschtes Stück Fuß.
+
+   `margin-top: 0` gegen den Fuß und KEIN `margin-top: auto`: Das steht am
+   `.site-footer` und schiebt ihn auf kurzen Seiten nach unten. Stünde es hier
+   noch einmal, risse es den Banner vom Fuß los und ließe eine Lücke. */
+.nd-banner {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 1.1rem 0;
+    font-size: .84rem;
+}
+.nd-banner-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: .7rem 1.6rem; flex-wrap: wrap;
+}
+.nd-banner-brand {
+    display: inline-flex; align-items: center; gap: .6rem;
+    color: var(--muted); text-decoration: none;
+}
+.nd-banner-brand:hover { color: var(--text); }
+.nd-banner-brand strong { color: var(--accent-text); font-family: var(--font-head); font-weight: 600; }
+.nd-banner-mark { width: 26px; height: auto; flex-shrink: 0; }
+.nd-banner-more { color: var(--muted); text-decoration: none; white-space: nowrap; font-family: var(--font-head); }
+.nd-banner-more:hover { color: var(--accent-text); }
+
+/* Unter ~520 px stehen die beiden Teile untereinander statt an den Rändern
+   auseinandergezogen – „space-between" bei zwei umgebrochenen Zeilen sieht
+   aus, als wäre etwas verrutscht. */
+@media (max-width: 520px) {
+    .nd-banner-inner { flex-direction: column; align-items: flex-start; }
+}
 
 /* =========================================================================
    Admin

@@ -168,7 +168,25 @@ $schoolUrl = trim((string) config('school.url'));
         <div class="section-head">
             <div class="section-head-text">
                 <span class="section-eyebrow">Womit ich arbeite</span>
-                <h2>Wofür man mich holt</h2>
+                <?php /* Hieß bis zum 17.08.2026 „Wofür man mich holt" (Sarah,
+                         Ticket SAR-25). Das „man" war der Fehler: Es steht
+                         mitten auf einer Seite, die sonst durchgehend „ich"
+                         und „du" sagt, und „holen" klingt nach beauftragen.
+
+                         Warum nicht das Naheliegende – „Meine Leistungen",
+                         „Mein Angebot"? Das darf hier nicht stehen. Sarah ist
+                         angestellte Fahrlehrerin; Anmeldung, Vertrag und
+                         Preise laufen über die Fahrschule. Eine Seite, die
+                         ein Leistungspaket behauptet, gibt ein Angebot ab,
+                         das sie gar nicht machen kann (siehe CLAUDE.md,
+                         Projektkontext). Die alte Formulierung war der
+                         Versuch, genau das zu umgehen.
+
+                         „Begleiten" trägt zusätzlich die beiden Karten, die
+                         keine Fahrzeugklasse sind – Handicap und die Angst
+                         vorm Steuer. „Was ich mit dir fahre" hätte für die
+                         beiden zu kurz gegriffen. */ ?>
+                <h2>Wobei ich dich begleite</h2>
             </div>
         </div>
 

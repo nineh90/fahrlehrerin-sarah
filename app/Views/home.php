@@ -384,14 +384,55 @@ $schoolUrl = trim((string) config('school.url'));
                 </ul>
             </article>
 
+            <?php /* Hier stand bis zum 17.08.2026 „Bei mir sitzt du im Auto" –
+                     die Gegenliste zur Fahrschule: alle Fahrstunden, die
+                     Pflichtfahrten, Ausbildung mit Prothese oder Handbedienung,
+                     eigene Termine.
+
+                     Sarahs Wunsch (SAR-29): An dieser Stelle steht jetzt der
+                     Ablauf von /fahren-mit-handicap, dort die Sektion „So läuft
+                     es ab" (früher mit dem Label „Der Weg dahin").
+
+                     „Im gleichen Stil" heißt hier NICHT dieselbe Auszeichnung
+                     wie dort: Auf /fahren-mit-handicap ist das eine `.process`-
+                     Liste, also ein vierspaltiges Raster mit Verbindungslinie
+                     zwischen den Nummern – eine waagerechte Zeitleiste über die
+                     volle Seitenbreite. In einer halben Spalte hat die keinen
+                     Platz. `.steps` ist dieselbe Sache senkrecht, mit denselben
+                     runden Nummern; damit bleibt die Reihenfolge erhalten, und
+                     genau die ist der Sinn eines Ablaufs. Eine `check-list` wie
+                     nebenan wäre die einfachere Wahl gewesen und hätte aus vier
+                     Schritten vier gleichrangige Haken gemacht.
+
+                     Der Text ist wörtlich von /fahren-mit-handicap übernommen.
+                     ACHTUNG: Er ist dort ein ENTWURF und nicht von Sarah – er
+                     steht jetzt an zwei Stellen, geändert wird er also auch an
+                     zwei Stellen. */ ?>
             <article class="card" style="--card-accent: var(--c-violet);">
-                <h3 style="margin-top:0;">Bei mir sitzt du im Auto</h3>
-                <ul class="check-list" style="margin-bottom:0;">
-                    <li>Alle Fahrstunden, von der ersten bis zur Prüfung</li>
-                    <li>Die Pflichtfahrten: Überland, Autobahn, bei Dunkelheit</li>
-                    <li>Ausbildung mit Prothese, Lenkhilfe oder Handbedienung</li>
-                    <li>Deine Termine – hier auf der Seite, ohne Telefonieren</li>
-                </ul>
+                <h3 style="margin-top:0;">So läuft es ab</h3>
+                <ol class="steps" style="margin-bottom:0;">
+                    <li>
+                        <strong>Wir telefonieren</strong>
+                        <span>Du erzählst mir, worum es geht. Ich sage dir ehrlich, was ich
+                              einschätzen kann und was ein Gutachten klären muss.</span>
+                    </li>
+                    <li>
+                        <strong>Gutachten &amp; Auflagen</strong>
+                        <span>Für die Fahrerlaubnis wird meist ein medizinisches oder
+                              verkehrsmedizinisches Gutachten gebraucht. Daraus ergeben sich
+                              die Auflagen für dein Fahrzeug.</span>
+                    </li>
+                    <li>
+                        <strong>Erste Stunde</strong>
+                        <span>Wir setzen uns ins angepasste Fahrzeug, stellen alles auf dich
+                              ein und fahren erstmal nur, damit du ein Gefühl bekommst.</span>
+                    </li>
+                    <li>
+                        <strong>Üben bis es sitzt</strong>
+                        <span>Wie bei jedem anderen auch: so lange, bis du sicher bist. Der
+                              einzige Unterschied ist der Weg, nicht das Ziel.</span>
+                    </li>
+                </ol>
             </article>
         </div>
 

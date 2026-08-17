@@ -328,14 +328,21 @@ $schoolUrl = trim((string) config('school.url'));
                          „Kleinwuchs" ist der Begriff, den der Bundesverband
                          kleinwüchsiger Menschen selbst verwendet.
 
-                         ACHTUNG, DIESELBE AUFZÄHLUNG STAND AN DREI STELLEN: hier und in
-                         den Meta-Beschreibungen von HomeController und PageController.
-                         Alle drei sind mitgezogen – sonst verspricht die Seite etwas,
-                         das die Google-Vorschau nicht kennt. */ ?>
+                         PROTHESE IST GANZ ENTFALLEN und nicht nur hier: auch aus den
+                         beiden Meta-Beschreibungen, aus dem Vorspann von
+                         /fahren-mit-handicap und als eigene Karte „Prothesenfahren"
+                         von dort. „Eingeschränkte Beweglichkeit" ist der Ersatz –
+                         breiter gefasst und ohne ein Hilfsmittel zu nennen, das die
+                         Seite nicht mehr anbietet.
+
+                         Die Aufzählung steht damit an drei Stellen: hier und in den
+                         Meta-Beschreibungen von HomeController und PageController.
+                         Wer sie ändert, ändert sie dreimal – sonst verspricht die
+                         Seite etwas, das die Google-Vorschau nicht kennt. */ ?>
                 <p>
-                    Handbedienung, Lenkhilfe, Pedalverlängerung, Sitzerhöhung – für
-                    Kleinwuchs genauso wie für eine Prothese. Ich kenne die Technik und
-                    übe sie, bis du nicht mehr darüber nachdenkst.
+                    Handbedienung, Lenkhilfe, Pedalverlängerung, Sitzerhöhung – ob
+                    Kleinwuchs oder eingeschränkte Beweglichkeit. Ich kenne die Technik
+                    und übe sie, bis du nicht mehr darüber nachdenkst.
                 </p>
             </article>
 

@@ -3,8 +3,8 @@
     <div class="container">
         <h1>Fahren mit Handicap</h1>
         <p class="page-lead">
-            Mit Prothese, nach einer Amputation, nach einem Unfall oder mit einer
-            Einschränkung, die dir jemand als Ausschlussgrund verkauft hat:
+            Mit Kleinwuchs, nach einem Unfall oder mit einer Einschränkung, die dir
+            jemand als Ausschlussgrund verkauft hat:
             Lass uns darüber reden, bevor du es abhakst.
         </p>
     </div>
@@ -80,12 +80,23 @@
                 </p>
             </article>
 
+            <?php /* Hier stand bis zum 17.08.2026 „Prothesenfahren". Auf Wunsch
+                     entfallen (SAR-43), samt Icon und allen Nennungen im Rest der
+                     Seite. An seine Stelle tritt der Umbau, um den es bei Kleinwuchs
+                     geht – die Startseite nennt ihn seit SAR-43, und ohne diese Karte
+                     verspräche sie etwas, das die Detailseite nicht kennt.
+
+                     ENTWURF, nicht von Sarah – wie alles hier, was nicht ausdrücklich
+                     als ihr Text markiert ist. Der Text bleibt bewusst bei dem, was
+                     technisch allgemein gilt (Aufsätze, Sitzhöhe, Sichtlinie);
+                     welche Systeme sie konkret im Auto hat, muss sie ergänzen. */ ?>
             <article class="feature-card">
-                <span class="feature-icon"><?= icon('prosthesis') ?></span>
-                <h3>Prothesenfahren</h3>
+                <span class="feature-icon"><?= icon('extension') ?></span>
+                <h3>Pedalverlängerung</h3>
                 <p>
-                    Ob Bein- oder Armprothese: Wir schauen zuerst, was mit deiner Prothese
-                    gut geht, und suchen dann die passende Technik dazu – nicht umgekehrt.
+                    Aufsätze holen die Pedale nach oben, dazu kommt der Sitz höher.
+                    Gesucht ist die eine Position, in der du gleichzeitig gut siehst,
+                    bequem ans Lenkrad kommst und die Pedale ganz durchtreten kannst.
                 </p>
             </article>
         </div>

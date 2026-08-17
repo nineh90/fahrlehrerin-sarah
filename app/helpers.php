@@ -220,7 +220,7 @@ function icon(string $name): string
         /* Bewusst das bekannte Zugänglichkeits-Piktogramm (Person im Rad) und
            kein Rollstuhl von der Seite: Es ist dieselbe Form, die im Lenkrad
            von Sarahs Logo sitzt, und es steht für Handicap allgemein. Ihr
-           Schwerpunkt umfasst auch Prothese und Handbedienung – ein reiner
+           Schwerpunkt umfasst auch Kleinwuchs und Handbedienung – ein reiner
            Rollstuhl würde das Thema enger machen, als es ist.
 
            Seit dem Logo-Tausch am 17.08.2026 ist es die DYNAMISCHE Fassung
@@ -266,18 +266,18 @@ function icon(string $name): string
            ohnehin im Text der Karte darunter. */
         'lever'     => '<path d="M6.4 20.4h11.2"/><path d="M12 20.4v-7.6"/><path d="M8.6 8.2a3.4 3.4 0 0 1 6.8 0v1.2a3.4 3.4 0 0 1-3.4 3.4 3.4 3.4 0 0 1-3.4-3.4Z"/>',
 
-        /* Prothese: Schaft, Kniegelenk, Fuß. Zwei Dinge sind hier hart
-           erarbeitet und sollten so bleiben:
-           Der Fuß MUSS zur Seite zeigen – jeder symmetrische Entwurf (Schaft
-           oben, Sockel unten) las sich als Pokal. Erst die asymmetrische
-           Silhouette macht daraus ein Bein.
-           Und das GELENK zwischen Schaft und Fuß muss sichtbar bleiben: Ohne
-           es verschmelzen Schaft und Fuß bei 26 px zu einem Stiefel. Der Kreis
-           ist das einzige, was aus dem Bein eine Prothese macht.
-           Gezeigt ist das Bein, obwohl die Karte auch Arme nennt – es ist die
-           bei Weitem lesbarere Form, und die Umbauten auf dieser Seite drehen
-           sich ohnehin überwiegend um die Beine. */
-        'prosthesis' => '<path d="M8.6 2.8h6.8a1.6 1.6 0 0 1 1.6 1.8l-.5 3.6a2.6 2.6 0 0 1-2.6 2.2h-3.8A2.6 2.6 0 0 1 7.5 8.2L7 4.6a1.6 1.6 0 0 1 1.6-1.8Z"/><circle cx="12" cy="12.8" r="2"/><path d="M12 14.8v2.8"/><path d="M9.6 17.6h5a1.5 1.5 0 0 1 1.5 1.5v.4h2.2a1.2 1.2 0 0 1 0 2.4H9.6a1.4 1.4 0 0 1-1.4-1.4v-1.5a1.4 1.4 0 0 1 1.4-1.4Z"/>',
+        /* Hier lag bis zum 17.08.2026 'prosthesis' – ein Bein mit Schaft,
+           Kniegelenk und Fuß, für die Karte „Prothesenfahren". Karte und Icon
+           sind mit SAR-43 entfallen; das Icon steht in der Versionsgeschichte,
+           falls das Thema zurückkommt.
+
+           Pedalverlängerung: dasselbe geriffelte Pedal wie in 'pedal', damit
+           beide Karten dieselbe Sprache sprechen, und ein Pfeil daneben. Der
+           Pfeil zeigt nach OBEN und nicht zur Seite: Verlängert wird nach oben,
+           dem Fuß entgegen. Eine zweite Variante mit Pedal und aufgesetztem
+           Zweitteil war anatomisch näher dran, zerfiel bei 26 px aber in zwei
+           Kästchen ohne erkennbaren Zusammenhang. */
+        'extension' => '<rect x="5.6" y="8.6" width="7" height="11.2" rx="2.4"/><path d="M7.8 11.4h2.6M7.8 14.2h2.6M7.8 17h2.6"/><path d="M17.4 19.6V6.6"/><path d="m14.8 9.2 2.6-2.8 2.6 2.8"/>',
         'shield'    => '<path d="M12 3l7.5 3v5.4c0 4.6-3.1 8.8-7.5 10.1-4.4-1.3-7.5-5.5-7.5-10.1V6Z"/><path d="m9.2 12.2 2 2 3.6-3.8"/>',
         'sparkles'  => '<path d="m12 3 1.7 4.6L18.3 9l-4.6 1.4L12 15l-1.7-4.6L5.7 9l4.6-1.4Z"/><path d="m18 15 .8 2.2 2.2.8-2.2.8L18 21l-.8-2.2-2.2-.8 2.2-.8Z"/>',
         'chat'      => '<path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-5.6A8 8 0 0 1 13 4a8 8 0 0 1 8 8Z"/>',

@@ -29,9 +29,9 @@ final class PageController
         render('pages/handicap', [
             'title'           => 'Fahren mit Handicap',
             /* Siehe HomeController: dieselbe Aufzählung, dieselbe Begründung (SAR-43). */
-            'metaDescription' => 'Führerschein mit Kleinwuchs, Prothese, Lenkhilfe oder '
-                . 'Handbedienung: Wie die Ausbildung im angepassten Fahrzeug abläuft und '
-                . 'was du dafür brauchst.',
+            'metaDescription' => 'Führerschein bei Kleinwuchs oder eingeschränkter '
+                . 'Beweglichkeit: Handbedienung, Lenkhilfe, Pedalverlängerung – wie die '
+                . 'Ausbildung im angepassten Fahrzeug abläuft und was du dafür brauchst.',
         ]);
     }
 

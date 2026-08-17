@@ -3,7 +3,10 @@
 $school    = (string) config('school.name');
 $schoolUrl = trim((string) config('school.url'));
 ?>
-<section class="hero">
+<?php /* hero--photo: In der Medienspalte liegt ein Foto, keine Fläche. Der
+         Modifier schaltet auf schmalen Screens die Regel aus nd-base.css ab,
+         die die Abbildung hinter den Text legt (Begründung in theme.css). */ ?>
+<section class="hero hero--photo">
     <div class="container hero-inner">
         <div class="duo duo--narrow-media">
             <?php /* Die Augenbraue war am 07.08.2026 entfallen, weil die Klassen
@@ -24,7 +27,14 @@ $schoolUrl = trim((string) config('school.url'));
                          Vorlesesoftware und für alle ohne JavaScript.
                          Bewusst nur hier: Eine tippende Überschrift trägt einmal.
                          Auf jeder Unterseite noch einmal wäre sie ein Tic. */ ?>
-                <h1 data-typewriter>Hinterm Steuer<br>ist Platz für alle.</h1>
+                <?php /* Beide Umbrüche stehen hart im Text, und das ist kein
+                         Geschmack: Der Typewriter baut die Zeile Zeichen für
+                         Zeichen auf, ein vom Browser gesetzter Umbruch springt
+                         dabei mitten im Wort in die nächste Zeile. Nachgemessen
+                         mit nur einem <br> nach „Führerscheinausbildung":
+                         „Handicap" rutschte beim letzten Zeichen nach unten und
+                         schob den ganzen Block. */ ?>
+                <h1 data-typewriter>Führerscheinausbildung<br>für Menschen<br>mit Handicap</h1>
                 <?php /* "fast" = doppeltes Tempo. Das ist kein Detail: Bei 42 ms
                          je Zeichen tippt die Seite mit rund 285 Wörtern pro
                          Minute, also ungefähr Lesegeschwindigkeit – dann fühlt
@@ -45,43 +55,56 @@ $schoolUrl = trim((string) config('school.url'));
                     <span class="sr-only">Unterwegs in </span>
                     <span data-typewriter="fast"><?= e(area_sentence()) ?></span>
                 </p>
+                <?php /* Die Knöpfe heißen wie die Menüpunkte, zu denen sie führen
+                         (Sarah, 17.08.2026, Ticket SAR-22): „so einfach wie
+                         möglich". Wer im Menü „Über mich" gelesen hat, soll
+                         denselben Namen wiederfinden und nicht raten müssen, ob
+                         „Mehr über mich" woanders hinführt.
+
+                         Gilt für die ganze Seite und für jedes Ziel, das im Menü
+                         steht. Wer hier einen Knopf ergänzt, gibt ihm den Namen
+                         aus `partials/nav.php` – oder, wenn das Ziel nicht im
+                         Menü steht (TikTok, Instagram, die Fahrschule), einen
+                         eigenen. */ ?>
                 <div class="hero-actions">
-                    <a class="btn btn-primary btn-lg" href="<?= url('/ueber-mich') ?>">Mehr über mich</a>
+                    <a class="btn btn-primary btn-lg" href="<?= url('/ueber-mich') ?>">Über mich</a>
                     <a class="btn btn-ghost btn-lg" href="<?= url('/fahren-mit-handicap') ?>">Fahren mit Handicap</a>
                 </div>
             </div>
 
-            <?php /* Hier stand bis zum 12.08.2026 ein Lockup aus drei Ebenen: der
-                     Bogen als Bühne, Sarah freigestellt an der Stelle des Lenkrads
-                     und darunter der Schriftzug – das Logo mit ihrem Foto darin.
+            <?php /* SARAH SELBST, seit dem 17.08.2026 (ihr Wunsch, Ticket SAR-21).
 
-                     Sarahs Wunsch, und er ist der bessere: an dieser Stelle ihr
-                     Logo, so wie sie es gezeichnet hat, mit dem Lenkrad statt
-                     ihrem Foto. Ihr Bild folgt weiter unten ohnehin gleich noch
-                     einmal; zweimal dieselbe Person auf einem Bildschirm nimmt
-                     beiden Auftritten die Wirkung.
+                     Hier lagen vorher zwei Fassungen: bis zum 12.08.2026 ein
+                     Lockup aus drei Ebenen (Bogen als Bühne, Sarah freigestellt
+                     an der Stelle des Lenkrads, Schriftzug darunter), danach auf
+                     ihren Wunsch nur ihr Logo. Beide sind weg – jetzt steht hier
+                     ein Foto von ihr.
 
-                     Ein Bild statt drei Ebenen: Das Logo ist final, es wird nicht
-                     mehr zusammengesetzt (siehe CLAUDE.md). Damit entfällt auch
-                     jedes Nachrechnen von Positionen.
+                     Warum das Logo an dieser Stelle inzwischen nicht mehr trägt:
+                     Es schreibt „Klasse B · Klasse BE · Handicapausbildung" mit
+                     aus. Seit die Überschrift daneben „Führerscheinausbildung für
+                     Menschen mit Handicap" heißt (SAR-20), stand zweimal fast
+                     dasselbe auf einem Bildschirm, einmal gezeichnet und einmal
+                     gesetzt. Das Logo trägt weiter den Header, dort steht kein
+                     Text daneben, der mit ihm konkurriert.
 
-                     Auf schmalen Screens legt sich die Abbildung hinter den Text
-                     (nd-base.css) – dort trägt das <picture> nur den Bogen aus.
-                     Der Grund steht in theme.css: Zwei Textebenen übereinander
-                     bekommt kein Overlay auseinander. Beide Dateien haben dasselbe
-                     Seitenverhältnis, deshalb springt beim Wechsel nichts.
+                     Es ist dasselbe Foto wie auf /ueber-mich, mit Absicht: Sarah
+                     wollte genau dieses. Auf beiden Seiten derselbe Rahmen wäre
+                     eine Kopie, deshalb hier kein --portrait (das begrenzt die
+                     Höhe für Fließtext daneben, hier trägt das Bild die Spalte)
+                     und eine andere Akzentfarbe am Rahmen.
 
-                     alt="": Das Logo sagt „Fahrlehrerin Sarah" – derselbe Name
-                     steht drei Zeilen weiter im Fließtext und noch einmal im
-                     Header. Vorgelesen wäre er hier schlicht doppelt. */ ?>
+                     Auf schmalen Screens legt nd-base.css die Medienspalte hinter
+                     den Text. Das gilt hier NICHT – `hero--photo` schaltet es ab.
+                     Warum, steht in theme.css: Hinter Fließtext taugt eine Fläche,
+                     kein Gesicht. */ ?>
             <div class="duo-media">
-                <div class="hero-logo">
-                    <picture>
-                        <source media="(max-width: 820px)" srcset="<?= asset('img/logo-bogen.webp') ?>">
-                        <img src="<?= asset('img/logo-sarah-hero.webp') ?>" alt=""
-                             width="820" height="947">
-                    </picture>
-                </div>
+                <figure class="photo hero-photo" style="--card-accent: var(--c-violet);">
+                    <img src="<?= asset('img/sarah-rollistammtisch-nah.jpg') ?>"
+                         alt="Sarah sitzt lächelnd an ihrem Infotisch, davor eine Tischlampe
+                              und ein Schild mit der Aufschrift „Die Rollistammtische“"
+                         width="680" height="900" fetchpriority="high">
+                </figure>
             </div>
         </div>
     </div>
@@ -157,7 +180,7 @@ $schoolUrl = trim((string) config('school.url'));
                     Hilfestellung, es selbst zu schaffen.
                 </p>
                 <div class="duo-actions">
-                    <a class="btn btn-primary" href="<?= url('/fahren-mit-handicap') ?>">Wie das abläuft</a>
+                    <a class="btn btn-primary" href="<?= url('/fahren-mit-handicap') ?>">Fahren mit Handicap</a>
                 </div>
             </div>
         </div>
@@ -322,7 +345,7 @@ $schoolUrl = trim((string) config('school.url'));
             <div class="empty-state card">
                 <p>Gerade ist alles voll. Neue Zeiten trage ich meistens sonntags ein –
                    schau in ein paar Tagen nochmal rein.</p>
-                <a class="btn btn-ghost" href="<?= url('/kontakt') ?>">Schreib mir</a>
+                <a class="btn btn-ghost" href="<?= url('/kontakt') ?>">Kontakt</a>
             </div>
         <?php else: ?>
             <?php /* --plain: keine Regenbogen-Rotation. Hier ist jede Karte dieselbe
@@ -340,7 +363,7 @@ $schoolUrl = trim((string) config('school.url'));
                             <?php endif; ?>
                         </p>
                         <div class="feature-meta">
-                            <a class="btn btn-ghost btn-sm" href="<?= url('/termine') ?>">Im Kalender öffnen</a>
+                            <a class="btn btn-ghost btn-sm" href="<?= url('/termine') ?>">Meine freien Zeiten</a>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -414,7 +437,7 @@ $schoolUrl = trim((string) config('school.url'));
                     Richtige für dich bin – und wenn nicht, wen du fragen solltest.
                 </p>
             </div>
-            <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">So erreichst du mich</a>
+            <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Kontakt</a>
         </div>
     </div>
 </section>

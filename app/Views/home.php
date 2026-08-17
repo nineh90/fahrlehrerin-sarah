@@ -116,76 +116,21 @@ $schoolUrl = trim((string) config('school.url'));
          sie einmal zu viel, und direkt unter dem Hero las sie sich wie eine
          Entschuldigung dafür, dass hier keine Fahrschule steht. */ ?>
 
-<?php /* Fahren mit Handicap: Sarahs Schwerpunkt.
+<?php /* Hier stand bis zum 17.08.2026 „Mein Schwerpunkt – Fahren mit
+         Handicap": Sarahs eigener Text über Linksgas, Lenkraddrehknopf und
+         Handbedienung, daneben das Foto vom Rollistammtisch.
 
-         DIESER TEXT IST VON SARAH – der erste auf der Seite, der wirklich von
-         ihr stammt (11.08.2026, wörtlich übernommen). Nicht „glätten": Die
-         Auslassungspunkte nach der Technik-Aufzählung, das „normal" in
-         Anführungszeichen und der direkte Satz über das gute Gefühl sind ihr
-         Ton. Wer hier umformuliert, macht daraus wieder einen Entwurf.
+         Auf ihren Wunsch komplett nach /ueber-mich gezogen (Ticket SAR-24) –
+         Text, Foto und Knopf unverändert. Dass die beiden Seiten dadurch
+         Überschneidungen haben, ist bekannt und wird dort in einem eigenen
+         Durchgang aufgeräumt.
 
-         Geändert wurde genau eines: Sie schreibt „DU musst ein gutes Gefühl
-         haben". Versalien lesen sich im Web als Schreien, die Betonung trägt
-         hier <strong>. Falls sie die Großbuchstaben ausdrücklich will, ist das
-         ihre Entscheidung – dann zurückändern.
-
-         Neben dem Text stand bis zum 12.08.2026 das Linksgas-Foto. Sarahs
-         Wunsch: Die Technikfotos gehören auf die Unterseite, hier steht sie
-         selbst.
-
-         Das Foto zeigt sie am Infotisch beim Rollistammtisch – also genau in
-         dem Umfeld, um das es im Text daneben geht. Das fremde Branding im
-         Hintergrund (Wandmuster des Veranstalters, das Schild auf dem Tisch)
-         bleibt sichtbar, dieselbe Entscheidung wie beim Fahrschulauto
-         (Nils, 12.08.2026): Es zeigt, wo sie unterwegs ist.
-
-         Keine Bildunterschrift – und das ist seit dem 12.08.2026 die Regel
-         für die ganze Seite, nicht die Ausnahme: Sarah will unter den Fotos
-         keine Erklärtexte mehr. Ein Foto, das eine Erklärung braucht, ist
-         das falsche Foto. Was das Bild zeigt, steht im alt-Attribut, und das
-         liest nur vor, wer es braucht. */ ?>
-<section class="section section--alt">
-    <div class="container">
-        <div class="duo duo--text-first">
-            <div class="duo-media photo-wrap" style="--card-accent: var(--c-teal);">
-                <?php /* Hochformat, deshalb .photo--portrait: Ohne die Begrenzung
-                         bestimmt das Bild die Spaltenhöhe und der Text daneben
-                         steht verloren in der Leere. */ ?>
-                <figure class="photo photo--portrait">
-                    <img src="<?= asset('img/sarah-rollistammtisch.jpg') ?>"
-                         alt="Sarah sitzt lächelnd an einem Infotisch; davor liegen Karten
-                              der Fahrschule, eine Schale Bonbons und ein Schild mit der
-                              Aufschrift „Die Rollistammtische“"
-                         width="900" height="1021" loading="lazy" decoding="async">
-                </figure>
-            </div>
-
-            <div class="duo-text">
-                <span class="section-eyebrow" style="padding-left:0;">Mein Schwerpunkt</span>
-                <h2>Fahren mit Handicap</h2>
-                <p>
-                    Ein angepasstes Fahrzeug fährt sich anders als üblich – nicht schwerer.
-                </p>
-                <p>
-                    Linksgas, Lenkraddrehknopf, Handbedienung für Gas und Bremse …
-                    Ich kenne die Technik und weiß, dass es länger dauern kann, bis es
-                    sich „normal“ anfühlt.
-                </p>
-                <p class="statement">
-                    Nicht ich muss mich wohl fühlen – <strong>du</strong> musst ein gutes
-                    Gefühl haben.
-                </p>
-                <p>
-                    Wir arbeiten auf Augenhöhe miteinander, ich gebe dir nur die
-                    Hilfestellung, es selbst zu schaffen.
-                </p>
-                <div class="duo-actions">
-                    <a class="btn btn-primary" href="<?= url('/fahren-mit-handicap') ?>">Fahren mit Handicap</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+         Zwei Dinge, die diese Verschiebung nebenbei erledigt hat: Der
+         Streifenwechsel der Seite stimmt weiterhin (die Sektion war `--alt`,
+         die nächste ist es nicht, es bleibt beim Hell-Dunkel-Wechsel), und
+         die Startseite zeigt den Rollistammtisch jetzt nur noch einmal –
+         nämlich im Hero. Vorher standen dort beide Zuschnitte desselben
+         Fotos, keinen Bildschirm auseinander. */ ?>
 
 <!-- Zitat: bricht den Rhythmus, gibt Sarah eine Stimme -->
 <section class="section">

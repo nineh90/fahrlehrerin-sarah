@@ -378,6 +378,91 @@ $schoolUrl = trim((string) config('school.url'));
     </div>
 </section>
 
+<?php /* Fahren mit Handicap: Sarahs Schwerpunkt.
+
+         STAND BIS ZUM 17.08.2026 AUF DER STARTSEITE und ist auf Sarahs
+         Wunsch komplett hierher gezogen (Ticket SAR-24) – Text, Foto und
+         Knopf unverändert übernommen. Die Startseite hat die Sektion nicht
+         mehr.
+
+         DIESER TEXT IST VON SARAH – wörtlich, seit dem 11.08.2026. Nicht
+         „glätten": Die Auslassungspunkte nach der Technik-Aufzählung, das
+         „normal" in Anführungszeichen und der direkte Satz über das gute
+         Gefühl sind ihr Ton. Wer hier umformuliert, macht daraus wieder
+         einen Entwurf.
+
+         Geändert wurde genau eines: Sie schreibt „DU musst ein gutes Gefühl
+         haben". Versalien lesen sich im Web als Schreien, die Betonung trägt
+         hier <strong>. Falls sie die Großbuchstaben ausdrücklich will, ist
+         das ihre Entscheidung – dann zurückändern.
+
+         Neben dem Text stand bis zum 12.08.2026 das Linksgas-Foto. Sarahs
+         Wunsch: Die Technikfotos gehören auf /fahren-mit-handicap, hier
+         steht sie selbst.
+
+         Das Foto zeigt sie am Infotisch beim Rollistammtisch – also genau in
+         dem Umfeld, um das es im Text daneben geht. Das fremde Branding im
+         Hintergrund (Wandmuster des Veranstalters, das Schild auf dem Tisch)
+         bleibt sichtbar, dieselbe Entscheidung wie beim Fahrschulauto
+         (Nils, 12.08.2026): Es zeigt, wo sie unterwegs ist.
+
+         Keine Bildunterschrift – seit dem 12.08.2026 die Regel für die ganze
+         Seite: Was das Bild zeigt, steht im alt-Attribut, und das liest nur
+         vor, wer es braucht.
+
+         NOCH OFFEN (SAR-24, zweiter Teil): Diese Seite trägt jetzt zweimal
+         denselben Moment – hier der weite Zuschnitt vom Rollistammtisch, weiter
+         oben neben ihrem Über-mich-Text der nahe. Und inhaltlich überschneidet
+         sich der Abschnitt mit ihren Kapiteln darüber. Beides wird in einem
+         eigenen Durchgang aufgeräumt, nicht nebenbei.
+
+         `.section` statt `.section--alt` wie auf der Startseite: Davor steht
+         hier das Akkordeon, und das ist bereits abgesetzt. Deshalb wechselt
+         der Anmelde-Hinweis darunter auf `--alt`, damit der Hell-Dunkel-
+         Wechsel der Seite bestehen bleibt. */ ?>
+<section class="section">
+    <div class="container">
+        <div class="duo duo--text-first">
+            <div class="duo-media photo-wrap" style="--card-accent: var(--c-teal);">
+                <?php /* Hochformat, deshalb .photo--portrait: Ohne die Begrenzung
+                         bestimmt das Bild die Spaltenhöhe und der Text daneben
+                         steht verloren in der Leere. */ ?>
+                <figure class="photo photo--portrait">
+                    <img src="<?= asset('img/sarah-rollistammtisch.jpg') ?>"
+                         alt="Sarah sitzt lächelnd an einem Infotisch; davor liegen Karten
+                              der Fahrschule, eine Schale Bonbons und ein Schild mit der
+                              Aufschrift „Die Rollistammtische“"
+                         width="900" height="1021" loading="lazy" decoding="async">
+                </figure>
+            </div>
+
+            <div class="duo-text">
+                <span class="section-eyebrow" style="padding-left:0;">Mein Schwerpunkt</span>
+                <h2>Fahren mit Handicap</h2>
+                <p>
+                    Ein angepasstes Fahrzeug fährt sich anders als üblich – nicht schwerer.
+                </p>
+                <p>
+                    Linksgas, Lenkraddrehknopf, Handbedienung für Gas und Bremse …
+                    Ich kenne die Technik und weiß, dass es länger dauern kann, bis es
+                    sich „normal“ anfühlt.
+                </p>
+                <p class="statement">
+                    Nicht ich muss mich wohl fühlen – <strong>du</strong> musst ein gutes
+                    Gefühl haben.
+                </p>
+                <p>
+                    Wir arbeiten auf Augenhöhe miteinander, ich gebe dir nur die
+                    Hilfestellung, es selbst zu schaffen.
+                </p>
+                <div class="duo-actions">
+                    <a class="btn btn-primary" href="<?= url('/fahren-mit-handicap') ?>">Fahren mit Handicap</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <?php /* Hier stand „Wie eine Stunde bei mir abläuft", daneben das Foto des
          Fahrschulautos. Beides ist am 12.08.2026 auf Sarahs Wunsch entfallen:
          Nach ihrem eigenen Text las sich der Ablauf einer einzelnen Fahrstunde
@@ -399,8 +484,12 @@ $schoolUrl = trim((string) config('school.url'));
 
          Bewusst kurz gehalten und nicht die ganze Startseiten-Sektion
          wiederholt: Hier geht es um Sarah, die Fahrschule ist die Fußnote
-         dazu. Prüft auf leeren SCHOOL_NAME, wie alle anderen Stellen auch. */ ?>
-<section class="section">
+         dazu. Prüft auf leeren SCHOOL_NAME, wie alle anderen Stellen auch.
+
+         `--alt` seit dem 17.08.2026: Darüber steht jetzt der Schwerpunkt-
+         Abschnitt auf hellem Grund (SAR-24). Ohne den Wechsel liefen zwei
+         gleich helle Sektionen ineinander. */ ?>
+<section class="section section--alt">
     <div class="container">
         <div class="notice" style="--card-accent: var(--c-blue);">
             <?= icon('shield') ?>

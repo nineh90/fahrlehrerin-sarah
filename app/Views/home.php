@@ -313,9 +313,29 @@ $schoolUrl = trim((string) config('school.url'));
             <article class="feature-card">
                 <span class="feature-icon"><?= icon('wheelchair') ?></span>
                 <h3>Ausbildung mit Handicap</h3>
+                <?php /* SAR-43: Stand bis zum 17.08.2026 als „Fahren mit Prothese,
+                         Lenkhilfe oder Handbedienung". Die drei Beispiele lasen sich
+                         als die Liste dessen, was geht – kleinwüchsige Fahrschüler:innen
+                         kamen darin nicht vor und mussten annehmen, sie seien nicht
+                         gemeint.
+
+                         Jetzt stehen die UMBAUTEN vorn und die Voraussetzung dahinter.
+                         Das ist nicht nur Reihenfolge: Der Satz zählt damit auf, was
+                         Sarah beherrscht, statt aufzuzählen, wer kommen darf. Pedal-
+                         verlängerung und Sitzerhöhung sind die Umbauten, um die es bei
+                         Kleinwuchs geht – sie fehlten vorher ganz.
+
+                         „Kleinwuchs" ist der Begriff, den der Bundesverband
+                         kleinwüchsiger Menschen selbst verwendet.
+
+                         ACHTUNG, DIESELBE AUFZÄHLUNG STAND AN DREI STELLEN: hier und in
+                         den Meta-Beschreibungen von HomeController und PageController.
+                         Alle drei sind mitgezogen – sonst verspricht die Seite etwas,
+                         das die Google-Vorschau nicht kennt. */ ?>
                 <p>
-                    Fahren mit Prothese, Lenkhilfe oder Handbedienung. Ich kenne die
-                    Technik und übe sie, bis du nicht mehr darüber nachdenkst.
+                    Handbedienung, Lenkhilfe, Pedalverlängerung, Sitzerhöhung – für
+                    Kleinwuchs genauso wie für eine Prothese. Ich kenne die Technik und
+                    übe sie, bis du nicht mehr darüber nachdenkst.
                 </p>
             </article>
 

@@ -17,9 +17,12 @@ final class HomeController
            BookingController arbeitet damit. */
         render('home', [
             'title'           => 'Fahrlehrerin in ' . config('contact.city'),
+            /* Die Aufzählung folgt der Karte „Ausbildung mit Handicap" auf der
+               Startseite (SAR-43) – wer nach „Führerschein Kleinwuchs" sucht, soll
+               das schon in der Google-Vorschau finden und nicht erst auf der Seite. */
             'metaDescription' => 'Sarah ist Fahrlehrerin für die Klassen B und BE in '
                 . implode(', ', config('contact.area')) . ' – mit Erfahrung in der Ausbildung '
-                . 'von Menschen mit Prothese, Lenkhilfe oder Handbedienung.',
+                . 'von Menschen mit Kleinwuchs, Prothese, Lenkhilfe oder Handbedienung.',
         ]);
     }
 }

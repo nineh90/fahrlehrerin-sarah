@@ -28,8 +28,10 @@ final class PageController
     {
         render('pages/handicap', [
             'title'           => 'Fahren mit Handicap',
-            'metaDescription' => 'Führerschein mit Prothese, Lenkhilfe oder Handbedienung: '
-                . 'Wie die Ausbildung im angepassten Fahrzeug abläuft und was du dafür brauchst.',
+            /* Siehe HomeController: dieselbe Aufzählung, dieselbe Begründung (SAR-43). */
+            'metaDescription' => 'Führerschein mit Kleinwuchs, Prothese, Lenkhilfe oder '
+                . 'Handbedienung: Wie die Ausbildung im angepassten Fahrzeug abläuft und '
+                . 'was du dafür brauchst.',
         ]);
     }
 

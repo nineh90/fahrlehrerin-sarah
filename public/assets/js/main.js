@@ -356,10 +356,13 @@
         //
         // Nach unten ist der Wert nicht beliebig: Die Zahl ist die Strecke,
         // die der UNTERSTE Block einer Seite noch hochscrollen können muss.
-        // Nachgemessen hat die knappste Seite (/meine-website) dafür 130 %
-        // Luft – die Blöcke liegen alle in <main>, und darunter kommen noch
-        // Einordnung, Credit-Band und Fuß. Wer hier über ~50 % geht, prüft
-        // das nach, sonst bleibt der letzte Block einer Seite unsichtbar.
+        // Nachgemessen wurde das an der damals knappsten Seite, /meine-website:
+        // 130 % Luft – die Blöcke liegen alle in <main>, und darunter kommen
+        // noch Einordnung und Fuß. Diese Seite ist am 17.08.2026 entfallen; die
+        // Messung ist damit nur noch eine untere Schranke von gestern. Bei 78 %
+        // trägt das mit Abstand. Wer hier über ~50 % geht, misst neu nach –
+        // an der dann kürzesten Seite, sonst bleibt deren letzter Block
+        // unsichtbar.
         var REVEAL_LINE = 0.78;
 
         blocks.forEach(function (el) {

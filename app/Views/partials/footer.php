@@ -51,8 +51,11 @@
                 <span class="sep">·</span>
                 <a href="<?= url('/datenschutz') ?>">Datenschutz</a>
                 <span class="sep">·</span>
-                <a href="<?= url('/meine-website') ?>">Diese Website</a>
-                <span class="sep">·</span>
+                <?php /* Zwischen Datenschutz und Schaltzentrale stand bis zum
+                         17.08.2026 „Diese Website" – der zweite Weg auf
+                         /meine-website. Die Seite ist entfallen, also auch der
+                         Link: Ein Eintrag im Fuß, der ins Leere führt, ist
+                         schlimmer als gar keiner. */ ?>
                 <a href="<?= url('/admin/login') ?>">Sarahs Schaltzentrale</a>
             </nav>
             <p class="footer-copy">&copy; <?= date('Y') ?> Sarah <?= e(config('contact.city')) ?></p>

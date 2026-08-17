@@ -41,20 +41,12 @@ final class PageController
         ]);
     }
 
-    /**
-     * Referenzseite: Sarah erzählt, wer ihre Website erstellt hat.
-     * Bewusst in ihrer Stimme und nicht als Werbetext von Nils-Digital –
-     * eine Kopie von nils-digital.de wäre für beide Seiten schlechter
-     * (doppelte Inhalte, und eine Empfehlung wirkt nur aus ihrem Mund).
-     */
-    public function website(): void
-    {
-        render('pages/meine-website', [
-            'title'           => 'Wer diese Seite erstellt hat',
-            'metaDescription' => 'Warum Sarah eine eigene Website wollte und wer sie '
-                . 'umgesetzt hat – eine Referenz für Nils-Digital.',
-        ]);
-    }
+    /* Hier lag bis zum 17.08.2026 `website()` für /meine-website – die
+       Referenzseite „Wer diese Seite erstellt hat", auf der Sarah in eigenen
+       Worten erzählte, wie die Website entstanden ist. Auf Wunsch entfallen,
+       samt Route, View und den drei Links darauf (Fuß, ND-Streifen,
+       nd-credit.php). Der Hinweis auf Nils-Digital bleibt: Der Streifen unter
+       dem Fuß führt weiterhin nach nils-digital.de. */
 
     public function impressum(): void
     {

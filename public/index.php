@@ -33,7 +33,6 @@ $router->get('/',                    [HomeController::class, 'index']);
 $router->get('/ueber-mich',          [PageController::class, 'about']);
 $router->get('/fahren-mit-handicap', [PageController::class, 'handicap']);
 $router->get('/kontakt',             [PageController::class, 'contact']);
-$router->get('/meine-website',       [PageController::class, 'website']);
 $router->get('/impressum',           [PageController::class, 'impressum']);
 $router->get('/datenschutz',         [PageController::class, 'datenschutz']);
 $router->get('/robots.txt',          [RobotsController::class, 'index']);

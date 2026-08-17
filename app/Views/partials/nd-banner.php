@@ -33,10 +33,11 @@
             <span>Diese Website wurde von <strong>Nils-Digital</strong> erstellt</span>
         </a>
 
-        <?php /* Zweites Ziel, nicht dasselbe noch einmal: Der Satz links führt
-                 zu nils-digital.de, dieser Link zu Sarahs eigener Schilderung
-                 auf /meine-website. Zwei Links nebeneinander auf dieselbe
-                 Adresse bringen niemandem etwas. */ ?>
-        <a class="nd-banner-more" href="<?= url('/meine-website') ?>">Wie es dazu kam &rarr;</a>
+        <?php /* Hier stand bis zum 17.08.2026 ein zweiter Link „Wie es dazu kam →"
+                 auf /meine-website – Sarahs eigene Schilderung, wie die Seite
+                 entstanden ist. Seite und Link sind entfallen; der Streifen führt
+                 jetzt nur noch nach nils-digital.de. Das CSS (.nd-banner-more)
+                 bleibt in nd-base.css, es gehört zur ND-Signatur und andere
+                 Projekte haben die Referenzseite weiterhin. */ ?>
     </div>
 </aside>

@@ -9,6 +9,12 @@
  *
  * Projektübergreifend identisch – nutzt nur Tokens aus theme.css und färbt sich
  * damit automatisch in die Farbwelt der jeweiligen Kundin ein.
+ *
+ * IN DIESEM PROJEKT NICHT EINGEBUNDEN, siehe layout.php. Die Datei liegt hier
+ * als Vorlage. Neben dem Knopf stand ein zweiter Link „Wie es dazu kam →" auf
+ * /meine-website; die Seite gibt es hier seit dem 17.08.2026 nicht mehr, also
+ * ist der Link raus – sonst holt ihn sich der Nächste mitsamt einem 404 zurück.
+ * Wo es die Referenzseite gibt, gehört er wieder in die nd-credit-actions.
  */
 ?>
 <section class="nd-credit-band">
@@ -32,7 +38,6 @@
             <div class="nd-credit-actions">
                 <a class="btn btn-primary" href="https://nils-digital.de"
                    target="_blank" rel="noopener">nils-digital.de</a>
-                <a class="link-more" href="<?= url('/meine-website') ?>">Wie es dazu kam &rarr;</a>
             </div>
         </div>
     </div>

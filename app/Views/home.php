@@ -394,14 +394,13 @@ $schoolUrl = trim((string) config('school.url'));
                  ändert, ändert sie überall. Die Rangfolge tragen die
                  Spaltenbreiten, nicht zwei verschiedene Gestaltungen.
 
-                 Die Kacheln sind gleich hoch (Raster-Standard), und das ist
-                 hier der Punkt: Der Ablauf ist mit fünf Schritten fast doppelt
-                 so hoch wie die vier Zeilen der Fahrschule. Frei stehend sähe
-                 die kurze Kachel abgeschnitten aus; als gleich hohe Kachel im
-                 Raster ist der Platz darunter einfach Kachel. Der Knopf zur
-                 Fahrschule hängt sich an ihre Unterkante und schließt sie ab.
-                 Er ist dafür aus dem Sektionsfuß hierher gewandert – er gehört
-                 zur Fahrschule und nicht unter die ganze Sektion. */ ?>
+                 Jede Kachel ist nur so hoch wie ihr Inhalt (`align-items: start`
+                 in der theme.css). Auf gleiche Höhe gestreckt stand unter der
+                 kurzen Liste der Fahrschule ein halber Bildschirm Weiß – das
+                 sah nach vergessenem Inhalt aus, nicht nach Gestaltung.
+
+                 Der Knopf zur Fahrschule ist aus dem Sektionsfuß in ihre Kachel
+                 gewandert: Er führt zu ihr und nicht zur Sektion. */ ?>
         <div class="enroll">
             <?php /* Der Ablauf stammt von /fahren-mit-handicap, Sektion „So läuft
                      es ab" (Sarahs Wunsch, SAR-29). Dort ist er eine `.process`-

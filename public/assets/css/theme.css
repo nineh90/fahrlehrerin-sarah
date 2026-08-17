@@ -588,15 +588,21 @@
    ändert, ändert sie überall. Das Raster hier gibt nur die Breiten vor – der
    Ablauf ist der Inhalt, die Fahrschule die Fußnote dazu.
 
-   Dass beide gleich hoch werden (Raster-Standard), ist erwünscht und nicht
-   Bequemlichkeit: Der Ablauf ist mit fünf Schritten fast doppelt so hoch wie
-   die vier Zeilen der Fahrschule. Zwei frei stehende Kacheln mit so
-   verschiedener Höhe sehen aus wie ein Fehler, zwei gleich hohe wie ein
-   Raster. Den Rest fängt der Knopf an der Unterkante ab. */
+   `align-items: start` ist der Kern der Sache. Ein Raster streckt seine Zellen
+   sonst auf die Höhe der höchsten – und der Ablauf ist mit fünf Schritten fast
+   doppelt so hoch wie die vier Zeilen der Fahrschule. Gestreckt stand unter
+   deren Liste ein halber Bildschirm Weiß, und eine Kachel, die zu 60 % leer
+   ist, sieht nach Fehler aus, egal wie sauber ihr Rahmen sitzt.
+
+   Jede Kachel hört also da auf, wo ihr Inhalt aufhört. Dass die beiden dann
+   unten nicht bündig abschließen, ist der Preis dafür und der günstigere von
+   beiden: Ungleiche Höhen liest man als zwei verschieden lange Texte, große
+   Leerflächen als vergessenen Inhalt. */
 .enroll {
     display: grid;
     grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
     gap: 1.4rem;
+    align-items: start;
 }
 
 /* Die Farbe der Kopfkante steht hier und nicht im Template – so wie bei jeder
@@ -612,10 +618,11 @@
 
 .enroll-formal .check-list { margin-bottom: 0; }
 .enroll-formal .check-list li::before { color: var(--card-accent, var(--accent)); }
-/* `auto` und kein fester Abstand: Der Knopf sinkt an die Unterkante der Kachel
-   und schließt sie ab, statt mitten in der Fläche zu enden. Möglich, weil
-   .feature-card eine Flex-Spalte ist. */
-.enroll-formal .btn { margin-top: auto; align-self: flex-start; }
+/* Fester Abstand und NICHT `margin-top: auto`. Auto schöbe den Knopf an die
+   Unterkante der Kachel – das war richtig, solange die Kachel gestreckt wurde
+   und der Knopf die Leere abschließen musste. Jetzt endet die Kachel am
+   Inhalt, und der Knopf gehört direkt unter die Liste, zu der er gehört. */
+.enroll-formal .btn { margin-top: 1.5rem; align-self: flex-start; }
 
 /* --- Die Zeitleiste ------------------------------------------------------
    Fünf Schritte sind keine Aufzählung mehr, sondern ein Weg. Was ihn dazu
@@ -662,7 +669,4 @@
    Markup ist dafür schon die richtige: erst der Ablauf, dann das Formale. */
 @media (max-width: 900px) {
     .enroll { grid-template-columns: 1fr; }
-    /* Gestapelt hat die kurze Kachel keine hohe Nachbarin mehr, an der sie sich
-       ausrichten müsste – der Knopf gehört dann wieder direkt unter die Liste. */
-    .enroll-formal .btn { margin-top: 1.5rem; }
 }

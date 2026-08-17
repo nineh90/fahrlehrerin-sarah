@@ -14,7 +14,6 @@
     <div class="container">
         <div class="section-head">
             <div class="section-head-text">
-                <span class="section-eyebrow">Kommende Stunden</span>
                 <h2>Das steht an</h2>
             </div>
             <a class="link-more" href="<?= url('/termine') ?>">Weitere Zeiten ansehen &rarr;</a>
@@ -77,7 +76,6 @@
         <div class="container">
             <div class="section-head">
                 <div class="section-head-text">
-                    <span class="section-eyebrow">Verlauf</span>
                     <h2>Vergangen &amp; storniert</h2>
                 </div>
             </div>

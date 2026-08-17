@@ -437,7 +437,6 @@ $schoolUrl = trim((string) config('school.url'));
             </div>
 
             <div class="duo-text">
-                <span class="section-eyebrow" style="padding-left:0;">Mein Schwerpunkt</span>
                 <h2>Fahren mit Handicap</h2>
                 <p>
                     Ein angepasstes Fahrzeug fährt sich anders als üblich – nicht schwerer.

@@ -47,7 +47,6 @@
     <div class="container">
         <div class="section-head">
             <div class="section-head-text">
-                <span class="section-eyebrow">Technik im Fahrzeug</span>
                 <h2>Womit wir arbeiten</h2>
             </div>
         </div>
@@ -130,7 +129,6 @@
     <div class="container">
         <div class="section-head">
             <div class="section-head-text">
-                <span class="section-eyebrow">Der Weg dahin</span>
                 <h2>So läuft es ab</h2>
             </div>
         </div>

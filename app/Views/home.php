@@ -167,7 +167,6 @@ $schoolUrl = trim((string) config('school.url'));
     <div class="container">
         <div class="section-head">
             <div class="section-head-text">
-                <span class="section-eyebrow">Womit ich arbeite</span>
                 <?php /* Hieß bis zum 17.08.2026 „Wofür man mich holt" (Sarah,
                          Ticket SAR-25). Das „man" war der Fehler: Es steht
                          mitten auf einer Seite, die sonst durchgehend „ich"
@@ -235,7 +234,6 @@ $schoolUrl = trim((string) config('school.url'));
     <div class="container">
         <div class="duo duo--narrow-media">
             <div class="duo-text">
-                <span class="section-eyebrow" style="padding-left:0;">Auf TikTok und Instagram</span>
                 <h2>Was im Fahrschulauto wirklich passiert</h2>
                 <p>
                     Auf meinen Kanälen zeige ich meinen Arbeitsalltag: Situationen, die in
@@ -292,7 +290,6 @@ $schoolUrl = trim((string) config('school.url'));
     <div class="container">
         <div class="section-head">
             <div class="section-head-text">
-                <span class="section-eyebrow">Meine Stundenplanung</span>
                 <h2>Wann ich diese Woche Zeit habe</h2>
             </div>
             <a class="link-more" href="<?= url('/termine') ?>">Ganze Woche ansehen &rarr;</a>
@@ -343,7 +340,6 @@ $schoolUrl = trim((string) config('school.url'));
     <div class="container">
         <div class="section-head">
             <div class="section-head-text">
-                <span class="section-eyebrow">Der erste Schritt</span>
                 <h2>Wie du bei mir Fahrschüler:in wirst</h2>
             </div>
         </div>

@@ -12,7 +12,16 @@ $schoolUrl = trim((string) config('school.url'));
     <div class="container hero-inner">
         <div class="duo duo--narrow-media">
             <div class="hero-content">
-                <h1>Hallo,<br>ich bin Sarah.</h1>
+                <?php /* Hieß bis zum 17.08.2026 „Hallo, ich bin Sarah." (SAR-39).
+                         Der Umbruch bleibt an derselben Stelle: Begrüßung oben,
+                         Name unten. Er ist hier ein `<br>` und keine Textbreite,
+                         weil die Zeile sonst je nach Fenster irgendwo umbricht –
+                         mitten in „ihr Lieben" sieht der Gruß aus wie verrutscht.
+
+                         „Lieben" groß: substantiviertes Adjektiv in der Anrede.
+                         Kleingeschrieben wäre es ein Fehler auf der ersten Zeile,
+                         die jemand von Sarah liest. */ ?>
+                <h1>Moin ihr Lieben.<br>Ich bin Sarah.</h1>
                 <?php /* Der Leitsatz, mit dem Sarahs eigener Text anfängt. Er stand
                          in ihrer Fassung als erste Zeile unter der Überschrift
                          „Über mich" – hier oben trägt er die ganze Seite. Vorher

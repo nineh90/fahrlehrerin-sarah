@@ -1,5 +1,4 @@
 <?php
-/** @var array $freeSlots */
 $school    = (string) config('school.name');
 $schoolUrl = trim((string) config('school.url'));
 ?>
@@ -285,58 +284,36 @@ $schoolUrl = trim((string) config('school.url'));
     </div>
 </section>
 
-<!-- Freie Zeiten -->
-<section class="section section--alt">
-    <div class="container">
-        <div class="section-head">
-            <div class="section-head-text">
-                <h2>Wann ich diese Woche Zeit habe</h2>
-            </div>
-            <a class="link-more" href="<?= url('/termine') ?>">Ganze Woche ansehen &rarr;</a>
-        </div>
+<?php /* Hier stand bis zum 17.08.2026 „Wann ich diese Woche Zeit habe": die
+         nächsten sechs freien Stunden als Karten, dazu der Hinweis, dass das
+         Sarahs eigene Planung ist und kein Buchungssystem der Fahrschule.
 
-        <p class="muted" style="max-width:640px;margin:-1.4rem 0 2rem;">
-            Diese Übersicht ist meine eigene Planung, kein Buchungssystem der Fahrschule.
-            Meine Fahrschüler:innen tragen sich hier selbst ein, statt mir zwischen zwei
-            Stunden hinterherzutelefonieren.
-        </p>
+         Auf ihren Wunsch entfallen (Ticket SAR-27) – der Wochenplan ist nur
+         noch über „Termine" im Header erreichbar. Damit steht die Startseite
+         für das, wer sie ist, und die Planung an einer Stelle statt an zwei.
 
-        <?php if (!$freeSlots): ?>
-            <div class="empty-state card">
-                <p>Gerade ist alles voll. Neue Zeiten trage ich meistens sonntags ein –
-                   schau in ein paar Tagen nochmal rein.</p>
-                <a class="btn btn-ghost" href="<?= url('/kontakt') ?>">Kontakt</a>
-            </div>
-        <?php else: ?>
-            <?php /* --plain: keine Regenbogen-Rotation. Hier ist jede Karte dieselbe
-                     Sache – eine freie Stunde. Siehe theme.css. */ ?>
-            <div class="card-grid card-grid--plain">
-                <?php foreach ($freeSlots as $slot): ?>
-                    <?php $start = dt($slot['starts_at']); ?>
-                    <article class="feature-card">
-                        <span class="feature-icon"><?= icon('calendar') ?></span>
-                        <h3><?= e(weekday_long($start)) ?>, <?= e($start->format('d.m.')) ?></h3>
-                        <p>
-                            <?= e(format_time($start)) ?> · <?= e(Slot::label($slot)) ?>
-                            <?php if ($slot['location']): ?>
-                                <br><?= e($slot['location']) ?>
-                            <?php endif; ?>
-                        </p>
-                        <div class="feature-meta">
-                            <a class="btn btn-ghost btn-sm" href="<?= url('/termine') ?>">Termine</a>
-                        </div>
-                    </article>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
-    </div>
-</section>
+         Zwei Dinge, die dabei mitgegangen sind und die man kennen muss, falls
+         die Sektion je zurückkommt:
+
+         Der Satz „meine eigene Planung, kein Buchungssystem der Fahrschule"
+         ist die fachliche Abgrenzung und darf nicht ersatzlos verschwinden.
+         Er steht sinngemäß weiter auf /termine („Das ist mein eigener
+         Wochenplan – kein Buchungssystem der Fahrschule"), deshalb war hier
+         nichts nachzutragen.
+
+         `$freeSlots` braucht die Startseite damit nicht mehr; der Aufruf von
+         `Slot::upcomingFree()` ist aus dem HomeController entfernt. Die
+         Methode selbst bleibt – der BookingController arbeitet mit ihr. */ ?>
 
 <?php /* Der praktische nächste Schritt. Steht bewusst HIER und nicht weiter oben:
          Wer bis hierhin gelesen hat, ist überzeugt und fragt sich, wie es geht.
          Die Arbeitsteilung nebeneinander zu zeigen ist ehrlicher als ein Satz –
-         Sarah verkauft nichts, sie fährt. */ ?>
-<section class="section">
+         Sarah verkauft nichts, sie fährt.
+
+         `--alt` seit dem 17.08.2026: Davor lag die Sektion mit den freien
+         Zeiten, die abgesetzt war. Ohne den Wechsel stießen hier zwei gleich
+         helle Sektionen aneinander (SAR-27). */ ?>
+<section class="section section--alt">
     <div class="container">
         <div class="section-head">
             <div class="section-head-text">

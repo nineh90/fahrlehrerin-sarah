@@ -2,7 +2,7 @@
     <div class="login-head">
         <span class="brand">
             <img class="login-logo" src="<?= asset('img/logo-sarah-klein.webp') ?>"
-                 alt="Fahrlehrerin Sarah" width="260" height="300">
+                 alt="Fahrlehrerin Sarah" width="255" height="300">
             <span class="brand-sub">Schaltzentrale</span>
         </span>
     </div>

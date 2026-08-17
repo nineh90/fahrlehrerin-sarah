@@ -5,7 +5,7 @@
                 <?php /* Helle Logo-Variante: auf dem dunklen Fuß wäre der schwarze
                          Schriftzug des Originals nicht lesbar. */ ?>
                 <img class="footer-logo" src="<?= asset('img/logo-sarah-hell.webp') ?>"
-                     alt="Fahrlehrerin Sarah" width="400" height="462"
+                     alt="Fahrlehrerin Sarah" width="393" height="462"
                      loading="lazy" decoding="async">
                 <?php /* Hier standen zwei Absätze: eine Selbstbeschreibung („Fahrlehrerin
                          aus Überzeugung …", ein Entwurf) und der Hinweis auf die

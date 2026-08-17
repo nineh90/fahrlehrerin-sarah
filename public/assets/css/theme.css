@@ -398,7 +398,7 @@
    teilt. Gleiches Seitenverhältnis, damit beide Heros gleich hoch bauen. */
 .hero-arc {
     position: relative;
-    aspect-ratio: 1000 / 1155;
+    aspect-ratio: 983 / 1155;
     background: url("../img/logo-bogen.webp") no-repeat center / contain;
 }
 .hero-arc img {

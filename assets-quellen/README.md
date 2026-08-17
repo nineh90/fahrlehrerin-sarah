@@ -2,8 +2,19 @@
 
 Hier liegen die Vorlagen, aus denen die Bilder in `public/assets/img/` abgeleitet werden.
 Sie liegen **bewusst außerhalb des Webroots** – sie sollen nicht über die Website
-abrufbar sein. Die Befehle zum Neubauen der Ableitungen stehen in der `CLAUDE.md`
-im Abschnitt „Sarahs Logo".
+abrufbar sein.
+
+Die Logo-Ableitungen baut `scripts/logo-ableitungen.py`. Schickt Sarah ein neues Logo,
+kommt es als `fahrlehrerin_sarah_logo.png` hierher und das Skript läuft einmal durch:
+
+```bash
+python3 scripts/logo-ableitungen.py
+```
+
+Es stellt frei, zerlegt in Bogen, Lenkrad und Schriftzug und schreibt alle Fassungen
+samt Favicon und Teilen-Bild. Ändert sich dabei das Seitenverhältnis, nennt es die neuen
+Maße – dann gehören die `width`/`height` an den `<img>`-Tags und `.hero-arc` in der
+`theme.css` mit angefasst. Was warum so gerechnet wird, steht im Kopf des Skripts.
 
 | Datei | Was | Im Repo? |
 |---|---|---|

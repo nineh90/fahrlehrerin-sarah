@@ -20,7 +20,7 @@
                  einen Satz hört. */ ?>
         <a class="brand" href="<?= url('/') ?>" aria-label="Fahrlehrerin Sarah – zur Startseite">
             <img class="brand-logo brand-logo--full" src="<?= asset('img/logo-sarah-klein.webp') ?>"
-                 alt="" width="260" height="300">
+                 alt="" width="255" height="300">
             <span class="brand-text">
                 <span class="brand-mark">Fahrlehrerin Sarah</span>
                 <?php /* „Fahrlehrerin" steht schon eine Zeile höher im Namen – hier

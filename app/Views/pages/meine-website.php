@@ -29,7 +29,7 @@
                          mal Nils-Digital" keinen Sinn, die beiden alt-Texte reichen. */ ?>
                 <div class="cooperation">
                     <img class="cooperation-mark" src="<?= asset('img/logo-sarah-klein.webp') ?>"
-                         alt="Fahrlehrerin Sarah" width="260" height="300"
+                         alt="Fahrlehrerin Sarah" width="255" height="300"
                          loading="lazy" decoding="async">
                     <span class="cooperation-x" aria-hidden="true">&times;</span>
                     <img class="cooperation-mark cooperation-mark--nd" src="<?= asset('img/nils-digital-logo.png') ?>"

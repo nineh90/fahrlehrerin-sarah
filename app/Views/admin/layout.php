@@ -19,7 +19,7 @@
     <aside class="admin-sidebar" id="adminSidebar">
         <a class="brand admin-brand" href="<?= url('/admin') ?>">
             <img class="admin-brand-logo" src="<?= asset('img/logo-sarah-hell.webp') ?>"
-                 alt="Fahrlehrerin Sarah" width="400" height="462">
+                 alt="Fahrlehrerin Sarah" width="393" height="462">
             <span class="brand-sub">Schaltzentrale</span>
         </a>
 

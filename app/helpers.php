@@ -221,8 +221,18 @@ function icon(string $name): string
            kein Rollstuhl von der Seite: Es ist dieselbe Form, die im Lenkrad
            von Sarahs Logo sitzt, und es steht für Handicap allgemein. Ihr
            Schwerpunkt umfasst auch Prothese und Handbedienung – ein reiner
-           Rollstuhl würde das Thema enger machen, als es ist. */
-        'wheelchair' => '<circle cx="9.6" cy="4.2" r="2"/><path d="M8.8 8.2v4.6h5"/><path d="M13.8 12.8l3.3 1.5-1.1 2.9"/><circle cx="11.4" cy="15.4" r="5.4"/>',
+           Rollstuhl würde das Thema enger machen, als es ist.
+
+           Seit dem Logo-Tausch am 17.08.2026 ist es die DYNAMISCHE Fassung
+           („Accessible Icon"): nach vorn gelehnt, der Arm greift zurück ans
+           Rad. Das neue Logo trägt sie im Lenkrad, also trägt die Seite sie
+           auch – vorher saß hier die aufrechte, statische Figur.
+
+           Gezeichnet ist sie nach dem Logo, nicht davon abgepaust: Vier
+           Striche müssen bei 26 px noch auseinanderfallen. Deshalb sitzt der
+           Kopf frei über der Schulter statt sie zu berühren, und das Rad ist
+           kleiner als im Logo – sonst verschluckt sein Bogen den Arm. */
+        'wheelchair' => '<circle cx="17" cy="4.6" r="1.9"/><path d="M13.8 6.6 7.6 8.6l1.8 3.4"/><path d="M14.6 7.8 11.8 11.4l4.6 1.4.8 7"/><circle cx="9.6" cy="16.6" r="4.8"/>',
 
         /* ---- Die vier Umbauten auf /fahren-mit-handicap -------------------
            Vorher liefen die Karten mit Auto, Schild, Uhr und Funkeln – also

@@ -323,7 +323,7 @@ $schoolUrl = trim((string) config('school.url'));
                             <?php endif; ?>
                         </p>
                         <div class="feature-meta">
-                            <a class="btn btn-ghost btn-sm" href="<?= url('/termine') ?>">Meine freien Zeiten</a>
+                            <a class="btn btn-ghost btn-sm" href="<?= url('/termine') ?>">Termine</a>
                         </div>
                     </article>
                 <?php endforeach; ?>

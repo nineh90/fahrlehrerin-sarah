@@ -49,7 +49,20 @@
                 <a class="btn btn-primary btn-sm nav-cta<?= nav_active('/termine') ?>" href="<?= url('/termine') ?>">Stunde eintragen</a>
             <?php else: ?>
                 <a class="nav-link<?= nav_active('/login') ?>" href="<?= url('/login') ?>">Anmelden</a>
-                <a class="btn btn-primary btn-sm nav-cta<?= nav_active('/termine') ?>" href="<?= url('/termine') ?>">Meine freien Zeiten</a>
+                <?php /* Hieß bis zum 17.08.2026 „Meine freien Zeiten" (Sarah,
+                         Ticket SAR-26). Weil die Knöpfe auf den Seiten seit
+                         SAR-22 heißen wie ihr Menüpunkt, ist der Name hier
+                         die Quelle: Wer ihn ändert, ändert ihn auch in
+                         home.php, ueber-mich.php und footer.php mit.
+
+                         Die Zielseite selbst heißt weiter „Meine freien
+                         Zeiten" – das ist kein Versehen, siehe CLAUDE.md:
+                         Die Terminplanung ist Sarahs eigenes Werkzeug, kein
+                         Buchungssystem der Fahrschule. Das „meine" sagt
+                         genau das. Als Wegweiser im Header ist „Termine"
+                         trotzdem besser, weil er kurz sein muss und neben
+                         „Anmelden" steht. */ ?>
+                <a class="btn btn-primary btn-sm nav-cta<?= nav_active('/termine') ?>" href="<?= url('/termine') ?>">Termine</a>
             <?php endif; ?>
         </nav>
     </div>

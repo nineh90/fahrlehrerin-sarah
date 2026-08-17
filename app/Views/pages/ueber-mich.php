@@ -33,7 +33,7 @@ $schoolUrl = trim((string) config('school.url'));
                     <span><?= e(area_sentence()) ?></span>
                 </p>
                 <div class="hero-actions">
-                    <a class="btn btn-primary btn-lg" href="<?= url('/termine') ?>">Meine freien Zeiten</a>
+                    <a class="btn btn-primary btn-lg" href="<?= url('/termine') ?>">Termine</a>
                     <a class="btn btn-ghost btn-lg" href="<?= url('/kontakt') ?>">Schreib mir</a>
                 </div>
             </div>

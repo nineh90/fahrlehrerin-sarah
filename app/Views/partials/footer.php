@@ -28,7 +28,7 @@
             <div>
                 <h3>Fahrstunden</h3>
                 <ul class="footer-links">
-                    <li><a href="<?= url('/termine') ?>">Meine freien Zeiten</a></li>
+                    <li><a href="<?= url('/termine') ?>">Termine</a></li>
                     <li><a href="<?= url('/meine-termine') ?>">Meine Stunden</a></li>
                     <li><a href="<?= url('/login') ?>">Anmelden</a></li>
                 </ul>

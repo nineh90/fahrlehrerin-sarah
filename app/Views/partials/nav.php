@@ -9,26 +9,21 @@
                  reinen Bogen aus; das war auf Wunsch von Nils falsch: Ein
                  Logo, das sich beim Scrollen verwandelt, prägt sich nicht ein.
 
-                 Weil der Schriftzug im Logo klein nicht mehr lesbar ist,
-                 blendet beim Scrollen die Wortmarke als echter Text daneben
-                 ein. Sie steht auch oben schon im Fluss, nur unsichtbar – so
-                 hält sie die Breite des Markenblocks und die Navigation
-                 daneben verrutscht beim Umschalten nicht.
+                 Bis zum 17.08.2026 blendete beim Scrollen zusätzlich eine
+                 Wortmarke als echter Text daneben ein („Fahrlehrerin Sarah" /
+                 „Klasse B · BE · Handicap"). Sie ist mit SAR-37 entfallen; die
+                 Bewegung des Logos bleibt. Der Markenblock trägt jetzt nur noch
+                 das eine Bild – die Regeln, die den Text ein- und ausblendeten,
+                 sind in nd-base.css mit weg, sonst wäre die Animation nur ihres
+                 Inhalts beraubt und nicht entfernt.
 
                  Das Bild trägt alt="" – den Namen trägt das aria-label am
-                 Link, damit Vorlesesoftware in beiden Zuständen denselben
-                 einen Satz hört. */ ?>
+                 Link. Das war schon vorher so und ist jetzt die EINZIGE Quelle
+                 des Namens im Header: Wer das aria-label entfernt, nimmt der
+                 Vorlesesoftware den Namen der Seite ersatzlos weg. */ ?>
         <a class="brand" href="<?= url('/') ?>" aria-label="Fahrlehrerin Sarah – zur Startseite">
             <img class="brand-logo brand-logo--full" src="<?= asset('img/logo-sarah-klein.webp') ?>"
                  alt="" width="255" height="300">
-            <span class="brand-text">
-                <span class="brand-mark">Fahrlehrerin Sarah</span>
-                <?php /* „Fahrlehrerin" steht schon eine Zeile höher im Namen – hier
-                         nur die Klassen. Die Zeile läuft in Versalien mit weitem
-                         Sperrsatz, jedes Wort mehr bricht den Header auf dem Handy
-                         in eine dritte Zeile um. */ ?>
-                <span class="brand-sub">Klasse B · BE · Handicap</span>
-            </span>
         </a>
 
         <button class="nav-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">

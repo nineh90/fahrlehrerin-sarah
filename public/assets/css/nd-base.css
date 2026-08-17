@@ -126,8 +126,9 @@ body { padding-top: var(--header-h, 0px); }
 .admin-body, .admin-auth-body { padding-top: 0; }
 
 .header-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; gap: 1rem; }
-/* Marke = Bildmarke + Wortmarke nebeneinander. Das Logo bleibt dekorativ (alt=""),
-   den Namen trägt der Text daneben – klein skaliert ist die Schrift im Logo nicht lesbar. */
+/* Marke = die Bildmarke, sonst nichts. Bis SAR-37 stand eine Wortmarke daneben,
+   die beim Scrollen einblendete; sie ist entfallen. Das Logo bleibt dekorativ
+   (alt=""), den Namen trägt das aria-label am Link. */
 /* Der Markenblock spannt sich über die volle Headerhöhe (align-self: stretch).
    Das ist die Voraussetzung dafür, dass die große Marke darunter mit einem
    festen Abstand von OBEN sitzen kann, statt an der wechselnden Mitte zu
@@ -150,14 +151,15 @@ body { padding-top: var(--header-h, 0px); }
    Header; `align-self: flex-start` verhindert, dass die Flexbox es auf die
    Headerhöhe zusammenstaucht, und der Überstand fällt unten heraus.
 
-   Die Wortmarke daneben steht auch oben schon im Fluss, nur unsichtbar. Das
-   ist Absicht: Sie hält die Breite des Markenblocks, damit sich beim
-   Umschalten nur Deckkraft und Höhe ändern und die Navigation nicht wandert.
-   Sichtbar wird sie erst im kompakten Zustand – dann ist der Schriftzug IM
-   Logo zu klein zum Lesen und der Name braucht eine zweite Quelle.
+   Daneben stand bis SAR-37 (17.08.2026) eine Wortmarke, die oben unsichtbar
+   im Fluss lag und im kompakten Zustand einblendete – sie hielt zugleich die
+   Breite des Markenblocks, damit die Navigation beim Umschalten nicht wandert.
+   Sie ist entfallen, und mit ihr ihre beiden Regeln (`opacity: 0` hier,
+   `opacity: 1` unter `.is-compact`). Die Navigation wandert deswegen nicht:
+   Sie sitzt am anderen Ende eines `space-between`-Flex und hängt am rechten
+   Rand, nicht an der Breite der Marke.
 
-   Ohne JavaScript kommt `.is-compact` nie: Dann bleibt es beim großen Logo,
-   und das trägt den Namen selbst. */
+   Ohne JavaScript kommt `.is-compact` nie: Dann bleibt es beim großen Logo. */
 .brand-logo--full {
     align-self: flex-start;
     margin-top: var(--brand-full-top, 4px);
@@ -165,13 +167,11 @@ body { padding-top: var(--header-h, 0px); }
     transition: height .28s cubic-bezier(.22, .61, .36, 1),
                 margin-top .28s cubic-bezier(.22, .61, .36, 1);
 }
-.brand-text { opacity: 0; transition: opacity .25s ease; }
 
 .site-header.is-compact .brand-logo--full {
     height: var(--brand-compact-h, 54px);
     margin-top: var(--brand-compact-top, 0px);
 }
-.site-header.is-compact .brand-text { opacity: 1; }
 .brand-mark { font-family: var(--font-head); color: var(--text); font-weight: 700; font-size: 1.4rem; letter-spacing: .3px; }
 .brand-mark::after { content: "."; color: var(--accent); }
 .brand-sub { color: var(--accent); font-size: .68rem; text-transform: uppercase; letter-spacing: 2.5px; margin-top: 2px; }
@@ -1487,35 +1487,27 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
        Restplatzes neben dem Hamburger. Der landet dafür per `flex-end`
        rechts – er ist jetzt das einzige Kind im Fluss.
 
-       Der Text daneben hält hier oben KEINE Breite, anders als auf dem
-       Desktop: Sonst säße nicht das Logo in der Mitte, sondern das Logo
-       samt unsichtbarem Text daneben – das Logo stünde sichtbar zu weit
-       links. Wandern darf die Breite hier, weil rechts nur der Hamburger
-       steht und der hängt ohnehin am Rand.
+       Hier steckte bis SAR-37 (17.08.2026) die meiste Mechanik: Die Wortmarke
+       durfte oben KEINE Breite halten (anders als auf dem Desktop), sonst saß
+       nicht das Logo in der Mitte, sondern das Logo samt unsichtbarem Text
+       daneben. Dasselbe galt für den Flex-Gap – der zählt zur Breite, auch
+       wenn das Element daneben null breit ist, und schob das Logo nachgemessen
+       13 px nach links. Beim Umschalten klappte der Text dann per `max-width`
+       auf, mit Verzögerung, damit er sich nicht an die noch große Bildmarke
+       drängte.
 
-       Der Abstand zwischen beiden muss aus demselben Grund mit weg: Ein
-       Flex-Gap zählt auch dann zur Breite, wenn das Element daneben null
-       breit ist. Nachgemessen stand das Logo dadurch 13 px zu weit links –
-       genau die 11 px Abstand plus Rundung. */
+       Ohne den Text braucht die Marke nichts davon mehr: Sie hat genau ein
+       Kind, also gibt es keine fremde Breite und keinen Gap zu kompensieren.
+       Übrig bleibt die Bewegung selbst – von der Mitte an den linken Rand,
+       während das Logo schrumpft. Genau die sollte bleiben. */
     .header-inner { justify-content: flex-end; }
     .brand {
         position: absolute; top: 0; height: 100%;
-        left: 50%; translate: -50% 0; gap: 0;
+        left: 50%; translate: -50% 0;
         transition: left .34s cubic-bezier(.22, .61, .36, 1),
-                    translate .34s cubic-bezier(.22, .61, .36, 1),
-                    gap .34s cubic-bezier(.22, .61, .36, 1);
+                    translate .34s cubic-bezier(.22, .61, .36, 1);
     }
-    .brand-text {
-        max-width: 0; overflow: hidden;
-        transition: opacity .25s ease, max-width .34s cubic-bezier(.22, .61, .36, 1);
-    }
-    .site-header.is-compact .brand { left: var(--container-pad, 22px); translate: 0 0; gap: .7rem; }
-    /* Erst wandern und schrumpfen, dann der Text. Ohne die Verzögerung
-       erscheint er, während das Logo noch groß in der Mitte steht, und
-       drängt sich für einen Moment an dessen rechte Kante. Nur beim
-       Einblenden – rückwärts soll er sofort verschwinden, sonst steht er
-       noch da, wenn das Logo schon wieder unter ihm liegt. */
-    .site-header.is-compact .brand-text { max-width: 62vw; transition-delay: .14s; }
+    .site-header.is-compact .brand { left: var(--container-pad, 22px); translate: 0 0; }
 
     .main-nav {
         /* 100% statt fester 72px: Der Header wechselt seine Höhe, das Menü

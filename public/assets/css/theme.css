@@ -202,9 +202,18 @@
        --brand-compact-h    Dasselbe Logo, nur kleiner. Es wird NICHT gegen
                            eine andere Grafik getauscht – ein Logo, das sich
                            beim Scrollen verwandelt, prägt sich nicht ein.
-                           Bei 72 px ist der Schriftzug darin nicht mehr zu
-                           lesen; deshalb blendet dann die Wortmarke als
-                           echter Text daneben ein.
+
+                           ACHTUNG, hier hat sich die Begründung geändert: Bei
+                           72 px ist der Schriftzug IM Logo nicht mehr zu lesen.
+                           Bis SAR-37 fing das die Wortmarke daneben auf; die
+                           ist entfallen. Der kompakte Header trägt jetzt also
+                           eine Bildmarke, deren Schrift zu klein ist, und
+                           sonst keinen Namen. Wer den Namen im gescrollten
+                           Zustand wieder lesbar haben will, hat zwei Wege:
+                           diesen Wert anheben (dann wird der Header höher,
+                           --header-h-compact zieht mit) oder die Wortmarke
+                           zurückholen. Beides ist eine Entscheidung, keine
+                           Reparatur.
        --brand-compact-top  Damit das kleinere Logo im flacheren Header
                            mittig sitzt (78 - 72 = 6, also 3 oben).
        --------------------------------------------------------------------- */

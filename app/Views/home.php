@@ -358,91 +358,125 @@ $schoolUrl = trim((string) config('school.url'));
          helle Sektionen aneinander (SAR-27). */ ?>
 <section class="section section--alt">
     <div class="container">
+        <?php /* Der Einordnungssatz steht IM section-head und nicht als eigener
+                 Absatz darunter. Vorher zog ihn ein `margin-top:-1.4rem` wieder
+                 an die Überschrift heran – gegen den Abstand, den `.section-head`
+                 selbst mitbringt. Zwei Regeln, die sich gegenseitig aufheben,
+                 sind eine Regel zu viel: Im Kopf gehört er zur Überschrift und
+                 bekommt deren Einzug (die 16 px des Regenbogenbalkens). */ ?>
         <div class="section-head">
             <div class="section-head-text">
                 <h2>Wie du bei mir Fahrschüler:in wirst</h2>
+                <p class="section-lead">
+                    Ich bin angestellte Fahrlehrerin, keine eigene Fahrschule. Die Anmeldung
+                    läuft deshalb nicht über diese Seite, sondern über
+                    <?= $school !== '' ? school_link() : 'meine Fahrschule' ?>. Sag dort einfach,
+                    dass du bei mir fahren möchtest.
+                </p>
             </div>
         </div>
 
-        <p class="muted" style="max-width:660px;margin:-1.4rem 0 2rem;">
-            Ich bin angestellte Fahrlehrerin, keine eigene Fahrschule. Die Anmeldung
-            läuft deshalb nicht über diese Seite, sondern über
-            <?= $school !== '' ? school_link() : 'meine Fahrschule' ?>. Sag dort einfach,
-            dass du bei mir fahren möchtest.
-        </p>
+        <?php /* ZWEI SPALTEN, ABER NICHT ZWEI GLEICHE.
+                 Bis zum 17.08.2026 lagen hier zwei identische `.card` in einem
+                 `.split-grid`: links die Fahrschule, rechts der Ablauf. Beide
+                 weiß, beide gleich schwer – die Seite stellte damit die
+                 Formalitäten gleichrangig neben das, was die Besucherin
+                 eigentlich wissen will.
 
-        <div class="split-grid">
-            <article class="card" style="--card-accent: var(--c-green);">
-                <h3 style="margin-top:0;">
-                    <?= $school !== '' ? e($school) : 'Die Fahrschule' ?> übernimmt
-                </h3>
-                <ul class="check-list" style="margin-bottom:0;">
+                 Mit dem fünften Schritt (SAR-45) ging das endgültig nicht mehr
+                 auf: Die rechte Karte wurde deutlich höher als die linke, und
+                 zwei gleich gestaltete Karten mit stark verschiedener Höhe
+                 sehen nach Versehen aus, nicht nach Absicht.
+
+                 Jetzt sind es dieselben Kacheln wie in „Wobei ich dich
+                 begleite": `.feature-card`, mit der farbigen Kopfkante. Nicht
+                 nachgebaut, sondern dieselbe Klasse – wer die Kachel einmal
+                 ändert, ändert sie überall. Die Rangfolge tragen die
+                 Spaltenbreiten, nicht zwei verschiedene Gestaltungen.
+
+                 Die Kacheln sind gleich hoch (Raster-Standard), und das ist
+                 hier der Punkt: Der Ablauf ist mit fünf Schritten fast doppelt
+                 so hoch wie die vier Zeilen der Fahrschule. Frei stehend sähe
+                 die kurze Kachel abgeschnitten aus; als gleich hohe Kachel im
+                 Raster ist der Platz darunter einfach Kachel. Der Knopf zur
+                 Fahrschule hängt sich an ihre Unterkante und schließt sie ab.
+                 Er ist dafür aus dem Sektionsfuß hierher gewandert – er gehört
+                 zur Fahrschule und nicht unter die ganze Sektion. */ ?>
+        <div class="enroll">
+            <?php /* Der Ablauf stammt von /fahren-mit-handicap, Sektion „So läuft
+                     es ab" (Sarahs Wunsch, SAR-29). Dort ist er eine `.process`-
+                     Liste: ein waagerechtes Raster über die volle Seitenbreite.
+                     In einer halben Spalte hat das keinen Platz, deshalb steht er
+                     hier senkrecht.
+
+                     Bis SAR-45 lief das über die generische `.steps` aus
+                     nd-base.css. Die reicht für drei, vier Zeilen (sie steht so
+                     auch im Fahrschüler-Login), macht aus fünf Schritten aber
+                     eine bloß lange Liste: Nummern ohne Verbindung, alle in
+                     derselben Farbe. `.enroll-steps` in der theme.css ist
+                     dieselbe Sache als echte Zeitleiste – Linie zwischen den
+                     Nummern, Regenbogenfolge wie im Bogen des Logos. `.steps`
+                     bleibt unangetastet, sie wird woanders gebraucht.
+
+                     ACHTUNG, DER TEXT STEHT AN ZWEI STELLEN: wörtlich auch auf
+                     /fahren-mit-handicap. Wer hier etwas ändert, ändert es dort
+                     mit. Er ist außerdem ein ENTWURF und nicht von Sarah. */ ?>
+            <div class="enroll-main feature-card">
+                <h3>So läuft es ab</h3>
+                <ol class="enroll-steps">
+                    <li>
+                        <strong>Wir telefonieren</strong>
+                        <p>Du erzählst mir, worum es geht. Ich sage dir ehrlich, was ich
+                           einschätzen kann und was ein Gutachten klären muss.</p>
+                    </li>
+                    <li>
+                        <strong>Gutachten &amp; Auflagen</strong>
+                        <p>Für die Fahrerlaubnis wird meist ein medizinisches oder
+                           verkehrsmedizinisches Gutachten gebraucht. Daraus ergeben sich
+                           die Auflagen für dein Fahrzeug.</p>
+                    </li>
+                    <li>
+                        <strong>Erste Stunde</strong>
+                        <p>Wir setzen uns ins angepasste Fahrzeug, stellen alles auf dich
+                           ein und fahren erstmal nur, damit du ein Gefühl bekommst.</p>
+                    </li>
+                    <li>
+                        <strong>Üben bis es sitzt</strong>
+                        <p>Wie bei jedem anderen auch: so lange, bis du sicher bist. Der
+                           einzige Unterschied ist der Weg, nicht das Ziel.</p>
+                    </li>
+                    <?php /* Neu mit SAR-45. Der Schritt schließt den Weg ab, den die
+                             vier davor beschreiben – ohne ihn hörte der Ablauf beim
+                             Üben auf. Er greift bewusst zwei Dinge auf, die schon
+                             auf der Seite stehen: das angepasste Fahrzeug aus
+                             Schritt 3 und die Anmeldung durch die Fahrschule aus
+                             der Nebenspalte. Kein Wort zum Bestehen – versprechen
+                             kann sie das nicht, und die Seite verspricht nichts. */ ?>
+                    <li>
+                        <strong>Prüfung</strong>
+                        <p>Geprüft wird in dem Auto, in dem du geübt hast, und ich sitze
+                           daneben. Den Termin meldet die Fahrschule an – ich schlage ihn
+                           erst vor, wenn du wirklich so weit bist.</p>
+                    </li>
+                </ol>
+            </div>
+
+            <aside class="enroll-formal feature-card">
+                <h3><?= $school !== '' ? e($school) : 'Die Fahrschule' ?> übernimmt</h3>
+                <ul class="check-list">
                     <li>Anmeldung und Ausbildungsvertrag</li>
                     <li>Theorieunterricht und Lernmaterial</li>
                     <li>Preise und Abrechnung</li>
                     <li>Anmeldung zur Prüfung bei der Führerscheinstelle</li>
                 </ul>
-            </article>
 
-            <?php /* Hier stand bis zum 17.08.2026 „Bei mir sitzt du im Auto" –
-                     die Gegenliste zur Fahrschule: alle Fahrstunden, die
-                     Pflichtfahrten, Ausbildung mit Prothese oder Handbedienung,
-                     eigene Termine.
-
-                     Sarahs Wunsch (SAR-29): An dieser Stelle steht jetzt der
-                     Ablauf von /fahren-mit-handicap, dort die Sektion „So läuft
-                     es ab" (früher mit dem Label „Der Weg dahin").
-
-                     „Im gleichen Stil" heißt hier NICHT dieselbe Auszeichnung
-                     wie dort: Auf /fahren-mit-handicap ist das eine `.process`-
-                     Liste, also ein vierspaltiges Raster mit Verbindungslinie
-                     zwischen den Nummern – eine waagerechte Zeitleiste über die
-                     volle Seitenbreite. In einer halben Spalte hat die keinen
-                     Platz. `.steps` ist dieselbe Sache senkrecht, mit denselben
-                     runden Nummern; damit bleibt die Reihenfolge erhalten, und
-                     genau die ist der Sinn eines Ablaufs. Eine `check-list` wie
-                     nebenan wäre die einfachere Wahl gewesen und hätte aus vier
-                     Schritten vier gleichrangige Haken gemacht.
-
-                     Der Text ist wörtlich von /fahren-mit-handicap übernommen.
-                     ACHTUNG: Er ist dort ein ENTWURF und nicht von Sarah – er
-                     steht jetzt an zwei Stellen, geändert wird er also auch an
-                     zwei Stellen. */ ?>
-            <article class="card" style="--card-accent: var(--c-violet);">
-                <h3 style="margin-top:0;">So läuft es ab</h3>
-                <ol class="steps" style="margin-bottom:0;">
-                    <li>
-                        <strong>Wir telefonieren</strong>
-                        <span>Du erzählst mir, worum es geht. Ich sage dir ehrlich, was ich
-                              einschätzen kann und was ein Gutachten klären muss.</span>
-                    </li>
-                    <li>
-                        <strong>Gutachten &amp; Auflagen</strong>
-                        <span>Für die Fahrerlaubnis wird meist ein medizinisches oder
-                              verkehrsmedizinisches Gutachten gebraucht. Daraus ergeben sich
-                              die Auflagen für dein Fahrzeug.</span>
-                    </li>
-                    <li>
-                        <strong>Erste Stunde</strong>
-                        <span>Wir setzen uns ins angepasste Fahrzeug, stellen alles auf dich
-                              ein und fahren erstmal nur, damit du ein Gefühl bekommst.</span>
-                    </li>
-                    <li>
-                        <strong>Üben bis es sitzt</strong>
-                        <span>Wie bei jedem anderen auch: so lange, bis du sicher bist. Der
-                              einzige Unterschied ist der Weg, nicht das Ziel.</span>
-                    </li>
-                </ol>
-            </article>
+                <?php if ($school !== '' && $schoolUrl !== ''): ?>
+                    <a class="btn btn-ghost" href="<?= e($schoolUrl) ?>" target="_blank" rel="noopener">
+                        Zur <?= e($school) ?> &nearr;
+                    </a>
+                <?php endif; ?>
+            </aside>
         </div>
-
-        <?php if ($school !== '' && $schoolUrl !== ''): ?>
-            <p style="margin:2rem 0 0;">
-                <a class="btn btn-ghost" href="<?= e($schoolUrl) ?>" target="_blank" rel="noopener">
-                    Zur <?= e($school) ?> &nearr;
-                </a>
-            </p>
-        <?php endif; ?>
     </div>
 </section>
 

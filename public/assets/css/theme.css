@@ -249,6 +249,19 @@
 .card-grid > *:nth-child(7n+6), .process > *:nth-child(7n+6), .stat-grid > *:nth-child(7n+6) { --card-accent: var(--c-blue);   --card-accent-soft: rgba(59, 125, 216, 0.13); }
 .card-grid > *:nth-child(7n+7), .process > *:nth-child(7n+7), .stat-grid > *:nth-child(7n+7) { --card-accent: var(--c-violet); --card-accent-soft: rgba(124, 58, 237, 0.12); }
 
+/* Dieselbe Rotation für die Zeitleiste in „Wie du bei mir Fahrschüler:in
+   wirst". Sie läuft senkrecht, deshalb steht sie nicht in der Zeile darüber:
+   Dort geht es um Karten nebeneinander. Fünf Schritte ergeben rot, orange,
+   gelb, grün, türkis – der Anfang des Bogens aus Sarahs Logo, von oben nach
+   unten gelesen. */
+.enroll-steps > *:nth-child(7n+1) { --card-accent: var(--c-red);    --card-accent-soft: rgba(228, 87, 46, 0.12); }
+.enroll-steps > *:nth-child(7n+2) { --card-accent: var(--c-orange); --card-accent-soft: rgba(240, 138, 36, 0.14); }
+.enroll-steps > *:nth-child(7n+3) { --card-accent: var(--c-yellow); --card-accent-soft: rgba(232, 181, 23, 0.16); }
+.enroll-steps > *:nth-child(7n+4) { --card-accent: var(--c-green);  --card-accent-soft: rgba(62, 165, 91, 0.13); }
+.enroll-steps > *:nth-child(7n+5) { --card-accent: var(--c-teal);   --card-accent-soft: rgba(24, 154, 156, 0.13); }
+.enroll-steps > *:nth-child(7n+6) { --card-accent: var(--c-blue);   --card-accent-soft: rgba(59, 125, 216, 0.13); }
+.enroll-steps > *:nth-child(7n+7) { --card-accent: var(--c-violet); --card-accent-soft: rgba(124, 58, 237, 0.12); }
+
 /* Dieselbe Rotation für die Aufklapper. Sie stehen untereinander statt
    nebeneinander, aber es gilt derselbe Gedanke: Jeder Abschnitt ist ein
    eigenes Thema, und die Farbe an der Kante macht die Gliederung auf einen
@@ -548,4 +561,108 @@
 .tiktok-handle {
     display: inline-block; margin-top: .8rem; font-size: .9rem;
     color: var(--footer-accent); font-family: var(--font-body);
+}
+
+/* =========================================================================
+   „Wie du bei mir Fahrschüler:in wirst" (SAR-45)
+   -------------------------------------------------------------------------
+   Die Sektion beantwortet die einzige Frage, mit der jemand hier ankommt:
+   Wie fange ich an? Sie muss deshalb sofort lesbar machen, WER was tut –
+   Sarah fährt, die Fahrschule verwaltet.
+   ========================================================================= */
+
+/* Der Einordnungssatz unter der Überschrift. Der Einzug ist derselbe wie beim
+   h2 daneben: 16 px, die Breite des Regenbogenbalkens, den `.section-head h2`
+   davorsetzt. Ohne ihn stünde der Satz am Balken vorbei und der Kopf hätte
+   zwei linke Kanten. */
+.section-lead {
+    padding-left: 16px;
+    max-width: 64ch;
+    margin: .75rem 0 0;
+    color: var(--text-soft);
+}
+
+/* Zwei Kacheln nebeneinander – dieselben `.feature-card` wie in „Wobei ich
+   dich begleite", damit auf der Seite eine Kachel aussieht wie die andere.
+   Bewusst DIESELBE Klasse und keine nachgebaute: Wer die Kachel einmal
+   ändert, ändert sie überall. Das Raster hier gibt nur die Breiten vor – der
+   Ablauf ist der Inhalt, die Fahrschule die Fußnote dazu.
+
+   Dass beide gleich hoch werden (Raster-Standard), ist erwünscht und nicht
+   Bequemlichkeit: Der Ablauf ist mit fünf Schritten fast doppelt so hoch wie
+   die vier Zeilen der Fahrschule. Zwei frei stehende Kacheln mit so
+   verschiedener Höhe sehen aus wie ein Fehler, zwei gleich hohe wie ein
+   Raster. Den Rest fängt der Knopf an der Unterkante ab. */
+.enroll {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    gap: 1.4rem;
+}
+
+/* Die Farbe der Kopfkante steht hier und nicht im Template – so wie bei jeder
+   anderen Kachel der Seite auch (siehe „Regenbogen-Rotation" weiter oben).
+   Violett führt als Leitfarbe, Grün steht für die Fahrschule und wiederholt
+   sich unten in ihren Haken. */
+.enroll > *:nth-child(1) { --card-accent: var(--c-violet); --card-accent-soft: rgba(124, 58, 237, 0.12); }
+.enroll > *:nth-child(2) { --card-accent: var(--c-green);  --card-accent-soft: rgba(62, 165, 91, 0.13); }
+
+/* Mehr Luft unter der Überschrift als in einer Text-Kachel: Darunter beginnt
+   eine Liste und keine Fließzeile. */
+.enroll h3 { margin: 0 0 1.5rem; font-size: 1.18rem; }
+
+.enroll-formal .check-list { margin-bottom: 0; }
+.enroll-formal .check-list li::before { color: var(--card-accent, var(--accent)); }
+/* `auto` und kein fester Abstand: Der Knopf sinkt an die Unterkante der Kachel
+   und schließt sie ab, statt mitten in der Fläche zu enden. Möglich, weil
+   .feature-card eine Flex-Spalte ist. */
+.enroll-formal .btn { margin-top: auto; align-self: flex-start; }
+
+/* --- Die Zeitleiste ------------------------------------------------------
+   Fünf Schritte sind keine Aufzählung mehr, sondern ein Weg. Was ihn dazu
+   macht, ist die Linie zwischen den Nummern: Ohne sie stehen fünf Kreise
+   untereinander und man liest sie als gleichrangige Punkte.
+
+   Die Ziffer steht in --text und nicht in der Schrittfarbe. Bei Gelb wäre
+   sie sonst kaum zu lesen – die Farbe trägt der Ring und die Linie, die
+   Ziffer trägt den Kontrast. */
+.enroll-steps { list-style: none; counter-reset: enroll; margin: 0; padding: 0; }
+.enroll-steps > li { position: relative; padding: 0 0 1.6rem 3.7rem; }
+.enroll-steps > li:last-child { padding-bottom: 0; }
+
+.enroll-steps > li::before {
+    counter-increment: enroll;
+    content: counter(enroll);
+    position: absolute; left: 0; top: -.2rem;
+    width: 2.5rem; height: 2.5rem; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--card-accent-soft, var(--accent-soft));
+    border: 2px solid var(--card-accent, var(--accent));
+    color: var(--text);
+    font-family: var(--font-head); font-weight: 700; font-size: 1.05rem;
+}
+
+/* Läuft von der Unterkante des Kreises bis kurz über den nächsten. Der
+   Verlauf ins --border hinein nimmt der Linie das Lineal-hafte und führt
+   zugleich zur Farbe des nächsten Schrittes über. */
+.enroll-steps > li::after {
+    content: "";
+    position: absolute; left: calc(1.25rem - 1.5px);
+    top: 2.55rem; bottom: .3rem; width: 3px; border-radius: 2px;
+    background: linear-gradient(180deg, var(--card-accent, var(--accent)), var(--border));
+}
+.enroll-steps > li:last-child::after { content: none; }
+
+.enroll-steps strong {
+    display: block; margin-bottom: .3rem;
+    font-family: var(--font-head); color: var(--text); font-size: 1.04rem;
+}
+.enroll-steps p { margin: 0; color: var(--text-soft); font-size: .93rem; line-height: 1.6; }
+
+/* Unter 900 px stehen die beiden Spalten untereinander. Die Reihenfolge im
+   Markup ist dafür schon die richtige: erst der Ablauf, dann das Formale. */
+@media (max-width: 900px) {
+    .enroll { grid-template-columns: 1fr; }
+    /* Gestapelt hat die kurze Kachel keine hohe Nachbarin mehr, an der sie sich
+       ausrichten müsste – der Knopf gehört dann wieder direkt unter die Liste. */
+    .enroll-formal .btn { margin-top: 1.5rem; }
 }

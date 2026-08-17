@@ -294,7 +294,10 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 .chip.is-active { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 
 /* ---------- Prozess-Schritte ---------- */
-.process { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6rem; }
+/* Vier Schritte sind der Normalfall, deshalb die 4 als Rückfall. Wer mehr oder
+   weniger hat, setzt `--process-cols` am <ol> – so bleibt die Zahl dort stehen,
+   wo auch die Schritte stehen, statt hier im gemeinsamen Grundgerüst. */
+.process { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(var(--process-cols, 4), minmax(0, 1fr)); gap: 1.6rem; }
 .process-step { position: relative; padding-right: 1rem; }
 .process-num {
     position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center;
@@ -304,7 +307,13 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     font-family: var(--font-head); font-weight: 700; font-size: 1.4rem;
 }
 .process-step h3 { margin: 0 0 .5rem; font-size: 1.15rem; }
-.process-step p { margin: 0; color: var(--text-soft); font-size: .92rem; line-height: 1.6; }
+/* Die Spalten sind schmal, und Deutsch hat lange Wörter: „verkehrs­medizinisches"
+   ist breiter als eine Spalte, sobald es fünf statt vier sind. `hyphens: auto`
+   trennt es an den richtigen Stellen (das <html lang="de"> im Layout ist die
+   Voraussetzung dafür); `overflow-wrap` ist der Notausgang, falls der Browser
+   für die Sprache keine Trennmuster hat – dann bricht das Wort hart um, statt
+   in die Nachbarspalte zu laufen. */
+.process-step p { margin: 0; color: var(--text-soft); font-size: .92rem; line-height: 1.6; hyphens: auto; overflow-wrap: break-word; }
 .process-step::after { content: ""; position: absolute; top: 27px; left: 54px; width: calc(100% - 54px + 1.6rem); height: 3px; border-radius: 2px; background: linear-gradient(90deg, var(--card-accent, var(--accent)), transparent); }
 .process-step:last-child::after { width: calc(100% - 54px); }
 
@@ -1439,8 +1448,14 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 }
 
 @media (max-width: 980px) {
-    .process { grid-template-columns: repeat(2, 1fr); }
-    .process-step:nth-child(2)::after { width: calc(100% - 54px); }
+    .process { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    /* Die Verbindungslinie eines Schrittes zeigt auf den nächsten und ragt
+       dafür in den Spaltenabstand hinein. Am ZEILENENDE gibt es kein Nächstes
+       mehr – dort muss sie kurz bleiben, sonst zeigt sie über den Rand hinaus
+       auf den Schritt eine Zeile tiefer. Bei zwei Spalten endet jeder GERADE
+       Schritt eine Zeile; mit `nth-child(2)` galt das nur für den ersten davon
+       und stimmte deshalb nur bei genau vier Schritten. */
+    .process-step:nth-child(2n)::after { width: calc(100% - 54px); }
 }
 
 @media (max-width: 760px) {

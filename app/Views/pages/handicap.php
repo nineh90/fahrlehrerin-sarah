@@ -133,7 +133,7 @@
             </div>
         </div>
 
-        <ol class="process">
+        <ol class="process" style="--process-cols: 5;">
             <li class="process-step">
                 <span class="process-num">1</span>
                 <h3>Wir telefonieren</h3>
@@ -157,6 +157,19 @@
                 <h3>Üben bis es sitzt</h3>
                 <p>Wie bei jedem anderen auch: so lange, bis du sicher bist. Der einzige
                    Unterschied ist der Weg, nicht das Ziel.</p>
+            </li>
+            <?php /* Fünfter Schritt mit SAR-45. Das Ticket betraf die Startseite –
+                     hier steht derselbe Ablauf wörtlich noch einmal, und ein Weg,
+                     der auf der einen Seite fünf und auf der anderen vier Schritte
+                     hat, widerspricht sich. Wer den Text ändert, ändert ihn an
+                     beiden Stellen (home.php, Sektion „Wie du bei mir
+                     Fahrschüler:in wirst"). */ ?>
+            <li class="process-step">
+                <span class="process-num">5</span>
+                <h3>Prüfung</h3>
+                <p>Geprüft wird in dem Auto, in dem du geübt hast, und ich sitze daneben.
+                   Den Termin meldet die Fahrschule an – ich schlage ihn erst vor, wenn
+                   du wirklich so weit bist.</p>
             </li>
         </ol>
     </div>

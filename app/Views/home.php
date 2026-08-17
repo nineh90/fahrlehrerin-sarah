@@ -287,7 +287,11 @@ $schoolUrl = trim((string) config('school.url'));
             </div>
         </div>
 
-        <div class="card-grid">
+        <?php /* `--5` seit SAR-44: Mit der fünften Karte stünde eine allein in der
+                 zweiten Zeile. Der Modifier macht 3 + 2 daraus, zweite Zeile mittig
+                 (Begründung in nd-base.css). Kommt je eine Karte dazu oder weg,
+                 gehört er angepasst oder entfernt – er ist auf fünf gerechnet. */ ?>
+        <div class="card-grid card-grid--5">
             <article class="feature-card">
                 <span class="feature-icon"><?= icon('car') ?></span>
                 <h3>Klasse B</h3>
@@ -312,6 +316,31 @@ $schoolUrl = trim((string) config('school.url'));
                 <p>
                     Fahren mit Prothese, Lenkhilfe oder Handbedienung. Ich kenne die
                     Technik und übe sie, bis du nicht mehr darüber nachdenkst.
+                </p>
+            </article>
+
+            <?php /* SAR-44. Steht hinter „Ausbildung mit Handicap": beides ist
+                     Ausbildung mit besonderer Voraussetzung, und die Karte
+                     danach („Angstfrei ans Steuer") handelt vom Kopf und nicht
+                     vom Körper – sie schließt die Reihe ab.
+
+                     ZUM TEXT: FahrSignal ist echt (eigenes Projekt, Produktidee
+                     von Sarah) und beschrieben, wie die App wirklich arbeitet –
+                     Anweisung als Verkehrszeichen auf dem Gerät der Schülerin,
+                     farbcodiert nach Dringlichkeit, Empfängerschirm ohne
+                     bedienbare Elemente. Aber sie ist NICHT veröffentlicht.
+                     Deshalb steht hier „entsteht gerade" und kein Satz, der
+                     eine fertige App verspricht. Wer die Karte anfasst, prüft
+                     vorher den Stand des Projekts – ein Werbesatz für etwas,
+                     das es noch nicht gibt, wäre auf einer Seite, die sonst
+                     nichts verspricht, der einzige Bruch. */ ?>
+            <article class="feature-card">
+                <span class="feature-icon"><?= icon('ear') ?></span>
+                <h3>Ausbildung mit Hörschädigung</h3>
+                <p>
+                    Was ich sage, hörst du nicht – also zeige ich es dir. Meine Anweisungen
+                    erscheinen als Schild auf einem Gerät im Auto, farbig nach Dringlichkeit.
+                    Die App dafür heißt FahrSignal und entsteht gerade.
                 </p>
             </article>
 

@@ -250,6 +250,32 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 /* ---------- Karten-Raster (generisch) ---------- */
 .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.4rem; }
 .card-grid--2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+/* FÜNF KARTEN GEHEN IN KEINEM RASTER GLATT AUF.
+   Mit dem auto-fit oben werden es auf dem Desktop vier Spalten – und die fünfte
+   Karte steht allein in der zweiten Zeile, links angeschlagen. Das liest sich
+   nicht als Raster, sondern als vergessene Karte.
+
+   Fünf nebeneinander sind die andere naheliegende Lösung und die schlechtere:
+   Bei rund 205 px Spaltenbreite bricht jede Überschrift um und die Zeilen
+   werden zu Fetzen. Also 3 + 2, mit der zweiten Zeile mittig.
+
+   Gemacht über ein Sechser-Raster, in dem jede Karte zwei Spalten belegt: Die
+   vierte setzt bei Spalte 2 ein, die fünfte schließt bei 4 an – zusammen sitzen
+   sie mittig unter den drei darüber. Alle Karten behalten dabei DIESELBE
+   Breite; zwei breitere Karten in der letzten Zeile würden die Reihe füllen,
+   aber die Kacheln wären nicht mehr gleich.
+
+   Die 820 px sind gemessen und nicht gegriffen: Bei 839 px hört das auto-fit
+   oben von selbst mit drei Spalten auf (3 × 250 px + 2 × Abstand). Ein Wert
+   darüber ließe genau dazwischen ein schmales Band, in dem drei Spalten stehen,
+   die zweite Zeile aber wieder links klebt. Darunter greift das auto-fit und
+   macht zwei Spalten daraus. */
+@media (min-width: 820px) {
+    .card-grid--5 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .card-grid--5 > * { grid-column: span 2; }
+    .card-grid--5 > *:nth-child(4) { grid-column: 2 / span 2; }
+}
 .feature-card {
     position: relative; display: flex; flex-direction: column; overflow: hidden;
     background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);

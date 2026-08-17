@@ -234,6 +234,15 @@ function icon(string $name): string
            kleiner als im Logo – sonst verschluckt sein Bogen den Arm. */
         'wheelchair' => '<circle cx="17" cy="4.6" r="1.9"/><path d="M13.8 6.6 7.6 8.6l1.8 3.4"/><path d="M14.6 7.8 11.8 11.4l4.6 1.4.8 7"/><circle cx="9.6" cy="16.6" r="4.8"/>',
 
+        /* Durchgestrichenes Ohr – das international übliche Zeichen für
+           Gehörlosigkeit. Bewusst NICHT das Ohr mit Schallwellen daneben: Das
+           ist das Zeichen für Hören und meint bei 26 px das Gegenteil.
+           Ein Handy mit Schild darauf wäre die App gewesen, nicht die
+           Zielgruppe – die Nachbarkarten benennen alle Menschen, keine Geräte.
+           Der Strich läuft fast von Ecke zu Ecke: Kürzer gerät er in die
+           Silhouette des Ohrs und liest sich als Teil davon. */
+        'ear'       => '<path d="M6.6 9.4a5.4 5.4 0 0 1 10.8 0c0 3.6-3.6 4.6-3.6 7.6a2.9 2.9 0 0 1-5.8 0"/><path d="M10.2 9.6a1.9 1.9 0 0 1 3.6.8c0 1.5-1.7 1.7-1.7 3.2"/><path d="M4.4 4.4 19.6 19.6"/>',
+
         /* ---- Die vier Umbauten auf /fahren-mit-handicap -------------------
            Vorher liefen die Karten mit Auto, Schild, Uhr und Funkeln – also
            mit dem, was gerade im Satz übrig war. Auf einer Seite, die von

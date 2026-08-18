@@ -340,6 +340,21 @@
 
     --radius:    18px;
     --radius-sm: 12px;
+
+    /* --- Die Leiste am linken Rand ---------------------------------------
+       Am linken Bildschirmrand kleben zwei Dinge übereinander: der
+       Barrierefreiheits-Knopf (a11y.css, SAR-34) und darunter Sarahs Kanäle
+       (SAR-36). Sie stehen im Markup an ganz verschiedenen Stellen – der eine
+       weit oben, damit er der zweite Tab-Stopp ist, die anderen ganz unten,
+       weil sie das nicht sein sollen. Zu sehen sind sie trotzdem als eine
+       Spalte, und das hängt an diesen zwei Zahlen.
+
+       Wer eine davon ändert, verschiebt beide Bausteine gleichzeitig. Stünde
+       die Höhe zweimal da, würde die Spalte beim nächsten Anfassen
+       auseinanderrutschen – und zwar so wenig, dass es niemandem auffällt und
+       trotzdem unordentlich aussieht. */
+    --rand-tab-h:     52px;   /* Höhe eines Knopfs in der Leiste */
+    --rand-tab-luecke: 8px;   /* Abstand zwischen den Knöpfen */
     --shadow:    0 6px 22px rgba(43, 36, 52, 0.07);
     --shadow-lg: 0 18px 45px rgba(43, 36, 52, 0.13);
     --container: 1160px;
@@ -799,4 +814,75 @@
    Markup ist dafür schon die richtige: erst der Ablauf, dann das Formale. */
 @media (max-width: 900px) {
     .enroll { grid-template-columns: 1fr; }
+}
+
+/* =========================================================================
+   SARAHS KANÄLE AM LINKEN RAND  ·  .social-rail                    (SAR-36)
+   -------------------------------------------------------------------------
+   Zwei Knöpfe unter dem Barrierefreiheits-Knopf, dieselbe Form, dieselbe
+   Kante. Zusammen sind es drei Reiter in einer Spalte.
+
+   DIE AUSRICHTUNG IST GERECHNET UND NICHT PROBIERT. Der Knopf über der
+   Leiste sitzt senkrecht mittig (`top: 50%` mit `translateY(-50%)`), seine
+   Unterkante liegt also bei 50 % + halbe Höhe. Genau dort setzt die Leiste
+   an, plus eine Lücke. Beide Werte kommen aus :root – wer die Knopfhöhe
+   ändert, verschiebt die Leiste automatisch mit.
+
+   Kein `transform` hier: Die Leiste wächst von ihrem Anfang nach UNTEN. Mit
+   einer Verschiebung um die halbe eigene Höhe würde sie beim Hinzufügen eines
+   dritten Kanals in beide Richtungen wachsen und den Knopf darüber
+   überlappen.
+   ========================================================================= */
+.social-rail {
+    position: fixed;
+    left: 0;
+    top: calc(50% + var(--rand-tab-h) / 2 + var(--rand-tab-luecke));
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    gap: var(--rand-tab-luecke);
+}
+
+/* Dieselben Maße und Kanten wie .a11y-tab. Bewusst nachgebaut und nicht per
+   gemeinsamer Klasse gelöst: Der eine ist ein <button>, der die Darstellung
+   der Seite ändert, die anderen sind <a> und führen von der Seite weg. Sie
+   sehen gleich aus, weil sie am selben Rand sitzen – gleich SEIN sollen sie
+   nicht, und eine geteilte Klasse hätte genau das behauptet. */
+.social-rail-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: var(--rand-tab-h);
+    border: 1px solid var(--border-strong);
+    border-left: 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    background: var(--bg-card);
+    color: var(--accent-text);
+    box-shadow: var(--shadow);
+    transition: background .15s, color .15s;
+}
+.social-rail-tab:hover { background: var(--accent-soft); color: var(--accent-text); }
+.social-rail-tab svg { width: 22px; height: 22px; }
+
+/* Auf schmalen Screens rutscht der Barrierefreiheits-Knopf nach unten links
+   (Regel in a11y.css). Die Kanäle reihen sich dort waagerecht neben ihn:
+   senkrecht untereinander wären es drei Knöpfe über ein Drittel Bildhöhe, die
+   beim Scrollen dauerhaft Text verdecken.
+
+   Der Abstand nach links ist der Knopf plus zweimal Lücke – so sitzen alle
+   drei in einer Reihe mit gleichmäßigem Abstand. Die 559 px sind derselbe
+   Umschaltpunkt wie in a11y.css; laufen die auseinander, überlappen sich die
+   Knöpfe. */
+@media (max-width: 559px) {
+    .social-rail {
+        top: auto;
+        bottom: 14px;
+        left: calc(10px + 44px + var(--rand-tab-luecke));
+        flex-direction: row;
+    }
+    .social-rail-tab {
+        border-left: 1px solid var(--border-strong);
+        border-radius: var(--radius-sm);
+    }
 }

@@ -105,6 +105,12 @@
     <script src="<?= asset('js/main.js') ?>" defer></script>
     <?php /* Nur die Bedienung des Panels. Das Anwenden der Einstellungen liegt im
              Inline-Skript oben im <head> – siehe die Begründung dort. */ ?>
+    <?php /* Sarahs Kanäle als Leiste am linken Rand (SAR-36). Steht hier unten und
+             nicht oben beim Barrierefreiheits-Knopf, obwohl beide daneben zu sehen
+             sind: Zwei Links auf fremde Plattformen sollen nicht der zweite
+             Tab-Stopp der Seite sein. Begründung im Partial. */ ?>
+    <?php require APP_ROOT . '/app/Views/partials/social-rail.php'; ?>
+
     <script src="<?= asset('js/a11y.js') ?>" defer></script>
 </body>
 </html>

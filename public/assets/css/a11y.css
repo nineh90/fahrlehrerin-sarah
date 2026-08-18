@@ -325,7 +325,10 @@ html[data-kontrast='hoch'] .brand-logo {
     align-items: center;
     justify-content: center;
     width: 44px;
-    height: 52px;
+    /* Aus theme.css, weil die Social-Leiste darunter dieselbe Zahl braucht, um
+       daran anzuschließen (SAR-36). Zweimal hingeschrieben würden die beiden
+       auseinanderrutschen. */
+    height: var(--rand-tab-h, 52px);
     padding: 0;
     border: 1px solid var(--border-strong);
     border-left: 0;

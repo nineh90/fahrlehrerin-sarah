@@ -21,18 +21,27 @@
  */
 ?>
 <nav class="social-rail" aria-label="Sarah auf Social Media">
-    <?php /* „(öffnet TikTok)" statt nur „TikTok": Der Link führt von der Seite
-             weg, und das gehört in den Namen. Sichtbar ist nur das Zeichen –
-             deshalb trägt jeder Link seinen Namen als sr-only-Text und das
-             Zeichen selbst ist aria-hidden (das macht icon() von sich aus). */ ?>
-    <a class="social-rail-tab" href="<?= e(tiktok_url()) ?>"
+    <?php /* Der Name jedes Reiters steht in EINEM Element und ist zweigeteilt:
+             sichtbar der kurze Plattformname, unsichtbar der Rest. Sichtbar wird
+             er bei Hover UND bei Tastaturfokus (Regel in theme.css) – vorher war
+             er nur für Vorlesesoftware da, und wer das Zeichen sah, musste raten.
+
+             Bewusst kein title-Attribut: Das erscheint nur bei der Maus, nicht
+             bei der Tastatur und nicht auf dem Touchscreen, und Screenreader
+             lesen es gern zusätzlich zum Namen vor, also doppelt.
+
+             „öffnet in neuem Tab" gehört in den Namen, weil target="_blank" den
+             Besucher aus der Seite trägt, ohne ihn zu fragen. Sichtbar steht es
+             nicht da – ein Reiter am Bildschirmrand hat für den Satz keinen
+             Platz, und für die Maus verrät es die Statusleiste ohnehin. */ ?>
+    <a class="rand-tab social-rail-tab" href="<?= e(tiktok_url()) ?>"
        target="_blank" rel="noopener noreferrer">
-        <span class="sr-only">Sarah auf TikTok (öffnet in neuem Tab)</span>
         <?= icon('tiktok') ?>
+        <span class="rand-tab-name">TikTok<span class="sr-only"> – Sarahs Kanal, öffnet in neuem Tab</span></span>
     </a>
-    <a class="social-rail-tab" href="<?= e(instagram_url()) ?>"
+    <a class="rand-tab social-rail-tab" href="<?= e(instagram_url()) ?>"
        target="_blank" rel="noopener noreferrer">
-        <span class="sr-only">Sarah auf Instagram (öffnet in neuem Tab)</span>
         <?= icon('instagram') ?>
+        <span class="rand-tab-name">Instagram<span class="sr-only"> – Sarahs Kanal, öffnet in neuem Tab</span></span>
     </a>
 </nav>

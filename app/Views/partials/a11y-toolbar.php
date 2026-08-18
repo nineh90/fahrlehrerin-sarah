@@ -25,10 +25,21 @@
 $optionen = require APP_ROOT . '/app/darstellung.php';
 $optionen = $optionen['optionen'];
 ?>
-<button type="button" class="a11y-tab" data-a11y-oeffnen
+<button type="button" class="rand-tab a11y-tab" data-a11y-oeffnen
         aria-expanded="false" aria-controls="a11y-panel">
-    <span class="sr-only">Darstellung und Barrierefreiheit einstellen</span>
     <?= icon('accessibility') ?>
+    <?php /* SICHTBARES LABEL BEI HOVER UND TASTATURFOKUS (SAR-36).
+             Vorher stand hier nur `sr-only`: Für Vorlesesoftware war der Knopf
+             benannt, wer ihn SAH, musste das Zeichen deuten. Bewusst kein
+             title-Attribut – das erscheint nur bei der Maus, nicht bei der
+             Tastatur und nicht auf dem Touchscreen, und Screenreader lesen es
+             gern zusätzlich zum Namen vor, also doppelt.
+
+             Der lange Satz bleibt für die Vorlesesoftware, sichtbar wird nur
+             ein kurzes Wort – ein Reiter am Bildschirmrand hat keinen Platz
+             für einen Satz. Beides steht in EINEM Element, damit der Name des
+             Knopfs an einer Stelle steht und nicht an zwei. */ ?>
+    <span class="rand-tab-name">Darstellung<span class="sr-only"> und Barrierefreiheit einstellen</span></span>
     <?php /* Der Zähler zeigt, DASS Einstellungen aktiv sind. Ohne ihn wundert man
              sich auf einem fremden oder länger nicht benutzten Gerät über das
              veränderte Aussehen und findet die Ursache nicht. */ ?>

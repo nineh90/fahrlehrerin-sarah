@@ -316,31 +316,17 @@ html[data-kontrast='hoch'] .brand-logo {
    Regenbogenbogen des Heros und auf dem Handy der Hamburger sitzen.
    ========================================================================= */
 .a11y-tab {
+    /* NUR die Platzierung. Aussehen und Maße stehen bei `.rand-tab` in
+       theme.css – der Knopf teilt sie sich mit Sarahs Kanälen darunter
+       (SAR-36). Standen sie hier ein zweites Mal, liefen die drei Reiter beim
+       nächsten Anfassen auseinander; genau das ist beim Einbau des Labels
+       passiert. */
     position: fixed;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
     z-index: 60;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    /* Aus theme.css, weil die Social-Leiste darunter dieselbe Zahl braucht, um
-       daran anzuschließen (SAR-36). Zweimal hingeschrieben würden die beiden
-       auseinanderrutschen. */
-    height: var(--rand-tab-h, 52px);
-    padding: 0;
-    border: 1px solid var(--border-strong);
-    border-left: 0;
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    background: var(--bg-card);
-    color: var(--accent-text);
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    transition: background .15s, color .15s;
 }
-.a11y-tab:hover { background: var(--accent-soft); }
-.a11y-tab svg { width: 22px; height: 22px; }
 
 /* Der Zähler sitzt in der Ecke des Knopfs und zeigt, wie viele Einstellungen
    aktiv sind. Kleiner als --fs-xs geht hier ausnahmsweise nicht anders: Es ist

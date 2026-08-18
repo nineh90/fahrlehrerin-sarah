@@ -843,27 +843,40 @@
     gap: var(--rand-tab-luecke);
 }
 
-/* Dieselben Maße und Kanten wie .a11y-tab. Bewusst nachgebaut und nicht per
-   gemeinsamer Klasse gelöst: Der eine ist ein <button>, der die Darstellung
-   der Seite ändert, die anderen sind <a> und führen von der Seite weg. Sie
-   sehen gleich aus, weil sie am selben Rand sitzen – gleich SEIN sollen sie
-   nicht, und eine geteilte Klasse hätte genau das behauptet. */
-.social-rail-tab {
+/* DIE GEMEINSAME FORM ALLER DREI REITER.
+   Ursprünglich stand sie zweimal da – einmal für den Barrierefreiheits-Knopf
+   in a11y.css, einmal hier für die Kanäle – mit dem Argument, die beiden seien
+   nicht dasselbe. Semantisch stimmt das weiter: der eine ist ein <button>, der
+   die Darstellung ändert, die anderen sind <a> und führen von der Seite weg.
+   AUSSEHEN IST ABER KEINE SEMANTIK. Beim Einbau des Labels rutschten die
+   Zeichen auseinander, weil die eine Kopie angepasst wurde und die andere
+   nicht. Die Form steht jetzt einmal hier; die Dateien darüber setzen nur noch,
+   WO ihr Reiter klebt.
+
+   `justify-content: flex-start` mit festem linken Abstand von 11 px – das ist
+   genau (44 − 22) / 2, die Mitte des zugeklappten Reiters. Mittig ausgerichtet
+   würde das Zeichen beim Aufklappen nach links wandern, und drei Reiter, deren
+   Zeichen beim Überfahren zappeln, sehen kaputt aus. */
+.rand-tab {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     width: 44px;
     height: var(--rand-tab-h);
+    padding: 0 0 0 11px;
+    overflow: hidden;
+    white-space: nowrap;
     border: 1px solid var(--border-strong);
     border-left: 0;
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     background: var(--bg-card);
     color: var(--accent-text);
     box-shadow: var(--shadow);
+    cursor: pointer;
     transition: background .15s, color .15s;
 }
-.social-rail-tab:hover { background: var(--accent-soft); color: var(--accent-text); }
-.social-rail-tab svg { width: 22px; height: 22px; }
+.rand-tab:hover { background: var(--accent-soft); color: var(--accent-text); }
+.rand-tab svg { width: 22px; height: 22px; flex-shrink: 0; }
 
 /* Auf schmalen Screens rutscht der Barrierefreiheits-Knopf nach unten links
    (Regel in a11y.css). Die Kanäle reihen sich dort waagerecht neben ihn:
@@ -885,4 +898,63 @@
         border-left: 1px solid var(--border-strong);
         border-radius: var(--radius-sm);
     }
+}
+
+/* --- Das Label an den Reitern der Randleiste ------------------------------
+   Alle drei Reiter zeigen bei Hover UND bei Tastaturfokus ihren Namen. Gilt
+   für den Barrierefreiheits-Knopf genauso wie für die Kanäle – er ist sogar
+   der wichtigere Fall, sein Zeichen ist das am wenigsten selbsterklärende.
+
+   WARUM KEIN title-ATTRIBUT: Es erscheint nur bei der Maus. Wer mit der
+   Tastatur durch die Seite geht, sieht es nie; auf dem Touchscreen gibt es
+   es gar nicht. Dazu lesen Screenreader es häufig ZUSÄTZLICH zum
+   Accessible Name vor – aus einem Hinweis wird eine Dopplung.
+
+   WARUM KEIN SCHWEBENDES KÄSTCHEN daneben, sondern der Reiter selbst, der
+   sich verbreitert: Ein eingeblendetes Kästchen ist „Inhalt bei Hover"
+   (WCAG 1.4.13) und müsste zusätzlich mit Escape wegzuklicken sein, ohne
+   den Zeiger zu bewegen – das braucht JavaScript. Der Reiter, der seinen
+   eigenen Namen zeigt, ist kein Zusatzinhalt, sondern das Bedienelement.
+
+   DAS ZEICHEN DARF DABEI NICHT WANDERN. Deshalb `justify-content:
+   flex-start` und ein fester linker Abstand von 11 px – das ist genau
+   (44 − 22) / 2, also die Mitte des zugeklappten Reiters. Mittig
+   ausgerichtet würde das Zeichen beim Aufklappen nach links rutschen, und
+   drei Reiter, deren Zeichen beim Überfahren zappeln, sehen kaputt aus.
+
+   Kein Übergang auf der Breite: `width: auto` lässt sich nicht animieren,
+   ein Zwischenwert wäre geraten. Der Name blendet auf, die Breite springt –
+   das liest sich ruhiger als eine Breite, die auf halber Strecke stockt. */
+.rand-tab-name {
+    margin-left: .5rem;
+    padding-right: .3rem;
+    font-family: var(--font-head);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    color: var(--accent-text);
+    opacity: 0;
+    transition: opacity .15s;
+}
+.rand-tab:hover,
+.rand-tab:focus-visible {
+    width: auto;
+}
+.rand-tab:hover .rand-tab-name,
+.rand-tab:focus-visible .rand-tab-name {
+    opacity: 1;
+}
+
+/* Auf schmalen Screens liegen die drei Reiter waagerecht unten links. Klappte
+   dort einer auf, schöbe er die beiden anderen aus dem Bild – die Leiste hat
+   dort keine freie Fläche nach rechts. Und Hover gibt es auf dem Touchscreen
+   ohnehin nicht: Ein Fingertipp löst gleich aus, das Label käme nie zum
+   Lesen. Also bleibt der Name dort, wo er vorher war – bei der
+   Vorlesesoftware. */
+@media (max-width: 559px) {
+    .rand-tab-name {
+        position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+        overflow: hidden; clip: rect(0 0 0 0); border: 0;
+    }
+    .rand-tab:hover,
+    .rand-tab:focus-visible { width: 44px; }
 }

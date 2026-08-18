@@ -154,13 +154,18 @@ html[data-kontrast='dunkel'] {
     --text-soft: #C6BDD2;
     --muted:     #A399B0;
 
-    /* Violett auf dunklem Grund braucht mehr Helligkeit, sonst fällt es durch:
-       Das Marken-Violett #7C3AED kommt auf diesem Hintergrund auf 3,3:1. */
-    --accent:       #C4A6FF;
-    --accent-hover: #D9C6FF;
-    --accent-text:  #C4A6FF;
+    /* Die Leitfarbe kehrt sich hier um. Hell ist sie ein ABGEDUNKELTES Grün
+       (#22753A, siehe theme.css) – auf diesem Grund käme das auf 1,6:1 und
+       wäre praktisch unsichtbar. Dunkel muss dasselbe Grün AUFGEHELLT
+       werden. Es ist derselbe Wert wie --footer-accent im hellen Schema,
+       denn dort ist die Fläche ebenfalls dunkel.
+       8,59:1 auf dem Grund, 7,60:1 auf der Karte, dunkler Text darauf
+       8,59:1 – dieselben Zahlen, die das helle Violett vorher hatte. */
+    --accent:       #51CC74;
+    --accent-hover: #7ED998;
+    --accent-text:  #51CC74;
     --on-accent:    #1B1722;
-    --accent-soft:  rgba(196, 166, 255, 0.16);
+    --accent-soft:  rgba(81, 204, 116, 0.16);
 
     --border:        rgba(241, 236, 246, 0.16);
     --border-strong: rgba(241, 236, 246, 0.32);
@@ -176,7 +181,7 @@ html[data-kontrast='dunkel'] {
     --bg-footer:     #120F17;
     --footer-text:   #F1ECF6;
     --footer-muted:  #B3A9C0;
-    --footer-accent: #C4A6FF;
+    --footer-accent: #51CC74;
     --footer-border: rgba(241, 236, 246, 0.14);
     --footer-hover:  rgba(241, 236, 246, 0.08);
 
@@ -191,8 +196,8 @@ html[data-kontrast='dunkel'] {
 
     /* Die Farbwolken im Hintergrund dürfen dunkel kaum sichtbar sein, sonst
        wird der Fließtext darüber unruhig. */
-    --aurora-1: rgba(124, 58, 237, 0.20);
-    --aurora-2: rgba(24, 154, 156, 0.16);
+    --aurora-1: rgba(62, 165, 91, 0.20);
+    --aurora-2: rgba(124, 58, 237, 0.16);
     --aurora-3: rgba(240, 138, 36, 0.12);
     --aurora-4: rgba(59, 125, 216, 0.16);
 
@@ -206,8 +211,12 @@ html[data-kontrast='dunkel'] {
 
 /* --- Hoher Kontrast ----------------------------------------------------
    Reines Schwarz/Weiß, Gelb als einziger Akzent – die maximale Trennschärfe.
-   Gelb und nicht das Marken-Violett: #7C3AED kommt auf Schwarz auf 3,2:1 und
-   fällt für Text damit durch. */
+   Gelb und nicht die Leitfarbe: Das Akzent-Grün #22753A kommt auf Schwarz
+   auf 3,67:1 und fällt für Text damit durch – genau wie das Violett davor
+   (3,69:1). Der Farbwechsel vom 18.08.2026 ändert an dieser Entscheidung
+   also nichts. Das helle Regenbogen-Grün #3EA55B käme mit 6,74:1 zwar
+   durch, ist hier aber trotzdem falsch: In diesem Modus soll es EINEN
+   Akzent geben und nicht einen zweiten Grünton neben --green-text. */
 html[data-kontrast='hoch'] {
     --bg:            #000000;
     --bg-secondary:  #000000;

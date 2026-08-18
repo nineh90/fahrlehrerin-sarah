@@ -1581,14 +1581,47 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     body.admin-nav-open { overflow: hidden; }
 }
 
-@media (max-width: 740px) {
+/* --- DIE NAVIGATION KLAPPT BEI 1120 PX ZUSAMMEN, NICHT ERST BEI 740 -------
+   Die Grenze ist keine runde Zahl, sondern gemessen an der längsten Fassung
+   der Zeile. Die Navigation ist Flex ohne `nowrap`; wird sie zu breit, läuft
+   sie nicht quer heraus, sondern „Fahren mit Handicap" bricht um und der
+   Header wird zweizeilig. Das sieht nach Fehler aus, ist aber leise – deshalb
+   ist es lange niemandem aufgefallen.
+
+   Gerechnet mit Roboto Mono (0.6 em Vorschub) bei --fs-sm 15 px und 13,6 px
+   Innenabstand je Seite am Link, dazu Logo (92 px), Header-Gap (16 px) und
+   Container-Rand (2 × 22 px):
+
+     abgemeldet   Startseite … Termine          ~730 px  ->  ab  ~882 px frei
+     angemeldet   … Meine Stunden, Abmelden,
+                  Stunde eintragen              ~952 px  ->  ab ~1104 px frei
+
+   Maßgebend ist die ANGEMELDETE Fassung – sie ist die längere, und wer
+   angemeldet ist, ist Fahrschüler:in und damit der häufigere Fall auf dieser
+   Seite. 1120 statt 1104, damit ein bisschen Luft bleibt.
+
+   Der angemeldete Umbruch ist übrigens ÄLTER als der Menüpunkt „Startseite"
+   (SAR-48). Nachgemessen an der Fassung davor: Bei 1024 px stand die Zeile noch,
+   bei 900 px brachen VIER Punkte intern um – „Über mich", „Fahren mit Handicap",
+   „Meine Stunden" und „Stunde eintragen" standen zweizeilig. Der neue Punkt hat
+   den Umbruch also nicht verursacht, sondern nur so weit nach oben geschoben,
+   dass er auffiel.
+
+   WICHTIG: Diese Grenze gilt NUR für den Header. Alles andere am Handy-Layout
+   steht weiter bei 740 px im Block darunter. Wer beides zusammenlegt, macht
+   das Preisraster und die Schrittfolge schon auf dem Laptop einspaltig.
+
+   Wer hier Menüpunkte umbenennt, verschiebt die Grenze mit – kürzere Namen
+   dürfen sie senken, längere müssen sie heben. */
+@media (max-width: 1120px) {
     .nav-toggle { display: flex; }
 
     /* --- Die Marke steht oben in der Mitte --------------------------------
-       Auf dem Handy trägt der Header nur noch Logo und Hamburger. Links in
-       der Ecke sieht das große Logo neben der leeren Fläche daneben aus wie
-       verrutscht – also steht es beim Öffnen der Seite mittig und wandert
-       beim Scrollen auf seinen Platz nach links, während es schrumpft.
+       Sobald die Navigation zusammengeklappt ist, trägt der Header nur noch
+       Logo und Hamburger. Links in der Ecke sieht das große Logo neben der
+       leeren Fläche daneben aus wie verrutscht – also steht es beim Öffnen
+       der Seite mittig und wandert beim Scrollen auf seinen Platz nach links,
+       während es schrumpft.
 
        Absolut positioniert und nicht per Flex zentriert, weil die Bewegung
        laufen und nicht springen soll: `left` lässt sich animieren, ein
@@ -1629,6 +1662,11 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     .main-nav.is-open { display: flex; }
     .nav-link { padding: .8rem .5rem; }
     .nav-cta { margin: .5rem 0 0; }
+}
+
+/* Ab hier das eigentliche Handy-Layout. Es hing nie am Header und bleibt
+   deshalb bei 740 px stehen. */
+@media (max-width: 740px) {
     .form-row { grid-template-columns: 1fr; }
     .hero-badges { grid-template-columns: 1fr; }
     .price-row { grid-template-columns: 1fr; gap: .8rem; }

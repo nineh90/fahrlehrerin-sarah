@@ -31,6 +31,23 @@
         </button>
 
         <nav class="main-nav" id="mainNav">
+            <?php /* SAR-48. Der Weg zurück auf die Startseite steht ZWEIMAL im
+                     Header: als Logo und als Menüpunkt. Das ist keine Dopplung aus
+                     Versehen. Dass ein Logo zur Startseite führt, ist eine erlernte
+                     Konvention – wer sie nicht kennt, sieht dort nur ein Bild und
+                     findet im Menü keinen Weg heim. Der Menüpunkt ist für ihn da.
+
+                     Er steht vorn, weil er die oberste Ebene ist; alles danach
+                     liegt darunter. Und er ist der einzige Punkt, dessen aktiver
+                     Zustand exakt passen muss: nav_active('/') vergleicht bei '/'
+                     auf Gleichheit statt auf Präfix (siehe helpers.php), sonst
+                     wäre er auf JEDER Seite hervorgehoben.
+
+                     Er kostet Breite und hat damit den Umschaltpunkt des Headers
+                     verschoben – die Rechnung steht in nd-base.css beim
+                     1120-px-Block. Wer diesen Punkt wieder entfernt, darf die
+                     Grenze dort senken. */ ?>
+            <a class="nav-link<?= nav_active('/') ?>" href="<?= url('/') ?>">Startseite</a>
             <a class="nav-link<?= nav_active('/ueber-mich') ?>" href="<?= url('/ueber-mich') ?>">Über mich</a>
             <a class="nav-link<?= nav_active('/fahren-mit-handicap') ?>" href="<?= url('/fahren-mit-handicap') ?>">Fahren mit Handicap</a>
             <a class="nav-link<?= nav_active('/kontakt') ?>" href="<?= url('/kontakt') ?>">Kontakt</a>

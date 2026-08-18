@@ -47,8 +47,8 @@
 <body>
     <?php /* SPRUNGLINK, erster Tab-Stopp der Seite (SAR-34).
              Wer mit der Tastatur oder einem Screenreader kommt, musste vorher auf
-             jeder Unterseite erst durch Logo und fünf Menüpunkte, bevor der
-             Inhalt anfing. Unsichtbar bis er den Fokus bekommt – dann springt er
+             jeder Unterseite erst durch Logo und die ganze Hauptnavigation,
+             bevor der Inhalt anfing. Unsichtbar bis er den Fokus bekommt – dann springt er
              sichtbar oben links ins Bild (Regel in a11y.css ist es nicht, sondern
              nd-base.css: der Sprunglink gehört zum Grundgerüst und nicht zu den
              abschaltbaren Modi). */ ?>

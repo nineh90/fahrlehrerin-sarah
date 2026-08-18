@@ -55,8 +55,12 @@
        steht Fließtext, der Kontrast darf nicht ins Rutschen kommen.
        Mehr Deckkraft als hier wird schnell unruhig – lieber die Wolken
        größer machen (Breite in nd-base.css) als kräftiger. */
-    --aurora-1: rgba(124, 58, 237, 0.15);   /* Violett – die Leitfarbe */
-    --aurora-2: rgba(24, 154, 156, 0.14);   /* Türkis */
+    --aurora-1: rgba(62, 165, 91, 0.15);    /* Grün – die Leitfarbe */
+    /* War Türkis. Türkis liegt im Farbkreis direkt neben Grün; nebeneinander
+       auf derselben Fläche verschwimmen die beiden Wolken zu einem Fleck.
+       Violett hat den Platz übernommen – es ist die Farbe, die vorne frei
+       geworden ist, und liegt weit genug weg. */
+    --aurora-2: rgba(124, 58, 237, 0.14);   /* Violett */
     --aurora-3: rgba(240, 138, 36, 0.12);   /* Orange */
     --aurora-4: rgba(59, 125, 216, 0.12);   /* Blau */
 
@@ -74,17 +78,48 @@
     --muted:     #756B80;
 
     /* =====================================================================
-       4. AKZENT  ·  Violett führt, der Regenbogen begleitet
+       4. AKZENT  ·  Grün führt, der Regenbogen begleitet
+       -------------------------------------------------------------------------
+       WARUM HIER EIN FESTER WERT STEHT UND NICHT `var(--c-green)`.
+       Bis zum 18.08.2026 führte Violett, und zwar als `var(--c-violet)` –
+       die Leitfarbe WAR eine der sieben Regenbogenfarben, unverändert. Das
+       war die Eleganz des Aufbaus, und mit Grün geht sie nicht mehr auf.
+
+       Grund ist die Physik der Farbe, nicht der Geschmack: Grün ist bei
+       gleicher Sättigung viel heller als Violett. `--c-green` (#3EA55B)
+       kommt auf dem Creme-Grund auf 2,95:1. Gefordert sind 4,5:1 für Text
+       unter 24 px (WCAG 1.4.3), und der Akzent ist an 28 Stellen eine
+       TEXTFARBE – unter anderem `a { color: var(--accent) }`, also jeder
+       Link der Seite. Violett schaffte dort 5,39:1.
+
+       Die Werte unten sind deshalb ein abgedunkeltes Grün im Farbton von
+       `--c-green` (137°), gerechnet auf exakt die Kontraste, die das
+       Violett vorher hatte:
+
+         --accent        5,41:1 auf Creme   (Violett: 5,39)  · Weiß darauf 5,72:1
+         --accent-hover  6,71:1             (Violett: 6,72)
+         --accent-text   8,49:1             (Violett: 8,50)
+
+       Der Regenbogen bleibt davon unberührt: `--c-green` oben ist weiter
+       das helle Grün des Logos und steht weiter im Bogen, in der
+       Kachel-Rotation und in den Statusfarben. Nur die Leitfarbe ist eine
+       eigene, dunklere Fassung davon.
+
+       WER HIER SCHRAUBT, MISST NACH. Ein Grün, das auf dem Monitor „noch
+       gut lesbar" aussieht, liegt fast immer unter 4,5:1 – hell wirkende
+       Farben täuschen genau in diesem Bereich.
        ===================================================================== */
-    --accent:       var(--c-violet);
-    --accent-hover: #6D28D9;
+    --accent:       #22753A;
+    --accent-hover: #1D6532;
     --on-accent:    #FFFFFF;                    /* Text auf Akzentflächen */
-    --accent-text:  #5B21B6;                    /* Akzentfarbe als Textfarbe (kontraststark) */
-    --accent-soft:  rgba(124, 58, 237, 0.10);   /* zarte Akzentfläche */
+    --accent-text:  #185429;                    /* Akzentfarbe als Textfarbe (kontraststark) */
+    --accent-soft:  rgba(34, 117, 58, 0.10);    /* zarte Akzentfläche */
     /* Tiefe unter dem Hauptbutton – neutral und dezent. Ein farbiger Schein
-       in Violett sah neben dem Regenbogen nach Effekt aus, nicht nach Handwerk. */
+       in der Leitfarbe sah neben dem Regenbogen nach Effekt aus, nicht nach
+       Handwerk. Deshalb steht hier ein Grauton und keine Ableitung des
+       Akzents; der Farbwechsel auf Grün lässt ihn unberührt. */
     --shadow-accent: rgba(43, 36, 52, 0.16);
-    --focus-ring:   #7C3AED;                    /* Tastatur-Fokus */
+    --focus-ring:   #22753A;                    /* Tastatur-Fokus */
 
     /* =====================================================================
        5. LINIEN & FLÄCHENDETAILS
@@ -101,7 +136,20 @@
 
     /* =====================================================================
        6. STATUS  ·  semantisch, greift auf die Regenbogenfarben zurück
-       ===================================================================== */
+       -------------------------------------------------------------------------
+       ACHTUNG SEIT DEM FARBWECHSEL (18.08.2026): Grün ist jetzt zweierlei –
+       die Leitfarbe der Marke UND „hat geklappt". Solange die Leitfarbe
+       Violett war, waren die beiden Bedeutungen sauber getrennt.
+
+       Auseinander hält sie ihre Helligkeit: Status-Grün ist das helle
+       `--c-green` (#3EA55B) und steht auf Flächen (Plaketten, Kanten,
+       Zeilenkanten). Der Akzent ist das dunkle #22753A und steht als Text
+       und als Knopffläche. Wer eine Statusfarbe auf den Akzent umstellt
+       oder umgekehrt, nimmt der Seite diese Trennung.
+
+       Eine echte Statusmeldung braucht deshalb weiter ein Wort dazu und
+       nicht nur die Farbe – das galt vorher schon für Farbenblinde und
+       gilt jetzt für alle. */
     --green:      var(--c-green);
     --green-soft: rgba(62, 165, 91, 0.12);
     --green-line: rgba(62, 165, 91, 0.45);
@@ -123,14 +171,18 @@
     --footer-text:   #FDF8F0;
     --footer-muted:  #B6ADC4;
     --footer-border: rgba(255, 255, 255, 0.14);
-    --footer-accent: #C4A6FF;
+    /* Die Leitfarbe für den dunklen Fuß: dasselbe Grün, aber aufgehellt
+       statt abgedunkelt – auf #2B2434 käme #22753A auf 1,4:1. 7,29:1, das
+       ist auf die Zehntelstelle der Wert, den das helle Violett vorher
+       hatte. */
+    --footer-accent: #51CC74;
     --footer-hover:  rgba(255, 255, 255, 0.07);
 
     /* =====================================================================
        8. HERO  ·  großflächiger Regenbogen über Creme
        ===================================================================== */
     --hero-bg:
-        radial-gradient(760px 420px at 88% 8%,  rgba(124, 58, 237, 0.30), transparent 62%),
+        radial-gradient(760px 420px at 88% 8%,  rgba(62, 165, 91, 0.30), transparent 62%),
         radial-gradient(680px 400px at 66% 88%, rgba(59, 125, 216, 0.26), transparent 62%),
         radial-gradient(620px 380px at 96% 74%, rgba(24, 154, 156, 0.26), transparent 62%),
         radial-gradient(560px 340px at 42% 4%,  rgba(232, 181, 23, 0.24), transparent 62%),
@@ -163,12 +215,12 @@
         rgba(253, 248, 240, 0.00) 100%);
 
     --page-head-bg:
-        radial-gradient(700px 300px at 88% -40%, rgba(124, 58, 237, 0.20), transparent 65%),
+        radial-gradient(700px 300px at 88% -40%, rgba(62, 165, 91, 0.20), transparent 65%),
         radial-gradient(600px 280px at 10% -20%, rgba(24, 154, 156, 0.16), transparent 65%),
         var(--bg-secondary);
 
     --cta-bg:
-        radial-gradient(620px 260px at 92% -50%, rgba(124, 58, 237, 0.18), transparent 68%),
+        radial-gradient(620px 260px at 92% -50%, rgba(62, 165, 91, 0.18), transparent 68%),
         linear-gradient(135deg, #FFFFFF, var(--bg-secondary));
 
     /* =====================================================================
@@ -422,7 +474,15 @@
 }
 .site-header.is-compact::after { scale: 1 1; }
 
-/* Header auf dem Handy: Dieselbe Mechanik, kleinere Zahlen. Das Logo bleibt
+/* Header in der zusammengeklappten Fassung: Dieselbe Mechanik, kleinere
+   Zahlen. Die Grenze steht bei 1120 px und nicht bei 740 wie der Rest des
+   Handy-Layouts – sie ist an der Breite der Navigation gemessen, die
+   Rechnung dazu steht in nd-base.css beim gleichlautenden Block. Beide
+   Grenzen MÜSSEN dieselbe Zahl tragen: Diese Tokens setzen die Höhen, zu
+   denen die mittige Marke dort passt. Laufen sie auseinander, steht das
+   Logo eine Weile mittig in einem Header, der noch die Desktop-Höhe hat.
+
+   Das Logo bleibt
    deutlich über der gemessenen Lesbarkeitsgrenze von rund 104 px – kleiner
    wäre der Schriftzug auch hier wieder Matsch.
 
@@ -432,7 +492,7 @@
    mehr anschneiden. Der Überstand von 24 px ist damit gewollt sichtbar und
    nicht mehr das Maß, das gerade noch geht. Weiter darf er trotzdem nicht
    wachsen – darunter beginnt der Hero. */
-@media (max-width: 740px) {
+@media (max-width: 1120px) {
     :root {
         --header-h:          88px;
         --header-h-compact:  70px;
@@ -674,10 +734,13 @@
 
 /* Die Farbe der Kopfkante steht hier und nicht im Template – so wie bei jeder
    anderen Kachel der Seite auch (siehe „Regenbogen-Rotation" weiter oben).
-   Violett führt als Leitfarbe, Grün steht für die Fahrschule und wiederholt
-   sich unten in ihren Haken. */
-.enroll > *:nth-child(1) { --card-accent: var(--c-violet); --card-accent-soft: rgba(124, 58, 237, 0.12); }
-.enroll > *:nth-child(2) { --card-accent: var(--c-green);  --card-accent-soft: rgba(62, 165, 91, 0.13); }
+   Die erste Kachel ist Sarah und trägt die Leitfarbe, jetzt also Grün. Die
+   Fahrschule hatte bis zum 18.08.2026 Grün und bekommt dafür Violett – nicht
+   aus Symmetrie, sondern weil beide Kacheln nebeneinander stehen und sich
+   unterscheiden müssen. Die Haken in ihrer Liste ziehen mit: Sie lesen
+   `--card-accent` der eigenen Kachel und nicht den festen Wert. */
+.enroll > *:nth-child(1) { --card-accent: var(--c-green);  --card-accent-soft: rgba(62, 165, 91, 0.13); }
+.enroll > *:nth-child(2) { --card-accent: var(--c-violet); --card-accent-soft: rgba(124, 58, 237, 0.12); }
 
 /* Mehr Luft unter der Überschrift als in einer Text-Kachel: Darunter beginnt
    eine Liste und keine Fließzeile. */

@@ -24,6 +24,8 @@
     <link rel="icon" href="<?= asset('img/favicon.png') ?>" sizes="48x48" type="image/png">
     <link rel="apple-touch-icon" href="<?= asset('img/apple-touch-icon.png') ?>">
 
+    <?php require APP_ROOT . '/app/Views/partials/a11y-head.php'; ?>
+
     <?php /* Die getippte Überschrift (data-typewriter, nur auf der Startseite)
              ist bis zum Start des Skripts unsichtbar – sonst stünde sie einen
              Wimpernschlag lang vollständig da und verschwände wieder. Ohne
@@ -43,6 +45,19 @@
     <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
+    <?php /* SPRUNGLINK, erster Tab-Stopp der Seite (SAR-34).
+             Wer mit der Tastatur oder einem Screenreader kommt, musste vorher auf
+             jeder Unterseite erst durch Logo und fünf Menüpunkte, bevor der
+             Inhalt anfing. Unsichtbar bis er den Fokus bekommt – dann springt er
+             sichtbar oben links ins Bild (Regel in a11y.css ist es nicht, sondern
+             nd-base.css: der Sprunglink gehört zum Grundgerüst und nicht zu den
+             abschaltbaren Modi). */ ?>
+    <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+
+    <?php /* Die Barrierefreiheits-Leiste. Gleich hinter dem Sprunglink, damit sie
+             der zweite Tab-Stopp ist – wer sie braucht, soll sie nicht suchen. */ ?>
+    <?php require APP_ROOT . '/app/Views/partials/a11y-toolbar.php'; ?>
+
     <?php /* Bewegter Hintergrund: vier langsam ziehende Farbwolken hinter der
              ganzen Seite. Reine Dekoration – deshalb aria-hidden und leere
              <span>, es gibt hier nichts vorzulesen. Gestaltung in nd-base.css
@@ -56,7 +71,7 @@
 
     <?php require APP_ROOT . '/app/Views/partials/flash.php'; ?>
 
-    <main>
+    <main id="inhalt">
         <?= $content ?>
     </main>
 
@@ -88,5 +103,8 @@
     <?php require APP_ROOT . '/app/Views/partials/nd-banner.php'; ?>
 
     <script src="<?= asset('js/main.js') ?>" defer></script>
+    <?php /* Nur die Bedienung des Panels. Das Anwenden der Einstellungen liegt im
+             Inline-Skript oben im <head> – siehe die Begründung dort. */ ?>
+    <script src="<?= asset('js/a11y.js') ?>" defer></script>
 </body>
 </html>

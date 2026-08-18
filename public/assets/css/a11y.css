@@ -1,0 +1,452 @@
+/* =========================================================================
+   BARRIEREFREIHEITS-MODI  ·  a11y.css                              (SAR-34)
+   -------------------------------------------------------------------------
+   Übernommen aus dem Schwesterprojekt „Kein Einzelfall" und auf diese Seite
+   übertragen. Lädt NACH theme.css, darf also Tokens umdefinieren.
+
+   ZWEI REGELN, DIE DEN GANZEN AUFBAU TRAGEN:
+
+   1. Alles hängt an Attributen und Klassen auf <html>, gesetzt von a11y.js.
+      Kein Modus fasst einzelne Bausteine an. Dadurch gilt jede Regel
+      automatisch auch für Komponenten, die es heute noch gar nicht gibt.
+
+   2. Die Kontrastmodi arbeiten ausschließlich über die Farb-Tokens aus
+      theme.css. Sie sind deshalb kurz, obwohl sie die ganze Seite umfärben –
+      Frontend wie Admin, Kalender wie Formulare.
+
+   Was hier NICHT drin ist: die Leichte Sprache. Das ist keine Darstellungs-
+   einstellung, sondern ein zweiter Textbestand – den schreibt Sarah.
+   ========================================================================= */
+
+/* --- Stellschrauben, die das Panel dreht ---------------------------------
+   Die Standardwerte sind die, die die Seite ohne Einstellung hat. Wer nichts
+   anfasst, sieht also genau das, was vorher da war. */
+:root {
+    --a11y-font-scale:     1;
+    --a11y-line-height:    1.6;
+    --a11y-letter-spacing: 0em;
+}
+
+/* Grundschrift = Browsereinstellung × Nutzerfaktor.
+   `100%` und keine px-Angabe: Wer im Browser eine größere Grundschrift
+   eingestellt hat, behält sie (WCAG 1.4.4). Weil die ganze Seite seit SAR-34
+   in rem an zehn Tokens hängt, wächst mit diesem einen Faktor alles
+   gleichmäßig – Schrift, Abstände, Kartenhöhen, Knöpfe. */
+html {
+    font-size: calc(100% * var(--a11y-font-scale));
+}
+body {
+    line-height: var(--a11y-line-height);
+    letter-spacing: var(--a11y-letter-spacing);
+}
+
+/* --- Gut lesbare Schrift -------------------------------------------------
+   Die Hausschriften sind Fredoka (Überschriften) und Roboto Mono (Fließtext).
+   Beide sind schön, beide sind nicht für jeden gut lesbar – eine Monospace
+   für ganze Absätze schon gar nicht. Dieser Modus tauscht sie gegen die
+   Systemschrift, also gegen die, die auf dem Gerät ohnehin am besten sitzt. */
+html.a11y-lesbar body,
+html.a11y-lesbar :is(h1, h2, h3, h4, h5, h6, p, a, li, span, strong, em,
+                     button, label, input, textarea, select, figcaption, dt, dd, th, td) {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif !important;
+}
+
+/* --- Schrift für Legasthenie ---------------------------------------------
+   Ohne Zusatzschrift: OpenDyslexic ist nicht für jeden Einsatz frei. Statt
+   dessen die Faktoren, die nachweislich am meisten helfen – Abstände,
+   Zeilenhöhe und begrenzte Zeilenlänge. Linksbündig, weil Blocksatz die
+   Wortabstände unregelmäßig macht. */
+html.a11y-dyslexie body {
+    font-family: Verdana, Tahoma, sans-serif !important;
+    letter-spacing: 0.08em !important;
+    word-spacing: 0.18em !important;
+    line-height: 2 !important;
+}
+html.a11y-dyslexie :is(p, li, dd) {
+    max-width: 62ch;
+    text-align: left !important;
+}
+
+/* --- Links hervorheben --------------------------------------------------- */
+html.a11y-links a {
+    text-decoration: underline !important;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px !important;
+    font-weight: 600 !important;
+}
+/* Knöpfe sind schon als Fläche erkennbar. Unterstrichen sähen sie aus wie ein
+   Link IN einem Knopf. */
+html.a11y-links a.btn { text-decoration: none !important; }
+
+/* --- Großer Mauszeiger --------------------------------------------------- */
+html.a11y-cursor,
+html.a11y-cursor * {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24'%3E%3Cpath d='M4 2l7 18 2.5-7.5L21 10z' fill='%23fff' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") 4 2, auto !important;
+}
+
+/* --- Bewegung stoppen ---------------------------------------------------
+   Diese Seite hat mehr Bewegung als die meisten: die ziehenden Farbwolken im
+   Hintergrund, die einblendenden Abschnitte, die getippte Überschrift, der
+   schrumpfende Header. Der Modus hält alles an.
+
+   `prefers-reduced-motion` gibt es bereits in nd-base.css und greift von
+   selbst. Dieser Schalter ist für die, die das im Betriebssystem nicht
+   eingestellt haben oder es nur für diese Seite wollen. */
+html.a11y-ruhe *,
+html.a11y-ruhe *::before,
+html.a11y-ruhe *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+}
+/* Die einblendenden Abschnitte hängen an einer Klasse, die JavaScript erst beim
+   Scrollen setzt. Ohne Übergang bliebe sie unsichtbar stehen – deshalb hier
+   ausdrücklich sichtbar. */
+html.a11y-ruhe .reveal { opacity: 1 !important; transform: none !important; }
+html.a11y-ruhe [data-typewriter] { visibility: visible !important; }
+
+/* --- Bilder ausblenden --------------------------------------------------
+   Für Menschen, die von Bildern überreizt werden. `visibility` und nicht
+   `display`, damit der Platz erhalten bleibt und das Layout nicht springt.
+   Icons bleiben: Sie sind Teil der Bedienung, nicht Bildmaterial. */
+html.a11y-bilder :is(img, picture, video, .arc-figure, .hero-arc) {
+    visibility: hidden !important;
+}
+html.a11y-bilder .page-aurora,
+html.a11y-bilder .photo-wrap::before { display: none !important; }
+/* Der Bogen und die Fotorahmen sind Hintergrundbilder bzw. gedrehte Flächen –
+   ohne Bild darin bleibt sonst ein leerer schiefer Kasten stehen. */
+html.a11y-bilder :is(.photo, .video-frame) {
+    box-shadow: none !important; transform: none !important; border: 0 !important;
+}
+
+/* --- Leselinie ----------------------------------------------------------
+   Waagerechte Linie, die dem Zeiger folgt. Hilft beim Halten der Zeile. */
+#leselinie { display: none; }
+html.a11y-leselinie #leselinie {
+    display: block;
+    position: fixed;
+    left: 0; right: 0;
+    height: 0;
+    border-top: 3px solid var(--accent);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* =========================================================================
+   KONTRASTMODI
+   -------------------------------------------------------------------------
+   Umgesetzt durch Umdefinieren der Farb-Tokens aus theme.css. Dadurch zieht
+   jeder Modus automatisch durch alle Komponenten – auch durch künftige.
+   ========================================================================= */
+
+/* --- Dunkel -------------------------------------------------------------
+   Warm gehalten und nicht kaltes Grau: Die Seite soll auch dunkel nach dieser
+   Marke aussehen und nicht nach Systemeinstellung. */
+html[data-kontrast='dunkel'] {
+    --bg:            #1B1722;
+    --bg-secondary:  #221D2B;
+    --bg-card:       #272130;
+    --section-alt-bg: rgba(34, 29, 43, 0.85);
+
+    --text:      #F1ECF6;
+    --text-soft: #C6BDD2;
+    --muted:     #A399B0;
+
+    /* Violett auf dunklem Grund braucht mehr Helligkeit, sonst fällt es durch:
+       Das Marken-Violett #7C3AED kommt auf diesem Hintergrund auf 3,3:1. */
+    --accent:       #C4A6FF;
+    --accent-hover: #D9C6FF;
+    --accent-text:  #C4A6FF;
+    --on-accent:    #1B1722;
+    --accent-soft:  rgba(196, 166, 255, 0.16);
+
+    --border:        rgba(241, 236, 246, 0.16);
+    --border-strong: rgba(241, 236, 246, 0.32);
+    --header-bg:     rgba(27, 23, 34, 0.92);
+    --input-bg:      #201B28;
+    --placeholder:   #9A90A8;
+    --row-hover:     rgba(241, 236, 246, 0.06);
+    --day-head-bg:   #221D2B;
+    --glass-card:    rgba(39, 33, 48, 0.78);
+
+    /* Der Fuß ist im Standard die dunkle Fläche der Seite. Dunkel wäre er
+       nicht mehr abgesetzt – deshalb hier eine Stufe dunkler als der Grund. */
+    --bg-footer:     #120F17;
+    --footer-text:   #F1ECF6;
+    --footer-muted:  #B3A9C0;
+    --footer-accent: #C4A6FF;
+    --footer-border: rgba(241, 236, 246, 0.14);
+    --footer-hover:  rgba(241, 236, 246, 0.08);
+
+    /* Statusfarben aufhellen: Die Textvarianten waren für hellen Grund
+       gerechnet und wären hier nicht zu lesen. */
+    --green-text:  #8FD6A6;
+    --yellow-text: #E8C65A;
+    --red-text:    #FF9E82;
+    --green-soft:  rgba(62, 165, 91, 0.20);
+    --yellow-soft: rgba(232, 181, 23, 0.20);
+    --red-soft:    rgba(228, 87, 46, 0.20);
+
+    /* Die Farbwolken im Hintergrund dürfen dunkel kaum sichtbar sein, sonst
+       wird der Fließtext darüber unruhig. */
+    --aurora-1: rgba(124, 58, 237, 0.20);
+    --aurora-2: rgba(24, 154, 156, 0.16);
+    --aurora-3: rgba(240, 138, 36, 0.12);
+    --aurora-4: rgba(59, 125, 216, 0.16);
+
+    /* Der Hero trug einen hellen Schleier, der die Schrift vom Bild trennt.
+       Dunkel muss er dunkel sein, sonst leuchtet er als weißer Nebel. */
+    --hero-overlay: linear-gradient(180deg,
+        rgba(27, 23, 34, 0.35) 0%,
+        rgba(27, 23, 34, 0.62) 55%,
+        var(--bg) 100%);
+}
+
+/* --- Hoher Kontrast ----------------------------------------------------
+   Reines Schwarz/Weiß, Gelb als einziger Akzent – die maximale Trennschärfe.
+   Gelb und nicht das Marken-Violett: #7C3AED kommt auf Schwarz auf 3,2:1 und
+   fällt für Text damit durch. */
+html[data-kontrast='hoch'] {
+    --bg:            #000000;
+    --bg-secondary:  #000000;
+    --bg-card:       #000000;
+    --bg-footer:     #000000;
+    --section-alt-bg: #000000;
+
+    --text:      #FFFFFF;
+    --text-soft: #FFFFFF;
+    --muted:     #FFFFFF;
+
+    --accent:       #FFFF00;
+    --accent-hover: #FFFF00;
+    --accent-text:  #FFFF00;
+    --on-accent:    #000000;
+    --accent-soft:  #000000;
+
+    --border:        #FFFFFF;
+    --border-strong: #FFFFFF;
+    --header-bg:     #000000;
+    --input-bg:      #000000;
+    --placeholder:   #FFFFFF;
+    --row-hover:     rgba(255, 255, 0, 0.18);
+    --day-head-bg:   #000000;
+    --glass-card:    #000000;
+
+    --footer-text:   #FFFFFF;
+    --footer-muted:  #FFFFFF;
+    --footer-accent: #FFFF00;
+    --footer-border: #FFFFFF;
+    --footer-hover:  rgba(255, 255, 0, 0.18);
+
+    --green-text:  #7CFF9E;
+    --yellow-text: #FFFF00;
+    --red-text:    #FF9E82;
+    --green-soft:  #000000;
+    --yellow-soft: #000000;
+    --red-soft:    #000000;
+
+    /* Die Farbwolken und der Hero-Verlauf sind Zierde und stören hier den
+       Kontrast. Aus. */
+    --aurora-1: transparent;
+    --aurora-2: transparent;
+    --aurora-3: transparent;
+    --aurora-4: transparent;
+    --hero-bg: #000000;
+    --hero-overlay: none;
+
+    /* Der Regenbogen ist die Marke, aber als Farbverlauf auf Schwarz ist er
+       eine Linie, die stellenweise verschwindet. Hier trägt ihn Gelb. */
+    --gradient-rainbow:   #FFFF00;
+    --gradient-rainbow-v: #FFFF00;
+
+    /* Die Kachel-Akzente hängen an sieben Regenbogenfarben (theme.css). Vier
+       davon kommen auf Schwarz nicht über 4,5:1. Alle auf Gelb. */
+    --c-red: #FFFF00; --c-orange: #FFFF00; --c-yellow: #FFFF00;
+    --c-green: #FFFF00; --c-teal: #FFFF00; --c-blue: #FFFF00; --c-violet: #FFFF00;
+}
+/* Links und Knöpfe brauchen ein zweites Merkmal neben der Farbe. */
+html[data-kontrast='hoch'] :is(a, button) { text-decoration: underline; }
+html[data-kontrast='hoch'] a.btn { text-decoration: none; border-width: 2px; }
+/* Schatten sind auf Schwarz unsichtbar und nehmen den Karten die Kante. */
+html[data-kontrast='hoch'] :is(.card, .feature-card, .video-frame, .photo, .cta-inner, .week-day) {
+    box-shadow: none;
+    border: 1px solid #FFFFFF;
+}
+html[data-kontrast='hoch'] :focus-visible {
+    outline: 3px solid #FFFF00 !important;
+    outline-offset: 3px;
+}
+
+/* --- Graustufen -------------------------------------------------------- */
+html[data-kontrast='monochrom'] { filter: grayscale(1); }
+
+/* --- Das Logo im Header ------------------------------------------------
+   Sarahs Logo trägt schwarze Schrift („Fahrlehrerin") auf durchsichtigem
+   Grund. Auf dem hellen Standard-Header stimmt das; auf dunklem oder
+   schwarzem Grund verschwindet die Hälfte des Logos.
+
+   Deshalb eine helle Platte darunter. Der Fuß braucht sie nicht: Dort läuft
+   ohnehin die helle Logo-Fassung (logo-sarah-hell.webp), die genau dafür
+   gebaut ist. Ein Tausch der Bilddatei im Header wäre die andere Lösung –
+   dann müsste sie aber auf jeder Seite geladen werden, auch von allen, die
+   diesen Modus nie einschalten. */
+html[data-kontrast='dunkel'] .brand-logo,
+html[data-kontrast='hoch'] .brand-logo {
+    background: #FDF8F0;
+    border-radius: 14px;
+    padding: 4px 8px;
+}
+
+/* =========================================================================
+   DIE LEISTE SELBST
+   -------------------------------------------------------------------------
+   Der Knopf klebt senkrecht mittig am linken Rand: auf jeder Seite und in
+   jeder Scrollposition an derselben Stelle. Links, weil rechts der
+   Regenbogenbogen des Heros und auf dem Handy der Hamburger sitzen.
+   ========================================================================= */
+.a11y-tab {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 52px;
+    padding: 0;
+    border: 1px solid var(--border-strong);
+    border-left: 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    background: var(--bg-card);
+    color: var(--accent-text);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: background .15s, color .15s;
+}
+.a11y-tab:hover { background: var(--accent-soft); }
+.a11y-tab svg { width: 22px; height: 22px; }
+
+/* Der Zähler sitzt in der Ecke des Knopfs und zeigt, wie viele Einstellungen
+   aktiv sind. Kleiner als --fs-xs geht hier ausnahmsweise nicht anders: Es ist
+   eine einzelne Ziffer in einem 18-px-Kreis, kein Text. */
+.a11y-zaehler {
+    position: absolute;
+    top: -6px; right: -6px;
+    min-width: 18px; height: 18px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 4px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-family: var(--font-head);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.a11y-panel {
+    position: fixed;
+    left: 12px; right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 61;
+    max-height: 86vh;
+    overflow-y: auto;
+    padding: 1.1rem 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-card);
+    box-shadow: var(--shadow-lg);
+}
+@media (min-width: 560px) {
+    .a11y-panel { right: auto; width: 21rem; left: 52px; }
+}
+
+.a11y-panel-kopf {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; margin-bottom: .5rem;
+}
+.a11y-titel { margin: 0; font-family: var(--font-head); font-size: var(--fs-lg); color: var(--text); }
+.a11y-schliessen {
+    display: flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; flex-shrink: 0;
+    border: 0; border-radius: 999px;
+    background: none; color: var(--text-soft);
+    font-size: var(--fs-xl); line-height: 1; cursor: pointer;
+}
+.a11y-schliessen:hover { background: var(--accent-soft); color: var(--text); }
+
+.a11y-gruppe { padding: .75rem 0; border-bottom: 1px solid var(--border); }
+.a11y-gruppe:last-of-type { border-bottom: 0; }
+.a11y-label {
+    margin: 0 0 .5rem;
+    font-family: var(--font-head); font-size: var(--fs-sm); color: var(--text);
+}
+.a11y-stufen { display: flex; flex-wrap: wrap; gap: .4rem; }
+.a11y-stufe {
+    padding: .4rem .8rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: var(--bg-card);
+    color: var(--text-soft);
+    font-family: var(--font-head); font-size: var(--fs-xs);
+    cursor: pointer;
+}
+.a11y-stufe[aria-pressed='true'] {
+    background: var(--accent); border-color: var(--accent); color: var(--on-accent);
+}
+
+/* Der Schalter ist ein Knopf mit aria-pressed – kein Kontrollkästchen. Die
+   Schiene daneben ist reine Anzeige (aria-hidden), den Zustand trägt das
+   Attribut. */
+.a11y-schalter {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; width: 100%;
+    padding: 0; border: 0; background: none;
+    color: var(--text); font-family: var(--font-body); font-size: var(--fs-sm);
+    text-align: left; cursor: pointer;
+}
+.a11y-schalter-spur {
+    position: relative; flex-shrink: 0;
+    width: 42px; height: 24px;
+    border-radius: 999px;
+    background: var(--border-strong);
+    transition: background .15s;
+}
+.a11y-schalter-spur > span {
+    position: absolute; left: 3px; top: 3px;
+    width: 18px; height: 18px;
+    border-radius: 999px;
+    background: var(--bg-card);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+    transition: transform .15s;
+}
+.a11y-schalter[aria-pressed='true'] .a11y-schalter-spur { background: var(--accent); }
+.a11y-schalter[aria-pressed='true'] .a11y-schalter-spur > span { transform: translateX(18px); }
+
+.a11y-reset {
+    width: 100%; margin-top: .9rem;
+    padding: .55rem 1rem;
+    border: 1px solid var(--border-strong); border-radius: 999px;
+    background: none; color: var(--text-soft);
+    font-family: var(--font-head); font-size: var(--fs-sm);
+    cursor: pointer;
+}
+.a11y-reset:hover { background: var(--accent-soft); color: var(--text); }
+.a11y-hinweis { margin: .8rem 0 0; font-size: var(--fs-xs); color: var(--muted); line-height: 1.5; }
+
+/* Auf dem Handy sitzt der Knopf nicht mittig am Rand: Dort ist die Mitte der
+   Daumenweg beim Scrollen, und ein fester Knopf mitten im Bild verdeckt Text.
+   Unten links ist er erreichbar, ohne im Weg zu stehen. */
+@media (max-width: 559px) {
+    .a11y-tab {
+        top: auto; bottom: 14px; transform: none;
+        border-left: 1px solid var(--border-strong);
+        border-radius: var(--radius-sm);
+        margin-left: 10px;
+    }
+}

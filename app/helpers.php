@@ -286,6 +286,13 @@ function icon(string $name): string
         'bell'      => '<path d="M18 8a6 6 0 1 0-12 0c0 5-2 6.5-2 6.5h16S18 13 18 8Z"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/>',
         'check'     => '<path d="m5 12.5 4.5 4.5L19 7"/>',
         'pin'       => '<path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/>',
+        /* Das bekannte Zugänglichkeitszeichen (Figur mit ausgebreiteten Armen im
+           Kreis) für den Knopf der Barrierefreiheits-Leiste. Bewusst MIT Kreis:
+           Ohne ihn steht am Bildschirmrand nur ein Strichmännchen, und der Kreis
+           ist es, der das Zeichen international wiedererkennbar macht. Nicht das
+           Rollstuhl-Piktogramm ('wheelchair'): Die Leiste stellt die Darstellung
+           für alle ein und nicht nur für Rollstuhlfahrer:innen. */
+        'accessibility' => '<circle cx="12" cy="12" r="9.2"/><circle cx="12" cy="7.4" r="1.5"/><path d="M7.6 10.4h8.8"/><path d="M12 10.4v3.4"/><path d="m12 13.8-1.9 4.4M12 13.8l1.9 4.4"/>',
         'tiktok'    => '<path d="M16 4c.4 2.4 2 4 4.4 4.2v3.1c-1.7.1-3.2-.4-4.4-1.3v5.6a5.9 5.9 0 1 1-5.1-5.8v3.2a2.7 2.7 0 1 0 1.9 2.6V4Z"/>',
         'instagram' => '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/>',
         'default'   => '<circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2"/>',

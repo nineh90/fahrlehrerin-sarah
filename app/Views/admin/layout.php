@@ -13,8 +13,17 @@
     <link rel="stylesheet" href="<?= asset('css/theme.css') ?>">
     <link rel="icon" href="<?= asset('img/favicon.png') ?>" sizes="48x48" type="image/png">
     <link rel="apple-touch-icon" href="<?= asset('img/apple-touch-icon.png') ?>">
+
+    <?php require APP_ROOT . '/app/Views/partials/a11y-head.php'; ?>
 </head>
 <body class="admin-body">
+    <?php /* Die Leiste gibt es auch hier (SAR-34). Sarah ist die Einzige, die die
+             Schaltzentrale benutzt, und gleichzeitig die, die diese Einstellungen
+             am ehesten braucht – ihren Dunkelmodus beim Wechsel hierher zu
+             verlieren wäre genau die Inkonsequenz, die so ein Bedienfeld
+             unbrauchbar macht. Kein Sprunglink: Der Adminbereich hat keine
+             Hauptnavigation, an der man vorbeimüsste. */ ?>
+    <?php require APP_ROOT . '/app/Views/partials/a11y-toolbar.php'; ?>
 
     <aside class="admin-sidebar" id="adminSidebar">
         <a class="brand admin-brand" href="<?= url('/admin') ?>">
@@ -80,5 +89,6 @@
     </div>
 
     <script src="<?= asset('js/main.js') ?>" defer></script>
+    <script src="<?= asset('js/a11y.js') ?>" defer></script>
 </body>
 </html>

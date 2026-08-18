@@ -65,7 +65,13 @@
        ===================================================================== */
     --text:      #2B2434;   /* Fließtext, Überschriften */
     --text-soft: #544B60;   /* ruhigere Absätze */
-    --muted:     #7A7086;   /* Meta-Angaben, Labels */
+    /* Meta-Angaben, Labels, Navigation. War #7A7086 und kam damit auf dem
+       Seitengrund auf 4,42:1 – knapp UNTER den 4,5:1, die für Text unter 24 px
+       gefordert sind (WCAG 1.4.3). Betroffen war unter anderem die ganze
+       Hauptnavigation. Jetzt 4,76:1, bei gleichem Farbton und gleicher
+       Sättigung: nur ein Prozent Helligkeit dunkler, mit dem Auge nicht zu
+       unterscheiden. Wer hier heller geht, prüft den Wert nach. */
+    --muted:     #756B80;
 
     /* =====================================================================
        4. AKZENT  ·  Violett führt, der Regenbogen begleitet

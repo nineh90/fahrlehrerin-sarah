@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="<?= asset('css/theme.css') ?>">
     <link rel="icon" href="<?= asset('img/favicon.png') ?>" sizes="48x48" type="image/png">
     <link rel="apple-touch-icon" href="<?= asset('img/apple-touch-icon.png') ?>">
+
+    <?php /* Nur der Kopfteil und keine Leiste: Auf der Login-Seite gibt es nichts
+             einzustellen, was den Weg zum Formular erleichtert. Eine gespeicherte
+             Einstellung muss hier aber greifen – sonst schlägt jemandem, der den
+             hohen Kontrast braucht, beim Anmelden die helle Seite entgegen. */ ?>
+    <?php require APP_ROOT . '/app/Views/partials/a11y-head.php'; ?>
 </head>
 <body class="admin-auth-body">
     <div class="admin-auth">

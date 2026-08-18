@@ -40,7 +40,48 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
 }
-main { flex: 1; }
+/* `overflow-x: clip` hält den waagerechten Scrollbalken von der Seite.
+
+   Es gibt Deko, die absichtlich über ihr Element hinausragt – vor allem den
+   farbigen Fleck hinter Bildern und Videos (.photo-wrap::before, `inset` mit
+   negativen Werten). Auf breiten Fenstern verschwindet der Überhang im
+   Seitenrand. Wird die Spalte schmaler, ragt er über den Rand hinaus, und der
+   Browser macht daraus eine waagerechte Bildlaufleiste: gemessen 21 px bei
+   820 px Fensterbreite auf der Startseite. Für Menschen, die mit Vergrößerung
+   arbeiten, ist seitliches Scrollen beim Lesen ein echtes Hindernis
+   (WCAG 1.4.10).
+
+   `clip` und NICHT `hidden`: hidden macht aus dem Element einen Scroll-Container
+   und bricht damit `position: sticky` bei allem, was darin liegt. clip klemmt
+   nur ab. Und nur die x-Achse – senkrecht muss die Seite scrollen können.
+
+   Am <main> und nicht am <body>: Der Header liegt fixiert über der Seite und
+   die bewegte Hintergrundebene dahinter, beide außerhalb von <main>. So bleibt
+   sicher, dass hier nichts geklemmt wird, was gar nicht gemeint ist. */
+main { flex: 1; overflow-x: clip; }
+
+/* DEUTSCH HAT LANGE WÖRTER, und diese Seite hat schmale Spalten.
+   „Pedalverlängerung", „Führerscheinausbildung", „verkehrsmedizinisches" – auf
+   einem 320 px breiten Gerät oder bei eingeschalteter Schriftvergrößerung passt
+   so ein Wort nicht mehr in seine Spalte, und der Browser macht daraus eine
+   waagerechte Bildlaufleiste. Seitliches Scrollen beim Lesen ist genau das, was
+   WCGA 1.4.10 verhindern will.
+
+   Zwei verschiedene Mittel, mit Absicht:
+
+   Für FLIESSTEXT `hyphens: auto`. Der Browser trennt nach den Regeln der im
+   <html lang="de"> angegebenen Sprache – ohne das Attribut passiert nichts.
+   Greift nur, wenn es nötig ist: Passt das Wort in die Zeile, bleibt es ganz.
+
+   Für ÜBERSCHRIFTEN nur `overflow-wrap`. Getrennte Überschriften lesen sich
+   gedruckt wie ein Fehler, und bei den kurzen Zeilen einer Überschrift wäre der
+   Bindestrich fast immer sichtbar. `overflow-wrap` bricht dagegen ausschließlich
+   dann, wenn ein einzelnes Wort länger als die Zeile ist – also im Notfall. */
+h1, h2, h3, h4 { overflow-wrap: break-word; }
+:is(p, li, dd, dt, figcaption, blockquote, .accordion-teaser) {
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
 
 h1, h2, h3 { font-family: var(--font-head); color: var(--text); line-height: 1.15; font-weight: 600; }
 h1 { font-size: var(--fs-4xl); }
@@ -73,6 +114,24 @@ img { max-width: 100%; display: block; }
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
     overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
+
+/* Sprunglink: unsichtbar, bis er den Fokus bekommt. Bewusst NICHT `.sr-only` –
+   der versteckt dauerhaft, dieser hier muss sichtbar werden, sobald jemand mit
+   der Tastatur ankommt (WCAG 2.4.1). Über den fixierten Header hinaus mit
+   z-index, sonst springt er dahinter. */
+.skip-link {
+    position: fixed;
+    top: -100px; left: 12px;
+    z-index: 100;
+    padding: .7rem 1.1rem;
+    border-radius: var(--radius-sm);
+    background: var(--accent);
+    color: var(--on-accent);
+    font-family: var(--font-head); font-weight: 600; font-size: var(--fs-md);
+    box-shadow: var(--shadow-lg);
+    transition: top .15s;
+}
+.skip-link:focus { top: 12px; color: var(--on-accent); }
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -333,13 +392,10 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     font-family: var(--font-head); font-weight: 700; font-size: var(--fs-2xl);
 }
 .process-step h3 { margin: 0 0 .5rem; font-size: var(--fs-lg); }
-/* Die Spalten sind schmal, und Deutsch hat lange Wörter: „verkehrs­medizinisches"
-   ist breiter als eine Spalte, sobald es fünf statt vier sind. `hyphens: auto`
-   trennt es an den richtigen Stellen (das <html lang="de"> im Layout ist die
-   Voraussetzung dafür); `overflow-wrap` ist der Notausgang, falls der Browser
-   für die Sprache keine Trennmuster hat – dann bricht das Wort hart um, statt
-   in die Nachbarspalte zu laufen. */
-.process-step p { margin: 0; color: var(--text-soft); font-size: var(--fs-md); line-height: 1.6; hyphens: auto; overflow-wrap: break-word; }
+/* Silbentrennung braucht dieser Absatz besonders (fünf schmale Spalten,
+   „verkehrsmedizinisches"), steht aber seit SAR-34 global für allen Fließtext
+   weiter oben – hier nichts mehr zu tun. */
+.process-step p { margin: 0; color: var(--text-soft); font-size: var(--fs-md); line-height: 1.6; }
 .process-step::after { content: ""; position: absolute; top: 27px; left: 54px; width: calc(100% - 54px + 1.6rem); height: 3px; border-radius: 2px; background: linear-gradient(90deg, var(--card-accent, var(--accent)), transparent); }
 .process-step:last-child::after { width: calc(100% - 54px); }
 
@@ -403,6 +459,19 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 .split-grid--wide-left { grid-template-columns: 1.4fr 1fr; }
 .contact-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1.1rem; }
 .contact-list li { display: flex; flex-direction: column; }
+/* E-Mail-Adressen, Telefonnummern und Handles sind ein einziges Wort ohne
+   Trennstelle – die Silbentrennung weiter oben kann daran nichts machen. Auf
+   einem 320 px breiten Gerät passte „info@fahrlehrerinsarah.de" nicht mehr in
+   die Spalte und schob die ganze Seite 15 px seitwärts; mit eingeschalteter
+   Schriftvergrößerung waren es 52 px im Fuß.
+
+   `anywhere` darf notfalls mitten im Wort umbrechen. Bei einer Adresse ist das
+   richtig: Sie wird gelesen und nicht gesprochen, ein Umbruch nach dem @ tut
+   ihr nichts. Nur an den beiden Stellen, an denen solche Wörter vorkommen, und
+   nicht global – im Fließtext wären harte Wortbrüche der schlechtere Tausch
+   gegen eine etwas lose Zeile. */
+.contact-list a,
+.footer-links a { overflow-wrap: anywhere; }
 .contact-label { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: .5px; color: var(--accent); margin-bottom: .2rem; font-family: var(--font-head); }
 .steps { list-style: none; counter-reset: step; padding: 0; margin: 0 0 1rem; display: flex; flex-direction: column; gap: 1.1rem; }
 .steps li { display: flex; flex-direction: column; padding-left: 2.8rem; position: relative; }

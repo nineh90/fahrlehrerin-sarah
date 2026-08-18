@@ -46,6 +46,27 @@
             kein Tracking und keine Werbung statt.
         </p>
 
+        <?php /* Der Abschnitt gehört zur Barrierefreiheits-Leiste (SAR-34): Das Panel
+                 verlinkt mit „Was gespeichert wird" auf genau diesen Anker. Wer etwas
+                 im Browser ablegt, muss sagen, was – auch wenn es die Seite nie
+                 verlässt und für eine Einwilligung zu belanglos ist. Wird die Liste
+                 der Einstellungen in app/darstellung.php erweitert, gehört dieser
+                 Absatz mit angefasst. */ ?>
+        <h2 id="darstellung">Deine Darstellungs-Einstellungen</h2>
+        <p>
+            Über den Knopf am linken Bildschirmrand kannst du Schriftgröße, Abstände,
+            Kontrast und ein paar Lesehilfen einstellen. Damit du das nicht auf jeder
+            Seite neu machen musst, merkt sich dein Browser deine Auswahl in seinem
+            eigenen Speicher (<em>localStorage</em>, Eintrag <code>sarah-a11y</code>).
+        </p>
+        <p>
+            Diese Angaben bleiben auf deinem Gerät. Sie werden nicht an diese Website
+            und an niemanden sonst übertragen, nicht ausgewertet und nicht mit anderen
+            Daten verknüpft. Im Panel setzt der Knopf „Alles zurücksetzen" den Eintrag
+            wieder zurück; du kannst ihn auch jederzeit über die Einstellungen deines
+            Browsers löschen.
+        </p>
+
         <h2>Schriftarten</h2>
         <p>
             Die verwendeten Schriftarten liegen auf dem Server dieser Website und werden

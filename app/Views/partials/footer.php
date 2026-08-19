@@ -17,13 +17,18 @@
                          Barrierefreiheits-Leiste, und sie kostet keinen Download
                          von 30 kB auf jeder Seite.
 
-                         Der Regenbogen bleibt als kurzer Strich über dem Namen.
-                         Es ist derselbe 28 × 3 px Strich wie bei `.hero-eyebrow`
-                         (nd-base.css) und damit kein neues Gestaltungsmittel.
-                         NICHT als Farbverlauf im Namen selbst: Violett kommt auf
-                         dem Fuß auf 2,62:1 und fiele für Text durch, auch für
-                         großen. Als Strich trägt der Bogen keine Schrift und
-                         darf deshalb bunt sein.
+                         Der Name steht in EINER Zeile neben dem Regenbogen.
+                         Zwischenstand war eine kleine Zeile „Fahrlehrerin" über
+                         einem großen „Sarah", wie im Logo gestapelt; auf Wunsch
+                         wieder zusammengezogen. Das große Wort war neben den
+                         schmalen Spalten daneben zu laut für einen Fuß.
+
+                         Der Regenbogenstrich davor ist derselbe 28 × 3 px Strich
+                         wie bei `.hero-eyebrow` (nd-base.css) und damit kein
+                         neues Gestaltungsmittel. NICHT als Farbverlauf in der
+                         Schrift: Violett kommt auf dem Fuß auf 2,62:1 und fiele
+                         für Text durch, auch für großen. Als Strich trägt der
+                         Bogen keine Schrift und darf deshalb bunt sein.
 
                          Die Datei bleibt liegen, sie wird noch gebraucht: Die
                          Seitenleiste der Schaltzentrale zeigt sie weiter
@@ -32,8 +37,7 @@
                          Wer ihn dort auch loswerden will, macht dasselbe wie
                          hier oder bessert die Datei nach. */ ?>
                 <p class="footer-wordmark">
-                    <span class="footer-wordmark-eyebrow">Fahrlehrerin</span>
-                    <span class="footer-wordmark-name">Sarah</span>
+                    <span class="footer-wordmark-name">Fahrlehrerin Sarah</span>
                     <span class="footer-wordmark-claims">
                         Klasse B <span class="sep" aria-hidden="true">·</span> Klasse BE<br>
                         Handicapausbildung

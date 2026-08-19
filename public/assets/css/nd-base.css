@@ -1222,21 +1222,22 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
    Klassenzeile. */
 .footer-brand { max-width: 320px; }
 .footer-wordmark { margin: 0; display: flex; flex-direction: column; align-items: flex-start; gap: .1rem; }
-.footer-wordmark-eyebrow {
+/* Der Name in einer Zeile, der Regenbogenstrich davor. Er sitzt eine Stufe
+   über `.hero-eyebrow`: `--fs-sm` statt `--fs-xs` und die helle Fußfarbe statt
+   der leisen. Beides muss so sein, denn hier ist die Zeile nicht die
+   Beschriftung von etwas Größerem, sondern das Größte im Block. Bliebe sie auf
+   Augenbrauen-Maß, wäre die Klassenzeile darunter der auffälligste Text der
+   Spalte, und die Marke stünde kleiner da als ihre eigene Fußnote. */
+.footer-wordmark-name {
     display: inline-flex; align-items: center; gap: .6rem;
-    color: var(--footer-muted);
-    font-family: var(--font-head); font-size: var(--fs-xs); font-weight: 600;
+    color: var(--footer-text);
+    font-family: var(--font-head); font-size: var(--fs-sm); font-weight: 600;
     text-transform: uppercase; letter-spacing: 3px;
 }
 /* Derselbe Regenbogenstrich wie bei `.hero-eyebrow`, gleiche Maße. */
-.footer-wordmark-eyebrow::before {
-    content: ""; width: 28px; height: 3px; border-radius: 2px;
+.footer-wordmark-name::before {
+    content: ""; width: 28px; height: 3px; border-radius: 2px; flex-shrink: 0;
     background: var(--gradient-rainbow, var(--footer-accent));
-}
-.footer-wordmark-name {
-    color: var(--footer-text);
-    font-family: var(--font-head); font-weight: 700;
-    font-size: var(--fs-3xl); line-height: 1.1;
 }
 .footer-wordmark-claims {
     margin-top: .45rem;

@@ -499,8 +499,24 @@ $schoolUrl = trim((string) config('school.url'));
                     </li>
                     <li>
                         <strong>Üben bis es sitzt</strong>
-                        <p>Wie bei jedem anderen auch: so lange, bis du sicher bist. Der
-                           einzige Unterschied ist der Weg, nicht das Ziel.</p>
+                        <?php /* SAR-50, Sarahs Formulierung. Vorher stand hier „so
+                                 lange, bis du sicher bist. Der einzige Unterschied
+                                 ist der Weg, nicht das Ziel."
+
+                                 Zwei Dinge sind an der neuen Fassung Absicht und
+                                 kein Versehen. Erstens „Wir üben": Der Satz sagt
+                                 jetzt, dass Sarah dabei ist, statt eine Bedingung
+                                 zu nennen, die der Fahrschüler erfüllen muss.
+                                 Zweitens das große DU. Es ist die Betonung, auf
+                                 die es Sarah ankommt: Nicht sie entscheidet, wann
+                                 es reicht, sondern die Person am Steuer. Wer das
+                                 hier auf Kleinschreibung „korrigiert", nimmt dem
+                                 Satz genau seine Aussage.
+
+                                 Derselbe Satz steht ein zweites Mal auf
+                                 /fahren-mit-handicap, Schritt 4. */ ?>
+                        <p>Wie bei jedem anderen auch: Wir üben so lange, bis DU dich
+                           sicher fühlst.</p>
                     </li>
                     <?php /* Neu mit SAR-45. Der Schritt schließt den Weg ab, den die
                              vier davor beschreiben – ohne ihn hörte der Ablauf beim

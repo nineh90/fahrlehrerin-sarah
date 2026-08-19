@@ -15,9 +15,17 @@
         </div>
 
         <h2>Verantwortliche Stelle</h2>
+        <?php /* Dieselben Angaben wie im Impressum, seit SAR-15 auch hier echt.
+                 Sie MÜSSEN übereinstimmen: Verantwortliche Stelle nach DSGVO und
+                 Anbieterin nach DDG sind dieselbe Person, und zwei verschiedene
+                 Anschriften auf zwei Rechtsseiten derselben Website sind ein
+                 Widerspruch. Wer eine ändert, ändert beide. Begründung zur
+                 c/o-Adresse und zur abweichenden E-Mail steht im Kopf von
+                 impressum.php. */ ?>
         <p>
-            Sarah <em>[Nachname]</em>, <em>[Anschrift]</em>, <?= e(config('contact.city')) ?>,
-            E-Mail: <?= e(config('contact.email')) ?>
+            Sarah Schweikert<br>
+            c/o Online-Impressum 10297, Europaring 90, 53757 Sankt Augustin<br>
+            E-Mail: <a href="mailto:sarah@fahrlehrerinsarah.de">sarah@fahrlehrerinsarah.de</a>
         </p>
 
         <h2>Welche Daten gespeichert werden</h2>

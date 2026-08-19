@@ -1,3 +1,33 @@
+<?php
+/* IMPRESSUM (SAR-15)
+ * -------------------------------------------------------------------------
+ * Bis zum 19.08.2026 standen hier Platzhalter in eckigen Klammern. Sarah hat
+ * ihr Impressum inzwischen über einen Dienst angelegt:
+ * https://mein.online-impressum.de/fahrlehrerinsarah/
+ * Die Angaben unten sind von dort übernommen, abgerufen am 19.08.2026.
+ *
+ * WAS DAS FÜR DIE ADRESSE HEISST: Sie lautet nicht auf Sarahs Wohnort,
+ * sondern auf eine c/o-Anschrift des Dienstes in Sankt Augustin. Die Zeile
+ * „c/o Online-Impressum 10297" ist Teil der Adresse und darf nicht wegfallen,
+ * sonst kann dort keine Post zugeordnet werden. Deshalb steht die Anschrift
+ * hier auch fest im Text und nicht über `config('contact.city')`: Der Ort in
+ * der .env ist Sarahs Einzugsgebiet und hat mit dieser Adresse nichts zu tun.
+ *
+ * DIE E-MAIL WEICHT AB, und zwar mit Absicht: Sarah hat im Impressum
+ * `sarah@` hinterlegt, auf der Kontaktseite läuft `info@` aus der .env. Hier
+ * gehört die Adresse hin, die sie als Impressumskontakt angegeben hat.
+ *
+ * OFFEN, VOR DEM LIVEGANG ZU KLÄREN: ob die für die Fahrlehrerlaubnis
+ * zuständige Behörde genannt werden muss. Der Block „Berufsbezeichnung"
+ * unten nennt sie nicht; ihr Impressum tut es auch nicht. Bis das geklärt
+ * ist, steht hier lieber gar nichts als eine geratene Behörde. Die
+ * Niedersächsische Landesmedienanstalt weiter unten ist etwas anderes: Sie
+ * ist die Medienaufsicht und stammt aus Sarahs Impressum.
+ *
+ * Diese Seite ist NICHT juristisch geprüft. Sie gibt wieder, was Sarah
+ * veröffentlicht hat.
+ */
+?>
 <section class="page-head">
     <div class="container">
         <h1>Impressum</h1>
@@ -7,24 +37,31 @@
 
 <section class="section">
     <div class="container prose">
-        <div class="placeholder-note">
-            <strong>Noch nicht rechtsverbindlich.</strong>
-            Diese Seite enthält Platzhalter. Vor dem Livegang müssen hier Sarahs echte
-            Angaben stehen – vollständiger Name und ladungsfähige Anschrift sind Pflicht,
-            auch bei einer rein persönlichen Seite ohne eigenen Betrieb.
-        </div>
-
         <h2>Verantwortlich für diese Seite</h2>
         <p>
-            Sarah <em>[Nachname]</em><br>
-            <em>[Straße und Hausnummer]</em><br>
-            <em>[PLZ]</em> <?= e(config('contact.city')) ?>
+            FahrlehrerinSarah<br>
+            Sarah Schweikert<br>
+            c/o Online-Impressum 10297<br>
+            Europaring 90<br>
+            53757 Sankt Augustin
         </p>
 
         <h2>Kontakt</h2>
         <p>
-            Telefon: <?= e(config('contact.phone')) ?><br>
-            E-Mail: <?= e(config('contact.email')) ?>
+            E-Mail: <a href="mailto:sarah@fahrlehrerinsarah.de">sarah@fahrlehrerinsarah.de</a>
+        </p>
+        <?php /* Der zweite Kontaktweg nach § 5 DDG. Er liegt beim Dienst und
+                 nicht auf dieser Seite, deshalb der Link dorthin. Ohne den
+                 Hinweis stünde im Impressum nur ein Weg. */ ?>
+        <p>
+            Zweiter Kontaktweg: über das Formular im
+            <a href="https://mein.online-impressum.de/fahrlehrerinsarah/"
+               target="_blank" rel="noopener noreferrer">Online-Impressum</a>.
+        </p>
+
+        <h2>Zuständige Aufsichtsbehörde</h2>
+        <p>
+            Niedersächsische Landesmedienanstalt, Sitz: Deutschland
         </p>
 
         <h2>Zur Einordnung</h2>
@@ -40,7 +77,6 @@
         <p>
             Berufsbezeichnung: Fahrlehrerin (verliehen in der Bundesrepublik Deutschland)<br>
             Fahrlehrerlaubnis der Klassen: B, BE<br>
-            Zuständige Behörde: <em>[zuständige Fahrerlaubnisbehörde eintragen]</em><br>
             Es gelten das Fahrlehrergesetz (FahrlG) und die
             Fahrschüler-Ausbildungsordnung (FahrschAusbO).
         </p>

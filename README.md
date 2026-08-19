@@ -98,6 +98,7 @@ Es gibt bewusst keine Test-Suite. Vor jeder Übergabe einmal durchklicken:
 | 17 | Kachel anklicken | Infoseite des Wegbegleiters, Rückweg oben links |
 | 18 | `/wegbegleiter/gibt-es-nicht` aufrufen | 404 |
 | 19 | Fuß auf jeder Seite ansehen | Nur Impressum · Datenschutz, kein Weg in die Schaltzentrale |
+| 20 | `/impressum` und `/datenschutz` | Echte Angaben, keine eckigen Klammern, gleiche Anschrift |
 
 Syntaxprüfung:
 
@@ -111,7 +112,13 @@ for f in $(find app public scripts -name '*.php'); do php -l "$f"; done
 
 Die vollständige Liste steht in `CLAUDE.md`. Das Wichtigste:
 
-1. **Impressum und Datenschutz** mit echten Daten füllen – aktuell Platzhalter.
+1. ~~**Impressum und Datenschutz** mit echten Daten füllen.~~ Mit SAR-15 erledigt:
+   Sarahs Angaben stammen aus ihrem Online-Impressum, im Datenschutz steht dieselbe
+   verantwortliche Stelle. **Zwei Punkte bleiben offen:** ob die für die
+   Fahrlehrerlaubnis zuständige Behörde genannt werden muss (der Block
+   „Berufsbezeichnung" nennt sie nicht), und die Hosting-Angaben im Datenschutz
+   (Auftragsverarbeitung, Serverstandort, Logfiles). Juristisch geprüft ist beides
+   nicht.
 2. Restliche Fotos einsetzen (Porträt von Sarah, Fahrschulauto, Lenkhilfe/Handbedienteil,
    Kanal-Ausschnitt) – das Linksgas-Foto ist schon drin.
 3. ~~Klären, ob die Fahrschule namentlich genannt werden darf.~~ Geklärt am

@@ -63,14 +63,32 @@
             </div>
         </div>
 
+        <?php /* SAR-53: DIESE KARTEN BESCHREIBEN TECHNIK, KEINE KÖRPER.
+                 Zwei von ihnen taten bis zum 19.08.2026 beides. „Wenn der
+                 rechte Fuß nicht mitmacht" und „wenn die zweite Hand nicht
+                 mitarbeiten kann" klingen im ersten Moment schonend, sind es
+                 aber nicht: Beide setzen voraus, dass die Gliedmaße da ist und
+                 sich nur weigert. Wer ohne rechtes Bein hier liest, bekommt
+                 seinen Alltag als Unlust beschrieben. Dazu kam ein dritter
+                 Satz, „schwierig ist am Anfang nur, den rechten Fuß stillhalten
+                 zu lassen", der dieselbe Voraussetzung macht.
+
+                 Die Regel für alles, was hier künftig dazukommt: Sag, was der
+                 Umbau TUT und wie gefahren wird. Wer ihn braucht, weiß das
+                 selbst und muss es nicht von einer Website erklärt bekommen.
+                 Kein „wenn X nicht mehr geht", kein „trotz", kein „leider".
+
+                 Die Startseite war davon nicht betroffen, ihre Handicap-Karte
+                 spricht schon von Kleinwuchs und eingeschränkter Beweglichkeit
+                 statt von Körperteilen. */ ?>
         <div class="card-grid">
             <article class="feature-card">
                 <span class="feature-icon"><?= icon('pedal') ?></span>
                 <h3>Linksgas</h3>
                 <p>
-                    Ein zweites Gaspedal links der Bremse, wenn der rechte Fuß nicht
-                    mitmacht. Der Umbau ist klein, die Umstellung überraschend schnell –
-                    schwierig ist am Anfang nur, den rechten Fuß stillhalten zu lassen.
+                    Das Gaspedal sitzt links neben der Bremse, gefahren wird mit dem
+                    linken Fuß. Der Umbau ist klein, und die Umstellung geht schneller,
+                    als die meisten erwarten.
                 </p>
             </article>
 
@@ -78,8 +96,9 @@
                 <span class="feature-icon"><?= icon('knob') ?></span>
                 <h3>Lenkraddrehknopf</h3>
                 <p>
-                    Lenken mit einer Hand – der Klassiker, wenn die zweite Hand nicht
-                    mitarbeiten kann. Nach zwei, drei Stunden fühlt es sich normal an.
+                    Ein Knauf auf dem Lenkradkranz, mit dem sich das Lenkrad sicher mit
+                    einer Hand führen lässt. Nach zwei, drei Stunden fühlt es sich
+                    normal an.
                 </p>
             </article>
 

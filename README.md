@@ -30,6 +30,10 @@ Dann <http://localhost:8000> öffnen.
 | Fahrschüler Tim | `/login` | `tim@example.de` · PIN `222222` |
 | Fahrschülerin Mia | `/login` | `mia@example.de` · PIN `333333` |
 
+Die Schaltzentrale ist seit SAR-54 **nirgends mehr verlinkt**. `/admin/login` gibt es
+unverändert, die Adresse muss man nur direkt eingeben. Das ist eine Aufräumaktion im
+Fuß und keine Sicherung: Was den Bereich schützt, ist das Passwort.
+
 Die Demo-Termine werden **relativ zum heutigen Datum** erzeugt. Wirkt die Demo nach ein paar
 Wochen leer, einfach `php scripts/migrate.php` erneut ausführen – das setzt alles frisch auf.
 
@@ -93,6 +97,7 @@ Es gibt bewusst keine Test-Suite. Vor jeder Übergabe einmal durchklicken:
 | 16 | Ganz nach unten auf `/` | Abschnitt „Wegbegleiter“ mit Logo-Kachel |
 | 17 | Kachel anklicken | Infoseite des Wegbegleiters, Rückweg oben links |
 | 18 | `/wegbegleiter/gibt-es-nicht` aufrufen | 404 |
+| 19 | Fuß auf jeder Seite ansehen | Nur Impressum · Datenschutz, kein Weg in die Schaltzentrale |
 
 Syntaxprüfung:
 

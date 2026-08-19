@@ -56,13 +56,34 @@
                 <a href="<?= url('/impressum') ?>">Impressum</a>
                 <span class="sep">·</span>
                 <a href="<?= url('/datenschutz') ?>">Datenschutz</a>
-                <span class="sep">·</span>
-                <?php /* Zwischen Datenschutz und Schaltzentrale stand bis zum
-                         17.08.2026 „Diese Website" – der zweite Weg auf
+                <?php /* HIER STAND DER WEG IN SARAHS SCHALTZENTRALE, bis zum
+                         19.08.2026 (Ticket SAR-54). Sie ist NICHT weg, nur
+                         nicht mehr verlinkt: `/admin/login` gibt es
+                         unverändert, Sarah ruft die Adresse direkt auf oder
+                         hat sie im Lesezeichen.
+
+                         Warum der Link raus ist: Der Fuß ist der Ort für die
+                         Wege, die Besucher:innen gehen sollen. Ein Eingang zur
+                         Verwaltung gehört nicht dazu; er lädt Fremde ein,
+                         etwas auszuprobieren, was sie nichts angeht, und für
+                         Sarah spart er keinen Klick, weil sie ohnehin immer
+                         dieselbe Adresse ansteuert.
+
+                         DAS IST KEINE SICHERUNG. Wer die Adresse kennt, kommt
+                         weiterhin auf den Login, und das soll auch so sein.
+                         Was den Bereich schützt, ist das Passwort und die
+                         Anmeldepflicht im AdminAuthController, nicht die
+                         Unauffälligkeit der Adresse. Vor Suchmaschinen liegt
+                         `/admin` außerdem schon per robots.txt zu (siehe
+                         RobotsController).
+
+                         Zwischen Datenschutz und Schaltzentrale stand bis zum
+                         17.08.2026 noch „Diese Website", der zweite Weg auf
                          /meine-website. Die Seite ist entfallen, also auch der
                          Link: Ein Eintrag im Fuß, der ins Leere führt, ist
-                         schlimmer als gar keiner. */ ?>
-                <a href="<?= url('/admin/login') ?>">Sarahs Schaltzentrale</a>
+                         schlimmer als gar keiner. Damit ist die Zeile jetzt
+                         das, was sie heißt, nämlich Rechtliches und sonst
+                         nichts. */ ?>
             </nav>
             <p class="footer-copy">&copy; <?= date('Y') ?> Sarah <?= e(config('contact.city')) ?></p>
 

@@ -308,6 +308,41 @@ html[data-kontrast='hoch'] .brand-logo {
     padding: 4px 8px;
 }
 
+/* --- Die Logos der Wegbegleiter ----------------------------------------
+   Dasselbe Problem eine Etage tiefer, nur schlimmer: Fremde Logos sind für
+   den hellen Grund gezeichnet, auf dem sie normalerweise stehen. Das Logo
+   der Fahrschule Sander etwa schreibt „FAHRSCHULE" in Schwarz – dunkel
+   verschwindet das halbe Wort, im Schwarz-Weiß-Modus das halbe Logo.
+
+   Und anders als bei Sarahs eigenem Logo ist eine helle Zweitfassung hier
+   keine Option: Sie müsste vom Partner kommen, und für jeden neuen
+   Wegbegleiter noch einmal. Die Platte gilt deshalb für alle und hält
+   diesen Fall ein für alle Mal offen.
+
+   Die Kachel selbst bleibt dunkel – nur das Logo bekommt seinen hellen
+   Grund, so groß wie nötig und keinen Millimeter größer. */
+/* Hier stand bis zum 19.08.2026 eine Ausnahme von „jeder Link bekommt einen
+   Unterstrich": Die Kachel war als Ganzes ein Link und enthielt drei Zeilen
+   Fließtext, die der Modus alle unterstrichen hätte. Seit die Kachel nur noch
+   das Logo trägt, gibt es darin keinen Text mehr – die Ausnahme ist
+   gegenstandslos und deshalb raus. */
+
+html[data-kontrast='dunkel'] .partner-logo,
+html[data-kontrast='hoch'] .partner-logo,
+html[data-kontrast='dunkel'] .partner-head-logo,
+html[data-kontrast='hoch'] .partner-head-logo {
+    background: #FDF8F0;
+    border-radius: 10px;
+    padding: 6px 10px;
+    /* Die Seite rechnet global mit `border-box` – damit fräßen die 6 px
+       Polsterung oben und unten das Logo von 46 auf 34 px herunter, und es
+       stünde im dunklen Modus kleiner da als im hellen. Hier also die
+       Ausnahme: Die Höhe meint das Logo, die Platte kommt obendrauf. Die
+       Kachel wächst dadurch um 12 px – alle gleich, denn sie stehen im
+       selben Raster. */
+    box-sizing: content-box;
+}
+
 /* =========================================================================
    DIE LEISTE SELBST
    -------------------------------------------------------------------------

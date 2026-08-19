@@ -552,3 +552,9 @@ $schoolUrl = trim((string) config('school.url'));
         </div>
     </div>
 </section>
+
+<?php /* Die Wegbegleiter ganz zum Schluss – unter dem Abschluss-CTA und damit
+         als Letztes vor dem Fuß. Begründung für Ort und Aufbau steht im
+         Partial; hier liegt nur die Entscheidung, dass die Reihe auf die
+         Startseite gehört und sonst nirgendwohin. */ ?>
+<?php require APP_ROOT . '/app/Views/partials/wegbegleiter.php'; ?>

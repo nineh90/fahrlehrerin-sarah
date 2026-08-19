@@ -44,6 +44,7 @@ Wochen leer, einfach `php scripts/migrate.php` erneut ausführen – das setzt a
 | Name der Fahrschule (leer = wird nicht genannt) | `.env` → `SCHOOL_NAME` |
 | Änderungsfrist fürs Absagen (Standard 24 h) | `.env` → `CANCEL_DEADLINE_HOURS` |
 | Texte | `app/Views/` (Plain PHP, keine Templatesprache) |
+| Wegbegleiter (Partner-Logos + Unterseiten) | `app/Partners.php`, Anleitung steht im Kopf der Datei |
 | Bilder | `public/assets/img/` – echte Fotos direkt, Fehlendes als `platzhalter-*.svg` |
 | Mailversand | `.env` → `MAIL_DRIVER`, `SMTP_*` (siehe unten) |
 
@@ -89,6 +90,9 @@ Es gibt bewusst keine Test-Suite. Vor jeder Übergabe einmal durchklicken:
 | 13 | Dieselbe Serie nochmal | „Alle X Termine gab es bereits", nichts doppelt |
 | 14 | Fahrschüler:in anlegen | PIN wird einmalig angezeigt, Login damit funktioniert |
 | 15 | Formular ohne CSRF-Token abschicken | Abbruch mit HTTP 419 |
+| 16 | Ganz nach unten auf `/` | Abschnitt „Wegbegleiter“ mit Logo-Kachel |
+| 17 | Kachel anklicken | Infoseite des Wegbegleiters, Rückweg oben links |
+| 18 | `/wegbegleiter/gibt-es-nicht` aufrufen | 404 |
 
 Syntaxprüfung:
 
@@ -105,7 +109,11 @@ Die vollständige Liste steht in `CLAUDE.md`. Das Wichtigste:
 1. **Impressum und Datenschutz** mit echten Daten füllen – aktuell Platzhalter.
 2. Restliche Fotos einsetzen (Porträt von Sarah, Fahrschulauto, Lenkhilfe/Handbedienteil,
    Kanal-Ausschnitt) – das Linksgas-Foto ist schon drin.
-3. Klären, ob die Fahrschule namentlich genannt werden darf.
+3. ~~Klären, ob die Fahrschule namentlich genannt werden darf.~~ Geklärt am
+   19.08.2026: Sie darf genannt werden, und ihr Logo darf stehen, denn Sarah
+   arbeitet dort. Das gilt für die Fahrschule Sander. Bei jedem weiteren
+   Wegbegleiter ist die Frage neu zu klären, denn ein fremdes Logo zu zeigen
+   ist eine Nutzung und kein Zitat.
 4. `APP_DEBUG=false`, neues `ADMIN_PASSWORD`, echte Kontaktdaten in der `.env`.
 5. Google Fonts lokal ausliefern – dann entfällt die Datenübertragung an Google.
 

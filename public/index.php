@@ -33,6 +33,11 @@ $router->get('/',                    [HomeController::class, 'index']);
 $router->get('/ueber-mich',          [PageController::class, 'about']);
 $router->get('/fahren-mit-handicap', [PageController::class, 'handicap']);
 $router->get('/kontakt',             [PageController::class, 'contact']);
+/* Die Wegbegleiter – eine Route für alle. Der Slug wird in app/Partners.php
+   nachgeschlagen, unbekannte enden mit 404. Eine Übersichtsseite unter
+   /wegbegleiter gibt es bewusst nicht: Die Übersicht ist der Abschnitt unten
+   auf der Startseite. */
+$router->get('/wegbegleiter/{slug}', [PartnerController::class, 'show']);
 $router->get('/impressum',           [PageController::class, 'impressum']);
 $router->get('/datenschutz',         [PageController::class, 'datenschutz']);
 $router->get('/robots.txt',          [RobotsController::class, 'index']);

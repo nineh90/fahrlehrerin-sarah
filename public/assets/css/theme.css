@@ -114,6 +114,35 @@
     --on-accent:    #FFFFFF;                    /* Text auf Akzentflächen */
     --accent-text:  #185429;                    /* Akzentfarbe als Textfarbe (kontraststark) */
     --accent-soft:  rgba(34, 117, 58, 0.10);    /* zarte Akzentfläche */
+
+    /* WARUM DAS GRÜN NICHT HELLER WIRD.
+       Am 19.08.2026 sollte es auf Sarahs Wunsch greller werden. Ausprobiert,
+       angesehen, wieder verworfen: Hell gefiel es nicht. Die Rechnung dahinter
+       steht hier, damit sie beim nächsten Mal nicht neu gemacht werden muss.
+
+       `--accent` macht zwei Jobs gleichzeitig. Es ist an 29 Stellen eine
+       TEXTFARBE (unter anderem `a { color: … }`, also jeder Link) und an 25
+       Stellen eine FLÄCHE mit weißer Schrift darauf. Beide verlangen dasselbe,
+       nämlich dunkel: 4,5:1 als Text auf dem Creme-Grund (WCAG 1.4.3), 4,5:1
+       für die weiße Schrift auf der Fläche.
+
+       Auf dem Weg nach hell liegt deshalb eine tote Zone, in der BEIDES
+       durchfällt. Nachgemessen:
+
+         #22753A   weiß 5,72   dunkel 2,62     ← hier stehen wir
+         #268040   weiß 4,95   dunkel 3,02     letzter Wert mit weißer Schrift
+         #2A8A45   weiß 4,36   dunkel 3,43     tote Zone
+         #2E9149   weiß 3,99   dunkel 3,75     tote Zone
+         #389E54   weiß 3,39   dunkel 4,40     tote Zone
+         #3EA55B   weiß 3,12   dunkel 4,80     ab hier trägt nur dunkle Schrift
+         #46B565   weiß 2,61   dunkel 5,74
+
+       Mit weißer Schrift ist also bei #268040 Schluss, und das ist von hier
+       mit bloßem Auge kaum zu unterscheiden. Wirklich heller geht nur jenseits
+       der toten Zone, und dann muss die Schrift auf den Knöpfen dunkel werden
+       und `--accent` in zwei Token zerfallen: eins für Text, eins für Flächen.
+       Genau so war es kurzzeitig gebaut. Wer es wieder will, findet den Aufbau
+       in der Versionsgeschichte vom 19.08.2026. */
     /* Tiefe unter dem Hauptbutton – neutral und dezent. Ein farbiger Schein
        in der Leitfarbe sah neben dem Regenbogen nach Effekt aus, nicht nach
        Handwerk. Deshalb steht hier ein Grauton und keine Ableitung des
@@ -369,14 +398,19 @@
 
 /* --- Regenbogen-Rotation für Karten -------------------------------------
    Jede Karte in einem Raster bekommt automatisch die nächste Regenbogenfarbe.
-   Die Templates setzen KEINE Farbe – hier entsteht sie. */
-.card-grid > *:nth-child(7n+1), .process > *:nth-child(7n+1), .stat-grid > *:nth-child(7n+1) { --card-accent: var(--c-red);    --card-accent-soft: rgba(228, 87, 46, 0.12); }
-.card-grid > *:nth-child(7n+2), .process > *:nth-child(7n+2), .stat-grid > *:nth-child(7n+2) { --card-accent: var(--c-orange); --card-accent-soft: rgba(240, 138, 36, 0.14); }
-.card-grid > *:nth-child(7n+3), .process > *:nth-child(7n+3), .stat-grid > *:nth-child(7n+3) { --card-accent: var(--c-yellow); --card-accent-soft: rgba(232, 181, 23, 0.16); }
-.card-grid > *:nth-child(7n+4), .process > *:nth-child(7n+4), .stat-grid > *:nth-child(7n+4) { --card-accent: var(--c-green);  --card-accent-soft: rgba(62, 165, 91, 0.13); }
-.card-grid > *:nth-child(7n+5), .process > *:nth-child(7n+5), .stat-grid > *:nth-child(7n+5) { --card-accent: var(--c-teal);   --card-accent-soft: rgba(24, 154, 156, 0.13); }
-.card-grid > *:nth-child(7n+6), .process > *:nth-child(7n+6), .stat-grid > *:nth-child(7n+6) { --card-accent: var(--c-blue);   --card-accent-soft: rgba(59, 125, 216, 0.13); }
-.card-grid > *:nth-child(7n+7), .process > *:nth-child(7n+7), .stat-grid > *:nth-child(7n+7) { --card-accent: var(--c-violet); --card-accent-soft: rgba(124, 58, 237, 0.12); }
+   Die Templates setzen KEINE Farbe – hier entsteht sie.
+
+   `.partner-grid` steht mit in der Reihe, damit die Logo-Kacheln unten auf der
+   Startseite dieselbe Kopfkante tragen wie die Kacheln weiter oben. Gezählt
+   wird dort das <li>, nicht die Kachel darin – das ist egal, die Eigenschaft
+   vererbt sich nach innen und `.partner-card::before` liest sie dort. */
+.card-grid > *:nth-child(7n+1), .process > *:nth-child(7n+1), .stat-grid > *:nth-child(7n+1), .partner-grid > *:nth-child(7n+1) { --card-accent: var(--c-red);    --card-accent-soft: rgba(228, 87, 46, 0.12); }
+.card-grid > *:nth-child(7n+2), .process > *:nth-child(7n+2), .stat-grid > *:nth-child(7n+2), .partner-grid > *:nth-child(7n+2) { --card-accent: var(--c-orange); --card-accent-soft: rgba(240, 138, 36, 0.14); }
+.card-grid > *:nth-child(7n+3), .process > *:nth-child(7n+3), .stat-grid > *:nth-child(7n+3), .partner-grid > *:nth-child(7n+3) { --card-accent: var(--c-yellow); --card-accent-soft: rgba(232, 181, 23, 0.16); }
+.card-grid > *:nth-child(7n+4), .process > *:nth-child(7n+4), .stat-grid > *:nth-child(7n+4), .partner-grid > *:nth-child(7n+4) { --card-accent: var(--c-green);  --card-accent-soft: rgba(62, 165, 91, 0.13); }
+.card-grid > *:nth-child(7n+5), .process > *:nth-child(7n+5), .stat-grid > *:nth-child(7n+5), .partner-grid > *:nth-child(7n+5) { --card-accent: var(--c-teal);   --card-accent-soft: rgba(24, 154, 156, 0.13); }
+.card-grid > *:nth-child(7n+6), .process > *:nth-child(7n+6), .stat-grid > *:nth-child(7n+6), .partner-grid > *:nth-child(7n+6) { --card-accent: var(--c-blue);   --card-accent-soft: rgba(59, 125, 216, 0.13); }
+.card-grid > *:nth-child(7n+7), .process > *:nth-child(7n+7), .stat-grid > *:nth-child(7n+7), .partner-grid > *:nth-child(7n+7) { --card-accent: var(--c-violet); --card-accent-soft: rgba(124, 58, 237, 0.12); }
 
 /* Dieselbe Rotation für die Zeitleiste in „Wie du bei mir Fahrschüler:in
    wirst". Sie läuft senkrecht, deshalb steht sie nicht in der Zeile darüber:

@@ -347,6 +347,25 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     background: var(--card-accent, var(--accent));
 }
 .feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+/* Eine Kachel, die als GANZES ein Link ist. Sonst ist `.feature-card` immer
+   ein <article> mit Text darin; als <a> würde der Browser die komplette Kachel
+   unterstreichen und in Linkfarbe setzen, Überschrift und Absatz inbegriffen.
+   Beides hier zurückgenommen: Die Kachel sieht aus wie ihre Nachbarn, sie ist
+   nur eben anfassbar. Was sie zum Link macht, steht in der `.feature-meta`
+   unten drin. */
+.feature-card--link { color: var(--text); text-decoration: none; }
+.feature-card--link:hover { text-decoration: none; }
+/* DIE ZEILE UNTEN TRÄGT NICHT DIE KACHELFARBE, und das ist eine Kontrast- und
+   keine Geschmacksfrage. `.feature-meta strong` steht auf `--card-accent`, und
+   die Rotation aus theme.css schickt da auch Gelb durch: #E8B517 kommt auf
+   Weiß auf rund 2:1. Gefordert sind 4,5:1 für Text unter 24 px, diese Zeile
+   ist 18 px. Auf einer gelben Kachel wäre der Weiterlink also der einzige
+   Text der Seite, den man nicht lesen kann.
+
+   Deshalb die Leitfarbe in ihrer textsicheren Fassung, dieselbe wie bei jedem
+   anderen Link. Die Kachelfarbe bleibt sichtbar, wo sie keinen Text tragen
+   muss: in der Kopfkante und hinter dem Icon. */
+.feature-card--link .feature-meta strong { color: var(--accent-text, var(--accent)); }
 .feature-icon {
     display: inline-flex; align-items: center; justify-content: center;
     width: 52px; height: 52px; border-radius: 16px; margin-bottom: 1.15rem;
@@ -1037,6 +1056,110 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 @supports not (background-clip: text) { .error-code { -webkit-text-fill-color: currentColor; } }
 
 /* =========================================================================
+   WEGBEGLEITER  ·  Logo-Reihe unten auf der Startseite + die Unterseiten
+   -------------------------------------------------------------------------
+   Die Kachel trägt NUR das Logo (Begründung im Partial). Sie ist damit ein
+   naher Verwandter der `.feature-card` weiter oben auf der Startseite und
+   borgt sich deren Sprache: dieselbe Fläche, derselbe Rahmen, dieselbe
+   farbige Kopfkante, dasselbe Anheben beim Überfahren. Bewusst geborgt und
+   nicht dieselbe Klasse – eine `.feature-card` bringt Icon-, Überschrift- und
+   Absatzregeln mit, von denen hier keine je greift, und die Farbrotation in
+   theme.css hängt an `.card-grid > *`. Ein Logo-Kästchen ist keine Karte mit
+   Text; es sieht nur so aus.
+
+   Fremde Logos auf einer Seite, die vom Regenbogen lebt: Das Risiko ist, dass
+   die Reihe unruhig wird, weil jedes Logo seine eigenen Farben, Proportionen
+   und Ränder mitbringt. Dagegen hilft nur eines – jedem Logo denselben
+   Rahmen und dieselbe HÖHE geben und die Breite laufen lassen. Ein Logo auf
+   feste Breite zu zwingen staucht das nächste, das quadratisch ist.
+   ========================================================================= */
+.partner-grid {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1.2rem;
+}
+/* Solange es genau einen Wegbegleiter gibt, füllt seine Kachel sonst die
+   ganze Breite und das Logo schwimmt in der Mitte einer 1100-px-Fläche.
+   Die Reihe bleibt links stehen und wächst nach rechts, wenn Sarah weitere
+   aufnimmt. */
+.partner-grid > li { max-width: 290px; }
+
+.partner-card {
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    height: 100%; min-height: 116px;
+    padding: 1.9rem 1.5rem 1.6rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    transition: transform .18s, border-color .18s, box-shadow .18s;
+}
+/* Die farbige Kopfkante – dieselbe Kante, dieselben 6 px wie bei
+   `.feature-card`. Die Farbe je Kachel setzt theme.css über --card-accent. */
+.partner-card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+    background: var(--card-accent, var(--accent));
+}
+.partner-card:hover,
+.partner-card:focus-visible {
+    transform: translateY(-5px);
+    border-color: var(--card-accent, var(--accent));
+    box-shadow: var(--shadow-lg);
+    text-decoration: none;
+}
+
+/* Feste Höhe, freie Breite – das ist die Regel, an der die Reihe hängt.
+   `object-fit: contain` sorgt dafür, dass ein Logo in seinem Kästchen bleibt,
+   auch wenn die Datei quadratisch ist statt quer. */
+.partner-logo {
+    height: 46px; width: auto; max-width: 100%;
+    object-fit: contain; object-position: center;
+}
+
+/* --- Kopf der Unterseite ------------------------------------------------
+   Etwas größer als in der Kachel, aber immer noch klein genug, dass die
+   Überschrift darunter die Seite trägt und nicht das fremde Logo. */
+.partner-head-logo { height: 58px; width: auto; max-width: 100%; object-fit: contain; object-position: left center; display: block; margin-bottom: 1rem; }
+
+/* Der Rückweg über dem Seitentitel. Bewusst leise und klein: Er ist eine
+   Hilfe, keine Navigation. */
+/* `--muted` steht hier nicht, obwohl es nach der leisesten Farbe klingt: Der
+   Wert ist auf den Seitengrund gerechnet (4,76:1) und rutscht auf der
+   abgesetzten Fläche des Seitenkopfs auf 4,34:1, also unter die geforderten
+   4,5:1. `--text-soft` schafft dort 7,09:1 und ist immer noch ruhiger als
+   Fließtext. */
+.back-link { margin: 0 0 .8rem; font-size: var(--fs-sm); }
+.back-link a { color: var(--text-soft); text-decoration: none; }
+.back-link a:hover { color: var(--accent); text-decoration: underline; }
+
+/* --- Filialen ----------------------------------------------------------
+   Adressblöcke nebeneinander. Kein Kasten drumherum: Acht gerahmte Kärtchen
+   sähen aus wie acht Angebote; hier stehen acht Adressen. Der kurze farbige
+   Strich links reicht als Trennung und holt die Palette in den Abschnitt. */
+.branch-grid {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1.4rem;
+}
+.branch {
+    display: flex; flex-direction: column; gap: .15rem;
+    padding-left: .9rem;
+    border-left: 3px solid var(--card-accent, var(--accent));
+    color: var(--text-soft); font-size: var(--fs-sm); line-height: 1.55;
+}
+.branch strong { color: var(--text); font-family: var(--font-head); font-size: var(--fs-md); margin-bottom: .2rem; }
+.branch a { color: var(--accent-text, var(--accent)); }
+/* Dieselbe Rotation wie bei `.facts` – sieben Farben, dann von vorn. */
+.branch:nth-child(7n+1) { --card-accent: var(--c-red); }
+.branch:nth-child(7n+2) { --card-accent: var(--c-orange); }
+.branch:nth-child(7n+3) { --card-accent: var(--c-yellow); }
+.branch:nth-child(7n+4) { --card-accent: var(--c-green); }
+.branch:nth-child(7n+5) { --card-accent: var(--c-teal); }
+.branch:nth-child(7n+6) { --card-accent: var(--c-blue); }
+.branch:nth-child(7n+7) { --card-accent: var(--c-violet); }
+
+/* =========================================================================
    ND-CREDIT-BAND
    Sichtbarer Urheberhinweis am Seitenende. Hebt sich vom Kundeninhalt ab,
    ohne ihn zu überstrahlen – deshalb ruhige Fläche statt Akzentfarbe und
@@ -1185,6 +1308,19 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 }
 /* Auf der aktiven, bereits eingefärbten Fläche würde die Plakette verschwinden */
 .admin-nav a.is-active .nav-badge { background: var(--on-accent); color: var(--accent-text); }
+/* DER GEIST-KNOPF AUF DER DUNKLEN LEISTE.
+   `.btn-ghost` nimmt `color: var(--text)` und `border-color: var(--border-strong)`,
+   und beide sind für den hellen Seitengrund gerechnet. In der Seitenleiste der
+   Schaltzentrale liegen sie auf `--bg-footer`, also auf derselben Farbe wie die
+   Schrift: Der Knopf „Abmelden" stand dort unsichtbar, dunkel auf dunkel, samt
+   unsichtbarem Rand. Gefunden beim Nachmessen am 19.08.2026; der Fehler ist
+   älter und hat mit dem Farbwechsel nichts zu tun.
+
+   Hier deshalb die Fuß-Tokens, die es für genau diesen Fall gibt. Sie färben
+   sich in jedem Kontrastmodus mit. */
+.admin-sidebar .btn-ghost { color: var(--footer-text); border-color: var(--footer-border); }
+.admin-sidebar .btn-ghost:hover { color: var(--footer-accent); border-color: var(--footer-accent); }
+
 .admin-sidebar-foot { display: flex; flex-direction: column; gap: .8rem; border-top: 1px solid var(--footer-border); padding-top: 1.1rem; }
 .admin-sidebar-foot a { color: var(--footer-muted); font-size: var(--fs-xs); }
 .admin-sidebar-foot a:hover { color: var(--footer-accent); text-decoration: none; }

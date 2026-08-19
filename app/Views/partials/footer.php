@@ -21,6 +21,12 @@
                 <ul class="footer-links">
                     <li><a href="<?= url('/ueber-mich') ?>">Wer ich bin</a></li>
                     <li><a href="<?= url('/fahren-mit-handicap') ?>">Fahren mit Handicap</a></li>
+                    <?php /* Führt auf den Abschnitt unten auf der Startseite und nicht
+                             auf eine eigene Übersichtsseite – die gibt es bewusst nicht
+                             (Begründung im PartnerController). Der Sprungpunkt heißt
+                             `#wegbegleiter` und sitzt am <section> im gleichnamigen
+                             Partial; wer den umbenennt, bricht diesen Link hier mit. */ ?>
+                    <li><a href="<?= url('/') ?>#wegbegleiter">Wegbegleiter</a></li>
                     <li><a href="<?= url('/kontakt') ?>">Kontakt</a></li>
                 </ul>
             </div>

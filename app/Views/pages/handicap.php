@@ -25,18 +25,30 @@
 
             <div class="duo-text">
                 <h2>Ein angepasstes Auto fährt sich anders, nicht schwerer</h2>
+                <?php /* SAR-52, Sarahs Fassung. Hier standen drei Absätze; der erste
+                         („Die meisten, die zu mir kommen, haben denselben Satz im
+                         Kopf: ‚Ob das überhaupt geht?'") ist mit dem Ticket
+                         entfallen. Er war kein Verlust an dieser Stelle: Die
+                         Seite beantwortet dieselbe Frage schon im Vorspann oben
+                         („bevor du es abhakst") und noch einmal im Ablauf weiter
+                         unten. Was übrig bleibt, beschreibt das Foto daneben,
+                         und genau dafür steht der Text hier.
+
+                         Zwei Absätze und nicht einer, obwohl Sarah es am Stück
+                         geschrieben hat: Die ersten drei Sätze erklären die
+                         Technik auf dem Bild, der letzte sagt, wie sie
+                         unterrichtet. Am Stück gesetzt liest sich das in einer
+                         schmalen Spalte neben einem Foto als ein Block, in dem
+                         der letzte Satz untergeht. Wortlaut und Reihenfolge sind
+                         unverändert. */ ?>
                 <p>
-                    Die meisten, die zu mir kommen, haben denselben Satz im Kopf: „Ob das
-                    überhaupt geht?" Meistens geht es. Manchmal braucht es eine andere
-                    Technik, oft ein paar Stunden mehr – aber fast nie ein Nein.
-                </p>
-                <p>
-                    Das Foto zeigt einen Linksgas-Umbau: ein zusätzliches Gaspedal links
-                    der Bremse. Mehr Unterschied zum normalen Fahrschulauto ist da nicht.
+                    Das Foto zeigt einen Linksgas-Umbau. Dabei wird das Gas von rechts
+                    auf links mechanisch umgelegt. Das rechte Pedal ist dann für den
+                    Gebrauch blockiert.
                 </p>
                 <p>
                     Ich erkläre dir die Bedienelemente in Ruhe und wir fahren so lange
-                    damit, bis du nicht mehr überlegen musst, sondern einfach machst.
+                    damit, bis es sich für dich völlig normal anfühlt.
                 </p>
             </div>
         </div>

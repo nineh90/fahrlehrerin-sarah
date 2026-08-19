@@ -499,24 +499,31 @@ $schoolUrl = trim((string) config('school.url'));
                     </li>
                     <li>
                         <strong>Üben bis es sitzt</strong>
-                        <?php /* SAR-50, Sarahs Formulierung. Vorher stand hier „so
-                                 lange, bis du sicher bist. Der einzige Unterschied
-                                 ist der Weg, nicht das Ziel."
+                        <?php /* WARUM HIER NICHT MEHR „bis DU dich sicher fühlst"
+                                 STEHT. Genau so hatte Sarah es formuliert (SAR-50),
+                                 und einen Ticketstapel später endet Schritt 5 mit
+                                 „sobald DU dich sicher fühlst" (SAR-51). Zwei
+                                 Kacheln nebeneinander mit demselben Halbsatz lesen
+                                 sich wie ein Kopierfehler, und der Satz verliert
+                                 sein Gewicht, wenn er zweimal kommt.
 
-                                 Zwei Dinge sind an der neuen Fassung Absicht und
-                                 kein Versehen. Erstens „Wir üben": Der Satz sagt
-                                 jetzt, dass Sarah dabei ist, statt eine Bedingung
-                                 zu nennen, die der Fahrschüler erfüllen muss.
-                                 Zweitens das große DU. Es ist die Betonung, auf
-                                 die es Sarah ankommt: Nicht sie entscheidet, wann
-                                 es reicht, sondern die Person am Steuer. Wer das
-                                 hier auf Kleinschreibung „korrigiert", nimmt dem
-                                 Satz genau seine Aussage.
+                                 Aufgeteilt statt gekürzt: Schritt 4 beschreibt
+                                 jetzt das Üben, Schritt 5 trägt die Entscheidung.
+                                 Damit steht die Aussage, auf die es Sarah ankommt,
+                                 genau einmal, und zwar an der Stelle, wo sie zählt,
+                                 nämlich beim Prüfungstermin.
+
+                                 „Wie bei jedem anderen auch" bleibt: Das ist der
+                                 Kern des Schritts und Sarahs Ton. Der Rest ist
+                                 ENTWURF und nicht von ihr, siehe CLAUDE.md.
+                                 Bewusst ohne Angabe zur Stundenzahl: Pflichtstunden
+                                 gibt es, und die Seite behauptet nichts, was sie
+                                 nicht halten kann.
 
                                  Derselbe Satz steht ein zweites Mal auf
                                  /fahren-mit-handicap, Schritt 4. */ ?>
-                        <p>Wie bei jedem anderen auch: Wir üben so lange, bis DU dich
-                           sicher fühlst.</p>
+                        <p>Wie bei jedem anderen auch: Wir wiederholen in Ruhe, was noch
+                           nicht sitzt, und fahren in deinem Tempo.</p>
                     </li>
                     <?php /* Neu mit SAR-45. Der Schritt schließt den Weg ab, den die
                              vier davor beschreiben; ohne ihn hörte der Ablauf beim

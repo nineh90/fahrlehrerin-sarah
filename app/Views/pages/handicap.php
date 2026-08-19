@@ -197,10 +197,11 @@
             <li class="process-step">
                 <span class="process-num">4</span>
                 <h3>Üben bis es sitzt</h3>
-                <?php /* SAR-50. Wortgleich mit Schritt 4 auf der Startseite, dort
-                         steht die Begründung für das große DU. */ ?>
-                <p>Wie bei jedem anderen auch: Wir üben so lange, bis DU dich sicher
-                   fühlst.</p>
+                <?php /* Wortgleich mit Schritt 4 auf der Startseite, dort steht die
+                         Begründung, warum das „bis DU dich sicher fühlst" aus
+                         SAR-50 hier nicht mehr steht. */ ?>
+                <p>Wie bei jedem anderen auch: Wir wiederholen in Ruhe, was noch nicht
+                   sitzt, und fahren in deinem Tempo.</p>
             </li>
             <?php /* Fünfter Schritt mit SAR-45. Das Ticket betraf die Startseite –
                      hier steht derselbe Ablauf wörtlich noch einmal, und ein Weg,

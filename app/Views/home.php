@@ -519,17 +519,27 @@ $schoolUrl = trim((string) config('school.url'));
                            sicher fühlst.</p>
                     </li>
                     <?php /* Neu mit SAR-45. Der Schritt schließt den Weg ab, den die
-                             vier davor beschreiben – ohne ihn hörte der Ablauf beim
-                             Üben auf. Er greift bewusst zwei Dinge auf, die schon
-                             auf der Seite stehen: das angepasste Fahrzeug aus
-                             Schritt 3 und die Anmeldung durch die Fahrschule aus
-                             der Nebenspalte. Kein Wort zum Bestehen – versprechen
-                             kann sie das nicht, und die Seite verspricht nichts. */ ?>
+                             vier davor beschreiben; ohne ihn hörte der Ablauf beim
+                             Üben auf. Kein Wort zum Bestehen: Versprechen kann
+                             Sarah das nicht, und die Seite verspricht nichts.
+
+                             SAR-51 hat ihn auf einen Satz gekürzt. Vorher stand
+                             hier zusätzlich „Geprüft wird in dem Auto, in dem du
+                             geübt hast, und ich sitze daneben", dazu „ich schlage
+                             ihn erst vor, wenn du wirklich so weit bist".
+
+                             Damit hängt der Schritt jetzt an derselben Aussage wie
+                             Schritt 4: Nicht Sarah entscheidet, wann es so weit
+                             ist, sondern die Person am Steuer. Das große DU ist
+                             deshalb dasselbe wie dort und keine Marotte, siehe die
+                             Begründung bei „Üben bis es sitzt".
+
+                             Derselbe Schritt steht wörtlich noch einmal auf
+                             /fahren-mit-handicap. */ ?>
                     <li>
-                        <strong>Prüfung</strong>
-                        <p>Geprüft wird in dem Auto, in dem du geübt hast, und ich sitze
-                           daneben. Den Termin meldet die Fahrschule an – ich schlage ihn
-                           erst vor, wenn du wirklich so weit bist.</p>
+                        <strong>Prüfung &amp; Überprüfung</strong>
+                        <p>Den Termin meldet die Fahrschule bei der Prüfstelle an, sobald
+                           DU dich sicher fühlst.</p>
                     </li>
                 </ol>
             </div>

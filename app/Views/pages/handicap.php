@@ -210,10 +210,11 @@
                      Fahrschüler:in wirst"). */ ?>
             <li class="process-step">
                 <span class="process-num">5</span>
-                <h3>Prüfung</h3>
-                <p>Geprüft wird in dem Auto, in dem du geübt hast, und ich sitze daneben.
-                   Den Termin meldet die Fahrschule an – ich schlage ihn erst vor, wenn
-                   du wirklich so weit bist.</p>
+                <?php /* SAR-51. Wortgleich mit Schritt 5 auf der Startseite, dort
+                         steht die Begründung. */ ?>
+                <h3>Prüfung &amp; Überprüfung</h3>
+                <p>Den Termin meldet die Fahrschule bei der Prüfstelle an, sobald DU
+                   dich sicher fühlst.</p>
             </li>
         </ol>
     </div>

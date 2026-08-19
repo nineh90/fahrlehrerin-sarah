@@ -296,11 +296,15 @@ html[data-kontrast='monochrom'] { filter: grayscale(1); }
    Grund. Auf dem hellen Standard-Header stimmt das; auf dunklem oder
    schwarzem Grund verschwindet die Hälfte des Logos.
 
-   Deshalb eine helle Platte darunter. Der Fuß braucht sie nicht: Dort läuft
-   ohnehin die helle Logo-Fassung (logo-sarah-hell.webp), die genau dafür
-   gebaut ist. Ein Tausch der Bilddatei im Header wäre die andere Lösung –
-   dann müsste sie aber auf jeder Seite geladen werden, auch von allen, die
-   diesen Modus nie einschalten. */
+   Deshalb eine helle Platte darunter. Ein Tausch der Bilddatei im Header wäre
+   die andere Lösung, dann müsste die helle Fassung aber auf jeder Seite
+   geladen werden, auch von allen, die diesen Modus nie einschalten.
+
+   Hier stand bis zum 19.08.2026 zusätzlich, der Fuß brauche die Platte nicht,
+   weil dort die helle Logo-Fassung laufe. Der Fuß trägt seit SAR-49 gar kein
+   Logo mehr, sondern eine Wortmarke aus Text; die Begründung ist damit
+   gegenstandslos. Die Seitenleiste der Schaltzentrale zeigt die helle Fassung
+   weiterhin und kommt ohne Platte aus. */
 html[data-kontrast='dunkel'] .brand-logo,
 html[data-kontrast='hoch'] .brand-logo {
     background: #FDF8F0;

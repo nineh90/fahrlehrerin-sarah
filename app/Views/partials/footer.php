@@ -2,18 +2,51 @@
     <div class="container">
         <div class="footer-grid">
             <div class="footer-brand">
-                <?php /* Helle Logo-Variante: auf dem dunklen Fuß wäre der schwarze
-                         Schriftzug des Originals nicht lesbar. */ ?>
-                <img class="footer-logo" src="<?= asset('img/logo-sarah-hell.webp') ?>"
-                     alt="Fahrlehrerin Sarah" width="393" height="462"
-                     loading="lazy" decoding="async">
+                <?php /* SAR-49: WORTMARKE ALS TEXT, KEIN LOGO MEHR.
+                         Hier lag bis zum 19.08.2026 `logo-sarah-hell.webp`, die
+                         helle Fassung von Sarahs Logo. Sie ist nicht sauber
+                         freigestellt: Um den Regenbogenbogen steht ein weißer
+                         Rand, der auf dem hellen Seitengrund nicht auffällt,
+                         auf dem dunklen Fuß aber als Schleier um das ganze
+                         Zeichen liegt.
+
+                         Statt die Datei nachzubessern steht hier jetzt der
+                         Inhalt des Logos als Text. Das löst nebenbei drei
+                         Dinge: Es gibt keinen Rand mehr, der falsch sein kann,
+                         die Wortmarke skaliert mit der Schriftgröße aus der
+                         Barrierefreiheits-Leiste, und sie kostet keinen Download
+                         von 30 kB auf jeder Seite.
+
+                         Der Regenbogen bleibt als kurzer Strich über dem Namen.
+                         Es ist derselbe 28 × 3 px Strich wie bei `.hero-eyebrow`
+                         (nd-base.css) und damit kein neues Gestaltungsmittel.
+                         NICHT als Farbverlauf im Namen selbst: Violett kommt auf
+                         dem Fuß auf 2,62:1 und fiele für Text durch, auch für
+                         großen. Als Strich trägt der Bogen keine Schrift und
+                         darf deshalb bunt sein.
+
+                         Die Datei bleibt liegen, sie wird noch gebraucht: Die
+                         Seitenleiste der Schaltzentrale zeigt sie weiter
+                         (admin/layout.php), und zwar auf demselben dunklen
+                         Grund. Der weiße Rand ist dort also genauso zu sehen.
+                         Wer ihn dort auch loswerden will, macht dasselbe wie
+                         hier oder bessert die Datei nach. */ ?>
+                <p class="footer-wordmark">
+                    <span class="footer-wordmark-eyebrow">Fahrlehrerin</span>
+                    <span class="footer-wordmark-name">Sarah</span>
+                    <span class="footer-wordmark-claims">
+                        Klasse B <span class="sep" aria-hidden="true">·</span> Klasse BE<br>
+                        Handicapausbildung
+                    </span>
+                </p>
                 <?php /* Hier standen zwei Absätze: eine Selbstbeschreibung („Fahrlehrerin
                          aus Überzeugung …", ein Entwurf) und der Hinweis auf die
                          Fahrschule. Beide sind am 12.08.2026 entfallen, weil direkt
                          darüber Sarahs eigene Einordnung steht (site-note.php) und
                          dasselbe sagt – in ihren Worten statt in geliehenen.
                          Drei Selbstbeschreibungen auf 20 cm Bildschirm sind zwei zu
-                         viel. Der Fuß trägt jetzt Logo und Wege, sonst nichts. */ ?>
+                         viel. Der Fuß trägt jetzt Wortmarke und Wege, sonst
+                         nichts. */ ?>
             </div>
 
             <div>

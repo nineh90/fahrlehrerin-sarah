@@ -1208,17 +1208,43 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 .footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--footer-border); }
 .footer-grid h3 { font-family: var(--font-head); font-size: var(--fs-sm); text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 1.1rem; }
 .footer-grid .brand-mark { color: var(--footer-text); }
-.footer-logo { width: 168px; height: auto; display: block; }
 .footer-tagline { font-size: var(--fs-sm); margin-top: 1rem; max-width: 320px; }
-/* Nur im vierspaltigen Footer: das Logo steht mittig über dem Text statt links
-   daneben. Linksbündig wirkt es verrutscht, weil der Textblock darunter breiter
-   ist als das Logo (168 px gegen 320 px). Zentriert wird auf die Textbreite,
-   nicht auf die Rasterspalte – sonst wandert das Logo vom Text weg.
-   Ab 880 px spannt der Markenblock über die volle Breite, dort passt es nicht. */
-@media (min-width: 881px) {
-    .footer-brand { max-width: 320px; }
-    .footer-brand .footer-logo { margin-inline: auto; }
+
+/* ---------- Wortmarke im Fuß (SAR-49) ----------
+   Der Inhalt von Sarahs Logo als Text, seit die Bilddatei dort raus ist
+   (Begründung im Partial). Drei Zeilen in der Reihenfolge des Logos: die
+   Berufsbezeichnung klein darüber, der Name groß, die Klassen darunter.
+
+   Alle drei Farben kommen aus den Fuß-Tokens und nicht aus den normalen:
+   Der Fuß ist die einzige dunkle Fläche im hellen Schema, `--text` und
+   `--muted` sind für den Creme-Grund gerechnet und wären hier unlesbar.
+   14,14:1 für den Namen, 6,95:1 für die Berufsbezeichnung, 7,29:1 für die
+   Klassenzeile. */
+.footer-brand { max-width: 320px; }
+.footer-wordmark { margin: 0; display: flex; flex-direction: column; align-items: flex-start; gap: .1rem; }
+.footer-wordmark-eyebrow {
+    display: inline-flex; align-items: center; gap: .6rem;
+    color: var(--footer-muted);
+    font-family: var(--font-head); font-size: var(--fs-xs); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 3px;
 }
+/* Derselbe Regenbogenstrich wie bei `.hero-eyebrow`, gleiche Maße. */
+.footer-wordmark-eyebrow::before {
+    content: ""; width: 28px; height: 3px; border-radius: 2px;
+    background: var(--gradient-rainbow, var(--footer-accent));
+}
+.footer-wordmark-name {
+    color: var(--footer-text);
+    font-family: var(--font-head); font-weight: 700;
+    font-size: var(--fs-3xl); line-height: 1.1;
+}
+.footer-wordmark-claims {
+    margin-top: .45rem;
+    color: var(--footer-accent);
+    font-family: var(--font-head); font-size: var(--fs-sm); font-weight: 500;
+    line-height: 1.55;
+}
+.footer-wordmark-claims .sep { color: var(--footer-muted); }
 .footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .6rem; }
 .footer-links a { color: var(--footer-muted); font-size: var(--fs-sm); }
 .footer-links a:hover { color: var(--footer-accent); text-decoration: none; }
@@ -1844,7 +1870,10 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
    Fuß der Seite ist ohnehin schon mittig (.footer-bottom). */
 @media (max-width: 600px) {
     .footer-grid { grid-template-columns: 1fr; gap: 2.2rem; text-align: center; }
-    .footer-logo { margin-inline: auto; }
+    /* Der Fuß steht hier in einer Spalte und mittig. Die Wortmarke ist ein
+       Flex-Stapel, `text-align` allein rückt sie deshalb nicht. */
+    .footer-brand { max-width: none; }
+    .footer-wordmark { align-items: center; }
     .footer-tagline { max-width: 36ch; margin-inline: auto; }
     .footer-links { align-items: center; }
     .footer-grid h3 { margin-bottom: .8rem; }

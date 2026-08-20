@@ -35,7 +35,7 @@ final class HomeController
                der Technik, wegen der sie so lang war, hat nie jemand gesehen.
                Kurz genug heißt: Das Wichtigste steht vorn UND wird gelesen. */
             'metaDescription' => 'Fahrlehrerin für Klasse B und BE in '
-                . area_list() . ' – mit Erfahrung in der Ausbildung von '
+                . area_sentence() . ' – mit Erfahrung in der Ausbildung von '
                 . 'Menschen mit Handicap.',
             /* Sarah als Person plus die Website selbst. Beides nur hier: Die
                Startseite ist die Seite, die für „wer ist das" steht. */

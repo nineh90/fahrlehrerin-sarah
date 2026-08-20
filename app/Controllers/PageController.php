@@ -27,7 +27,7 @@ final class PageController
             // Seite ist: Die Ausbildung ist der Grund, warum sie diesen Schwerpunkt
             // hat, und in der Suche unterscheidet sie sie von jeder anderen Fahrschule.
             'metaDescription' => 'Sarah, angestellte Fahrlehrerin für Klasse B und BE '
-                . 'in ' . area_list() . ' – Heilerziehungspflegerin mit '
+                . 'in ' . area_sentence() . ' – Heilerziehungspflegerin mit '
                 . 'Schwerpunkt Handicap.',
             /* Ihre Person, auf der Seite, die von ihr handelt. */
             'jsonLd'          => Seo::person(),
@@ -51,7 +51,7 @@ final class PageController
                Rankingfaktor und entscheidet nur über den Klick, wenn der
                Treffer schon da ist. Der eigentliche Satz fehlt im Text der
                Seite und wartet auf Sarahs Durchgang (eigenes Ticket). */
-            'metaDescription' => 'Führerschein mit Handicap in ' . area_list()
+            'metaDescription' => 'Führerschein mit Handicap in ' . area_sentence()
                 . ': Handbedienung, Lenkhilfe, Pedalverlängerung – und was du '
                 . 'dafür brauchst.',
         ]);
@@ -65,7 +65,7 @@ final class PageController
                Treffer für „Fahrlehrerin + Ort + Kontakt" – dann darf in der
                Vorschau auch stehen, um wen es geht und wo. */
             'metaDescription' => 'So erreichst du Sarah – Fahrlehrerin in '
-                . area_list() . '. Telefon, E-Mail, TikTok und Instagram.',
+                . area_sentence() . '. Telefon, E-Mail, TikTok und Instagram.',
         ]);
     }
 

@@ -81,37 +81,6 @@ function absolute_url(string $path = '/'): string
     return $scheme . '://' . $host . url($path);
 }
 
-/**
- * Das Einzugsgebiet als Aufzählung für Fließtext: „A, B, C und D".
- *
- * Steht hier, weil vier Meta-Beschreibungen dieselbe Liste brauchen und
- * `implode(', ', …)` dafür die falsche Form hat: „Neu Wulmstorf, Buxtehude,
- * Stade, Hamburg" liest sich in einem Satz wie eine abgebrochene Aufzählung.
- * Das letzte Komma wird deshalb zu einem „und".
- *
- * Nicht zu verwechseln mit der Ausgabe auf /kontakt und /ueber-mich – dort
- * stehen die Orte als Aufzählung mit „·" untereinander, das ist eine Liste
- * und kein Satz.
- */
-function area_list(): string
-{
-    $orte = array_values(array_filter(array_map(
-        static fn ($ort): string => trim((string) $ort),
-        (array) config('contact.area', [])
-    ), static fn (string $ort): bool => $ort !== ''));
-
-    if ($orte === []) {
-        return (string) config('contact.city', '');
-    }
-    if (count($orte) === 1) {
-        return $orte[0];
-    }
-
-    $letzter = array_pop($orte);
-
-    return implode(', ', $orte) . ' und ' . $letzter;
-}
-
 /** HTML-Escaping für die Ausgabe. IMMER bei der Ausgabe von Daten verwenden. */
 function e(?string $value): string
 {

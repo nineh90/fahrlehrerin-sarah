@@ -274,6 +274,28 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 .hero-eyebrow { display: inline-flex; align-items: center; gap: .6rem; color: var(--accent); text-transform: uppercase; letter-spacing: 3px; font-size: var(--fs-xs); font-weight: 600; margin: 0 0 1.1rem; font-family: var(--font-head); }
 .hero-eyebrow::before { content: ""; width: 28px; height: 3px; border-radius: 2px; background: var(--gradient-rainbow, var(--accent)); }
 .hero h1 { margin: 0 0 1.1rem; font-size: var(--fs-hero); line-height: 1.06; letter-spacing: -.5px; overflow-wrap: break-word; }
+/* DIE ÜBERSCHRIFT DER STARTSEITE BRICHT NUR DORT, WO EIN <br> STEHT.
+   Ihre drei Zeilen stehen hart im Markup (Begründung dort: der Typewriter
+   verträgt keinen Umbruch, der beim Tippen wandert). `nowrap` sagt dasselbe
+   noch einmal auf CSS-Seite, und das ist seit dem 20.08.2026 nötig.
+
+   WARUM, und das sieht man erst beim Nachmessen: Ein Rasterfeld kann nicht
+   schmaler werden als das breiteste unteilbare Wort darin. „Führerschein-
+   ausbildung" hat sich seine Textspalte damit immer selbst erzwungen, quer
+   über alle Desktop-Breiten – bei 1100 px Fenster waren es 593 px Spalte für
+   593 px Wort, aufs Pixel. Nicht die Spalte hielt das Wort, das Wort hielt
+   die Spalte.
+
+   Mit dem Bindestrich aus SAR-59 wurde das Wort teilbar, die Spalte fiel auf
+   ihren Rasteranteil zurück (605 px bei 1280) und die Überschrift wurde
+   vierzeilig. `nowrap` stellt den alten Mechanismus wieder her. Die Spalte
+   ist dadurch rund 30 px breiter als vorher, so viel kostet der Bindestrich;
+   dieselben 30 px fehlen dem Foto daneben.
+
+   UNTER 500 px WIRD DIE SPERRE AUFGEHOBEN (Block weiter unten). Dort ist die
+   Spalte die ganze Breite, das Wort passt schlicht nicht mehr, und der
+   Bindestrich ist genau dafür da. */
+.hero-headline { white-space: nowrap; }
 .hero-lead { font-size: var(--fs-lg); color: var(--text-soft); max-width: 560px; margin: 0 0 1.4rem; }
 /* Kleine Ortsangabe unter dem Fließtext */
 .hero-meta { display: flex; align-items: center; gap: .55rem; margin: 0 0 2rem; color: var(--muted); font-size: var(--fs-sm); }
@@ -2061,6 +2083,9 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     .footer-grid { grid-template-columns: 1fr; }
     .cta-inner { flex-direction: column; align-items: flex-start; }
     .hero h1 { font-size: var(--fs-hero-sm); }
+    /* Hier darf das lange Wort brechen, dafür steht der Bindestrich drin.
+       Die Gegenregel und der ganze Grund stehen oben bei `.hero-headline`. */
+    .hero-headline { white-space: normal; }
     .hero-content { max-width: 100%; }
     .hero-lead { font-size: var(--fs-md); }
     .appointment { grid-template-columns: 1fr; }

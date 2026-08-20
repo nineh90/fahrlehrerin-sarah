@@ -44,16 +44,26 @@ $schoolUrl = trim((string) config('school.url'));
                          break-word` (nd-base.css), und das bricht ohne
                          Bindestrich mitten im Wort.
 
-                         Mit dem Bindestrich bricht der Browser dort, wo es
-                         hingehört, und nur wenn er muss: Ab rund 350 px steht
-                         die Zeile weiter am Stück. Deshalb KEINE Media Query
-                         und kein zweites `<br>` – der Bindestrich ist die
-                         Regel, die sich selbst anwendet.
-
                          Die Schreibweise ist orthografisch in Ordnung: Der
                          Bindestrich gliedert ein zusammengesetztes Wort, der
-                         zweite Teil wird dabei großgeschrieben. */ ?>
-                <h1 data-typewriter>Führerschein-Ausbildung<br>für Menschen<br>mit Handicap</h1>
+                         zweite Teil wird dabei großgeschrieben.
+
+                         `hero-headline` HÄLT DAS WORT AUF DEM DESKTOP ZUSAMMEN
+                         (nd-base.css, `white-space: nowrap`), und zwar aus
+                         einem Grund, den man erst beim Nachmessen sieht: Das
+                         lange Wort hat sich seine Spalte immer selbst erzwungen.
+                         Ein Rasterfeld kann nicht schmaler werden als das
+                         breiteste unteilbare Wort darin, und genau das hielt die
+                         Überschrift dreizeilig – nicht die Spaltenbreite hielt
+                         das Wort, das Wort hielt die Spalte.
+
+                         Mit dem Bindestrich war das Wort plötzlich teilbar, die
+                         Spalte fiel auf ihren Rasteranteil zurück und die
+                         Überschrift wurde vierzeilig. `nowrap` stellt den alten
+                         Zustand her, jetzt mit den 30 px, die der Bindestrich
+                         zusätzlich braucht. Unter 500 px wird die Sperre
+                         aufgehoben, dort SOLL das Wort brechen. */ ?>
+                <h1 class="hero-headline" data-typewriter>Führerschein-Ausbildung<br>für Menschen<br>mit Handicap</h1>
                 <?php /* "fast" = doppeltes Tempo. Das ist kein Detail: Bei 42 ms
                          je Zeichen tippt die Seite mit rund 285 Wörtern pro
                          Minute, also ungefähr Lesegeschwindigkeit – dann fühlt

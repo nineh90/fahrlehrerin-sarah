@@ -32,8 +32,28 @@ $schoolUrl = trim((string) config('school.url'));
                          dabei mitten im Wort in die nächste Zeile. Nachgemessen
                          mit nur einem <br> nach „Führerscheinausbildung":
                          „Handicap" rutschte beim letzten Zeichen nach unten und
-                         schob den ganzen Block. */ ?>
-                <h1 data-typewriter>Führerscheinausbildung<br>für Menschen<br>mit Handicap</h1>
+                         schob den ganzen Block.
+
+                         DER BINDESTRICH IN „FÜHRERSCHEIN-AUSBILDUNG" ist seit
+                         dem 20.08.2026 drin (SAR-59, Kevin). Das Wort ist mit
+                         22 Zeichen das längste der Seite und war auf schmalen
+                         Geräten das Maß aller Dinge: Bei 320 px stand es exakt
+                         von Rand zu Rand, ohne einen Millimeter Luft, und die
+                         Schriftgröße `--fs-hero-sm` war erkennbar darauf
+                         gerechnet. Reißen konnte es nur `overflow-wrap:
+                         break-word` (nd-base.css), und das bricht ohne
+                         Bindestrich mitten im Wort.
+
+                         Mit dem Bindestrich bricht der Browser dort, wo es
+                         hingehört, und nur wenn er muss: Ab rund 350 px steht
+                         die Zeile weiter am Stück. Deshalb KEINE Media Query
+                         und kein zweites `<br>` – der Bindestrich ist die
+                         Regel, die sich selbst anwendet.
+
+                         Die Schreibweise ist orthografisch in Ordnung: Der
+                         Bindestrich gliedert ein zusammengesetztes Wort, der
+                         zweite Teil wird dabei großgeschrieben. */ ?>
+                <h1 data-typewriter>Führerschein-Ausbildung<br>für Menschen<br>mit Handicap</h1>
                 <?php /* "fast" = doppeltes Tempo. Das ist kein Detail: Bei 42 ms
                          je Zeichen tippt die Seite mit rund 285 Wörtern pro
                          Minute, also ungefähr Lesegeschwindigkeit – dann fühlt
@@ -41,8 +61,18 @@ $schoolUrl = trim((string) config('school.url'));
                          Text ist immer schneller fertig, als man ihm folgt.
                          Für die Überschrift bleibt es beim langsamen Tempo,
                          die ist der Akzent und kurz genug. */ ?>
+                <?php /* Der Schwerpunkt heißt seit dem 20.08.2026 „Führerschein-
+                         ausbildung für Menschen mit Handicap" und nicht mehr
+                         „Fahren mit Handicap" (SAR-59, Kevin). Der alte Satz war
+                         zu weit gefasst: Fahren mit Handicap tun ihre Leute
+                         danach jahrelang, ausbilden tut Sarah.
+
+                         ACHTUNG, DAS STEHT JETZT ZWEIMAL: Die Überschrift
+                         darüber sagt denselben Satz. So gewollt und von Kevin
+                         so beauftragt. Wer das ändert, ändert den Vorspann und
+                         nicht die Überschrift, die trägt die Seite. */ ?>
                 <p class="hero-lead" data-typewriter="fast">
-                    Ich bin Sarah. Mein Schwerpunkt: Fahren mit Handicap.
+                    Ich bin Sarah. Mein Schwerpunkt: Führerscheinausbildung für Menschen mit Handicap.
                 </p>
                 <p class="hero-meta">
                     <?= icon('pin') ?>

@@ -22,17 +22,21 @@ final class HomeController
                – auf der wichtigsten Seite der Seite ist das der Platz, an dem
                sonst „Handicap" stünde. Die Reihenfolge ist die Rangfolge:
                ihr Name, ihr Alleinstellungsmerkmal, ihr Ort. */
-            'metaTitle'       => 'Fahrlehrerin Sarah – Führerschein mit Handicap in '
+            'metaTitle'       => 'Fahrlehrerin Sarah – Führerschein mit Handicap, '
                 . config('contact.city'),
             /* Die Aufzählung folgt der Karte „Ausbildung mit Handicap" auf der
                Startseite (SAR-43) – wer nach „Führerschein Kleinwuchs" sucht, soll
                das schon in der Google-Vorschau finden und nicht erst auf der Seite.
                „Prothese" stand hier bis zum 17.08.2026 und ist mit dem Thema
                entfallen; die Vorschau darf nichts anbieten, was die Seite nicht hat. */
-            'metaDescription' => 'Sarah ist Fahrlehrerin für die Klassen B und BE in '
-                . implode(', ', config('contact.area')) . ' – mit Erfahrung in der Ausbildung '
-                . 'von Menschen mit Kleinwuchs oder eingeschränkter Beweglichkeit: '
-                . 'Handbedienung, Lenkhilfe, Pedalverlängerung.',
+            /* AUF LÄNGE GESCHRIEBEN (SAR-10). Google schneidet die Beschreibung
+               bei rund 158 Zeichen ab. Die alte Fassung hatte 234 und brach
+               mitten in „Kleinwuchs oder eingeschränkter" ab – die Aufzählung
+               der Technik, wegen der sie so lang war, hat nie jemand gesehen.
+               Kurz genug heißt: Das Wichtigste steht vorn UND wird gelesen. */
+            'metaDescription' => 'Fahrlehrerin für Klasse B und BE in '
+                . area_list() . ' – mit Erfahrung in der Ausbildung von '
+                . 'Menschen mit Handicap.',
             /* Sarah als Person plus die Website selbst. Beides nur hier: Die
                Startseite ist die Seite, die für „wer ist das" steht. */
             'jsonLd'          => [Seo::person(), Seo::website()],

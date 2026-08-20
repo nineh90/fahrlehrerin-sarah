@@ -26,10 +26,9 @@ final class PageController
             // „Heilerziehungspflegerin" steht hier, seit Sarahs eigener Text auf der
             // Seite ist: Die Ausbildung ist der Grund, warum sie diesen Schwerpunkt
             // hat, und in der Suche unterscheidet sie sie von jeder anderen Fahrschule.
-            'metaDescription' => 'Sarah ist angestellte Fahrlehrerin für die Klassen B und BE '
-                . 'in ' . implode(', ', config('contact.area')) . ' – ausgebildete '
-                . 'Heilerziehungspflegerin mit Schwerpunkt auf der Ausbildung von '
-                . 'Menschen mit Handicap.',
+            'metaDescription' => 'Sarah, angestellte Fahrlehrerin für Klasse B und BE '
+                . 'in ' . area_list() . ' – Heilerziehungspflegerin mit '
+                . 'Schwerpunkt Handicap.',
             /* Ihre Person, auf der Seite, die von ihr handelt. */
             'jsonLd'          => Seo::person(),
         ]);
@@ -44,10 +43,17 @@ final class PageController
                Beides darf verschieden sein – die Überschrift spricht die an,
                die schon da sind, der Titel die, die noch suchen. */
             'metaTitle'       => 'Führerschein mit Handicap – so läuft die Ausbildung ab',
-            /* Siehe HomeController: dieselbe Aufzählung, dieselbe Begründung (SAR-43). */
-            'metaDescription' => 'Führerschein bei Kleinwuchs oder eingeschränkter '
-                . 'Beweglichkeit: Handbedienung, Lenkhilfe, Pedalverlängerung – wie die '
-                . 'Ausbildung im angepassten Fahrzeug abläuft und was du dafür brauchst.',
+            /* DIE EINZIGE STELLE, AN DER DIESE SEITE EINEN ORT NENNT. Nachgemessen
+               am 20.08.2026: Im sichtbaren Text der Seite steht kein einziger
+               Ortsname – 531 Wörter über Handbedienung und Lenkhilfe, aber
+               „Führerschein mit Handicap" und „Hamburg" kommen nie zusammen vor.
+               Die Beschreibung ist dafür nur das Pflaster: Sie ist KEIN
+               Rankingfaktor und entscheidet nur über den Klick, wenn der
+               Treffer schon da ist. Der eigentliche Satz fehlt im Text der
+               Seite und wartet auf Sarahs Durchgang (eigenes Ticket). */
+            'metaDescription' => 'Führerschein mit Handicap in ' . area_list()
+                . ': Handbedienung, Lenkhilfe, Pedalverlängerung – und was du '
+                . 'dafür brauchst.',
         ]);
     }
 
@@ -55,7 +61,11 @@ final class PageController
     {
         render('pages/kontakt', [
             'title'           => 'Kontakt',
-            'metaDescription' => 'So erreichst du Sarah – Telefon, E-Mail, TikTok und Instagram.',
+            /* Die alte Fassung nannte nur die Kanäle. Eine Kontaktseite ist der
+               Treffer für „Fahrlehrerin + Ort + Kontakt" – dann darf in der
+               Vorschau auch stehen, um wen es geht und wo. */
+            'metaDescription' => 'So erreichst du Sarah – Fahrlehrerin in '
+                . area_list() . '. Telefon, E-Mail, TikTok und Instagram.',
         ]);
     }
 

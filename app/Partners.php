@@ -156,6 +156,35 @@ final class Partners
                 . 'Handicap um: Handbediengeräte, Lenkhilfen, '
                 . 'Pedalanpassungen. Dazu ein angepasster Fahrschulwagen.',
         ],
+
+        /* SAR-61, aufgenommen am 20.08.2026.
+           Nils-Digital hat diese Website gebaut. Damit schließt sich ein
+           Kreis: Der Kommentar in layout.php nennt das Credit-Band der Agentur
+           (partials/nd-credit.php) ausdrücklich „die Vorlage für das, was Sarah
+           später als Wegbegleiter genannt hat". Aus dem Werbeband ist eine
+           Kachel geworden, die aussieht wie alle anderen.
+
+           DREIMAL AM SEITENENDE, das gehört gesehen: Die Agentur steht jetzt
+           als Kachel, im Streifen unter dem Fuß (partials/nd-banner.php) und
+           im Impressum. Keine davon ist falsch, aber wenn eine zu viel ist,
+           ist es der Streifen; die Kachel sagt dasselbe und ordnet sich ein. */
+        'nils-digital' => [
+            'name' => 'Nils-Digital',
+            'url'  => 'https://nils-digital.de/',
+            'logo' => 'partner/nils-digital.webp',
+            /* Die Bildmarke aus `img/nils-digital-logo.png`, freigestellt und
+               auf ihren Inhalt beschnitten. Die Originaldatei bleibt, wo sie
+               ist: Der Streifen unter dem Fuß benutzt sie weiter. */
+            'logo_width'  => 300,
+            'logo_height' => 213,
+            /* Wie bei moooov, aus demselben Grund und mit derselben Mechanik:
+               Das Türkis der Marke kommt auf Weiß nur auf 2,9:1. #111827 ist
+               die Farbe ihres eigenen Seitenkopfs, dort steht sie bei 6,1:1. */
+            'logo_plate' => '#111827',
+            'meta' => 'Nils-Digital aus Ibbenbüren hat diese Website gebaut. '
+                . 'Nils Nehring macht Webentwicklung, Apps und '
+                . 'KI-Automatisierung für kleine Betriebe und Selbstständige.',
+        ],
     ];
 
     /**

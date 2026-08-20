@@ -104,7 +104,7 @@ Es gibt bewusst keine Test-Suite. Vor jeder Übergabe einmal durchklicken:
 | 13 | Dieselbe Serie nochmal | „Alle X Termine gab es bereits", nichts doppelt |
 | 14 | Fahrschüler:in anlegen | PIN wird einmalig angezeigt, Login damit funktioniert |
 | 15 | Formular ohne CSRF-Token abschicken | Abbruch mit HTTP 419 |
-| 16 | Ganz nach unten auf `/` | Abschnitt „Wegbegleiter“, die Logo-Kacheln stehen nebeneinander links |
+| 16 | Ganz nach unten auf `/` | Abschnitt „Wegbegleiter“, fünf Logo-Kacheln als 3 + 2, zweite Zeile mittig |
 | 17 | Kachel anklicken | Infoseite des Wegbegleiters, Rückweg oben links |
 | 18 | `/wegbegleiter/gibt-es-nicht` aufrufen | 404 |
 | 18a | Wegbegleiter-Seite ganz nach unten | Herkunftsangabe unter einer Haarlinie, KEIN „Ich bin Fahrlehrerin …“ |
@@ -150,6 +150,10 @@ Die vollständige Liste steht in `CLAUDE.md`. Das Wichtigste:
    eigenen Hausfarbe, weil das helle Mintgrün auf Weiß nicht lesbar wäre; die
    Datei selbst ist unverändert. Falls sie das anders möchten, steht die Farbe
    als `logo_plate` in `app/Partners.php` und ist in einer Zeile geändert.
+   **Nicht offen für Nils-Digital** (SAR-61, seit 20.08.2026): Die Agentur hat
+   die Seite gebaut, ihr Logo läuft ohnehin im Streifen unter dem Fuß. Zu sehen
+   ist sie am Seitenende jetzt aber dreimal, als Kachel, im Streifen und im
+   Impressum. Falls das einmal zu viel ist, ist der Streifen der Kandidat.
 4. `APP_DEBUG=false`, neues `ADMIN_PASSWORD`, echte Kontaktdaten in der `.env`.
 5. Google Fonts lokal ausliefern – dann entfällt die Datenübertragung an Google.
 

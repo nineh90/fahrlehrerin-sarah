@@ -37,7 +37,13 @@ $wegbegleiter = Partners::all();
             </div>
         </div>
 
-        <ul class="partner-grid">
+        <?php /* Der Modifier hängt an der ANZAHL und nicht an der Seite: Fünf
+                 Kacheln brauchen 3 + 2 mit mittiger zweiter Zeile, sonst steht
+                 die fünfte allein. Warum genau fünf und warum nicht sechs,
+                 steht bei `.partner-grid--5` in nd-base.css. Kommt ein
+                 sechster Wegbegleiter dazu, fällt der Modifier von selbst
+                 weg. */ ?>
+        <ul class="partner-grid<?= count($wegbegleiter) === 5 ? ' partner-grid--5' : '' ?>">
             <?php foreach ($wegbegleiter as $slug => $partner): ?>
                 <li>
                     <a class="partner-card" href="<?= e(Partners::path($slug)) ?>">

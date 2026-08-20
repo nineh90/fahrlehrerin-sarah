@@ -1102,10 +1102,31 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
    Platz auf je rund 265 px. Die Grenze bei 290 px bleibt: Bei zwei oder drei
    Kacheln sollen sie nicht auf halbe Bildschirmbreite auseinanderlaufen.
 
-   ACHTUNG BEIM FÜNFTEN: Dann heißt es 4 + 1, und das Problem ist zurück. Wer
-   den fünften aufnimmt, schaut sich die Reihe an. Eine Zahl, die für jede
-   Anzahl aufgeht, gibt es nicht. */
+   Für FÜNF Kacheln reicht diese Zahl nicht, dafür gibt es den Modifier
+   darunter. Eine Ausgangsbreite, die für jede Anzahl aufgeht, gibt es nicht. */
 .partner-grid > li { flex: 1 1 240px; max-width: 290px; }
+
+/* FÜNF KACHELN, dieselbe Aufgabe wie bei `.card-grid--5` weiter oben und
+   dieselbe Antwort: 3 + 2 mit mittiger zweiter Zeile. Seit dem 20.08.2026,
+   als Nils-Digital der fünfte Wegbegleiter wurde. Die Warnung von vorhin ist
+   damit eingelöst: Mit 240 px Ausgangsbreite wären vier in die erste Zeile
+   gerutscht und die fünfte hätte allein und links angeschlagen darunter
+   gestanden.
+
+   Anders als beim Kartenraster braucht es hier kein Sechser-Grid. Zwei Zeilen
+   genügen: Bei 290 px passen drei nebeneinander und keine vier mehr, und
+   `center` rückt beide Zeilen in die Mitte. Die zweite sitzt damit mittig
+   unter der ersten, und alle fünf Kacheln behalten dieselbe Breite.
+
+   Dass die Reihe hier NICHT links beginnt, ist der Preis dafür und in Ordnung:
+   Der Grund für den linken Anschlag war eine einzelne Kachel, die sonst in der
+   Mitte einer leeren Fläche schwamm. Drei Kacheln füllen die Zeile fast ganz,
+   da fällt der Unterschied kaum auf.
+
+   Den Modifier setzt `partials/wegbegleiter.php` anhand der Anzahl. Kommt ein
+   sechster dazu, fällt er von selbst weg, und sechs gehen als 4 + 2 auf. */
+.partner-grid--5 { justify-content: center; }
+.partner-grid--5 > li { flex: 0 1 290px; }
 
 .partner-card {
     position: relative; overflow: hidden;

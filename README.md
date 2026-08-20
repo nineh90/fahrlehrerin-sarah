@@ -94,9 +94,10 @@ Es gibt bewusst keine Test-Suite. Vor jeder Übergabe einmal durchklicken:
 | 13 | Dieselbe Serie nochmal | „Alle X Termine gab es bereits", nichts doppelt |
 | 14 | Fahrschüler:in anlegen | PIN wird einmalig angezeigt, Login damit funktioniert |
 | 15 | Formular ohne CSRF-Token abschicken | Abbruch mit HTTP 419 |
-| 16 | Ganz nach unten auf `/` | Abschnitt „Wegbegleiter“ mit Logo-Kachel |
+| 16 | Ganz nach unten auf `/` | Abschnitt „Wegbegleiter“, die Logo-Kacheln stehen nebeneinander links |
 | 17 | Kachel anklicken | Infoseite des Wegbegleiters, Rückweg oben links |
 | 18 | `/wegbegleiter/gibt-es-nicht` aufrufen | 404 |
+| 18a | Wegbegleiter-Seite ganz nach unten | Herkunftsangabe unter einer Haarlinie, KEIN „Ich bin Fahrlehrerin …“ |
 | 19 | Fuß auf jeder Seite ansehen | Nur Impressum · Datenschutz, kein Weg in die Schaltzentrale |
 | 20 | `/impressum` und `/datenschutz` | Echte Angaben, keine eckigen Klammern, gleiche Anschrift |
 
@@ -126,6 +127,10 @@ Die vollständige Liste steht in `CLAUDE.md`. Das Wichtigste:
    arbeitet dort. Das gilt für die Fahrschule Sander. Bei jedem weiteren
    Wegbegleiter ist die Frage neu zu klären, denn ein fremdes Logo zu zeigen
    ist eine Nutzung und kein Zitat.
+   **Offen für Ankerliebe St. Pauli** (SAR-64, seit 20.08.2026): Logo und Name
+   stehen auf der Seite, die Freigabe von Ricarda Belmar fehlt noch. Dasselbe
+   gilt für den Satz im Vorspann der Unterseite, der sagt, wie Sarah und
+   Ankerliebe zusammenhängen; der ist geschlossen und nicht von Sarah bestätigt.
 4. `APP_DEBUG=false`, neues `ADMIN_PASSWORD`, echte Kontaktdaten in der `.env`.
 5. Google Fonts lokal ausliefern – dann entfällt die Datenübertragung an Google.
 

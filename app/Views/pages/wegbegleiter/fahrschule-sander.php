@@ -197,13 +197,17 @@ $wege = [
     </div>
 </section>
 
-<section class="section" style="padding-top:0;">
+<section class="section section--footnote">
     <div class="container">
         <?php /* Die Herkunftsangabe. Sie steht hier, weil auf dieser Seite fremde
                  Angaben stehen: Adressen, Telefonnummern, ein Angebot. Wer sie
                  liest, soll wissen, wie alt sie sind und wo das Verbindliche
-                 steht. Wer die Seite überarbeitet, ändert das Datum mit. */ ?>
-        <p class="muted" style="font-size: var(--fs-xs); max-width: 64ch;">
+                 steht. Wer die Seite überarbeitet, ändert das Datum mit.
+
+                 Form und Abstände stecken seit dem 20.08.2026 in `.source-note`
+                 (nd-base.css) statt in Inline-Styles. Beide Wegbegleiter-Seiten
+                 enden damit gleich. */ ?>
+        <p class="source-note">
             Angaben von der Website und aus dem Impressum der Fahrschule Sander,
             Stand 19.08.2026. Verbindlich ist, was dort steht. Logo und Name
             gehören der Fahrschule Sander GmbH.

@@ -34,6 +34,12 @@ final class PartnerController
             'title'           => $partner['name'],
             'metaDescription' => $partner['meta'],
             'partner'         => $partner,
+            /* Ohne Sarahs Fußnote „Ich bin Fahrlehrerin für die Klassen B und
+               BE …" (Kevin, 20.08.2026). Sie steht sonst auf jeder Seite; die
+               Begründung für die Ausnahme steht im Layout an der Stelle, die
+               sie auswertet. Gilt für alle Wegbegleiter, deshalb hier und
+               nicht in den einzelnen Views. */
+            'showSiteNote'    => false,
         ]);
     }
 }

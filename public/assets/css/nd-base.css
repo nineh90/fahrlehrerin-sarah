@@ -1073,16 +1073,23 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
    Rahmen und dieselbe HÖHE geben und die Breite laufen lassen. Ein Logo auf
    feste Breite zu zwingen staucht das nächste, das quadratisch ist.
    ========================================================================= */
+/* FLEX UND KEIN GRID, seit hier am 20.08.2026 der zweite Wegbegleiter dazukam.
+   Vorher stand hier `grid-template-columns: repeat(auto-fit, minmax(190px, 1fr))`
+   und darunter `max-width: 290px` je Kachel. Mit einer Kachel sah das richtig
+   aus, mit zweien fiel es auseinander: `auto-fit` legt die leeren Spalten
+   zusammen und schenkt die frei gewordene Breite den belegten. Die beiden
+   Spalten wurden 548 px breit, die Kacheln blieben bei ihren 290 px und
+   standen links darin. Zwischen den Logos klaffte ein Loch von 258 px.
+
+   Flex kennt keine leeren Spalten. Jede Kachel ist 290 px breit, darf schmaler
+   werden, wenn der Platz nicht reicht, und die nächste steht direkt daneben.
+   Die Reihe beginnt links und wächst nach rechts, egal wie viele es sind. */
 .partner-grid {
     list-style: none; padding: 0; margin: 0;
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    display: flex; flex-wrap: wrap;
     gap: 1.2rem;
 }
-/* Solange es genau einen Wegbegleiter gibt, füllt seine Kachel sonst die
-   ganze Breite und das Logo schwimmt in der Mitte einer 1100-px-Fläche.
-   Die Reihe bleibt links stehen und wächst nach rechts, wenn Sarah weitere
-   aufnimmt. */
-.partner-grid > li { max-width: 290px; }
+.partner-grid > li { flex: 0 1 290px; max-width: 290px; }
 
 .partner-card {
     position: relative; overflow: hidden;
@@ -1132,6 +1139,42 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 .back-link { margin: 0 0 .8rem; font-size: var(--fs-sm); }
 .back-link a { color: var(--text-soft); text-decoration: none; }
 .back-link a:hover { color: var(--accent); text-decoration: underline; }
+
+/* --- Herkunftsangabe am Fuß einer Wegbegleiter-Seite --------------------
+   Auf diesen Seiten stehen fremde Angaben, also gehört dazu, woher sie
+   stammen und wie alt sie sind. Der Satz stand bis zum 20.08.2026 als
+   `<p class="muted">` mit zwei Inline-Styles in einer eigenen `.section` mit
+   `padding-top: 0`. Das ergab genau das, was Kevin an der Ankerliebe-Seite
+   aufgefallen ist: ein schmaler grauer Textblock, der oben an der Kante der
+   Sektion darüber klebt und unter dem eine halbe Bildschirmhöhe leer bleibt.
+   Er sah nicht aus wie eine Fußnote, sondern wie ein vergessener Absatz.
+
+   Zwei Dinge machen daraus eine Fußnote: die Haarlinie darüber, die ihn vom
+   Inhalt trennt statt ihn daran zu kleben, und ein Abstand, der nach unten
+   kürzer ist als nach oben. Damit endet die Seite mit ihm, statt ihn liegen
+   zu lassen.
+
+   DER ABSTAND NACH OBEN STECKT IM ABSATZ, nicht im Abschnitt darum herum
+   (Kevin, 20.08.2026). Der Grund ist der Hintergrund: Die Fußnote muss auf
+   DERSELBEN Fläche stehen wie das Modul über ihr, sonst sieht sie aus wie
+   angeklebt. Auf der Sander-Seite steht davor ein `.cta-band`, und das hat
+   gar keinen eigenen Hintergrund – der Seitengrund läuft durch, die Fußnote
+   gehört sichtbar dazu. Auf der Ankerliebe-Seite ist das Modul davor ein
+   `.section--alt` mit eigener Fläche und Trennlinie; eine Fußnote in einem
+   neuen Abschnitt dahinter beginnt hinter dieser Linie und wirkt wie ein
+   Nachtrag von jemand anderem. Sie steht deshalb IM `.section--alt` drin.
+
+   Weil der Absatz seinen Abstand selbst mitbringt, funktioniert er an beiden
+   Stellen gleich: als letztes Kind eines Moduls oder in `.section--footnote`
+   für die Seiten, die ihn allein tragen. */
+.section--footnote { padding: 0 0 clamp(2rem, 3vw, 2.6rem); }
+.source-note {
+    max-width: 64ch; margin: clamp(2.2rem, 4vw, 3rem) 0 0;
+    padding-top: 1.3rem;
+    border-top: 1px solid var(--border);
+    font-size: var(--fs-xs); line-height: 1.75;
+    color: var(--muted);
+}
 
 /* --- Filialen ----------------------------------------------------------
    Adressblöcke nebeneinander. Kein Kasten drumherum: Acht gerahmte Kärtchen

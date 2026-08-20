@@ -68,6 +68,34 @@ final class Partners
                 . 'Arbeitgeberin, acht Standorte zwischen Hamburg und Stade. '
                 . 'Dort läuft die Anmeldung, bei Sarah die Fahrstunde.',
         ],
+
+        /* SAR-64, aufgenommen am 20.08.2026.
+           Der zweite Wegbegleiter, und der erste, der keine Fahrschule ist.
+           Ricarda Belmar vermietet auf St. Pauli möblierte Apartments; wer
+           von weiter weg zum Fahren nach Hamburg kommt, schläft irgendwo.
+           Genau dafür steht der Eintrag hier.
+
+           ZWEI PUNKTE GEHÖREN VON SARAH BESTÄTIGT, bevor die Seite live geht:
+           die Freigabe für Logo und Namen (siehe Hinweis oben, sie gilt für
+           jeden Eintrag neu), und der Satz auf der Unterseite, der sagt, wie
+           die beiden zusammenhängen. Der steht dort als einzige Stelle, die
+           eine Aussage über die Zusammenarbeit macht, und ist bewusst so
+           gebaut, dass er in einer Zeile ausgetauscht werden kann. */
+        'ankerliebe-stpauli' => [
+            'name' => 'Ankerliebe St. Pauli',
+            'url'  => 'https://ankerliebe-stpauli.de/',
+            'logo' => 'partner/ankerliebe-stpauli.webp',
+            /* Aus dem Kopf der Website geholt und freigestellt: Die Datei dort
+               ist ein PNG auf weißem Grund. Auf der Kachel fiele das nicht
+               auf, die ist selbst weiß, aber im dunklen Kontrastmodus stünde
+               ein weißer Kasten auf der cremefarbenen Platte, die a11y.css
+               unter jedes Partnerlogo legt. */
+            'logo_width'  => 382,
+            'logo_height' => 73,
+            'meta' => 'Ankerliebe St. Pauli: möblierte Apartments in der '
+                . 'Erichstraße, ein paar Schritte von der Reeperbahn. Ein Bett '
+                . 'für alle, die zum Fahren nach Hamburg kommen.',
+        ],
     ];
 
     /** Alle Wegbegleiter in der Reihenfolge, in der sie hier stehen. */

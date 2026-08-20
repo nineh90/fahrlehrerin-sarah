@@ -75,10 +75,24 @@
         <?= $content ?>
     </main>
 
-    <?php /* Sarahs Einordnung in eigenen Worten. Steht ÜBER dem Credit-Band und
-             ohne Schalter: Ihre Sache zuerst, und „auf jeder Seite" heißt auf
-             jeder – auch dort, wo der Credit bewusst schweigt. */ ?>
-    <?php require APP_ROOT . '/app/Views/partials/site-note.php'; ?>
+    <?php /* Sarahs Einordnung in eigenen Worten. Steht ÜBER dem Credit-Band:
+             Ihre Sache zuerst, auch dort, wo der Credit bewusst schweigt.
+
+             EINE AUSNAHME seit dem 20.08.2026, und nur eine: die Unterseiten
+             der Wegbegleiter (Kevin). Hier stand bis dahin „ohne Schalter, auf
+             jeder Seite heißt auf jeder". Auf einer Wegbegleiter-Seite kippt
+             der Satz aber die Aussage: „Ich bin Fahrlehrerin … angestellt bei
+             der Fahrschule Sander" steht dort direkt unter dem Logo und den
+             Angaben eines fremden Betriebs und liest sich, als gehöre er dazu.
+             Auf der Seite von Ankerliebe St. Pauli ergibt er gar keinen Sinn
+             mehr. Wer dort ist, kam über Sarahs Startseite und hat die
+             Einordnung schon gelesen.
+
+             Den Schalter setzt der PartnerController, sonst niemand. Fehlt er,
+             steht die Fußnote wie überall. */ ?>
+    <?php if ($showSiteNote ?? true): ?>
+        <?php require APP_ROOT . '/app/Views/partials/site-note.php'; ?>
+    <?php endif; ?>
 
     <?php /* Hier stand bis zum 17.08.2026 das große Credit-Band von
              Nils-Digital (partials/nd-credit.php): Logo, Überschrift,

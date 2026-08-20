@@ -15,7 +15,9 @@
  *
  * DIE E-MAIL WEICHT AB, und zwar mit Absicht: Sarah hat im Impressum
  * `sarah@` hinterlegt, auf der Kontaktseite läuft `info@` aus der .env. Hier
- * gehört die Adresse hin, die sie als Impressumskontakt angegeben hat.
+ * gehört die Adresse hin, die sie als Impressumskontakt angegeben hat. Sie ist
+ * seit dem 19.08.2026 auch der einzige Kontaktweg auf dieser Seite; der Hinweis
+ * auf das Formular beim Dienst ist auf Wunsch entfallen.
  *
  * OFFEN, VOR DEM LIVEGANG ZU KLÄREN: ob die für die Fahrlehrerlaubnis
  * zuständige Behörde genannt werden muss. Der Block „Berufsbezeichnung"
@@ -50,14 +52,13 @@
         <p>
             E-Mail: <a href="mailto:sarah@fahrlehrerinsarah.de">sarah@fahrlehrerinsarah.de</a>
         </p>
-        <?php /* Der zweite Kontaktweg nach § 5 DDG. Er liegt beim Dienst und
-                 nicht auf dieser Seite, deshalb der Link dorthin. Ohne den
-                 Hinweis stünde im Impressum nur ein Weg. */ ?>
-        <p>
-            Zweiter Kontaktweg: über das Formular im
-            <a href="https://mein.online-impressum.de/fahrlehrerinsarah/"
-               target="_blank" rel="noopener noreferrer">Online-Impressum</a>.
-        </p>
+        <?php /* HIER STAND DER ZWEITE KONTAKTWEG, bis zum 19.08.2026: ein Satz
+                 samt Link auf das Formular in Sarahs Online-Impressum, das den
+                 zweiten Kanal nach § 5 DDG stellt. Auf Wunsch wieder raus.
+
+                 Das Formular gibt es weiterhin, es steht nur nicht mehr auf
+                 dieser Seite. Wer den Weg zurückholt, findet ihn unter
+                 https://mein.online-impressum.de/fahrlehrerinsarah/ */ ?>
 
         <h2>Zuständige Aufsichtsbehörde</h2>
         <p>

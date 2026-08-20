@@ -76,6 +76,6 @@ final class Router
     private function notFound(): void
     {
         http_response_code(404);
-        render('errors/404', ['title' => 'Seite nicht gefunden']);
+        render('errors/404', ['title' => 'Seite nicht gefunden', 'noindex' => true]);
     }
 }

@@ -26,7 +26,7 @@ final class PartnerController
         $view = 'pages/wegbegleiter/' . $slug;
         if ($partner === null || !is_file(APP_ROOT . '/app/Views/' . $view . '.php')) {
             http_response_code(404);
-            render('errors/404', ['title' => 'Seite nicht gefunden']);
+            render('errors/404', ['title' => 'Seite nicht gefunden', 'noindex' => true]);
             return;
         }
 
@@ -34,6 +34,11 @@ final class PartnerController
             'title'           => $partner['name'],
             'metaDescription' => $partner['meta'],
             'partner'         => $partner,
+            /* Die Unterseite handelt vom Wegbegleiter, also steht hier dessen
+               Markup und nicht Sarahs (SAR-10). Ein Person-Block über Sarah
+               auf der Seite eines fremden Betriebs würde die beiden
+               zusammenziehen – genau das, was die Seite nicht behaupten soll. */
+            'jsonLd'          => Seo::partner($partner),
             /* Ohne Sarahs Fußnote „Ich bin Fahrlehrerin für die Klassen B und
                BE …" (Kevin, 20.08.2026). Sie steht sonst auf jeder Seite; die
                Begründung für die Ausnahme steht im Layout an der Stelle, die

@@ -27,6 +27,12 @@ final class SlotController
 
         render('slots/index', [
             'title'        => 'Meine freien Zeiten',
+            /* Dauerhaft nicht in den Index (SAR-10). Das ist Sarahs Werkzeug
+               und kein Schaufenster – und die Terminplanung liegt ohnehin auf
+               Eis (Stand 20.08.2026). Steht zusätzlich zum Disallow in der
+               robots.txt: Das eine hält Suchmaschinen vom Lesen ab, das andere
+               vom Anzeigen, und nur zusammen halten sie die Adresse draußen. */
+            'noindex'      => true,
             'monday'       => $monday,
             'weekOffset'   => (int) $offset,
             'slotsByDay'   => group_slots_by_day($slots, $monday),

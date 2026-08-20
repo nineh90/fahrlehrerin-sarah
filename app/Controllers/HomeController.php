@@ -17,6 +17,13 @@ final class HomeController
            BookingController arbeitet damit. */
         render('home', [
             'title'           => 'Fahrlehrerin in ' . config('contact.city'),
+            /* VOLLER TITEL statt „… · Fahrlehrerin Sarah" (SAR-10). Der Anhang
+               kostet 21 Zeichen, und Google schneidet den Titel bei rund 60 ab
+               – auf der wichtigsten Seite der Seite ist das der Platz, an dem
+               sonst „Handicap" stünde. Die Reihenfolge ist die Rangfolge:
+               ihr Name, ihr Alleinstellungsmerkmal, ihr Ort. */
+            'metaTitle'       => 'Fahrlehrerin Sarah – Führerschein mit Handicap in '
+                . config('contact.city'),
             /* Die Aufzählung folgt der Karte „Ausbildung mit Handicap" auf der
                Startseite (SAR-43) – wer nach „Führerschein Kleinwuchs" sucht, soll
                das schon in der Google-Vorschau finden und nicht erst auf der Seite.
@@ -26,6 +33,9 @@ final class HomeController
                 . implode(', ', config('contact.area')) . ' – mit Erfahrung in der Ausbildung '
                 . 'von Menschen mit Kleinwuchs oder eingeschränkter Beweglichkeit: '
                 . 'Handbedienung, Lenkhilfe, Pedalverlängerung.',
+            /* Sarah als Person plus die Website selbst. Beides nur hier: Die
+               Startseite ist die Seite, die für „wer ist das" steht. */
+            'jsonLd'          => [Seo::person(), Seo::website()],
         ]);
     }
 }

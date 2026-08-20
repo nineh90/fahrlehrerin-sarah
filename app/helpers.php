@@ -59,6 +59,18 @@ function asset(string $path): string
  */
 function absolute_url(string $path = '/'): string
 {
+    /* APP_URL zuerst (SAR-10). Der Request ist die schlechtere Quelle: Die
+       Seite ist im Betrieb über die Domain UND über die IP des VPS
+       erreichbar, und hinter Traefik entscheidet ein weitergereichter
+       Header über das Schema. Wer den Canonical raten lässt, bekommt unter
+       der IP einen Canonical auf die IP – dann zeigt jede der beiden
+       Fassungen auf sich selbst, und die Zusammenführung, für die es den
+       Canonical gibt, findet nicht statt. */
+    $konfiguriert = (string) config('app_url', '');
+    if ($konfiguriert !== '') {
+        return $konfiguriert . url($path);
+    }
+
     $host = (string) ($_SERVER['HTTP_HOST'] ?? '');
     if ($host === '') {
         return url($path);

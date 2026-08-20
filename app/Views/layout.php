@@ -1,17 +1,49 @@
 <?php /** @var string $content @var string $title */ ?>
+<?php
+/* SEO-Bausteine, die jede Seite setzen kann (SAR-10):
+   $metaTitle       – der VOLLSTÄNDIGE Titel, ohne angehängtes „· Fahrlehrerin
+                      Sarah". Für die Seiten, bei denen der Anhang den Platz
+                      wegnimmt, den ein Suchbegriff bräuchte.
+   $metaDescription – die Beschreibung in der Trefferliste.
+   $noindex         – true = diese Seite gehört dauerhaft in keinen Index,
+                      unabhängig von ALLOW_INDEXING (Login, Kalender, …).
+   $jsonLd          – strukturierte Daten, gebaut über die Klasse Seo.
+   $canonicalPath   – nur nötig, wenn der Canonical NICHT der eigene Pfad ist. */
+$seitenTitel = $metaTitle ?? (($title ?? 'Fahrlehrerin Sarah') . ' · Fahrlehrerin Sarah');
+$seitenText  = $metaDescription
+    ?? 'Sarah ist Fahrlehrerin in ' . config('contact.city')
+     . ' – mit Geduld, klaren Ansagen und Erfahrung im Fahren mit Handicap.';
+/* Der Canonical zeigt auf den Pfad OHNE Query-String. Genau darum geht es:
+   /termine?woche=3 und /termine sind dieselbe Seite, und die Adresse mit
+   Parameter soll nicht als eigene in den Index. */
+$canonical = absolute_url($canonicalPath ?? current_path());
+?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= e($title ?? 'Fahrlehrerin Sarah') ?> · Fahrlehrerin Sarah</title>
-    <meta name="description" content="<?= e($metaDescription ?? 'Sarah ist Fahrlehrerin in ' . config('contact.city') . ' – mit Geduld, klaren Ansagen und Erfahrung im Fahren mit Handicap.') ?>">
+    <title><?= e($seitenTitel) ?></title>
+    <meta name="description" content="<?= e($seitenText) ?>">
+
+    <?php /* Die eine verbindliche Adresse dieser Seite. Ohne sie ist die Seite
+             unter Domain, IP und (später) www dreimal dieselbe Seite – für eine
+             Suchmaschine drei Seiten, die sich gegenseitig Konkurrenz machen.
+             Steht APP_URL in der .env, ist der Wert fest; sonst rät
+             absolute_url() den Host, siehe app/helpers.php. */ ?>
+    <link rel="canonical" href="<?= e($canonical) ?>">
 
     <?php /* Solange die Seite nicht offiziell live ist, soll sie in keiner
              Suchmaschine auftauchen. Ein Meta allein reicht nicht – dazu gehört
              /robots.txt (RobotsController). Umschalten über ALLOW_INDEXING. */ ?>
     <?php if (!config('allow_indexing')): ?>
         <meta name="robots" content="noindex, nofollow">
+    <?php elseif (!empty($noindex)): ?>
+        <?php /* Dauerhaft draußen, auch nach dem Livegang: Login, Kalender und
+                 die persönlichen Seiten. „follow" bleibt bewusst stehen – die
+                 Seite selbst soll nicht in den Index, ihre Links (Fuß,
+                 Navigation) dürfen aber weiter verfolgt werden. */ ?>
+        <meta name="robots" content="noindex, follow">
     <?php endif; ?>
     <?php /* Schriften kommen vom eigenen Server (public/assets/fonts/), nicht von
              Google. Vorgeladen wird nur das latin-Subset – das trägt den Text;
@@ -37,12 +69,29 @@
              absolute URL, deshalb absolute_url() statt asset(). */ ?>
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Fahrlehrerin Sarah">
-    <meta property="og:title" content="<?= e($title ?? 'Fahrlehrerin Sarah') ?>">
-    <meta property="og:description" content="<?= e($metaDescription ?? 'Sarah ist Fahrlehrerin in ' . config('contact.city') . ' – mit Geduld, klaren Ansagen und Erfahrung im Fahren mit Handicap.') ?>">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:url" content="<?= e($canonical) ?>">
+    <meta property="og:title" content="<?= e($seitenTitel) ?>">
+    <meta property="og:description" content="<?= e($seitenText) ?>">
     <meta property="og:image" content="<?= e(absolute_url('/assets/img/logo-sarah-teilen.jpg')) ?>">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
+
+    <?php /* Strukturierte Daten – nur dort, wo eine Seite sie ausdrücklich
+             mitgibt (siehe app/Seo.php). Kein automatisches Markup auf jeder
+             Seite: Sarahs Person auf dem Login-Formular zu behaupten, sagt
+             über die Seite nichts und über die Person das Falsche. */ ?>
+    <?php if (!empty($jsonLd)): ?>
+        <?php /* Eine Seite darf einen Datensatz mitgeben oder mehrere. Ohne
+                 diese Zeile zerfiele ein einzelner in seine Felder, und die
+                 Seite bekäme statt eines Person-Blocks ein halbes Dutzend
+                 leerer Skripte. array_is_list() unterscheidet die Liste
+                 („mehrere") vom Datensatz („einer"). */ ?>
+        <?php foreach (array_is_list($jsonLd) ? $jsonLd : [$jsonLd] as $datensatz): ?>
+    <?= Seo::script($datensatz) ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </head>
 <body>
     <?php /* SPRUNGLINK, erster Tab-Stopp der Seite (SAR-34).

@@ -31,11 +31,20 @@ final class RobotsController
         echo "User-agent: *\n";
         // Der Adminbereich und die persönlichen Seiten der Fahrschüler:innen
         // gehören auch im Livebetrieb in keinen Index.
+        //
+        // WICHTIG: Ein Disallow hier ist KEIN noindex. Eine gesperrte Adresse
+        // kann trotzdem im Index landen – ohne Beschreibung, weil Google sie
+        // ja nicht lesen durfte, aber mit ihrer URL. Das eigentliche noindex
+        // dieser Seiten steht deshalb im Layout (SAR-10, $noindex); die
+        // beiden Sperren ergänzen sich und ersetzen sich nicht.
         echo "Disallow: /admin\n";
         echo "Disallow: /meine-termine\n";
         echo "Disallow: /buchung\n";
         echo "Disallow: /login\n";
         echo "\n";
-        echo 'Host: ' . absolute_url('/') . "\n";
+        // Wo die Liste der Seiten steht, die in den Index sollen. Ersetzt seit
+        // SAR-10 die Zeile `Host:` – die stammt von Yandex, ist nie ein
+        // Standard gewesen und wird von Google schlicht überlesen.
+        echo 'Sitemap: ' . absolute_url('/sitemap.xml') . "\n";
     }
 }

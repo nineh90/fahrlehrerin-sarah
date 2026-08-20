@@ -41,6 +41,9 @@ $router->get('/wegbegleiter/{slug}', [PartnerController::class, 'show']);
 $router->get('/impressum',           [PageController::class, 'impressum']);
 $router->get('/datenschutz',         [PageController::class, 'datenschutz']);
 $router->get('/robots.txt',          [RobotsController::class, 'index']);
+/* Die Sitemap hängt am selben Schalter wie robots.txt (ALLOW_INDEXING)
+   und antwortet bis zum Livegang mit 404 – siehe SitemapController. */
+$router->get('/sitemap.xml',         [SitemapController::class, 'index']);
 
 // ---------------------------------------------------------------------------
 // Schüler-Bereich: Login + Terminbuchung
@@ -103,6 +106,6 @@ try {
     } else {
         error_log($e->getMessage());
         http_response_code(500);
-        render('errors/500', ['title' => 'Serverfehler']);
+        render('errors/500', ['title' => 'Serverfehler', 'noindex' => true]);
     }
 }

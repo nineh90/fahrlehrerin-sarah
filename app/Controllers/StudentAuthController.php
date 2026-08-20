@@ -12,6 +12,8 @@ final class StudentAuthController
 
         render('student/login', [
             'title'        => 'Anmelden',
+            /* Ein Login-Formular hat in keiner Trefferliste etwas verloren. */
+            'noindex'      => true,
             'values'       => [],
         ]);
     }
@@ -36,6 +38,8 @@ final class StudentAuthController
         set_flash('error', 'E-Mail oder PIN stimmen nicht. Bitte noch einmal versuchen.');
         render('student/login', [
             'title'        => 'Anmelden',
+            /* Ein Login-Formular hat in keiner Trefferliste etwas verloren. */
+            'noindex'      => true,
             'values'       => ['email' => $email],
         ]);
     }

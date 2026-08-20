@@ -59,6 +59,13 @@ $config = [
     'app_name'  => env('APP_NAME', 'Fahrlehrerin Sarah'),
     // BASE_PATH ohne abschließenden Slash, leer = Root-Domain
     'base_path' => rtrim((string) env('BASE_PATH', ''), '/'),
+    // Die öffentliche Adresse der Seite, ohne abschließenden Slash.
+    // Leer = absolute_url() rät den Host aus dem Request, wie vor SAR-10.
+    // Gefüllt = jede absolute URL steht fest, egal wer sie erzeugt. Das ist
+    // die Voraussetzung für Canonical und Sitemap: Ein Canonical, der sich
+    // nach dem Request richtet, zeigt unter der IP auf die IP und hebt damit
+    // genau die Zusammenführung auf, für die es ihn gibt.
+    'app_url' => rtrim((string) env('APP_URL', ''), '/'),
     // Darf die Seite in Suchmaschinen auftauchen?
     // Standard ist NEIN – die sichere Richtung. Solange die Seite nur zum
     // Zeigen online steht, soll sie niemand über Google finden. Erst zum

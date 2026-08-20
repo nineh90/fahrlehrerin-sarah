@@ -30,6 +30,8 @@ final class BookingController
 
         render('booking/index', [
             'title'    => 'Meine Termine',
+            /* Persönliche Seite hinter dem Login – siehe SlotController. */
+            'noindex'  => true,
             'student'      => StudentAuth::user(),
             'upcoming' => $upcoming,
             'past'     => $past,
@@ -85,6 +87,7 @@ final class BookingController
 
         render('booking/reschedule', [
             'title'   => 'Termin verschieben',
+            'noindex' => true,
             'booking'      => $booking,
             'options'      => Slot::upcomingFree(),
         ]);
@@ -125,7 +128,7 @@ final class BookingController
 
         if (!$booking || (int) $booking['student_id'] !== StudentAuth::id()) {
             http_response_code(404);
-            render('errors/404', ['title' => 'Buchung nicht gefunden']);
+            render('errors/404', ['title' => 'Buchung nicht gefunden', 'noindex' => true]);
             exit;
         }
 

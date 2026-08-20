@@ -67,7 +67,7 @@ $wege = [
         <?php /* alt="" weil der Name als <h1> direkt darunter steht. Die Klasse
                  kommt aus `Partners`: Dieses Logo ist quadratisch und bekommt
                  deshalb mehr Höhe als eine Wortmarke. */ ?>
-        <img class="<?= e(Partners::logoClass($partner, 'partner-head-logo')) ?>"
+        <img class="<?= e(Partners::logoClass($partner, 'partner-head-logo')) ?>"<?= Partners::logoPlateAttr($partner) ?>
              src="<?= asset('img/' . $partner['logo']) ?>" alt=""
              width="<?= (int) $partner['logo_width'] ?>"
              height="<?= (int) $partner['logo_height'] ?>">

@@ -129,6 +129,33 @@ final class Partners
                 . 'kostenfreie Selbsthilfegruppen und Beratung zu '
                 . 'Entschädigungsrecht, Schwerbehindertenausweis und Pflegegrad.',
         ],
+
+        /* SAR-62, aufgenommen am 20.08.2026.
+           Der vierte Eintrag und der erste, bei dem die Verbindung zu Sarahs
+           Arbeit keine Erklärung braucht: Moooov baut Autos für Menschen mit
+           Handicap um. Handbediengeräte, Lenkhilfen, Pedalanpassungen, also
+           genau die Technik, die auf /fahren-mit-handicap in den Karten steht.
+           Die Werkstatt sitzt in Harsefeld und damit in Sarahs Einzugsgebiet. */
+        'moooov' => [
+            'name' => 'moooov',
+            'url'  => 'https://moooov-mobility.de/',
+            'logo' => 'partner/moooov.webp',
+            'logo_width'  => 400,
+            'logo_height' => 102,
+            /* DIESES LOGO BRAUCHT SEINEN EIGENEN GRUND. Die Wortmarke ist ein
+               helles Mintgrün (#77F1A1) und für den dunklen Hintergrund
+               gezeichnet, auf dem sie auf der eigenen Seite steht. Auf der
+               weißen Kachel käme sie auf 1,4:1 und wäre ein blasser Schemen.
+
+               #1F2B37 ist keine ausgedachte Farbe, sondern die ihrer eigenen
+               Navigationsleiste. Darauf steht die Marke bei 10:1, und zwar in
+               jedem Kontrastmodus. Umfärben wäre die Alternative gewesen und
+               die schlechtere: Ein fremdes Logo umzufärben ändert es. */
+            'logo_plate' => '#1F2B37',
+            'meta' => 'moooov aus Harsefeld baut Autos für Menschen mit '
+                . 'Handicap um: Handbediengeräte, Lenkhilfen, '
+                . 'Pedalanpassungen. Dazu ein angepasster Fahrschulwagen.',
+        ],
     ];
 
     /**
@@ -152,10 +179,53 @@ final class Partners
         return (int) ($partner['logo_width'] ?? 0) / $height < 2.2;
     }
 
-    /** Die CSS-Klassen für ein Logo, samt Zusatz für blockige Marken. */
+    /**
+     * Die Plattenfarbe hinter einem Logo, oder null.
+     *
+     * Nur für Marken, die auf hellem Grund nicht lesbar sind, weil sie für
+     * einen dunklen gezeichnet wurden. Die Farbe gehört dann dem Partner und
+     * ist von seiner eigenen Seite abgelesen, nicht ausgesucht.
+     *
+     * Die Prüfung auf eine echte Hex-Farbe ist kein Selbstzweck: Der Wert
+     * landet unten als Inline-Style im Markup. Er kommt zwar aus der Liste
+     * oben und damit aus dieser Datei, aber ein Tippfehler soll ein Logo ohne
+     * Platte ergeben und keinen kaputten style-Block.
+     */
+    public static function logoPlate(array $partner): ?string
+    {
+        $value = (string) ($partner['logo_plate'] ?? '');
+
+        return preg_match('/^#[0-9A-Fa-f]{6}$/', $value) === 1 ? $value : null;
+    }
+
+    /** Die CSS-Klassen für ein Logo, samt Zusätzen für Form und Platte. */
     public static function logoClass(array $partner, string $base): string
     {
-        return self::hasBlockLogo($partner) ? $base . ' ' . $base . '--block' : $base;
+        $classes = [$base];
+
+        if (self::hasBlockLogo($partner)) {
+            $classes[] = $base . '--block';
+        }
+        if (self::logoPlate($partner) !== null) {
+            $classes[] = $base . '--plate';
+        }
+
+        return implode(' ', $classes);
+    }
+
+    /**
+     * Das style-Attribut für ein Logo mit Platte, sonst ein leerer String.
+     *
+     * Die Farbe steht als Custom Property im Markup und nicht als fertige
+     * `background`-Regel: So bleibt das Aussehen der Platte (Rundung,
+     * Polsterung) in nd-base.css, und aus den Daten kommt nur der eine Wert,
+     * der von Partner zu Partner verschieden ist.
+     */
+    public static function logoPlateAttr(array $partner): string
+    {
+        $plate = self::logoPlate($partner);
+
+        return $plate === null ? '' : ' style="--logo-plate: ' . $plate . '"';
     }
 
     /** Alle Wegbegleiter in der Reihenfolge, in der sie hier stehen. */

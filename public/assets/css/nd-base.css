@@ -1091,7 +1091,21 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     display: flex; flex-wrap: wrap;
     gap: 1.2rem;
 }
-.partner-grid > li { flex: 0 1 290px; max-width: 290px; }
+/* Die Kachel ist HÖCHSTENS 290 px breit und darf schmaler werden, damit eine
+   Reihe voll wird. Bis zum 20.08.2026 stand hier `flex: 0 1 290px`, also feste
+   290 px. Mit dreien ging das auf; beim vierten Wegbegleiter brach die Reihe in
+   3 + 1 um, denn vier mal 290 plus Abstände sind 1218 px und der Inhalt ist
+   1116 px breit. Die vierte Kachel stand allein und links angeschlagen, also
+   genau die „vergessene Karte", die `.card-grid--5` weiter oben abfängt.
+
+   Mit 240 px als Ausgangsbreite passen vier in eine Zeile und teilen sich den
+   Platz auf je rund 265 px. Die Grenze bei 290 px bleibt: Bei zwei oder drei
+   Kacheln sollen sie nicht auf halbe Bildschirmbreite auseinanderlaufen.
+
+   ACHTUNG BEIM FÜNFTEN: Dann heißt es 4 + 1, und das Problem ist zurück. Wer
+   den fünften aufnimmt, schaut sich die Reihe an. Eine Zahl, die für jede
+   Anzahl aufgeht, gibt es nicht. */
+.partner-grid > li { flex: 1 1 240px; max-width: 290px; }
 
 .partner-card {
     position: relative; overflow: hidden;
@@ -1148,6 +1162,28 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
    klein im Kopf. Deshalb trägt das Logo den Vereinsnamen im alt-Text – dort
    ist er vollständig da, auch wenn das Bild ihn verschluckt. */
 .partner-logo--block { height: 80px; }
+
+/* EIN LOGO AUF SEINEM EIGENEN GRUND, seit am 20.08.2026 moooov dazukam.
+   Ihre Wortmarke ist ein helles Mintgrün und für den dunklen Hintergrund
+   gezeichnet, auf dem sie auf der eigenen Seite steht. Auf der weißen Kachel
+   käme sie auf 1,4:1 und wäre ein blasser Schemen; auf der cremefarbenen
+   Platte, die a11y.css im dunklen Modus unterlegt, genauso.
+
+   Die Platte ist deshalb nicht hell, sondern trägt die Farbe des Partners
+   (`--logo-plate` aus Partners.php). Darauf steht die Marke bei 10:1.
+
+   Dieselbe Idee wie die helle Platte in a11y.css, nur andersherum, und
+   dieselbe Regel gilt: so groß wie nötig und keinen Millimeter größer. Die
+   Höhe meint weiterhin das LOGO, deshalb `content-box` – die Seite rechnet
+   sonst global mit `border-box`, und die Polsterung fräße das Logo von 46 auf
+   30 px herunter. */
+.partner-logo--plate,
+.partner-head-logo--plate {
+    box-sizing: content-box;
+    background: var(--logo-plate, #1F2B37);
+    border-radius: 10px;
+    padding: 8px 12px;
+}
 
 /* --- Kopf der Unterseite ------------------------------------------------
    Etwas größer als in der Kachel, aber immer noch klein genug, dass die

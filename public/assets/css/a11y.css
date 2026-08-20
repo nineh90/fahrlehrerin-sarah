@@ -347,6 +347,23 @@ html[data-kontrast='hoch'] .partner-head-logo {
     box-sizing: content-box;
 }
 
+/* AUSGENOMMEN: Logos, die ihre eigene Platte mitbringen (`--plate` in
+   nd-base.css, seit dem 20.08.2026). Die helle Platte oben rettet dunkle
+   Marken. Eine HELLE Marke rettet sie nicht, sie erledigt sie: Das Mintgrün
+   von moooov steht auf Creme genauso bei 1,4:1 wie auf Weiß.
+
+   Solche Logos behalten deshalb in jedem Modus ihren dunklen Grund. Der ist
+   ihr eigener, nicht unserer, und liefert dort 10:1 – mehr als die helle
+   Platte je erreicht. Die Regel steht hier und nicht oben, weil sie eine
+   Ausnahme von dieser Ausnahme ist und sonst niemand sie fände. */
+html[data-kontrast='dunkel'] .partner-logo--plate,
+html[data-kontrast='hoch'] .partner-logo--plate,
+html[data-kontrast='dunkel'] .partner-head-logo--plate,
+html[data-kontrast='hoch'] .partner-head-logo--plate {
+    background: var(--logo-plate, #1F2B37);
+    padding: 8px 12px;
+}
+
 /* =========================================================================
    DIE LEISTE SELBST
    -------------------------------------------------------------------------

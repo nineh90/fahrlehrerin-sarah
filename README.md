@@ -145,6 +145,11 @@ Die vollständige Liste steht in `CLAUDE.md`. Das Wichtigste:
    Punkte, Freigabe durch den Verein und der Satz im Vorspann. Dazu ein dritter,
    der nur hier gilt: ob Sarah auf ihrer Seite auf Opferhilfe verweisen möchte.
    Das ist keine Gestaltungsfrage.
+   **Offen für moooov** (SAR-62, seit 20.08.2026): Freigabe für Logo und Namen
+   durch die Moooov GmbH. Ihr Logo steht dabei auf einer dunklen Platte in ihrer
+   eigenen Hausfarbe, weil das helle Mintgrün auf Weiß nicht lesbar wäre; die
+   Datei selbst ist unverändert. Falls sie das anders möchten, steht die Farbe
+   als `logo_plate` in `app/Partners.php` und ist in einer Zeile geändert.
 4. `APP_DEBUG=false`, neues `ADMIN_PASSWORD`, echte Kontaktdaten in der `.env`.
 5. Google Fonts lokal ausliefern – dann entfällt die Datenübertragung an Google.
 

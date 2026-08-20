@@ -46,7 +46,7 @@ $wegbegleiter = Partners::all();
                                  Quadratische Marken bekommen mehr Höhe als
                                  Wortmarken, sonst stehen sie verloren daneben.
                                  Die Unterseiten fragen dieselbe Stelle. */ ?>
-                        <img class="<?= e(Partners::logoClass($partner, 'partner-logo')) ?>"
+                        <img class="<?= e(Partners::logoClass($partner, 'partner-logo')) ?>"<?= Partners::logoPlateAttr($partner) ?>
                              src="<?= asset('img/' . $partner['logo']) ?>"
                              alt="<?= e($partner['name']) ?>"
                              width="<?= (int) $partner['logo_width'] ?>"

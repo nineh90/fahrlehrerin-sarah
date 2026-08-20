@@ -13,11 +13,19 @@
  * hier auch fest im Text und nicht über `config('contact.city')`: Der Ort in
  * der .env ist Sarahs Einzugsgebiet und hat mit dieser Adresse nichts zu tun.
  *
- * DIE E-MAIL WEICHT AB, und zwar mit Absicht: Sarah hat im Impressum
- * `sarah@` hinterlegt, auf der Kontaktseite läuft `info@` aus der .env. Hier
- * gehört die Adresse hin, die sie als Impressumskontakt angegeben hat. Sie ist
- * seit dem 19.08.2026 auch der einzige Kontaktweg auf dieser Seite; der Hinweis
- * auf das Formular beim Dienst ist auf Wunsch entfallen.
+ * DIE E-MAIL STEHT HIER FEST IM TEXT und kommt nicht aus der .env. Bis zum
+ * 20.08.2026 wich sie deshalb sichtbar ab: Im Impressum stand `sarah@`, auf
+ * der Kontaktseite lief `info@`. Seit SAR-65 ist überall `sarah@`, die beiden
+ * zeigen also auf dieselbe Adresse.
+ *
+ * DAS IST KEIN GRUND, HIER AUF `config()` UMZUSTELLEN. Es sind weiterhin zwei
+ * verschiedene Fragen: welche Adresse Sarah als Impressumskontakt angegeben
+ * hat, und unter welcher Adresse die Seite zum Schreiben einlädt. Sie dürfen
+ * wieder auseinandergehen, ohne dass jemand das Impressum anfasst. Ändert sich
+ * die Impressumsadresse, gehört sie HIER geändert.
+ *
+ * Sie ist seit dem 19.08.2026 auch der einzige Kontaktweg auf dieser Seite;
+ * der Hinweis auf das Formular beim Dienst ist auf Wunsch entfallen.
  *
  * OFFEN, VOR DEM LIVEGANG ZU KLÄREN: ob die für die Fahrlehrerlaubnis
  * zuständige Behörde genannt werden muss. Der Block „Berufsbezeichnung"

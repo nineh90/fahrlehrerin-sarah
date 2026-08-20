@@ -25,10 +25,20 @@ Dann <http://localhost:8000> öffnen.
 
 | Rolle | Adresse | Zugangsdaten |
 |---|---|---|
-| Sarah (Schaltzentrale) | `/admin/login` | `info@fahrlehrerinsarah.de` · `sarah12345` |
+| Sarah (Schaltzentrale) | `/admin/login` | `sarah@fahrlehrerinsarah.de` · `sarah12345` |
 | Fahrschülerin Lena | `/login` | `lena@example.de` · PIN `111111` |
 | Fahrschüler Tim | `/login` | `tim@example.de` · PIN `222222` |
 | Fahrschülerin Mia | `/login` | `mia@example.de` · PIN `333333` |
+
+`ADMIN_EMAIL` in der `.env` legt den Zugang nur beim Aufsetzen an. Danach steht die
+Adresse in der Tabelle `admins`, und eine Änderung in der `.env` bewegt sie dort NICHT
+mit. Wer sie nachträglich umstellt (wie bei SAR-65 von `info@` auf `sarah@`), fasst die
+Datenbank an, statt `scripts/migrate.php` laufen zu lassen: Das Skript spielt das Schema
+neu ein und nimmt dabei alle Daten mit.
+
+```sql
+UPDATE admins SET email = 'sarah@fahrlehrerinsarah.de' WHERE email = 'info@fahrlehrerinsarah.de';
+```
 
 Die Schaltzentrale ist seit SAR-54 **nirgends mehr verlinkt**. `/admin/login` gibt es
 unverändert, die Adresse muss man nur direkt eingeben. Das ist eine Aufräumaktion im

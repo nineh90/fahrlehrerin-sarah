@@ -94,7 +94,10 @@ $config = [
     ],
     'contact' => [
         'phone' => env('CONTACT_PHONE', '0123 456789'),
-        'email' => env('CONTACT_EMAIL', 'info@fahrlehrerinsarah.de'),
+        // Seit dem 20.08.2026 `sarah@` und nicht mehr `info@` (SAR-65). Das
+        // ist der Rückfall für den Fall, dass die .env den Wert nicht setzt;
+        // die echte Adresse steht dort.
+        'email' => env('CONTACT_EMAIL', 'sarah@fahrlehrerinsarah.de'),
         'city'  => env('CONTACT_CITY', 'Neu Wulmstorf'),
         // Einzugsgebiet als Liste, in der .env mit Komma getrennt
         'area'  => array_values(array_filter(array_map(
@@ -107,7 +110,7 @@ $config = [
         'driver' => env('MAIL_DRIVER', 'log'),
         'to'     => env('MAIL_TO', 'info@example.com'),
         'from'   => env('MAIL_FROM', 'noreply@example.com'),
-        // Klarname vor der Adresse ("Fahrlehrerin Sarah <info@…>"). Leer = nur
+        // Klarname vor der Adresse ("Fahrlehrerin Sarah <sarah@…>"). Leer = nur
         // die Adresse. Steht hier etwas mit Umlaut, wird es kodiert.
         'from_name' => env('MAIL_FROM_NAME', ''),
         // Wohin Antworten gehen, wenn das nicht die Absenderadresse sein soll.

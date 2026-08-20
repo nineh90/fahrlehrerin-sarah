@@ -482,7 +482,9 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
    Trennstelle – die Silbentrennung weiter oben kann daran nichts machen. Auf
    einem 320 px breiten Gerät passte „info@fahrlehrerinsarah.de" nicht mehr in
    die Spalte und schob die ganze Seite 15 px seitwärts; mit eingeschalteter
-   Schriftvergrößerung waren es 52 px im Fuß.
+   Schriftvergrößerung waren es 52 px im Fuß. Seit SAR-65 heißt die Adresse
+   „sarah@fahrlehrerinsarah.de" und ist ein Zeichen länger, die Regel hier ist
+   damit eher wichtiger geworden als überflüssig.
 
    `anywhere` darf notfalls mitten im Wort umbrechen. Bei einer Adresse ist das
    richtig: Sie wird gelesen und nicht gesprochen, ein Umbruch nach dem @ tut

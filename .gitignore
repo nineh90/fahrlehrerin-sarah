@@ -29,6 +29,9 @@ assets-quellen/fahrschulwagen_sander_fahrlehrerin_sarah.jpeg
 CLAUDE.md
 projekt.md
 texte-von-sarah.md
+# Ticketentwürfe, die noch nicht im System der Kundin stehen. Nennen Namen und
+# internen Ablauf, gehören also nicht in ein öffentliches Repo.
+ticket-*.md
 
 # Editoren
 .idea/

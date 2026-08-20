@@ -75,10 +75,23 @@ final class Seo
             $daten['email'] = $mail;
         }
 
-        /* Einzugsgebiet. `areaServed` und nicht `address`: Sarah hat auf
-           dieser Seite keine Anschrift, und sie soll auch keine bekommen –
-           die Frage, ob ihre Privatadresse ins Netz gehört, ist offen und
-           ihre Entscheidung (siehe CLAUDE.md, Impressum). */
+        /* Einzugsgebiet als `areaServed` – und ABSICHTLICH KEIN `address`.
+           Das ist keine Kleinigkeit, seit das Impressum steht (SAR-15).
+
+           Dort steht seit dem 19.08.2026 eine vollständige Postanschrift:
+           die c/o-Adresse eines Impressumsdienstes in 53757 Sankt Augustin.
+           Das ist bei Bonn, rund 400 km von Neu Wulmstorf – und es ist die
+           einzige vollständige Anschrift auf der ganzen Website.
+
+           Für das Impressum ist das genau richtig: Sarahs Privatadresse hat
+           dort nichts verloren. Für die lokale Suche wäre es das Gegenteil.
+           Wer diese Adresse hier als `address` einträgt, weil ein Prüfwerkzeug
+           „unvollständige Angaben" meldet, erzählt Google, die Seite sitze im
+           Rheinland – und nimmt ihr damit genau die Region, um die es geht.
+
+           Es gibt für Sarah keine Anschrift, die hier hingehört. Sie ist
+           angestellte Fahrlehrerin, sie fährt in einem Gebiet und sitzt nicht
+           an einem Ort. Genau dafür ist `areaServed` da. */
         $gebiet = (array) config('contact.area', []);
         if ($gebiet !== []) {
             $daten['areaServed'] = array_map(

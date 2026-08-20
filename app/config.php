@@ -93,7 +93,15 @@ $config = [
         'instagram_handle' => ltrim((string) env('INSTAGRAM_HANDLE', 'fahrlehrerinsarah'), '@'),
     ],
     'contact' => [
-        'phone' => env('CONTACT_PHONE', '0123 456789'),
+        // Sarahs echte Nummer seit dem 20.08.2026 (SAR-66). Vorher stand hier
+        // der Platzhalter `0123 456789`, der auf jeder Seite im Fuß mitlief.
+        //
+        // Die Schreibweise mit Leerzeichen ist die für die ANZEIGE. Die
+        // `tel:`-Links bauen sich ihre Fassung selbst, indem sie alle
+        // Leerzeichen wegwerfen; wer hier etwas ändert, ändert also beides.
+        // Deshalb gehört in diesen Wert nichts, was in einer Wählnummer nicht
+        // vorkommen darf, also keine Klammern und kein Schrägstrich.
+        'phone' => env('CONTACT_PHONE', '+49 175 3716772'),
         // Seit dem 20.08.2026 `sarah@` und nicht mehr `info@` (SAR-65). Das
         // ist der Rückfall für den Fall, dass die .env den Wert nicht setzt;
         // die echte Adresse steht dort.

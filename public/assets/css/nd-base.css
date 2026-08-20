@@ -1124,10 +1124,37 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     object-fit: contain; object-position: center;
 }
 
+/* BLOCKIGE MARKEN BEKOMMEN MEHR HÖHE, seit am 20.08.2026 mit KE!N EINZELFALL
+   e.V. das erste quadratische Logo dazukam.
+
+   Gleiche Höhe ist die richtige Regel für Wortmarken, und bis dahin waren es
+   nur Wortmarken. Sie funktioniert, weil ein breites Logo bei gleicher Höhe
+   auch viel Fläche bekommt: Die Marke von Ankerliebe ist bei 46 px Höhe
+   241 px breit. Ein Quadrat ist bei 46 px Höhe 46 px breit und damit ein
+   Fünftel davon. Es stünde nicht ruhig daneben, sondern verloren.
+
+   80 px ist der Ausgleich. Nach Fläche müssten es eher 100 px sein, dann
+   sprengt das Quadrat aber die Kachel und zieht die ganze Reihe in die Höhe.
+   Bei 80 px wächst die Kachel von 116 auf 136 px, alle gleich, weil sie im
+   selben Flex-Container stehen.
+
+   Welche Datei „blockig" ist, entscheidet `Partners::hasBlockLogo()` an ihren
+   Maßen, nicht die Seite. Sonst müsste man beim nächsten Logo daran denken.
+
+   Was 80 px NICHT reparieren: Die Schrift im grünen Band bleibt zu klein zum
+   Lesen. Das ist die Marke selbst, sie steht auf ihrer eigenen Seite genauso
+   klein im Kopf. Deshalb trägt das Logo den Vereinsnamen im alt-Text – dort
+   ist er vollständig da, auch wenn das Bild ihn verschluckt. */
+.partner-logo--block { height: 80px; }
+
 /* --- Kopf der Unterseite ------------------------------------------------
    Etwas größer als in der Kachel, aber immer noch klein genug, dass die
    Überschrift darunter die Seite trägt und nicht das fremde Logo. */
 .partner-head-logo { height: 58px; width: auto; max-width: 100%; object-fit: contain; object-position: left center; display: block; margin-bottom: 1rem; }
+/* Dasselbe Verhältnis wie in der Kachel: eine Spur größer als die Wortmarke
+   daneben, damit beide gleich schwer wiegen. Die Überschrift trägt die Seite
+   trotzdem, sie steht direkt darunter und ist mehr als doppelt so hoch. */
+.partner-head-logo--block { height: 96px; margin-bottom: .8rem; }
 
 /* Der Rückweg über dem Seitentitel. Bewusst leise und klein: Er ist eine
    Hilfe, keine Navigation. */

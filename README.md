@@ -131,6 +131,10 @@ Die vollständige Liste steht in `CLAUDE.md`. Das Wichtigste:
    stehen auf der Seite, die Freigabe von Ricarda Belmar fehlt noch. Dasselbe
    gilt für den Satz im Vorspann der Unterseite, der sagt, wie Sarah und
    Ankerliebe zusammenhängen; der ist geschlossen und nicht von Sarah bestätigt.
+   **Offen für KE!N EINZELFALL e.V.** (SAR-63, seit 20.08.2026): dieselben zwei
+   Punkte, Freigabe durch den Verein und der Satz im Vorspann. Dazu ein dritter,
+   der nur hier gilt: ob Sarah auf ihrer Seite auf Opferhilfe verweisen möchte.
+   Das ist keine Gestaltungsfrage.
 4. `APP_DEBUG=false`, neues `ADMIN_PASSWORD`, echte Kontaktdaten in der `.env`.
 5. Google Fonts lokal ausliefern – dann entfällt die Datenübertragung an Google.
 

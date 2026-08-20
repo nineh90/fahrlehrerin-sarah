@@ -82,7 +82,7 @@ $wege = [
         <?php /* Das Logo trägt hier alt="" weil der Name als <h1> direkt
                  darunter steht. Zweimal derselbe Name hintereinander
                  vorgelesen ist eine Dopplung, keine Information. */ ?>
-        <img class="partner-head-logo"
+        <img class="<?= e(Partners::logoClass($partner, 'partner-head-logo')) ?>"
              src="<?= asset('img/' . $partner['logo']) ?>" alt=""
              width="<?= (int) $partner['logo_width'] ?>"
              height="<?= (int) $partner['logo_height'] ?>">

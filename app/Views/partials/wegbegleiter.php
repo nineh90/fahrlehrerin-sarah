@@ -41,7 +41,12 @@ $wegbegleiter = Partners::all();
             <?php foreach ($wegbegleiter as $slug => $partner): ?>
                 <li>
                     <a class="partner-card" href="<?= e(Partners::path($slug)) ?>">
-                        <img class="partner-logo"
+                        <?php /* Die Klasse kommt aus `Partners`, weil sie von den
+                                 Maßen der Datei abhängt und nicht von der Seite:
+                                 Quadratische Marken bekommen mehr Höhe als
+                                 Wortmarken, sonst stehen sie verloren daneben.
+                                 Die Unterseiten fragen dieselbe Stelle. */ ?>
+                        <img class="<?= e(Partners::logoClass($partner, 'partner-logo')) ?>"
                              src="<?= asset('img/' . $partner['logo']) ?>"
                              alt="<?= e($partner['name']) ?>"
                              width="<?= (int) $partner['logo_width'] ?>"

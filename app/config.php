@@ -99,6 +99,24 @@ $config = [
         'tiktok_handle'    => ltrim((string) env('TIKTOK_HANDLE', 'fahrlehrerin_sarah'), '@'),
         'instagram_handle' => ltrim((string) env('INSTAGRAM_HANDLE', 'fahrlehrerinsarah'), '@'),
     ],
+    /* KONTAKTDATEN – DIE EINZIGE QUELLE. Seit dem 21.08.2026 stehen sie nicht
+       mehr zusätzlich in der .env, und das ist der Punkt: Vorher standen sie
+       an beiden Stellen mit verschiedenen Werten, die .env gewann, und die
+       Seite zeigte einen Platzhalter, obwohl hier die richtige Nummer stand.
+
+       Sie sind auch keine Umgebungskonfiguration. Telefon, E-Mail, Ort und
+       Einzugsgebiet sind auf jedem Rechner dieselben – anders als Passwörter,
+       APP_URL oder ALLOW_INDEXING, die sich je Umgebung unterscheiden. Was
+       überall gleich ist, gehört in den Code: Der Deploy bringt es mit, und
+       niemand muss an eine Datei denken, die er nicht sieht.
+
+       Dass die Nummer damit in einem öffentlichen Repo steht, ist geprüft und
+       gewollt (Nils, 21.08.2026): Es ist Sarahs DIENSTnummer und steht ohnehin
+       im Fuß jeder Seite. Für ihre private wäre die Antwort eine andere.
+
+       Die env()-Aufrufe bleiben als Notausgang – wer einen Wert doch je
+       Umgebung braucht, kann ihn in der .env setzen und übersteuert damit
+       bewusst den Code. Nur eben nicht mehr aus Versehen. */
     'contact' => [
         // Sarahs echte Nummer seit dem 20.08.2026 (SAR-66). Vorher stand hier
         // der Platzhalter `0123 456789`, der auf jeder Seite im Fuß mitlief.

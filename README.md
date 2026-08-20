@@ -104,7 +104,7 @@ Es gibt bewusst keine Test-Suite. Vor jeder Übergabe einmal durchklicken:
 | 13 | Dieselbe Serie nochmal | „Alle X Termine gab es bereits", nichts doppelt |
 | 14 | Fahrschüler:in anlegen | PIN wird einmalig angezeigt, Login damit funktioniert |
 | 15 | Formular ohne CSRF-Token abschicken | Abbruch mit HTTP 419 |
-| 16 | Ganz nach unten auf `/` | Abschnitt „Wegbegleiter“, fünf Logo-Kacheln als 3 + 2, zweite Zeile mittig |
+| 16 | Ganz nach unten auf `/` | Abschnitt „Wegbegleiter“, sechs Logo-Kacheln als 4 + 2, zweite Zeile mittig |
 | 17 | Kachel anklicken | Infoseite des Wegbegleiters, Rückweg oben links |
 | 18 | `/wegbegleiter/gibt-es-nicht` aufrufen | 404 |
 | 18a | Wegbegleiter-Seite ganz nach unten | Herkunftsangabe unter einer Haarlinie, KEIN „Ich bin Fahrlehrerin …“ |
@@ -154,6 +154,16 @@ Die vollständige Liste steht in `CLAUDE.md`. Das Wichtigste:
    die Seite gebaut, ihr Logo läuft ohnehin im Streifen unter dem Fuß. Zu sehen
    ist sie am Seitenende jetzt aber dreimal, als Kachel, im Streifen und im
    Impressum. Falls das einmal zu viel ist, ist der Streifen der Kandidat.
+   **Offen für Johannes Springer Studio** (SAR-60, seit 20.08.2026): Freigabe
+   für Namen und Bildmarke. Dazu eine Frage, die es bei den anderen nicht gab:
+   Auf seiner Seite gibt es KEINE Wortmarke als Datei, nur das Favicon, und das
+   steht jetzt in der Kachel. Es zeigt einen orangenen Block auf Dunkel und
+   nennt seinen Namen nicht. Nachgebaut wird hier nichts. Wer den Namen in der
+   Kachel lesbar haben will, holt eine Logodatei bei ihm.
+   Seine Seite ist außerdem noch nicht fertig: Die E-Mail-Adresse ist laut
+   eigener Angabe „noch nicht eingerichtet", das Instagram-Profil steht noch
+   nicht. Deshalb führt von hier nur die Telefonnummer direkt zu ihm; kommen die
+   anderen Wege dazu, gehören sie in `johannes-springer.php` nachgetragen.
 4. `APP_DEBUG=false`, neues `ADMIN_PASSWORD`, echte Kontaktdaten in der `.env`.
 5. Google Fonts lokal ausliefern – dann entfällt die Datenübertragung an Google.
 

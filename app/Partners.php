@@ -185,6 +185,37 @@ final class Partners
                 . 'Nils Nehring macht Webentwicklung, Apps und '
                 . 'KI-Automatisierung für kleine Betriebe und Selbstständige.',
         ],
+
+        /* SAR-60, aufgenommen am 20.08.2026.
+           Johannes Springer ist Videograf in Lilienthal bei Bremen: Erklär-
+           videos, kurze Clips für Social Media, Mehrkamera-Livestreams. */
+        'johannes-springer' => [
+            'name' => 'Johannes Springer Studio',
+            'url'  => 'https://johannes-springer.studio/',
+            /* DIE BILDMARKE VON DER SEITE, und zwar die einzige, die es dort
+               als Datei gibt: ihr Favicon (assets/img/favicon.svg, ein oranger
+               Block auf dunklem Grund). Aus dem SVG gerastert, damit sie in der
+               Kachel scharf steht.
+
+               EIN WORTMARKEN-LOGO GIBT ES DORT NICHT. „JOHANNES SPRINGER
+               STUDIO" ist auf seiner Seite gesetzter Text und keine Bilddatei.
+               Nachgebaut wird sie hier nicht: Eine Marke, die es als Datei
+               nicht gibt, selbst zu zeichnen hieße, sie zu erfinden. Wer den
+               Namen in der Kachel lesbar haben will, holt eine Logodatei bei
+               ihm. Bis dahin trägt der alt-Text den Namen.
+
+               KEINE `logo_plate` wie bei moooov und Nils-Digital, obwohl die
+               Marke dunkel ist: Sie bringt ihren dunklen Grund selbst mit. Im
+               dunklen Kontrastmodus setzt a11y.css die helle Platte darunter,
+               und die ist hier genau richtig – ohne sie stünde ein Quadrat in
+               #14161C auf einer fast gleich dunklen Kachel. */
+            'logo'        => 'partner/johannes-springer.webp',
+            'logo_width'  => 256,
+            'logo_height' => 256,
+            'meta' => 'Johannes Springer Studio aus Lilienthal bei Bremen: '
+                . 'Videos, kurze Clips für Social Media und '
+                . 'Mehrkamera-Livestreams von Veranstaltungen.',
+        ],
     ];
 
     /**

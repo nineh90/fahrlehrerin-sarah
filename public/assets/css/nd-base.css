@@ -1083,12 +1083,23 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
    Spalten wurden 548 px breit, die Kacheln blieben bei ihren 290 px und
    standen links darin. Zwischen den Logos klaffte ein Loch von 258 px.
 
-   Flex kennt keine leeren Spalten. Jede Kachel ist 290 px breit, darf schmaler
-   werden, wenn der Platz nicht reicht, und die nächste steht direkt daneben.
-   Die Reihe beginnt links und wächst nach rechts, egal wie viele es sind. */
+   Flex kennt keine leeren Spalten. Jede Kachel hat dieselbe Breite, darf
+   schmaler werden, wenn der Platz nicht reicht, und die nächste steht direkt
+   daneben.
+
+   DIE REIHE STEHT MITTIG, seit sie am 20.08.2026 auf sechs Kacheln gewachsen
+   ist und damit zum ersten Mal eine unvollständige zweite Zeile hatte: vier
+   oben, zwei unten. Links angeschlagen sahen die beiden aus wie übrig
+   geblieben. Mittig sitzen sie unter den vieren und die Reihe wirkt gesetzt.
+
+   Der linke Anschlag von früher galt einer EINZELNEN Kachel, die sonst in der
+   Mitte einer 1100 px breiten Fläche schwamm. Sobald eine Zeile voll wird, und
+   das ist sie ab vier, ist zwischen links und mittig ohnehin kein Unterschied
+   zu sehen. Wer je wieder bei einer oder zwei Kacheln landet, schaut noch mal
+   hin. */
 .partner-grid {
     list-style: none; padding: 0; margin: 0;
-    display: flex; flex-wrap: wrap;
+    display: flex; flex-wrap: wrap; justify-content: center;
     gap: 1.2rem;
 }
 /* Die Kachel ist HÖCHSTENS 290 px breit und darf schmaler werden, damit eine
@@ -1114,18 +1125,17 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
    gestanden.
 
    Anders als beim Kartenraster braucht es hier kein Sechser-Grid. Zwei Zeilen
-   genügen: Bei 290 px passen drei nebeneinander und keine vier mehr, und
-   `center` rückt beide Zeilen in die Mitte. Die zweite sitzt damit mittig
-   unter der ersten, und alle fünf Kacheln behalten dieselbe Breite.
+   genügen: Bei 290 px Ausgangsbreite passen drei nebeneinander und keine vier
+   mehr, und das `center` von oben rückt beide Zeilen in die Mitte. Die zweite
+   sitzt damit mittig unter der ersten, und alle fünf behalten dieselbe Breite.
 
-   Dass die Reihe hier NICHT links beginnt, ist der Preis dafür und in Ordnung:
-   Der Grund für den linken Anschlag war eine einzelne Kachel, die sonst in der
-   Mitte einer leeren Fläche schwamm. Drei Kacheln füllen die Zeile fast ganz,
-   da fällt der Unterschied kaum auf.
+   Dieser Modifier ändert deshalb NUR die Ausgangsbreite. Das Zentrieren stand
+   bis zum 20.08.2026 auch hier und ist mit dem sechsten Wegbegleiter nach oben
+   gewandert, wo es für jede Anzahl gilt.
 
-   Den Modifier setzt `partials/wegbegleiter.php` anhand der Anzahl. Kommt ein
-   sechster dazu, fällt er von selbst weg, und sechs gehen als 4 + 2 auf. */
-.partner-grid--5 { justify-content: center; }
+   Den Modifier setzt `partials/wegbegleiter.php` anhand der Anzahl. Bei sechs
+   fällt er von selbst weg, dann greift wieder die 240 von oben und es wird
+   4 + 2. */
 .partner-grid--5 > li { flex: 0 1 290px; }
 
 .partner-card {

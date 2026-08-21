@@ -175,47 +175,59 @@
             </div>
         </div>
 
-        <ol class="process" style="--process-cols: 5;">
+        <?php /* SARAHS EIGENER ABLAUF, seit dem 21.08.2026 (Ticket SAR-72).
+                 Der Text kommt von ihr und ersetzt den Entwurf, der hier stand –
+                 er ist damit tabu für Umformulierungen, wie alles von ihr (siehe
+                 CLAUDE.md). Zwei offensichtliche Tippfehler der Vorlage sind
+                 korrigiert und beim Ticket vermerkt: „mein angepasste" →
+                 „angepasstes", „bis zu ein gutes Gefühl" → „bis du".
+
+                 VIER SCHRITTE STATT FÜNF: „Üben bis es sitzt" ist entfallen, das
+                 Üben steht jetzt im Prüfungsschritt („Bis zur Prüfung üben wir
+                 gemeinsam"). Deshalb steht hier auch kein `--process-cols` mehr –
+                 vier ist der Rückfallwert in nd-base.css.
+
+                 DIESER ABLAUF STAND BIS HEUTE AUCH AUF DER STARTSEITE, dort als
+                 senkrechte Zeitleiste in der Sektion „Wie du bei mir
+                 Fahrschüler:in wirst". Mit SAR-72 ist er von dort verschwunden;
+                 die Startseite zeigt nur noch die Einordnung und die Kachel der
+                 Fahrschule. Der Ablauf steht damit genau einmal – hier. */ ?>
+        <ol class="process">
             <li class="process-step">
                 <span class="process-num">1</span>
                 <h3>Wir telefonieren</h3>
-                <p>Du erzählst mir, worum es geht. Ich sage dir ehrlich, was ich einschätzen
-                   kann und was ein Gutachten klären muss.</p>
+                <p>Du erzählst mir, worum es geht. Ich sage dir ehrlich, wie ich die
+                   Situation einschätze und welche Gutachten etc. für den Antrag bei
+                   deiner Behörde notwendig sind.</p>
             </li>
             <li class="process-step">
                 <span class="process-num">2</span>
                 <h3>Gutachten &amp; Auflagen</h3>
-                <p>Für die Fahrerlaubnis wird meist ein medizinisches oder verkehrsmedizinisches
-                   Gutachten gebraucht. Daraus ergeben sich die Auflagen für dein Fahrzeug.</p>
+                <p>In den meisten Fällen fordert deine zuständige Verkehrsbehörde ein
+                   amtsärztliches / verkehrsmedizinisches Gutachten. Ich helfe dir weiter
+                   bei den notwendigen Unterlagen und Anträgen, wie beispielsweise
+                   möglichen Kostenübernahmen bei den Kostenträgern.</p>
             </li>
             <li class="process-step">
                 <span class="process-num">3</span>
                 <h3>Erste Stunde</h3>
-                <p>Wir setzen uns ins angepasste Fahrzeug, stellen alles auf dich ein
-                   und fahren erstmal nur, damit du ein Gefühl bekommst.</p>
+                <p>Wir setzen uns in mein angepasstes Fahrschulfahrzeug und stellen alles
+                   auf dich ein. Danach fahren wir beide die ersten Runden auf unserem
+                   eigenen Firmengelände, bis du ein gutes Gefühl hast. Sobald du bereit
+                   bist und dich sicher fühlst, gehen wir gemeinsam auf die Straßen.</p>
             </li>
             <li class="process-step">
                 <span class="process-num">4</span>
-                <h3>Üben bis es sitzt</h3>
-                <?php /* Wortgleich mit Schritt 4 auf der Startseite, dort steht die
-                         Begründung, warum das „bis DU dich sicher fühlst" aus
-                         SAR-50 hier nicht mehr steht. */ ?>
-                <p>Wie bei jedem anderen auch: Wir wiederholen in Ruhe, was noch nicht
-                   sitzt, und fahren in deinem Tempo.</p>
-            </li>
-            <?php /* Fünfter Schritt mit SAR-45. Das Ticket betraf die Startseite –
-                     hier steht derselbe Ablauf wörtlich noch einmal, und ein Weg,
-                     der auf der einen Seite fünf und auf der anderen vier Schritte
-                     hat, widerspricht sich. Wer den Text ändert, ändert ihn an
-                     beiden Stellen (home.php, Sektion „Wie du bei mir
-                     Fahrschüler:in wirst"). */ ?>
-            <li class="process-step">
-                <span class="process-num">5</span>
-                <?php /* SAR-51. Wortgleich mit Schritt 5 auf der Startseite, dort
-                         steht die Begründung. */ ?>
                 <h3>Prüfung &amp; Überprüfung</h3>
-                <p>Den Termin meldet die Fahrschule bei der Prüfstelle an, sobald DU
-                   dich sicher fühlst.</p>
+                <?php /* Der Name der Fahrschule kommt wie überall aus der
+                         Konfiguration. Steht dort nichts, formuliert der Satz
+                         ohne ihn – dieselbe Regel wie auf der ganzen Seite. */ ?>
+                <p>Bis zur Prüfung / Überprüfung üben wir gemeinsam. Mir ist dabei wichtig,
+                   dass DU dich gut fühlst. Ich sitze zur Prüfung nur noch neben dir und
+                   freue mich, wenn du nach erfolgreichem Abschluss den Führerschein in den
+                   Händen hältst. Den Termin dafür meldet
+                   <?= $school !== '' ? 'die ' . e($school) : 'die Fahrschule' ?> bei der
+                   zuständigen Prüfstelle, wenn du dich sicher genug fühlst.</p>
             </li>
         </ol>
     </div>

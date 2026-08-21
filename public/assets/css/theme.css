@@ -825,14 +825,39 @@
     gap: 1.4rem;
     align-items: start;
 }
+/* NUR NOCH DIE KACHEL DER FAHRSCHULE, seit SAR-72 (21.08.2026): Der Ablauf
+   „So läuft es ab" ist von der Startseite verschwunden und steht jetzt allein
+   auf /fahren-mit-handicap.
+
+   Übrig bleibt eine einzelne Kachel, und die läuft ohne diese Regel über die
+   breite Spalte des Rasters – eine Liste mit vier Haken auf 700 px Breite
+   sieht aus, als fehle daneben etwas. 520 px sind etwas mehr als ihre alte
+   Spalte (rund 430) und schmal genug, dass sie als Kasten liest.
+
+   Links angeschlagen und nicht mittig: Die Überschrift der Sektion darüber
+   steht auch links, und mittig stünde die Kachel unter einem linksbündigen
+   Kopf wie versehentlich verrutscht.
+
+   Der Modifier steht am selben Element wie `.enroll`, damit klar ist, dass es
+   dasselbe Raster ist – wer den Ablauf zurückholt, nimmt ihn wieder weg. */
+.enroll--nur-fahrschule { grid-template-columns: minmax(0, 520px); }
 
 /* Die Farbe der Kopfkante steht hier und nicht im Template – so wie bei jeder
    anderen Kachel der Seite auch (siehe „Regenbogen-Rotation" weiter oben).
-   Die erste Kachel ist Sarah und trägt die Leitfarbe, jetzt also Grün. Die
-   Fahrschule hatte bis zum 18.08.2026 Grün und bekommt dafür Violett – nicht
-   aus Symmetrie, sondern weil beide Kacheln nebeneinander stehen und sich
-   unterscheiden müssen. Die Haken in ihrer Liste ziehen mit: Sie lesen
-   `--card-accent` der eigenen Kachel und nicht den festen Wert. */
+   Die Haken in der Liste ziehen mit: Sie lesen `--card-accent` der eigenen
+   Kachel und nicht den festen Wert.
+
+   SEIT SAR-72 STEHT NUR NOCH EINE KACHEL HIER, die der Fahrschule – und sie
+   ist damit die erste und trägt Grün, die Leitfarbe. Das ist kein Zufall,
+   sondern die Regel: Die erste Kachel bekommt sie.
+
+   Bis zum 18.08.2026 war das anders herum begründet: Damals stand links der
+   Ablauf (Sarah, Grün) und rechts die Fahrschule, die deshalb auf Violett
+   auswich – nicht aus Symmetrie, sondern weil zwei Kacheln nebeneinander sich
+   unterscheiden müssen. Der Ablauf ist weg, der Grund dafür also auch.
+
+   Die zweite Zeile bleibt trotzdem stehen: Kommt je wieder eine Kachel
+   daneben, greift sie von selbst und der Unterschied ist wieder da. */
 .enroll > *:nth-child(1) { --card-accent: var(--c-green);  --card-accent-soft: rgba(62, 165, 91, 0.13); }
 .enroll > *:nth-child(2) { --card-accent: var(--c-violet); --card-accent-soft: rgba(124, 58, 237, 0.12); }
 
@@ -849,6 +874,12 @@
 .enroll-formal .btn { margin-top: 1.5rem; align-self: flex-start; }
 
 /* --- Die Zeitleiste ------------------------------------------------------
+   ⏸ DERZEIT UNGENUTZT, seit SAR-72 (21.08.2026): Sie trug den Ablauf in der
+   Sektion „Wie du bei mir Fahrschüler:in wirst" auf der Startseite, und der
+   steht jetzt nur noch auf /fahren-mit-handicap – dort als waagerechte
+   `.process`-Liste, nicht als Zeitleiste. Die Regeln bleiben stehen: Sie sind
+   die Vorlage, falls der Ablauf zurückkommt, und kosten nichts.
+
    Fünf Schritte sind keine Aufzählung mehr, sondern ein Weg. Was ihn dazu
    macht, ist die Linie zwischen den Nummern: Ohne sie stehen fünf Kreise
    untereinander und man liest sie als gleichrangige Punkte.

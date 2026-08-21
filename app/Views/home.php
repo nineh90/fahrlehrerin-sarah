@@ -566,123 +566,29 @@ $schoolUrl = trim((string) config('school.url'));
             </div>
         </div>
 
-        <?php /* ZWEI SPALTEN, ABER NICHT ZWEI GLEICHE.
-                 Bis zum 17.08.2026 lagen hier zwei identische `.card` in einem
-                 `.split-grid`: links die Fahrschule, rechts der Ablauf. Beide
-                 weiß, beide gleich schwer – die Seite stellte damit die
-                 Formalitäten gleichrangig neben das, was die Besucherin
-                 eigentlich wissen will.
+        <?php /* HIER STAND DER ABLAUF „SO LÄUFT ES AB", bis zum 21.08.2026
+                 (Sarahs Ticket SAR-72). Fünf Schritte als senkrechte Zeitleiste
+                 (`.enroll-main` mit `.enroll-steps`), daneben die Kachel der
+                 Fahrschule.
 
-                 Mit dem fünften Schritt (SAR-45) ging das endgültig nicht mehr
-                 auf: Die rechte Karte wurde deutlich höher als die linke, und
-                 zwei gleich gestaltete Karten mit stark verschiedener Höhe
-                 sehen nach Versehen aus, nicht nach Absicht.
+                 ER STEHT JETZT NUR NOCH AUF /fahren-mit-handicap, dort in Sarahs
+                 eigenem Wortlaut und in vier Schritten. Vorher stand derselbe
+                 Ablauf wörtlich auf beiden Seiten – jede Textänderung musste an
+                 zwei Stellen gemacht werden, und die Startseite erzählte den Weg
+                 zweimal: einmal hier und einmal auf der Unterseite, auf die sie
+                 verweist.
 
-                 Jetzt sind es dieselben Kacheln wie in „Wobei ich dich
-                 begleite": `.feature-card`, mit der farbigen Kopfkante. Nicht
-                 nachgebaut, sondern dieselbe Klasse – wer die Kachel einmal
-                 ändert, ändert sie überall. Die Rangfolge tragen die
-                 Spaltenbreiten, nicht zwei verschiedene Gestaltungen.
+                 WAS DIESE SEKTION JETZT NOCH SAGT, ist genau das, wofür sie da
+                 ist: Sarah ist angestellt, die Anmeldung läuft über die
+                 Fahrschule, und was die übernimmt, steht in der Kachel. Der Weg
+                 zur Ausbildung selbst gehört auf die Seite, die davon handelt.
 
-                 Jede Kachel ist nur so hoch wie ihr Inhalt (`align-items: start`
-                 in der theme.css). Auf gleiche Höhe gestreckt stand unter der
-                 kurzen Liste der Fahrschule ein halber Bildschirm Weiß – das
-                 sah nach vergessenem Inhalt aus, nicht nach Gestaltung.
-
-                 Der Knopf zur Fahrschule ist aus dem Sektionsfuß in ihre Kachel
-                 gewandert: Er führt zu ihr und nicht zur Sektion. */ ?>
-        <div class="enroll">
-            <?php /* Der Ablauf stammt von /fahren-mit-handicap, Sektion „So läuft
-                     es ab" (Sarahs Wunsch, SAR-29). Dort ist er eine `.process`-
-                     Liste: ein waagerechtes Raster über die volle Seitenbreite.
-                     In einer halben Spalte hat das keinen Platz, deshalb steht er
-                     hier senkrecht.
-
-                     Bis SAR-45 lief das über die generische `.steps` aus
-                     nd-base.css. Die reicht für drei, vier Zeilen (sie steht so
-                     auch im Fahrschüler-Login), macht aus fünf Schritten aber
-                     eine bloß lange Liste: Nummern ohne Verbindung, alle in
-                     derselben Farbe. `.enroll-steps` in der theme.css ist
-                     dieselbe Sache als echte Zeitleiste – Linie zwischen den
-                     Nummern, Regenbogenfolge wie im Bogen des Logos. `.steps`
-                     bleibt unangetastet, sie wird woanders gebraucht.
-
-                     ACHTUNG, DER TEXT STEHT AN ZWEI STELLEN: wörtlich auch auf
-                     /fahren-mit-handicap. Wer hier etwas ändert, ändert es dort
-                     mit. Er ist außerdem ein ENTWURF und nicht von Sarah. */ ?>
-            <div class="enroll-main feature-card">
-                <h3>So läuft es ab</h3>
-                <ol class="enroll-steps">
-                    <li>
-                        <strong>Wir telefonieren</strong>
-                        <p>Du erzählst mir, worum es geht. Ich sage dir ehrlich, was ich
-                           einschätzen kann und was ein Gutachten klären muss.</p>
-                    </li>
-                    <li>
-                        <strong>Gutachten &amp; Auflagen</strong>
-                        <p>Für die Fahrerlaubnis wird meist ein medizinisches oder
-                           verkehrsmedizinisches Gutachten gebraucht. Daraus ergeben sich
-                           die Auflagen für dein Fahrzeug.</p>
-                    </li>
-                    <li>
-                        <strong>Erste Stunde</strong>
-                        <p>Wir setzen uns ins angepasste Fahrzeug, stellen alles auf dich
-                           ein und fahren erstmal nur, damit du ein Gefühl bekommst.</p>
-                    </li>
-                    <li>
-                        <strong>Üben bis es sitzt</strong>
-                        <?php /* WARUM HIER NICHT MEHR „bis DU dich sicher fühlst"
-                                 STEHT. Genau so hatte Sarah es formuliert (SAR-50),
-                                 und einen Ticketstapel später endet Schritt 5 mit
-                                 „sobald DU dich sicher fühlst" (SAR-51). Zwei
-                                 Kacheln nebeneinander mit demselben Halbsatz lesen
-                                 sich wie ein Kopierfehler, und der Satz verliert
-                                 sein Gewicht, wenn er zweimal kommt.
-
-                                 Aufgeteilt statt gekürzt: Schritt 4 beschreibt
-                                 jetzt das Üben, Schritt 5 trägt die Entscheidung.
-                                 Damit steht die Aussage, auf die es Sarah ankommt,
-                                 genau einmal, und zwar an der Stelle, wo sie zählt,
-                                 nämlich beim Prüfungstermin.
-
-                                 „Wie bei jedem anderen auch" bleibt: Das ist der
-                                 Kern des Schritts und Sarahs Ton. Der Rest ist
-                                 ENTWURF und nicht von ihr, siehe CLAUDE.md.
-                                 Bewusst ohne Angabe zur Stundenzahl: Pflichtstunden
-                                 gibt es, und die Seite behauptet nichts, was sie
-                                 nicht halten kann.
-
-                                 Derselbe Satz steht ein zweites Mal auf
-                                 /fahren-mit-handicap, Schritt 4. */ ?>
-                        <p>Wie bei jedem anderen auch: Wir wiederholen in Ruhe, was noch
-                           nicht sitzt, und fahren in deinem Tempo.</p>
-                    </li>
-                    <?php /* Neu mit SAR-45. Der Schritt schließt den Weg ab, den die
-                             vier davor beschreiben; ohne ihn hörte der Ablauf beim
-                             Üben auf. Kein Wort zum Bestehen: Versprechen kann
-                             Sarah das nicht, und die Seite verspricht nichts.
-
-                             SAR-51 hat ihn auf einen Satz gekürzt. Vorher stand
-                             hier zusätzlich „Geprüft wird in dem Auto, in dem du
-                             geübt hast, und ich sitze daneben", dazu „ich schlage
-                             ihn erst vor, wenn du wirklich so weit bist".
-
-                             Damit hängt der Schritt jetzt an derselben Aussage wie
-                             Schritt 4: Nicht Sarah entscheidet, wann es so weit
-                             ist, sondern die Person am Steuer. Das große DU ist
-                             deshalb dasselbe wie dort und keine Marotte, siehe die
-                             Begründung bei „Üben bis es sitzt".
-
-                             Derselbe Schritt steht wörtlich noch einmal auf
-                             /fahren-mit-handicap. */ ?>
-                    <li>
-                        <strong>Prüfung &amp; Überprüfung</strong>
-                        <p>Den Termin meldet die Fahrschule bei der Prüfstelle an, sobald
-                           DU dich sicher fühlst.</p>
-                    </li>
-                </ol>
-            </div>
-
+                 Kommt der Ablauf je zurück, steht er in der Versionsgeschichte;
+                 `.enroll-steps` in theme.css ist absichtlich stehen geblieben.
+                 Die Kachel ist dieselbe wie vorher (`.feature-card`), sie steht
+                 jetzt allein – deshalb begrenzt `.enroll` ihre Breite, statt sie
+                 über die ganze Seite zu ziehen (Begründung dort). */ ?>
+        <div class="enroll enroll--nur-fahrschule">
             <aside class="enroll-formal feature-card">
                 <h3><?= $school !== '' ? e($school) : 'Die Fahrschule' ?> übernimmt</h3>
                 <ul class="check-list">

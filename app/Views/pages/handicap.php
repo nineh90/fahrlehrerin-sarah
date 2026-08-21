@@ -233,40 +233,27 @@
     </div>
 </section>
 
-<?php /* Der Ablauf einer einzelnen Fahrstunde. Stand bis zum 12.08.2026 auf
-         /ueber-mich; dort ist er auf Sarahs Wunsch entfallen und hierher
-         gewandert („Wie die Stunde abläuft vielleicht bei fahren mit handicap").
+<?php /* HIER STAND „WIE EINE STUNDE BEI MIR ABLÄUFT", bis zum 21.08.2026
+         (Sarahs Ticket SAR-35). Zwei Absätze zum Ablauf einer einzelnen
+         Fahrstunde, dazu vier Haken: klare Ansagen, feste Ansprechpartnerin,
+         ehrliche Rückmeldung, passende Termine.
 
-         An dieser Stelle, weil der Abschnitt darüber den Weg zum Führerschein
-         beschreibt und dieser hier die einzelne Stunde darin – vom Großen ins
-         Kleine. Ohne das Foto des Fahrschulautos, das vorher danebenstand: Auf
-         dieser Seite gibt es schon zwei Fotos, ein drittes macht sie zur Galerie.
+         DIE SEKTION IST JETZT NIRGENDS MEHR. Sie stand bis zum 12.08.2026 auf
+         /ueber-mich und ist von dort schon einmal umgezogen – auf Sarahs
+         Vorschlag hierher, weil der Abschnitt darüber den Weg zum Führerschein
+         beschreibt und dieser die einzelne Stunde darin. Mit SAR-35 fällt sie
+         ganz weg. Zweimal verschoben und dann gestrichen heißt: Sie hatte
+         nirgends einen Platz, an dem sie gebraucht wurde.
 
-         ENTWURF, nicht von Sarah – wie alles, was hier nicht ausdrücklich als
-         ihr Text markiert ist. */ ?>
-<section class="section">
-    <div class="container">
-        <div class="prose">
-            <h2>Wie eine Stunde bei mir abläuft</h2>
-            <p>
-                Zu Beginn sagen wir beide, was heute dran ist – du, was du üben willst,
-                ich, was ich für nötig halte. Am Ende bekommst du eine ehrliche
-                Einschätzung: was saß, was noch nicht, und was wir beim nächsten Mal
-                machen.
-            </p>
-            <p>
-                Ich rede während der Fahrt wenig, aber früh. Lieber eine Ansage zwei
-                Sekunden vorher als ein Kommentar hinterher.
-            </p>
-            <ul class="check-list">
-                <li>Klare Ansagen, kein Anschreien</li>
-                <li>Feste Ansprechpartnerin – du fährst immer mit mir</li>
-                <li>Ehrliche Rückmeldung zu deinem Stand</li>
-                <li>Termine, die zu Schule, Ausbildung oder Schicht passen</li>
-            </ul>
-        </div>
-    </div>
-</section>
+         DER TEXT WAR EIN ENTWURF und nicht von Sarah – das ist der Grund,
+         warum hier nichts nachzutragen ist. Was inhaltlich zählte, sagt sie
+         auf /ueber-mich mit eigenen Worten.
+
+         Das Video aus dem ursprünglichen Ticket („an geeigneter Stelle wieder
+         verwenden") ist erledigt: Es steht seit SAR-28 auf der Startseite,
+         direkt hinter dem Hero.
+
+         Kommt der Ablauf je zurück, steht er in der Versionsgeschichte. */ ?>
 
 <section class="section section--alt">
     <div class="container">

@@ -583,6 +583,27 @@
     margin-inline: auto;
 }
 
+/* KEIN REGENBOGENSTRICH VOR DER AUGENBRAUE, seit dem 21.08.2026 (SAR-74).
+   `nd-base.css` setzt ihn als `::before` an `.hero-eyebrow` – 28 × 3 px im
+   Verlauf der Marke, links neben der Versalzeile. Auf dem Desktop sitzt er
+   sauber davor, auf dem Handy nicht:
+
+   Der Hero steht dort mittig, und die Zeile „Fahrlehrerin Sarah · Fahrschule
+   Sander" braucht zwei Zeilen. Der Strich ist aber Teil derselben Flex-Zeile
+   und bleibt beim Umbruch am Anfang stehen – also ganz links außen, während
+   der Text mittig darunter steht. Nachgemessen bei 400 px Fensterbreite: Er
+   hing frei am linken Rand und sah aus wie ein Rest, den jemand vergessen hat.
+
+   ER IST GANZ WEG UND NICHT NUR AUF DEM HANDY (Kevin, 21.08.2026): Eine
+   Zierlinie, die auf zwei von drei Bildschirmgrößen fehlt, ist keine
+   Signatur mehr, sondern ein Zufall.
+
+   ABGESCHALTET STATT GELÖSCHT, und das ist der Grund für den Ort: Die Regel
+   steht in der ND-Signatur und gehört anderen Kundenprojekten. Was hier
+   entschieden wird, ist eine Frage dieser Seite – deshalb steht sie auf der
+   Kundenebene. Wer den Strich zurückholen will, löscht diese drei Zeilen. */
+.hero-eyebrow::before { display: none; }
+
 /* --- Sarah freigestellt (Abschnitt „Über mich" auf /ueber-mich) -----------
    HIER STAND BIS ZUM 17.08.2026 `.hero-arc`: Sarah im Regenbogenbogen, im Hero
    dieser Seite. Mit SAR-38 läuft im Hero das Video, und Sarah steht eine

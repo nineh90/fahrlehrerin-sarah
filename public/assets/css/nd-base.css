@@ -381,7 +381,24 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
 
 /* ---------- Karten-Raster (generisch) ---------- */
 .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.4rem; }
-.card-grid--2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+/* ZWEI SPALTEN, UND ZWAR WIRKLICH ZWEI (SAR-82). Die Klasse hiess schon
+   vorher `--2`, hielt das aber nicht: Sie war `auto-fit, minmax(300px, 1fr)`
+   und ergab bei 1200 px Containerbreite drei Spalten – mit vier Kacheln also
+   3 + 1 und einer allein in der zweiten Zeile, genau die „vergessene Kachel",
+   gegen die `--5` weiter unten gebaut ist. Nachgemessen auf
+   /fahren-mit-handicap, als Sarahs laengere Texte (SAR-82) das Viererraster
+   sprengten und die Kacheln hierher wechselten.
+
+   Die Klasse wurde bis dahin NIRGENDS benutzt, das Umdefinieren aendert also
+   keine bestehende Seite – und der Name sagt jetzt, was passiert.
+
+   Die Grenze liegt bei 740 px und nicht bei den 820 px der Nachbarregeln:
+   Unterhalb macht das auto-fit der Basis von selbst zwei Spalten und ab rund
+   500 px eine. Bei 820 bliebe dazwischen ein schmales Band, in dem die Basis
+   wieder drei Spalten stellt und die vierte Kachel allein steht. */
+@media (min-width: 740px) {
+    .card-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 
 /* FÜNF KARTEN GEHEN IN KEINEM RASTER GLATT AUF.
    Mit dem auto-fit oben werden es auf dem Desktop vier Spalten – und die fünfte

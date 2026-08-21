@@ -44,9 +44,11 @@ final class PageController
                die schon da sind, der Titel die, die noch suchen. */
             'metaTitle'       => 'Führerschein mit Handicap – so läuft die Ausbildung ab',
             /* DIE EINZIGE STELLE, AN DER DIESE SEITE EINEN ORT NENNT. Nachgemessen
-               am 20.08.2026: Im sichtbaren Text der Seite steht kein einziger
-               Ortsname – 531 Wörter über Handbedienung und Lenkhilfe, aber
-               „Führerschein mit Handicap" und „Hamburg" kommen nie zusammen vor.
+               am 20.08.2026 und nach Sarahs Neufassung am 21.08.2026 (SAR-82,
+               SAR-83, SAR-84) noch einmal: Im sichtbaren Text der Seite steht
+               weiterhin kein einziger Ortsname – inzwischen 889 Wörter statt
+               531, aber „Führerschein mit Handicap" und „Hamburg" kommen nie
+               zusammen vor.
                Die Beschreibung ist dafür nur das Pflaster: Sie ist KEIN
                Rankingfaktor und entscheidet nur über den Klick, wenn der
                Treffer schon da ist. Der eigentliche Satz fehlt im Text der

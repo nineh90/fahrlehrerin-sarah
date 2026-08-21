@@ -2,10 +2,24 @@
 <section class="page-head">
     <div class="container">
         <h1>Fahren mit Handicap</h1>
+        <?php /* SARAHS VORSPANN, seit dem 21.08.2026 (Ticket SAR-82). Hier
+                 stand eine kürzere Fassung von uns: „Mit Kleinwuchs, nach einem
+                 Unfall oder mit einer Einschränkung, die dir jemand als
+                 Ausschlussgrund verkauft hat: Lass uns darüber reden, bevor du
+                 es abhakst."
+
+                 Ihre ist länger und sagt dasselbe in vier Sätzen, aber sie sagt
+                 es zu jedem einzeln: kleinwüchsig, nach einem Unfall, eine
+                 andere technische Lösung. Der dritte Satz („Vielleicht wurde dir
+                 sogar schon gesagt, dass Autofahren für dich nicht möglich sei")
+                 nennt beim Namen, was in der alten Fassung nur angedeutet war. */ ?>
         <p class="page-lead">
-            Mit Kleinwuchs, nach einem Unfall oder mit einer Einschränkung, die dir
-            jemand als Ausschlussgrund verkauft hat:
-            Lass uns darüber reden, bevor du es abhakst.
+            Eine körperliche Einschränkung bedeutet nicht automatisch, dass du auf den
+            Führerschein verzichten musst. Vielleicht bist du kleinwüchsig, hast nach
+            einem Unfall körperliche Einschränkungen oder brauchst beim Fahren eine
+            andere technische Lösung. Vielleicht wurde dir sogar schon gesagt, dass
+            Autofahren für dich nicht möglich sei. Bevor du diesen Wunsch abhakst, lass
+            uns gemeinsam schauen, was möglich ist.
         </p>
     </div>
 </section>
@@ -24,31 +38,34 @@
             </div>
 
             <div class="duo-text">
-                <h2>Ein angepasstes Auto fährt sich anders, nicht schwerer</h2>
-                <?php /* SAR-52, Sarahs Fassung. Hier standen drei Absätze; der erste
-                         („Die meisten, die zu mir kommen, haben denselben Satz im
-                         Kopf: ‚Ob das überhaupt geht?'") ist mit dem Ticket
-                         entfallen. Er war kein Verlust an dieser Stelle: Die
-                         Seite beantwortet dieselbe Frage schon im Vorspann oben
-                         („bevor du es abhakst") und noch einmal im Ablauf weiter
-                         unten. Was übrig bleibt, beschreibt das Foto daneben,
-                         und genau dafür steht der Text hier.
+                <?php /* SARAHS FASSUNG, SEIT SAR-82. Sie löst ihre eigene von
+                         SAR-52 ab, die hier stand: „Das Foto zeigt einen
+                         Linksgas-Umbau. Dabei wird das Gas von rechts auf links
+                         mechanisch umgelegt. Das rechte Pedal ist dann für den
+                         Gebrauch blockiert." Dazu die Überschrift „Ein
+                         angepasstes Auto fährt sich anders, nicht schwerer" –
+                         ihr neuer erster Satz sagt dasselbe.
 
-                         Zwei Absätze und nicht einer, obwohl Sarah es am Stück
-                         geschrieben hat: Die ersten drei Sätze erklären die
-                         Technik auf dem Bild, der letzte sagt, wie sie
-                         unterrichtet. Am Stück gesetzt liest sich das in einer
-                         schmalen Spalte neben einem Foto als ein Block, in dem
-                         der letzte Satz untergeht. Wortlaut und Reihenfolge sind
-                         unverändert. */ ?>
+                         NICHTS GEHT DABEI VERLOREN: Was die alte Fassung über
+                         den Linksgas-Umbau sagte, steht jetzt eine Kachel
+                         weiter unten in ihrer eigenen, ausführlicheren
+                         Beschreibung. Der Absatz hier führt dafür in die vier
+                         Umbauten ein, statt einen davon vorwegzunehmen.
+
+                         DAS FOTO WIRD NICHT MEHR ERWÄHNT („Das Foto zeigt …").
+                         Es steht damit für sich, und was darauf zu sehen ist,
+                         sagt sein alt-Text. Das ist die Regel dieser Seite,
+                         seit die Bildunterschriften weg sind. */ ?>
+                <h2>Autofahren mit angepasster Technik</h2>
                 <p>
-                    Das Foto zeigt einen Linksgas-Umbau. Dabei wird das Gas von rechts
-                    auf links mechanisch umgelegt. Das rechte Pedal ist dann für den
-                    Gebrauch blockiert.
+                    Ein angepasstes Fahrzeug fährt sich nicht unbedingt schwerer – zunächst
+                    einfach anders. Je nachdem, was du brauchst, können unterschiedliche
+                    technische Hilfsmittel zum Einsatz kommen.
                 </p>
                 <p>
-                    Ich erkläre dir die Bedienelemente in Ruhe und wir fahren so lange
-                    damit, bis es sich für dich völlig normal anfühlt.
+                    Ich zeige dir in Ruhe, wie die Bedienelemente funktionieren, wir stellen
+                    das Fahrzeug passend auf dich ein und du bekommst die Zeit, dich damit
+                    vertraut zu machen.
                 </p>
             </div>
         </div>
@@ -57,38 +74,51 @@
 
 <section class="section section--alt">
     <div class="container">
-        <div class="section-head">
-            <div class="section-head-text">
-                <h2>Womit wir arbeiten</h2>
-            </div>
-        </div>
+        <?php /* DIE VIER UMBAUTEN, in Sarahs Worten seit dem 21.08.2026
+                 (SAR-82). Alle vier Texte sind ihre und damit tabu.
 
-        <?php /* SAR-53: DIESE KARTEN BESCHREIBEN TECHNIK, KEINE KÖRPER.
+                 HIER STAND DIE ÜBERSCHRIFT „WOMIT WIR ARBEITEN" und sie ist
+                 ersatzlos weg. Der Grund steht im Abschnitt darüber: Sarahs
+                 Text führt die vier dort ein („können unterschiedliche
+                 technische Hilfsmittel zum Einsatz kommen"), die Kacheln sind
+                 seine Fortsetzung. Eine zweite Überschrift dazwischen wäre eine
+                 von uns, mitten in einem Abschnitt, den sie am Stück
+                 geschrieben hat.
+
+                 SAR-53 GILT WEITER, deshalb steht die Regel hier als
+                 Vorgeschichte: DIESE KARTEN BESCHREIBEN TECHNIK, KEINE KÖRPER.
                  Zwei von ihnen taten bis zum 19.08.2026 beides. „Wenn der
                  rechte Fuß nicht mitmacht" und „wenn die zweite Hand nicht
                  mitarbeiten kann" klingen im ersten Moment schonend, sind es
                  aber nicht: Beide setzen voraus, dass die Gliedmaße da ist und
                  sich nur weigert. Wer ohne rechtes Bein hier liest, bekommt
-                 seinen Alltag als Unlust beschrieben. Dazu kam ein dritter
-                 Satz, „schwierig ist am Anfang nur, den rechten Fuß stillhalten
-                 zu lassen", der dieselbe Voraussetzung macht.
+                 seinen Alltag als Unlust beschrieben.
 
                  Die Regel für alles, was hier künftig dazukommt: Sag, was der
                  Umbau TUT und wie gefahren wird. Wer ihn braucht, weiß das
                  selbst und muss es nicht von einer Website erklärt bekommen.
                  Kein „wenn X nicht mehr geht", kein „trotz", kein „leider".
 
-                 Die Startseite war davon nicht betroffen, ihre Handicap-Karte
-                 spricht schon von Kleinwuchs und eingeschränkter Beweglichkeit
-                 statt von Körperteilen. */ ?>
-        <div class="card-grid">
+                 Sarahs Fassung hält sich daran. Sie nennt Körpergröße bei der
+                 Pedalverlängerung, aber als Maß und nicht als Mangel: „wenn
+                 Gas, Bremse oder Kupplung aufgrund der Körpergröße nicht sicher
+                 erreicht werden können".
+
+                 ZWEI SPALTEN STATT VIER (`--2`): Ihre Texte sind mit 40 bis 50
+                 Wörtern rund doppelt so lang wie die Entwürfe, die hier
+                 standen. Im Viererraster wären das Spalten von 280 px und
+                 vierzehn Zeilen Höhe – dasselbe Problem wie beim Ablauf weiter
+                 unten, nur kleiner. Bei zwei Spalten sind es sieben Zeilen. */ ?>
+        <div class="card-grid card-grid--2">
             <article class="feature-card">
                 <span class="feature-icon"><?= icon('pedal') ?></span>
                 <h3>Linksgas</h3>
                 <p>
-                    Das Gaspedal sitzt links neben der Bremse, gefahren wird mit dem
-                    linken Fuß. Der Umbau ist klein, und die Umstellung geht schneller,
-                    als die meisten erwarten.
+                    Beim Linksgas befindet sich das Gaspedal links neben der Bremse und
+                    wird mit dem linken Fuß bedient. Das ursprüngliche Gaspedal wird für
+                    die Nutzung entsprechend gesichert. Gerade am Anfang ist die Bedienung
+                    ungewohnt. Deshalb üben wir sie Schritt für Schritt, bis deine Abläufe
+                    sicher werden.
                 </p>
             </article>
 
@@ -96,9 +126,11 @@
                 <span class="feature-icon"><?= icon('knob') ?></span>
                 <h3>Lenkraddrehknopf</h3>
                 <p>
-                    Ein Knauf auf dem Lenkradkranz, mit dem sich das Lenkrad sicher mit
-                    einer Hand führen lässt. Nach zwei, drei Stunden fühlt es sich
-                    normal an.
+                    Ein Lenkraddrehknopf ermöglicht es, das Lenkrad sicher mit einer Hand
+                    zu führen. Das kann beispielsweise in Verbindung mit einer
+                    Handbedienung notwendig sein. Auch hier gilt: Erst kennenlernen, dann
+                    ausprobieren und anschließend so lange üben, bis die Bedienung sicher
+                    funktioniert.
                 </p>
             </article>
 
@@ -106,28 +138,32 @@
                 <span class="feature-icon"><?= icon('lever') ?></span>
                 <h3>Handbedienung</h3>
                 <p>
-                    Gas und Bremse über einen Hebel statt über die Pedale. Braucht am
-                    Anfang Konzentration, wird aber schnell zur Gewohnheit.
+                    Bei einer Handbedienung werden Gas und Bremse nicht mit den Füßen,
+                    sondern über eine entsprechende Bedienvorrichtung mit der Hand
+                    gesteuert. Das verlangt zunächst Aufmerksamkeit und Koordination. Wir
+                    nehmen uns die Zeit, die Bewegungsabläufe gemeinsam aufzubauen und zu
+                    festigen.
                 </p>
             </article>
 
             <?php /* Hier stand bis zum 17.08.2026 „Prothesenfahren". Auf Wunsch
                      entfallen (SAR-43), samt Icon und allen Nennungen im Rest der
-                     Seite. An seine Stelle tritt der Umbau, um den es bei Kleinwuchs
+                     Seite. An seine Stelle trat der Umbau, um den es bei Kleinwuchs
                      geht – die Startseite nennt ihn seit SAR-43, und ohne diese Karte
                      verspräche sie etwas, das die Detailseite nicht kennt.
 
-                     ENTWURF, nicht von Sarah – wie alles hier, was nicht ausdrücklich
-                     als ihr Text markiert ist. Der Text bleibt bewusst bei dem, was
-                     technisch allgemein gilt (Aufsätze, Sitzhöhe, Sichtlinie);
-                     welche Systeme sie konkret im Auto hat, muss sie ergänzen. */ ?>
+                     Der Text war bis SAR-82 ein Entwurf von uns; jetzt steht Sarahs
+                     eigener da. Der Hinweis von damals, sie müsse ergänzen, welche
+                     Systeme sie konkret im Auto hat, ist damit erledigt. */ ?>
             <article class="feature-card">
                 <span class="feature-icon"><?= icon('extension') ?></span>
                 <h3>Pedalverlängerung</h3>
                 <p>
-                    Aufsätze holen die Pedale nach oben, dazu kommt der Sitz höher.
-                    Gesucht ist die eine Position, in der du gleichzeitig gut siehst,
-                    bequem ans Lenkrad kommst und die Pedale ganz durchtreten kannst.
+                    Pedalverlängerungen können eingesetzt werden, wenn Gas, Bremse oder
+                    Kupplung aufgrund der Körpergröße nicht sicher erreicht werden können.
+                    Dabei geht es nicht nur darum, die Pedale zu erreichen. Sitzposition,
+                    Sicht, Abstand zum Lenkrad und die sichere Bedienung des Fahrzeugs
+                    müssen zusammenpassen.
                 </p>
             </article>
         </div>
@@ -138,13 +174,13 @@
     <div class="container">
         <div class="duo duo--text-first">
             <div class="duo-media photo-wrap" style="--card-accent: var(--c-violet);">
+                <?php /* „während des Umbaus" trug bis zum 12.08.2026 die
+                         Bildunterschrift. Die ist auf Sarahs Wunsch weg (keine
+                         Erklärtexte unter den Fotos mehr), deshalb steht die
+                         Einordnung jetzt im alt-Text: Auf dem Bild liegen Teile
+                         herum, und ohne den Hinweis liest sich das als Pfusch
+                         statt als Zwischenstand. */ ?>
                 <figure class="photo photo--right">
-                    <?php /* „während des Umbaus" trug bis zum 12.08.2026 die
-                             Bildunterschrift. Die ist auf Sarahs Wunsch weg (keine
-                             Erklärtexte unter den Fotos mehr), deshalb steht die
-                             Einordnung jetzt im alt-Text: Auf dem Bild liegen Teile
-                             herum, und ohne den Hinweis liest sich das als Pfusch
-                             statt als Zwischenstand. */ ?>
                     <img src="<?= asset('img/handicap-handbedienung.jpg') ?>"
                          alt="Fußraum während des Umbaus auf Handbedienung: ein grün lackierter Hebel am Boden, verbunden über grüne Gestänge, daneben eine grüne Abdeckung vor den Pedalen"
                          width="1200" height="1484" loading="lazy" decoding="async">
@@ -152,22 +188,51 @@
             </div>
 
             <div class="duo-text">
-                <h2>Welche Technik zu dir passt, entscheiden wir gemeinsam</h2>
+                <?php /* SARAHS FASSUNG, SEIT SAR-82. Hier stand ein Entwurf von
+                         uns unter der Überschrift „Welche Technik zu dir passt,
+                         entscheiden wir gemeinsam".
+
+                         WAS DABEI VERSCHWINDET, gehört gesagt: „Manchmal reicht
+                         Linksgas, manchmal braucht es die komplette
+                         Handbedienung, manchmal nur eine Automatik und einen
+                         anders eingestellten Sitz." Damit steht das Wort
+                         „Automatik" auf dieser Seite nicht mehr – auf der
+                         Startseite nennt es die Kachel „Klasse B" weiter.
+                         Ebenfalls weg: „In der ersten Stunde probieren wir aus,
+                         was sich für dich am natürlichsten anfühlt." Den Satz
+                         hat der Ablauf darunter längst übernommen, Schritt 3
+                         heißt „Kennenlernen & ausprobieren".
+
+                         IHRE FASSUNG SAGT DAFÜR ETWAS, DAS DEM ENTWURF FEHLTE:
+                         wer über die Auflagen entscheidet. Der letzte Satz
+                         verweist auf die zuständigen Stellen und schlägt damit
+                         die Brücke zum Abschnitt „Was wir vorher klären müssen"
+                         weiter unten (SAR-84). */ ?>
+                <h2>Welche Lösung passt zu dir?</h2>
                 <p>
-                    Nicht jeder Umbau passt zu jedem. Manchmal reicht Linksgas, manchmal
-                    braucht es die komplette Handbedienung, manchmal nur eine Automatik und
-                    einen anders eingestellten Sitz.
+                    Das lässt sich nicht pauschal beantworten – und genau deshalb schauen
+                    wir uns deine Situation individuell an. Manchmal reicht eine
+                    vergleichsweise kleine Anpassung, manchmal werden weitere technische
+                    Hilfsmittel benötigt.
                 </p>
                 <p>
-                    In der ersten Stunde probieren wir aus, was sich für dich am
-                    natürlichsten anfühlt – und danach richtet sich alles Weitere.
+                    Welche Auflagen für deine Fahrerlaubnis gelten und welche
+                    Voraussetzungen erfüllt werden müssen, wird von den zuständigen Stellen
+                    geklärt.
                 </p>
             </div>
         </div>
     </div>
 </section>
 
-<section class="section">
+<?php /* DER WECHSEL DER HINTERGRUNDFARBE SITZT SEIT SAR-82 HIER und
+         nicht mehr einen Abschnitt tiefer. Vorher stiessen zwei helle
+         Abschnitte aneinander – „Welche Lösung passt zu dir?" und dieser –
+         und der Ablauf begann optisch mitten im vorigen. Jetzt wechselt die
+         Seite von oben nach unten durchgehend ab: hell, abgesetzt, hell,
+         abgesetzt. Wer hier eine Sektion einfügt, dreht die Reihenfolge für
+         alles darunter mit. */ ?>
+<section class="section section--alt">
     <div class="container">
         <div class="section-head">
             <div class="section-head-text">
@@ -304,7 +369,7 @@
 
          Kommt der Ablauf je zurück, steht er in der Versionsgeschichte. */ ?>
 
-<section class="section section--alt">
+<section class="section">
     <div class="container">
         <?php /* SARAHS EIGENER TEXT, seit dem 21.08.2026 (ihr Ticket SAR-84).
                  Wörtlich übernommen und damit tabu für Umformulierungen.

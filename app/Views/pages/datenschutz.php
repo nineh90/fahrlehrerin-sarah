@@ -19,13 +19,28 @@
                  Sie MÜSSEN übereinstimmen: Verantwortliche Stelle nach DSGVO und
                  Anbieterin nach DDG sind dieselbe Person, und zwei verschiedene
                  Anschriften auf zwei Rechtsseiten derselben Website sind ein
-                 Widerspruch. Wer eine ändert, ändert beide. Begründung zur
-                 c/o-Adresse und zur abweichenden E-Mail steht im Kopf von
-                 impressum.php. */ ?>
+                 Widerspruch.
+
+                 GENAU DESHALB KOMMT DIE E-MAIL JETZT AUS `config('contact.email')`
+                 (21.08.2026): Der Satz „wer eine ändert, ändert beide" stand hier
+                 schon vorher – aber solange die Adresse an zwei Stellen im Text
+                 stand, war er eine Bitte und keine Zusicherung. Jetzt ist es
+                 dieselbe Quelle wie im Impressum, im Fuß und auf /kontakt, und
+                 auseinandergehen kann es nicht mehr.
+
+                 DIE ANSCHRIFT BLEIBT AUCH HIER FEST IM TEXT, aus demselben Grund
+                 wie drüben: `config('contact.city')` ist Sarahs Einzugsgebiet,
+                 nicht die c/o-Anschrift. Ausführlich im Kopf von impressum.php.
+
+                 Eine Telefonnummer verlangt Art. 13 DSGVO hier nicht, die
+                 E-Mail genügt als Kontaktdatum des Verantwortlichen. Im
+                 Impressum steht sie, weil § 5 DDG einen zweiten Weg zur
+                 unmittelbaren Kommunikation verlangt – das ist eine andere
+                 Vorschrift mit einem anderen Zweck. */ ?>
         <p>
             Sarah Schweikert<br>
             c/o Online-Impressum 10297, Europaring 90, 53757 Sankt Augustin<br>
-            E-Mail: <a href="mailto:sarah@fahrlehrerinsarah.de">sarah@fahrlehrerinsarah.de</a>
+            E-Mail: <a href="mailto:<?= e(config('contact.email')) ?>"><?= e(config('contact.email')) ?></a>
         </p>
 
         <h2>Welche Daten gespeichert werden</h2>

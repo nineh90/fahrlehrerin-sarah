@@ -443,9 +443,14 @@ $schoolUrl = trim((string) config('school.url'));
             <article class="feature-card">
                 <span class="feature-icon"><?= icon('trailer') ?></span>
                 <h3>Klasse BE</h3>
+                <?php /* SARAHS FASSUNG, 21.08.2026 (SAR-68). Die Aufzählung
+                         „Pferdeanhänger, Wohnwagen, Baustellenhänger" ist
+                         entfallen; übrig bleibt, worum es beim BE tatsächlich
+                         geht. Der Schlusspunkt ist ergänzt – die Vorlage hatte
+                         keinen, und alle Karten dieser Reihe enden mit einem. */ ?>
                 <p>
-                    Fahren mit Anhänger: Pferdeanhänger, Wohnwagen, Baustellenhänger.
-                    Vor allem Rangieren – rückwärts um die Ecke will geübt sein.
+                    Fahren mit Anhänger: Vor allem Rangieren – rückwärts um die Ecke will
+                    geübt sein.
                 </p>
             </article>
 

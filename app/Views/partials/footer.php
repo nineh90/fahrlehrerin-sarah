@@ -122,7 +122,31 @@
                          das, was sie heißt, nämlich Rechtliches und sonst
                          nichts. */ ?>
             </nav>
-            <p class="footer-copy">&copy; <?= date('Y') ?> Sarah <?= e(config('contact.city')) ?></p>
+            <?php /* DER RECHTEINHABER GEHOERT AUSGESCHRIEBEN. Bis zum 21.08.2026
+                     stand hier „Sarah" und direkt dahinter der Ort aus der
+                     Konfiguration, ohne etwas dazwischen – gelesen wurde daraus
+                     „Sarah Neu Wulmstorf", also ein Nachname. Ein Copyright-
+                     Vermerk nennt aber genau eine Sache, nämlich wem die Inhalte
+                     gehören, und dafür braucht es ihren echten Namen.
+
+                     ZWEITE STELLE MIT IHREM NACHNAMEN: Impressum und
+                     Datenschutz (dort als verantwortliche Stelle). Heiratet sie,
+                     sind es drei Zeilen, nicht eine. Absichtlich trotzdem nicht
+                     aus `config()`: Der Name in einem Copyright-Vermerk und die
+                     Anbieterangabe nach § 5 DDG sind zwei verschiedene Aussagen,
+                     und die Impressumsseite begründet im Kopf ausführlich, warum
+                     sie ihre Angaben fest im Text hält.
+
+                     Der Ort BLEIBT und kommt weiter aus der Konfiguration: Er
+                     ist der einzige Ortsbezug, der auf jeder Seite mitläuft, und
+                     „Fahrlehrerin in …" sagt dasselbe wie `areaServed` in den
+                     strukturierten Daten. Die Marke „Fahrlehrerin Sarah" steht
+                     oben im Fuß als Wortmarke – hier unten steht die Person. */ ?>
+            <p class="footer-copy">
+                &copy; <?= date('Y') ?> Sarah Schweikert
+                <span class="sep" aria-hidden="true">·</span>
+                Fahrlehrerin in <?= e(config('contact.city')) ?>
+            </p>
 
             <?php /* Hier stand bis zum 17.08.2026 „Gemacht mit ♥ von
                      Nils-Digital" samt Logo. Entfallen mit SAR-32: Der Streifen

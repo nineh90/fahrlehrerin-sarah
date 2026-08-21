@@ -55,6 +55,11 @@ final class Seo
                 'Fahren mit Handbedienung',
                 'Fahren mit Lenkhilfe',
                 'Fahren mit Pedalverlängerung',
+                /* SAR-65. Beide Begriffe und nicht nur der Oberbegriff:
+                   „Neurodivergenz" kennt nicht jede:r, den oder die es
+                   betrifft – gesucht wird nach der Diagnose. */
+                'Fahrausbildung bei ADHS',
+                'Fahrausbildung bei Autismus',
             ],
         ];
 

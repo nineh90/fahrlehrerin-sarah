@@ -57,6 +57,32 @@ final class PageController
         ]);
     }
 
+    /**
+     * /neurodivergenz – SAR-65.
+     *
+     * Der Anlass kam von Sarah selbst: „Ich habe bisher nicht ein Wort über
+     * die Menschen mit unsichtbaren Behinderungen gefunden." Genau deshalb
+     * ist es eine eigene Seite und kein Abschnitt auf /fahren-mit-handicap –
+     * angehängt wäre es weiterhin nicht gefunden, und die beiden Seiten
+     * handeln von Verschiedenem: dort von der Technik am Auto und vom Weg
+     * über die Behörde, hier davon, wie unterrichtet wird.
+     */
+    public function neurodivergenz(): void
+    {
+        render('pages/neurodivergenz', [
+            'title'           => 'Fahrschule & Neurodivergenz',
+            /* Wie bei der Handicap-Seite: Die Überschrift spricht die an, die
+               schon da sind, der Titel die, die noch suchen. Gesucht wird
+               nach der Diagnose und nicht nach dem Oberbegriff – „ADHS" und
+               „Autismus" stehen deshalb vorn, „Neurodivergenz" kennt nicht
+               jede:r, der oder die betroffen ist. */
+            'metaTitle'       => 'Führerschein mit ADHS oder Autismus – Fahrschule, die anders lernt',
+            'metaDescription' => 'Fahrausbildung für neurodivergente Menschen in '
+                . area_sentence() . ': klare Abläufe, einzelne Schritte, '
+                . 'Wiederholungen ohne Druck. Diagnose ist keine Voraussetzung.',
+        ]);
+    }
+
     public function contact(): void
     {
         render('pages/kontakt', [

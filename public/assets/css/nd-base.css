@@ -247,6 +247,57 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 .nav-cta { margin-left: .5rem; }
 .nav-cta.is-active { color: var(--on-accent); }
 
+/* --- Das Untermenü „Schwerpunkte" (SAR-65) --------------------------------
+   Zwei Seiten unter einem Punkt: /fahren-mit-handicap und /neurodivergenz.
+   Warum die Gruppe so heißt und warum ihr Kopf ein <button> ist, steht in
+   partials/nav.php – hier steht nur, wie sie aussieht.
+
+   KEIN REINES HOVER-MENÜ. Aufgeklappt wird per Klick (`.is-open` aus
+   main.js), und das aus einem handfesten Grund: Auf Touchgeräten gibt es
+   kein Hover, dort ist der erste Tipp auf einen Hover-Punkt ein Klick auf
+   den Elternlink – und der führt bei einer Gruppe ohne eigene Seite
+   nirgendwohin. Auf dem Handy ist die Gruppe deshalb gar nicht erst
+   zugeklappt (Block bei 1120 px weiter unten).
+
+   DIE ZWEITE REGEL IST DER AUSFALLSCHIRM. Lädt main.js nicht, gibt es kein
+   `.is-open` und die beiden Seiten wären über das Menü unerreichbar. Dann
+   greifen `:hover` und `:focus-within` – Maus wie Tastatur kommen durch.
+   Sie hängen an `html:not(.has-js)`, weil sonst mit JS zwei Mechanismen
+   nebeneinander liefen: Der Knopf sagt per `aria-expanded` zu, dass er
+   zugeklappt ist, während `:focus-within` ihn beim Antabben schon öffnet.
+   Genau diese Lüge gegenüber der Vorlesesoftware soll die Klasse
+   verhindern. Sie kommt aus main.js und steht am <html>, nicht am <body>:
+   So gilt sie schon, bevor der Körper gezeichnet ist. */
+.nav-group { position: relative; }
+.nav-group-toggle { display: inline-flex; align-items: center; gap: .4rem; }
+/* Das Dreieck ist reine Form (im Markup `aria-hidden`) und deshalb aus
+   Rahmen gebaut statt als Zeichen: Ein „▾" aus der Schrift säße je nach
+   Font woanders auf der Grundlinie. */
+.nav-caret {
+    width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent;
+    border-top: 5px solid currentColor; transition: transform .18s;
+}
+.nav-group.is-open .nav-caret { transform: rotate(180deg); }
+.nav-submenu {
+    position: absolute; top: 100%; left: 0; min-width: 232px; z-index: 60;
+    display: flex; flex-direction: column; gap: .1rem;
+    padding: .4rem; margin-top: .35rem;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); box-shadow: var(--shadow-lg);
+    /* `visibility` und nicht `display: none`, damit der Wechsel weich läuft –
+       und trotzdem kein Tabstopp im zugeklappten Menü hängen bleibt. Genau
+       das kann `opacity: 0` allein nicht: Ein durchsichtiges Menü ist für
+       die Tastatur weiter da. */
+    opacity: 0; visibility: hidden; translate: 0 -4px;
+    transition: opacity .15s, translate .15s, visibility .15s;
+}
+.nav-group.is-open > .nav-submenu,
+html:not(.has-js) .nav-group:hover > .nav-submenu,
+html:not(.has-js) .nav-group:focus-within > .nav-submenu {
+    opacity: 1; visibility: visible; translate: 0 0;
+}
+.nav-submenu .nav-link { white-space: nowrap; }
+
 .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: 0; cursor: pointer; padding: 8px; }
 .nav-toggle span { width: 26px; height: 2px; background: var(--text); border-radius: 2px; transition: .2s; }
 
@@ -356,6 +407,22 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     .card-grid--5 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
     .card-grid--5 > * { grid-column: span 2; }
     .card-grid--5 > *:nth-child(4) { grid-column: 2 / span 2; }
+}
+
+/* SECHS KARTEN GEHEN GENAUSO WENIG GLATT AUF, und zwar aus demselben Grund
+   (SAR-65): Das auto-fit oben macht auf breiten Schirmen VIER Spalten, sechs
+   Karten stehen also 4 + 2 – die zweite Zeile halb leer und links angeschlagen.
+
+   Nachgemessen bei 1440 px, nachdem die sechste Kachel dazukam. Die Annahme,
+   sechs ergäben von selbst 3 + 3, war falsch: Sie stimmt nur für ein Raster mit
+   fester Spaltenzahl, und das hier hat keine.
+
+   Drei feste Spalten statt sechs mit `span 2` wie oben: Bei sechs Karten muss
+   nichts zentriert werden, beide Zeilen sind voll. Die 820 px sind dieselbe
+   gemessene Grenze wie beim Nachbarn darüber – darunter übernimmt das auto-fit
+   und macht zwei Spalten daraus, also 3 × 2. */
+@media (min-width: 820px) {
+    .card-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 .feature-card {
     position: relative; display: flex; flex-direction: column; overflow: hidden;
@@ -1058,6 +1125,35 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
 .check-list { list-style: none; padding: 0; margin: 0 0 1rem; }
 .check-list li { padding-left: 1.9rem; position: relative; margin-bottom: .6rem; color: var(--text-soft); }
 .check-list li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+/* Zweispaltig, sobald Platz ist (SAR-65). Neun Punkte untereinander sind auf
+   einem breiten Schirm eine schmale Kolonne, die den Abschnitt in die Länge
+   zieht.
+
+   `columns` und nicht Grid: Der Umbruch soll sich nach der Länge der Punkte
+   richten, nicht nach ihrer Anzahl. `break-inside` ist Pflicht – ohne die
+   Zeile reißt der Browser einen zweizeiligen Punkt mitten durch und die
+   zweite Hälfte steht ohne Haken oben in der nächsten Spalte. */
+@media (min-width: 720px) {
+    .check-list--two { columns: 2; column-gap: 2.2rem; }
+    .check-list--two li { break-inside: avoid; }
+}
+
+/* Kurze Sätze, einzeln gesetzt (SAR-65, /neurodivergenz).
+   Eine Liste ohne Zeichen davor: Der senkrechte Strich fasst sie zusammen,
+   ohne jedem Punkt ein Symbol zu geben. Warum kein Haken, steht in der View
+   bei der Liste. */
+.beat-list {
+    list-style: none; padding: 0 0 0 1.1rem; margin: 0 0 1rem;
+    border-left: 3px solid var(--accent);
+}
+.beat-list li { color: var(--text-soft); margin-bottom: .35rem; }
+.beat-list li:last-child { margin-bottom: 0; }
+
+/* Der Weg zur Nachbarseite unter einem Abschnitt (SAR-65). Bewusst
+   unauffällig: Er ist eine Fußnote, kein zweiter Aufruf zum Handeln – davon
+   hat jede Seite genau einen, und der steht im Schlussband. */
+.cross-link { margin: 1.6rem 0 0; color: var(--muted); font-size: var(--fs-sm); }
+.cross-link a { font-weight: 500; text-decoration: underline; }
 
 /* Deutlich sichtbarer Platzhalter-Hinweis (Demo-Inhalte) */
 .placeholder-note {
@@ -2077,7 +2173,19 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
    die Terminplanung zurückholt, legt eine Zeile in der `.env` um – und hätte
    dann ein zweizeiliges Menü, ohne zu ahnen, dass es an einem CSS-Breakpoint
    liegt. Die 1120 sind auf die LANGE Fassung gerechnet und bleiben stehen,
-   bis entschieden ist, ob die Planung wiederkommt. */
+   bis entschieden ist, ob die Planung wiederkommt.
+
+   SAR-65 HAT DIE ZEILE VERKÜRZT, nicht verlängert, obwohl eine Seite
+   dazugekommen ist: Aus „Fahren mit Handicap" (19 Zeichen) wurde die Gruppe
+   „Schwerpunkte" (12), und die zweite Seite hängt im Untermenü statt in der
+   Zeile. Nach derselben Rechnung wie oben sind das 7 × 9 px weniger, das
+   Dreieck daneben kostet rund 14 px zurück – netto etwa 50 px kürzer, in
+   beiden Fassungen gleichermaßen. Die Grenze bleibt trotzdem bei 1120: Sie
+   hatte oben schon Luft, und ein Breakpoint, der bei jeder Umbenennung
+   nachgeführt wird, ist irgendwann auf nichts mehr gerechnet.
+
+   WAS DAS UNTERMENÜ HIER UNTEN TUT, steht am Ende dieses Blocks: Es klappt
+   nicht auf, sondern steht eingerückt offen da. */
 @media (max-width: 1120px) {
     .nav-toggle { display: flex; }
 
@@ -2127,6 +2235,34 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     .main-nav.is-open { display: flex; }
     .nav-link { padding: .8rem .5rem; }
     .nav-cta { margin: .5rem 0 0; }
+
+    /* --- „Schwerpunkte" ist hier KEIN Untermenü mehr (SAR-65) --------------
+       Im aufgeklappten Hamburger stehen die beiden Seiten einfach eingerückt
+       untereinander. Ein Menü im Menü wäre auf dem Handy ein zweiter
+       Bedienschritt für zwei Links – und ausgerechnet auf der Seite, die
+       davon handelt, Abläufe einfach zu halten.
+
+       Der Knopf bleibt trotzdem stehen und wird zur Überschrift: Er ordnet
+       die beiden ein. Er ist per `pointer-events: none` stillgelegt, damit
+       niemand auf etwas tippt, das nichts tut – die Ansage bleibt für
+       Vorlesesoftware erhalten, weil das Element im Baum bleibt. Sein
+       Dreieck ist weg, es verspräche ein Aufklappen, das es hier nicht
+       gibt. */
+    .nav-group { position: static; }
+    .nav-group-toggle {
+        pointer-events: none; width: 100%; justify-content: flex-start;
+        text-transform: uppercase; letter-spacing: 1.5px; font-size: var(--fs-xs);
+        color: var(--muted); padding-bottom: .2rem;
+    }
+    .nav-group-toggle.is-active { color: var(--muted); }
+    .nav-caret { display: none; }
+    .nav-submenu {
+        position: static; opacity: 1; visibility: visible; translate: 0 0;
+        min-width: 0; padding: 0 0 0 .9rem; margin: 0;
+        background: none; border: 0; box-shadow: none;
+        border-left: 2px solid var(--border);
+        transition: none;
+    }
 }
 
 /* Ab hier das eigentliche Handy-Layout. Es hing nie am Header und bleibt

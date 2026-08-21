@@ -199,6 +199,28 @@ function nav_active(string $path): string
     return str_starts_with($current, $target) ? ' is-active' : '';
 }
 
+/**
+ * Wie `nav_active()`, aber für eine GRUPPE von Pfaden (SAR-65).
+ *
+ * Die Menü-Gruppe „Schwerpunkte" ist selbst keine Seite – sie steht für zwei.
+ * Aktiv ist sie deshalb, sobald einer ihrer Punkte aktiv ist. Ohne das wäre
+ * die Gruppe der einzige Menüeintrag ohne Zustand: Man stünde auf
+ * /neurodivergenz, und die Leiste zeigte nirgends, wo man ist.
+ *
+ * Nur die Färbung, NICHT der Aufklappzustand: Das Untermenü startet immer
+ * zugeklappt, auch auf seinen eigenen Seiten. Warum, steht in
+ * partials/nav.php.
+ */
+function nav_group_active(array $paths): string
+{
+    foreach ($paths as $path) {
+        if (nav_active($path) !== '') {
+            return ' is-active';
+        }
+    }
+    return '';
+}
+
 /** Markiert die aktive Navigation nur bei exakt diesem Pfad. */
 function nav_exact(string $path): string
 {
@@ -307,6 +329,16 @@ function icon(string $name): string
         'accessibility' => '<circle cx="12" cy="12" r="9.2"/><circle cx="12" cy="7.4" r="1.5"/><path d="M7.6 10.4h8.8"/><path d="M12 10.4v3.4"/><path d="m12 13.8-1.9 4.4M12 13.8l1.9 4.4"/>',
         'tiktok'    => '<path d="M16 4c.4 2.4 2 4 4.4 4.2v3.1c-1.7.1-3.2-.4-4.4-1.3v5.6a5.9 5.9 0 1 1-5.1-5.8v3.2a2.7 2.7 0 1 0 1.9 2.6V4Z"/>',
         'instagram' => '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/>',
+        /* NEURODIVERGENZ: die Unendlichkeitsschleife (SAR-65). Das ist das
+           Zeichen, das die neurodivergente Community selbst benutzt – und
+           ausdrücklich NICHT das Puzzleteil, das dort als abwertend gilt
+           (ein fehlendes Stück). Wer das Icon je austauscht, sollte das
+           wissen: Es ist keine Geschmacksfrage.
+
+           Farbe kommt wie bei allen anderen aus `--card-accent`; die
+           goldene bzw. bunte Fassung des Zeichens lässt sich hier nicht
+           abbilden, weil der Kachelrahmen die Farbe rotiert. */
+        'infinity'  => '<path d="M12 12c-2-2.7-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.3 6-4Z"/><path d="M12 12c2 2.7 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.3-6 4Z"/>',
         'default'   => '<circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2"/>',
     ];
 

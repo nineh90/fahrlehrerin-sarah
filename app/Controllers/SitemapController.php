@@ -37,6 +37,10 @@ final class SitemapController
     private const SEITEN = [
         '/'                    => ['prioritaet' => '1.0', 'frequenz' => 'monthly'],
         '/fahren-mit-handicap' => ['prioritaet' => '0.9', 'frequenz' => 'monthly'],
+        /* Dieselbe Gewichtung wie die Handicap-Seite (SAR-65): Die beiden sind
+           die zwei Schwerpunkte und stehen im Menü nebeneinander. Eine
+           niedrigere Zahl hier hieße, wir hielten die eine für nachrangig. */
+        '/neurodivergenz'      => ['prioritaet' => '0.9', 'frequenz' => 'monthly'],
         '/ueber-mich'          => ['prioritaet' => '0.8', 'frequenz' => 'monthly'],
         '/kontakt'             => ['prioritaet' => '0.6', 'frequenz' => 'yearly'],
     ];

@@ -70,6 +70,75 @@
         });
     }
 
+    /* Untermenü „Schwerpunkte" im Header (SAR-65).
+
+       Die Klasse am <html> ist das Erste, was hier passiert, und sie ist
+       kein Beiwerk: Solange sie fehlt, öffnet das CSS das Untermenü bei
+       Hover und Fokus von allein (Ausfallschirm für den Fall, dass diese
+       Datei nicht lädt). Erst mit ihr übernimmt der Knopf. Steht sie zu
+       spät, blitzt das Menü beim Antabben kurz auf.
+
+       Zum Verhalten: Klick schaltet um, Escape schließt und gibt den Fokus
+       an den Knopf zurück (sonst steht er im Nichts), ein Klick irgendwo
+       daneben schließt ebenfalls. Wandert der Fokus per Tabulator aus der
+       Gruppe heraus, geht sie zu – ohne das bliebe ein offenes Menü über
+       der Seite stehen, während man längst woanders ist.
+
+       `aria-expanded` wird an EINER Stelle gesetzt (setzeGruppe), damit die
+       Ansage nie von der Anzeige abweichen kann. */
+    document.documentElement.classList.add('has-js');
+
+    document.querySelectorAll('.nav-group').forEach(function (gruppe) {
+        var knopf = gruppe.querySelector('.nav-group-toggle');
+        if (!knopf) return;
+
+        var setzeGruppe = function (offen) {
+            gruppe.classList.toggle('is-open', offen);
+            knopf.setAttribute('aria-expanded', offen ? 'true' : 'false');
+        };
+
+        /* IM HAMBURGER GIBT ES NICHTS ZUM AUFKLAPPEN: Dort steht die Gruppe
+           eingerückt offen da (Regel im 1120-px-Block von nd-base.css). Ohne
+           die folgenden Zeilen stünde am Knopf trotzdem `aria-expanded=false`,
+           während die beiden Links sichtbar darunter stehen – eine Ansage,
+           die der Anzeige widerspricht.
+
+           DIE 1120 STEHT HIER ZUM ZWEITEN MAL. Sie gehört eigentlich dem CSS;
+           wer sie dort verschiebt, muss sie hier mitziehen, sonst sagt der
+           Knopf auf Tabletbreite wieder etwas anderes, als zu sehen ist. */
+        var schmal = window.matchMedia('(max-width: 1120px)');
+        var pruefeBreite = function () {
+            if (schmal.matches) setzeGruppe(true);
+        };
+        schmal.addEventListener('change', pruefeBreite);
+        pruefeBreite();
+
+        knopf.addEventListener('click', function () {
+            if (schmal.matches) return;
+            setzeGruppe(!gruppe.classList.contains('is-open'));
+        });
+
+        gruppe.addEventListener('keydown', function (e) {
+            if (e.key !== 'Escape' || schmal.matches) return;
+            setzeGruppe(false);
+            knopf.focus();
+        });
+
+        // `focusout` und nicht `blur`: Nur blur steigt nicht auf, käme hier
+        // also nie an. `relatedTarget` ist das Element, das den Fokus BEKOMMT
+        // – liegt es noch in der Gruppe, war es nur ein Sprung von einem
+        // Untermenüpunkt zum nächsten.
+        gruppe.addEventListener('focusout', function (e) {
+            if (schmal.matches || gruppe.contains(e.relatedTarget)) return;
+            setzeGruppe(false);
+        });
+
+        document.addEventListener('click', function (e) {
+            if (schmal.matches || gruppe.contains(e.target)) return;
+            setzeGruppe(false);
+        });
+    });
+
     // Admin-Navigation: Hamburger-Drawer (mobil)
     var adminToggle = document.querySelector('.admin-nav-toggle');
     var adminSidebar = document.getElementById('adminSidebar');

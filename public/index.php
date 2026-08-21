@@ -32,6 +32,13 @@ $router = new Router();
 $router->get('/',                    [HomeController::class, 'index']);
 $router->get('/ueber-mich',          [PageController::class, 'about']);
 $router->get('/fahren-mit-handicap', [PageController::class, 'handicap']);
+/* SAR-65. Steht im Menü zusammen mit /fahren-mit-handicap unter
+   „Schwerpunkte", ist aber eine eigenständige Seite und kein Unterpfad:
+   /neurodivergenz und nicht /fahren-mit-handicap/neurodivergenz. Der Grund
+   ist derselbe wie bei der Benennung der Gruppe (partials/nav.php) – eine
+   Adresse, die Neurodivergenz unter „Handicap" einsortiert, sagt etwas aus,
+   das Sarahs Text auf der Seite ausdrücklich offenlässt. */
+$router->get('/neurodivergenz',      [PageController::class, 'neurodivergenz']);
 $router->get('/kontakt',             [PageController::class, 'contact']);
 /* Die Wegbegleiter – eine Route für alle. Der Slug wird in app/Partners.php
    nachgeschlagen, unbekannte enden mit 404. Eine Übersichtsseite unter

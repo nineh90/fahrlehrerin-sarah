@@ -49,7 +49,63 @@
                      Grenze dort senken. */ ?>
             <a class="nav-link<?= nav_active('/') ?>" href="<?= url('/') ?>">Startseite</a>
             <a class="nav-link<?= nav_active('/ueber-mich') ?>" href="<?= url('/ueber-mich') ?>">Über mich</a>
-            <a class="nav-link<?= nav_active('/fahren-mit-handicap') ?>" href="<?= url('/fahren-mit-handicap') ?>">Fahren mit Handicap</a>
+            <?php /* DIE GRUPPE „SCHWERPUNKTE", seit dem 21.08.2026 (SAR-65).
+
+                     Hier stand ein einzelner Punkt „Fahren mit Handicap". Mit
+                     /neurodivergenz kam eine zweite Seite dazu, die inhaltlich
+                     danebengehört, und für zwei lange Punkte nebeneinander ist
+                     in der Leiste kein Platz (die Rechnung steht in nd-base.css
+                     beim 1120-px-Block).
+
+                     WARUM DIE GRUPPE NICHT „FAHREN MIT HANDICAP" HEISST, obwohl
+                     das der stärkere Begriff wäre: Sie wäre dann der Elternpunkt
+                     von „Neurodivergenz" – und ein Menü, das das eine unter das
+                     andere hängt, behauptet, Neurodivergenz sei ein Handicap.
+                     Sarahs Text auf der Seite vermeidet genau diese Einordnung
+                     („du möchtest dich überhaupt keinem Begriff zuordnen").
+                     Nebenbei müsste die bestehende Seite dann umbenannt werden,
+                     weil ein Elternpunkt nicht heißen kann wie sein Kind.
+                     „Schwerpunkte" ordnet niemanden ein, es sagt nur, worauf
+                     Sarah spezialisiert ist – und trägt später auch die
+                     Hörschädigung oder die Angst vorm Steuer, falls die Kacheln
+                     der Startseite eigene Seiten bekommen.
+
+                     ES IST EIN <button>, KEIN LINK, und das ist der Kern der
+                     Sache: Die Gruppe hat keine eigene Seite. Ein Link, der
+                     nirgendwohin führt (href="#"), wäre für Vorlesesoftware ein
+                     Versprechen, das er nicht hält. Der Knopf sagt über
+                     `aria-expanded` genau, was er tut, und `aria-controls`
+                     zeigt auf die Liste darunter.
+
+                     OHNE JAVASCRIPT bleibt das Menü trotzdem bedienbar: Die
+                     Liste ist im Markup immer da, und `:focus-within` in
+                     nd-base.css klappt sie auf, sobald der Knopf oder einer
+                     ihrer Links den Fokus hat. Mit Tastatur kommt man also
+                     durch, auch wenn main.js nicht lädt. Auf dem Handy ist sie
+                     ohnehin immer offen (siehe 1120-px-Block).
+
+                     ZUGEKLAPPT AUCH AUF DEN EIGENEN SEITEN. Eine frühere Fassung
+                     ließ das Untermenü aufgeklappt, wenn man auf einer der
+                     beiden Seiten stand – der Gedanke war, dass man sonst erst
+                     aufklappen muss, um zu sehen, wo man ist. Beim Ansehen war
+                     es das Falsche: Das Menü hing beim Laden über der
+                     Überschrift und verschwand beim ersten Klick irgendwohin,
+                     also genau wie ein hängengebliebenes Menü. Wo man ist,
+                     sagt der Knopf ohnehin – `nav_group_active()` färbt ihn
+                     ein, sobald eine der beiden Seiten offen ist. */ ?>
+            <?php $schwerpunkte = ['/fahren-mit-handicap', '/neurodivergenz']; ?>
+            <div class="nav-group">
+                <button class="nav-link nav-group-toggle<?= nav_group_active($schwerpunkte) ?>"
+                        type="button"
+                        aria-expanded="false"
+                        aria-controls="navSchwerpunkte">
+                    Schwerpunkte<span class="nav-caret" aria-hidden="true"></span>
+                </button>
+                <div class="nav-submenu" id="navSchwerpunkte">
+                    <a class="nav-link<?= nav_active('/fahren-mit-handicap') ?>" href="<?= url('/fahren-mit-handicap') ?>">Fahren mit Handicap</a>
+                    <a class="nav-link<?= nav_active('/neurodivergenz') ?>" href="<?= url('/neurodivergenz') ?>">Neurodivergenz</a>
+                </div>
+            </div>
 
             <?php /* DIE FAHRSCHULE IM MENÜ, seit dem 21.08.2026 (SAR-54).
 

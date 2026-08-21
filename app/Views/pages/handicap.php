@@ -274,6 +274,22 @@
                 </p>
             </div>
         </div>
+
+        <?php /* SAR-65. Die spiegelbildliche Zeile steht auf /neurodivergenz.
+
+                 Diese Seite handelt von der Technik am Auto und vom Weg über
+                 die Behörde, die andere davon, wie unterrichtet wird – zwei
+                 Seiten, die einander nicht ersetzen. Im Menü stehen sie unter
+                 „Schwerpunkte" nebeneinander; hier steht derselbe Weg für
+                 alle, die das Menü nicht benutzen.
+
+                 Bewusst eine Fußnote und kein Kasten mit Werbetext: Jede Seite
+                 hat genau einen Aufruf zum Handeln, und der steht im
+                 Schlussband darunter. */ ?>
+        <p class="cross-link">
+            Zum anderen Schwerpunkt:
+            <a href="<?= url('/neurodivergenz') ?>">Fahrschule &amp; Neurodivergenz</a>
+        </p>
     </div>
 </section>
 

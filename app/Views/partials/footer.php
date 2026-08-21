@@ -58,6 +58,13 @@
                 <ul class="footer-links">
                     <li><a href="<?= url('/ueber-mich') ?>">Wer ich bin</a></li>
                     <li><a href="<?= url('/fahren-mit-handicap') ?>">Fahren mit Handicap</a></li>
+                    <?php /* SAR-65. Steht hier FLACH neben den anderen und nicht
+                             eingerückt unter „Fahren mit Handicap", obwohl die
+                             beiden im Menü eine Gruppe sind: Der Fuß ist eine
+                             Liste von Wegen, keine zweite Navigation. Eine
+                             Verschachtelung über vier Punkte wäre Aufwand für
+                             eine Ordnung, die hier niemand sucht. */ ?>
+                    <li><a href="<?= url('/neurodivergenz') ?>">Neurodivergenz</a></li>
                     <?php /* Führt auf den Abschnitt unten auf der Startseite und nicht
                              auf eine eigene Übersichtsseite – die gibt es bewusst nicht
                              (Begründung im PartnerController). Der Sprungpunkt heißt

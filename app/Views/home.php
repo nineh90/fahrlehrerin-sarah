@@ -419,11 +419,22 @@ $schoolUrl = trim((string) config('school.url'));
             </div>
         </div>
 
-        <?php /* `--5` seit SAR-44: Mit der fünften Karte stünde eine allein in der
-                 zweiten Zeile. Der Modifier macht 3 + 2 daraus, zweite Zeile mittig
-                 (Begründung in nd-base.css). Kommt je eine Karte dazu oder weg,
-                 gehört er angepasst oder entfernt – er ist auf fünf gerechnet. */ ?>
-        <div class="card-grid card-grid--5">
+        <?php /* HIER STAND `card-grid--5`, bis zum 21.08.2026 (SAR-65). Der
+                 Modifier fing genau fünf Kacheln ab: Ohne ihn stand die fünfte
+                 allein in der zweiten Zeile, mit ihm wurden 3 + 2 daraus, zweite
+                 Zeile mittig.
+
+                 Mit „Neurodivergenz" sind es sechs, und die brauchen einen
+                 anderen: `--3` macht drei feste Spalten, also 3 + 3 mit zwei
+                 vollen Zeilen. OHNE Modifier wären es 4 + 2 – nachgemessen bei
+                 1440 px, das auto-fit im Basisraster stellt auf breiten Schirmen
+                 vier Spalten. Sechs Karten gehen also NICHT von selbst auf, auch
+                 wenn die Zahl danach aussieht.
+
+                 `--5` bleibt in nd-base.css, die Wegbegleiter-Seiten benutzen es
+                 weiter. Wer je wieder auf fünf Kacheln kommt, tauscht hier
+                 zurück. */ ?>
+        <div class="card-grid card-grid--3">
             <article class="feature-card">
                 <span class="feature-icon"><?= icon('car') ?></span>
                 <h3>Klasse B</h3>
@@ -560,6 +571,32 @@ $schoolUrl = trim((string) config('school.url'));
                     erscheinen als Anweisung auf einem Display im Auto. Unsere eigens
                     entwickelte App dafür heißt FahrSignal und befindet sich gerade in der
                     Testphase.
+                </p>
+            </article>
+
+            <?php /* SAR-65, 21.08.2026. Steht ZWISCHEN Hörschädigung und Angst,
+                     und die Reihenfolge der letzten vier Kacheln ist damit eine
+                     Linie: Körper, Sinne, Reizverarbeitung, Kopf. „Angstfrei ans
+                     Steuer" schließt die Reihe weiterhin ab.
+
+                     DER TEXT IST SARAHS und steht wörtlich so auch im Vorspann
+                     von /neurodivergenz – die Kachel ist der Anriss dieser
+                     Seite, nicht ein zweiter Text über dasselbe. Wer ihn hier
+                     ändert, ändert dort mit.
+
+                     Die Überschrift heißt wie der Menüpunkt („Neurodivergenz")
+                     und nicht wie die Seite („Fahrschule & Neurodivergenz"):
+                     Kachel und Menü sollen für Suchende dasselbe Wort tragen.
+                     Die Nachbarn heißen „Ausbildung mit …" – das passt hier
+                     nicht, Neurodivergenz ist keine Voraussetzung, die man
+                     mitbringt wie einen Anhänger. */ ?>
+            <article class="feature-card">
+                <span class="feature-icon"><?= icon('infinity') ?></span>
+                <h3>Neurodivergenz</h3>
+                <p>
+                    Autismus, ADHS oder eine andere Art der Reizverarbeitung müssen kein
+                    Hindernis für den Führerschein sein. Manchmal braucht es einfach eine
+                    Fahrausbildung, die anders funktioniert.
                 </p>
             </article>
 

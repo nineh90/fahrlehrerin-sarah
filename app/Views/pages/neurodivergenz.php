@@ -216,13 +216,16 @@
 
 <section class="section section--alt">
     <div class="container">
-        <?php /* DIESELBE ÜBERSCHRIFT STEHT AUF /fahren-mit-handicap, und das ist
-                 kein Versehen: Sarah hat beide Male von sich aus so formuliert.
-                 Der Kasten dort grenzt gegen die Führerscheinstelle ab, dieser
-                 gegen Ärztin und Psychotherapeutin. Zwei Grenzen, ein Satzmuster
-                 – wer die eine Seite kennt, erkennt es auf der anderen wieder.
+        <?php /* DIESELBE ÜBERSCHRIFT STAND BIS ZUM 21.08.2026 AUCH AUF
+                 /fahren-mit-handicap. Dort heißt der Abschnitt seit SAR-84
+                 „Was wir vorher klären müssen" – Sarahs eigener Text, der
+                 dieselbe Grenze zieht und noch dazu sagt, was sie sehr wohl
+                 beurteilen kann.
 
-                 Wer eine der beiden je umbenennt, sollte die andere mitnehmen. */ ?>
+                 Die beiden Seiten sprechen damit nicht mehr wortgleich, aber
+                 im selben Muster: „Ich bin Fahrlehrerin – keine Ärztin und
+                 keine Gutachterin" dort, „keine Ärztin und keine
+                 Psychotherapeutin" hier. Beide Sätze sind ihre. */ ?>
         <div class="notice" style="--card-accent: var(--c-violet);">
             <?= icon('shield') ?>
             <div>

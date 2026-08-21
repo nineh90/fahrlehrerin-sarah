@@ -257,16 +257,76 @@
 
 <section class="section section--alt">
     <div class="container">
+        <?php /* SARAHS EIGENER TEXT, seit dem 21.08.2026 (ihr Ticket SAR-84).
+                 Wörtlich übernommen und damit tabu für Umformulierungen.
+
+                 HIER STAND DER KASTEN „WAS ICH NICHT BEURTEILEN KANN", ein
+                 Entwurf von uns. Er sagte dasselbe in zwei Sätzen; ihre Fassung
+                 sagt es genauer (nicht nur „was ich nicht kann", sondern auch,
+                 was sie sehr wohl beurteilen kann) und endet mit einer
+                 Einladung statt mit einer Grenze.
+
+                 KEIN KASTEN MEHR, sondern ein Abschnitt wie jeder andere. Der
+                 Grund ist die Länge: Ein `.notice` ist für einen kurzen
+                 Vorbehalt gedacht, ihre drei Absätze sind rund 130 Wörter. In
+                 einem gelb geränderten Kasten läse sich das als Warnung, und
+                 der letzte Absatz („darfst du dich trotzdem bei mir melden")
+                 ist das Gegenteil davon.
+
+                 DIE ÜBERSCHRIFT IST DAMIT NICHT MEHR DIESELBE wie die auf
+                 /neurodivergenz. Bis heute hieß sie hier und dort „Was ich
+                 nicht beurteilen kann"; dort ist es weiterhin Sarahs Wortlaut
+                 und bleibt. */ ?>
+        <div class="section-head">
+            <div class="section-head-text">
+                <h2>Was wir vorher klären müssen</h2>
+            </div>
+        </div>
+
+        <div class="prose">
+            <p>
+                Ich bin Fahrlehrerin – keine Ärztin und keine Gutachterin. Deshalb kann
+                und werde ich nicht beurteilen, ob du aus medizinischer Sicht
+                fahrtauglich bist oder welche Auflagen für deine Fahrerlaubnis notwendig
+                sind. Diese Entscheidungen gehören in die Hände der zuständigen
+                Fachleute und Behörden.
+            </p>
+            <p>
+                Was ich beurteilen kann: wie du mit der für dich vorgesehenen Technik im
+                Fahrzeug zurechtkommst, wo wir in der praktischen Ausbildung ansetzen
+                und was wir gemeinsam trainieren können.
+            </p>
+            <p>
+                Wenn du noch ganz am Anfang stehst und nicht weißt, welche Gutachten,
+                Nachweise oder nächsten Schritte für dich notwendig sind, darfst du dich
+                trotzdem bei mir melden. Wir schauen gemeinsam, wo du gerade stehst – und
+                von dort aus geht es weiter.
+            </p>
+        </div>
+
+        <?php /* DER EINZIGE SATZ DES ALTEN KASTENS, DER ÜBRIG IST, und der
+                 einzige Satz dieses Abschnitts, der nicht von Sarah stammt.
+
+                 Ihr Text von SAR-84 deckt die medizinische und behördliche
+                 Seite ab, das Vertragliche nicht – er ist ohne diesen Satz
+                 geschrieben, weil sie den alten Kasten vermutlich nicht vor
+                 sich hatte. Ersatzlos streichen wollten wir ihn nicht: Wer über
+                 die Suche direkt auf dieser Seite landet, findet sonst nirgends
+                 darauf, wo er sich anmeldet und was es kostet.
+
+                 Er steht als Kasten und nicht im Fließtext darüber, damit die
+                 Grenze sichtbar bleibt: oben ihre Worte, hier unsere.
+
+                 Die Einordnung „angestellt, nicht selbstständig" steht ohnehin
+                 auf JEDER Seite unten (partials/site-note.php) – dieser Satz
+                 ist die praktische Ergänzung dazu, nicht ihre Wiederholung.
+
+                 Fällt er irgendwann weg, ist das kein Verlust an Recht, aber
+                 einer an Auskunft. */ ?>
         <div class="notice" style="--card-accent: var(--c-yellow);">
-            <?= icon('clock') ?>
+            <?= icon('shield') ?>
             <div>
-                <h3>Was ich nicht beurteilen kann</h3>
-                <p>
-                    Ob du fahren darfst, entscheidet nicht die Fahrschule und schon gar
-                    nicht ich, sondern die Führerscheinstelle auf Basis eines Gutachtens.
-                    Was ich dir sagen kann: wie das Fahren mit der jeweiligen Technik
-                    praktisch funktioniert und worauf du dich einstellen kannst.
-                </p>
+                <h3>Anmeldung und Vertrag</h3>
                 <p>
                     Anmeldung, Vertrag und Preise laufen über
                     <?= $school !== '' ? 'die ' . school_link() : 'die Fahrschule, bei der ich angestellt bin' ?> –
@@ -296,11 +356,27 @@
 <section class="cta-band">
     <div class="container">
         <div class="cta-inner">
+            <?php /* SARAHS SCHLUSSBAND, ebenfalls SAR-84 und wörtlich von ihr.
+                     Vorher stand hier unser Entwurf: „Unsicher, ob das bei dir
+                     klappt? Genau dafür ist das erste Telefonat da. Es kostet
+                     nichts und du bist danach schlauer."
+
+                     Ihre Fassung ist länger als jedes andere Schlussband der
+                     Seite, und das darf sie sein: Sie beantwortet die Frage in
+                     der Überschrift Satz für Satz und nimmt jedem die Ausrede,
+                     erst noch etwas herausfinden zu müssen. Genau das ist der
+                     Grund, warum jemand hier nicht anruft.
+
+                     Nur die Aufschrift des Knopfes ist von uns und bleibt, wie
+                     sie ist – dieselbe wie auf /neurodivergenz. */ ?>
             <div class="cta-text">
-                <h2>Unsicher, ob das bei dir klappt?</h2>
+                <h2>Du weißt noch nicht, ob das bei dir möglich ist?</h2>
                 <p>
-                    Genau dafür ist das erste Telefonat da. Es kostet nichts und
-                    du bist danach schlauer.
+                    Dann musst du das auch noch nicht wissen. Melde dich einfach bei mir
+                    und erzähl mir kurz, worum es bei dir geht. Wir schauen gemeinsam, wo
+                    du gerade stehst und welcher nächste Schritt sinnvoll ist. Du musst
+                    nicht mit fertigen Antworten zu mir kommen. Eine Frage reicht für den
+                    Anfang.
                 </p>
             </div>
             <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Lass uns reden</a>

@@ -105,9 +105,41 @@ $schoolUrl = trim((string) config('school.url'));
                          aus `partials/nav.php` – oder, wenn das Ziel nicht im
                          Menü steht (TikTok, Instagram, die Fahrschule), einen
                          eigenen. */ ?>
+                <?php /* DER ZWEITE KNOPF FÜHRT ZUR FAHRSCHULE, seit dem 21.08.2026
+                         (Ticket SAR-77). Vorher stand hier „Fahren mit Handicap".
+
+                         Der Grund kommt aus der Fahrschule selbst: Sarahs
+                         Arbeitgeber trägt ihren Handicap-Schwerpunkt mit, ihm
+                         missfällt aber, dass sie nach außen alleine dazustehen
+                         scheint. Genannt wurde er auf der Seite schon (Sektion
+                         „Wie du bei mir Fahrschüler:in wirst"), nur eben erst
+                         weit unten. Im Hero steht der Bezug jetzt sofort.
+
+                         Der Handicap-Schwerpunkt verliert dadurch nichts an
+                         dieser Stelle: Die Überschrift direkt darüber sagt ihn
+                         aus, und der Weg zur Unterseite steht im Menü.
+
+                         Warum extern und nicht auf eine eigene Unterseite: Eine
+                         Seite über die Fahrschule bei Sarah wäre ein zweiter
+                         Auftritt für einen fremden Betrieb – die Entscheidung
+                         gegen eine solche Unterseite steht in CLAUDE.md und
+                         gilt weiter. Der Knopf reicht zur Fahrschule durch,
+                         `target="_blank"` lässt Sarahs Seite dabei offen.
+
+                         Die if-Prüfung ist kein Schmuck: Alle Templates dieser
+                         Seite formulieren ohne die Fahrschule, wenn SCHOOL_NAME
+                         oder SCHOOL_URL leer sind. Wer die beiden Zeilen in der
+                         .env leert, bekommt hier wieder den alten Knopf – nicht
+                         einen, der ins Leere zeigt. */ ?>
                 <div class="hero-actions">
                     <a class="btn btn-primary btn-lg" href="<?= url('/ueber-mich') ?>">Über mich</a>
-                    <a class="btn btn-ghost btn-lg" href="<?= url('/fahren-mit-handicap') ?>">Fahren mit Handicap</a>
+                    <?php if ($school !== '' && $schoolUrl !== ''): ?>
+                        <a class="btn btn-ghost btn-lg" href="<?= e($schoolUrl) ?>" target="_blank" rel="noopener">
+                            <?= e($school) ?> &nearr;
+                        </a>
+                    <?php else: ?>
+                        <a class="btn btn-ghost btn-lg" href="<?= url('/fahren-mit-handicap') ?>">Fahren mit Handicap</a>
+                    <?php endif; ?>
                 </div>
             </div>
 

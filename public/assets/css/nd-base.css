@@ -507,6 +507,43 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
 .process-step::after { content: ""; position: absolute; top: 27px; left: 54px; width: calc(100% - 54px + 1.6rem); height: 3px; border-radius: 2px; background: linear-gradient(90deg, var(--card-accent, var(--accent)), transparent); }
 .process-step:last-child::after { width: calc(100% - 54px); }
 
+/* --- DER ABLAUF ALS SENKRECHTE LEITER (SAR-83) ----------------------------
+   Nebeneinander funktioniert nur, solange die Schritte kurz sind. Sarahs
+   zweite Fassung des Ablaufs auf /fahren-mit-handicap hat rund 310 Woerter
+   auf fuenf Schritte, einer davon allein 78. Nachgemessen bei 1440 px und
+   `--process-cols: 5`: Spalten von 215 px Breite, 30 Zeilen hoch, und Schritt
+   2 endete 300 px unter seinen Nachbarn. Die Reihe las sich nicht mehr als
+   Abfolge, sondern als fuenf ungleich lange Textsaeulen.
+
+   Dieser Modifier stellt sie untereinander: Nummer, Ueberschrift, Text, und
+   ein farbiger Strich links daneben statt des Pfeils nach rechts. Es ist
+   dieselbe Form, die das Handy-Layout unter 740 px ohnehin schon herstellt –
+   hier gilt sie in jeder Breite.
+
+   DIE BREITE IST BEGRENZT und das ist der eigentliche Gewinn: Ueber die volle
+   Containerbreite waeren es rund 130 Zeichen je Zeile, mehr als das Doppelte
+   des Lesbaren. Die 800 px sind nachgerechnet und nicht gegriffen: abzueglich
+   der 20 px Einzug, den der Strich links braucht, bleiben genau die 780 px
+   von `.prose`. Der Ablauf hat damit dieselbe Zeilenlaenge wie der Fliesstext
+   im Abschnitt darunter – bei 840 px waren es rund 82 Zeichen und damit
+   sichtbar mehr.
+
+   ZUR SPEZIFITAET: Die Regeln stehen bewusst auf zwei Klassen
+   (`.process.process--stapel`) beziehungsweise auf drei Stufen bei den
+   `::after`. Die Bloecke bei 980 px und 740 px weiter unten fassen dieselben
+   Elemente an und stehen SPAETER in der Datei – bei gleicher Spezifitaet
+   gewaennen sie und machten daraus auf Tablets wieder zwei Spalten mit
+   waagerechtem Strich. */
+.process.process--stapel { grid-template-columns: 1fr; gap: 1.7rem; max-width: 800px; }
+.process--stapel .process-num { width: 44px; height: 44px; font-size: var(--fs-lg); margin-bottom: .9rem; }
+.process--stapel .process-step { padding-left: 1.25rem; padding-right: 0; }
+.process--stapel .process-step::after,
+.process--stapel .process-step:nth-child(2n)::after,
+.process--stapel .process-step:last-child::after {
+    top: 6px; bottom: 6px; left: 0; width: 3px; height: auto;
+    background: linear-gradient(180deg, var(--card-accent, var(--accent)), transparent);
+}
+
 /* ---------- CTA-Band ---------- */
 .cta-band { padding: clamp(1.5rem, 4vw, 2.5rem) 0 clamp(3rem, 6vw, 5rem); }
 .cta-inner {

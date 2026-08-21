@@ -172,62 +172,111 @@
         <div class="section-head">
             <div class="section-head-text">
                 <h2>So läuft es ab</h2>
+                <?php /* Ihr Vorspann steht IM section-head, nicht als eigener
+                         Absatz darunter – dieselbe Stelle wie auf der Startseite
+                         bei „Wie du bei mir Fahrschüler:in wirst". Dort steht
+                         auch, warum: Im Kopf gehört er zur Überschrift und
+                         bekommt deren Einzug, den der Regenbogenbalken vorgibt. */ ?>
+                <p class="section-lead">
+                    Du musst vorher nicht schon wissen, welche Technik du brauchst oder wie
+                    der genaue Weg zu deinem Führerschein aussieht. Wir schauen gemeinsam,
+                    wo du gerade stehst und was die nächsten Schritte sind.
+                </p>
             </div>
         </div>
 
-        <?php /* SARAHS EIGENER ABLAUF, seit dem 21.08.2026 (Ticket SAR-72).
-                 Der Text kommt von ihr und ersetzt den Entwurf, der hier stand –
-                 er ist damit tabu für Umformulierungen, wie alles von ihr (siehe
-                 CLAUDE.md). Zwei offensichtliche Tippfehler der Vorlage sind
-                 korrigiert und beim Ticket vermerkt: „mein angepasste" →
-                 „angepasstes", „bis zu ein gutes Gefühl" → „bis du".
+        <?php /* SARAHS ABLAUF IN IHRER ZWEITEN FASSUNG, seit dem 21.08.2026
+                 (Ticket SAR-83). Wörtlich übernommen und tabu für
+                 Umformulierungen, wie alles von ihr.
 
-                 VIER SCHRITTE STATT FÜNF: „Üben bis es sitzt" ist entfallen, das
-                 Üben steht jetzt im Prüfungsschritt („Bis zur Prüfung üben wir
-                 gemeinsam"). Deshalb steht hier auch kein `--process-cols` mehr –
-                 vier ist der Rückfallwert in nd-base.css.
+                 SIE ERSETZT IHRE EIGENE FASSUNG VON SAR-72 vom selben Tag. Beide
+                 Texte sind von ihr, dieser ist der jüngere. Er ist deutlich
+                 ausführlicher (rund 310 Wörter statt 150), erklärt das
+                 Gutachtenverfahren genauer und hat den Schritt „Wir üben in
+                 deinem Tempo" wieder, den SAR-72 gestrichen hatte.
 
-                 DIESER ABLAUF STAND BIS HEUTE AUCH AUF DER STARTSEITE, dort als
-                 senkrechte Zeitleiste in der Sektion „Wie du bei mir
-                 Fahrschüler:in wirst". Mit SAR-72 ist er von dort verschwunden;
-                 die Startseite zeigt nur noch die Einordnung und die Kachel der
-                 Fahrschule. Der Ablauf steht damit genau einmal – hier. */ ?>
-        <ol class="process">
+                 WAS MIT SAR-72 VERSCHWINDET, gehört ausdrücklich gesagt, weil es
+                 Zusagen waren und nicht nur Formulierungen:
+                 - „Ich helfe dir weiter bei den notwendigen Unterlagen und
+                   Anträgen, wie beispielsweise möglichen Kostenübernahmen bei den
+                   Kostenträgern." Die neue Fassung sagt an derselben Stelle „Ich
+                   kann dir erklären, was die einzelnen Schritte für deine
+                   praktische Fahrausbildung bedeuten" – das ist erklären statt
+                   helfen, und die Kostenübernahme kommt gar nicht mehr vor. Auf
+                   der ganzen Website steht sie damit nirgends mehr.
+                 - Die ersten Runden „auf unserem eigenen Firmengelände".
+                 - „Ich sitze zur Prüfung nur noch neben dir und freue mich, wenn
+                   du nach erfolgreichem Abschluss den Führerschein in den Händen
+                   hältst."
+                 Alle drei stehen in der Versionsgeschichte, falls sie
+                 zurücksollen.
+
+                 SIE STEHEN UNTEREINANDER, NICHT NEBENEINANDER (`--stapel`).
+                 Zuerst mit `--process-cols: 5` gebaut und verworfen: Bei 1440 px
+                 waren das fünf Spalten à 215 px und 30 Zeilen Höhe, Schritt 2
+                 endete 300 px unter seinen Nachbarn. Bei Schritten von 55 bis 78
+                 Wörtern trägt die Reihe nebeneinander nicht mehr. Die Rechnung
+                 steht bei der Regel in nd-base.css.
+
+                 DIE FAHRSCHULE STEHT HIER OHNE NAMEN („kümmert sich die
+                 Fahrschule um die weiteren Schritte"), anders als in der Fassung
+                 davor, die `SCHOOL_NAME` einsetzte. Das ist ihr Wortlaut und
+                 bleibt so: Der Name steht auf dieser Seite ohnehin zweimal, im
+                 Kasten „Anmeldung und Vertrag" und in der Einordnung unter jeder
+                 Seite.
+
+                 DIESER ABLAUF STAND BIS ZUM 21.08.2026 AUCH AUF DER STARTSEITE,
+                 dort als senkrechte Zeitleiste. Mit SAR-72 ist er von dort
+                 verschwunden; er steht genau einmal – hier. */ ?>
+        <ol class="process process--stapel">
             <li class="process-step">
                 <span class="process-num">1</span>
-                <h3>Wir telefonieren</h3>
-                <p>Du erzählst mir, worum es geht. Ich sage dir ehrlich, wie ich die
-                   Situation einschätze und welche Gutachten etc. für den Antrag bei
-                   deiner Behörde notwendig sind.</p>
+                <h3>Wir sprechen miteinander</h3>
+                <p>Am Anfang steht ein unverbindliches Telefonat. Du erzählst mir kurz von
+                   deiner Situation und davon, was du erreichen möchtest. Ich höre zu,
+                   beantworte deine ersten Fragen und sage dir offen, wobei ich dich
+                   unterstützen kann – und was von einer zuständigen Stelle oder durch ein
+                   Gutachten geklärt werden muss.</p>
             </li>
             <li class="process-step">
                 <span class="process-num">2</span>
-                <h3>Gutachten &amp; Auflagen</h3>
-                <p>In den meisten Fällen fordert deine zuständige Verkehrsbehörde ein
-                   amtsärztliches / verkehrsmedizinisches Gutachten. Ich helfe dir weiter
-                   bei den notwendigen Unterlagen und Anträgen, wie beispielsweise
-                   möglichen Kostenübernahmen bei den Kostenträgern.</p>
+                <h3>Gutachten &amp; mögliche Auflagen</h3>
+                <p>Je nach Art und Umfang deiner Einschränkung kann für die Fahrerlaubnis
+                   ein ärztliches oder fachärztliches Gutachten und gegebenenfalls eine
+                   weitere Begutachtung erforderlich sein. Dabei wird geklärt, ob und unter
+                   welchen Voraussetzungen du ein Fahrzeug führen kannst und welche
+                   technischen Anpassungen oder Auflagen notwendig sind. Du musst dich durch
+                   diesen Prozess nicht allein durchkämpfen. Ich kann dir erklären, was die
+                   einzelnen Schritte für deine praktische Fahrausbildung bedeuten und
+                   worauf es anschließend beim Fahren ankommt.</p>
             </li>
             <li class="process-step">
                 <span class="process-num">3</span>
-                <h3>Erste Stunde</h3>
-                <p>Wir setzen uns in mein angepasstes Fahrschulfahrzeug und stellen alles
-                   auf dich ein. Danach fahren wir beide die ersten Runden auf unserem
-                   eigenen Firmengelände, bis du ein gutes Gefühl hast. Sobald du bereit
-                   bist und dich sicher fühlst, gehen wir gemeinsam auf die Straßen.</p>
+                <h3>Kennenlernen &amp; ausprobieren</h3>
+                <p>Sobald die Voraussetzungen geklärt sind, geht es an die Praxis. Wir
+                   stellen das Fahrzeug und die vorhandenen Hilfsmittel so ein, dass sie zu
+                   dir passen. Dann lernst du die Bedienung in Ruhe kennen und bekommst ein
+                   Gefühl dafür, wie sich das Fahren damit anfühlt. Ohne Druck und ohne die
+                   Erwartung, dass alles sofort funktionieren muss.</p>
             </li>
             <li class="process-step">
                 <span class="process-num">4</span>
-                <h3>Prüfung &amp; Überprüfung</h3>
-                <?php /* Der Name der Fahrschule kommt wie überall aus der
-                         Konfiguration. Steht dort nichts, formuliert der Satz
-                         ohne ihn – dieselbe Regel wie auf der ganzen Seite. */ ?>
-                <p>Bis zur Prüfung / Überprüfung üben wir gemeinsam. Mir ist dabei wichtig,
-                   dass DU dich gut fühlst. Ich sitze zur Prüfung nur noch neben dir und
-                   freue mich, wenn du nach erfolgreichem Abschluss den Führerschein in den
-                   Händen hältst. Den Termin dafür meldet
-                   <?= $school !== '' ? 'die ' . e($school) : 'die Fahrschule' ?> bei der
-                   zuständigen Prüfstelle, wenn du dich sicher genug fühlst.</p>
+                <h3>Wir üben in deinem Tempo</h3>
+                <p>Dann machen wir das, was Fahrausbildung eigentlich ausmacht: üben,
+                   wiederholen und sicherer werden. Manche Abläufe funktionieren schnell,
+                   andere brauchen Zeit. Beides ist völlig in Ordnung. Mir ist wichtiger,
+                   dass du dich mit dem Fahrzeug und der Technik wirklich sicher fühlst, als
+                   dass wir irgendeinen Zeitplan erfüllen.</p>
+            </li>
+            <li class="process-step">
+                <span class="process-num">5</span>
+                <h3>Sicher Richtung Prüfung</h3>
+                <p>Wenn die notwendigen Voraussetzungen erfüllt sind und du für die Prüfung
+                   bereit bist, kümmert sich die Fahrschule um die weiteren Schritte und die
+                   Anmeldung bei der Prüfstelle. Bis dahin arbeiten wir gemeinsam daran, dass
+                   du das Fahrzeug sicher beherrschst und weißt, was dich in der Prüfung
+                   erwartet. Das Ziel ist nicht, irgendwie durch die Prüfung zu kommen. Das
+                   Ziel ist, dass du danach selbstständig und sicher unterwegs sein kannst.</p>
             </li>
         </ol>
     </div>

@@ -62,9 +62,15 @@ $wege = [
         <p class="back-link">
             <a href="<?= url('/') ?>#wegbegleiter">&larr; Wegbegleiter</a>
         </p>
-        <?php /* alt="" weil der Name als <h1> direkt darunter steht. Die Klasse
-                 kommt aus `Partners`: Die Marke ist quadratisch und bekommt
-                 deshalb mehr Höhe als eine Wortmarke. */ ?>
+        <?php /* alt="" weil der Name als <h1> direkt darunter steht – und das
+                 wiegt hier schwerer als bei den anderen: Seit dem 21.08.2026
+                 (SAR-60) steht im Logo derselbe Name noch einmal, diesmal
+                 gezeichnet. Mit einem alt-Text hörte man ihn zweimal.
+
+                 Die Klasse kommt aus `Partners`: Die Wortmarke ist breit und
+                 wird deshalb wie jede andere Wortmarke behandelt, dazu die
+                 Platte in seinem Seitengrund – ihre Schrift ist Creme und wäre
+                 auf hellem Grund nicht zu sehen. */ ?>
         <img class="<?= e(Partners::logoClass($partner, 'partner-head-logo')) ?>"<?= Partners::logoPlateAttr($partner) ?>
              src="<?= asset('img/' . $partner['logo']) ?>" alt=""
              width="<?= (int) $partner['logo_width'] ?>"

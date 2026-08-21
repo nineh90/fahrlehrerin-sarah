@@ -128,26 +128,39 @@ final class Partners
             'name' => 'Johannes Springer Studio',
             'hint' => 'Video und Livestream',
             'url'  => 'https://johannes-springer.studio/',
-            /* DIE BILDMARKE VON DER SEITE, und zwar die einzige, die es dort
-               als Datei gibt: ihr Favicon (assets/img/favicon.svg, ein oranger
-               Block auf dunklem Grund). Aus dem SVG gerastert, damit sie in der
-               Kachel scharf steht.
+            /* SEINE WORTMARKE, nachgesetzt am 21.08.2026 (Kevin, SAR-60):
+               „Der Kasten ist es nicht, nimm seine Wortmarke, gleicher Stil
+               wie auf seiner Webseite." Gilt für die Kachel UND für den Kopf
+               der Unterseite – beide zeigen dieselbe Datei.
 
-               EIN WORTMARKEN-LOGO GIBT ES DORT NICHT. „JOHANNES SPRINGER
-               STUDIO" ist auf seiner Seite gesetzter Text und keine Bilddatei.
-               Nachgebaut wird sie hier nicht: Eine Marke, die es als Datei
-               nicht gibt, selbst zu zeichnen hieße, sie zu erfinden. Wer den
-               Namen in der Kachel lesbar haben will, holt eine Logodatei bei
-               ihm. Bis dahin trägt der alt-Text den Namen.
+               VORHER STAND HIER SEIN FAVICON (ein oranger Block auf dunklem
+               Grund, `partner/johannes-springer.webp`). Es war die einzige
+               Bilddatei auf seiner Seite und sagte niemandem, wer da steht.
+               Die Datei bleibt liegen, falls sie doch wieder gebraucht wird.
 
-               KEINE `logo_plate` wie bei moooov und Nils-Digital, obwohl die
-               Marke dunkel ist: Sie bringt ihren dunklen Grund selbst mit. Im
-               dunklen Kontrastmodus setzt a11y.css die helle Platte darunter,
-               und die ist hier genau richtig – ohne sie stünde ein Quadrat in
-               #14161C auf einer fast gleich dunklen Kachel. */
-            'logo'        => 'partner/johannes-springer.webp',
-            'logo_width'  => 256,
-            'logo_height' => 256,
+               EINE BILDDATEI SEINER WORTMARKE GIBT ES BEI IHM NICHT: „JOHANNES
+               SPRINGER / STUDIO" ist dort gesetzter Text. Deshalb ist sie hier
+               mit SEINEN Werten nachgesetzt, direkt aus seiner Seite gelesen –
+               Space Mono 400, Versalien, 0,17 em Sperrung, 1,35 Zeilenhöhe,
+               erste Zeile #F3EEE4, „STUDIO" und der Cursorblock dahinter in
+               #EE7B2E. Das ist der Unterschied zum Erfinden einer Marke: Es
+               ist seine Gestaltung, nur als Datei statt als Text. Der Befehl
+               dazu steht in `assets-quellen/README.md`; wer sie neu baut,
+               ändert nichts an den Werten.
+
+               ⚠️ DAS GEHÖRT VON IHM FREIGEGEBEN, und zwar eigens: Ein Logo zu
+               zeigen war schon zustimmungspflichtig, eine nachgebaute
+               Wortmarke ist es erst recht. Liefert er eine eigene Datei, tritt
+               sie an diese Stelle.
+
+               `logo_plate` MIT SEINEM SEITENGRUND, anders als vorher: Die
+               Wortmarke steht in Creme und wäre auf der weißen Kachel
+               unsichtbar. #14161C ist die Farbe seiner eigenen Seite, dieselbe
+               Mechanik wie bei moooov und Nils-Digital. */
+            'logo'        => 'partner/johannes-springer-wortmarke.webp',
+            'logo_width'  => 600,
+            'logo_height' => 106,
+            'logo_plate'  => '#14161C',
             'meta' => 'Johannes Springer Studio aus Lilienthal bei Bremen: '
                 . 'Videos, kurze Clips für Social Media und '
                 . 'Mehrkamera-Livestreams von Veranstaltungen.',

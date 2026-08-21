@@ -1332,6 +1332,16 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     border-radius: 10px;
     padding: 8px 12px;
 }
+/* DIE PLATTE MUSS IHRE EIGENE POLSTERUNG MITRECHNEN, seit am 21.08.2026 mit der
+   Wortmarke von Johannes Springer das erste breite Logo eine Platte bekam
+   (SAR-60). `max-width: 100%` weiter oben begrenzt bei `content-box` nur das
+   BILD; die 2 × 12 px der Platte kommen obendrauf. Nachgemessen stand die
+   Platte dadurch 12,8 px vom Kachelrand statt der 24 px, die alle anderen
+   Logos einhalten – sie sah aus, als wäre sie zu groß geraten.
+
+   Die schmalen Platten (moooov, Nils-Digital) merken davon nichts, sie
+   erreichen die Grenze gar nicht. */
+.partner-logo--plate { max-width: calc(100% - 24px); }
 
 /* --- Kopf der Unterseite ------------------------------------------------
    Etwas größer als in der Kachel, aber immer noch klein genug, dass die

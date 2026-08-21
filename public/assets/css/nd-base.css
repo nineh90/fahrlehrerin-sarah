@@ -1212,6 +1212,50 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px;
     background: var(--card-accent, var(--accent));
 }
+/* DER SATZ ZUM ÜBERFAHREN, seit dem 21.08.2026.
+   Er liegt als Fläche über der ganzen Kachel und blendet ein, während das Logo
+   ausblendet. Vier Entscheidungen dahinter:
+
+   ER DECKT DIE KACHEL DECKEND AB (`--bg-card`, nicht halbtransparent): Was
+   darunter liegt, ist bei jedem Wegbegleiter ein anderes Logo – mal eine helle
+   Wortmarke, mal ein fast schwarzes Quadrat. Über einem durchscheinenden Grund
+   wäre der Kontrast des Textes von der Marke abhängig und damit nicht zusagbar.
+
+   DIE FARBIGE KOPFKANTE BLEIBT FREI (`top: 6px`): Sie ist das, was die Reihe
+   zusammenhält, und sie zeigt beim Überfahren, welche Kachel gemeint ist.
+
+   NUR AUF GERÄTEN MIT ECHTEM ZEIGER (`hover: hover` und `pointer: fine`). Auf
+   einem Touchscreen gibt es kein Überfahren; dort löst `:hover` beim Tippen aus
+   und bleibt danach kleben – die Kachel zeigt dann Text, wo eben noch das Logo
+   stand, und niemand weiß, warum. Auf dem Handy passiert deshalb gar nichts.
+
+   DER TASTATUR-FOKUS ZEIGT IHN AUCH, und der steht bewusst AUSSERHALB dieser
+   Abfrage: Wer mit der Tabulatortaste durch die Reihe geht, tut das auch auf
+   einem Gerät ohne Zeiger.
+
+   Das Ein- und Ausblenden hängt am globalen Netz für `prefers-reduced-motion`
+   ganz unten in dieser Datei (`transition-duration: .01ms`); es wird dann hart
+   umgeschaltet statt geblendet. */
+.partner-hint {
+    position: absolute; top: 6px; right: 0; bottom: 0; left: 0;
+    display: flex; align-items: center; justify-content: center;
+    padding: 1rem 1.2rem;
+    background: var(--bg-card);
+    color: var(--text);
+    font-size: var(--fs-sm); line-height: 1.4; text-align: center;
+    opacity: 0; transition: opacity .18s;
+    pointer-events: none;
+}
+.partner-logo { transition: opacity .18s; }
+
+.partner-card:focus-visible .partner-hint { opacity: 1; }
+.partner-card:focus-visible .partner-logo { opacity: 0; }
+
+@media (hover: hover) and (pointer: fine) {
+    .partner-card:hover .partner-hint { opacity: 1; }
+    .partner-card:hover .partner-logo { opacity: 0; }
+}
+
 .partner-card:hover,
 .partner-card:focus-visible {
     transform: translateY(-5px);

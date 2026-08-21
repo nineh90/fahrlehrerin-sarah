@@ -68,6 +68,21 @@ $wegbegleiter = Partners::all();
                              width="<?= (int) $partner['logo_width'] ?>"
                              height="<?= (int) $partner['logo_height'] ?>"
                              loading="lazy" decoding="async">
+                        <?php /* DER SATZ ZUM ÜBERFAHREN (Nils, 21.08.2026). Er liegt
+                                 IMMER im Markup und wird nur nicht angezeigt – das
+                                 ist der Unterschied zu einem `title`-Attribut, das
+                                 kein Touchgerät und keine Tastatur je zu sehen
+                                 bekommt. So gehört er zum Namen des Links: Wer die
+                                 Seite vorlesen lässt, hört „Fahrschule Sander,
+                                 meine Fahrschule" statt nur den Namen.
+
+                                 Sichtbar wird er beim Überfahren und beim
+                                 Tastatur-Fokus, siehe `.partner-hint` in
+                                 nd-base.css. */ ?>
+                        <?php $hint = trim((string) ($partner['hint'] ?? '')); ?>
+                        <?php if ($hint !== ''): ?>
+                            <span class="partner-hint"><?= e($hint) ?></span>
+                        <?php endif; ?>
                     </a>
                 </li>
             <?php endforeach; ?>

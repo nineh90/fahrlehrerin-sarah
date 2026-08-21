@@ -33,7 +33,7 @@ declare(strict_types=1);
  * 21.08.2026, Nils). Er sagt in drei bis vier Wörtern, was der Betrieb mit
  * Sarah zu tun hat, und ist damit die Kurzfassung von `meta`. Zwei Regeln:
  *
- *   · Er steht in SARAHS PERSPEKTIVE („Meine Fahrschule", „Hat diese Website
+ *   · Er steht in SARAHS PERSPEKTIVE („Mein Arbeitgeber", „Hat diese Website
  *     gebaut"), nicht in der Selbstbeschreibung des Betriebs. Die Kachel ist
  *     Sarahs Aussage darüber, wer sie begleitet, kein Werbeplatz.
  *   · Er bleibt kurz genug für eine bis zwei Zeilen. Wer mehr erzählen will,
@@ -73,7 +73,7 @@ final class Partners
                `claim` (ein Satz zum Betrieb); beide gingen mit der schlanken
                Kachel und stehen jetzt ausformuliert auf der Unterseite. */
             'name' => 'Fahrschule Sander',
-            'hint' => 'Meine Fahrschule',
+            'hint' => 'Mein Arbeitgeber',
             /* ACHTUNG, DIESE ADRESSE STEHT ZWEIMAL: hier und in der `.env` als
                `SCHOOL_URL`, von wo `school_link()` sie an einem Dutzend
                Stellen der Seite ausgibt. Das ist kein Versehen: Die beiden

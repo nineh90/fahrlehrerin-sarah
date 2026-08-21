@@ -2139,10 +2139,27 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     .section-head { flex-direction: column; align-items: flex-start; gap: .6rem; }
     .process { grid-template-columns: 1fr; gap: 1.7rem; }
     .process-num { width: 44px; height: 44px; font-size: var(--fs-lg); margin-bottom: .9rem; }
-    /* Strich wird vertikal und sitzt links neben dem Inhalt */
+    /* Strich wird vertikal und sitzt links neben dem Inhalt.
+
+       DIE AUSNAHMEN MÜSSEN HIER MITGENANNT WERDEN, und das ist kein Schmuck:
+       Der 980er-Block darüber kürzt den Strich am Zeilenende über
+       `:nth-child(2n)`. Dieser Selektor ist SPEZIFISCHER als `.process-step`
+       allein – seine Breite gewinnt also auch hier unten, obwohl dieser Block
+       später steht. Wer ihn nicht ausdrücklich überschreibt, bekommt bei jedem
+       geraden Schritt ein Element, das die Breite der Karte hat (aus der
+       980er-Regel) und ihre Höhe (`top`/`bottom` von hier): ein farbiger
+       Balken quer über dem Text.
+
+       Genau das war seit dem Wechsel von `:nth-child(2)` auf `:nth-child(2n)`
+       der Fall und fiel als grüne Fläche über Schritt 4 auf (Kevin, SAR-73,
+       21.08.2026) – bei Schritt 2 nicht, der stand hier schon namentlich.
+       Vier ist grün, weil die Farben in Siebenerschritten rotieren.
+
+       Kurz: Jeder Selektor, der oben die Breite anfasst, gehört hier in die
+       Liste. */
     .process-step { padding-left: 1.25rem; padding-right: 0; }
     .process-step::after,
-    .process-step:nth-child(2)::after,
+    .process-step:nth-child(2n)::after,
     .process-step:last-child::after { top: 6px; bottom: 6px; left: 0; width: 3px; height: auto; background: linear-gradient(180deg, var(--card-accent, var(--accent)), transparent); }
     .appointment { grid-template-columns: auto 1fr; }
     .appointment-actions { grid-column: 1 / -1; justify-content: flex-start; }

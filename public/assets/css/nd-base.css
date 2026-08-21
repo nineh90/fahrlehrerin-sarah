@@ -1110,60 +1110,95 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
    daneben.
 
    DIE REIHE STEHT MITTIG, seit sie am 20.08.2026 auf sechs Kacheln gewachsen
-   ist und damit zum ersten Mal eine unvollständige zweite Zeile hatte: vier
-   oben, zwei unten. Links angeschlagen sahen die beiden aus wie übrig
-   geblieben. Mittig sitzen sie unter den vieren und die Reihe wirkt gesetzt.
+   ist und damit zum ersten Mal eine unvollständige zweite Zeile hatte. Links
+   angeschlagen sah die kurze Zeile aus wie übrig geblieben; mittig sitzt sie
+   unter der ersten und die Reihe wirkt gesetzt. Bei sechs Kacheln geht die
+   Rechnung seit dem 21.08.2026 ohne Rest auf (3 + 3), die Regel bleibt
+   trotzdem stehen – die nächste Anzahl hat den Fall wieder.
 
    Der linke Anschlag von früher galt einer EINZELNEN Kachel, die sonst in der
-   Mitte einer 1100 px breiten Fläche schwamm. Sobald eine Zeile voll wird, und
-   das ist sie ab vier, ist zwischen links und mittig ohnehin kein Unterschied
-   zu sehen. Wer je wieder bei einer oder zwei Kacheln landet, schaut noch mal
-   hin. */
+   Mitte einer 1100 px breiten Fläche schwamm. Sobald eine Zeile voll wird, ist
+   zwischen links und mittig ohnehin kein Unterschied zu sehen. Wer je wieder
+   bei einer oder zwei Kacheln landet, schaut noch mal hin. */
 .partner-grid {
     list-style: none; padding: 0; margin: 0;
     display: flex; flex-wrap: wrap; justify-content: center;
     gap: 1.2rem;
 }
-/* Die Kachel ist HÖCHSTENS 290 px breit und darf schmaler werden, damit eine
-   Reihe voll wird. Bis zum 20.08.2026 stand hier `flex: 0 1 290px`, also feste
-   290 px. Mit dreien ging das auf; beim vierten Wegbegleiter brach die Reihe in
-   3 + 1 um, denn vier mal 290 plus Abstände sind 1218 px und der Inhalt ist
-   1116 px breit. Die vierte Kachel stand allein und links angeschlagen, also
-   genau die „vergessene Karte", die `.card-grid--5` weiter oben abfängt.
+/* ALLE KACHELN GLEICH BREIT, seit dem 21.08.2026 (Ticket SAR-75). Das ist der
+   Kern: `flex-grow` steht auf 0, also wächst keine Kachel über ihre 290 px
+   hinaus, egal wie viel Platz in ihrer Zeile übrig ist.
 
-   Mit 240 px als Ausgangsbreite passen vier in eine Zeile und teilen sich den
-   Platz auf je rund 265 px. Die Grenze bei 290 px bleibt: Bei zwei oder drei
-   Kacheln sollen sie nicht auf halbe Bildschirmbreite auseinanderlaufen.
+   Vorher stand hier `flex: 1 1 240px; max-width: 290px`, und genau die
+   Kombination erzeugte zwei verschiedene Breiten auf einer Seite: Eine VOLLE
+   Zeile teilt den Restplatz unter ihren Kacheln auf, eine KURZE Zeile hat für
+   jede so viel übrig, dass sie an der Klemme von 290 px hängen bleibt.
+   Nachgemessen bei sechs Wegbegleitern auf 1116 px Inhaltsbreite: oben vier
+   Kacheln à 264,6 px, unten zwei à 290 px. Der Unterschied ist keine Laune des
+   Browsers, sondern rechnet sich aus der Anzahl in der Zeile – deshalb hilft
+   dagegen nur, das Wachsen ganz abzustellen.
 
-   Für FÜNF Kacheln reicht diese Zahl nicht, dafür gibt es den Modifier
-   darunter. Eine Ausgangsbreite, die für jede Anzahl aufgeht, gibt es nicht. */
-.partner-grid > li { flex: 1 1 240px; max-width: 290px; }
+   Der Preis dafür ist die Aufteilung: Bei fester Breite passen drei Kacheln
+   nebeneinander und keine vier mehr (drei mal 290 plus Abstände sind 908 px,
+   vier wären 1218 px). Aus 4 + 2 wird also 3 + 3 – zwei volle Zeilen, keine
+   angebrochene. Für sechs Kacheln ist das der bessere Fall.
 
-/* FÜNF KACHELN, dieselbe Aufgabe wie bei `.card-grid--5` weiter oben und
-   dieselbe Antwort: 3 + 2 mit mittiger zweiter Zeile. Seit dem 20.08.2026,
-   als Nils-Digital der fünfte Wegbegleiter wurde. Die Warnung von vorhin ist
-   damit eingelöst: Mit 240 px Ausgangsbreite wären vier in die erste Zeile
-   gerutscht und die fünfte hätte allein und links angeschlagen darunter
-   gestanden.
+   SHRINK BLEIBT ERLAUBT (die 1 in der Mitte): Auf schmalen Geräten schrumpfen
+   alle Kacheln gemeinsam und bleiben dabei gleich breit. Nur wachsen dürfen
+   sie nicht.
 
-   Anders als beim Kartenraster braucht es hier kein Sechser-Grid. Zwei Zeilen
-   genügen: Bei 290 px Ausgangsbreite passen drei nebeneinander und keine vier
-   mehr, und das `center` von oben rückt beide Zeilen in die Mitte. Die zweite
-   sitzt damit mittig unter der ersten, und alle fünf behalten dieselbe Breite.
+   BEI GENAU VIER WEGBEGLEITERN NOCH EINMAL HINSEHEN: Dann ergibt diese Regel
+   3 + 1, also die „vergessene Kachel", die `.card-grid--5` weiter oben abfängt.
+   Der Ausweg wäre derselbe wie dort – ein Modifier, der für diese eine Anzahl
+   die Basis senkt. Genau so einen gab es hier bis zum 21.08.2026 für fünf
+   Kacheln (`.partner-grid--5`); er ist entfallen, weil er dasselbe tat, was
+   jetzt für alle gilt. */
+.partner-grid > li { flex: 0 1 290px; }
 
-   Dieser Modifier ändert deshalb NUR die Ausgangsbreite. Das Zentrieren stand
-   bis zum 20.08.2026 auch hier und ist mit dem sechsten Wegbegleiter nach oben
-   gewandert, wo es für jede Anzahl gilt.
+/* VIER STATT DREI PRO ZEILE, für die Anzahlen, bei denen drei nicht aufgehen.
+   Ebenfalls SAR-75, und der zweite Teil davon: Gleich groß sind die Kacheln
+   nach der Regel darüber IMMER, aber bei 4, 7 oder 10 Wegbegleitern bliebe
+   nach vollen Dreierzeilen genau eine übrig – 3 + 1 und 3 + 3 + 1. Sie steht
+   dann mittig und in voller Größe da, aber eben allein: dieselbe „vergessene
+   Kachel", die `.card-grid--5` weiter oben abfängt.
 
-   Den Modifier setzt `partials/wegbegleiter.php` anhand der Anzahl. Bei sechs
-   fällt er von selbst weg, dann greift wieder die 240 von oben und es wird
-   4 + 2. */
-.partner-grid--5 > li { flex: 0 1 290px; }
+   260 px ist die Breite, bei der genau vier nebeneinanderpassen und keine
+   fünf: vier mal 260 plus drei Abstände sind 1097,6 px bei 1116 px
+   Inhaltsbreite, fünf wären 1376,8 px. Damit wird aus 3 + 1 eine volle Zeile
+   und aus 3 + 3 + 1 wird 4 + 3.
 
+   NUR DIE BASIS ÄNDERT SICH, `flex-grow` bleibt bei 0 – sonst wäre genau der
+   Fehler zurück, den der Block darüber behebt.
+
+   WELCHE ANZAHL DIESEN MODIFIER BEKOMMT, entscheidet `partials/wegbegleiter.php`
+   mit einer Zeile. Bei dreizehn Kacheln ginge auch das nicht auf (4 + 4 + 4 + 1);
+   so weit ist die Liste nicht, und wer sie so weit füllt, sieht es hier. */
+.partner-grid--cols-4 > li { flex: 0 1 260px; }
+
+/* DIE HÖHE IST FEST UND NICHT GEWACHSEN, ebenfalls seit SAR-75.
+
+   Hier stand `height: 100%; min-height: 116px`, und damit bestimmte das
+   GRÖSSTE LOGO EINER ZEILE deren Höhe: Alle Kacheln einer Flex-Zeile strecken
+   sich auf die höchste. Weil die Logos verschieden hoch sind – 46 px für eine
+   Wortmarke, 80 px für eine blockige Marke, dazu 2 × 8 px Polsterung, wenn sie
+   auf ihrer eigenen Platte steht –, hing die Zeilenhöhe davon ab, welche Marke
+   zufällig in welcher Zeile landete. Nachgemessen: oben 137,6 px, unten
+   153,6 px, weil in der zweiten Zeile mit Nils-Digital die einzige Marke
+   steht, die blockig IST und eine Platte trägt (96 px).
+
+   `--partner-logo-box` ist genau dieses größte Kästchen. Die Kachelhöhe rechnet
+   sich daraus plus ihrer Polsterung, statt als abgeschriebene Zahl daneben zu
+   stehen: Wer oben am Padding dreht, verschiebt die Höhe automatisch mit.
+
+   KOMMT EIN LOGO DAZU, das höher als 96 px steht, gehört die Zahl geprüft –
+   die Kachel wächst dann nicht mehr mit, sie schneidet ab (`overflow: hidden`
+   eine Zeile weiter unten). Das ist der bewusste Tausch: eine Reihe, die
+   garantiert gleich aussieht, gegen eine, die sich still verstellt. */
 .partner-card {
+    --partner-logo-box: 96px;
     position: relative; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
-    height: 100%; min-height: 116px;
+    height: calc(var(--partner-logo-box) + 1.9rem + 1.6rem);
     padding: 1.9rem 1.5rem 1.6rem;
     background: var(--bg-card);
     border: 1px solid var(--border); border-radius: var(--radius);

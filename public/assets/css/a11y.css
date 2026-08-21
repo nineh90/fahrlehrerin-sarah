@@ -341,9 +341,15 @@ html[data-kontrast='hoch'] .partner-head-logo {
     /* Die Seite rechnet global mit `border-box` – damit fräßen die 6 px
        Polsterung oben und unten das Logo von 46 auf 34 px herunter, und es
        stünde im dunklen Modus kleiner da als im hellen. Hier also die
-       Ausnahme: Die Höhe meint das Logo, die Platte kommt obendrauf. Die
-       Kachel wächst dadurch um 12 px – alle gleich, denn sie stehen im
-       selben Raster. */
+       Ausnahme: Die Höhe meint das Logo, die Platte kommt obendrauf.
+
+       DIE KACHEL WÄCHST DADURCH NICHT MEHR MIT, seit ihre Höhe fest steht
+       (SAR-75, 21.08.2026). Sie ist auf das größte Logo-Kästchen gerechnet,
+       und das sind die 96 px eines blockigen Logos auf eigener Platte – die
+       12 px hier bringen ein blockiges Logo auf 92 px und bleiben darunter.
+       Nachgemessen in allen drei Modi: 290 × 152 px, überall dieselbe Kachel.
+       Wer diese Polsterung erhöht, prüft `--partner-logo-box` in
+       nd-base.css mit. */
     box-sizing: content-box;
 }
 

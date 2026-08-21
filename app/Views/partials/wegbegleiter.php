@@ -37,13 +37,23 @@ $wegbegleiter = Partners::all();
             </div>
         </div>
 
-        <?php /* Der Modifier hängt an der ANZAHL und nicht an der Seite: Fünf
-                 Kacheln brauchen 3 + 2 mit mittiger zweiter Zeile, sonst steht
-                 die fünfte allein. Warum genau fünf und warum nicht sechs,
-                 steht bei `.partner-grid--5` in nd-base.css. Kommt ein
-                 sechster Wegbegleiter dazu, fällt der Modifier von selbst
-                 weg. */ ?>
-        <ul class="partner-grid<?= count($wegbegleiter) === 5 ? ' partner-grid--5' : '' ?>">
+        <?php /* DIE GRÖSSE DER KACHELN HÄNGT NICHT MEHR AN DIESER ZEILE:
+                 Seit dem 21.08.2026 (SAR-75) sind alle gleich breit und gleich
+                 hoch, egal wie viele in ihrer Zeile stehen. Hier stand vorher
+                 ein Modifier, der genau das für fünf Kacheln herstellte; er ist
+                 entfallen, weil es jetzt für jede Anzahl gilt.
+
+                 GEBLIEBEN IST DIE FRAGE, WIE DIE ZEILEN AUFGEHEN. Normal
+                 stehen drei nebeneinander. Bleibt danach genau eine übrig,
+                 steht sie allein in der letzten Zeile – bei 4, 7 oder 10
+                 Wegbegleitern, also immer dann, wenn die Anzahl durch drei
+                 geteilt den Rest 1 lässt. Dann rücken vier in die Zeile: aus
+                 3 + 1 wird 4, aus 3 + 3 + 1 wird 4 + 3.
+
+                 Die Rechnung steht hier und nicht im CSS, weil CSS die Anzahl
+                 der Kacheln nicht kennt. Was der Modifier tut, steht bei
+                 `.partner-grid--cols-4` in nd-base.css. */ ?>
+        <ul class="partner-grid<?= count($wegbegleiter) % 3 === 1 ? ' partner-grid--cols-4' : '' ?>">
             <?php foreach ($wegbegleiter as $slug => $partner): ?>
                 <li>
                     <a class="partner-card" href="<?= e(Partners::path($slug)) ?>">

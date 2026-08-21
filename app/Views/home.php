@@ -8,18 +8,34 @@ $schoolUrl = trim((string) config('school.url'));
 <section class="hero hero--photo">
     <div class="container hero-inner">
         <div class="duo duo--narrow-media">
-            <?php /* Die Augenbraue war am 07.08.2026 entfallen, weil die Klassen
-                     im Header unter der Wortmarke standen und hier ein zweites
-                     Mal gestanden hätten.
+            <?php /* DIE AUGENBRAUE NENNT SEIT DEM 21.08.2026 DIE FAHRSCHULE
+                     (Ticket SAR-78) und nicht mehr die Klassen. Hier stand
+                     „Fahrlehrerin · Klasse B + BE · Handicap".
 
-                     Seit dem Header-Umbau am 11.08.2026 stimmt diese Begründung
-                     nicht mehr: Ganz oben zeigt der Header nur noch Sarahs
-                     Logo, die Versalzeile „Klasse B · BE · Handicap" blendet
-                     erst beim Scrollen ein. Genau dann, wenn jemand die Seite
-                     öffnet, steht sie also nirgends – und deshalb steht sie
-                     jetzt wieder hier. */ ?>
+                     Das gehört zur selben Bewegung wie der Knopf darunter
+                     (SAR-77): Sarahs Arbeitgeber trägt ihren Schwerpunkt mit,
+                     findet es aber unglücklich, dass sie nach außen alleine
+                     dazustehen scheint. Jetzt steht die Zuordnung in der
+                     allerersten Zeile des Heros.
+
+                     WAS DAMIT AUS DEM HERO VERSCHWINDET, gehört gewusst: die
+                     Klassen B und BE. Sie standen hier, seit der Header sie
+                     beim Öffnen der Seite nicht mehr zeigt – seine Versalzeile
+                     blendet erst beim Scrollen ein. Ganz weg sind sie nicht:
+                     Sarahs Einordnung unten auf jeder Seite nennt sie
+                     ausgeschrieben („Fahrlehrerin für die Klassen B und BE"),
+                     und im Logo stehen sie mit im Bild. Im Hero-Text steht
+                     jetzt keine mehr.
+
+                     Der Mittelpunkt ist der Trenner dieser Seite – er steht so
+                     im Logo, im Fuß und stand so in der alten Fassung. Ein
+                     Bindestrich wäre der einzige an der ganzen Seite.
+
+                     Ist `SCHOOL_NAME` leer, steht wieder die alte Zeile da –
+                     dieselbe Regel wie überall: Die Seite formuliert ohne die
+                     Fahrschule, wenn es sie in der Konfiguration nicht gibt. */ ?>
             <div class="hero-content">
-                <p class="hero-eyebrow" data-typewriter="fast">Fahrlehrerin · Klasse B + BE · Handicap</p>
+                <p class="hero-eyebrow" data-typewriter="fast"><?= $school !== '' ? 'Fahrlehrerin Sarah · ' . e($school) : 'Fahrlehrerin · Klasse B + BE · Handicap' ?></p>
                 <?php /* data-typewriter: main.js baut diese eine Überschrift beim
                          Laden Zeichen für Zeichen auf. Der Satz steht trotzdem
                          vollständig hier im HTML – für Suchmaschinen, für
@@ -71,18 +87,51 @@ $schoolUrl = trim((string) config('school.url'));
                          Text ist immer schneller fertig, als man ihm folgt.
                          Für die Überschrift bleibt es beim langsamen Tempo,
                          die ist der Akzent und kurz genug. */ ?>
-                <?php /* Der Schwerpunkt heißt seit dem 20.08.2026 „Führerschein-
-                         ausbildung für Menschen mit Handicap" und nicht mehr
-                         „Fahren mit Handicap" (SAR-59, Kevin). Der alte Satz war
-                         zu weit gefasst: Fahren mit Handicap tun ihre Leute
-                         danach jahrelang, ausbilden tut Sarah.
+                <?php /* HIER SPRICHT SIE SELBST, seit dem 21.08.2026 (SAR-78):
+                         „Moin ihr Lieben. Mein Name ist Sarah."
 
-                         ACHTUNG, DAS STEHT JETZT ZWEIMAL: Die Überschrift
-                         darüber sagt denselben Satz. So gewollt und von Kevin
-                         so beauftragt. Wer das ändert, ändert den Vorspann und
-                         nicht die Überschrift, die trägt die Seite. */ ?>
+                         DAS IST IHR WORTLAUT, nicht nachempfunden: Mit genau
+                         diesen zwei Sätzen fangen ihre Videos an (Kevin,
+                         21.08.2026). Damit gilt hier dieselbe Regel wie für
+                         ihre Zitate – umformulieren, kürzen oder „glätten" ist
+                         keine Option, denn es wäre eine Behauptung darüber, wie
+                         sie sich vorstellt. Der Zusatz dahinter („Fahrlehrerin
+                         für die Klassen B und BE") ist dagegen unsere Ergänzung
+                         und darf angefasst werden.
+
+                         Der erste Satz der Seite klingt damit nach ihr und
+                         nicht nach einer Selbstbeschreibung.
+
+                         Vorher stand hier „Ich bin Sarah. Mein Schwerpunkt:
+                         Führerscheinausbildung für Menschen mit Handicap." Der
+                         Satz sagte dasselbe wie die Überschrift direkt darüber,
+                         und das war zwischenzeitlich sogar so beauftragt
+                         (SAR-59, Kevin). Mit dem neuen Vorspann ist die
+                         Doppelung weg: Die H1 nennt den Schwerpunkt, die Zeile
+                         darunter begrüßt. Der Schwerpunkt geht dabei nicht
+                         verloren, er steht eine Zeile höher.
+
+                         DIE KLASSEN STEHEN JETZT HIER. Sie standen bis heute in
+                         der Augenbraue darüber, und die nennt seit SAR-78 die
+                         Fahrschule. Ohne diesen Zusatz stünde im ganzen ersten
+                         Bildschirm nicht mehr, was sie ausbildet – dabei sucht
+                         genau danach, wer einen Führerschein anfängt.
+
+                         DER HANDICAP-SCHWERPUNKT GEHÖRT HIER NICHT NOCH EINMAL
+                         HIN (Kevin, 21.08.2026). Der Satz endete kurz auf
+                         „– inklusive Handicapausbildung"; die Überschrift eine
+                         Zeile höher sagt genau das. Was hier steht, ergänzt die
+                         H1, es wiederholt sie nicht.
+
+                         DER EINE UMBRUCH STEHT HART IM TEXT, alles danach bricht
+                         der Browser selbst. Hart, weil die Begrüßung eine eigene
+                         Zeile ist und keine, die je nach Fensterbreite
+                         woanders endet; `main.js` merkt sich das <br> und setzt
+                         es beim Tippen wieder. Der zweite Satz bleibt bewusst
+                         frei umbrechend – feste Umbrüche in einem langen Satz
+                         sitzen auf dem Handy immer falsch. */ ?>
                 <p class="hero-lead" data-typewriter="fast">
-                    Ich bin Sarah. Mein Schwerpunkt: Führerscheinausbildung für Menschen mit Handicap.
+                    Moin ihr Lieben.<br>Mein Name ist Sarah, Fahrlehrerin für die Klassen B und BE.
                 </p>
                 <p class="hero-meta">
                     <?= icon('pin') ?>

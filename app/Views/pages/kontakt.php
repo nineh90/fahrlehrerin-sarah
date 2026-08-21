@@ -85,10 +85,17 @@
                 </li>
             </ul>
 
-            <p class="muted" style="margin-top:1.6rem;">
-                Du fährst schon bei mir? Dann trag dich für deine nächste Stunde direkt in
-                <a href="<?= url('/termine') ?>">meinen Zeiten</a> ein – dafür musst du mich nicht anrufen.
-            </p>
+            <?php /* Der Absatz für alle, die schon bei ihr fahren – seit SAR-54
+                     nur noch bei eingeschalteter Terminplanung (21.08.2026).
+                     Er verspricht „dafür musst du mich nicht anrufen"; ohne den
+                     Weg dahinter wäre das ein Versprechen ins Leere, und genau
+                     auf der Kontaktseite fällt das auf. */ ?>
+            <?php if (termine_oeffentlich()): ?>
+                <p class="muted" style="margin-top:1.6rem;">
+                    Du fährst schon bei mir? Dann trag dich für deine nächste Stunde direkt in
+                    <a href="<?= url('/termine') ?>">meinen Zeiten</a> ein – dafür musst du mich nicht anrufen.
+                </p>
+            <?php endif; ?>
         </div>
     </div>
 </section>

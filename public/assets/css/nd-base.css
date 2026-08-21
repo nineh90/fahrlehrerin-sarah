@@ -2041,7 +2041,20 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
    das Preisraster und die Schrittfolge schon auf dem Laptop einspaltig.
 
    Wer hier Menüpunkte umbenennt, verschiebt die Grenze mit – kürzere Namen
-   dürfen sie senken, längere müssen sie heben. */
+   dürfen sie senken, längere müssen sie heben.
+
+   SEIT SAR-54 (21.08.2026) IST DAS MENÜ VIEL KÜRZER: „Anmelden", „Termine"
+   und der ganze angemeldete Zustand hängen am Schalter `booking.public` und
+   sind derzeit aus. Übrig sind vier Punkte, nachgemessen 526 px; mit Logo,
+   Gap und Container-Rand wären ab rund 680 px alle nebeneinander frei – die
+   Grenze könnte also auf die 740 des übrigen Handy-Layouts fallen und der
+   Header hätte auf Tablets wieder eine echte Zeile statt des Hamburgers.
+
+   ABSICHTLICH NICHT GEMACHT: Diese Grenze weiß nichts von dem Schalter. Wer
+   die Terminplanung zurückholt, legt eine Zeile in der `.env` um – und hätte
+   dann ein zweizeiliges Menü, ohne zu ahnen, dass es an einem CSS-Breakpoint
+   liegt. Die 1120 sind auf die LANGE Fassung gerechnet und bleiben stehen,
+   bis entschieden ist, ob die Planung wiederkommt. */
 @media (max-width: 1120px) {
     .nav-toggle { display: flex; }
 

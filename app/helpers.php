@@ -344,6 +344,25 @@ function area_sentence(string $conjunction = 'und'): string
  *
  * Gibt fertiges HTML zurück (deshalb NICHT noch einmal durch e() schicken).
  */
+/**
+ * Führt die Website öffentlich zur Terminplanung?
+ *
+ * Seit SAR-54 (21.08.2026) lautet die Antwort nein – die Begründung steht bei
+ * `booking.public` in config.php. Der Helfer steht hier, damit die Frage in
+ * den Views ein Wort ist und nicht ein Pfad durch die Konfiguration: Wer eine
+ * neue Seite baut, die auf /termine, /login oder /meine-termine zeigt, packt
+ * den Link in ein `if (termine_oeffentlich())` und muss nichts weiter wissen.
+ *
+ * ACHTUNG, DAS IST KEINE ZUGANGSSPERRE. Die Routen bleiben offen, wer die
+ * Adresse kennt, kommt hin. Genau so beauftragt: „nur erst mal nicht über die
+ * Website erreichbar". Wer daraus eine echte Sperre machen will, tut das im
+ * Router und nicht hier.
+ */
+function termine_oeffentlich(): bool
+{
+    return (bool) config('booking.public');
+}
+
 function school_link(): string
 {
     $name = trim((string) config('school.name'));

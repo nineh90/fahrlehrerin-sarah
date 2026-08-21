@@ -68,14 +68,24 @@
                 </ul>
             </div>
 
-            <div>
-                <h3>Fahrstunden</h3>
-                <ul class="footer-links">
-                    <li><a href="<?= url('/termine') ?>">Termine</a></li>
-                    <li><a href="<?= url('/meine-termine') ?>">Meine Stunden</a></li>
-                    <li><a href="<?= url('/login') ?>">Anmelden</a></li>
-                </ul>
-            </div>
+            <?php /* DIE SPALTE „FAHRSTUNDEN" ALS GANZES, seit SAR-54 nur noch
+                     bei eingeschalteter Terminplanung (21.08.2026). Nicht bloß
+                     ihre drei Links: Eine Überschrift ohne Punkte darunter ist
+                     schlimmer als eine Spalte weniger.
+
+                     Der Fuß steht dann auf drei Spalten statt vier. Das Raster
+                     ist `auto-fit` und verteilt sie von selbst – hier ist
+                     nichts nachzurechnen. */ ?>
+            <?php if (termine_oeffentlich()): ?>
+                <div>
+                    <h3>Fahrstunden</h3>
+                    <ul class="footer-links">
+                        <li><a href="<?= url('/termine') ?>">Termine</a></li>
+                        <li><a href="<?= url('/meine-termine') ?>">Meine Stunden</a></li>
+                        <li><a href="<?= url('/login') ?>">Anmelden</a></li>
+                    </ul>
+                </div>
+            <?php endif; ?>
 
             <div>
                 <h3>Direkt erreichen</h3>

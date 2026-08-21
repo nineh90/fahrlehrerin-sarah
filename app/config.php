@@ -88,6 +88,25 @@ $config = [
         // Bis wie viele Stunden vor Terminbeginn darf storniert/verschoben werden
         'cancel_deadline_hours' => (int) env('CANCEL_DEADLINE_HOURS', 24),
         'slot_duration_min'     => (int) env('SLOT_DURATION_MIN', 45),
+
+        // ZEIGT DIE WEBSITE DIE TERMINPLANUNG? Seit dem 21.08.2026 nicht mehr
+        // (Sarahs Ticket SAR-54): Ihre Fahrschule bekommt ab September ein
+        // neues System, das Termine wohl selbst freigeben kann. Bis das
+        // geklärt ist, soll ihre eigene Planung von der Seite verschwinden –
+        // „aber nicht verwerfen".
+        //
+        // DER SCHALTER NIMMT NUR DIE WEGE WEG, NICHT DIE SACHE: Menü, Fuß und
+        // die Knöpfe auf den Inhaltsseiten führen nicht mehr dorthin. Routen,
+        // Controller, Views, Models und der ganze Admin-Bereich bleiben
+        // unangetastet und funktionieren; wer die Adresse kennt, kommt hin.
+        // Genau so war es gewünscht, und genau deshalb ist es ein Schalter
+        // und keine Löschung: Zurückholen ist eine Zeile, kein Wiederaufbau.
+        //
+        // Der Standardwert ist `false`. Das ist Absicht: Die `.env` auf dem
+        // Server ist von Hand gepflegt, und ein Server ohne den Eintrag soll
+        // die Planung NICHT anzeigen. Wer sie zurückholt, setzt bewusst
+        // TERMINE_OEFFENTLICH=true.
+        'public' => (bool) env('TERMINE_OEFFENTLICH', false),
     ],
     // Sarah ist angestellte Fahrlehrerin – ihre Fahrschule ist ein eigener
     // Betrieb. Bleibt 'name' leer, wird sie auf der Seite nirgends genannt.

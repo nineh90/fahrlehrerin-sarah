@@ -50,31 +50,83 @@
             <a class="nav-link<?= nav_active('/') ?>" href="<?= url('/') ?>">Startseite</a>
             <a class="nav-link<?= nav_active('/ueber-mich') ?>" href="<?= url('/ueber-mich') ?>">Über mich</a>
             <a class="nav-link<?= nav_active('/fahren-mit-handicap') ?>" href="<?= url('/fahren-mit-handicap') ?>">Fahren mit Handicap</a>
-            <a class="nav-link<?= nav_active('/kontakt') ?>" href="<?= url('/kontakt') ?>">Kontakt</a>
 
-            <?php if (StudentAuth::check()): ?>
-                <a class="nav-link<?= nav_active('/meine-termine') ?>" href="<?= url('/meine-termine') ?>">Meine Stunden</a>
-                <form class="inline-form" method="post" action="<?= url('/logout') ?>">
-                    <?= csrf_field() ?>
-                    <button class="nav-link" type="submit">Abmelden</button>
-                </form>
-                <a class="btn btn-primary btn-sm nav-cta<?= nav_active('/termine') ?>" href="<?= url('/termine') ?>">Stunde eintragen</a>
-            <?php else: ?>
-                <a class="nav-link<?= nav_active('/login') ?>" href="<?= url('/login') ?>">Anmelden</a>
-                <?php /* Hieß bis zum 17.08.2026 „Meine freien Zeiten" (Sarah,
-                         Ticket SAR-26). Weil die Knöpfe auf den Seiten seit
-                         SAR-22 heißen wie ihr Menüpunkt, ist der Name hier
-                         die Quelle: Wer ihn ändert, ändert ihn auch in
-                         home.php, ueber-mich.php und footer.php mit.
+            <?php /* DIE FAHRSCHULE IM MENÜ, seit dem 21.08.2026 (SAR-54).
 
-                         Die Zielseite selbst heißt weiter „Meine freien
-                         Zeiten" – das ist kein Versehen, siehe CLAUDE.md:
-                         Die Terminplanung ist Sarahs eigenes Werkzeug, kein
-                         Buchungssystem der Fahrschule. Das „meine" sagt
-                         genau das. Als Wegweiser im Header ist „Termine"
-                         trotzdem besser, weil er kurz sein muss und neben
-                         „Anmelden" steht. */ ?>
-                <a class="btn btn-primary btn-sm nav-cta<?= nav_active('/termine') ?>" href="<?= url('/termine') ?>">Termine</a>
+                     Sie steht hier, weil an dieser Stelle Platz frei wurde:
+                     „Anmelden" und „Termine" sind mit der Terminplanung
+                     verschwunden. Der Punkt füllt die Lücke nicht nur optisch –
+                     er ist der Weg, den Besucher jetzt am ehesten brauchen: Die
+                     Anmeldung läuft über die Fahrschule, nicht über diese Seite.
+
+                     DER EINZIGE MENÜPUNKT, DER VON DER SEITE WEGFÜHRT, deshalb
+                     der Pfeil. Er ist `aria-hidden`, weil Vorlesesoftware ihn
+                     sonst als „Nordostpfeil" ansagt; was er bedeutet, steht als
+                     Text daneben und nur für sie. Dieselbe Aufteilung wie bei
+                     Sarahs Kanälen weiter unten.
+
+                     Wie überall auf der Seite: Ist `SCHOOL_NAME` oder
+                     `SCHOOL_URL` leer, gibt es den Punkt nicht. */ ?>
+            <?php $navSchule = trim((string) config('school.name')); ?>
+            <?php $navSchuleUrl = trim((string) config('school.url')); ?>
+            <?php if ($navSchule !== '' && $navSchuleUrl !== ''): ?>
+                <a class="nav-link" href="<?= e($navSchuleUrl) ?>" target="_blank" rel="noopener noreferrer">
+                    <?= e($navSchule) ?><span aria-hidden="true"> &nearr;</span><span class="sr-only"> – öffnet in neuem Tab</span>
+                </a>
+            <?php endif; ?>
+
+            <?php /* KONTAKT TRÄGT SEIT SAR-54 DEN KNOPF-STIL, den vorher
+                     „Termine" hatte (Kevin, 21.08.2026). Der Header hatte
+                     immer einen hervorgehobenen Abschluss; fällt er ersatzlos
+                     weg, endet das Menü in einer Reihe gleich aussehender
+                     Wörter und niemand weiß, was der nächste Schritt ist.
+
+                     Kontakt ist dieser Schritt, solange die Terminplanung
+                     ruht: Wer nicht anrufen will, schreibt. Kommt „Termine"
+                     zurück, gehört der Knopf wieder dorthin – zwei
+                     hervorgehobene Punkte nebeneinander sind keiner. */ ?>
+            <a class="btn btn-primary btn-sm nav-cta<?= nav_active('/kontakt') ?>" href="<?= url('/kontakt') ?>">Kontakt</a>
+
+            <?php /* HIER STAND DER WEG IN SARAHS TERMINPLANUNG, bis zum
+                     21.08.2026 (ihr Ticket SAR-54): „Anmelden" und „Termine",
+                     für Angemeldete stattdessen „Meine Stunden", „Abmelden"
+                     und „Stunde eintragen".
+
+                     Der Grund ist keiner der Website: Ihre Fahrschule bekommt
+                     ab September ein neues System, das Termine wohl selbst
+                     freigeben kann. Bis das geklärt ist, soll ihre eigene
+                     Planung nicht mehr angeboten werden – „aber nicht
+                     verwerfen".
+
+                     Deshalb ist der Block nicht gelöscht, sondern hängt an
+                     `termine_oeffentlich()` (helpers.php). Steht der Schalter
+                     wieder auf true, ist das Menü unverändert das von vorher,
+                     inklusive des angemeldeten Zustands. */ ?>
+            <?php if (termine_oeffentlich()): ?>
+                <?php if (StudentAuth::check()): ?>
+                    <a class="nav-link<?= nav_active('/meine-termine') ?>" href="<?= url('/meine-termine') ?>">Meine Stunden</a>
+                    <form class="inline-form" method="post" action="<?= url('/logout') ?>">
+                        <?= csrf_field() ?>
+                        <button class="nav-link" type="submit">Abmelden</button>
+                    </form>
+                    <a class="btn btn-primary btn-sm nav-cta<?= nav_active('/termine') ?>" href="<?= url('/termine') ?>">Stunde eintragen</a>
+                <?php else: ?>
+                    <a class="nav-link<?= nav_active('/login') ?>" href="<?= url('/login') ?>">Anmelden</a>
+                    <?php /* Hieß bis zum 17.08.2026 „Meine freien Zeiten" (Sarah,
+                             Ticket SAR-26). Weil die Knöpfe auf den Seiten seit
+                             SAR-22 heißen wie ihr Menüpunkt, ist der Name hier
+                             die Quelle: Wer ihn ändert, ändert ihn auch in
+                             home.php, ueber-mich.php und footer.php mit.
+
+                             Die Zielseite selbst heißt weiter „Meine freien
+                             Zeiten" – das ist kein Versehen, siehe CLAUDE.md:
+                             Die Terminplanung ist Sarahs eigenes Werkzeug, kein
+                             Buchungssystem der Fahrschule. Das „meine" sagt
+                             genau das. Als Wegweiser im Header ist „Termine"
+                             trotzdem besser, weil er kurz sein muss und neben
+                             „Anmelden" steht. */ ?>
+                    <a class="btn btn-primary btn-sm nav-cta<?= nav_active('/termine') ?>" href="<?= url('/termine') ?>">Termine</a>
+                <?php endif; ?>
             <?php endif; ?>
 
             <?php /* SARAHS KANÄLE, ABER NUR AUF DEM HANDY (21.08.2026).

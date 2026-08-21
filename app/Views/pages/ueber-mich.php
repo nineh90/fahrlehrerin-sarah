@@ -53,9 +53,19 @@ $schoolUrl = trim((string) config('school.url'));
                     <span class="sr-only">Unterwegs in </span>
                     <span><?= e(area_sentence()) ?></span>
                 </p>
+                <?php /* SEIT SAR-54 STEHT HIER NUR NOCH EIN KNOPF (21.08.2026):
+                         „Termine" ist weg, solange die Planung nicht öffentlich
+                         ist. „Schreib mir" wird dafür der Hauptknopf – ein
+                         einzelner Knopf in der Nebenrolle sieht aus, als fehle
+                         der eigentliche. Kommt „Termine" zurück, ist auch die
+                         Rangfolge wieder die alte. */ ?>
                 <div class="hero-actions">
-                    <a class="btn btn-primary btn-lg" href="<?= url('/termine') ?>">Termine</a>
-                    <a class="btn btn-ghost btn-lg" href="<?= url('/kontakt') ?>">Schreib mir</a>
+                    <?php if (termine_oeffentlich()): ?>
+                        <a class="btn btn-primary btn-lg" href="<?= url('/termine') ?>">Termine</a>
+                        <a class="btn btn-ghost btn-lg" href="<?= url('/kontakt') ?>">Schreib mir</a>
+                    <?php else: ?>
+                        <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Schreib mir</a>
+                    <?php endif; ?>
                 </div>
             </div>
 

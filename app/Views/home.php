@@ -505,12 +505,22 @@ $schoolUrl = trim((string) config('school.url'));
                 </p>
             </article>
 
+            <?php /* SARAHS FASSUNG, seit dem 21.08.2026 (Ticket SAR-71). Der
+                     Schlusssatz hieß vorher „Wir fangen da an, wo es sich noch
+                     machbar anfühlt." – ein Entwurf. Ihr Satz sagt etwas
+                     anderes: nicht, wo angefangen wird, sondern wie lange es
+                     dauern darf. Die beiden Fragen davor sind unverändert.
+
+                     Ein Komma ist ergänzt („die du benötigst, um …") – vor dem
+                     Infinitivsatz mit „um" steht es zwingend. Beim Ticket
+                     vermerkt; sonst ist an ihrem Wortlaut nichts geändert. */ ?>
             <article class="feature-card">
                 <span class="feature-icon"><?= icon('thumb') ?></span>
                 <h3>Angstfrei ans Steuer</h3>
                 <p>
                     Prüfung mehrfach nicht bestanden? Seit dem Unfall nicht mehr gefahren?
-                    Wir fangen da an, wo es sich noch machbar anfühlt.
+                    Wir nehmen uns gemeinsam die Zeit, die du benötigst, um zu deinem
+                    persönlichen Ziel zu kommen.
                 </p>
             </article>
         </div>

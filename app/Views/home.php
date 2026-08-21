@@ -482,11 +482,42 @@ $schoolUrl = trim((string) config('school.url'));
                          Die Aufzählung steht damit an drei Stellen: hier und in den
                          Meta-Beschreibungen von HomeController und PageController.
                          Wer sie ändert, ändert sie dreimal – sonst verspricht die
-                         Seite etwas, das die Google-Vorschau nicht kennt. */ ?>
+                         Seite etwas, das die Google-Vorschau nicht kennt.
+
+                         DAS ALLES BESCHREIBT DIE FASSUNG BIS ZUM 21.08.2026 und
+                         steht nur noch als Vorgeschichte hier: Mit SAR-69 ist
+                         Sarahs eigener Text an die Stelle getreten, und der zählt
+                         keine Technik mehr auf. Der Absatz oben bleibt trotzdem
+                         stehen – wer die Aufzählung je zurückholt, findet hier,
+                         was daran alles hängt.
+
+                         NACHGEPRÜFT, was jetzt noch wo steht: Die Meta-Beschreibung
+                         der Startseite nennt die Technik seit SAR-10 nicht mehr
+                         (sie war zu lang und wurde gekürzt), die von
+                         /fahren-mit-handicap nennt sie weiter – und dort stehen die
+                         Begriffe auch sichtbar in den vier Karten. Dasselbe gilt
+                         für `knowsAbout` in Seo.php. Es klafft also keine Lücke
+                         zwischen Vorschau und Seite.
+
+                         WAS DIE STARTSEITE VERLIERT, gehört trotzdem gesagt:
+                         „Handbedienung", „Lenkhilfe", „Pedalverlängerung",
+                         „Sitzerhöhung" und „Kleinwuchs" kommen auf ihr nicht mehr
+                         vor. Wer danach sucht, landet über /fahren-mit-handicap
+                         hier – nicht über die Startseite. */ ?>
+                <?php /* SARAHS FASSUNG (SAR-71 und SAR-69 sind am selben Tag
+                         gekommen): Sie beschreibt nicht mehr die Technik, sondern
+                         die Haltung – und nennt zum ersten Mal auf dieser Seite
+                         ausdrücklich auch seelische Einschränkungen.
+
+                         Zwei Korrekturen an der Vorlage, beim Ticket vermerkt:
+                         „ob körperlich oder seelisches" → „körperliches"
+                         (Adjektivendung) und ein Komma vor dem Infinitivsatz
+                         („die Hilfestellung, es selbst zu schaffen"). Sonst ist
+                         nichts geändert. */ ?>
                 <p>
-                    Handbedienung, Lenkhilfe, Pedalverlängerung, Sitzerhöhung – ob
-                    Kleinwuchs oder eingeschränkte Beweglichkeit. Ich kenne die Technik
-                    und übe sie, bis du nicht mehr darüber nachdenkst.
+                    Ganz gleich, ob körperliches oder seelisches Handicap. Ich gebe dir
+                    die Hilfestellung, es selbst zu schaffen. Gemeinsam erarbeiten wir
+                    den perfekten Weg zur Mobilität für dich.
                 </p>
             </article>
 

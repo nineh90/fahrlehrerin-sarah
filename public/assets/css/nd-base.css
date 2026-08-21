@@ -1240,20 +1240,36 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     position: absolute; top: 6px; right: 0; bottom: 0; left: 0;
     display: flex; align-items: center; justify-content: center;
     padding: 1rem 1.2rem;
-    background: var(--bg-card);
+    /* ZWEI LAGEN, und die untere ist der Grund der Kachel. `--card-accent-soft`
+       ist bewusst fast durchsichtig – allein gesetzt läge der Text auf dem
+       Logo. Der Verlauf aus einer einzigen Farbe ist der übliche Weg, eine
+       Farbe als eigene Lage über eine andere zu legen. */
+    background:
+        linear-gradient(var(--card-accent-soft), var(--card-accent-soft)),
+        var(--bg-card);
+    /* Fredoka und nicht die Textschrift: Das hier ist ein Etikett, kein Satz,
+       und die Seite setzt kurze Etiketten (Kartenzahlen, Fußzeilen-Titel)
+       überall in der Überschriftenschrift. Die Farbe bleibt `--text` und nicht
+       der Akzent – der ist bei Gelb auf hellem Grund nicht mehr lesbar. */
     color: var(--text);
-    font-size: var(--fs-sm); line-height: 1.4; text-align: center;
-    opacity: 0; transition: opacity .18s;
+    font-family: var(--font-head); font-weight: 600;
+    font-size: var(--fs-md); line-height: 1.35;
+    text-align: center; text-wrap: balance;
+    opacity: 0; translate: 0 8px;
+    transition: opacity .2s, translate .2s;
     pointer-events: none;
 }
-.partner-logo { transition: opacity .18s; }
+/* `scale` und nicht `transform`: Auf der Kachel darüber liegt beim Überfahren
+   schon eine Verschiebung, und über `transform` würden die beiden einander
+   auslöschen. Dieselbe Regel gilt auf der ganzen Seite. */
+.partner-logo { transition: opacity .2s, scale .2s; }
 
-.partner-card:focus-visible .partner-hint { opacity: 1; }
-.partner-card:focus-visible .partner-logo { opacity: 0; }
+.partner-card:focus-visible .partner-hint { opacity: 1; translate: 0 0; }
+.partner-card:focus-visible .partner-logo { opacity: 0; scale: .94; }
 
 @media (hover: hover) and (pointer: fine) {
-    .partner-card:hover .partner-hint { opacity: 1; }
-    .partner-card:hover .partner-logo { opacity: 0; }
+    .partner-card:hover .partner-hint { opacity: 1; translate: 0 0; }
+    .partner-card:hover .partner-logo { opacity: 0; scale: .94; }
 }
 
 .partner-card:hover,

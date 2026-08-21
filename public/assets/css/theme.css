@@ -933,26 +933,54 @@
 .rand-tab:hover { background: var(--accent-soft); color: var(--accent-text); }
 .rand-tab svg { width: 22px; height: 22px; flex-shrink: 0; }
 
-/* Auf schmalen Screens rutscht der Barrierefreiheits-Knopf nach unten links
-   (Regel in a11y.css). Die Kanäle reihen sich dort waagerecht neben ihn:
-   senkrecht untereinander wären es drei Knöpfe über ein Drittel Bildhöhe, die
-   beim Scrollen dauerhaft Text verdecken.
+/* AUF DEM HANDY GIBT ES DIESE LEISTE NICHT MEHR, seit dem 21.08.2026.
 
-   Der Abstand nach links ist der Knopf plus zweimal Lücke – so sitzen alle
-   drei in einer Reihe mit gleichmäßigem Abstand. Die 559 px sind derselbe
-   Umschaltpunkt wie in a11y.css; laufen die auseinander, überlappen sich die
-   Knöpfe. */
+   Sie lag dort waagerecht unten links neben dem Barrierefreiheits-Knopf und
+   damit über dem Inhalt – auf der Startseite über dem Knopf „Fahrschule
+   Sander" im Hero. Der Barrierefreiheits-Knopf ist deshalb in die Kopfzeile
+   gezogen (a11y.css); die Kanäle brauchen dort keinen Platz, sie stehen im
+   ausgeklappten Menü (`.nav-social` weiter unten).
+
+   WARUM SIE NICHT MITWANDERN, sondern verschwinden: Am Rand ist ein Kanal-
+   Reiter eine Abkürzung. Auf einem Handy ist er das nicht – dort stehen
+   TikTok und Instagram schon im Menü, im Fuß, auf /kontakt und im Kanal-
+   Abschnitt der Startseite. Ein fünfter Auftritt, der über dem Text klebt,
+   ist keine Abkürzung mehr, sondern Verdeckung.
+
+   `display: none` und nicht `visibility`: Der Reiter soll auch für die
+   Tastatur weg sein, sonst führt der letzte Tab-Stopp der Seite auf einen
+   Knopf, den niemand sieht. Die Links im Menü übernehmen seine Rolle.
+
+   Die 559 px sind derselbe Umschaltpunkt wie in a11y.css und beim Menüblock
+   unten. Laufen die auseinander, verschwinden die Kanäle an einer Breite, in
+   der sie das Menü noch nicht zeigt. */
 @media (max-width: 559px) {
-    .social-rail {
-        top: auto;
-        bottom: 14px;
-        left: calc(10px + 44px + var(--rand-tab-luecke));
-        flex-direction: row;
+    .social-rail { display: none; }
+}
+
+/* --- Sarahs Kanäle im ausgeklappten Menü  ·  .nav-social ------------------
+   Der Ersatz für die Randleiste, und nur dort sichtbar, wo die verschwindet.
+   Zwischen 560 und 1120 px klappt das Menü zwar schon auf, aber die Leiste
+   steht noch am Rand – stünden die Links dann auch im Menü, wären es zwei
+   Auftritte auf einem Bildschirm.
+
+   Sie stehen als eigene Zeile UNTER den Menüpunkten, abgesetzt durch eine
+   Linie: Es sind die einzigen zwei Punkte, die von der Seite wegführen. */
+.nav-social { display: none; }
+@media (max-width: 559px) {
+    .nav-social {
+        display: flex;
+        gap: 1.4rem;
+        margin-top: .4rem;
+        padding-top: .9rem;
+        border-top: 1px solid var(--border);
     }
-    .social-rail-tab {
-        border-left: 1px solid var(--border-strong);
-        border-radius: var(--radius-sm);
+    .nav-social a {
+        display: inline-flex; align-items: center; gap: .45rem;
+        color: var(--accent-text); text-decoration: none;
+        font-family: var(--font-head); font-size: var(--fs-sm); font-weight: 600;
     }
+    .nav-social svg { width: 20px; height: 20px; }
 }
 
 /* --- Das Label an den Reitern der Randleiste ------------------------------

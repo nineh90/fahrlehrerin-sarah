@@ -499,14 +499,43 @@ html[data-kontrast='hoch'] .partner-head-logo--plate {
 .a11y-reset:hover { background: var(--accent-soft); color: var(--text); }
 .a11y-hinweis { margin: .8rem 0 0; font-size: var(--fs-xs); color: var(--muted); line-height: 1.5; }
 
-/* Auf dem Handy sitzt der Knopf nicht mittig am Rand: Dort ist die Mitte der
-   Daumenweg beim Scrollen, und ein fester Knopf mitten im Bild verdeckt Text.
-   Unten links ist er erreichbar, ohne im Weg zu stehen. */
+/* AUF DEM HANDY SITZT DER KNOPF UNTEN RECHTS, seit dem 21.08.2026.
+
+   Die Stelle ist die dritte, und die beiden davor sind je an einer Sache
+   gescheitert:
+
+   UNTEN LINKS (bis heute) lag er über dem Inhalt – auf der Startseite über dem
+   Knopf „Fahrschule Sander" im Hero, zusammen mit den beiden Kanal-Reitern
+   daneben (Kevin, 21.08.2026).
+
+   IN DER KOPFZEILE, oben links, hielt genau einen Nachmittag: Auf dem Handy
+   steht die Marke oben mittig und WANDERT BEIM SCROLLEN NACH LINKS (Mechanik
+   in nd-base.css, 740er Block). Sobald man scrollte, lag der Knopf auf dem
+   Logo. Wer dort etwas hinsetzt, muss diese Bewegung kennen.
+
+   UNTEN RECHTS ist die Ecke, die auf dieser Seite niemandem gehört: Die
+   Knöpfe im Hero laufen über die volle Breite oder stehen links, der
+   Sprunglink sitzt oben links, sonst schwebt hier nichts mehr – die Kanäle
+   sind seit heute im Menü. Und für die Hand, die das Gerät hält, ist die
+   untere Ecke der kürzeste Weg.
+
+   ER BLEIBT DABEI, WO ER IM QUELLTEXT STAND: gleich hinter dem Sprunglink und
+   damit zweiter Tab-Stopp. `position: fixed` löst ihn aus dem Fluss, an der
+   Reihenfolge ändert keine dieser Positionen etwas.
+
+   44 px statt der 52 aus `--rand-tab-h`: freistehend in einer Ecke wirkt der
+   hohe Reiter wie ein Rest der Randleiste, die er einmal war. 44 px ist
+   zugleich die Untergrenze für eine sichere Berührfläche, tiefer darf er
+   nicht. Und weil er nicht mehr am Rand klebt, bekommt er seine linke Kante
+   und alle vier Ecken zurück. */
 @media (max-width: 559px) {
     .a11y-tab {
-        top: auto; bottom: 14px; transform: none;
+        top: auto; bottom: 14px;
+        left: auto; right: 10px;
+        transform: none;
+        height: 44px;
+        margin-left: 0;
         border-left: 1px solid var(--border-strong);
         border-radius: var(--radius-sm);
-        margin-left: 10px;
     }
 }

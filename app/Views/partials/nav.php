@@ -76,6 +76,35 @@
                          „Anmelden" steht. */ ?>
                 <a class="btn btn-primary btn-sm nav-cta<?= nav_active('/termine') ?>" href="<?= url('/termine') ?>">Termine</a>
             <?php endif; ?>
+
+            <?php /* SARAHS KANÄLE, ABER NUR AUF DEM HANDY (21.08.2026).
+
+                     Sie standen dort bis heute als schwebende Reiter unten links
+                     am Bildschirmrand (`partials/social-rail.php`) und lagen
+                     damit über dem Inhalt – auf der Startseite über dem Knopf im
+                     Hero. Die Leiste ist auf schmalen Schirmen abgeschaltet, hier
+                     stehen ihre beiden Links stattdessen.
+
+                     DASSELBE ZIEL ZWEIMAL IM MARKUP, und das ist Absicht: Die
+                     Randleiste steht am ENDE des Körpers, damit zwei Links auf
+                     fremde Plattformen nicht vor Sarahs eigener Navigation
+                     vorgelesen werden. Genau deshalb kann sie hier oben nicht
+                     einfach hineinwandern. Sichtbar ist immer nur eine der
+                     beiden Fassungen (`display: none`, nicht `visibility`), also
+                     hört und findet niemand sie doppelt.
+
+                     Die Adressen kommen aus derselben Quelle wie überall
+                     (TIKTOK_HANDLE, INSTAGRAM_HANDLE in der .env). */ ?>
+            <div class="nav-social">
+                <a href="<?= e(tiktok_url()) ?>" target="_blank" rel="noopener noreferrer">
+                    <?= icon('tiktok') ?>
+                    TikTok<span class="sr-only"> – Sarahs Kanal, öffnet in neuem Tab</span>
+                </a>
+                <a href="<?= e(instagram_url()) ?>" target="_blank" rel="noopener noreferrer">
+                    <?= icon('instagram') ?>
+                    Instagram<span class="sr-only"> – Sarahs Kanal, öffnet in neuem Tab</span>
+                </a>
+            </div>
         </nav>
     </div>
 </header>

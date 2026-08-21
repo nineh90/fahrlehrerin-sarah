@@ -427,9 +427,16 @@ $schoolUrl = trim((string) config('school.url'));
             <article class="feature-card">
                 <span class="feature-icon"><?= icon('car') ?></span>
                 <h3>Klasse B</h3>
+                <?php /* SARAHS FASSUNG, 21.08.2026 (SAR-67). Geändert ist nur der
+                         zweite Satz: „Automatik oder Schaltung, wie es zu dir
+                         passt" hieß, dass die Person allein wählt – ihr Satz sagt,
+                         dass sie gemeinsam wählen. Der Gedankenstrich ist derselbe
+                         wie im Satz davor (–, kein Bindestrich), sonst stünden
+                         zwei verschiedene Striche in einem Absatz. */ ?>
                 <p>
                     Der Autoführerschein – von der ersten Runde auf dem Parkplatz bis zur
-                    Prüfungsfahrt. Automatik oder Schaltung, wie es zu dir passt.
+                    Prüfungsfahrt. Automatik oder Schaltung – wir finden gemeinsam das
+                    passende Fahrzeug für dich.
                 </p>
             </article>
 

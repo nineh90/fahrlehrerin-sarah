@@ -199,15 +199,35 @@
             while (teile[teile.length - 1] === ' ') { teile.pop(); }
             if (!teile.length) return;
 
-            // Höhe festnageln, BEVOR der Text verschwindet. Ohne das klappt der
-            // Hero beim Tippen Zeile für Zeile auf und schiebt alles darunter
-            // vor sich her – der Fehler, an dem dieser Effekt sonst scheitert.
-            // Inline-Elemente (das <span> in der Ortszeile) nehmen keine
-            // min-height an; dort hält der umgebende Block die Höhe.
+            // Höhe UND BREITE festnageln, BEVOR der Text verschwindet. Ohne die
+            // Höhe klappt der Hero beim Tippen Zeile für Zeile auf und schiebt
+            // alles darunter vor sich her – der Fehler, an dem dieser Effekt
+            // sonst scheitert. Inline-Elemente (das <span> in der Ortszeile)
+            // nehmen keine min-height an; dort hält der umgebende Block die
+            // Höhe.
+            //
+            // DIE BREITE KAM AM 21.08.2026 DAZU (SAR-80). Sie ist derselbe
+            // Fehler, nur quer: Die Überschrift der Startseite steht auf dem
+            // Desktop in einer Zeile (`white-space: nowrap`) und spannt damit
+            // ihre Rasterspalte selbst auf – nachzulesen im Kommentar an der
+            // H1 in home.php. Solange sie unfertig ist, ist sie schmaler, die
+            // Spalte gibt den Platz an die Bildspalte daneben ab, und beim
+            // letzten Zeichen springt das Bild zurück.
+            //
+            // Nachgemessen bei 1100 px Inhaltsbreite: Das Bild war während des
+            // Tippens 401 px breit und danach 297 – ein Satz von 104 px. Bei
+            // 1000 px waren es 168. Aufgefallen ist es erst mit dem hohen
+            // Hero-Bild aus SAR-80; klein genug war der Sprung nie.
+            //
+            // Beide Maße stehen nur, SOLANGE getippt wird – danach nimmt sie
+            // der Abschluss unten wieder weg. Ein festgenagelter Wert, den
+            // niemand mehr anfasst, wäre bei der nächsten Fensterbreite falsch.
             var traeger = window.getComputedStyle(el).display === 'inline'
                 ? el.parentElement
                 : el;
-            traeger.style.minHeight = traeger.getBoundingClientRect().height + 'px';
+            var mass = traeger.getBoundingClientRect();
+            traeger.style.minHeight = mass.height + 'px';
+            traeger.style.minWidth = mass.width + 'px';
 
             // Vollständiger Satz als Beschriftung, solange getippt wird: So
             // liest Vorlesesoftware ihn am Stück und stolpert nicht über jedes
@@ -218,6 +238,7 @@
             schritte.push({
                 el: el,
                 teile: teile,
+                traeger: traeger,
                 tempo: TEMPO[el.getAttribute('data-typewriter')] || STANDARD
             });
         });
@@ -237,6 +258,12 @@
                     // Atemzug zwischen zwei Absätzen.
                     schritt.el.classList.remove('is-typing');
                     schritt.el.removeAttribute('aria-label');
+                    // Die Stützmaße wieder abbauen: Ab hier steht der volle
+                    // Text da und hält Höhe wie Breite selbst. Blieben sie
+                    // stehen, wären sie beim nächsten Drehen am Fenster eine
+                    // Sperre auf einem Maß, das dann nicht mehr stimmt.
+                    schritt.traeger.style.minHeight = '';
+                    schritt.traeger.style.minWidth = '';
                     window.setTimeout(naechsterBlock, 70);
                     return;
                 }

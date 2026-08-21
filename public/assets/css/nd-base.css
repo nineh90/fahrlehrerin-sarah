@@ -1917,6 +1917,29 @@ button.nav-link { background: none; border: 0; cursor: pointer; font-family: var
     width: .5ch;
     height: .82em;
     margin-left: .1em;
+    /* DER CURSOR ZÄHLT NICHT ZUR ZEILENBREITE, seit dem 21.08.2026 (SAR-80).
+       Der negative Rand rechts nimmt genau das zurück, was er breit ist –
+       gezeichnet wird er weiterhin, er schiebt nur nichts mehr.
+
+       Vorher schob er: Die Überschrift der Startseite steht auf dem Desktop
+       in einer Zeile (`white-space: nowrap`) und spannt ihre Rasterspalte
+       selbst auf. Reicht der Text bis an den Rand – bei „Führerschein-
+       Ausbildung" tut er das –, kommt der Cursor obendrauf, die Spalte wird
+       breiter und die Bildspalte daneben schmaler. Im Moment des letzten
+       Zeichens verschwindet er, und das Bild springt zurück. Genau das
+       „Wackeln", das an einem hohen Hero-Bild auffällt (Kevin, 21.08.2026).
+
+       Das ist der zweite Teil des Fehlers. Der erste sitzt in main.js: Dort
+       hält der Typewriter jetzt Höhe UND Breite fest, solange getippt wird.
+       Beides zusammen ergibt eine Spalte, die sich während der Animation
+       nicht mehr bewegt – eines allein reicht nicht, sie greifen an
+       verschiedenen Enden desselben Problems an.
+
+       Der Balken ragt dadurch bis zu einem halben Zeichen über das Zeilenende
+       hinaus. Im Hero ist dort die Lücke zur Bildspalte (mindestens 2 rem),
+       auf dem Handy der Innenabstand des Containers – nachgemessen entsteht
+       nirgends ein waagerechter Scrollbalken. */
+    margin-right: calc(-.5ch - .1em);
     vertical-align: -.04em;
     border-radius: 2px;
     background: var(--accent);

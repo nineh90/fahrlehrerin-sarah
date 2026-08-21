@@ -647,11 +647,19 @@
    anderen hell (Tischplatte). Deshalb schaltet `hero--photo` die Mechanik ab
    und Sarahs Foto stellt sich unter den Text.
 
-   Zwei Dinge machen das bezahlbar. Die REIHENFOLGE im Markup: Text zuerst,
-   Bild danach – die Knöpfe bleiben erreichbar, ohne an ihr vorbeizuscrollen
-   (genau das war das Argument gegen das Stapeln). Und die HÖHE ist begrenzt,
-   sonst baut ein Hochformat den Hero auf dem Handy doppelt so hoch; `cover`
-   schneidet dabei zum Gesicht hin an, nicht mittig – dort sitzt sie im Bild.
+   Bezahlbar macht das die begrenzte HÖHE: Ohne sie baut ein Hochformat den
+   Hero auf dem Handy doppelt so hoch. `cover` schneidet dabei zum Gesicht hin
+   an, nicht mittig – dort sitzt sie im Bild.
+
+   DAS FOTO STEHT SEIT DEM 21.08.2026 OBEN, vor dem Text (Kevin, SAR-80).
+   Vorher stand es darunter, in der Reihenfolge des Markups, mit dem Argument:
+   die Knöpfe bleiben erreichbar, ohne an ihm vorbeizuscrollen. Nachgemessen
+   trug dieses Argument nicht mehr – über den Knöpfen lagen Augenbraue,
+   dreizeilige Überschrift, zweizeiliger Vorspann und die Ortszeile, und Sarah
+   kam erst danach. Wer auf dem Handy landet, sieht jetzt zuerst sie und liest
+   dann, wer sie ist. Am Rechner ändert sich dadurch nichts: Dort stehen beide
+   Spalten nebeneinander, und die Reihenfolge im Markup entscheidet nur, was
+   links liegt.
 
    Der Umschaltpunkt steht zweimal da: hier und als Breakpoint in nd-base.css
    für die Mechanik, die hier abgeschaltet wird. Wer ihn verschiebt, fasst
@@ -669,6 +677,15 @@
         display: block;
         pointer-events: auto;
     }
+    /* Das Foto vor den Text. `order` und nicht eine andere Reihenfolge im
+       Markup: Dort steht der Text zuerst, und das soll er auch – er ist der
+       Inhalt, den Vorlesesoftware zuerst hören soll, und die Überschrift ist
+       die <h1> der Seite. Verschoben wird also nur, was man sieht.
+
+       Nur `hero--photo`: Auf /ueber-mich liegt in der Spalte das Video, und
+       ein Video, das man erst wegscrollen muss, um zu erfahren worum es geht,
+       ist etwas anderes als ein Porträt. */
+    .hero--photo .duo-media { order: -1; }
     /* Der Schleier gehört zur Fläche hinter dem Text – hier liegt nichts
        hinter dem Text, also nichts zu verschleiern. */
     .hero--photo .duo-media::after,
@@ -676,10 +693,17 @@
     .hero--photo .hero-photo img {
         max-height: 44vh;
         object-fit: cover;
-        /* Ihr Gesicht sitzt im Original bei etwa einem Drittel von links und
-           einem Viertel von oben. Mittig angeschnitten stünde stattdessen die
-           Tischlampe im Bild. */
-        object-position: 34% 24%;
+        /* Ihr Gesicht sitzt im Foto bei etwa 46 % von links und 24 % von
+           oben (nachgemessen am neuen Hero-Bild, SAR-80). Mittig
+           angeschnitten stünde stattdessen die Tischlampe im Bild.
+
+           Wirksam ist hier meist nur der ZWEITE Wert: Das Foto ist mit 9:16
+           hochkantiger als sein Kasten, es wird also auf die Breite gelegt
+           und oben/unten beschnitten. Der erste Wert greift erst, wenn der
+           Kasten schmaler proportioniert ist als das Bild – er steht
+           trotzdem richtig da, damit niemand ihn bei der nächsten
+           Bildänderung falsch übernimmt. */
+        object-position: 46% 24%;
     }
 
     /* Hier stand die Regel für `.hero-arc`: breiter als die Spalte und auf

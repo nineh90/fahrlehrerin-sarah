@@ -208,11 +208,22 @@ $schoolUrl = trim((string) config('school.url'));
                      gesetzt. Das Logo trägt weiter den Header, dort steht kein
                      Text daneben, der mit ihm konkurriert.
 
-                     Es ist dasselbe Foto wie auf /ueber-mich, mit Absicht: Sarah
-                     wollte genau dieses. Auf beiden Seiten derselbe Rahmen wäre
-                     eine Kopie, deshalb hier kein --portrait (das begrenzt die
-                     Höhe für Fließtext daneben, hier trägt das Bild die Spalte)
-                     und eine andere Akzentfarbe am Rahmen.
+                     SEIT DEM 21.08.2026 STEHT HIER EIN EIGENES FOTO (SAR-80,
+                     Kevin): Sarah am Tisch, den Kopf in die Hand gestützt.
+                     Davor war es derselbe Zuschnitt wie auf /ueber-mich
+                     (`sarah-rollistammtisch-nah.jpg`) – die Startseite und ihre
+                     Über-mich-Seite zeigten also dasselbe Bild. Das ist damit
+                     erledigt, und `/ueber-mich` behält seinen Zuschnitt für
+                     sich.
+
+                     Kein --portrait (das begrenzt die Höhe für Fließtext
+                     daneben, hier trägt das Bild die Spalte). Das Foto ist
+                     hochkantiger als sein Vorgänger, 9:16 statt 3:4 – der Hero
+                     wird dadurch rund 190 px höher. Auf einem 1920 × 956er
+                     Schirm passt er noch auf einen Bildschirm, auf einem
+                     kleinen Laptop nicht mehr ganz. Wer das ändern will, senkt
+                     `.hero-photo { max-width }` in theme.css; am Bild selbst
+                     ist nichts zu schneiden.
 
                      Auf schmalen Screens legt nd-base.css die Medienspalte hinter
                      den Text. Das gilt hier NICHT – `hero--photo` schaltet es ab.
@@ -220,10 +231,10 @@ $schoolUrl = trim((string) config('school.url'));
                      kein Gesicht. */ ?>
             <div class="duo-media">
                 <figure class="photo hero-photo" style="--card-accent: var(--c-violet);">
-                    <img src="<?= asset('img/sarah-rollistammtisch-nah.jpg') ?>"
-                         alt="Sarah sitzt lächelnd an ihrem Infotisch, davor eine Tischlampe
-                              und ein Schild mit der Aufschrift „Die Rollistammtische“"
-                         width="680" height="900" fetchpriority="high">
+                    <img src="<?= asset('img/sarah-hero.jpg') ?>"
+                         alt="Sarah sitzt lächelnd an einem Tisch, den Kopf in die Hand
+                              gestützt, daneben eine Tischlampe und ein Becher mit Stiften"
+                         width="800" height="1421" fetchpriority="high">
                 </figure>
             </div>
         </div>

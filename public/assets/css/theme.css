@@ -562,7 +562,9 @@
      .section-head h2::before   5 px links neben jeder h2
      .cta-inner::before         6 px am Abschlussband – dort steht auch eine h2
      .admin-hero::before        derselbe Balken im Dashboard
-     .footer-wordmark-name      28 × 3 px neben der Wortmarke im Fuß
+     .footer-wordmark-name      ENTFÄLLT seit dem 22.08.2026 (Nils) – der
+                                Strich neben der Wortmarke im Fuß ist ganz
+                                weg, siehe die Regel weiter unten
      .site-header::after        4 px unter der Kopfleiste, sobald gescrollt ist
                                 – NICHT hier, sondern in seinem eigenen Block
                                 weiter unten. Er hat dort schon eine Regel für
@@ -601,10 +603,21 @@
 .admin-hero::before {
     background: var(--accent-surface);
 }
-/* Der Fuß ist eine dunkle Fläche – dort trägt die aufgehellte Fassung.
-   `--accent` käme auf #2B2434 auf 1,4:1 und wäre praktisch unsichtbar. */
+/* KEIN STRICH NEBEN DER WORTMARKE IM FUSS (Nils, 22.08.2026). Hier stand
+   `background: var(--footer-accent)` – der Balken war seit SAR-81 grün, weil
+   `--accent` auf dem dunklen Fuß (#2B2434) nur 1,4:1 erreicht und praktisch
+   unsichtbar gewesen wäre. Jetzt ist er ersatzlos weg.
+
+   Abgeschaltet und nicht aus nd-base.css entfernt, und das ist Absicht: Der
+   Balken gehört dort zur ND-Signatur `.footer-wordmark-name` und damit den
+   anderen Kundenprojekten. Ob er bei SARAH steht, ist eine Frage dieser Seite
+   – also dieser Datei, genau wie die Farbe der übrigen Balken darüber.
+
+   `display: none` und nicht `content: none`: Das Pseudoelement ist ein
+   Flex-Item in einem `inline-flex` mit `gap: .6rem`. Ohne Item zählt der Gap
+   nicht mit, der Name rückt also sauber an den Anfang der Zeile. */
 .footer-wordmark-name::before {
-    background: var(--footer-accent);
+    display: none;
 }
 
 /* --- Regenbogen-Rotation für Karten -------------------------------------

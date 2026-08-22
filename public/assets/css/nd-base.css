@@ -799,12 +799,16 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
 .video-frame {
     margin: 0 auto; max-width: 300px;
     border-radius: var(--radius); overflow: hidden;
-    background: var(--bg-footer); box-shadow: var(--shadow-lg);
+    background: var(--video-frame-bg, var(--bg-footer)); box-shadow: var(--shadow-lg);
 }
+/* Das SCHWARZ bleibt schwarz und ist kein Token: Es ist die Flaeche des
+   Videos selbst, also das, was ein Player zeigt, solange kein Bild da ist.
+   Faerbt man sie mit ein, blitzt beim Laden eine bunte Kachel auf. */
 .video-frame video { display: block; width: 100%; height: auto; background: #000; }
 .video-frame figcaption {
     padding: .8rem 1rem; font-size: var(--fs-sm); line-height: 1.45;
-    color: var(--footer-muted); background: var(--bg-footer);
+    color: var(--video-frame-text, var(--footer-muted));
+    background: var(--video-frame-bg, var(--bg-footer));
 }
 
 /* Farbiger Fleck hinter dem Bild – die Regenbogenpalette taucht beiläufig auf */

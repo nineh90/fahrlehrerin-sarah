@@ -225,6 +225,31 @@
     --brand-instagram-edge:  #D62976;
     --on-brand-instagram:    #FFFFFF;
 
+    /* --- DER RAHMEN UM DAS VIDEO (SAR-88) --------------------------------
+       Sarah: „Können wir das lila noch ändern? Gerne ein helles grün?"
+       Gemeint war `--bg-footer` (#2B2434) – das dunkle Aubergine des Fußes,
+       das `.video-frame` bis dahin mitbenutzt hat. Sichtbar ist es vor allem
+       als Streifen unter dem Video, wo die Bildunterschrift steht.
+
+       WARUM ES JETZT EIN EIGENES TOKEN IST und nicht weiter `--bg-footer`:
+       Der Fuß ist eine dunkle Fläche und soll es bleiben. Solange beide
+       dasselbe Token lasen, war jede Änderung am einen auch eine am anderen –
+       ein hellgrüner Fuß wäre die Folge gewesen. Zwei Dinge, die zufällig
+       gleich aussahen, sind jetzt zwei Dinge.
+
+       Das Grün ist ein heller Ton in Sanders Farbton (107°), also aus
+       derselben Familie wie die Leitfarbe und nicht irgendein Grün.
+       Die Unterschrift trägt `--text-soft`: 5,97:1, also klar über den
+       4,5, die für 15-px-Text gefordert sind (WCAG 1.4.3) – und trotzdem
+       leiser als der Fließtext daneben, so wie vorher auch.
+
+       NICHT MITGEÄNDERT: der farbige Fleck hinter dem Video
+       (`.photo-wrap::before`). Der steht in `home.php` auf `--c-red` und
+       gehört zur Regenbogen-Rotation, nicht zum Rahmen. Sarah hat nach dem
+       Lila gefragt, nicht nach dem Fleck. */
+    --video-frame-bg:   #C6E4BE;
+    --video-frame-text: #544B60;
+
     /* WARUM DAS GRÜN NICHT HELLER WIRD.
        Am 19.08.2026 sollte es auf Sarahs Wunsch greller werden. Ausprobiert,
        angesehen, wieder verworfen: Hell gefiel es nicht. Die Rechnung dahinter

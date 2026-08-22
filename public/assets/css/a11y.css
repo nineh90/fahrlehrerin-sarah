@@ -196,6 +196,13 @@ html[data-kontrast='dunkel'] {
     --brand-tiktok-edge:    #C6BDD2;
     --brand-instagram-edge: #C6BDD2;
 
+    /* Der Videorahmen (SAR-88). Hell steht dort ein helles Gruen; dunkel
+       waere das ein leuchtender Block mitten auf der dunklen Seite. Also
+       derselbe Farbton, nur tief - und die Schrift kehrt sich um.
+       Schrift auf der Flaeche 6,42:1. */
+    --video-frame-bg:   #293E23;
+    --video-frame-text: #C6BDD2;
+
     --border:        rgba(241, 236, 246, 0.16);
     --border-strong: rgba(241, 236, 246, 0.32);
     --header-bg:     rgba(27, 23, 34, 0.92);
@@ -283,6 +290,11 @@ html[data-kontrast='hoch'] {
     --brand-instagram-hover: #FFFF00;
     --brand-instagram-edge:  #FFFF00;
     --on-brand-instagram:    #000000;
+
+    /* Videorahmen (SAR-88): schwarz mit weisser Schrift wie alles hier.
+       Ein Gruenton waere in diesem Modus eine zweite Farbe neben Gelb. */
+    --video-frame-bg:   #000000;
+    --video-frame-text: #FFFFFF;
     --on-accent:    #000000;
     --accent-soft:  #000000;
 

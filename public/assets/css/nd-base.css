@@ -827,11 +827,13 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
 .photo-wrap > .photo,
 .photo-wrap > .video-frame { position: relative; }
 
-/* Selbstauskunft über dem Fuß – steht auf jeder Seite und sagt überall
-   dasselbe. Bewusst leise: Sie soll gefunden werden von dem, der sie sucht,
-   und nicht gelesen werden müssen von allen anderen. Deshalb schmal, mittig
-   und im ruhigen Ton – lauter gesetzt wäre sie eine zweite Überschrift kurz
-   vor dem Fuß der Seite. */
+/* Selbstauskunft über dem Fuß. Bewusst leise: Sie soll gefunden werden von
+   dem, der sie sucht, und nicht gelesen werden müssen von allen anderen.
+   Deshalb schmal, mittig und im ruhigen Ton – lauter gesetzt wäre sie eine
+   zweite Überschrift kurz vor dem Fuß der Seite.
+   IN DIESEM PROJEKT DERZEIT UNBENUTZT: partials/site-note.php ist am
+   22.08.2026 entfallen. Die Regel bleibt wie .footer-credit als Teil der
+   ND-Signatur stehen. */
 .site-note {
     border-top: 1px solid var(--border);
     padding: 2.2rem 0;

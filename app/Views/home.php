@@ -353,10 +353,11 @@ $schoolUrl = trim((string) config('school.url'));
 </section>
 
 <?php /* Hier stand bis zum 12.08.2026 ein Kasten „Kurz vorweg: Das hier ist meine
-         persönliche Seite" – dieselbe Einordnung, die seit Sarahs Wunsch unten auf
-         jeder Seite steht (partials/site-note.php). Zweimal auf einer Seite wäre
-         sie einmal zu viel, und direkt unter dem Hero las sie sich wie eine
-         Entschuldigung dafür, dass hier keine Fahrschule steht. */ ?>
+         persönliche Seite" – dieselbe Einordnung, die danach unten auf jeder Seite
+         stand (partials/site-note.php). Direkt unter dem Hero las sie sich wie eine
+         Entschuldigung dafür, dass hier keine Fahrschule steht. Die Fußnote ist am
+         22.08.2026 ebenfalls entfallen: Die Fahrschule steht inzwischen an genug
+         Stellen der Seite. */ ?>
 
 <?php /* Hier stand bis zum 17.08.2026 „Mein Schwerpunkt – Fahren mit
          Handicap": Sarahs eigener Text über Linksgas, Lenkraddrehknopf und

@@ -431,9 +431,11 @@
                  Er steht als Kasten und nicht im Fließtext darüber, damit die
                  Grenze sichtbar bleibt: oben ihre Worte, hier unsere.
 
-                 Die Einordnung „angestellt, nicht selbstständig" steht ohnehin
-                 auf JEDER Seite unten (partials/site-note.php) – dieser Satz
-                 ist die praktische Ergänzung dazu, nicht ihre Wiederholung.
+                 Die Einordnung „angestellt, nicht selbstständig" stand bis zum
+                 22.08.2026 zusätzlich unter jeder Seite (partials/site-note.php).
+                 Seit die Fußnote weg ist, ist dieser Kasten auf dieser Seite die
+                 einzige Stelle, die sagt, wo man sich anmeldet – also nicht mehr
+                 die Ergänzung einer Einordnung, sondern sie selbst.
 
                  Fällt er irgendwann weg, ist das kein Verlust an Recht, aber
                  einer an Auskunft. */ ?>

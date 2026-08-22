@@ -155,17 +155,24 @@ html[data-kontrast='dunkel'] {
     --muted:     #A399B0;
 
     /* Die Leitfarbe kehrt sich hier um. Hell ist sie ein ABGEDUNKELTES Grün
-       (#22753A, siehe theme.css) – auf diesem Grund käme das auf 1,6:1 und
+       (#30751E, siehe theme.css) – auf diesem Grund käme das auf 1,6:1 und
        wäre praktisch unsichtbar. Dunkel muss dasselbe Grün AUFGEHELLT
        werden. Es ist derselbe Wert wie --footer-accent im hellen Schema,
        denn dort ist die Fläche ebenfalls dunkel.
-       8,59:1 auf dem Grund, 7,60:1 auf der Karte, dunkler Text darauf
-       8,59:1 – dieselben Zahlen, die das helle Violett vorher hatte. */
-    --accent:       #51CC74;
-    --accent-hover: #7ED998;
-    --accent-text:  #51CC74;
+       8,59:1 auf dem Grund, 7,61:1 auf der Karte, dunkler Text darauf
+       8,59:1 – dieselben Zahlen, die das helle Violett vorher hatte und die
+       auch Sarahs eigenes Grün (#51CC74) hier hatte.
+
+       SEIT SAR-81 (22.08.2026) ist es Sanders Farbton (107° statt 137°),
+       nach derselben Rechnung aufgehellt wie hell abgedunkelt. Wer das hier
+       vergisst, wenn er in theme.css die Leitfarbe wechselt, bekommt eine
+       Seite, die im Dunkelmodus noch in der alten Farbe steht – auffallen
+       würde das erst, wenn jemand den Modus einschaltet. */
+    --accent:       #5BCD3D;
+    --accent-hover: #86DA6F;
+    --accent-text:  #5BCD3D;
     --on-accent:    #1B1722;
-    --accent-soft:  rgba(81, 204, 116, 0.16);
+    --accent-soft:  rgba(91, 205, 61, 0.16);
 
     --border:        rgba(241, 236, 246, 0.16);
     --border-strong: rgba(241, 236, 246, 0.32);
@@ -181,7 +188,7 @@ html[data-kontrast='dunkel'] {
     --bg-footer:     #120F17;
     --footer-text:   #F1ECF6;
     --footer-muted:  #B3A9C0;
-    --footer-accent: #51CC74;
+    --footer-accent: #5BCD3D;
     --footer-border: rgba(241, 236, 246, 0.14);
     --footer-hover:  rgba(241, 236, 246, 0.08);
 
@@ -211,12 +218,16 @@ html[data-kontrast='dunkel'] {
 
 /* --- Hoher Kontrast ----------------------------------------------------
    Reines Schwarz/Weiß, Gelb als einziger Akzent – die maximale Trennschärfe.
-   Gelb und nicht die Leitfarbe: Das Akzent-Grün #22753A kommt auf Schwarz
-   auf 3,67:1 und fällt für Text damit durch – genau wie das Violett davor
-   (3,69:1). Der Farbwechsel vom 18.08.2026 ändert an dieser Entscheidung
-   also nichts. Das helle Regenbogen-Grün #3EA55B käme mit 6,74:1 zwar
-   durch, ist hier aber trotzdem falsch: In diesem Modus soll es EINEN
-   Akzent geben und nicht einen zweiten Grünton neben --green-text. */
+   Gelb und nicht die Leitfarbe: Sanders Akzent-Grün #30751E kommt auf
+   Schwarz auf 3,69:1 und fällt für Text damit durch – genau wie Sarahs
+   Grün davor (3,67:1) und das Violett davor (3,69:1). Weder der
+   Farbwechsel vom 18.08.2026 noch der auf Sander (SAR-81) ändert an
+   dieser Entscheidung etwas.
+
+   Auch Sanders Originalwert #43a22a hilft hier nicht, obwohl er auf
+   Schwarz mit 6,44:1 durchkäme: In diesem Modus soll es EINEN Akzent
+   geben und nicht einen zweiten Grünton neben --green-text. Dasselbe
+   Argument wie beim hellen Regenbogen-Grün #3EA55B (6,74:1). */
 html[data-kontrast='hoch'] {
     --bg:            #000000;
     --bg-secondary:  #000000;

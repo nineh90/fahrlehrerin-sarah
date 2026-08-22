@@ -78,8 +78,15 @@
     --muted:     #756B80;
 
     /* =====================================================================
-       4. AKZENT  ·  Grün führt, der Regenbogen begleitet
+       4. AKZENT  ·  das Grün der Fahrschule Sander führt
        -------------------------------------------------------------------------
+       DIE LEITFARBE IST SEIT DEM 22.08.2026 SANDERS GRÜN (SAR-81). Sarah ist
+       dort angestellt, und die Seite soll sich sichtbar an ihren Arbeitgeber
+       anlehnen. Sanders Marke ist genau eine Farbe: #43a22a, auf
+       fahrschule-sander.de das `bg-secondary` – der Rest ihrer Palette ist
+       Grau. Der Farbton ist also die Marke, und übernommen wird der Farbton
+       (107°), nicht der Hexwert. Warum, steht gleich unten.
+
        WARUM HIER EIN FESTER WERT STEHT UND NICHT `var(--c-green)`.
        Bis zum 18.08.2026 führte Violett, und zwar als `var(--c-violet)` –
        die Leitfarbe WAR eine der sieben Regenbogenfarben, unverändert. Das
@@ -92,28 +99,47 @@
        TEXTFARBE – unter anderem `a { color: var(--accent) }`, also jeder
        Link der Seite. Violett schaffte dort 5,39:1.
 
-       Die Werte unten sind deshalb ein abgedunkeltes Grün im Farbton von
-       `--c-green` (137°), gerechnet auf exakt die Kontraste, die das
-       Violett vorher hatte:
+       WARUM AUCH NICHT SANDERS #43a22a IM ORIGINAL. Dieselbe Rechnung, und
+       sie fällt sogar härter aus: #43a22a liegt bei 40 % Helligkeit und
+       kommt auf 3,08:1 als Text auf Creme und 3,26:1 mit weißer Schrift
+       darauf. Beides durchgefallen – es liegt mitten in der „toten Zone",
+       die im nächsten Block ausgemessen ist. Sanders Wert 1:1 zu übernehmen
+       hieße, jeden Link der Seite unlesbar zu machen; ausgerechnet auf einer
+       Seite, die sich an Menschen mit Einschränkungen richtet.
 
-         --accent        5,41:1 auf Creme   (Violett: 5,39)  · Weiß darauf 5,72:1
-         --accent-hover  6,71:1             (Violett: 6,72)
-         --accent-text   8,49:1             (Violett: 8,50)
+       Die Werte unten sind deshalb ein abgedunkeltes Grün im Farbton von
+       Sander (107°, Sättigung 59 %), gerechnet auf exakt dieselben
+       Kontraste, die vorher galten – erst für Violett, dann für Sarahs
+       eigenes Grün:
+
+                          jetzt (107°)   vorher (137°)   Violett
+         --accent          5,38:1         5,41:1          5,39:1   · Weiß darauf 5,69:1
+         --accent-hover    6,68:1         6,71:1          6,72:1
+         --accent-text     8,45:1         8,49:1          8,50:1
+
+       Alle drei Fassungen sind also gleich gut lesbar. Was sich ändert, ist
+       allein der Farbton: Sanders Grün ist gelbstichiger als das vorherige.
+
+       NEBENBEI GELÖST: Der Konflikt aus Abschnitt 6. Solange die Leitfarbe
+       ein Grün bei 137° war, lag sie im selben Farbton wie das Status-Grün
+       („hat geklappt") und musste allein über die Helligkeit
+       auseinandergehalten werden. Jetzt trennt beide zusätzlich der Farbton
+       – 107° gegen 137°. Die Regel dort gilt weiter, sie hat nur mehr Luft.
 
        Der Regenbogen bleibt davon unberührt: `--c-green` oben ist weiter
        das helle Grün des Logos und steht weiter im Bogen, in der
-       Kachel-Rotation und in den Statusfarben. Nur die Leitfarbe ist eine
-       eigene, dunklere Fassung davon.
+       Kachel-Rotation und in den Statusfarben. Sarahs Marke behält ihre
+       sieben Farben; Sanders Grün ist die Bedienfarbe darüber.
 
        WER HIER SCHRAUBT, MISST NACH. Ein Grün, das auf dem Monitor „noch
        gut lesbar" aussieht, liegt fast immer unter 4,5:1 – hell wirkende
        Farben täuschen genau in diesem Bereich.
        ===================================================================== */
-    --accent:       #22753A;
-    --accent-hover: #1D6532;
+    --accent:       #30751E;
+    --accent-hover: #2A651A;
     --on-accent:    #FFFFFF;                    /* Text auf Akzentflächen */
-    --accent-text:  #185429;                    /* Akzentfarbe als Textfarbe (kontraststark) */
-    --accent-soft:  rgba(34, 117, 58, 0.10);    /* zarte Akzentfläche */
+    --accent-text:  #235416;                    /* Akzentfarbe als Textfarbe (kontraststark) */
+    --accent-soft:  rgba(48, 117, 30, 0.10);    /* zarte Akzentfläche */
 
     /* WARUM DAS GRÜN NICHT HELLER WIRD.
        Am 19.08.2026 sollte es auf Sarahs Wunsch greller werden. Ausprobiert,
@@ -127,28 +153,41 @@
        für die weiße Schrift auf der Fläche.
 
        Auf dem Weg nach hell liegt deshalb eine tote Zone, in der BEIDES
-       durchfällt. Nachgemessen:
+       durchfällt. Neu nachgemessen für Sanders Farbton (107°, SAR-81):
 
-         #22753A   weiß 5,72   dunkel 2,62     ← hier stehen wir
-         #268040   weiß 4,95   dunkel 3,02     letzter Wert mit weißer Schrift
-         #2A8A45   weiß 4,36   dunkel 3,43     tote Zone
-         #2E9149   weiß 3,99   dunkel 3,75     tote Zone
-         #389E54   weiß 3,39   dunkel 4,40     tote Zone
-         #3EA55B   weiß 3,12   dunkel 4,80     ab hier trägt nur dunkle Schrift
-         #46B565   weiß 2,61   dunkel 5,74
+         #30751E   weiß 5,69   dunkel 5,38     ← hier stehen wir
+         #337C20   weiß 5,19   dunkel 4,91
+         #368222   weiß 4,80   dunkel 4,54     letzter Wert, der beides trägt
+         #388823   weiß 4,45   dunkel 4,21     tote Zone
+         #3B8E25   weiß 4,13   dunkel 3,91     tote Zone
+         #409A28   weiß 3,58   dunkel 3,38     tote Zone
+         #43A22A   weiß 3,26   dunkel 3,08     tote Zone – SANDERS ORIGINALWERT
+         #47AC2D   weiß 2,91   dunkel 2,76     tote Zone
 
-       Mit weißer Schrift ist also bei #268040 Schluss, und das ist von hier
-       mit bloßem Auge kaum zu unterscheiden. Wirklich heller geht nur jenseits
-       der toten Zone, und dann muss die Schrift auf den Knöpfen dunkel werden
-       und `--accent` in zwei Token zerfallen: eins für Text, eins für Flächen.
-       Genau so war es kurzzeitig gebaut. Wer es wieder will, findet den Aufbau
-       in der Versionsgeschichte vom 19.08.2026. */
+       Zwei Dinge sind hier anders als in der Fassung von vorher (137°, in
+       der Versionsgeschichte vom 19.08.2026):
+
+       Erstens gibt es bei diesem Farbton ein schmales Fenster, in dem beide
+       Jobs zugleich bestehen (#368222). Die Grenze liegt also etwas höher als
+       gedacht – aber nur zwei Zehntel Helligkeit, mit dem Auge kaum zu sehen.
+
+       Zweitens, und das ist der Punkt: SANDERS EIGENER WERT LIEGT MITTEN IN
+       DER TOTEN ZONE. #43a22a fällt bei beiden Jobs durch. Wer die Farbe „wie
+       bei Sander" haben will, kann sie deshalb nicht als Bedienfarbe nehmen –
+       nur ihren Farbton.
+
+       Wirklich heller geht nur jenseits der toten Zone, und dann muss die
+       Schrift auf den Knöpfen dunkel werden und `--accent` in zwei Token
+       zerfallen: eins für Text, eins für Flächen. Genau so war es kurzzeitig
+       gebaut. Wer es wieder will, findet den Aufbau in der
+       Versionsgeschichte vom 19.08.2026. */
     /* Tiefe unter dem Hauptbutton – neutral und dezent. Ein farbiger Schein
        in der Leitfarbe sah neben dem Regenbogen nach Effekt aus, nicht nach
        Handwerk. Deshalb steht hier ein Grauton und keine Ableitung des
-       Akzents; der Farbwechsel auf Grün lässt ihn unberührt. */
+       Akzents; der Farbwechsel auf Grün lässt ihn unberührt – der auf
+       Sanders Grün ebenso. */
     --shadow-accent: rgba(43, 36, 52, 0.16);
-    --focus-ring:   #22753A;                    /* Tastatur-Fokus */
+    --focus-ring:   #30751E;                    /* Tastatur-Fokus */
 
     /* =====================================================================
        5. LINIEN & FLÄCHENDETAILS
@@ -166,15 +205,20 @@
     /* =====================================================================
        6. STATUS  ·  semantisch, greift auf die Regenbogenfarben zurück
        -------------------------------------------------------------------------
-       ACHTUNG SEIT DEM FARBWECHSEL (18.08.2026): Grün ist jetzt zweierlei –
+       ACHTUNG SEIT DEM FARBWECHSEL (18.08.2026): Grün ist zweierlei –
        die Leitfarbe der Marke UND „hat geklappt". Solange die Leitfarbe
        Violett war, waren die beiden Bedeutungen sauber getrennt.
 
        Auseinander hält sie ihre Helligkeit: Status-Grün ist das helle
        `--c-green` (#3EA55B) und steht auf Flächen (Plaketten, Kanten,
-       Zeilenkanten). Der Akzent ist das dunkle #22753A und steht als Text
+       Zeilenkanten). Der Akzent ist das dunkle #30751E und steht als Text
        und als Knopffläche. Wer eine Statusfarbe auf den Akzent umstellt
        oder umgekehrt, nimmt der Seite diese Trennung.
+
+       SEIT SAR-81 (22.08.2026) trennt beide zusätzlich der Farbton: Sanders
+       Grün liegt bei 107°, das Status-Grün bei 137°. Das entschärft den
+       Konflikt, hebt ihn aber nicht auf – die Regel oben gilt unverändert
+       weiter, sie hat nur mehr Luft.
 
        Eine echte Statusmeldung braucht deshalb weiter ein Wort dazu und
        nicht nur die Farbe – das galt vorher schon für Farbenblinde und
@@ -201,10 +245,11 @@
     --footer-muted:  #B6ADC4;
     --footer-border: rgba(255, 255, 255, 0.14);
     /* Die Leitfarbe für den dunklen Fuß: dasselbe Grün, aber aufgehellt
-       statt abgedunkelt – auf #2B2434 käme #22753A auf 1,4:1. 7,29:1, das
+       statt abgedunkelt – auf #2B2434 käme #30751E auf 1,4:1. 7,29:1, das
        ist auf die Zehntelstelle der Wert, den das helle Violett vorher
-       hatte. */
-    --footer-accent: #51CC74;
+       hatte und den auch Sarahs eigenes Grün (#51CC74) hier hatte. Sanders
+       Farbton, gleiche Lesbarkeit – dieselbe Rechnung wie bei `--accent`. */
+    --footer-accent: #5BCD3D;
     --footer-hover:  rgba(255, 255, 255, 0.07);
 
     /* =====================================================================
@@ -396,6 +441,63 @@
    Nur Optik; die Struktur aus nd-base.css bleibt unangetastet.
    ========================================================================= */
 
+/* --- WO DER REGENBOGEN NICHT MEHR LÄUFT (SAR-81, 22.08.2026) -------------
+   Sarahs Marke hat zwei Rollen für Farbe, und sie waren bisher dieselbe:
+   den Regenbogen als Schmuck und den Akzent als Bedienfarbe. Seit die
+   Leitfarbe Sanders Grün ist, wird das getrennt – die GLIEDERUNG der Seite
+   trägt Grün, die ZIERDE bleibt bunt.
+
+   GRÜN ist ab jetzt jeder senkrechte Balken, der vor einer Überschrift
+   steht, dazu die beiden waagerechten Striche des Seitengerüsts:
+
+     .section-head h2::before   5 px links neben jeder h2
+     .cta-inner::before         6 px am Abschlussband – dort steht auch eine h2
+     .admin-hero::before        derselbe Balken im Dashboard
+     .footer-wordmark-name      28 × 3 px neben der Wortmarke im Fuß
+     .site-header::after        4 px unter der Kopfleiste, sobald gescrollt ist
+                                – NICHT hier, sondern in seinem eigenen Block
+                                weiter unten. Er hat dort schon eine Regel für
+                                seinen Auftritt, und eine zweite hier wäre eine
+                                Falle: Bei gleicher Spezifität gewinnt die
+                                spätere, also hätte die untere den Regenbogen
+                                einfach wieder zurückgeholt.
+
+   BUNT BLEIBT alles, was Sarahs Handschrift ist und nicht die Gliederung:
+
+     .quote                     der Balken neben ihrem Zitat – ausdrücklich
+                                ausgenommen (Sarah/Kevin im Ticket)
+     .card-grid & Co.           die Farbrotation der Wegbegleiter, Karten,
+                                Prozessschritte und Akkordeon-Kapitel
+     .error-code                die 404-Ziffer
+     .nd-credit::before         das Band von Nils-Digital – eigene Signatur,
+                                und es liegt ohnehin nur als Vorlage herum
+
+   WARUM DIE ÜBERSCHREIBUNG HIER STEHT UND NICHT IN nd-base.css: Dort ist der
+   Regenbogen die ND-Signatur und gehört anderen Kundenprojekten. Welche
+   Balken bei SARAH grün werden, ist eine Frage dieser Seite. Derselbe Ort und
+   derselbe Grund wie bei `.hero-eyebrow::before` (SAR-74) weiter unten.
+
+   DIE FALLE, FALLS JEMAND EINEN BALKEN ERGÄNZT: In nd-base.css steht überall
+   `var(--gradient-rainbow-v, var(--accent))`. Der zweite Wert ist ein
+   Rückfall für den Fall, dass es das Token nicht gibt – KEIN Schalter. Wer
+   einen neuen Balken grün haben will, trägt seinen Selektor hier ein.
+
+   BARRIEREFREIHEIT LÄUFT VON SELBST MIT: Die Regel nennt `var(--accent)` und
+   keinen Hexwert. Im Kontrastmodus „hoch" ist der Akzent Gelb, im
+   Dunkelmodus das aufgehellte Grün – die Balken folgen also beiden Modi,
+   ohne dass a11y.css etwas über sie wissen muss. Genau deshalb ein Token und
+   keine Farbe. */
+.section-head h2::before,
+.cta-inner::before,
+.admin-hero::before {
+    background: var(--accent);
+}
+/* Der Fuß ist eine dunkle Fläche – dort trägt die aufgehellte Fassung.
+   `--accent` käme auf #2B2434 auf 1,4:1 und wäre praktisch unsichtbar. */
+.footer-wordmark-name::before {
+    background: var(--footer-accent);
+}
+
 /* --- Regenbogen-Rotation für Karten -------------------------------------
    Jede Karte in einem Raster bekommt automatisch die nächste Regenbogenfarbe.
    Die Templates setzen KEINE Farbe – hier entsteht sie.
@@ -510,13 +612,22 @@
    später eine weitere Transformation liegen, und über `transform` würden
    sich beide gegenseitig auslöschen (siehe Bewegungs-Ebenen in CLAUDE.md).
    Bei `prefers-reduced-motion` greift das Netz in nd-base.css und setzt die
-   Dauer auf null: Der Streifen ist dann sofort da, statt zu laufen. */
+   Dauer auf null: Der Streifen ist dann sofort da, statt zu laufen.
+
+   SEIT DEM 22.08.2026 IST ER EINFARBIG (SAR-81): Sanders Grün statt des
+   Regenbogens. Er ist damit kein Regenbogen-Streifen mehr, aber der Name
+   der Überschrift bleibt – gemeint ist die Kante, nicht ihre Farbe.
+   Er gehört zur Gliederung der Seite und folgt derselben Trennung wie die
+   Balken vor den Überschriften; die Begründung steht dort oben im Block
+   „WO DER REGENBOGEN NICHT MEHR LÄUFT". Hier steht die Farbe und nicht dort,
+   weil diese Regel die spätere ist und eine Zuweisung weiter oben bei
+   gleicher Spezifität wirkungslos wäre. */
 .site-header::after {
     content: "";
     position: absolute;
     left: 0; right: 0; bottom: 0;
     height: 4px;
-    background: var(--gradient-rainbow);
+    background: var(--accent);
     scale: 0 1;
     transform-origin: right center;
     transition: scale .55s cubic-bezier(.22, .61, .36, 1);

@@ -188,6 +188,43 @@
     --accent-surface-hover: #46AA2C;
     --on-accent-surface:    #2B2434;
 
+    /* --- DIE FARBEN DER PLATTFORMEN (SAR-87) ------------------------------
+       Sarahs Wunsch: „Die Button vielleicht noch in der Originalfarbe? Also
+       pink und schwarz?" Gemeint sind die beiden Kanalknöpfe auf der
+       Startseite. Sie tragen deshalb als EINZIGE Stellen der Seite eine
+       fremde Marke – überall sonst führt Sanders Grün.
+
+       DAS PINK IST #D62976 UND NICHT #E1306C. Der gängige Wert, den die
+       meisten „Instagram-Pink" nennen, trägt weiße Schrift nur mit 4,34:1
+       und verfehlt die geforderten 4,5 (WCAG 1.4.3) um 0,16. #D62976 ist
+       kein erfundener Nachbarton, sondern ebenfalls ein Wert aus Instagrams
+       eigenem Verlauf – und kommt auf 4,73:1. Der Unterschied ist mit dem
+       Auge nicht zu sehen, der zwischen bestanden und durchgefallen schon.
+
+       Gemessen:
+         TikTok    #010101   weiße Schrift 20,87:1 · Fläche auf Creme 19,74:1
+         Instagram #D62976   weiße Schrift  4,73:1 · Fläche auf Creme  4,48:1
+
+       WARUM ES EIN EIGENES KANTEN-TOKEN GIBT, und das ist der Teil, den man
+       sonst erst im Dunkelmodus bemerkt: Ein schwarzer Knopf kommt auf dem
+       dunklen Grund (#1B1722) auf 1,19:1 – er verschwindet schlicht. Die
+       Fläche kann dort nicht heller werden, sonst ist es nicht mehr TikToks
+       Schwarz. Also trägt die KANTE den Umriss: hell im Dunkelmodus, gleich
+       der Füllung im hellen. `.btn` bringt die 2 px dafür schon mit
+       (`border: 2px solid transparent`), es fehlt nur die Farbe.
+
+       Der Hover läuft bei beiden nach dunkler – anders als beim grünen
+       Hauptknopf, denn hier ist die Schrift weiß und nicht dunkel. */
+    --brand-tiktok:          #010101;
+    --brand-tiktok-hover:    #2B2434;
+    --brand-tiktok-edge:     #010101;
+    --on-brand-tiktok:       #FFFFFF;
+
+    --brand-instagram:       #D62976;
+    --brand-instagram-hover: #B92264;
+    --brand-instagram-edge:  #D62976;
+    --on-brand-instagram:    #FFFFFF;
+
     /* WARUM DAS GRÜN NICHT HELLER WIRD.
        Am 19.08.2026 sollte es auf Sarahs Wunsch greller werden. Ausprobiert,
        angesehen, wieder verworfen: Hell gefiel es nicht. Die Rechnung dahinter
@@ -628,6 +665,41 @@
    deshalb bleibt hier nur die etwas festere Kante beim Hover. */
 .btn-primary:hover {
     box-shadow: 0 8px 20px var(--shadow-accent);
+}
+
+/* --- Die zwei Kanalknöpfe in den Farben ihrer Plattform (SAR-87) ---------
+   Sie stehen NUR im Kanal-Abschnitt der Startseite. Die Werte und die
+   Begründung stehen oben im :root; hier hängt nur die Mechanik.
+
+   DASS SIE IN theme.css STEHEN UND NICHT IN nd-base.css, ist keine Formsache:
+   `.btn-tiktok` ist die Marke eines fremden Unternehmens. In der ND-Signatur
+   hätte sie nichts zu suchen – die gilt projektübergreifend und darf keine
+   fremde Marke mitschleppen. Wer diese Knöpfe in einem anderen Kundenprojekt
+   braucht, kopiert diesen Block dorthin.
+
+   Die Kante ist immer gesetzt, auch wenn sie hell wie die Füllung ist. Nur
+   deshalb kann `a11y.css` sie im Dunkelmodus sichtbar machen, ohne hier noch
+   einmal etwas anzufassen – dieselbe Bauweise wie beim Rest der Seite: Die
+   Regel nennt Token, die Modi setzen Werte. */
+.btn-tiktok {
+    background: var(--brand-tiktok);
+    color: var(--on-brand-tiktok);
+    border-color: var(--brand-tiktok-edge);
+}
+.btn-tiktok:hover {
+    background: var(--brand-tiktok-hover);
+    border-color: var(--brand-tiktok-edge);
+    color: var(--on-brand-tiktok);
+}
+.btn-instagram {
+    background: var(--brand-instagram);
+    color: var(--on-brand-instagram);
+    border-color: var(--brand-instagram-edge);
+}
+.btn-instagram:hover {
+    background: var(--brand-instagram-hover);
+    border-color: var(--brand-instagram-edge);
+    color: var(--on-brand-instagram);
 }
 
 /* --- Wortmarke: Regenbogen-Punkt --------------------------------------- */

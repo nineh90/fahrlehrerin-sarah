@@ -319,12 +319,24 @@ $schoolUrl = trim((string) config('school.url'));
                          Der Handle bleibt in der .env (TIKTOK_HANDLE) und
                          steckt weiter in der verlinkten Adresse – nur
                          ausgeschrieben steht er hier nicht mehr. */ ?>
+                <?php /* DIE EINZIGEN KNÖPFE DER SEITE IN EINER FREMDEN MARKE
+                         (SAR-87, Sarahs Wunsch): TikTok schwarz, Instagram
+                         pink. Überall sonst führt Sanders Grün.
+
+                         Vorher war TikTok `btn-primary` und Instagram
+                         `btn-ghost` – also ein gefüllter und ein leerer Knopf.
+                         Das war eine Rangfolge, die es hier nicht gibt: Es
+                         sind zwei gleichwertige Kanäle. Jetzt sind beide
+                         gefüllt, und was sie unterscheidet, ist die Plattform
+                         und nicht ihre Wichtigkeit.
+
+                         Farbwerte und die Rechnung dahinter: theme.css. */ ?>
                 <div class="duo-actions">
-                    <a class="btn btn-primary" href="<?= e(tiktok_url()) ?>"
+                    <a class="btn btn-tiktok" href="<?= e(tiktok_url()) ?>"
                        target="_blank" rel="noopener noreferrer">
                         <?= icon('tiktok') ?> TikTok
                     </a>
-                    <a class="btn btn-ghost" href="<?= e(instagram_url()) ?>"
+                    <a class="btn btn-instagram" href="<?= e(instagram_url()) ?>"
                        target="_blank" rel="noopener noreferrer">
                         <?= icon('instagram') ?> Instagram
                     </a>

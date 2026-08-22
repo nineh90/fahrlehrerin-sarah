@@ -184,6 +184,18 @@ html[data-kontrast='dunkel'] {
     --accent-surface-hover: #86DA6F;
     --on-accent-surface:    #1B1722;
 
+    /* DIE KANALKNOEPFE (SAR-87). Die Fuellungen bleiben, wie sie sind – es
+       sind fremde Marken, und ein aufgehelltes TikTok-Schwarz waere keins
+       mehr. Was sich aendert, ist die KANTE: Schwarz auf #1B1722 kommt auf
+       1,19:1, der Knopf verschwaende ohne sie schlicht im Hintergrund.
+       #C6BDD2 ist --text-soft dieses Modus und kommt auf 9,74:1 gegen den
+       Grund und 11,54:1 gegen die schwarze Flaeche.
+       Instagram bekommt sie mit, aus einem zweiten Grund: Seine Fuellung
+       traegt zwar 3,72:1 gegen den Grund, beim Hover faellt sie aber auf
+       2,92:1. Mit Kante traegt den Umriss ohnehin die Kante. */
+    --brand-tiktok-edge:    #C6BDD2;
+    --brand-instagram-edge: #C6BDD2;
+
     --border:        rgba(241, 236, 246, 0.16);
     --border-strong: rgba(241, 236, 246, 0.32);
     --header-bg:     rgba(27, 23, 34, 0.92);
@@ -258,6 +270,19 @@ html[data-kontrast='hoch'] {
     --accent-surface:       #FFFF00;
     --accent-surface-hover: #FFFF00;
     --on-accent-surface:    #000000;
+
+    /* Auch die Kanalknoepfe werden gelb (SAR-87). In diesem Modus gibt es
+       genau einen Akzent – eine fremde Marke ist kein Grund fuer eine
+       Ausnahme, im Gegenteil: Wer ihn braucht, braucht ihn ueberall.
+       Erkennbar bleiben die beiden an Icon und Beschriftung. */
+    --brand-tiktok:          #FFFF00;
+    --brand-tiktok-hover:    #FFFF00;
+    --brand-tiktok-edge:     #FFFF00;
+    --on-brand-tiktok:       #000000;
+    --brand-instagram:       #FFFF00;
+    --brand-instagram-hover: #FFFF00;
+    --brand-instagram-edge:  #FFFF00;
+    --on-brand-instagram:    #000000;
     --on-accent:    #000000;
     --accent-soft:  #000000;
 

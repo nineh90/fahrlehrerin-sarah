@@ -141,6 +141,53 @@
     --accent-text:  #235416;                    /* Akzentfarbe als Textfarbe (kontraststark) */
     --accent-soft:  rgba(48, 117, 30, 0.10);    /* zarte Akzentfläche */
 
+    /* --- SANDERS LOGO-GRÜN FÜR FLÄCHEN (SAR-81, zweiter Durchgang) -------
+       DIE LEITFARBE ZERFÄLLT HIER IN ZWEI TOKEN, und das ist die Auflösung
+       der toten Zone von oben. Der Grund, warum `--accent` dunkel sein muss,
+       ist die weiße Schrift auf den Knöpfen. Lässt man die weiße Schrift
+       fallen, fällt auch der Zwang – und dann darf die FLÄCHE das Grün des
+       Logos tragen, unverändert.
+
+       Gemessen (Sanders Logo, nicht ihr CSS – die Marke ist die Datei):
+         Logo-Grün         #44A22C   H 107,8°  S 57,3%  L 40,4%
+         ihr CSS-Wert      #43A22A   H 107,5°  S 58,8%  L 40,0%
+       Das ist dieselbe Farbe; die drei Zehntel Grad sind WebP-Kompression.
+       Genommen ist der CSS-Wert, weil er der geschriebene ist.
+
+       Die Rechnung auf #43A22A:
+         Schrift --text (#2B2434) darauf   4,58:1  ✓  (weiß wäre 3,26 ✗)
+         Fläche gegen den Creme-Grund      3,08:1  ✓  (WCAG 1.4.11: 3:1)
+
+       ZWEI DINGE, DIE MAN DABEI FALSCH MACHEN KANN:
+
+       1. DER HOVER MUSS HELLER WERDEN, NICHT DUNKLER. Bei weißer Schrift
+          dunkelt man beim Überfahren ab; hier trägt die Fläche dunkle
+          Schrift, und Abdunkeln würde genau den Kontrast auffressen, für den
+          es diese Fassung gibt. `--accent-surface-hover` liegt deshalb ÜBER
+          dem Grundwert (L 42 % statt 40 %) und kommt auf 5,02:1.
+          Nebenwirkung, ehrlich benannt: Die Fläche selbst fällt beim
+          Überfahren auf 2,82:1 gegen den Grund, also unter die 3:1. Das ist
+          vertretbar, weil der Knopf im Ruhezustand identifizierbar ist und
+          `theme.css` beim Hover zusätzlich einen Schatten setzt – aber wer
+          den Wert weiter aufhellt, verschiebt das ins Unhaltbare.
+
+       2. `--accent-hover` IST NICHT DASSELBE. Es hängt an `a:hover`, also an
+          Text, und muss dunkel bleiben. Genau deshalb gibt es hier ein
+          zweites Hover-Token und nicht einen umdefinierten Wert.
+
+       WO ES GILT: gefüllte Bedienflächen auf hellem Grund (`.btn-primary`,
+       `.skip-link`, die Schalter im Barrierefreiheits-Panel) und die
+       Zierbalken aus dem ersten Durchgang. NICHT im Admin – `.chip` und die
+       Seitenleiste liegen auf dunklem Grund, dort gelten andere Zahlen.
+
+       DARAUS FOLGT DIE REGEL FÜR ALLES WEITERE:
+       FLÄCHE trägt Sanders Logo-Grün, SCHRIFT trägt die abgedunkelte
+       Fassung. Wer eine neue Komponente einfärbt, entscheidet zuerst, welche
+       der beiden sie ist. */
+    --accent-surface:       #43A22A;
+    --accent-surface-hover: #46AA2C;
+    --on-accent-surface:    #2B2434;
+
     /* WARUM DAS GRÜN NICHT HELLER WIRD.
        Am 19.08.2026 sollte es auf Sarahs Wunsch greller werden. Ausprobiert,
        angesehen, wieder verworfen: Hell gefiel es nicht. Die Rechnung dahinter
@@ -490,7 +537,7 @@
 .section-head h2::before,
 .cta-inner::before,
 .admin-hero::before {
-    background: var(--accent);
+    background: var(--accent-surface);
 }
 /* Der Fuß ist eine dunkle Fläche – dort trägt die aufgehellte Fassung.
    `--accent` käme auf #2B2434 auf 1,4:1 und wäre praktisch unsichtbar. */
@@ -627,7 +674,7 @@
     position: absolute;
     left: 0; right: 0; bottom: 0;
     height: 4px;
-    background: var(--accent);
+    background: var(--accent-surface);
     scale: 0 1;
     transform-origin: right center;
     transition: scale .55s cubic-bezier(.22, .61, .36, 1);

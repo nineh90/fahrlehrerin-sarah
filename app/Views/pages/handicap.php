@@ -225,14 +225,96 @@
     </div>
 </section>
 
-<?php /* DER WECHSEL DER HINTERGRUNDFARBE SITZT SEIT SAR-82 HIER und
-         nicht mehr einen Abschnitt tiefer. Vorher stiessen zwei helle
-         Abschnitte aneinander – „Welche Lösung passt zu dir?" und dieser –
-         und der Ablauf begann optisch mitten im vorigen. Jetzt wechselt die
-         Seite von oben nach unten durchgehend ab: hell, abgesetzt, hell,
-         abgesetzt. Wer hier eine Sektion einfügt, dreht die Reihenfolge für
-         alles darunter mit. */ ?>
+<?php /* SARAHS ABSCHNITT ÜBER DIE ZUSAMMENARBEIT, seit dem 23.08.2026
+         (Ticket SAR-92). Er stand bis dahin auf /ueber-mich und davor, bis
+         zum 17.08.2026, auf der Startseite (SAR-24). Zweimal war er nur
+         untergebracht: Auf einer Seite über Sarah las er sich als Vorschau
+         auf diese hier, und ihre Kapitel dort sagen dasselbe in Prosa.
+
+         DER TEXT IST VON SARAH, wörtlich seit dem 11.08.2026, und damit tabu
+         für Umformulierungen. Die Auslassungspunkte nach der Aufzählung, das
+         „normal" in Anführungszeichen und der direkte Satz über das gute
+         Gefühl sind ihr Ton. Geändert wurde daran genau eines, schon auf der
+         Startseite: Sie schreibt „DU musst ein gutes Gefühl haben", und weil
+         Versalien im Web als Schreien gelesen werden, trägt die Betonung
+         hier <strong>. Will sie die Großbuchstaben ausdrücklich, ist das ihre
+         Entscheidung.
+
+         EIN SATZ VON IHR IST NICHT MITGEZOGEN: „Ein angepasstes Fahrzeug
+         fährt sich anders als üblich – nicht schwerer." Er ist die ältere,
+         kürzere Fassung dessen, was drei Abschnitte weiter oben schon steht
+         („Ein angepasstes Fahrzeug fährt sich nicht unbedingt schwerer –
+         zunächst einfach anders", SAR-82, vom 21.08.2026). Beide sind von
+         ihr, beide sagen dasselbe, und auf einer Seite untereinander liest
+         sich das wie ein Versehen. Der ältere weicht, nicht der jüngere.
+
+         DIE ÜBERSCHRIFT IST VON UNS und war es auch vorher. Auf /ueber-mich
+         hieß der Abschnitt „Fahren mit Handicap"; hier oben steht das schon
+         als Titel der Seite. „Ich kenne die Technik" ist keine Erfindung,
+         sondern ihr eigener Satz aus dem ersten Absatz darunter.
+
+         DER KNOPF „FAHREN MIT HANDICAP" IST WEG, er zeigte von /ueber-mich
+         hierher und würde jetzt auf die eigene Seite verweisen. Der Aufruf
+         zum Handeln steht im Schlussband unten, einmal pro Seite.
+
+         DAS FOTO KOMMT MIT. Es zeigt Sarah am Infotisch beim Rollistammtisch,
+         also in dem Umfeld, um das es im Text daneben geht, und es ist die
+         einzige Abbildung von ihr auf dieser Seite: Zwischen zwei Fußräumen
+         steht hier der Mensch, der darin sitzt. Das fremde Branding im
+         Hintergrund (Wandmuster des Veranstalters, Schild auf dem Tisch)
+         bleibt sichtbar, dieselbe Entscheidung wie beim Fahrschulauto (Nils,
+         12.08.2026): Es zeigt, wo sie unterwegs ist. Keine Bildunterschrift,
+         wie überall seit dem 12.08.2026, was zu sehen ist, sagt der alt-Text.
+
+         Bild links, Text rechts, also ohne `duo--text-first`: Der Abschnitt
+         direkt darüber hat seine Abbildung rechts, und zwei Fotos an
+         derselben Kante lesen sich als Spalte. */ ?>
 <section class="section section--alt">
+    <div class="container">
+        <div class="duo">
+            <div class="duo-media photo-wrap" style="--card-accent: var(--c-orange);">
+                <?php /* Hochformat, deshalb `.photo--portrait`: Ohne die Begrenzung
+                         bestimmt das Bild die Spaltenhöhe und der Text daneben steht
+                         verloren in der Leere. Regel in nd-base.css. */ ?>
+                <figure class="photo photo--portrait">
+                    <img src="<?= asset('img/sarah-rollistammtisch.jpg') ?>"
+                         alt="Sarah sitzt lächelnd an einem Infotisch; davor liegen Karten
+                              der Fahrschule, eine Schale Bonbons und ein Schild mit der
+                              Aufschrift „Die Rollistammtische“"
+                         width="900" height="1021" loading="lazy" decoding="async">
+                </figure>
+            </div>
+
+            <div class="duo-text">
+                <h2>Ich kenne die Technik</h2>
+                <p>
+                    Linksgas, Lenkraddrehknopf, Handbedienung für Gas und Bremse …
+                    Ich kenne die Technik und weiß, dass es länger dauern kann, bis es
+                    sich „normal“ anfühlt.
+                </p>
+                <p class="statement">
+                    Nicht ich muss mich wohl fühlen – <strong>du</strong> musst ein gutes
+                    Gefühl haben.
+                </p>
+                <p>
+                    Wir arbeiten auf Augenhöhe miteinander, ich gebe dir nur die
+                    Hilfestellung, es selbst zu schaffen.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<?php /* HELL, SEIT SAR-92 (23.08.2026). Der Ablauf stand seit SAR-82
+         abgesetzt, weil er damals direkt auf „Welche Lösung passt zu dir?"
+         folgte und zwei helle Abschnitte sonst ineinandergelaufen wären.
+         Jetzt liegt Sarahs Abschnitt dazwischen und trägt das Dunkle.
+
+         Die Seite wechselt von oben nach unten durchgehend ab: hell,
+         abgesetzt, hell, abgesetzt. Wer hier eine Sektion einfügt, dreht
+         die Reihenfolge für alles darunter mit, so wie SAR-92 es getan
+         hat. */ ?>
+<section class="section">
     <div class="container">
         <div class="section-head">
             <div class="section-head-text">
@@ -369,7 +451,10 @@
 
          Kommt der Ablauf je zurück, steht er in der Versionsgeschichte. */ ?>
 
-<section class="section">
+<?php /* `--alt` seit SAR-92: Der Ablauf darüber ist mit demselben Ticket auf
+         hellen Grund gewechselt, also übernimmt dieser Abschnitt das
+         Abgesetzte. */ ?>
+<section class="section section--alt">
     <div class="container">
         <?php /* SARAHS EIGENER TEXT, seit dem 21.08.2026 (ihr Ticket SAR-84).
                  Wörtlich übernommen und damit tabu für Umformulierungen.

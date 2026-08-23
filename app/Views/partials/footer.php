@@ -82,9 +82,14 @@
                      ihre drei Links: Eine Überschrift ohne Punkte darunter ist
                      schlimmer als eine Spalte weniger.
 
-                     Der Fuß steht dann auf drei Spalten statt vier. Das Raster
-                     ist `auto-fit` und verteilt sie von selbst – hier ist
-                     nichts nachzurechnen. */ ?>
+                     Der Fuß steht dann auf drei Spalten statt vier, und seit
+                     SAR-94 (23.08.2026) verteilt das Raster sie auch wirklich
+                     von selbst. Bis dahin waren vier Spalten fest
+                     ausgeschrieben: Die vierte blieb leer am rechten Rand
+                     stehen, die drei anderen drängten sich auf zwei Dritteln
+                     der Breite, und Sarahs Adresse brach mitten im Wort um.
+                     Wie das Raster jetzt zählt, steht bei `.footer-grid` in
+                     nd-base.css. Hier ist weiterhin nichts nachzurechnen. */ ?>
             <?php if (termine_oeffentlich()): ?>
                 <div>
                     <h3>Fahrstunden</h3>

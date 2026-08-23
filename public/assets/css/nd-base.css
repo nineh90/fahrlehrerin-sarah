@@ -1631,7 +1631,54 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
 .site-footer h3 { color: var(--footer-text); }
 /* Auf dunklem Grund braucht die Unterzeile den hellen Akzent, nicht den dunklen */
 .site-footer .brand-sub, .admin-sidebar .brand-sub { color: var(--footer-accent); }
-.footer-grid { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--footer-border); }
+/* DIE SPALTEN RICHTEN SICH NACH DEN KINDERN UND NICHT NACH EINER ZAHL
+   (SAR-94, 23.08.2026). Hier stand `1.7fr 1fr 1fr 1fr`, also vier feste
+   Spalten – gebaut für Marke, „Über mich", „Fahrstunden" und „Direkt
+   erreichen".
+
+   SEIT SAR-54 GIBT ES DIE SPALTE „FAHRSTUNDEN" NUR NOCH BEI EINGESCHALTETER
+   TERMINPLANUNG, und die ist aus. Im Fuß standen damit drei Blöcke in einem
+   Raster für vier: Die vierte Spalte blieb leer am rechten Rand stehen, und
+   die drei anderen drängten sich auf zwei Dritteln der Breite. Die Adresse
+   `sarah@fahrlehrerinsarah.de` passte dadurch nicht mehr in ihre Zeile und
+   brach mitten im Wort um (`overflow-wrap: anywhere` weiter oben, gedacht als
+   Notnagel für schmale Handys). Das Ticket SAR-54 nahm an, das Raster sei
+   `auto-fit` und rechne selbst nach – das war es nie.
+
+   `grid-auto-flow: column` MACHT DIE ANNAHME WAHR: Ausgeschrieben ist nur die
+   erste Spalte, jedes weitere Kind legt sich seine eigene an. Drei Blöcke
+   ergeben drei Spalten, vier ergeben vier, ganz ohne Zählen im Template. Ein
+   `repeat(auto-fit, …)` täte dasselbe, verträgt sich aber nicht mit dem `fr`
+   der ersten Spalte: Die ganze Regel wäre ungültig und der Fuß einspaltig.
+
+   JEDE SPALTE IST SO BREIT WIE IHR INHALT, verteilt werden sie mit
+   `space-between`. Der Weg über Bruchteile (`1fr`) war der erste Versuch und
+   sah schlechter aus: Die Marke ist auf 320 px begrenzt (`.footer-brand`) und
+   ließ in ihrer Spalte über 100 px leer, während die Linkspalten auf je
+   400 px auseinandergezogen wurden. Die Abstände zwischen den drei Gruppen
+   waren dadurch verschieden groß. So stehen sie in gleichen Abständen, die
+   erste Spalte an der linken Kante des Containers, die letzte an der rechten
+   – dieselben Kanten wie in jeder Sektion darüber.
+
+   `minmax(0, max-content)` UND NICHT NUR `max-content`: Der zweite Wert ist
+   die Wunschbreite, die Null davor die Erlaubnis, schmaler zu werden. Ohne
+   sie stünde die Zeile fest, und käme die vierte Gruppe zurück, liefe der Fuß
+   zwischen 880 und 1000 px aus dem Container heraus. So rücken die Spalten
+   zusammen und die Adressen brechen notfalls um, statt überzulaufen.
+
+   Der Abstand ist von 2 auf 3 rem gewachsen: Er ist jetzt der einzige Platz
+   zwischen zwei Gruppen, vorher lag zusätzlich die leere Hälfte einer
+   1fr-Spalte dazwischen. */
+.footer-grid {
+    display: grid;
+    grid-template-columns: minmax(0, max-content);
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, max-content);
+    justify-content: space-between;
+    gap: 2rem 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--footer-border);
+}
 .footer-grid h3 { font-family: var(--font-head); font-size: var(--fs-sm); text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 1.1rem; }
 .footer-grid .brand-mark { color: var(--footer-text); }
 .footer-tagline { font-size: var(--fs-sm); margin-top: 1rem; max-width: 320px; }
@@ -2178,7 +2225,16 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
     /* Der Markenblock ist deutlich höher als eine Linkspalte – nebeneinander
        bleibt daneben ein leeres Feld stehen. Deshalb quer über die volle
        Breite, die drei Linkgruppen darunter nebeneinander. */
-    .footer-grid { grid-template-columns: repeat(3, 1fr); }
+    /* `grid-auto-flow: row` hebt die Spaltenlogik von oben wieder auf: Die
+       Marke liegt hier als eigene Zeile über den Linkgruppen.
+
+       DIE GRUPPEN DARUNTER ZÄHLT `auto-fit` SELBST AB (SAR-94): Drei feste
+       Spalten standen hier bis zum 23.08.2026, und zwischen 700 und 880 px
+       waren die rund 215 px breit – zu schmal für
+       `sarah@fahrlehrerinsarah.de`, die Adresse brach wieder mitten im Wort.
+       Mit 230 px Mindestbreite werden daraus von selbst zwei Spalten, sobald
+       drei nicht mehr passen. */
+    .footer-grid { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); grid-auto-flow: row; }
     .footer-grid > :first-child { grid-column: 1 / -1; }
     .admin-body { grid-template-columns: 1fr; }
     /* Sidebar wird zum Slide-in-Drawer, per Hamburger im Topbar geöffnet */

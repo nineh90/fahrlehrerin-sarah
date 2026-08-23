@@ -592,10 +592,32 @@ $schoolUrl = trim((string) config('school.url'));
                      Linie: Körper, Sinne, Reizverarbeitung, Kopf. „Angstfrei ans
                      Steuer" schließt die Reihe weiterhin ab.
 
-                     DER TEXT IST SARAHS und steht wörtlich so auch im Vorspann
+                     DER TEXT IST SARAHS. Er stand wörtlich so auch im Vorspann
                      von /neurodivergenz – die Kachel ist der Anriss dieser
-                     Seite, nicht ein zweiter Text über dasselbe. Wer ihn hier
-                     ändert, ändert dort mit.
+                     Seite, nicht ein zweiter Text über dasselbe.
+
+                     SEIT DEM 23.08.2026 STEHT HIER IHRE NEUE FASSUNG (Ticket
+                     SAR-90), und damit gehen die beiden Stellen erstmals
+                     auseinander. Auf /neurodivergenz steht weiter die alte:
+                     „Autismus, ADHS oder eine andere Art der Reizverarbeitung
+                     müssen kein Hindernis für den Führerschein sein. Manchmal
+                     braucht es einfach eine Fahrausbildung, die anders
+                     funktioniert." Das Ticket nannte ausdrücklich die
+                     Startseite; ob die Unterseite nachzieht, ist noch zu
+                     klären. Zieht sie nach, gilt wieder: eine Änderung, zwei
+                     Stellen.
+
+                     WAS IHRE NEUE FASSUNG SAGT UND DIE ALTE NICHT: PTBS und
+                     „unsichtbare Beeinträchtigungen" als Oberbegriff, also
+                     mehr als Reizverarbeitung. Dazu „Verständnis" und
+                     „individuelle Unterstützung" – die alte Fassung nannte nur
+                     die Ausbildung, die anders funktioniert.
+
+                     SIE SCHREIBT „an DICH angepasst". Versalien lesen sich im
+                     Web als Schreien, deshalb trägt die Betonung hier <strong>
+                     – dieselbe Entscheidung wie bei ihrem „DU musst ein gutes
+                     Gefühl haben" auf /fahren-mit-handicap. Will sie die
+                     Großbuchstaben ausdrücklich, ist das ihre Entscheidung.
 
                      Die Überschrift heißt wie der Menüpunkt („Neurodivergenz")
                      und nicht wie die Seite („Fahrschule & Neurodivergenz"):
@@ -607,9 +629,10 @@ $schoolUrl = trim((string) config('school.url'));
                 <span class="feature-icon"><?= icon('infinity') ?></span>
                 <h3>Neurodivergenz</h3>
                 <p>
-                    Autismus, ADHS oder eine andere Art der Reizverarbeitung müssen kein
-                    Hindernis für den Führerschein sein. Manchmal braucht es einfach eine
-                    Fahrausbildung, die anders funktioniert.
+                    ADHS, Autismus, PTBS oder andere unsichtbare Beeinträchtigungen müssen
+                    kein Hindernis für den Führerschein sein. Manchmal braucht es einfach
+                    mehr Verständnis, individuelle Unterstützung und eine Fahrausbildung,
+                    die an <strong>dich</strong> angepasst wird.
                 </p>
             </article>
 

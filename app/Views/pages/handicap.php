@@ -257,14 +257,26 @@
          hierher und würde jetzt auf die eigene Seite verweisen. Der Aufruf
          zum Handeln steht im Schlussband unten, einmal pro Seite.
 
-         DAS FOTO KOMMT MIT. Es zeigt Sarah am Infotisch beim Rollistammtisch,
-         also in dem Umfeld, um das es im Text daneben geht, und es ist die
-         einzige Abbildung von ihr auf dieser Seite: Zwischen zwei Fußräumen
-         steht hier der Mensch, der darin sitzt. Das fremde Branding im
-         Hintergrund (Wandmuster des Veranstalters, Schild auf dem Tisch)
-         bleibt sichtbar, dieselbe Entscheidung wie beim Fahrschulauto (Nils,
-         12.08.2026): Es zeigt, wo sie unterwegs ist. Keine Bildunterschrift,
-         wie überall seit dem 12.08.2026, was zu sehen ist, sagt der alt-Text.
+         DAS FOTO ZEIGT SARAH AM TISCH, und es ist die einzige Abbildung von
+         ihr auf dieser Seite: Zwischen zwei Fußräumen steht hier der Mensch,
+         der darin sitzt. Keine Bildunterschrift, wie überall seit dem
+         12.08.2026, was zu sehen ist, sagt der alt-Text.
+
+         SEIT DEM 23.08.2026 IST ES `sarah-hero.jpg` UND NICHT MEHR DER WEITE
+         ZUSCHNITT VOM ROLLISTAMMTISCH (`sarah-rollistammtisch.jpg`). Der
+         Wunsch kommt von Sarah: „das Foto nochmal tauschen gegen das ohne
+         Cola Dose". Auf dem alten steht eine Getränkedose auf dem Tisch, auf
+         der Startseite ist sie deshalb schon am 21.08.2026 verschwunden
+         (SAR-80). Dieselbe Szene, nur enger geschnitten und ohne die Dose.
+
+         DAMIT STEHT DASSELBE FOTO ZWEIMAL AUF DER WEBSITE, hier und im Hero
+         der Startseite. Genau das hatte SAR-80 aufgelöst, damals zwischen
+         Startseite und /ueber-mich. Es ist Sarahs Entscheidung und bleibt
+         zunächst so; wer es auflösen will, braucht einen zweiten Zuschnitt
+         ohne Dose, und der muss aus der Originaldatei kommen.
+
+         Die alte Datei bleibt liegen. Sie ist der einzige weite Zuschnitt und
+         zeigt als einzige den Infotisch mitsamt Schild.
 
          Bild links, Text rechts, also ohne `duo--text-first`: Der Abschnitt
          direkt darüber hat seine Abbildung rechts, und zwei Fotos an
@@ -272,16 +284,26 @@
 <section class="section section--alt">
     <div class="container">
         <div class="duo">
-            <div class="duo-media photo-wrap" style="--card-accent: var(--c-orange);">
+            <?php /* DER FLECK HINTER DEM FOTO IST GRÜN, seit dem 23.08.2026 und
+                     auf Sarahs Wunsch („den Rahmen außen rum in das grün wäre
+                     Mega"). Vorher war er orange, gewählt als Abstand zu Teal
+                     und Violett der beiden Technikfotos.
+
+                     `--c-green` UND NICHT `--accent`: Der Fleck ist eine
+                     Fläche, und dafür ist das helle Regenbogen-Grün da. Das
+                     dunkle Sander-Grün von SAR-81 ist die Bedienfarbe für Text
+                     und Knöpfe; als 13 % transparente Fläche wäre es ein
+                     Grauschleier. Die Regel dazu steht bei den Status-Farben
+                     in theme.css. */ ?>
+            <div class="duo-media photo-wrap" style="--card-accent: var(--c-green);">
                 <?php /* Hochformat, deshalb `.photo--portrait`: Ohne die Begrenzung
                          bestimmt das Bild die Spaltenhöhe und der Text daneben steht
                          verloren in der Leere. Regel in nd-base.css. */ ?>
                 <figure class="photo photo--portrait">
-                    <img src="<?= asset('img/sarah-rollistammtisch.jpg') ?>"
-                         alt="Sarah sitzt lächelnd an einem Infotisch; davor liegen Karten
-                              der Fahrschule, eine Schale Bonbons und ein Schild mit der
-                              Aufschrift „Die Rollistammtische“"
-                         width="900" height="1021" loading="lazy" decoding="async">
+                    <img src="<?= asset('img/sarah-hero.jpg') ?>"
+                         alt="Sarah sitzt lächelnd an einem Tisch, den Kopf in die Hand
+                              gestützt, daneben eine Tischlampe und ein Becher mit Stiften"
+                         width="800" height="1421" loading="lazy" decoding="async">
                 </figure>
             </div>
 

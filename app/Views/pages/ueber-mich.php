@@ -485,16 +485,40 @@ $schoolUrl = trim((string) config('school.url'));
                 <h2>Klingt nach dir?</h2>
                 <p>Dann melde dich – am besten kurz telefonisch, das geht am schnellsten.</p>
             </div>
-            <?php /* Zwei Wege nebeneinander, in dieser Reihenfolge: Wer gerade
-                     über Sarah gelesen hat, will SIE fragen und nicht ein
-                     Sekretariat – deshalb bleibt der Kontakt der Hauptknopf.
-                     Der Weg zur Fahrschule steht daneben, ruhiger, für alle,
-                     die schon entschieden sind. */ ?>
+            <?php /* NUR NOCH DER WEG ZUR FAHRSCHULE, seit dem 23.08.2026
+                     (Ticket SAR-93). Hier standen zwei Knöpfe nebeneinander,
+                     „Kontakt" als Hauptknopf und die Fahrschule daneben. Die
+                     Begründung dafür stand an dieser Stelle und ist mit dem
+                     Knopf hinfällig: Wer gerade über Sarah gelesen habe, wolle
+                     SIE fragen und nicht ein Sekretariat.
+
+                     Sarahs Kontakt ist damit von dieser Seite nicht
+                     verschwunden: Er steht im Menü, im Fuß und als eigene
+                     Seite. Was hier wegfällt, ist der Aufruf am Ende der
+                     Seite.
+
+                     DER KNOPF BLEIBT `btn-ghost` und wird nicht zum
+                     Hauptknopf: Kevin (23.08.2026) mag die Farbe genau so in
+                     der Kachel. Das ist eine Ausnahme von dem, was sonst für
+                     einzelne Knöpfe gilt (siehe Hero, SAR-54: ein einzelner
+                     Knopf in der Nebenrolle sieht aus, als fehle der
+                     eigentliche) – hier ist es Absicht.
+
+                     OFFEN UND NICHT NEBENBEI ENTSCHIEDEN: Der Satz darüber
+                     sagt „melde dich, am besten kurz telefonisch", der Knopf
+                     führt jetzt auf die Website der Fahrschule. Beides
+                     zusammen passt nicht ganz; der Text gehört bei
+                     Gelegenheit nachgezogen.
+
+                     Ohne konfigurierte Fahrschule steht wieder „Kontakt" da.
+                     Eine Kachel, die zum Handeln aufruft und keinen Knopf
+                     hat, wäre die schlechtere Fassung. */ ?>
             <div class="cta-actions">
-                <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Kontakt</a>
                 <?php if ($school !== '' && $schoolUrl !== ''): ?>
                     <a class="btn btn-ghost btn-lg" href="<?= e($schoolUrl) ?>"
                        target="_blank" rel="noopener">Zur <?= e($school) ?> &nearr;</a>
+                <?php else: ?>
+                    <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Kontakt</a>
                 <?php endif; ?>
             </div>
         </div>

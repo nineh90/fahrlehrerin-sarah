@@ -39,12 +39,11 @@ final class PartnerController
                auf der Seite eines fremden Betriebs würde die beiden
                zusammenziehen – genau das, was die Seite nicht behaupten soll. */
             'jsonLd'          => Seo::partner($partner),
-            /* Ohne Sarahs Fußnote „Ich bin Fahrlehrerin für die Klassen B und
-               BE …" (Kevin, 20.08.2026). Sie steht sonst auf jeder Seite; die
-               Begründung für die Ausnahme steht im Layout an der Stelle, die
-               sie auswertet. Gilt für alle Wegbegleiter, deshalb hier und
-               nicht in den einzelnen Views. */
-            'showSiteNote'    => false,
+            /* Hier stand bis zum 22.08.2026 `'showSiteNote' => false`: die
+               Ausnahme für die Wegbegleiter-Unterseiten, auf denen Sarahs
+               Fußnote unter fremdem Logo stand. Die Fußnote selbst ist an dem
+               Tag von allen Seiten entfallen, damit auch ihr Schalter – ein
+               Flag ohne Wirkung ist eine Falle. Begründung im Layout. */
         ]);
     }
 }

@@ -13,9 +13,10 @@
  * NUR ÜBERSCHRIFT UND LOGO, sonst nichts (Kevin, 19.08.2026). Hier standen bis
  * dahin eine grüne Versalzeile „WEGBEGLEITER" über der Überschrift, ein
  * Einordnungssatz und in jeder Kachel Rolle, Name und ein Satz zum Betrieb.
- * Das war eine dritte Selbstauskunft kurz vor dem Fuß; direkt darunter sagt
- * `site-note.php` ohnehin, dass Sarah angestellt ist. Die Erklärung, wer der
- * Betrieb ist, gehört auf seine Unterseite und nicht in die Kachel davor.
+ * Das war eine dritte Selbstauskunft kurz vor dem Fuß; darunter sagte damals
+ * `site-note.php` ohnehin, dass Sarah angestellt ist (die Fußnote ist am
+ * 22.08.2026 von allen Seiten entfallen). Die Erklärung, wer der Betrieb ist,
+ * gehört auf seine Unterseite und nicht in die Kachel davor.
  *
  * Die Überschrift heißt seither „Wegbegleiter" und nicht mehr „Mit wem ich
  * zusammenarbeite": Das Wort stand vorher als Versalzeile darüber und ist

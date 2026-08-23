@@ -125,13 +125,13 @@ img { max-width: 100%; display: block; }
     z-index: 100;
     padding: .7rem 1.1rem;
     border-radius: var(--radius-sm);
-    background: var(--accent);
-    color: var(--on-accent);
+    background: var(--accent-surface, var(--accent));
+    color: var(--on-accent-surface, var(--on-accent));
     font-family: var(--font-head); font-weight: 600; font-size: var(--fs-md);
     box-shadow: var(--shadow-lg);
     transition: top .15s;
 }
-.skip-link:focus { top: 12px; color: var(--on-accent); }
+.skip-link:focus { top: 12px; color: var(--on-accent-surface, var(--on-accent)); }
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -143,8 +143,12 @@ img { max-width: 100%; display: block; }
 .btn:hover { text-decoration: none; transform: translateY(-2px); }
 .btn svg { width: 20px; height: 20px; flex-shrink: 0; }
 .btn:disabled, .btn[aria-disabled="true"] { opacity: .5; cursor: not-allowed; transform: none; }
-.btn-primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); box-shadow: 0 6px 20px var(--shadow-accent); }
-.btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--on-accent); }
+/* GEFÜLLTE FLÄCHE, EIGENES TOKEN. `--accent-surface` faellt auf `--accent`
+   zurueck, wenn ein Projekt es nicht definiert – die ND-Signatur bleibt also
+   unveraendert, solange niemand das Token setzt. Warum es bei Sarah gesetzt
+   ist und warum der Hover HELLER wird statt dunkler: theme.css, Abschnitt 4. */
+.btn-primary { background: var(--accent-surface, var(--accent)); color: var(--on-accent-surface, var(--on-accent)); border-color: var(--accent-surface, var(--accent)); box-shadow: 0 6px 20px var(--shadow-accent); }
+.btn-primary:hover { background: var(--accent-surface-hover, var(--accent-hover)); border-color: var(--accent-surface-hover, var(--accent-hover)); color: var(--on-accent-surface, var(--on-accent)); }
 .btn-ghost { background: transparent; color: var(--text); border-color: var(--border-strong); }
 .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 .btn-light { background: var(--bg-card); color: var(--text); border-color: var(--bg-card); }
@@ -795,12 +799,16 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
 .video-frame {
     margin: 0 auto; max-width: 300px;
     border-radius: var(--radius); overflow: hidden;
-    background: var(--bg-footer); box-shadow: var(--shadow-lg);
+    background: var(--video-frame-bg, var(--bg-footer)); box-shadow: var(--shadow-lg);
 }
+/* Das SCHWARZ bleibt schwarz und ist kein Token: Es ist die Flaeche des
+   Videos selbst, also das, was ein Player zeigt, solange kein Bild da ist.
+   Faerbt man sie mit ein, blitzt beim Laden eine bunte Kachel auf. */
 .video-frame video { display: block; width: 100%; height: auto; background: #000; }
 .video-frame figcaption {
     padding: .8rem 1rem; font-size: var(--fs-sm); line-height: 1.45;
-    color: var(--footer-muted); background: var(--bg-footer);
+    color: var(--video-frame-text, var(--footer-muted));
+    background: var(--video-frame-bg, var(--bg-footer));
 }
 
 /* Farbiger Fleck hinter dem Bild – die Regenbogenpalette taucht beiläufig auf */
@@ -819,11 +827,13 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
 .photo-wrap > .photo,
 .photo-wrap > .video-frame { position: relative; }
 
-/* Selbstauskunft über dem Fuß – steht auf jeder Seite und sagt überall
-   dasselbe. Bewusst leise: Sie soll gefunden werden von dem, der sie sucht,
-   und nicht gelesen werden müssen von allen anderen. Deshalb schmal, mittig
-   und im ruhigen Ton – lauter gesetzt wäre sie eine zweite Überschrift kurz
-   vor dem Fuß der Seite. */
+/* Selbstauskunft über dem Fuß. Bewusst leise: Sie soll gefunden werden von
+   dem, der sie sucht, und nicht gelesen werden müssen von allen anderen.
+   Deshalb schmal, mittig und im ruhigen Ton – lauter gesetzt wäre sie eine
+   zweite Überschrift kurz vor dem Fuß der Seite.
+   IN DIESEM PROJEKT DERZEIT UNBENUTZT: partials/site-note.php ist am
+   22.08.2026 entfallen. Die Regel bleibt wie .footer-credit als Teil der
+   ND-Signatur stehen. */
 .site-note {
     border-top: 1px solid var(--border);
     padding: 2.2rem 0;

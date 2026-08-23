@@ -124,24 +124,25 @@ $canonical = absolute_url($canonicalPath ?? current_path());
         <?= $content ?>
     </main>
 
-    <?php /* Sarahs Einordnung in eigenen Worten. Steht ÜBER dem Credit-Band:
-             Ihre Sache zuerst, auch dort, wo der Credit bewusst schweigt.
+    <?php /* Hier stand bis zum 22.08.2026 Sarahs Einordnung (partials/site-note.php):
+             „Ich bin Fahrlehrerin für die Klassen B und BE … angestellt bei der
+             Fahrschule Sander, nicht selbstständig – diese Seite ist mein
+             persönliches Schaufenster, keine Fahrschul-Website." Sie lief über
+             dem Credit-Band auf jeder öffentlichen Seite, mit einer Ausnahme:
+             die Unterseiten der Wegbegleiter (Schalter `showSiteNote` im
+             PartnerController, mit ihr entfallen).
 
-             EINE AUSNAHME seit dem 20.08.2026, und nur eine: die Unterseiten
-             der Wegbegleiter (Kevin). Hier stand bis dahin „ohne Schalter, auf
-             jeder Seite heißt auf jeder". Auf einer Wegbegleiter-Seite kippt
-             der Satz aber die Aussage: „Ich bin Fahrlehrerin … angestellt bei
-             der Fahrschule Sander" steht dort direkt unter dem Logo und den
-             Angaben eines fremden Betriebs und liest sich, als gehöre er dazu.
-             Auf der Seite von Ankerliebe St. Pauli ergibt er gar keinen Sinn
-             mehr. Wer dort ist, kam über Sarahs Startseite und hat die
-             Einordnung schon gelesen.
+             Auf Nils' Wunsch ersatzlos gestrichen: Die Fahrschule Sander steht
+             inzwischen an so vielen Stellen der Seite, dass die Fußnote unter
+             JEDER Seite nichts mehr einordnet, was nicht ohnehin schon dasteht
+             – Hero-Knopf, Sander-Sektion der Startseite, /wegbegleiter samt
+             Unterseite, Kasten „Anmeldung und Vertrag" auf
+             /fahren-mit-handicap.
 
-             Den Schalter setzt der PartnerController, sonst niemand. Fehlt er,
-             steht die Fußnote wie überall. */ ?>
-    <?php if ($showSiteNote ?? true): ?>
-        <?php require APP_ROOT . '/app/Views/partials/site-note.php'; ?>
-    <?php endif; ?>
+             Was damit verschwindet, ist die eine Stelle, an der die Wörter
+             „angestellt, nicht selbstständig" wörtlich standen. Wer sie
+             zurückholen will: Die Datei liegt in der Versionsgeschichte, das
+             CSS (.site-note) steht weiter in nd-base.css. */ ?>
 
     <?php /* Hier stand bis zum 17.08.2026 das große Credit-Band von
              Nils-Digital (partials/nd-credit.php): Logo, Überschrift,

@@ -10,8 +10,9 @@
  * Preisangabe, die hier veraltet, ist schlimmer als keine.
  *
  * AUF DAS NÖTIGE ZUSAMMENGESTRICHEN (Kevin, 19.08.2026). Entfallen sind:
- *   · der Kasten „Ich verkaufe hier nichts". Genau das sagt `site-note.php`
- *     unter jeder Seite, und der Vorspann oben sagt es ein drittes Mal.
+ *   · der Kasten „Ich verkaufe hier nichts". Genau das sagte damals
+ *     `site-note.php` unter jeder Seite (entfallen am 22.08.2026), und der
+ *     Vorspann oben sagt es ohnehin.
  *   · der Abschnitt „Was das für dich heißt" mit der Häkchenliste. Dieselbe
  *     Aufteilung („die Fahrschule übernimmt …") steht schon auf der
  *     Startseite und auf /kontakt.

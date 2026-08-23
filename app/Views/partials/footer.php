@@ -46,8 +46,10 @@
                 <?php /* Hier standen zwei Absätze: eine Selbstbeschreibung („Fahrlehrerin
                          aus Überzeugung …", ein Entwurf) und der Hinweis auf die
                          Fahrschule. Beide sind am 12.08.2026 entfallen, weil direkt
-                         darüber Sarahs eigene Einordnung steht (site-note.php) und
-                         dasselbe sagt – in ihren Worten statt in geliehenen.
+                         darüber Sarahs eigene Einordnung stand (site-note.php) und
+                         dasselbe sagte – in ihren Worten statt in geliehenen. Die
+                         Fußnote selbst ist am 22.08.2026 entfallen; zurückgeholt
+                         wurde hier nichts, der Fuß bleibt Wortmarke und Wege.
                          Drei Selbstbeschreibungen auf 20 cm Bildschirm sind zwei zu
                          viel. Der Fuß trägt jetzt Wortmarke und Wege, sonst
                          nichts. */ ?>

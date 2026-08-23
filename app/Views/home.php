@@ -319,12 +319,24 @@ $schoolUrl = trim((string) config('school.url'));
                          Der Handle bleibt in der .env (TIKTOK_HANDLE) und
                          steckt weiter in der verlinkten Adresse – nur
                          ausgeschrieben steht er hier nicht mehr. */ ?>
+                <?php /* DIE EINZIGEN KNÖPFE DER SEITE IN EINER FREMDEN MARKE
+                         (SAR-87, Sarahs Wunsch): TikTok schwarz, Instagram
+                         pink. Überall sonst führt Sanders Grün.
+
+                         Vorher war TikTok `btn-primary` und Instagram
+                         `btn-ghost` – also ein gefüllter und ein leerer Knopf.
+                         Das war eine Rangfolge, die es hier nicht gibt: Es
+                         sind zwei gleichwertige Kanäle. Jetzt sind beide
+                         gefüllt, und was sie unterscheidet, ist die Plattform
+                         und nicht ihre Wichtigkeit.
+
+                         Farbwerte und die Rechnung dahinter: theme.css. */ ?>
                 <div class="duo-actions">
-                    <a class="btn btn-primary" href="<?= e(tiktok_url()) ?>"
+                    <a class="btn btn-tiktok" href="<?= e(tiktok_url()) ?>"
                        target="_blank" rel="noopener noreferrer">
                         <?= icon('tiktok') ?> TikTok
                     </a>
-                    <a class="btn btn-ghost" href="<?= e(instagram_url()) ?>"
+                    <a class="btn btn-instagram" href="<?= e(instagram_url()) ?>"
                        target="_blank" rel="noopener noreferrer">
                         <?= icon('instagram') ?> Instagram
                     </a>
@@ -341,10 +353,11 @@ $schoolUrl = trim((string) config('school.url'));
 </section>
 
 <?php /* Hier stand bis zum 12.08.2026 ein Kasten „Kurz vorweg: Das hier ist meine
-         persönliche Seite" – dieselbe Einordnung, die seit Sarahs Wunsch unten auf
-         jeder Seite steht (partials/site-note.php). Zweimal auf einer Seite wäre
-         sie einmal zu viel, und direkt unter dem Hero las sie sich wie eine
-         Entschuldigung dafür, dass hier keine Fahrschule steht. */ ?>
+         persönliche Seite" – dieselbe Einordnung, die danach unten auf jeder Seite
+         stand (partials/site-note.php). Direkt unter dem Hero las sie sich wie eine
+         Entschuldigung dafür, dass hier keine Fahrschule steht. Die Fußnote ist am
+         22.08.2026 ebenfalls entfallen: Die Fahrschule steht inzwischen an genug
+         Stellen der Seite. */ ?>
 
 <?php /* Hier stand bis zum 17.08.2026 „Mein Schwerpunkt – Fahren mit
          Handicap": Sarahs eigener Text über Linksgas, Lenkraddrehknopf und

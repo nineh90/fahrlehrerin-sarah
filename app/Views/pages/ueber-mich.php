@@ -1,6 +1,8 @@
 <?php
-$school    = (string) config('school.name');
-$schoolUrl = trim((string) config('school.url'));
+/* `$schoolUrl` stand hier bis zum 23.08.2026 (SAR-93). Die einzige Stelle, die
+   ihn brauchte, war der Knopf zur Fahrschule im Schlussband; der kommt jetzt
+   aus `school_cta_button()` und holt sich die Adresse selbst. */
+$school = (string) config('school.name');
 ?>
 
 <?php /* Im Hero steht seit dem 17.08.2026 Sarahs Video (SAR-38). Vorher saß
@@ -510,16 +512,13 @@ $schoolUrl = trim((string) config('school.url'));
                      zusammen passt nicht ganz; der Text gehört bei
                      Gelegenheit nachgezogen.
 
-                     Ohne konfigurierte Fahrschule steht wieder „Kontakt" da.
-                     Eine Kachel, die zum Handeln aufruft und keinen Knopf
-                     hat, wäre die schlechtere Fassung. */ ?>
+                     Aufschrift, Farbe und der Rückfall ohne konfigurierte
+                     Fahrschule stehen seit dem 23.08.2026 in
+                     `school_cta_button()` (helpers.php): Seitdem trägt jedes
+                     Schlussband der Website denselben Knopf, und der gehört an
+                     eine Stelle und nicht in fünf Views. */ ?>
             <div class="cta-actions">
-                <?php if ($school !== '' && $schoolUrl !== ''): ?>
-                    <a class="btn btn-ghost btn-lg" href="<?= e($schoolUrl) ?>"
-                       target="_blank" rel="noopener">Zur <?= e($school) ?> &nearr;</a>
-                <?php else: ?>
-                    <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Kontakt</a>
-                <?php endif; ?>
+                <?= school_cta_button() ?>
             </div>
         </div>
     </div>

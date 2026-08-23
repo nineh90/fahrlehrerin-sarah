@@ -580,7 +580,18 @@
                     Anfang.
                 </p>
             </div>
-            <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Lass uns reden</a>
+            <?php /* SEIT SAR-93 (23.08.2026) DER WEG ZUR FAHRSCHULE statt
+                     „Lass uns reden". Der Knopf kommt aus
+                     `school_cta_button()`, Begründung dort. Der Satz im
+                     Kommentar oben, die Aufschrift sei von uns und bleibe wie
+                     sie ist, gilt damit nicht mehr.
+
+                     HIER STEHT DIE FRAGE AM SCHÄRFSTEN: Sarahs Text daneben
+                     sagt „Melde dich einfach bei mir und erzähl mir kurz,
+                     worum es bei dir geht", der Knopf führt auf die Website
+                     der Fahrschule. Ihr Wortlaut bleibt unangetastet, und wer
+                     das auflösen will, fragt sie. */ ?>
+            <?= school_cta_button() ?>
         </div>
     </div>
 </section>

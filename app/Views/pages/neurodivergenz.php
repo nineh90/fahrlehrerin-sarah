@@ -297,7 +297,16 @@
                 <h2>Du musst nicht lernen wie alle anderen.</h2>
                 <p>Du musst lernen, sicher Auto zu fahren.</p>
             </div>
-            <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Lass uns reden</a>
+            <?php /* SEIT SAR-93 (23.08.2026) DER WEG ZUR FAHRSCHULE statt
+                     „Lass uns reden". Der Knopf kommt aus
+                     `school_cta_button()`, Begründung dort.
+
+                     DIE AUFSCHRIFT WAR DAS EINZIGE AUF DIESER SEITE, DAS NICHT
+                     VON SARAH IST – der Hinweis eine Zeile höher meinte genau
+                     sie. Jetzt steht dort der Name der Fahrschule aus der
+                     Konfiguration. Ihr Text darüber ist unberührt, und er
+                     endet weiter auf einer Einladung an SIE. */ ?>
+            <?= school_cta_button() ?>
         </div>
     </div>
 </section>

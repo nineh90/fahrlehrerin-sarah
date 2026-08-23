@@ -413,6 +413,52 @@ function school_link(): string
     );
 }
 
+/**
+ * Der Knopf im Schlussband jeder Seite: der Weg zur Fahrschule.
+ *
+ * SEIT SAR-93 (23.08.2026) STEHT IN JEDEM `.cta-band` NUR NOCH DIESER EINE
+ * KNOPF. Vorher war es überall „Kontakt" (auf /ueber-mich und der Seite der
+ * Fahrschule zusätzlich der Weg dorthin). Sarahs eigener Kontakt ist damit aus
+ * den Schlussbändern verschwunden; er steht weiter im Menü, im Fuß und als
+ * eigene Seite. Das ist eine Entscheidung von Kevin (23.08.2026) und kommt aus
+ * derselben Richtung wie SAR-77, SAR-78 und SAR-91: Die Fahrschule trägt
+ * Sarahs Schwerpunkt mit und soll dafür sichtbar sein.
+ *
+ * `btn-ghost` UND NICHT `btn-primary`, obwohl er jetzt allein steht: Kevin mag
+ * die Farbe genau so in der Kachel. Das ist bewusst die Ausnahme von der Regel
+ * aus SAR-54 (ein einzelner Knopf in der Nebenrolle sieht aus, als fehle der
+ * eigentliche).
+ *
+ * DER HELFER STEHT HIER UND NICHT FÜNFMAL IN DEN VIEWS, weil an ihm zwei
+ * Dinge hängen, die überall gleich sein müssen: die Aufschrift (der Name der
+ * Fahrschule kommt aus der Konfiguration) und der Rückfall. Ohne
+ * konfigurierte Fahrschule steht wieder „Kontakt" da – ein Schlussband ohne
+ * Knopf wäre die schlechtere Fassung, und die Seite formuliert ohne die
+ * Fahrschule, wenn es sie in der Konfiguration nicht gibt.
+ *
+ * Die Prüfung der Adresse ist dieselbe wie in `school_link()`: Steht dort
+ * etwas, das keine URL ist, führt der Knopf ins Leere. Dann lieber der
+ * Kontakt, der immer da ist.
+ */
+function school_cta_button(): string
+{
+    $name = trim((string) config('school.name'));
+    $url  = trim((string) config('school.url'));
+
+    if ($name === '' || $url === '' || !filter_var($url, FILTER_VALIDATE_URL)) {
+        return sprintf(
+            '<a class="btn btn-primary btn-lg" href="%s">Kontakt</a>',
+            e(url('/kontakt'))
+        );
+    }
+
+    return sprintf(
+        '<a class="btn btn-ghost btn-lg" href="%s" target="_blank" rel="noopener">Zur %s &nearr;</a>',
+        e($url),
+        e($name)
+    );
+}
+
 /** Profil-URL zu Sarahs TikTok-Kanal. */
 function tiktok_url(): string
 {

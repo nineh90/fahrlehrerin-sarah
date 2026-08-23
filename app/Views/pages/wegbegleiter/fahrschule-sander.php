@@ -189,8 +189,16 @@ $wege = [
                     ich sage dir ehrlich, ob ich die Richtige für dich bin.
                 </p>
             </div>
+            <?php /* DER KONTAKT-KNOPF IST WEG, seit dem 23.08.2026 (Ticket
+                     SAR-93) – wie in jedem Schlussband der Website.
+
+                     HIER STEHT ABER NICHT `school_cta_button()`, sondern der
+                     Weg zur Anmeldung, der schon vorher hier stand. Beide
+                     führen zur Fahrschule; dieser führt genauer, nämlich auf
+                     ihre Anmeldeseite, und diese Seite handelt ohnehin von
+                     nichts anderem. Zwei Knöpfe auf dieselbe Website
+                     nebeneinander wären der Rückschritt. */ ?>
             <div class="hero-actions">
-                <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Kontakt</a>
                 <a class="btn btn-ghost btn-lg" href="<?= e($web . '/anmelden/') ?>"
                    target="_blank" rel="noopener noreferrer">Zur Anmeldung &nearr;</a>
             </div>

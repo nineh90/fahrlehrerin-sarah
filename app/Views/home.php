@@ -815,7 +815,17 @@ $schoolUrl = trim((string) config('school.url'));
                     Richtige für dich bin – und wenn nicht, wen du fragen solltest.
                 </p>
             </div>
-            <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Kontakt</a>
+            <?php /* NUR NOCH DER WEG ZUR FAHRSCHULE, seit dem 23.08.2026
+                     (Ticket SAR-93). Hier stand „Kontakt". Der Knopf kommt
+                     jetzt aus `school_cta_button()`, damit alle fünf
+                     Schlussbänder der Website denselben tragen; die
+                     Begründung steht dort.
+
+                     DER TEXT DANEBEN SAGT WEITER „Ruf mich an oder schreib
+                     mir", und der Knopf führt zur Fahrschule. Das gehört bei
+                     Gelegenheit nachgezogen, es ist auf jeder der fünf Seiten
+                     dieselbe offene Frage. */ ?>
+            <?= school_cta_button() ?>
         </div>
     </div>
 </section>

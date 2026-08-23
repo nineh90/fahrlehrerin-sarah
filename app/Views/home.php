@@ -653,72 +653,100 @@ $schoolUrl = trim((string) config('school.url'));
          helle Sektionen aneinander (SAR-27). */ ?>
 <section class="section section--alt">
     <div class="container">
-        <?php /* Der Einordnungssatz steht IM section-head und nicht als eigener
-                 Absatz darunter. Vorher zog ihn ein `margin-top:-1.4rem` wieder
-                 an die Überschrift heran – gegen den Abstand, den `.section-head`
-                 selbst mitbringt. Zwei Regeln, die sich gegenseitig aufheben,
-                 sind eine Regel zu viel: Im Kopf gehört er zur Überschrift und
-                 bekommt deren Einzug (die 16 px des Regenbogenbalkens). */ ?>
-        <div class="section-head">
-            <div class="section-head-text">
-                <h2>Wie du bei mir Fahrschüler:in wirst</h2>
-                <p class="section-lead">
-                    Ich bin angestellte Fahrlehrerin, keine eigene Fahrschule. Die Anmeldung
-                    läuft deshalb nicht über diese Seite, sondern über
-                    <?= $school !== '' ? school_link() : 'meine Fahrschule' ?>. Sag dort einfach,
-                    dass du bei mir fahren möchtest.
-                </p>
+        <?php /* DAS BAND UM DIESEN ABSCHNITT, seit dem 23.08.2026 (SAR-91,
+                 zweiter Durchgang). Es hält links alles, was gelesen wird
+                 (Kopf und Kachel), und rechts das Logo.
+
+                 WARUM ES DIESE EBENE BRAUCHT: Das Logo stand zuerst im Raster
+                 der Kachel und war damit an ihr ausgerichtet, nicht an der
+                 Sektion. Neben einer 340 px hohen Kachel sah es mittig aus,
+                 der beige Grund darüber trägt aber noch Überschrift und
+                 Einordnungssatz, und gegen die ganze Fläche saß es zu tief.
+                 Hier steht es jetzt in der Mitte von allem, was auf der Fläche
+                 liegt (Kevin, 23.08.2026).
+
+                 Die Struktur ist die Begründung: Das Logo ist ein Geschwister
+                 des ganzen Blocks und nicht Teil der Kachelreihe. Wer den
+                 Ablauf von SAR-72 zurückholt, setzt ihn in `.enroll-band-main`
+                 und lässt das Band, wie es ist. */ ?>
+        <div class="enroll-band">
+            <div class="enroll-band-main">
+                <?php /* Der Einordnungssatz steht IM section-head und nicht als eigener
+                         Absatz darunter. Vorher zog ihn ein `margin-top:-1.4rem` wieder
+                         an die Überschrift heran – gegen den Abstand, den `.section-head`
+                         selbst mitbringt. Zwei Regeln, die sich gegenseitig aufheben,
+                         sind eine Regel zu viel: Im Kopf gehört er zur Überschrift und
+                         bekommt deren Einzug (die 16 px des Regenbogenbalkens). */ ?>
+                <div class="section-head">
+                    <div class="section-head-text">
+                        <h2>Wie du bei mir Fahrschüler:in wirst</h2>
+                        <p class="section-lead">
+                            Ich bin angestellte Fahrlehrerin, keine eigene Fahrschule. Die Anmeldung
+                            läuft deshalb nicht über diese Seite, sondern über
+                            <?= $school !== '' ? school_link() : 'meine Fahrschule' ?>. Sag dort einfach,
+                            dass du bei mir fahren möchtest.
+                        </p>
+                    </div>
+                </div>
+
+                <?php /* HIER STAND DER ABLAUF „SO LÄUFT ES AB", bis zum 21.08.2026
+                         (Sarahs Ticket SAR-72). Fünf Schritte als senkrechte Zeitleiste
+                         (`.enroll-main` mit `.enroll-steps`), daneben die Kachel der
+                         Fahrschule.
+
+                         ER STEHT JETZT NUR NOCH AUF /fahren-mit-handicap, dort in Sarahs
+                         eigenem Wortlaut und in vier Schritten. Vorher stand derselbe
+                         Ablauf wörtlich auf beiden Seiten – jede Textänderung musste an
+                         zwei Stellen gemacht werden, und die Startseite erzählte den Weg
+                         zweimal: einmal hier und einmal auf der Unterseite, auf die sie
+                         verweist.
+
+                         WAS DIESE SEKTION JETZT NOCH SAGT, ist genau das, wofür sie da
+                         ist: Sarah ist angestellt, die Anmeldung läuft über die
+                         Fahrschule, und was die übernimmt, steht in der Kachel. Der Weg
+                         zur Ausbildung selbst gehört auf die Seite, die davon handelt.
+
+                         Kommt der Ablauf je zurück, steht er in der Versionsgeschichte;
+                         `.enroll-steps` in theme.css ist absichtlich stehen geblieben.
+                         Die Kachel ist dieselbe wie vorher (`.feature-card`), sie steht
+                         seitdem allein – deshalb begrenzt `.enroll` ihre Breite, statt
+                         sie über die ganze Seite zu ziehen (Begründung dort).
+
+                         NEBEN IHR STEHT SEIT SAR-91 (23.08.2026) DAS LOGO DER
+                         FAHRSCHULE. Die Begründung steht unten am Bild, die Maße des
+                         Rasters bei `.enroll--nur-fahrschule` in theme.css. */ ?>
+                <div class="enroll enroll--nur-fahrschule">
+                    <aside class="enroll-formal feature-card">
+                        <h3><?= $school !== '' ? e($school) : 'Die Fahrschule' ?> übernimmt</h3>
+                        <ul class="check-list">
+                            <li>Anmeldung und Ausbildungsvertrag</li>
+                            <li>Theorieunterricht und Lernmaterial</li>
+                            <li>Preise und Abrechnung</li>
+                            <li>Anmeldung zur Prüfung bei der Führerscheinstelle</li>
+                        </ul>
+
+                        <?php if ($school !== '' && $schoolUrl !== ''): ?>
+                            <a class="btn btn-ghost" href="<?= e($schoolUrl) ?>" target="_blank" rel="noopener">
+                                Zur <?= e($school) ?> &nearr;
+                            </a>
+                        <?php endif; ?>
+                    </aside>
+                </div>
             </div>
-        </div>
-
-        <?php /* HIER STAND DER ABLAUF „SO LÄUFT ES AB", bis zum 21.08.2026
-                 (Sarahs Ticket SAR-72). Fünf Schritte als senkrechte Zeitleiste
-                 (`.enroll-main` mit `.enroll-steps`), daneben die Kachel der
-                 Fahrschule.
-
-                 ER STEHT JETZT NUR NOCH AUF /fahren-mit-handicap, dort in Sarahs
-                 eigenem Wortlaut und in vier Schritten. Vorher stand derselbe
-                 Ablauf wörtlich auf beiden Seiten – jede Textänderung musste an
-                 zwei Stellen gemacht werden, und die Startseite erzählte den Weg
-                 zweimal: einmal hier und einmal auf der Unterseite, auf die sie
-                 verweist.
-
-                 WAS DIESE SEKTION JETZT NOCH SAGT, ist genau das, wofür sie da
-                 ist: Sarah ist angestellt, die Anmeldung läuft über die
-                 Fahrschule, und was die übernimmt, steht in der Kachel. Der Weg
-                 zur Ausbildung selbst gehört auf die Seite, die davon handelt.
-
-                 Kommt der Ablauf je zurück, steht er in der Versionsgeschichte;
-                 `.enroll-steps` in theme.css ist absichtlich stehen geblieben.
-                 Die Kachel ist dieselbe wie vorher (`.feature-card`), sie steht
-                 seitdem allein – deshalb begrenzt `.enroll` ihre Breite, statt
-                 sie über die ganze Seite zu ziehen (Begründung dort).
-
-                 NEBEN IHR STEHT SEIT SAR-91 (23.08.2026) DAS LOGO DER
-                 FAHRSCHULE. Die Begründung steht unten am Bild, die Maße des
-                 Rasters bei `.enroll--nur-fahrschule` in theme.css. */ ?>
-        <div class="enroll enroll--nur-fahrschule">
-            <aside class="enroll-formal feature-card">
-                <h3><?= $school !== '' ? e($school) : 'Die Fahrschule' ?> übernimmt</h3>
-                <ul class="check-list">
-                    <li>Anmeldung und Ausbildungsvertrag</li>
-                    <li>Theorieunterricht und Lernmaterial</li>
-                    <li>Preise und Abrechnung</li>
-                    <li>Anmeldung zur Prüfung bei der Führerscheinstelle</li>
-                </ul>
-
-                <?php if ($school !== '' && $schoolUrl !== ''): ?>
-                    <a class="btn btn-ghost" href="<?= e($schoolUrl) ?>" target="_blank" rel="noopener">
-                        Zur <?= e($school) ?> &nearr;
-                    </a>
-                <?php endif; ?>
-            </aside>
 
             <?php /* DAS LOGO DER FAHRSCHULE, seit dem 23.08.2026 (Ticket
                      SAR-91). Neben der Kachel stand seit SAR-72 die halbe
                      Sektionsbreite leer: Die Kachel ist auf 520 px begrenzt,
                      der Ablauf daneben ist weg. Jetzt steht dort, um wen es
                      im Text geht.
+
+                     ES IST EIN GESCHWISTER DES GANZEN BLOCKS und steht
+                     deshalb hier und nicht in der Kachelreihe darüber: So
+                     liegt es in der senkrechten Mitte der beigen Fläche und
+                     nicht in der Mitte der Kachel. Rechtsbündig, damit auf
+                     breiten Bildschirmen der größtmögliche Abstand zum Text
+                     bleibt. Beides steht bei `.enroll-band` in theme.css,
+                     samt dem Weg dorthin.
 
                      ES IST KEIN LINK, und das ist eine Entscheidung. In der
                      Kachel daneben führt der Knopf schon zur Fahrschule, und

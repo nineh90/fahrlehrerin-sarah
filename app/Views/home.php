@@ -691,8 +691,12 @@ $schoolUrl = trim((string) config('school.url'));
                  Kommt der Ablauf je zurück, steht er in der Versionsgeschichte;
                  `.enroll-steps` in theme.css ist absichtlich stehen geblieben.
                  Die Kachel ist dieselbe wie vorher (`.feature-card`), sie steht
-                 jetzt allein – deshalb begrenzt `.enroll` ihre Breite, statt sie
-                 über die ganze Seite zu ziehen (Begründung dort). */ ?>
+                 seitdem allein – deshalb begrenzt `.enroll` ihre Breite, statt
+                 sie über die ganze Seite zu ziehen (Begründung dort).
+
+                 NEBEN IHR STEHT SEIT SAR-91 (23.08.2026) DAS LOGO DER
+                 FAHRSCHULE. Die Begründung steht unten am Bild, die Maße des
+                 Rasters bei `.enroll--nur-fahrschule` in theme.css. */ ?>
         <div class="enroll enroll--nur-fahrschule">
             <aside class="enroll-formal feature-card">
                 <h3><?= $school !== '' ? e($school) : 'Die Fahrschule' ?> übernimmt</h3>
@@ -709,6 +713,52 @@ $schoolUrl = trim((string) config('school.url'));
                     </a>
                 <?php endif; ?>
             </aside>
+
+            <?php /* DAS LOGO DER FAHRSCHULE, seit dem 23.08.2026 (Ticket
+                     SAR-91). Neben der Kachel stand seit SAR-72 die halbe
+                     Sektionsbreite leer: Die Kachel ist auf 520 px begrenzt,
+                     der Ablauf daneben ist weg. Jetzt steht dort, um wen es
+                     im Text geht.
+
+                     ES IST KEIN LINK, und das ist eine Entscheidung. In der
+                     Kachel daneben führt der Knopf schon zur Fahrschule, und
+                     unten auf derselben Seite führt dasselbe Logo in der
+                     Wegbegleiter-Reihe auf ihre Unterseite. Ein dritter Link
+                     hier, zwei Handbreit vom zweiten entfernt, hätte nur die
+                     Frage aufgeworfen, wohin er anders führt.
+
+                     `alt=""` AUS DEMSELBEN GRUND: Der Name steht direkt
+                     daneben zweimal, in der Überschrift der Kachel und auf
+                     dem Knopf. Vorgelesen wäre er hier das dritte Mal in
+                     zwei Sätzen und trüge nichts bei. Das Logo zeigt, was
+                     der Text schon sagt.
+
+                     DIE DATEI KOMMT AUS DER WEGBEGLEITER-LISTE und nicht aus
+                     der `.env`: Dort liegen Logo und Maße ohnehin, und
+                     dieselbe Datei steht unten in der Reihe. Die Kopplung
+                     ist damit auch die Schwachstelle, und sie gehört
+                     benannt: `SCHOOL_NAME` und der Eintrag
+                     `fahrschule-sander` sind zwei verschiedene Quellen für
+                     dieselbe Fahrschule. Wechselt Sarah den Arbeitgeber,
+                     zeigt diese Stelle das alte Logo weiter, bis jemand den
+                     Eintrag anfasst. Deshalb der `find()`-Aufruf mit
+                     Null-Prüfung: Fehlt der Eintrag, fehlt das Logo, und die
+                     Sektion sieht aus wie vorher.
+
+                     `$school !== ''` wie an jeder anderen Stelle der Seite:
+                     Ist die Fahrschule nicht konfiguriert, wird sie nicht
+                     genannt, und dann zeigt die Seite auch nicht ihr Logo.
+
+                     Im dunklen und im kontrastreichen Modus bekommt das Logo
+                     eine helle Platte (a11y.css). Es schreibt „FAHRSCHULE"
+                     in Schwarz, das verschwände sonst. */ ?>
+            <?php $schoolLogo = Partners::find('fahrschule-sander'); ?>
+            <?php if ($school !== '' && $schoolLogo !== null): ?>
+                <img class="enroll-logo" src="<?= asset('img/' . $schoolLogo['logo']) ?>" alt=""
+                     width="<?= (int) $schoolLogo['logo_width'] ?>"
+                     height="<?= (int) $schoolLogo['logo_height'] ?>"
+                     loading="lazy" decoding="async">
+            <?php endif; ?>
         </div>
     </div>
 </section>

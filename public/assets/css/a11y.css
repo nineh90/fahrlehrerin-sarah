@@ -353,6 +353,25 @@ html[data-kontrast='hoch'] .partner-head-logo {
     box-sizing: content-box;
 }
 
+/* DASSELBE FÜR DAS LOGO DER FAHRSCHULE IN DER SEKTION „WIE DU BEI MIR
+   FAHRSCHÜLER:IN WIRST" (SAR-91). Es ist dieselbe Datei wie in der Reihe
+   unten, steht dort aber ohne Kachel frei auf der Fläche: Ohne Platte
+   verschwände „FAHRSCHULE" in Schwarz im dunklen Modus genauso.
+
+   Die Regel steht als eigener Block und nicht im Selektor darüber, weil sie
+   andere Werte braucht: Das Logo ist hier gut dreimal so breit wie in der
+   Kachel, und die 6 px Polsterung von dort säßen daran wie eine zu enge
+   Fassung. `box-sizing: content-box` aus demselben Grund wie oben, nur für
+   die Breite: Die Deckelung in theme.css meint das Logo, die Platte kommt
+   obendrauf. */
+html[data-kontrast='dunkel'] .enroll-logo,
+html[data-kontrast='hoch'] .enroll-logo {
+    background: #FDF8F0;
+    border-radius: 12px;
+    padding: 10px 16px;
+    box-sizing: content-box;
+}
+
 /* AUSGENOMMEN: Logos, die ihre eigene Platte mitbringen (`--plate` in
    nd-base.css, seit dem 20.08.2026). Die helle Platte oben rettet dunkle
    Marken. Eine HELLE Marke rettet sie nicht, sie erledigt sie: Das Mintgrün

@@ -602,6 +602,9 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
    ohne dass eine zweite Karte aufgemacht werden muss */
 .form-fieldset { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.1rem 1.2rem .2rem; margin: 0 0 1.1rem; }
 .form-fieldset legend { font-family: var(--font-head); font-weight: 500; font-size: var(--fs-sm); padding: 0 .4rem; color: var(--text); }
+/* In einer Gruppe trägt das Raster den Abstand, nicht jedes Kästchen für
+   sich – sonst kommt der Zeilenabstand aus `.form label` noch obendrauf. */
+.form-fieldset .choice { margin-bottom: 0; }
 .form-actions { margin-top: .6rem; display: flex; gap: .8rem; flex-wrap: wrap; }
 .checkbox-label { display: flex; align-items: center; gap: .6rem; }
 .checkbox-label input { width: auto; margin: 0; accent-color: var(--accent); }
@@ -619,6 +622,39 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
 /* Wählbar, aber mit ehrlichem Hinweis auf die Folge */
 .choice--locked { border-style: dashed; }
 .choice-hint { display: block; font-size: var(--fs-xs); font-weight: 400; color: var(--muted); font-family: var(--font-body); }
+/* Fehler an einem einzelnen Feld (Kontaktformular). Die Meldung steht UNTER
+   dem Feld und nicht nur als roter Rahmen: Farbe allein ist keine Aussage –
+   wer sie nicht unterscheidet, sieht sonst gar nichts. Verbunden wird beides
+   über aria-describedby am Feld. */
+.form-error { display: block; font-family: var(--font-body); font-weight: 400; font-size: var(--fs-xs); color: var(--red-text); margin-top: .4rem; }
+.form input[aria-invalid="true"], .form select[aria-invalid="true"], .form textarea[aria-invalid="true"] { border-color: var(--red); }
+.form-fieldset[aria-invalid="true"] { border-color: var(--red); }
+/* Honigtopf: für Menschen unerreichbar, für Bots ein Feld wie jedes andere.
+   Nicht display:none – manche Bots überspringen genau das. */
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+/* Kontaktformular als Strecke (SAR-95). Die Schritte stehen im HTML alle
+   untereinander; erst `initFormSteps()` in main.js setzt `hidden` und blendet
+   einen nach dem anderen ein. Ohne JavaScript greift von diesem Block also
+   nur der Abstand – und das Formular steht vollständig da.
+
+   Die !important-Regel ist keine Bequemlichkeit: `.form-actions` und
+   `.form label` setzen `display`, und das schlägt das `display: none`, das
+   der Browser dem hidden-Attribut mitgibt. Ohne sie bleibt der abgeblendete
+   Schritt sichtbar. */
+.form [hidden] { display: none !important; }
+.form-step { margin-bottom: .4rem; }
+.form-progress {
+    margin: 0 0 1.2rem; font-family: var(--font-head); font-size: var(--fs-xs);
+    font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--accent);
+}
+/* „Zurück" links, „Weiter" rechts – die Richtung, in die es geht, liegt auf
+   der Seite, auf der man sie erwartet. */
+.form-nav { justify-content: flex-end; margin-top: 1.4rem; }
+/* Solange „Zurück" dasteht, drückt es „Weiter" nach rechts. Ist es
+   ausgeblendet (erster Schritt), steht „Weiter" allein am rechten Rand –
+   deshalb `flex-end` oben und nicht `space-between`: Das ließe einen
+   einzelnen Knopf links kleben. */
+.form-nav .btn-ghost:not([hidden]) { margin-right: auto; }
 
 /* ---------- Kontakt / zweispaltige Layouts ---------- */
 .split-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 2.6rem; align-items: start; }

@@ -39,7 +39,12 @@ $router->get('/fahren-mit-handicap', [PageController::class, 'handicap']);
    Adresse, die Neurodivergenz unter „Handicap" einsortiert, sagt etwas aus,
    das Sarahs Text auf der Seite ausdrücklich offenlässt. */
 $router->get('/neurodivergenz',      [PageController::class, 'neurodivergenz']);
-$router->get('/kontakt',             [PageController::class, 'contact']);
+/* SAR-95: /kontakt nimmt seit dem 27.08.2026 auch ein POST entgegen – das
+   Kontaktformular. Die GET-Fassung ist deshalb mit umgezogen: Nach einem
+   Eingabefehler rendert derselbe Controller die Seite noch einmal mit dem,
+   was schon getippt war. */
+$router->get('/kontakt',             [ContactController::class, 'index']);
+$router->post('/kontakt',            [ContactController::class, 'store']);
 /* Die Wegbegleiter – eine Route für alle. Der Slug wird in app/Partners.php
    nachgeschlagen, unbekannte enden mit 404. Eine Übersichtsseite unter
    /wegbegleiter gibt es bewusst nicht: Die Übersicht ist der Abschnitt unten

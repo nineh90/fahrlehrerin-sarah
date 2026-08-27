@@ -43,6 +43,36 @@
             E-Mail: <a href="mailto:<?= e(config('contact.email')) ?>"><?= e(config('contact.email')) ?></a>
         </p>
 
+        <?php /* SAR-95, 27.08.2026. Der Absatz steht VOR „Welche Daten
+                 gespeichert werden", weil er der einzige ist, der die meisten
+                 Besucher:innen betrifft – die Stundenplanung darunter gilt nur
+                 für Sarahs eigene Fahrschüler:innen. Die Sprungmarke wird vom
+                 Formular aus verlinkt. */ ?>
+        <h2 id="kontaktformular">Kontaktformular</h2>
+        <p>
+            Über das Formular auf der <a href="<?= url('/kontakt') ?>">Kontaktseite</a>
+            werden die dort eingetragenen Angaben verarbeitet: das gewählte Anliegen,
+            der Name, E-Mail-Adresse und/oder Telefonnummer sowie eine freiwillige
+            Nachricht. Zweck ist allein, die
+            Anfrage beantworten zu können. Rechtsgrundlage ist die Einwilligung, die
+            beim Absenden erteilt wird (Art. 6 Abs. 1 lit. a DSGVO); sie kann jederzeit
+            formlos widerrufen werden.
+        </p>
+        <p>
+            <strong>Auf dieser Website wird davon nichts gespeichert.</strong> Die
+            Angaben werden ausschließlich als E-Mail an Sarahs Postfach weitergeleitet
+            und liegen danach dort – es gibt keine Datenbank mit Anfragen und keine
+            Liste, in der Absender:innen geführt werden. Wie lange eine Anfrage im
+            Postfach bleibt, richtet sich danach, wie lange sie für die Beantwortung
+            und für Rückfragen gebraucht wird; danach wird sie gelöscht. Gesetzliche
+            Aufbewahrungsfristen bleiben unberührt.
+        </p>
+        <p>
+            Wird eine E-Mail-Adresse angegeben, geht an sie automatisch eine kurze
+            Eingangsbestätigung. Eine Weitergabe der Angaben an die Fahrschule oder an
+            Dritte findet nicht statt.
+        </p>
+
         <h2>Welche Daten gespeichert werden</h2>
         <p>
             Für Sarahs Stundenplanung werden Name, E-Mail-Adresse und – falls angegeben –

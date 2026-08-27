@@ -85,17 +85,10 @@ final class PageController
         ]);
     }
 
-    public function contact(): void
-    {
-        render('pages/kontakt', [
-            'title'           => 'Kontakt',
-            /* Die alte Fassung nannte nur die Kanäle. Eine Kontaktseite ist der
-               Treffer für „Fahrlehrerin + Ort + Kontakt" – dann darf in der
-               Vorschau auch stehen, um wen es geht und wo. */
-            'metaDescription' => 'So erreichst du Sarah – Fahrlehrerin in '
-                . area_sentence() . '. Telefon, E-Mail, TikTok und Instagram.',
-        ]);
-    }
+    /* `contact()` lag bis zum 27.08.2026 hier. Mit dem Kontaktformular
+       (SAR-95) nimmt /kontakt auch ein POST entgegen und muss nach einem
+       Eingabefehler dieselbe Seite mit den alten Werten neu rendern – das
+       gehört zusammen in den ContactController. */
 
     /* Hier lag bis zum 17.08.2026 `website()` für /meine-website – die
        Referenzseite „Wer diese Seite erstellt hat", auf der Sarah in eigenen

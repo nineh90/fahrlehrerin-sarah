@@ -220,6 +220,166 @@
        Fließtext liegt mit rund 850 deutlich darüber und ist immer fertig,
        bevor man ihm folgen konnte.
        ===================================================================== */
+    /* ---------------------------------------------------------------------
+       Kontaktformular: eine Frage nach der anderen  (SAR-95)
+
+       Im HTML stehen alle drei Schritte untereinander und das Formular ist
+       ohne diese Funktion vollständig abschickbar. Erst hier wird daraus
+       eine Strecke. Dieselbe Bedingung wie bei den Aufklappern auf
+       /ueber-mich: Verstecken darf man nur, was ohne die Mechanik trotzdem
+       erreichbar bleibt – sonst ist die Seite ohne JavaScript kaputt.
+
+       Geprüft wird beim Weitergehen nur, OB etwas dasteht, und zwar mit den
+       Sätzen aus Contact::MELDUNGEN, die als data-pflicht am Schritt hängen.
+       Die richtige Prüfung macht weiter der Server; hier geht es nur darum,
+       dass niemand drei Schritte weit läuft und dann zurückgeworfen wird.
+
+       Kommt die Seite mit einem Serverfehler zurück, trägt der betroffene
+       Schritt `data-hat-fehler` – dann fängt die Strecke dort an und nicht
+       wieder bei eins.
+       --------------------------------------------------------------------- */
+    initFormSteps();
+
+    function initFormSteps() {
+        var form = document.querySelector('form[data-schritte]');
+        if (!form) { return; }
+
+        var steps = Array.prototype.slice.call(form.querySelectorAll('.form-step'));
+        if (steps.length < 2) { return; }
+
+        var submitRow = form.querySelector('[data-absenden]');
+        var aktuell   = 0;
+
+        // Zählwerk und Knöpfe entstehen erst hier. Stünden sie im HTML,
+        // sähe man ohne JavaScript ein „Schritt 1 von 3" über einem
+        // Formular, das gar keine Schritte hat.
+        var zaehler = document.createElement('p');
+        zaehler.className = 'form-progress';
+        zaehler.setAttribute('aria-live', 'polite');
+        form.insertBefore(zaehler, steps[0]);
+
+        var nav = document.createElement('div');
+        nav.className = 'form-actions form-nav';
+
+        var zurueck = document.createElement('button');
+        zurueck.type = 'button';
+        zurueck.className = 'btn btn-ghost';
+        zurueck.textContent = 'Zurück';
+
+        var weiter = document.createElement('button');
+        weiter.type = 'button';
+        weiter.className = 'btn btn-primary';
+        weiter.textContent = 'Weiter';
+
+        nav.appendChild(zurueck);
+        nav.appendChild(weiter);
+        form.insertBefore(nav, submitRow);
+
+        /* Der Absendeknopf zieht in dieselbe Reihe wie „Zurück". Sonst steht
+           er im letzten Schritt eine Zeile darunter, und die Strecke endet
+           mit zwei Knopfreihen übereinander. Verschoben statt neu gebaut:
+           Ohne JavaScript bleibt er da, wo er im HTML steht. */
+        var absenden = submitRow.querySelector('button[type="submit"]');
+        nav.appendChild(absenden);
+        submitRow.hidden = true;
+
+        // Je Schritt ein Platz für die Meldung. Bei einer Frage pro Schritt
+        // reicht eine – und sie steht dort, wo man hinschaut.
+        steps.forEach(function (step) {
+            var slot = document.createElement('span');
+            slot.className = 'form-error';
+            slot.setAttribute('role', 'alert');
+            slot.hidden = true;
+            step.appendChild(slot);
+            step._meldung = slot;
+        });
+
+        function zeige(index, fokussieren) {
+            aktuell = Math.max(0, Math.min(index, steps.length - 1));
+
+            steps.forEach(function (step, i) {
+                step.hidden = i !== aktuell;
+            });
+
+            var letzter = aktuell === steps.length - 1;
+            zurueck.hidden  = aktuell === 0;
+            weiter.hidden   = letzter;
+            absenden.hidden = !letzter;
+
+            zaehler.textContent = 'Schritt ' + (aktuell + 1) + ' von ' + steps.length;
+
+            if (fokussieren) {
+                var erstes = steps[aktuell].querySelector('input:not([type=hidden]), textarea, select');
+                if (erstes) { erstes.focus({ preventScroll: true }); }
+            }
+        }
+
+        /* Steht in diesem Schritt genug? Gibt die erste verletzte Regel
+           zurück, sonst null. Eine Regel gilt als erfüllt, sobald EINES
+           ihrer Felder gefüllt bzw. angekreuzt ist – so deckt dieselbe
+           Mechanik „Name" und „E-Mail oder Telefon" ab. */
+        function verletzteRegel(step) {
+            var roh = step.getAttribute('data-pflicht');
+            if (!roh) { return null; }
+
+            var regeln;
+            try { regeln = JSON.parse(roh); } catch (e) { return null; }
+
+            for (var i = 0; i < regeln.length; i++) {
+                var erfuellt = regeln[i].felder.some(function (name) {
+                    var felder = form.querySelectorAll('[name="' + name + '"]');
+                    return Array.prototype.some.call(felder, function (feld) {
+                        if (feld.type === 'checkbox' || feld.type === 'radio') {
+                            return feld.checked;
+                        }
+                        return feld.value.trim().length > 1;
+                    });
+                });
+
+                if (!erfuellt) { return regeln[i]; }
+            }
+
+            return null;
+        }
+
+        weiter.addEventListener('click', function () {
+            var step   = steps[aktuell];
+            var regel  = verletzteRegel(step);
+
+            if (regel) {
+                step._meldung.textContent = regel.meldung;
+                step._meldung.hidden = false;
+                var erstes = step.querySelector('input:not([type=hidden]), textarea, select');
+                if (erstes) { erstes.focus({ preventScroll: true }); }
+                return;
+            }
+
+            step._meldung.hidden = true;
+            zeige(aktuell + 1, true);
+        });
+
+        zurueck.addEventListener('click', function () {
+            steps[aktuell]._meldung.hidden = true;
+            zeige(aktuell - 1, true);
+        });
+
+        // Enter im Textfeld soll weiterblättern und nicht abschicken,
+        // solange noch Schritte folgen.
+        form.addEventListener('keydown', function (event) {
+            if (event.key !== 'Enter' || event.target.tagName === 'TEXTAREA') { return; }
+            if (aktuell === steps.length - 1) { return; }
+            event.preventDefault();
+            weiter.click();
+        });
+
+        // Nach einem Serverfehler dort anfangen, wo etwas fehlt.
+        var fehlerhaft = steps.findIndex
+            ? steps.findIndex(function (s) { return s.hasAttribute('data-hat-fehler'); })
+            : -1;
+
+        zeige(fehlerhaft > -1 ? fehlerhaft : 0, false);
+    }
+
     function initTypewriter() {
         var felder = Array.prototype.slice.call(document.querySelectorAll('[data-typewriter]'));
         if (!felder.length) return;

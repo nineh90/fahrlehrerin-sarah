@@ -48,8 +48,14 @@ final class Mailer
     /**
      * Verschickt eine Nachricht. Gibt zurück, ob sie rausging.
      * Der Grund eines Fehlschlags steht danach in lastError().
+     *
+     * $replyTo setzt die Antwortadresse NUR für diese eine Nachricht und
+     * übersteuert damit MAIL_REPLY_TO aus der .env. Gebraucht wird das vom
+     * Kontaktformular: Absender bleibt Sarahs eigene Adresse (sonst stimmen
+     * SPF und DKIM nicht und ausgerechnet die Anfrage landet im Spam), aber
+     * ein Druck auf „Antworten" soll bei der fragenden Person landen.
      */
-    public static function send(string $to, string $subject, string $body): bool
+    public static function send(string $to, string $subject, string $body, ?string $replyTo = null): bool
     {
         self::$lastError = '';
         self::$deadline  = microtime(true) + self::TOTAL_TIMEOUT;
@@ -61,9 +67,9 @@ final class Mailer
 
         try {
             return match ((string) config('mail.driver')) {
-                'smtp'  => self::viaSmtp($to, $subject, $body),
-                'mail'  => self::viaMailFunction($to, $subject, $body),
-                default => self::viaLog($to, $subject, $body),
+                'smtp'  => self::viaSmtp($to, $subject, $body, $replyTo),
+                'mail'  => self::viaMailFunction($to, $subject, $body, $replyTo),
+                default => self::viaLog($to, $subject, $body, $replyTo),
             };
         } catch (Throwable $e) {
             // Auch ein Programmierfehler hier darf die Buchung nicht mitreißen.
@@ -81,23 +87,28 @@ final class Mailer
     // Die drei Wege
     // -----------------------------------------------------------------------
 
-    private static function viaLog(string $to, string $subject, string $body): bool
+    private static function viaLog(string $to, string $subject, string $body, ?string $replyTo = null): bool
     {
         // Bewusst lesbar und nicht als fertige Nachricht: Diese Datei ist zum
-        // Nachschauen da, nicht zum Verschicken.
+        // Nachschauen da, nicht zum Verschicken. Die Antwortadresse steht mit
+        // drin – sonst lässt sich lokal nicht prüfen, ob sie richtig gesetzt
+        // wird, und genau daran hängt beim Kontaktformular alles.
+        $antwort = self::resolveReplyTo($replyTo);
+
         return self::appendLog(sprintf(
-            "[%s] An: %s | Betreff: %s\n%s\n%s\n\n",
+            "[%s] An: %s%s | Betreff: %s\n%s\n%s\n\n",
             date('Y-m-d H:i:s'),
             $to,
+            $antwort !== '' ? ' | Antwort an: ' . $antwort : '',
             $subject,
             str_repeat('-', 60),
             $body
         ));
     }
 
-    private static function viaMailFunction(string $to, string $subject, string $body): bool
+    private static function viaMailFunction(string $to, string $subject, string $body, ?string $replyTo = null): bool
     {
-        $headers = self::headers($to);
+        $headers = self::headers($to, $replyTo);
         // Empfänger, Betreff und Zeitstempel setzt mail() bzw. der MTA selbst.
         unset($headers['To'], $headers['Date'], $headers['Message-ID']);
 
@@ -119,7 +130,7 @@ final class Mailer
      * Projekt hat keinen Composer, und mehr als ein Dutzend Zeilen Protokoll
      * ist es nicht.
      */
-    private static function viaSmtp(string $to, string $subject, string $body): bool
+    private static function viaSmtp(string $to, string $subject, string $body, ?string $replyTo = null): bool
     {
         $host     = trim((string) config('mail.smtp.host', ''));
         $port     = (int) config('mail.smtp.port', 465);
@@ -240,7 +251,7 @@ final class Mailer
                 return false;
             }
 
-            fwrite($socket, self::message($to, $subject, $body) . "\r\n.\r\n");
+            fwrite($socket, self::message($to, $subject, $body, $replyTo) . "\r\n.\r\n");
             if (self::response($socket, 250, 'Nachricht') === null) {
                 return false;
             }
@@ -345,8 +356,21 @@ final class Mailer
     // Die Nachricht selbst
     // -----------------------------------------------------------------------
 
+    /**
+     * Die Antwortadresse dieser Nachricht: erst die je Aufruf übergebene,
+     * sonst MAIL_REPLY_TO. Ungültiges fliegt raus statt in den Kopf – ein
+     * Reply-To kommt beim Kontaktformular aus einem Formularfeld, und was
+     * von dort kommt, gehört ungeprüft in keine Kopfzeile.
+     */
+    private static function resolveReplyTo(?string $replyTo): string
+    {
+        $wert = trim((string) ($replyTo ?? config('mail.reply_to', '')));
+
+        return $wert !== '' && filter_var($wert, FILTER_VALIDATE_EMAIL) ? $wert : '';
+    }
+
     /** @return array<string,string> */
-    private static function headers(string $to): array
+    private static function headers(string $to, ?string $replyTo = null): array
     {
         $from = trim((string) config('mail.from'));
         $name = trim((string) config('mail.from_name', ''));
@@ -368,9 +392,9 @@ final class Mailer
             'Content-Transfer-Encoding' => 'base64',
         ];
 
-        $replyTo = trim((string) config('mail.reply_to', ''));
-        if ($replyTo !== '') {
-            $headers['Reply-To'] = $replyTo;
+        $antwort = self::resolveReplyTo($replyTo);
+        if ($antwort !== '') {
+            $headers['Reply-To'] = $antwort;
         }
 
         return $headers;
@@ -387,9 +411,9 @@ final class Mailer
         return implode("\r\n", $zeilen);
     }
 
-    private static function message(string $to, string $subject, string $body): string
+    private static function message(string $to, string $subject, string $body, ?string $replyTo = null): string
     {
-        $headers            = self::headers($to);
+        $headers            = self::headers($to, $replyTo);
         $headers['Subject'] = self::encodeHeader($subject);
 
         return self::headerLines($headers) . "\r\n\r\n" . self::encodeBody($body);

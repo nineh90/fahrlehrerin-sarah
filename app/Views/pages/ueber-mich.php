@@ -71,7 +71,7 @@ $school = (string) config('school.name');
                 </div>
             </div>
 
-            <div class="duo-media photo-wrap" style="--card-accent: var(--c-violet);">
+            <div class="duo-media photo-wrap">
                 <?php /* Dasselbe Video wie auf der Startseite, dieselbe Auszeichnung.
                          Kein autoplay: Das Video hat Ton und startet nur auf Wunsch.
                          `preload="metadata"` lädt bloß die Kopfdaten und nicht die

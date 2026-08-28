@@ -689,6 +689,39 @@
     --card-accent-soft: var(--accent-soft);
 }
 
+/* --- Der Fleck hinter Bildern und Videos: Sander-Grün (SAR-96) -----------
+   Bis zum 28.08.2026 trug jedes Bild und jedes Video eine andere Farbe aus
+   dem Regenbogen, und zwar als `style="--card-accent: …"` INLINE IM
+   TEMPLATE – sechs Stellen, sechs Farben, ohne ein Muster dahinter. Genau
+   das war der Anlass: von außen sah es aus, als wäre die Farbe gewürfelt.
+   Jetzt tragen alle dasselbe Grün, und es steht an einer Stelle.
+
+   ES IST `--accent-surface` UND NICHT `--accent`, und das ist der Kern.
+   Beide sind „das Sander-Grün", aber sie haben verschiedene Jobs (SAR-81):
+   `--accent-surface` (#43A22A) ist Sanders Logo-Grün, die FLÄCHE.
+   `--accent` (#30751E) ist dasselbe Grün abgedunkelt, damit es als SCHRIFT
+   die Kontrastwerte schafft. Der Fleck liegt mit 13 % Deckkraft auf hellem
+   Grund – aus der abgedunkelten Schriftfassung wird darin ein Grauschleier,
+   aus dem Logo-Grün ein sichtbar grüner Ton. Dieselbe Rechnung stand schon
+   in SAR-92, damals für ein einzelnes Foto; hier gilt sie für alle.
+
+   DAS VERSCHIEBT EINE GRENZE, DIE IN SAR-81 GEZOGEN WURDE, und das gehört
+   festgehalten, damit es niemand später als Fehler „zurückrepariert":
+   Dort galt Grün für Bedienung und Gliederung, der Regenbogen für Sarahs
+   Handschrift – Karten, Wegbegleiter, Akkordeon, Zitatbalken. Der Fleck
+   hinter einem Foto zählte zur zweiten Gruppe. Mit diesem Ticket wechselt
+   er auf die grüne Seite. Die Karten, die Aufklapper und die Zeitleiste
+   darüber sind NICHT betroffen; der Regenbogen bleibt dort, wo er Gliederung
+   leistet.
+
+   Gesetzt wird `--card-accent` und nicht direkt die Farbe im ::before:
+   Das Pseudoelement steht in nd-base.css und darf keine feste Farbe kennen.
+   Über die Variable bleibt die ND-Signatur farblos und diese Datei
+   entscheidet. */
+.photo-wrap {
+    --card-accent: var(--accent-surface);
+}
+
 /* Pflichtfahrten: jede Fahrtart ihre eigene Farbe – so erkennt Sarah die
    Zeile am Balken, ohne die Beschriftung zu lesen. Feste Zuordnung, keine
    Rotation: die Farbe gehört zur Sache, nicht zur Reihenfolge. */

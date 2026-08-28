@@ -27,7 +27,7 @@
 <section class="section">
     <div class="container">
         <div class="duo">
-            <div class="duo-media photo-wrap" style="--card-accent: var(--c-teal);">
+            <div class="duo-media photo-wrap">
                 <figure class="photo">
                     <img src="<?= asset('img/handicap-linksgas.jpg') ?>"
                          alt="Fußraum eines Fahrschulautos mit Linksgas-Umbau: links neben der
@@ -173,7 +173,7 @@
 <section class="section">
     <div class="container">
         <div class="duo duo--text-first">
-            <div class="duo-media photo-wrap" style="--card-accent: var(--c-violet);">
+            <div class="duo-media photo-wrap">
                 <?php /* „während des Umbaus" trug bis zum 12.08.2026 die
                          Bildunterschrift. Die ist auf Sarahs Wunsch weg (keine
                          Erklärtexte unter den Fotos mehr), deshalb steht die
@@ -295,7 +295,7 @@
                      und Knöpfe; als 13 % transparente Fläche wäre es ein
                      Grauschleier. Die Regel dazu steht bei den Status-Farben
                      in theme.css. */ ?>
-            <div class="duo-media photo-wrap" style="--card-accent: var(--c-green);">
+            <div class="duo-media photo-wrap">
                 <?php /* Hochformat, deshalb `.photo--portrait`: Ohne die Begrenzung
                          bestimmt das Bild die Spaltenhöhe und der Text daneben steht
                          verloren in der Leere. Regel in nd-base.css. */ ?>

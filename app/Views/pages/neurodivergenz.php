@@ -146,7 +146,7 @@
 <section class="section section--alt">
     <div class="container">
         <div class="duo">
-            <div class="duo-media photo-wrap" style="--card-accent: var(--c-teal);">
+            <div class="duo-media photo-wrap">
                 <?php /* Das Messefoto lag seit dem 17.08.2026 ungenutzt in
                          public/assets/img – es stand vorher auf /ueber-mich und
                          ist dort dem Freisteller gewichen (SAR-38).

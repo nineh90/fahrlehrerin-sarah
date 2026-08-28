@@ -230,7 +230,7 @@ $schoolUrl = trim((string) config('school.url'));
                      Warum, steht in theme.css: Hinter Fließtext taugt eine Fläche,
                      kein Gesicht. */ ?>
             <div class="duo-media">
-                <figure class="photo hero-photo" style="--card-accent: var(--c-violet);">
+                <figure class="photo hero-photo">
                     <img src="<?= asset('img/sarah-hero.jpg') ?>"
                          alt="Sarah sitzt lächelnd an einem Tisch, den Kopf in die Hand
                               gestützt, daneben eine Tischlampe und ein Becher mit Stiften"
@@ -277,7 +277,7 @@ $schoolUrl = trim((string) config('school.url'));
                  jetzt zuerst das Video und dann den Text dazu. Das war der
                  zweite Teil von SAR-28 und ist hier gratis mitgekommen. */ ?>
         <div class="duo duo--narrow-media-left">
-            <div class="duo-media photo-wrap" style="--card-accent: var(--c-red);">
+            <div class="duo-media photo-wrap">
                 <figure class="video-frame">
                     <?php /* Kein autoplay: das Video hat Ton und startet nur auf Wunsch.
                              preload="metadata" lädt bloß die Kopfdaten, nicht die 5,7 MB. */ ?>

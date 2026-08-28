@@ -541,8 +541,25 @@
     --shadow:    0 6px 22px rgba(43, 36, 52, 0.07);
     --shadow-lg: 0 18px 45px rgba(43, 36, 52, 0.13);
     --container: 1160px;
-    --font-body: 'Roboto Mono', ui-monospace, "Courier New", monospace;
-    --font-head: 'Fredoka', "Segoe UI", system-ui, sans-serif;
+    /* SAR-104, 28.08.2026: Carlito trägt beides. Sarahs Entscheidung nach
+       einem Probelauf – vorher stand hier Fredoka über Roboto Mono.
+
+       Carlito steht VOR Calibri, obwohl Calibri gewünscht war: Nur die
+       erste ist eine Datei, die wir selbst ausliefern und die deshalb
+       überall gleich aussieht. Calibri liegt nur auf Windows, und was auf
+       dem Rechner der Besucher:innen liegt, entscheidet sonst über das
+       Schriftbild der Seite. Die beiden sind Zwillinge – gleiche Metrik,
+       gleiche Breiten –, also fällt der Unterschied ohnehin niemandem auf.
+       Calibri bleibt trotzdem in der Kette: Sie greift, wenn unsere Datei
+       einmal nicht ankommt.
+
+       BEIDE TOKEN TRAGEN JETZT DENSELBEN WERT, und sie bleiben trotzdem
+       zwei. In nd-base.css hängen über sechzig Regeln an der Unterscheidung
+       zwischen Überschrift und Fließtext. Ein Token daraus zu machen hieße,
+       diese Trennung wegzuwerfen – zurück käme sie nur, indem man alle
+       sechzig Stellen wieder von Hand auseinandersortiert. */
+    --font-body: 'Carlito', Calibri, "Segoe UI", system-ui, sans-serif;
+    --font-head: 'Carlito', Calibri, "Segoe UI", system-ui, sans-serif;
 }
 
 /* =========================================================================

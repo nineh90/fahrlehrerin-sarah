@@ -6,8 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($title ?? 'Schaltzentrale') ?> · Fahrlehrerin Sarah</title>
     <meta name="robots" content="noindex, nofollow">
-    <link rel="preload" href="<?= asset('fonts/fredoka-latin.woff2') ?>" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="<?= asset('fonts/roboto-mono-latin.woff2') ?>" as="font" type="font/woff2" crossorigin>
+    <?php /* SAR-104: Vorgeladen wird nur das latin-Subset, und darin beide
+             Schnitte – 400 trägt den Fließtext, 700 die Überschriften, beides
+             steht sofort im Bild. latin-ext bleibt draußen: Es ist mit Abstand
+             die dickste Datei und wird nur gebraucht, wenn ein Name ein ł oder
+             ș enthält. Der Browser holt es dann von selbst nach. */ ?>
+    <link rel="preload" href="<?= asset('fonts/carlito-latin-400.woff2') ?>" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="<?= asset('fonts/carlito-latin-700.woff2') ?>" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="<?= asset('css/fonts.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/nd-base.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/theme.css') ?>">

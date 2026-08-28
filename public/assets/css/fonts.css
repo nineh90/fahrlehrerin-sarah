@@ -1,30 +1,123 @@
 /* Fahrlehrerin Sarah – Schriften, lokal ausgeliefert
    ---------------------------------------------------------------------------
-   Fredoka und Roboto Mono liegen unter public/assets/fonts/ und werden vom
-   eigenen Server geholt. Kein Google-Fonts-Aufruf, also keine IP-Übertragung
-   an Google und kein Hinweis dazu in der Datenschutzerklärung nötig.
+   Die Schriften liegen unter public/assets/fonts/ und werden vom eigenen
+   Server geholt. Kein Google-Fonts-Aufruf, also keine IP-Übertragung an
+   Google und kein Hinweis dazu in der Datenschutzerklärung nötig. Diese
+   Zusage steht dort ausdrücklich – wer hier eine externe URL einträgt,
+   macht die Datenschutzerklärung falsch.
 
-   Beides sind VARIABLE FONTS: eine Datei je Subset deckt alle Gewichte ab
-   (Fredoka 300–700, Roboto Mono 100–700). Deshalb stehen hier nur vier
-   Dateien und nicht zehn – und deshalb darf `font-weight` nicht auf einen
-   einzelnen Wert festgenagelt werden, sondern nennt die Spanne.
+   SEIT SAR-104 (28.08.2026) TRÄGT CARLITO DIE GANZE SEITE, Überschriften wie
+   Fließtext. Sarahs Entscheidung nach einem Probelauf.
+
+   WARUM CARLITO UND NICHT CALIBRI. Gewünscht war Calibri. Das liegt auf
+   Windows- und Office-Rechnern und sonst nirgends, und es gibt dafür keine
+   Lizenz, die das Ausliefern als Webfont erlaubt. Carlito ist der freie
+   Zwilling: gleiche Metrik, gleiche Breiten, gleiches Schriftbild, Lizenz
+   OFL-1.1. Auf einem Windows-Rechner ist der Unterschied zu Calibri nicht
+   zu sehen, überall sonst ist es der einzige Weg, dieses Schriftbild
+   überhaupt zu zeigen.
+
+   CARLITO IST KEIN VARIABLE FONT – anders als die beiden Vorgänger. Es gibt
+   genau zwei Schnitte, 400 und 700, also zwei Dateien je Subset statt einer.
+   Deshalb steht bei `font-weight` hier ein EINZELNER Wert und keine Spanne:
+   Eine Spanne würde dem Browser Gewichte versprechen, die die Datei nicht
+   hat, und er rechnet sie sich dann selbst aus – künstlich fett, unsauber
+   in den Rundungen.
+
+   WAS DAS FÜR DIE ZWISCHENGEWICHTE HEISST. Die Seite fordert an vielen
+   Stellen 500 und 600 an. Der Browser sucht sich nach fester Regel den
+   nächsten vorhandenen Schnitt: 500 wird zu 400, 600 wird zu 700. Das ist
+   kein Fehler und keine Synthese, sondern gewollt und vorhersagbar – aber
+   es heißt, dass Überschriften (600) jetzt im vollen Fettschnitt stehen.
+   Genau so sah auch der Probelauf aus, den Sarah beurteilt hat: Die Schrift
+   auf dem Testrechner hatte dieselben zwei Schnitte.
+
+   KEIN KURSIVSCHNITT. Auf der ganzen Website steht ein einziges <em>
+   (/datenschutz, das Wort „localStorage"). Dafür lohnt keine fünfte Datei;
+   der Browser neigt die Buchstaben selbst. Kommt später durchgehend
+   kursiver Text dazu, holt man ital,wght@1,400 aus demselben Aufruf unten
+   nach und legt einen dritten Block an.
 
    Die Pfade sind relativ zu DIESER Datei (../fonts/…) – das überlebt jeden
    BASE_PATH, ohne dass PHP die URLs schreiben müsste.
 
    Zwei Subsets, mehr braucht eine deutsche Seite nicht: `latin` trägt den
    Text, `latin-ext` fängt Namen mit ł, ș, ő ab. Der Browser lädt latin-ext
-   nur, wenn so ein Zeichen wirklich vorkommt (unicode-range).
+   nur, wenn so ein Zeichen wirklich vorkommt (unicode-range). Das ist hier
+   wichtiger als vorher: Carlitos latin-ext-Dateien sind mit 79 und 82 KB
+   die dicksten im Ordner. Für den Normalfall zählt allein latin, und das
+   sind 61 KB – zwei weniger als die 63 KB von Fredoka + Roboto Mono.
 
-   Neu holen (Stand: v17 / v31, geladen am 11.08.2026):
+   Neu holen (Stand: Carlito v4, geladen am 28.08.2026):
      curl -H 'User-Agent: Mozilla/5.0 … Chrome/120' \
-       'https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Roboto+Mono:wght@400;500&display=swap'
-   liefert die aktuellen woff2-URLs; daraus die latin- und latin-ext-Datei
-   ziehen und hier ersetzen. Die Versionsnummer im Google-Pfad ändert sich,
-   die Dateinamen hier bleiben gleich.
+       'https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&display=swap'
+   liefert die aktuellen woff2-URLs; daraus je Subset die 400er und die
+   700er Datei ziehen und hier unter denselben Namen ersetzen. Die
+   Versionsnummer im Google-Pfad ändert sich, die Dateinamen hier bleiben
+   gleich – dann muss diese Datei nicht angefasst werden.
    --------------------------------------------------------------------------- */
 
-/* --- Fredoka (Überschriften) ------------------------------------------- */
+/* --- Carlito (Überschriften und Fließtext) ------------------------------ */
+
+@font-face {
+    font-family: 'Carlito';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../fonts/carlito-latin-400.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+        U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
+        U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Carlito';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(../fonts/carlito-latin-700.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+        U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
+        U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Carlito';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../fonts/carlito-latin-ext-400.woff2) format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+        U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+    font-family: 'Carlito';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(../fonts/carlito-latin-ext-700.woff2) format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+        U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+        U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* --- Fredoka und Roboto Mono: die Rückfalloption ------------------------
+   Bis zum 28.08.2026 trugen diese beiden die Seite – Fredoka die
+   Überschriften, Roboto Mono den Fließtext. Sie bleiben hier stehen, und
+   ihre Dateien bleiben im Ordner liegen.
+
+   Das kostet nichts: Eine @font-face-Regel, die keine Schriftfamilie
+   irgendwo anfordert, lädt der Browser nie herunter. Der Gewinn ist der
+   Rückweg – will Sarah es sich anders überlegen, sind es die zwei Zeilen
+   --font-head und --font-body in theme.css und sonst nichts. Vorgeladen
+   werden sie in den Layouts nicht mehr; ein Preload lädt sofort und
+   ungefragt, das wäre dann totes Gewicht auf jeder Seite.
+
+   Wer sicher ist, dass es beim neuen Schriftbild bleibt, darf diesen Block
+   und die vier Dateien löschen. Vorher nicht.
+   ------------------------------------------------------------------------ */
 
 @font-face {
     font-family: 'Fredoka';
@@ -49,8 +142,6 @@
         U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
         U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-
-/* --- Roboto Mono (Fließtext) ------------------------------------------- */
 
 @font-face {
     font-family: 'Roboto Mono';

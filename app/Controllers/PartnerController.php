@@ -18,13 +18,18 @@ final class PartnerController
     {
         $partner = Partners::find($slug);
 
-        /* Zwei Bedingungen, und beide müssen sein: Der Eintrag entscheidet, ob
-           es den Wegbegleiter gibt, und erst dadurch ist der Slug ein bekannter
-           Wert und der Dateiname unten harmlos. Die Dateiprüfung fängt den
-           Fall ab, dass jemand den Eintrag anlegt und die View vergisst; ohne
-           sie wäre das ein Serverfehler statt einer 404. */
+        /* Drei Bedingungen, und jede fängt etwas anderes ab: Der Eintrag
+           entscheidet, ob es den Wegbegleiter überhaupt gibt – und erst dadurch
+           ist der Slug ein bekannter Wert und der Dateiname unten harmlos.
+           `seite()` entscheidet, ob er hier eine Unterseite HABEN SOLL; seit
+           SAR-102 (30.08.2026) trifft das nur noch auf Nils-Digital zu, alle
+           anderen Kacheln führen direkt nach draußen. Die Dateiprüfung fängt
+           zuletzt den Fall ab, dass jemand das Flag setzt und die View
+           vergisst; ohne sie wäre das ein Serverfehler statt einer 404. */
         $view = 'pages/wegbegleiter/' . $slug;
-        if ($partner === null || !is_file(APP_ROOT . '/app/Views/' . $view . '.php')) {
+        if ($partner === null
+            || !Partners::seite($slug)
+            || !is_file(APP_ROOT . '/app/Views/' . $view . '.php')) {
             http_response_code(404);
             render('errors/404', ['title' => 'Seite nicht gefunden', 'noindex' => true]);
             return;

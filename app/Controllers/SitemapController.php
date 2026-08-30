@@ -61,8 +61,16 @@ final class SitemapController
         /* Die Wegbegleiter kommen aus derselben Liste wie die Navigation
            (app/Partners.php). Wer dort einen ergänzt, hat ihn hier
            automatisch mit – eine zweite, handgepflegte Liste würde
-           auseinanderlaufen, und zwar unbemerkt. */
+           auseinanderlaufen, und zwar unbemerkt.
+
+           SEIT SAR-102 (30.08.2026) STEHT HIER NUR NOCH, WAS ES ALS SEITE
+           GIBT. Die übrigen Kacheln führen direkt auf die Website des
+           Betriebs; eine Adresse in die Sitemap zu schreiben, die mit 404
+           antwortet, ist der häufigste Fehler in der Search Console. */
         foreach (array_keys(Partners::all()) as $slug) {
+            if (!Partners::seite($slug)) {
+                continue;
+            }
             $eintraege['/wegbegleiter/' . $slug] = [
                 'prioritaet' => '0.3',
                 'frequenz'   => 'yearly',

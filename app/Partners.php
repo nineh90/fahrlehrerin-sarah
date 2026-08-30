@@ -44,10 +44,16 @@ declare(strict_types=1);
  * NEUEN WEGBEGLEITER AUFNEHMEN:
  *   1. Logo nach `public/assets/img/partner/<slug>.webp` (freigestellt, siehe
  *      Hinweis unten), Maße hier eintragen.
- *   2. Eintrag in LIST ergänzen, `hint` nicht vergessen. Der Array-Schlüssel
- *      ist die URL: /wegbegleiter/<slug>.
- *   3. View `app/Views/pages/wegbegleiter/<slug>.php` anlegen.
- * Route und Controller bleiben unangetastet, die gelten für alle.
+ *   2. Eintrag in LIST ergänzen, `hint` nicht vergessen.
+ * Das reicht. Die Kachel führt dann direkt auf `url` – auf den eigenen
+ * Auftritt des Betriebs.
+ *
+ * SEIT SAR-102 (30.08.2026) GIBT ES KEINE UNTERSEITEN MEHR, mit einer
+ * Ausnahme: Nils-Digital. Wer wirklich eine braucht, setzt `'seite' => true`
+ * und legt `app/Views/pages/wegbegleiter/<slug>.php` an; Route und Controller
+ * gelten weiter für alle. Die Frage davor lautet aber, warum eine
+ * nacherzählte Seite über einen fremden Betrieb hier besser aufgehoben sein
+ * soll als bei ihm selbst.
  *
  * LOGOS GEHÖREN IHREN INHABERN. Sie liegen hier lokal statt als Fremd-Link auf
  * den Server des Partners: Ein Hotlink lädt bei jedem Seitenaufruf von dort,
@@ -180,6 +186,10 @@ final class Partners
         'nils-digital' => [
             'name' => 'Nils-Digital',
             'hint' => 'Hat diese Website gebaut',
+            /* DER EINZIGE EINTRAG MIT EIGENER UNTERSEITE, seit SAR-102
+               (30.08.2026). Alle anderen Kacheln führen direkt auf die Website
+               des Betriebs; siehe `seite()` weiter unten. */
+            'seite' => true,
             'url'  => 'https://nils-digital.de/',
             'logo' => 'partner/nils-digital.webp',
             /* Die Bildmarke aus `img/nils-digital-logo.png`, freigestellt und
@@ -351,9 +361,39 @@ final class Partners
         return self::LIST[$slug] ?? null;
     }
 
-    /** Die interne Adresse der Unterseite eines Wegbegleiters. */
+    /**
+     * Hat dieser Wegbegleiter eine eigene Unterseite auf DIESER Website?
+     *
+     * Seit SAR-102 (30.08.2026) trifft das nur noch auf Nils-Digital zu. Alle
+     * anderen führen direkt auf ihren eigenen Auftritt: Eine nacherzählte
+     * Seite über einen fremden Betrieb veraltet, sobald der etwas ändert, und
+     * sie hält Besucher:innen einen Klick lang von dem ab, was sie eigentlich
+     * suchen.
+     *
+     * Nils-Digital bleibt, weil diese Seite die Nachfolgerin von
+     * /meine-website ist – die Schilderung, wie Sarahs Website entstanden ist,
+     * und damit ein Text ÜBER dieses Projekt und nicht über einen fremden
+     * Betrieb.
+     *
+     * Die Antwort steht im Datensatz und nicht darin, ob die View-Datei
+     * zufällig existiert: So ist die Absicht lesbar, statt aus einem
+     * fehlenden File erschlossen zu werden.
+     */
+    public static function seite(string $slug): bool
+    {
+        return !empty(self::LIST[$slug]['seite']);
+    }
+
+    /**
+     * Wohin die Kachel führt: auf die eigene Unterseite, wenn es eine gibt,
+     * sonst direkt auf die Website des Betriebs.
+     */
     public static function path(string $slug): string
     {
-        return url('/wegbegleiter/' . $slug);
+        if (self::seite($slug)) {
+            return url('/wegbegleiter/' . $slug);
+        }
+
+        return (string) (self::LIST[$slug]['url'] ?? url('/'));
     }
 }

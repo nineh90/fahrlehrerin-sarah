@@ -57,7 +57,19 @@ $wegbegleiter = Partners::all();
         <ul class="partner-grid<?= count($wegbegleiter) % 3 === 1 ? ' partner-grid--cols-4' : '' ?>">
             <?php foreach ($wegbegleiter as $slug => $partner): ?>
                 <li>
-                    <a class="partner-card" href="<?= e(Partners::path($slug)) ?>">
+                    <?php /* SEIT SAR-102 (30.08.2026) FÜHREN DIE MEISTEN KACHELN
+                             NACH DRAUSSEN, nur Nils-Digital hat noch eine eigene
+                             Unterseite. `Partners::path()` entscheidet das, die
+                             Kachel fragt nur nach.
+
+                             Externe Ziele öffnen in einem neuen Tab, damit
+                             Sarahs Seite dabei offen bleibt – dieselbe
+                             Entscheidung wie beim Fahrschul-Knopf im Menü. Der
+                             Pfeil ist `aria-hidden`, weil Vorlesesoftware ihn
+                             sonst als „Nordostpfeil" ansagt; was er bedeutet,
+                             steht als Text daneben und nur für sie. */ ?>
+                    <?php $extern = !Partners::seite($slug); ?>
+                    <a class="partner-card" href="<?= e(Partners::path($slug)) ?>"<?= $extern ? ' target="_blank" rel="noopener"' : '' ?>>
                         <?php /* Die Klasse kommt aus `Partners`, weil sie von den
                                  Maßen der Datei abhängt und nicht von der Seite:
                                  Quadratische Marken bekommen mehr Höhe als
@@ -83,6 +95,13 @@ $wegbegleiter = Partners::all();
                         <?php $hint = trim((string) ($partner['hint'] ?? '')); ?>
                         <?php if ($hint !== ''): ?>
                             <span class="partner-hint"><?= e($hint) ?></span>
+                        <?php endif; ?>
+                        <?php if ($extern): ?>
+                            <?php /* Ohne den Namen: Der steht schon im alt-Text des
+                                     Logos, und der Name des Links setzt sich aus
+                                     beidem zusammen – sonst hört man ihn zweimal.
+                                     Wortlaut wie im Menü bei der Fahrschule. */ ?>
+                            <span class="sr-only"> – öffnet in neuem Tab</span>
                         <?php endif; ?>
                     </a>
                 </li>

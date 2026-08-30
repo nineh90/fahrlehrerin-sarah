@@ -140,9 +140,10 @@ $canonical = absolute_url($canonicalPath ?? current_path());
              Auf Nils' Wunsch ersatzlos gestrichen: Die Fahrschule Sander steht
              inzwischen an so vielen Stellen der Seite, dass die Fußnote unter
              JEDER Seite nichts mehr einordnet, was nicht ohnehin schon dasteht
-             – Hero-Knopf, Sander-Sektion der Startseite, /wegbegleiter samt
-             Unterseite, Kasten „Anmeldung und Vertrag" auf
-             /fahren-mit-handicap.
+             – Hero-Knopf, Sander-Sektion der Startseite, die Kachel unter
+             „Wegbegleiter", Kasten „Anmeldung und Vertrag" auf
+             /fahren-mit-handicap. (Die Unterseite der Fahrschule ist mit
+             SAR-102 entfallen, die Kachel führt jetzt direkt zu ihr.)
 
              Was damit verschwindet, ist die eine Stelle, an der die Wörter
              „angestellt, nicht selbstständig" wörtlich standen. Wer sie

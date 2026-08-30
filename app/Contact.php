@@ -249,46 +249,53 @@ final class Contact
     }
 
     /**
-     * Die Eingangsbestätigung.
+     * Die Eingangsbestätigung an die fragende Person.
      *
-     * Kurz halten. Sie sagt genau zwei Dinge: es ist angekommen, und es
-     * dauert vielleicht ein bisschen. Alles andere gehört in Sarahs echte
-     * Antwort – eine automatische Mail, die schon Auskunft gibt, klingt nach
-     * Kundenportal und ist das Gegenteil von dem, wofür Leute ihr schreiben.
+     * DIESER TEXT IST VON NILS UND SARAH (30.08.2026) und ersetzt den
+     * Entwurf, der hier bis dahin stand. Wortlaut, Gedankenstriche und das
+     * „&" sind ihre – wer daran glättet, macht daraus wieder einen Entwurf.
+     * Geändert wurde beim Übernehmen nur eines, auf ausdrücklichen Wunsch:
+     * Von den zehn Emojis der Vorlage sind zwei geblieben, das 👋 am Anfang
+     * und das 😜 am Schluss. Die übrigen standen neben Sätzen, die dasselbe
+     * schon sagten.
+     *
+     * ZWEI DINGE AUS DEM ALTEN TEXT SIND WEG, weil die neue Fassung sie
+     * nicht vorsieht: die Anrede mit dem Vornamen und der Rückblick
+     * („Das hast du mir geschickt"), der Anliegen und Nachricht noch einmal
+     * aufführte. Beides steht in der Versionsgeschichte.
+     *
+     * Die Telefonnummer kommt aus der Konfiguration und steht nicht im Text:
+     * Sie steht an vier weiteren Stellen der Seite, und eine Nummer, die
+     * sich an fünf Orten ändern muss, ändert sich irgendwann nur an vieren.
      *
      * @param array<string,mixed> $v
      */
     private static function bodyForPerson(array $v): string
     {
-        $zeilen = [
-            'Hallo ' . self::vorname((string) $v['name']) . ',',
+        $telefon = trim((string) config('contact.phone'));
+
+        return implode("\n", [
+            'Moin 👋',
             '',
-            'deine Nachricht ist bei mir angekommen – danke dafür. Ich melde mich,',
-            'sobald ich zwischen zwei Fahrstunden dazu komme. Das kann ein, zwei',
-            'Tage dauern.',
+            'Nachricht ist angekommen – ich ignoriere dich also nicht. Versprochen.',
             '',
-            'Wenn es schneller gehen soll, ruf mich einfach an: '
-                . trim((string) config('contact.phone')) . '.',
+            'Wahrscheinlich sitze ich gerade neben jemandem, der versucht, Blinker,',
+            'Kupplung und Atmen gleichzeitig zu koordinieren.',
             '',
-            'Viele Grüße',
+            'Sobald ich wieder beide Hände fürs Handy frei habe, melde ich mich bei',
+            'dir. Manchmal dauert\'s ein bisschen – 24–48 Stunden sind im',
+            'Ausnahmefall drin.',
+            '',
+            'Brennt die Hütte und es kann wirklich nicht warten?',
+            'Dann ruf einfach durch: ' . $telefon,
+            '',
+            'Gehe ich nicht ran, bin ich vermutlich gerade in einer Fahrstunde –',
+            'Rückruf kommt!',
+            '',
+            'Bis dahin: locker bleiben & nicht abwürgen. 😜',
+            '',
             'Sarah',
-            '',
-            str_repeat('-', 60),
-            'Das hast du mir geschickt:',
-            '',
-            '  Worum es geht:  ' . (self::ANLIEGEN[$v['anliegen']] ?? '–'),
-        ];
-
-        if ($v['nachricht'] !== '') {
-            $zeilen[] = '';
-            $zeilen[] = self::einrücken((string) $v['nachricht']);
-        }
-
-        $zeilen[] = '';
-        $zeilen[] = 'Diese Mail ist automatisch verschickt – eine Antwort darauf';
-        $zeilen[] = 'landet aber trotzdem bei mir.';
-
-        return implode("\n", $zeilen);
+        ]);
     }
 
     // -----------------------------------------------------------------------
@@ -322,14 +329,6 @@ final class Contact
     private static function ziffern(string $wert): string
     {
         return preg_replace('/\D+/', '', $wert) ?? '';
-    }
-
-    /** Der erste Namensteil, für die Anrede. Leer bleibt leer. */
-    private static function vorname(string $name): string
-    {
-        $teile = preg_split('/\s+/', trim($name)) ?: [];
-
-        return (string) ($teile[0] ?? $name);
     }
 
     /** Fremden Text um zwei Zeichen einrücken, damit er sich vom Rest absetzt. */

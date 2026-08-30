@@ -7,6 +7,7 @@
     // schiefgehen könnte – sichtbar ist sie danach auf jeden Fall.
     initTypewriter();
 
+
     /* Header schrumpfen lassen, sobald man scrollt: Oben trägt er Sarahs
        volles Logo, das unter der Leiste hervorsteht, danach die kompakte
        Marke. Aussehen und Maße stehen im CSS (.site-header.is-compact),

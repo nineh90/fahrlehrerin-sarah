@@ -106,6 +106,20 @@ final class ContactController
 
         render('pages/kontakt', [
             'title'           => 'Kontakt',
+            /* Die Bestätigung nach dem Absenden lesen wir HIER mit, damit die
+               View sie an die Stelle des Formulars setzen kann. Ein Band am
+               Seitenanfang allein hilft dem nicht, der gerade unten getippt
+               hat – und ein wieder leeres Formular liest sich, als wäre
+               nichts passiert.
+
+               GELESEN, NICHT VERBRAUCHT: Das Band oben bleibt zusätzlich
+               stehen. Eigentlich sollte die Seite nach dem Absenden von
+               selbst zum Formular springen – die Adresse trägt dafür
+               `#schreib-mir` –, aber genau das tut sie nachweislich nicht
+               (nachgemessen: scrollY bleibt 0). Solange das so ist, ist die
+               doppelte Meldung die sichere Seite: Wer oben landet, liest das
+               Band, wer unten steht, den Block. */
+            'erfolg'          => peek_flash('success'),
             /* Die alte Fassung nannte nur die Kanäle. Eine Kontaktseite ist der
                Treffer für „Fahrlehrerin + Ort + Kontakt" – dann darf in der
                Vorschau auch stehen, um wen es geht und wo. */
@@ -126,7 +140,9 @@ final class ContactController
         set_flash('success', 'Deine Nachricht ist raus – ich melde mich bei dir. '
             . 'Wenn du eine E-Mail-Adresse angegeben hast, liegt gleich eine '
             . 'Bestätigung in deinem Postfach.');
-        redirect('/kontakt');
+        /* Mit Sprungmarke: Der Browser steht danach beim Formular, also da,
+           wo die Bestätigung erscheint – und nicht wieder ganz oben. */
+        redirect('/kontakt#schreib-mir');
     }
 
     private function darfNochSenden(): bool

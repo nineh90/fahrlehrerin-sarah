@@ -114,6 +114,23 @@ function set_flash(string $type, string $message): void
 }
 
 /** Liest und verwirft alle Flash-Messages. */
+/**
+ * EINE Flash-Message lesen, OHNE sie zu verbrauchen.
+ *
+ * Für Seiten, die ihre Bestätigung zusätzlich an einer passenderen Stelle
+ * zeigen wollen als im Band ganz oben – siehe ContactController. Bewusst
+ * ohne Verbrauch: Das Band bleibt damit als Netz stehen. Wer die Seite nach
+ * dem Absenden am oberen Rand betritt, sieht die Meldung dort; wer beim
+ * Formular steht, sieht sie an Ort und Stelle. Doppelt gezeigt stört nicht,
+ * beide Stellen liegen weit auseinander – gar nicht gezeigt wäre der Fehler.
+ */
+function peek_flash(string $type): string
+{
+    ensure_session();
+
+    return (string) ($_SESSION['_flash'][$type] ?? '');
+}
+
 function take_flashes(): array
 {
     ensure_session();

@@ -182,6 +182,22 @@ $hatFehler = static function (array $felder) use ($errors): string {
 
         <div class="split-grid split-grid--wide-left">
             <div class="card">
+                <?php /* Nach dem Absenden steht hier die Bestätigung STATT des
+                         Formulars. Zwei Gründe: Wer gerade hier unten getippt
+                         hat, sieht ein Band am Seitenanfang nicht – und ein
+                         wieder leeres Formular liest sich, als wäre nichts
+                         passiert. Der Text stammt aus der Flash-Message, die
+                         der Controller herausgenommen hat. ENTWURF. */ ?>
+                <?php if (($erfolg ?? '') !== ''): ?>
+                    <div class="form-erfolg" role="status">
+                        <span class="form-erfolg-zeichen"><?= icon('check') ?></span>
+                        <h3>Angekommen.</h3>
+                        <p><?= e($erfolg) ?></p>
+                        <p>
+                            <a href="<?= url('/kontakt') ?>#schreib-mir">Noch eine Nachricht schreiben</a>
+                        </p>
+                    </div>
+                <?php else: ?>
                 <?php /* Die Sprungmarke steht IM Formularziel. Sie gilt auch für
                          die Antwort auf das POST – nach einem Fehler steht die
                          Seite damit beim Formular und nicht wieder ganz oben. */ ?>
@@ -298,6 +314,7 @@ $hatFehler = static function (array $felder) use ($errors): string {
                         <button class="btn btn-primary" type="submit">Nachricht abschicken</button>
                     </div>
                 </form>
+                <?php endif; ?>
             </div>
 
             <div>

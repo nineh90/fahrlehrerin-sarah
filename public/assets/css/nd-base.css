@@ -186,6 +186,10 @@ img { max-width: 100%; display: block; }
    auf der großen Höhe stehen – siehe oben. Der Admin hat keinen solchen
    Header und muss den Platz deshalb wieder abziehen. */
 body { padding-top: var(--header-h, 0px); }
+/* Der Kopf ist `fixed` und liegt über dem Inhalt. Ein Sprung zu einem Anker
+   setzt das Ziel sonst an die Oberkante des Fensters – also hinter den Kopf.
+   Gilt für den Sprung des Browsers wie für scrollIntoView(). */
+:target { scroll-margin-top: calc(var(--header-h, 0px) + 1.2rem); }
 .admin-body, .admin-auth-body { padding-top: 0; }
 
 .header-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; gap: 1rem; }
@@ -627,6 +631,18 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
    wer sie nicht unterscheidet, sieht sonst gar nichts. Verbunden wird beides
    über aria-describedby am Feld. */
 .form-error { display: block; font-family: var(--font-body); font-weight: 400; font-size: var(--fs-xs); color: var(--red-text); margin-top: .4rem; }
+/* Bestätigung AN DER STELLE DES FORMULARS statt im Band am Seitenanfang.
+   Wer gerade hier unten getippt hat, sieht ein Band ganz oben nicht – und ein
+   wieder leeres Formular liest sich, als wäre nichts passiert. Deshalb tritt
+   dieser Block an die Stelle des Formulars und nicht darüber. */
+.form-erfolg { display: flex; flex-direction: column; align-items: flex-start; gap: .9rem; padding: .5rem 0; }
+.form-erfolg-zeichen {
+    display: grid; place-items: center; width: 54px; height: 54px; flex-shrink: 0;
+    border-radius: 50%; background: var(--green-soft); color: var(--green-text);
+}
+.form-erfolg-zeichen svg { width: 28px; height: 28px; }
+.form-erfolg h3 { margin: 0; font-size: var(--fs-xl); }
+.form-erfolg p { margin: 0; color: var(--text-soft); max-width: 42ch; }
 .form input[aria-invalid="true"], .form select[aria-invalid="true"], .form textarea[aria-invalid="true"] { border-color: var(--red); }
 .form-fieldset[aria-invalid="true"] { border-color: var(--red); }
 /* Honigtopf: für Menschen unerreichbar, für Bots ein Feld wie jedes andere.

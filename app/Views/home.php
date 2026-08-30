@@ -79,7 +79,26 @@ $schoolUrl = trim((string) config('school.url'));
                          Zustand her, jetzt mit den 30 px, die der Bindestrich
                          zusätzlich braucht. Unter 500 px wird die Sperre
                          aufgehoben, dort SOLL das Wort brechen. */ ?>
-                <h1 class="hero-headline" data-typewriter>Führerschein-Ausbildung<br>für Menschen<br>mit Handicap</h1>
+                <?php /* SAR-98 (30.08.2026): „-Ausbildung" ist raus, die
+                         Überschrift heißt jetzt „Führerschein für Menschen mit
+                         Handicap".
+
+                         DAMIT IST DER GANZE APPARAT DARÜBER HINFÄLLIG. Das
+                         zusammengesetzte Wort „Führerscheinausbildung" war 23
+                         Zeichen lang und unteilbar; es hat sich seine Spalte
+                         selbst erzwungen, dann brauchte es einen Bindestrich zum
+                         Brechen, und der Bindestrich brauchte `white-space:
+                         nowrap` als Gegenregel plus eine Ausnahme unter 500 px.
+                         Das längste Wort heißt jetzt „Führerschein" und ist 12
+                         Zeichen lang – es passt überall hin. Beide CSS-Regeln
+                         und die Klasse `hero-headline` sind deshalb entfallen.
+                         Nebenbei bekommt das Foto die 30 px zurück, die der
+                         Bindestrich seiner Spalte gekostet hat.
+
+                         Die drei harten Umbrüche bleiben: Sie geben der
+                         Überschrift ihre Form, und die Zeilen enden an den
+                         Stellen, an denen man beim Lesen ohnehin Luft holt. */ ?>
+                <h1 data-typewriter>Führerschein<br>für Menschen<br>mit Handicap</h1>
                 <?php /* "fast" = doppeltes Tempo. Das ist kein Detail: Bei 42 ms
                          je Zeichen tippt die Seite mit rund 285 Wörtern pro
                          Minute, also ungefähr Lesegeschwindigkeit – dann fühlt
@@ -131,7 +150,9 @@ $schoolUrl = trim((string) config('school.url'));
                          frei umbrechend – feste Umbrüche in einem langen Satz
                          sitzen auf dem Handy immer falsch. */ ?>
                 <p class="hero-lead" data-typewriter="fast">
-                    Moin ihr Lieben.<br>Mein Name ist Sarah, Fahrlehrerin für die Klassen B und BE.
+                    Moin ihr Lieben.<br>Mein Name ist Sarah. Ich bin Fahrlehrerin für die
+                    Klassen B und BE. Spezialisiert habe ich mich auf die
+                    Führerschein-Ausbildung für Menschen mit Handicap.
                 </p>
                 <p class="hero-meta">
                     <?= icon('pin') ?>

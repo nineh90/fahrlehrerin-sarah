@@ -485,7 +485,19 @@ $school = (string) config('school.name');
         <div class="cta-inner">
             <div class="cta-text">
                 <h2>Klingt nach dir?</h2>
-                <p>Dann melde dich – am besten kurz telefonisch, das geht am schnellsten.</p>
+                <?php /* ⚠️ ENTWURF, nicht Sarahs Wortlaut. SAR-93, 30.08.2026:
+                         Hier stand „Dann melde dich – am besten kurz
+                         telefonisch", der Knopf daneben führt aber zur
+                         Fahrschule. Zweite Fassung wie auf der Startseite, aus
+                         demselben Grund. */ ?>
+                <?php if (school_configured()): ?>
+                    <p>
+                        Dann geht es über die <?= e($school) ?> weiter: Dort meldest
+                        du dich an und sagst, dass du zu mir möchtest.
+                    </p>
+                <?php else: ?>
+                    <p>Dann melde dich – am besten kurz telefonisch, das geht am schnellsten.</p>
+                <?php endif; ?>
             </div>
             <?php /* NUR NOCH DER WEG ZUR FAHRSCHULE, seit dem 23.08.2026
                      (Ticket SAR-93). Hier standen zwei Knöpfe nebeneinander,

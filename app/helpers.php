@@ -457,12 +457,29 @@ function school_link(): string
  * etwas, das keine URL ist, führt der Knopf ins Leere. Dann lieber der
  * Kontakt, der immer da ist.
  */
+/**
+ * Ist eine Fahrschule brauchbar konfiguriert?
+ *
+ * Steht seit SAR-93 (30.08.2026) als eigener Helfer da, weil die Antwort an
+ * ZWEI Stellen gebraucht wird: vom Knopf im Schlussband und vom Text daneben.
+ * Genau das war der Fehler, der repariert wird – der Knopf führte zur
+ * Fahrschule, der Text sagte weiter „ruf mich an". Prüften beide auf eigene
+ * Faust, liefen sie beim nächsten Mal wieder auseinander.
+ */
+function school_configured(): bool
+{
+    $name = trim((string) config('school.name'));
+    $url  = trim((string) config('school.url'));
+
+    return $name !== '' && $url !== '' && filter_var($url, FILTER_VALIDATE_URL) !== false;
+}
+
 function school_cta_button(): string
 {
     $name = trim((string) config('school.name'));
     $url  = trim((string) config('school.url'));
 
-    if ($name === '' || $url === '' || !filter_var($url, FILTER_VALIDATE_URL)) {
+    if (!school_configured()) {
         return sprintf(
             '<a class="btn btn-primary btn-lg" href="%s">Kontakt</a>',
             e(url('/kontakt'))

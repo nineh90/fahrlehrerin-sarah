@@ -854,10 +854,29 @@ $schoolUrl = trim((string) config('school.url'));
         <div class="cta-inner">
             <div class="cta-text">
                 <h2>Du überlegst noch?</h2>
-                <p>
-                    Ruf mich an oder schreib mir. Ich sage dir ehrlich, ob ich die
-                    Richtige für dich bin – und wenn nicht, wen du fragen solltest.
-                </p>
+                <?php /* ⚠️ ENTWURF, nicht Sarahs Wortlaut. SAR-93, 30.08.2026:
+                         Hier stand „Ruf mich an oder schreib mir", während der
+                         Knopf daneben längst zur Fahrschule führt – der Text
+                         versprach ein Gespräch, das der Knopf nicht anbietet.
+
+                         DIE ZWEITE FASSUNG IST KEIN BEIWERK: Ohne konfigurierte
+                         Fahrschule macht `school_cta_button()` einen
+                         Kontakt-Knopf daraus, und dann stimmt der alte Satz
+                         wieder genau. Beide lesen dieselbe Bedingung über
+                         `school_configured()`, damit sie nicht ein zweites Mal
+                         auseinanderlaufen. */ ?>
+                <?php if (school_configured()): ?>
+                    <p>
+                        Anmeldung, Vertrag und Theorie laufen über die
+                        <?= e($school) ?>. Sag dort einfach, dass du zu mir möchtest –
+                        alles Weitere klären wir in deiner ersten Stunde.
+                    </p>
+                <?php else: ?>
+                    <p>
+                        Ruf mich an oder schreib mir. Ich sage dir ehrlich, ob ich die
+                        Richtige für dich bin – und wenn nicht, wen du fragen solltest.
+                    </p>
+                <?php endif; ?>
             </div>
             <?php /* NUR NOCH DER WEG ZUR FAHRSCHULE, seit dem 23.08.2026
                      (Ticket SAR-93). Hier stand „Kontakt". Der Knopf kommt

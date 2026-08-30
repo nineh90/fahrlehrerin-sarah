@@ -1,7 +1,15 @@
 <?php $school = (string) config('school.name'); ?>
 <section class="page-head">
     <div class="container">
-        <h1>Fahren mit Handicap</h1>
+        <?php /* SAR-107, 30.08.2026: „körperlichem" dazu. Die Seite handelt von
+                 Technik – Linksgas, Lenkraddrehknopf, Handbedienung –, und wer
+                 mit ADHS oder Autismus hier landete, fand nichts von dem, was er
+                 gesucht hat. Das steht seit SAR-90 auf /neurodivergenz.
+
+                 Das Wort ist Sarahs eigenes: Ihr Vorspann direkt darunter
+                 beginnt mit „Eine körperliche Einschränkung". Die Überschrift
+                 sagt jetzt dasselbe wie der erste Satz. */ ?>
+        <h1>Fahren mit körperlichem Handicap</h1>
         <?php /* SARAHS VORSPANN, seit dem 21.08.2026 (Ticket SAR-82). Hier
                  stand eine kürzere Fassung von uns: „Mit Kleinwuchs, nach einem
                  Unfall oder mit einer Einschränkung, die dir jemand als

@@ -102,7 +102,24 @@
                     Schwerpunkte<span class="nav-caret" aria-hidden="true"></span>
                 </button>
                 <div class="nav-submenu" id="navSchwerpunkte">
-                    <a class="nav-link<?= nav_active('/fahren-mit-handicap') ?>" href="<?= url('/fahren-mit-handicap') ?>">Fahren mit Handicap</a>
+                <?php /* DIE BEIDEN PUNKTE SAGEN SEIT SAR-107 (30.08.2026), WORIN
+                         SIE SICH UNTERSCHEIDEN. Vorher hießen sie „Fahren mit
+                         Handicap" und „Neurodivergenz" – der erste klang wie der
+                         Oberbegriff für beide, und wer eine unsichtbare
+                         Beeinträchtigung hat, wäre bei ihm gelandet und hätte
+                         dort nur Technik gefunden.
+
+                         „Körperlich" ist NICHT unsere Wortwahl: Sarahs eigener
+                         Vorspann auf der Seite fängt mit „Eine körperliche
+                         Einschränkung bedeutet nicht automatisch …" an, und in
+                         der Kachel auf der Startseite steht „ob körperliches
+                         oder seelisches Handicap". Wir übernehmen hier also nur
+                         ihre eigene Unterscheidung ins Menü.
+
+                         Beide Punkte sind jetzt gleich gebaut – Adjektiv plus
+                         Sache, ohne „Fahren mit" davor. Vorher war der eine ein
+                         Halbsatz und der andere ein Wort. */ ?>
+                    <a class="nav-link<?= nav_active('/fahren-mit-handicap') ?>" href="<?= url('/fahren-mit-handicap') ?>">Körperliches Handicap</a>
                     <a class="nav-link<?= nav_active('/neurodivergenz') ?>" href="<?= url('/neurodivergenz') ?>">Neurodivergenz</a>
                 </div>
             </div>

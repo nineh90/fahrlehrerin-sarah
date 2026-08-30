@@ -59,7 +59,11 @@
                 <h3>Über mich</h3>
                 <ul class="footer-links">
                     <li><a href="<?= url('/ueber-mich') ?>">Wer ich bin</a></li>
-                    <li><a href="<?= url('/fahren-mit-handicap') ?>">Fahren mit Handicap</a></li>
+                    <?php /* Beschriftung wie im Menü (SAR-107): Der Punkt steht
+                             direkt über „Neurodivergenz", also genau die Paarung,
+                             die deutlich werden soll. Stünde hier weiter „Fahren
+                             mit Handicap", widerspräche der Fuß dem Menü. */ ?>
+                    <li><a href="<?= url('/fahren-mit-handicap') ?>">Körperliches Handicap</a></li>
                     <?php /* SAR-65. Steht hier FLACH neben den anderen und nicht
                              eingerückt unter „Fahren mit Handicap", obwohl die
                              beiden im Menü eine Gruppe sind: Der Fuß ist eine

@@ -37,7 +37,7 @@ final class PageController
     public function handicap(): void
     {
         render('pages/handicap', [
-            'title'           => 'Fahren mit Handicap',
+            'title'           => 'Fahren mit körperlichem Handicap',
             /* Der Titel weicht bewusst von der Überschrift ab: Auf der Seite
                steht „Fahren mit Handicap", gesucht wird nach „Führerschein".
                Beides darf verschieden sein – die Überschrift spricht die an,

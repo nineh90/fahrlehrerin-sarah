@@ -187,7 +187,7 @@ $schoolUrl = trim((string) config('school.url'));
                             <?= e($school) ?> &nearr;
                         </a>
                     <?php else: ?>
-                        <a class="btn btn-ghost btn-lg" href="<?= url('/fahren-mit-handicap') ?>">Fahren mit Handicap</a>
+                        <a class="btn btn-ghost btn-lg" href="<?= url('/fahren-mit-handicap') ?>">Fahren mit körperlichem Handicap</a>
                     <?php endif; ?>
                 </div>
             </div>

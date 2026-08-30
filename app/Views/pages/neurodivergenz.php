@@ -253,7 +253,7 @@
                  spiegelbildliche Zeile. */ ?>
         <p class="cross-link">
             Zum anderen Schwerpunkt:
-            <a href="<?= url('/fahren-mit-handicap') ?>">Fahren mit Handicap</a>
+            <a href="<?= url('/fahren-mit-handicap') ?>">Fahren mit körperlichem Handicap</a>
         </p>
     </div>
 </section>

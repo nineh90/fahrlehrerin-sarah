@@ -68,6 +68,26 @@ final class Contact
     /** Längste erlaubte Nachricht. Darüber ist es kein Kontaktformular mehr. */
     public const MAX_NACHRICHT = 3000;
 
+    /**
+     * Der Name, der in Sarahs Postfach vor der Adresse steht.
+     *
+     * WARUM DAS NICHT MAIL_FROM_NAME IST. Die Anfrage kommt von Sarahs
+     * eigener Adresse – anders geht es nicht, sonst brechen SPF und DKIM.
+     * Mit dem Klarnamen „Fahrlehrerin Sarah" davor stand die Anfrage aber in
+     * ihrem Postfach, als hätte sie sie sich selbst geschrieben.
+     *
+     * Geändert wird deshalb NUR diese eine Nachricht und nicht der Wert in
+     * der .env: Aus derselben Anwendung geht die Eingangsbestätigung an die
+     * fragende Person raus, und die ist in Sarahs Stimme geschrieben
+     * („… melde mich, sobald ich zwischen zwei Fahrstunden dazu komme.
+     * Viele Grüße, Sarah"). Käme die von „Kontaktformular Website", wäre der
+     * Absender ein Automat und der Text eine Person. Dasselbe gälte für jede
+     * andere Mail der Anwendung.
+     *
+     * Die ADRESSE bleibt unberührt, nur der Name davor ändert sich.
+     */
+    public const ABSENDER_NAME = 'Kontaktformular Website';
+
     // -----------------------------------------------------------------------
     // Prüfen
     // -----------------------------------------------------------------------
@@ -150,7 +170,10 @@ final class Contact
                senden bricht SPF und DKIM, und dann landet ausgerechnet die
                Anfrage im Spam. Ein Druck auf „Antworten" soll aber bei der
                fragenden Person landen, nicht bei ihr selbst. */
-            $values['email'] !== '' ? (string) $values['email'] : null
+            $values['email'] !== '' ? (string) $values['email'] : null,
+            /* … und im Postfach steht davor nicht ihr eigener Name, sondern
+               woher die Mail kommt. Siehe ABSENDER_NAME oben. */
+            self::ABSENDER_NAME
         );
 
         if (!$sarah) {

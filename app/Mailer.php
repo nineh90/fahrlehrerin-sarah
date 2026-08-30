@@ -54,8 +54,19 @@ final class Mailer
      * Kontaktformular: Absender bleibt Sarahs eigene Adresse (sonst stimmen
      * SPF und DKIM nicht und ausgerechnet die Anfrage landet im Spam), aber
      * ein Druck auf „Antworten" soll bei der fragenden Person landen.
+     *
+     * $fromName setzt den Klarnamen vor der Adresse, ebenfalls nur für diese
+     * eine Nachricht, und übersteuert MAIL_FROM_NAME. Die ADRESSE bleibt
+     * unberührt – nur der Name davor. SPF und DKIM hängen an der Adresse,
+     * nicht am Namen, hier lässt sich also nichts kaputtmachen.
      */
-    public static function send(string $to, string $subject, string $body, ?string $replyTo = null): bool
+    public static function send(
+        string $to,
+        string $subject,
+        string $body,
+        ?string $replyTo = null,
+        ?string $fromName = null
+    ): bool
     {
         self::$lastError = '';
         self::$deadline  = microtime(true) + self::TOTAL_TIMEOUT;
@@ -67,9 +78,9 @@ final class Mailer
 
         try {
             return match ((string) config('mail.driver')) {
-                'smtp'  => self::viaSmtp($to, $subject, $body, $replyTo),
-                'mail'  => self::viaMailFunction($to, $subject, $body, $replyTo),
-                default => self::viaLog($to, $subject, $body, $replyTo),
+                'smtp'  => self::viaSmtp($to, $subject, $body, $replyTo, $fromName),
+                'mail'  => self::viaMailFunction($to, $subject, $body, $replyTo, $fromName),
+                default => self::viaLog($to, $subject, $body, $replyTo, $fromName),
             };
         } catch (Throwable $e) {
             // Auch ein Programmierfehler hier darf die Buchung nicht mitreißen.
@@ -87,17 +98,25 @@ final class Mailer
     // Die drei Wege
     // -----------------------------------------------------------------------
 
-    private static function viaLog(string $to, string $subject, string $body, ?string $replyTo = null): bool
-    {
+    private static function viaLog(
+        string $to,
+        string $subject,
+        string $body,
+        ?string $replyTo = null,
+        ?string $fromName = null
+    ): bool {
         // Bewusst lesbar und nicht als fertige Nachricht: Diese Datei ist zum
         // Nachschauen da, nicht zum Verschicken. Die Antwortadresse steht mit
         // drin – sonst lässt sich lokal nicht prüfen, ob sie richtig gesetzt
         // wird, und genau daran hängt beim Kontaktformular alles.
         $antwort = self::resolveReplyTo($replyTo);
+        $name    = self::resolveFromName($fromName);
 
         return self::appendLog(sprintf(
-            "[%s] An: %s%s | Betreff: %s\n%s\n%s\n\n",
+            "[%s] Von: %s | An: %s%s | Betreff: %s\n%s\n%s\n\n",
             date('Y-m-d H:i:s'),
+            $name !== '' ? $name . ' <' . trim((string) config('mail.from')) . '>'
+                         : trim((string) config('mail.from')),
             $to,
             $antwort !== '' ? ' | Antwort an: ' . $antwort : '',
             $subject,
@@ -106,9 +125,14 @@ final class Mailer
         ));
     }
 
-    private static function viaMailFunction(string $to, string $subject, string $body, ?string $replyTo = null): bool
-    {
-        $headers = self::headers($to, $replyTo);
+    private static function viaMailFunction(
+        string $to,
+        string $subject,
+        string $body,
+        ?string $replyTo = null,
+        ?string $fromName = null
+    ): bool {
+        $headers = self::headers($to, $replyTo, $fromName);
         // Empfänger, Betreff und Zeitstempel setzt mail() bzw. der MTA selbst.
         unset($headers['To'], $headers['Date'], $headers['Message-ID']);
 
@@ -130,8 +154,13 @@ final class Mailer
      * Projekt hat keinen Composer, und mehr als ein Dutzend Zeilen Protokoll
      * ist es nicht.
      */
-    private static function viaSmtp(string $to, string $subject, string $body, ?string $replyTo = null): bool
-    {
+    private static function viaSmtp(
+        string $to,
+        string $subject,
+        string $body,
+        ?string $replyTo = null,
+        ?string $fromName = null
+    ): bool {
         $host     = trim((string) config('mail.smtp.host', ''));
         $port     = (int) config('mail.smtp.port', 465);
         $user     = trim((string) config('mail.smtp.user', ''));
@@ -251,7 +280,7 @@ final class Mailer
                 return false;
             }
 
-            fwrite($socket, self::message($to, $subject, $body, $replyTo) . "\r\n.\r\n");
+            fwrite($socket, self::message($to, $subject, $body, $replyTo, $fromName) . "\r\n.\r\n");
             if (self::response($socket, 250, 'Nachricht') === null) {
                 return false;
             }
@@ -369,11 +398,24 @@ final class Mailer
         return $wert !== '' && filter_var($wert, FILTER_VALIDATE_EMAIL) ? $wert : '';
     }
 
+    /**
+     * Der Klarname vor der Adresse: erst der je Aufruf übergebene, sonst
+     * MAIL_FROM_NAME. Zeilenumbrüche und Steuerzeichen fliegen raus – der
+     * Wert landet in einer Kopfzeile, und ein Umbruch darin wäre eine
+     * eingeschleuste zweite Kopfzeile.
+     */
+    private static function resolveFromName(?string $fromName): string
+    {
+        $wert = (string) ($fromName ?? config('mail.from_name', ''));
+
+        return trim(preg_replace('/[\p{C}]+/u', ' ', $wert) ?? '');
+    }
+
     /** @return array<string,string> */
-    private static function headers(string $to, ?string $replyTo = null): array
+    private static function headers(string $to, ?string $replyTo = null, ?string $fromName = null): array
     {
         $from = trim((string) config('mail.from'));
-        $name = trim((string) config('mail.from_name', ''));
+        $name = self::resolveFromName($fromName);
 
         $headers = [
             'Date'         => date('r'),
@@ -411,9 +453,14 @@ final class Mailer
         return implode("\r\n", $zeilen);
     }
 
-    private static function message(string $to, string $subject, string $body, ?string $replyTo = null): string
-    {
-        $headers            = self::headers($to, $replyTo);
+    private static function message(
+        string $to,
+        string $subject,
+        string $body,
+        ?string $replyTo = null,
+        ?string $fromName = null
+    ): string {
+        $headers            = self::headers($to, $replyTo, $fromName);
         $headers['Subject'] = self::encodeHeader($subject);
 
         return self::headerLines($headers) . "\r\n\r\n" . self::encodeBody($body);

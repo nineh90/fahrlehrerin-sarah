@@ -112,6 +112,34 @@
                     <li><a href="mailto:<?= e(config('contact.email')) ?>"><?= e(config('contact.email')) ?></a></li>
                     <li><a href="<?= e(tiktok_url()) ?>" target="_blank" rel="noopener noreferrer">TikTok</a></li>
                     <li><a href="<?= e(instagram_url()) ?>" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                    <?php /* DIE FAHRSCHULE, seit SAR-105 (31.08.2026).
+
+                             SIE STEHT ZULETZT, und zwar aus zwei Gründen: Die
+                             beiden Kanäle gehören als Paar zusammen, dazwischen
+                             wäre sie ein Fremdkörper – und sie ist der einzige
+                             Eintrag der Spalte, der nicht zu Sarah führt.
+                             Dieselbe Stelle wie im Menü, wo sie ebenfalls am
+                             Ende steht.
+
+                             `rel="noopener"` OHNE `noreferrer`, anders als bei
+                             TikTok und Instagram daneben: Es ist dasselbe Ziel
+                             wie der Knopf im Menü und in jedem Schlussband, und
+                             das wird dort genauso behandelt. `noreferrer` würde
+                             der Fahrschule verschweigen, dass der Besuch von
+                             Sarahs Seite kommt – bei ihrem Arbeitgeber ist das
+                             nicht gewollt.
+
+                             Wie überall: Ohne konfigurierte Fahrschule gibt es
+                             den Eintrag nicht. `school_configured()` ist
+                             dieselbe Bedingung, die auch der Knopf im
+                             Schlussband liest (SAR-93). */ ?>
+                    <?php if (school_configured()): ?>
+                        <li>
+                            <a href="<?= e(config('school.url')) ?>" target="_blank" rel="noopener">
+                                <?= e(config('school.name')) ?><span aria-hidden="true"> &nearr;</span><span class="sr-only"> – öffnet in neuem Tab</span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>

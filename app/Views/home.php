@@ -587,15 +587,18 @@ $schoolUrl = trim((string) config('school.url'));
                 <span class="feature-icon"><?= icon('ear') ?></span>
                 <h3>Ausbildung mit Hörschädigung</h3>
                 <?php /* SARAHS FASSUNG von SAR-70 (21.08.2026), EIN SATZ DAVON
-                         SEIT SAR-99 (30.08.2026) ERSETZT.
+                         SEIT SAR-99 (30.08.2026) NEU – EBENFALLS VON IHR.
 
                          Der mittlere Satz hieß „Meine Anweisungen erscheinen als
                          Anweisung auf einem Display im Auto." Die Wiederholung
                          „Anweisungen … als Anweisung" stand hier bewusst: Es war
-                         ihr Satz, und geglättet wäre er nicht mehr ihrer. Genau
-                         diesen Satz hat Nils jetzt ausgetauscht – die neue
-                         Fassung sagt, WAS erscheint (ein Pop-up) statt es zu
-                         wiederholen.
+                         ihr Satz, und geglättet wäre er nicht mehr ihrer.
+
+                         Ersetzt wurde er nicht von uns: Der Begriff „Pop-up"
+                         kommt von Sarah (bestätigt von Nils, 31.08.2026). Die
+                         Karte ist damit weiterhin durchgehend ihre – das ist
+                         der Grund, warum dieser Absatz überhaupt so genau
+                         Buch führt.
 
                          Die beiden anderen Sätze sind unverändert ihre. Der
                          Halbsatz zur Testphase bleibt ebenfalls – siehe die

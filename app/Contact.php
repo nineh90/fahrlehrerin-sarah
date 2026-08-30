@@ -88,6 +88,44 @@ final class Contact
      */
     public const ABSENDER_NAME = 'Kontaktformular Website';
 
+    /**
+     * Der Gruß über der Anfrage – jedes Mal ein anderer. Sarahs Osterei.
+     *
+     * DAS IST DIE EINZIGE STELLE DES PROJEKTS, AN DER EIN ERFUNDENER TEXT
+     * unbedenklich ist: Diese Zeile geht ausschließlich an Sarah, kein
+     * Besucher bekommt sie je zu sehen, und sie steht unter niemandes Namen.
+     * Überall sonst gilt weiter, dass Text entweder von ihr stammt oder als
+     * Entwurf gekennzeichnet ist.
+     *
+     * Der Ton lehnt sich an die Eingangsbestätigung an, damit die Seite
+     * nicht nach außen locker und nach innen nach Formular klingt.
+     *
+     * WICHTIG BEIM ERGÄNZEN: Der Spruch trägt KEINE Information. Alles, was
+     * Sarah wirklich braucht – wer, worum es geht, wie sie zurückkommt –,
+     * steht darunter und im Betreff. Wer hier die Fakten hineinzieht, macht
+     * eine Zeile, die man überliest, zur einzigen Quelle.
+     *
+     * Gezogen wird rein zufällig, ohne Gedächtnis: Das Formular speichert
+     * nichts, also weiß auch niemand, was zuletzt drankam. Bei dreizehn
+     * Sprüchen wiederholt sich also gelegentlich einer hintereinander – der
+     * Preis dafür, dass hier nichts liegen bleibt.
+     */
+    public const BEGRUESSUNGEN = [
+        'Handbremse lösen: Es gibt Post.',
+        'Jemand hat geblinkt und will zu dir rüber.',
+        'Frische Anfrage, noch warm.',
+        'Da draußen will wieder jemand losfahren.',
+        'Jemand hat sich getraut und auf „Absenden" gedrückt.',
+        'Neue Anfrage. Kein Grund zu hupen.',
+        'Einer mehr, der Blinker, Kupplung und Atmen gleichzeitig lernen will.',
+        'Schulterblick: Da kommt was von rechts.',
+        'Post für dich – und ausnahmsweise keine Werbung.',
+        'Anfrage sauber eingeparkt in deinem Postfach.',
+        'Jemand möchte bei dir ans Steuer.',
+        'Es hat geklingelt. Sinnbildlich.',
+        'Nicht abwürgen: Da ist eine Anfrage.',
+    ];
+
     // -----------------------------------------------------------------------
     // Prüfen
     // -----------------------------------------------------------------------
@@ -215,6 +253,10 @@ final class Contact
     private static function bodyForSarah(array $v): string
     {
         $zeilen = [
+            /* Das Osterei. Steht ÜBER der Sachlage und ersetzt sie nicht –
+               siehe BEGRUESSUNGEN. */
+            self::BEGRUESSUNGEN[array_rand(self::BEGRUESSUNGEN)],
+            '',
             $v['name'] . ' hat dir über das Formular auf deiner Website geschrieben.',
             '',
             'Worum es geht:  ' . (self::ANLIEGEN[$v['anliegen']] ?? '–'),

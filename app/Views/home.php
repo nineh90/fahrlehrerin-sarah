@@ -586,23 +586,28 @@ $schoolUrl = trim((string) config('school.url'));
             <article class="feature-card">
                 <span class="feature-icon"><?= icon('ear') ?></span>
                 <h3>Ausbildung mit Hörschädigung</h3>
-                <?php /* SARAHS FASSUNG, seit dem 21.08.2026 (Ticket SAR-70).
-                         Wörtlich übernommen, auch die Wiederholung „Anweisungen …
-                         als Anweisung" – das ist ihr Satz, und geglättet wäre er
-                         nicht mehr ihrer.
+                <?php /* SARAHS FASSUNG von SAR-70 (21.08.2026), EIN SATZ DAVON
+                         SEIT SAR-99 (30.08.2026) ERSETZT.
 
-                         Zwei Angaben sind dabei entfallen: „farbig nach
-                         Dringlichkeit" und „Schild". Die Karte beschreibt die App
-                         damit knapper; wie sie im Einzelnen arbeitet, steht
-                         weiter oben in diesem Kommentar und ändert sich nicht.
+                         Der mittlere Satz hieß „Meine Anweisungen erscheinen als
+                         Anweisung auf einem Display im Auto." Die Wiederholung
+                         „Anweisungen … als Anweisung" stand hier bewusst: Es war
+                         ihr Satz, und geglättet wäre er nicht mehr ihrer. Genau
+                         diesen Satz hat Nils jetzt ausgetauscht – die neue
+                         Fassung sagt, WAS erscheint (ein Pop-up) statt es zu
+                         wiederholen.
 
-                         „Unsere eigens entwickelte App" ist neu und sagt mehr als
-                         vorher: FahrSignal ist eine Eigenentwicklung, kein
-                         zugekauftes Werkzeug. Der Halbsatz zur Testphase bleibt –
-                         siehe die Warnung oben. */ ?>
+                         Die beiden anderen Sätze sind unverändert ihre. Der
+                         Halbsatz zur Testphase bleibt ebenfalls – siehe die
+                         Warnung oben, er hängt am Stand von FahrSignal und nicht
+                         an dieser Karte.
+
+                         Zwei Angaben aus einer früheren Fassung fehlen weiterhin:
+                         „farbig nach Dringlichkeit" und „Schild". Wie die App im
+                         Einzelnen arbeitet, steht im Kommentar darüber. */ ?>
                 <p>
                     Was ich sage, hörst du nicht – also zeige ich es dir. Meine Anweisungen
-                    erscheinen als Anweisung auf einem Display im Auto. Unsere eigens
+                    erscheinen als Pop-up auf einem Bildschirm im Auto. Unsere eigens
                     entwickelte App dafür heißt FahrSignal und befindet sich gerade in der
                     Testphase.
                 </p>

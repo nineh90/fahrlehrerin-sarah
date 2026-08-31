@@ -58,16 +58,16 @@ $school = (string) config('school.name');
                 </p>
                 <?php /* SEIT SAR-54 STEHT HIER NUR NOCH EIN KNOPF (21.08.2026):
                          „Termine" ist weg, solange die Planung nicht öffentlich
-                         ist. „Schreib mir" wird dafür der Hauptknopf – ein
+                         ist. Der Kontaktknopf wird dafür der Hauptknopf – ein
                          einzelner Knopf in der Nebenrolle sieht aus, als fehle
                          der eigentliche. Kommt „Termine" zurück, ist auch die
                          Rangfolge wieder die alte. */ ?>
                 <div class="hero-actions">
                     <?php if (termine_oeffentlich()): ?>
                         <a class="btn btn-primary btn-lg" href="<?= url('/termine') ?>">Termine</a>
-                        <a class="btn btn-ghost btn-lg" href="<?= url('/kontakt') ?>">Schreib mir</a>
+                        <a class="btn btn-ghost btn-lg" href="<?= url('/kontakt') ?>">Kontakt</a>
                     <?php else: ?>
-                        <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Schreib mir</a>
+                        <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Kontakt</a>
                     <?php endif; ?>
                 </div>
             </div>

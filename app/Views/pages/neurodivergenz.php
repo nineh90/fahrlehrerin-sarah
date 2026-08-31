@@ -61,7 +61,7 @@
                     Fahrausbildung, die anders funktioniert.
                 </p>
                 <div class="hero-actions">
-                    <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Schreib mir</a>
+                    <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Kontakt</a>
                 </div>
             </div>
 

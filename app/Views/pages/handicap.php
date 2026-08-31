@@ -32,8 +32,14 @@
 
          KNOPF STATT NUR TEXT: Die Seite hatte oben keinen einzigen Weg
          weiter – der erste Knopf kam nach sechs Abschnitten im Schlussband.
-         „Schreib mir" ist dieselbe Beschriftung wie im Hero auf
-         /ueber-mich. */ ?>
+
+         ER HEISST „KONTAKT" WIE DER PUNKT IM MENÜ (Nils, 31.08.2026: „es
+         sollte ja alles so heißen, wie im Menü"). Kurz stand „Schreib mir"
+         da, die Beschriftung aus dem Hero auf /ueber-mich – die ist am
+         selben Tag mitgewandert. Ein Knopf, der woanders hinzuführen
+         scheint als der gleichnamige Menüpunkt, kostet den Leser eine
+         Überlegung. Die Fließtext-Links bleiben, wie sie sind: „sprich mich
+         einfach an" mitten in einem Satz ist kein Knopf. */ ?>
 <section class="hero hero--photo hero--photo-auto">
     <div class="container hero-inner">
         <div class="duo duo--narrow-media">
@@ -71,7 +77,7 @@
                     uns gemeinsam schauen, was möglich ist.
                 </p>
                 <div class="hero-actions">
-                    <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Schreib mir</a>
+                    <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Kontakt</a>
                 </div>
             </div>
 

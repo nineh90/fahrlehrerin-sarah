@@ -9,8 +9,15 @@
  * überhaupt feststeht, ob es passt, macht aus einer Nachricht einen
  * Aufnahmebogen – genau der Eindruck, den diese Seite nirgends erwecken darf.
  *
- * Der Kasten „Was mir beim ersten Anruf hilft" steht deshalb unverändert
- * weiter oben: Er gilt dem ANRUF, und der bleibt der erste Weg.
+ * DIESE BEGRÜNDUNG STÜTZTE SICH AUF EINEN KASTEN, DEN ES NICHT MEHR GIBT:
+ * „Was mir beim ersten Anruf hilft" stand bis zum 31.08.2026 in der rechten
+ * Spalte und fragte genau die drei Dinge ab, die aus dem Formular
+ * herausgenommen wurden – nur eben für den Anruf. Mit SAR-106 ist die Spalte
+ * gegen die Kachel der Fahrschule getauscht.
+ *
+ * Am Formular ändert das nichts: Die Begründung oben gilt weiter, sie steht
+ * nur nicht mehr auf zwei Beinen. Wer die Liste vermisst, findet sie in der
+ * Versionsgeschichte.
  *
  * SCHRITT FÜR SCHRITT, ABER NICHT ANGEWIESEN AUF JAVASCRIPT. Alle drei
  * Schritte stehen im HTML; erst `initFormSteps()` in main.js blendet sie
@@ -115,46 +122,32 @@ $hatFehler = static function (array $felder) use ($errors): string {
         </div>
 
         <div>
-            <div class="notice" style="--card-accent: var(--c-blue); margin-bottom: 1.6rem;">
-                <?= icon('shield') ?>
-                <div>
-                    <h3>
-                        Anmelden musst du dich
-                        <?= $school !== '' ? 'bei der ' . e($school) : 'bei der Fahrschule' ?>
-                    </h3>
-                    <p>
-                        Ich bin angestellte Fahrlehrerin<?= $school !== '' ? ' bei der ' . school_link() : '' ?>.
-                        Vertrag, Anmeldung, Theorieunterricht und Preise laufen dort –
-                        mich fragst du, wenn es ums Fahren geht. Sag bei der Anmeldung
-                        einfach, dass du bei mir fahren möchtest.
-                    </p>
-                </div>
-            </div>
+            <?php /* HIER STAND BIS ZUM 31.08.2026 EIN ANDERER RECHTER TEIL
+                     (SAR-106, Nils): ein Hinweiskasten „Anmelden musst du dich
+                     bei der Fahrschule Sander" und darunter die Liste „Was mir
+                     beim ersten Anruf hilft" (worum es geht, wann du kannst, wo
+                     du wohnst).
 
-            <h2>Was mir beim ersten Anruf hilft</h2>
-            <ul class="facts">
-                <li>
-                    <?= icon('car') ?>
-                    <span>
-                        <strong>Worum es geht</strong>
-                        <span>Erster Führerschein, Klasse BE, Wiedereinstieg oder Ausbildung mit Handicap</span>
-                    </span>
-                </li>
-                <li>
-                    <?= icon('clock') ?>
-                    <span>
-                        <strong>Wann du kannst</strong>
-                        <span>Vormittags, nachmittags, nur samstags – dann sehe ich sofort, ob das passt</span>
-                    </span>
-                </li>
-                <li>
-                    <?= icon('pin') ?>
-                    <span>
-                        <strong>Wo du wohnst</strong>
-                        <span>Damit wir einen sinnvollen Treffpunkt finden</span>
-                    </span>
-                </li>
-            </ul>
+                     WAS DER TAUSCH AUFRÄUMT: Der Hinweiskasten sagte in eigenen
+                     Worten dasselbe wie die Kachel, die jetzt hier steht –
+                     angestellt, Anmeldung läuft über die Fahrschule, sag dort
+                     Bescheid. Zwei Formulierungen für eine Aussage, und beide
+                     mussten gepflegt werden. Jetzt steht sie einmal, und zwar
+                     als derselbe Baustein wie auf der Startseite.
+
+                     WAS DABEI WEGFÄLLT, gehört gesagt: Die Liste „Was mir beim
+                     ersten Anruf hilft" ist ersatzlos raus. Sie war nicht
+                     falsch, aber das Formular eine Sektion tiefer fragt genau
+                     dieselben drei Dinge ab – Anliegen, Erreichbarkeit,
+                     Nachricht – und die Schritte „Was danach passiert" stehen
+                     dort ebenfalls. Wer sie zurückholen will, findet sie in der
+                     Versionsgeschichte.
+
+                     DIE KACHEL KOMMT AUS EINEM BAUSTEIN und nicht aus einer
+                     Kopie: Sie steht gleichzeitig auf der Startseite, und zwei
+                     Kopien desselben Textes laufen früher oder später
+                     auseinander. Begründung in der Datei. */ ?>
+            <?php require APP_ROOT . '/app/Views/partials/sander-karte.php'; ?>
 
             <?php /* Der Absatz für alle, die schon bei ihr fahren – seit SAR-54
                      nur noch bei eingeschalteter Terminplanung (21.08.2026).

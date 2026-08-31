@@ -871,30 +871,7 @@ $schoolUrl = trim((string) config('school.url'));
                          FAHRSCHULE. Die Begründung steht unten am Bild, die Maße des
                          Rasters bei `.enroll--nur-fahrschule` in theme.css. */ ?>
                 <div class="enroll enroll--nur-fahrschule">
-                    <aside class="enroll-formal feature-card">
-                        <?php /* Steht VOR der Überschrift der Liste, nicht darunter:
-                                 erst warum, dann was. Wortlaut unverändert aus dem
-                                 Sektionskopf übernommen – nur der Ort ist neu. */ ?>
-                        <p class="enroll-formal-lead">
-                            Ich bin angestellte Fahrlehrerin, keine eigene Fahrschule. Die Anmeldung
-                            läuft deshalb nicht über diese Seite, sondern über
-                            <?= $school !== '' ? school_link() : 'meine Fahrschule' ?>. Sag dort einfach,
-                            dass du bei mir fahren möchtest.
-                        </p>
-                        <h3><?= $school !== '' ? e($school) : 'Die Fahrschule' ?> übernimmt</h3>
-                        <ul class="check-list">
-                            <li>Anmeldung und Ausbildungsvertrag</li>
-                            <li>Theorieunterricht und Lernmaterial</li>
-                            <li>Preise und Abrechnung</li>
-                            <li>Anmeldung zur Prüfung bei der Führerscheinstelle</li>
-                        </ul>
-
-                        <?php if ($school !== '' && $schoolUrl !== ''): ?>
-                            <a class="btn btn-ghost" href="<?= e($schoolUrl) ?>" target="_blank" rel="noopener">
-                                Zur <?= e($school) ?> &nearr;
-                            </a>
-                        <?php endif; ?>
-                    </aside>
+                    <?php require APP_ROOT . '/app/Views/partials/sander-karte.php'; ?>
                 </div>
             </div>
 

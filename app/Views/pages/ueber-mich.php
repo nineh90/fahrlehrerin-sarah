@@ -1,7 +1,8 @@
 <?php
-/* `$schoolUrl` stand hier bis zum 23.08.2026 (SAR-93). Die einzige Stelle, die
-   ihn brauchte, war der Knopf zur Fahrschule im Schlussband; der kommt jetzt
-   aus `school_cta_button()` und holt sich die Adresse selbst. */
+/* `$schoolUrl` stand hier bis zum 23.08.2026 (SAR-93) – gebraucht hat ihn nur
+   der Knopf zur Fahrschule im Schlussband. Das Schlussband selbst ist am
+   31.08.2026 mit SAR-101 gefallen; `$school` bleibt, weil ihn der Satz
+   „angestellte Fahrlehrerin bei der …" weiter unten braucht. */
 $school = (string) config('school.name');
 ?>
 
@@ -493,58 +494,17 @@ $school = (string) config('school.name');
     </div>
 </section>
 
-<section class="cta-band">
-    <div class="container">
-        <div class="cta-inner">
-            <div class="cta-text">
-                <h2>Klingt nach dir?</h2>
-                <?php /* ⚠️ ENTWURF, nicht Sarahs Wortlaut. SAR-93, 30.08.2026:
-                         Hier stand „Dann melde dich – am besten kurz
-                         telefonisch", der Knopf daneben führt aber zur
-                         Fahrschule. Zweite Fassung wie auf der Startseite, aus
-                         demselben Grund. */ ?>
-                <?php if (school_configured()): ?>
-                    <p>
-                        Dann geht es über die <?= e($school) ?> weiter: Dort meldest
-                        du dich an und sagst, dass du zu mir möchtest.
-                    </p>
-                <?php else: ?>
-                    <p>Dann melde dich – am besten kurz telefonisch, das geht am schnellsten.</p>
-                <?php endif; ?>
-            </div>
-            <?php /* NUR NOCH DER WEG ZUR FAHRSCHULE, seit dem 23.08.2026
-                     (Ticket SAR-93). Hier standen zwei Knöpfe nebeneinander,
-                     „Kontakt" als Hauptknopf und die Fahrschule daneben. Die
-                     Begründung dafür stand an dieser Stelle und ist mit dem
-                     Knopf hinfällig: Wer gerade über Sarah gelesen habe, wolle
-                     SIE fragen und nicht ein Sekretariat.
+<?php /* HIER STAND DAS SCHLUSSBAND „Klingt nach dir?" – entfernt am
+         31.08.2026 mit Ticket SAR-101, zusammen mit dem der Startseite und
+         aus demselben Grund (Sarah: „zu viel Sander"). Die ausführliche
+         Begründung steht in home.php an der Stelle, wo das dortige Band
+         stand.
 
-                     Sarahs Kontakt ist damit von dieser Seite nicht
-                     verschwunden: Er steht im Menü, im Fuß und als eigene
-                     Seite. Was hier wegfällt, ist der Aufruf am Ende der
-                     Seite.
+         Der Text war unser Entwurf, zuletzt am 30.08.2026 mit SAR-93 auf
+         die Fahrschule umgeschrieben. Damit ist SAR-93 auf dieser Seite
+         vollständig zurückgenommen.
 
-                     DER KNOPF BLEIBT `btn-ghost` und wird nicht zum
-                     Hauptknopf: Kevin (23.08.2026) mag die Farbe genau so in
-                     der Kachel. Das ist eine Ausnahme von dem, was sonst für
-                     einzelne Knöpfe gilt (siehe Hero, SAR-54: ein einzelner
-                     Knopf in der Nebenrolle sieht aus, als fehle der
-                     eigentliche) – hier ist es Absicht.
-
-                     OFFEN UND NICHT NEBENBEI ENTSCHIEDEN: Der Satz darüber
-                     sagt „melde dich, am besten kurz telefonisch", der Knopf
-                     führt jetzt auf die Website der Fahrschule. Beides
-                     zusammen passt nicht ganz; der Text gehört bei
-                     Gelegenheit nachgezogen.
-
-                     Aufschrift, Farbe und der Rückfall ohne konfigurierte
-                     Fahrschule stehen seit dem 23.08.2026 in
-                     `school_cta_button()` (helpers.php): Seitdem trägt jedes
-                     Schlussband der Website denselben Knopf, und der gehört an
-                     eine Stelle und nicht in fünf Views. */ ?>
-            <div class="cta-actions">
-                <?= school_cta_button() ?>
-            </div>
-        </div>
-    </div>
-</section>
+         Sarahs Kontakt bleibt im Menü, im Fuß und als eigene Seite – so wie
+         es schon in dem Kommentar stand, der mit dem Band gefallen ist. Neu
+         ist nur, dass die Seite jetzt mit ihrem letzten Inhaltsabschnitt
+         endet und niemanden mehr weiterschickt. */ ?>

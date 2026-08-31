@@ -972,53 +972,32 @@ $schoolUrl = trim((string) config('school.url'));
     </div>
 </section>
 
-<!-- Abschluss -->
-<section class="cta-band">
-    <div class="container">
-        <div class="cta-inner">
-            <div class="cta-text">
-                <h2>Du überlegst noch?</h2>
-                <?php /* ⚠️ ENTWURF, nicht Sarahs Wortlaut. SAR-93, 30.08.2026:
-                         Hier stand „Ruf mich an oder schreib mir", während der
-                         Knopf daneben längst zur Fahrschule führt – der Text
-                         versprach ein Gespräch, das der Knopf nicht anbietet.
+<?php /* HIER STAND DAS SCHLUSSBAND „Du überlegst noch?" – entfernt am
+         31.08.2026 mit Ticket SAR-101, auf Sarahs Wort: „Du überlegst
+         noch ?!? Wollten wir die nicht alle rausnehmen? Weil es sonst zu
+         viel Sander ist."
 
-                         DIE ZWEITE FASSUNG IST KEIN BEIWERK: Ohne konfigurierte
-                         Fahrschule macht `school_cta_button()` einen
-                         Kontakt-Knopf daraus, und dann stimmt der alte Satz
-                         wieder genau. Beide lesen dieselbe Bedingung über
-                         `school_configured()`, damit sie nicht ein zweites Mal
-                         auseinanderlaufen. */ ?>
-                <?php if (school_configured()): ?>
-                    <p>
-                        Anmeldung, Vertrag und Theorie laufen über die
-                        <?= e($school) ?>. Sag dort einfach, dass du zu mir möchtest –
-                        alles Weitere klären wir in deiner ersten Stunde.
-                    </p>
-                <?php else: ?>
-                    <p>
-                        Ruf mich an oder schreib mir. Ich sage dir ehrlich, ob ich die
-                        Richtige für dich bin – und wenn nicht, wen du fragen solltest.
-                    </p>
-                <?php endif; ?>
-            </div>
-            <?php /* NUR NOCH DER WEG ZUR FAHRSCHULE, seit dem 23.08.2026
-                     (Ticket SAR-93). Hier stand „Kontakt". Der Knopf kommt
-                     jetzt aus `school_cta_button()`, damit alle fünf
-                     Schlussbänder der Website denselben tragen; die
-                     Begründung steht dort.
+         DAMIT IST SAR-93 IN BEIDEN DURCHGÄNGEN ZURÜCKGENOMMEN: am
+         23.08.2026 hatte es den Sander-Knopf in jedes Schlussband gesetzt,
+         am 30.08.2026 den Text daneben darauf nachgezogen („Anmeldung,
+         Vertrag und Theorie laufen über die Fahrschule Sander"). Genau
+         diese zweite Fassung hat das Fass zum Überlaufen gebracht – vier
+         Seitenenden, die alle zur Fahrschule schicken.
 
-                     DER TEXT DANEBEN SAGT WEITER „Ruf mich an oder schreib
-                     mir", und der Knopf führt zur Fahrschule. Das gehört bei
-                     Gelegenheit nachgezogen, es ist auf jeder der fünf Seiten
-                     dieselbe offene Frage. */ ?>
-            <?= school_cta_button() ?>
-        </div>
-    </div>
-</section>
+         Der Text hier war ohnehin unser Entwurf, kein Wort von Sarah geht
+         verloren. Wo IHRE Schlussworte stehen (/fahren-mit-handicap und
+         /neurodivergenz), bleibt der Absatz stehen und nur der Knopf ist
+         gefallen.
 
-<?php /* Die Wegbegleiter ganz zum Schluss – unter dem Abschluss-CTA und damit
-         als Letztes vor dem Fuß. Begründung für Ort und Aufbau steht im
-         Partial; hier liegt nur die Entscheidung, dass die Reihe auf die
-         Startseite gehört und sonst nirgendwohin. */ ?>
+         Der Weg zur Fahrschule ist von der Startseite nicht verschwunden:
+         Hero-Knopf, die Sander-Sektion weiter oben, die Kachel bei den
+         Wegbegleitern und der Fuß. Was wegfällt, ist der Aufruf am Ende. */ ?>
+
+<?php /* Die Wegbegleiter ganz zum Schluss und damit als Letztes vor dem
+         Fuß. Begründung für Ort und Aufbau steht im Partial; hier liegt nur
+         die Entscheidung, dass die Reihe auf die Startseite gehört und sonst
+         nirgendwohin.
+
+         Bis SAR-101 (31.08.2026) stand darüber noch das Schlussband; seit es
+         weg ist, ist diese Reihe der Abschluss der Seite. */ ?>
 <?php require APP_ROOT . '/app/Views/partials/wegbegleiter.php'; ?>

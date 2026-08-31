@@ -615,8 +615,11 @@
                      erst noch etwas herausfinden zu müssen. Genau das ist der
                      Grund, warum jemand hier nicht anruft.
 
-                     Nur die Aufschrift des Knopfes ist von uns und bleibt, wie
-                     sie ist – dieselbe wie auf /neurodivergenz. */ ?>
+                     SEIT SAR-101 (31.08.2026) STEHT IHR TEXT HIER ALLEIN.
+                     Der Knopf daneben ist gefallen, also ist auch die
+                     Aufschrift weg – das Einzige, was an diesem Band noch von
+                     uns war. Begründung eine Ebene tiefer, wo der Knopf
+                     stand. */ ?>
             <div class="cta-text">
                 <h2>Du weißt noch nicht, ob das bei dir möglich ist?</h2>
                 <p>
@@ -627,18 +630,22 @@
                     Anfang.
                 </p>
             </div>
-            <?php /* SEIT SAR-93 (23.08.2026) DER WEG ZUR FAHRSCHULE statt
-                     „Lass uns reden". Der Knopf kommt aus
-                     `school_cta_button()`, Begründung dort. Der Satz im
-                     Kommentar oben, die Aufschrift sei von uns und bleibe wie
-                     sie ist, gilt damit nicht mehr.
+            <?php /* HIER STAND DER SANDER-KNOPF – gefallen am 31.08.2026 mit
+                     Ticket SAR-101 (Sarah: „zu viel Sander"). Damit ist auch
+                     SAR-93 hier zurückgenommen, das ihn am 23.08.2026
+                     anstelle von „Lass uns reden" gesetzt hatte.
 
-                     HIER STEHT DIE FRAGE AM SCHÄRFSTEN: Sarahs Text daneben
-                     sagt „Melde dich einfach bei mir und erzähl mir kurz,
-                     worum es bei dir geht", der Knopf führt auf die Website
-                     der Fahrschule. Ihr Wortlaut bleibt unangetastet, und wer
-                     das auflösen will, fragt sie. */ ?>
-            <?= school_cta_button() ?>
+                     DER WIDERSPRUCH LÖST SICH DAMIT VON SELBST, der zuletzt
+                     an dieser Stelle als offen vermerkt war: Sarahs Text
+                     daneben sagt „Melde dich einfach bei mir und erzähl mir
+                     kurz, worum es bei dir geht", der Knopf führte aber zur
+                     Fahrschule. Jetzt steht ihre Einladung allein da, und sie
+                     meint wieder, was sie sagt.
+
+                     IHR WORTLAUT IST UNBERÜHRT. Weggefallen ist nur der
+                     Knopf – deshalb bleibt das Band selbst stehen, anders als
+                     auf der Startseite und /ueber-mich, wo der Text unser
+                     Entwurf war. */ ?>
         </div>
     </div>
 </section>

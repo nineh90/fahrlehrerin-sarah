@@ -597,6 +597,24 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
    zwei Flex-Kinder von .cta-inner (space-between) – die Knöpfe würden dann
    auseinandergerissen, einer links am Text, einer rechts am Rand. */
 .cta-actions { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: .8rem; }
+/* EIN SCHLUSSBAND OHNE KNOPF – seit SAR-101 (31.08.2026) der Normalfall auf
+   /fahren-mit-handicap und /neurodivergenz: Dort stehen Sarahs Schlussworte
+   allein, der Weg zur Fahrschule ist daneben weggefallen.
+
+   `.cta-inner` ist ein Flex mit `space-between`, und `.cta-text` hört bei
+   640 px auf. Bleibt der Knopf weg, klebt der Text links und die halbe Karte
+   steht leer – es sieht aus, als fehle etwas. Der Block rückt deshalb in die
+   Mitte.
+
+   ZENTRIERT WIRD DER BLOCK, NICHT DER TEXT: Das Band auf /fahren-mit-handicap
+   trägt fünf Sätze am Stück, und mittig gesetzter Fließtext ist auf dieser
+   Länge kaum lesbar. Das Zeilenmaß von 640 px bleibt aus demselben Grund
+   stehen – über die ganze Kartenbreite gezogen wären es zu lange Zeilen
+   (dieselbe Überlegung wie in SAR-100).
+
+   `:only-child` statt einer Klasse im Template: So greift die Regel von
+   selbst, sobald ein Knopf zurückkommt, und keine View muss etwas dafür tun. */
+.cta-inner > .cta-text:only-child { margin-inline: auto; }
 .cta-band h2 { margin: 0 0 .4rem; }
 .cta-band p { margin: 0; color: var(--text-soft); }
 

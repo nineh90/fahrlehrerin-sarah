@@ -465,6 +465,10 @@ function school_link(): string
  * Genau das war der Fehler, der repariert wird – der Knopf führte zur
  * Fahrschule, der Text sagte weiter „ruf mich an". Prüften beide auf eigene
  * Faust, liefen sie beim nächsten Mal wieder auseinander.
+ *
+ * DIE SCHLUSSBÄNDER SIND SEIT SAR-101 (31.08.2026) WEG, der ursprüngliche
+ * Anlass also auch. Der Helfer bleibt trotzdem gebraucht: Die Sander-Kachel
+ * (partials/sander-karte.php) und der Fuß fragen ihn.
  */
 function school_configured(): bool
 {
@@ -474,6 +478,20 @@ function school_configured(): bool
     return $name !== '' && $url !== '' && filter_var($url, FILTER_VALIDATE_URL) !== false;
 }
 
+/**
+ * ⚠️ DERZEIT VON KEINER VIEW AUFGERUFEN – seit SAR-101 (31.08.2026).
+ *
+ * Der Knopf trug bis dahin jedes Schlussband der Website. Sarah hat die
+ * Bänder abgeräumt („zu viel Sander"): Auf der Startseite und /ueber-mich
+ * ist das ganze Band gefallen, auf /fahren-mit-handicap und /neurodivergenz
+ * steht ihr Text jetzt ohne Knopf.
+ *
+ * NICHT GELÖSCHT, sondern aufgehoben – dieselbe Entscheidung wie bei
+ * `nd-credit.php` und `.site-note`: Der Rückweg ist damit ein `<?= … ?>` in
+ * der View und sonst nichts. Wer ihn wieder einsetzt, dreht auch die Regel
+ * `.cta-inner > .cta-text:only-child` in nd-base.css zurück und prüft auf der
+ * Startseite den Wechsel der Abschnittsflächen (partials/wegbegleiter.php).
+ */
 function school_cta_button(): string
 {
     $name = trim((string) config('school.name'));

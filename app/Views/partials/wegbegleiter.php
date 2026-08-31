@@ -30,7 +30,18 @@
 $wegbegleiter = Partners::all();
 ?>
 <?php if ($wegbegleiter !== []): ?>
-<section class="section section--alt" id="wegbegleiter">
+<?php /* KEIN `section--alt` MEHR, seit SAR-101 (31.08.2026). Bis dahin lag
+         zwischen dieser Reihe und dem Abschnitt darüber das Schlussband, und
+         das ist durchsichtig – es trug keine eigene Fläche, sondern trennte
+         die beiden abgesetzten Abschnitte optisch voneinander. Mit dem
+         Schlussband ist diese Trennung weggefallen: Zwei `section--alt`
+         stießen direkt aneinander, liefen als ein einziger großer Block
+         zusammen und legten ihre Trennlinien in der Mitte doppelt übereinander.
+
+         Die Reihe steht damit wieder auf dem normalen Grund, und der Wechsel
+         der Startseite stimmt: hell – abgesetzt – hell – abgesetzt – hell.
+         Wer das Schlussband je zurückholt, dreht auch das hier zurück. */ ?>
+<section class="section" id="wegbegleiter">
     <div class="container">
         <div class="section-head">
             <div class="section-head-text">

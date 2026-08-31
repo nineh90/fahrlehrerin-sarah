@@ -288,8 +288,9 @@
          Satz, den wir geschrieben haben („Genau dafür ist das erste Telefonat
          da"). Hier war er nicht nötig – ihr Schluss ist der bessere.
 
-         Nur die Aufschrift des Knopfes ist von uns, und die ist dieselbe wie
-         auf /fahren-mit-handicap. */ ?>
+         SEIT SAR-101 (31.08.2026) GILT DAS OHNE EINSCHRÄNKUNG: Bis dahin
+         war die Aufschrift des Knopfes die eine Ausnahme. Der Knopf ist
+         gefallen, damit ist auf dieser Seite kein Wort mehr von uns. */ ?>
 <section class="cta-band">
     <div class="container">
         <div class="cta-inner">
@@ -297,16 +298,15 @@
                 <h2>Du musst nicht lernen wie alle anderen.</h2>
                 <p>Du musst lernen, sicher Auto zu fahren.</p>
             </div>
-            <?php /* SEIT SAR-93 (23.08.2026) DER WEG ZUR FAHRSCHULE statt
-                     „Lass uns reden". Der Knopf kommt aus
-                     `school_cta_button()`, Begründung dort.
+            <?php /* HIER STAND DER SANDER-KNOPF – gefallen am 31.08.2026 mit
+                     Ticket SAR-101 (Sarah: „zu viel Sander"). Damit ist auch
+                     SAR-93 hier zurückgenommen, das ihn am 23.08.2026
+                     anstelle von „Lass uns reden" gesetzt hatte.
 
-                     DIE AUFSCHRIFT WAR DAS EINZIGE AUF DIESER SEITE, DAS NICHT
-                     VON SARAH IST – der Hinweis eine Zeile höher meinte genau
-                     sie. Jetzt steht dort der Name der Fahrschule aus der
-                     Konfiguration. Ihr Text darüber ist unberührt, und er
-                     endet weiter auf einer Einladung an SIE. */ ?>
-            <?= school_cta_button() ?>
+                     DAMIT STIMMT DER HINWEIS WEITER OBEN WIEDER WÖRTLICH:
+                     Auf dieser Seite steht jetzt tatsächlich kein einziges
+                     Wort von uns. Die Knopfaufschrift war die letzte
+                     Ausnahme, und die ist mit dem Knopf weg. */ ?>
         </div>
     </div>
 </section>

@@ -1198,6 +1198,19 @@
    nimmt ihn wieder weg. */
 .enroll--nur-fahrschule { grid-template-columns: minmax(0, 520px); }
 
+/* Der Spot der Fahrschule in der rechten Spalte des Bandes (SAR-100).
+   Die Spalte ist `auto`, die Breite kommt also von hier. 440 px stehen im
+   Verhältnis zur Kachel daneben (520 px): Das Video ist der Beleg, die Kachel
+   die Sache – sie darf breiter bleiben. `min()` statt fester Breite, damit es
+   auf schmalen Fenstern nicht über die Spalte hinausragt.
+
+   `max-width: none` HEBT EINE REGEL AUS nd-base.css AUF, und das ist der
+   eigentliche Grund, warum diese Zeilen nötig sind: `.video-frame` ist dort
+   auf 300 px begrenzt. Der Wert ist für die hochkanten Kanal-Videos gemacht
+   (576 × 1024, angezeigt auf 300 px). Der Spot ist querformatig – auf 300 px
+   Breite wäre er 169 px hoch und damit nicht mehr anzusehen. */
+.enroll-video { width: min(440px, 100%); max-width: none; margin: 0; }
+
 /* --- Das Band um den ganzen Abschnitt  ·  .enroll-band          (SAR-91) ---
    Links alles, was gelesen wird (Überschrift, Einordnungssatz, Kachel), rechts
    das Logo der Fahrschule.
@@ -1332,6 +1345,10 @@
     .enroll { grid-template-columns: 1fr; }
     .enroll-band { grid-template-columns: 1fr; gap: 2rem; }
     .enroll-logo { justify-self: center; width: min(240px, 70%); }
+    /* Gestapelt steht der Spot mittig und nutzt die Breite – anders als das
+       Logo, das hier klein blieb. Ein Video, das man ansehen soll, ist auf
+       240 px nicht mehr zu gebrauchen. */
+    .enroll-video { justify-self: center; width: 100%; max-width: none; }
 }
 
 /* =========================================================================

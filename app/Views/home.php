@@ -824,21 +824,23 @@ $schoolUrl = trim((string) config('school.url'));
                  und lässt das Band, wie es ist. */ ?>
         <div class="enroll-band">
             <div class="enroll-band-main">
-                <?php /* Der Einordnungssatz steht IM section-head und nicht als eigener
-                         Absatz darunter. Vorher zog ihn ein `margin-top:-1.4rem` wieder
-                         an die Überschrift heran – gegen den Abstand, den `.section-head`
-                         selbst mitbringt. Zwei Regeln, die sich gegenseitig aufheben,
-                         sind eine Regel zu viel: Im Kopf gehört er zur Überschrift und
-                         bekommt deren Einzug (die 16 px des Regenbogenbalkens). */ ?>
+                <?php /* DER EINORDNUNGSSATZ IST IN DIE KACHEL GEZOGEN (SAR-100,
+                         31.08.2026, Nils). Er stand hier als `.section-lead` im
+                         Sektionskopf.
+
+                         Der Grund ist inhaltlich: Der Satz erklärt, WARUM die
+                         Fahrschule überhaupt vorkommt – und die Kachel darunter
+                         listet auf, was sie übernimmt. Getrennt las sich das wie
+                         zwei Aussagen; zusammen ist es eine, die mit der
+                         Erklärung anfängt und mit dem Weg dorthin endet.
+
+                         Der Sektionskopf trägt jetzt nur die Überschrift. Das ist
+                         kein Mangel: Die Überschrift ist eine Frage („Wie du bei
+                         mir Fahrschüler:in wirst"), und die Antwort steht
+                         vollständig in der Kachel. */ ?>
                 <div class="section-head">
                     <div class="section-head-text">
                         <h2>Wie du bei mir Fahrschüler:in wirst</h2>
-                        <p class="section-lead">
-                            Ich bin angestellte Fahrlehrerin, keine eigene Fahrschule. Die Anmeldung
-                            läuft deshalb nicht über diese Seite, sondern über
-                            <?= $school !== '' ? school_link() : 'meine Fahrschule' ?>. Sag dort einfach,
-                            dass du bei mir fahren möchtest.
-                        </p>
                     </div>
                 </div>
 
@@ -870,6 +872,15 @@ $schoolUrl = trim((string) config('school.url'));
                          Rasters bei `.enroll--nur-fahrschule` in theme.css. */ ?>
                 <div class="enroll enroll--nur-fahrschule">
                     <aside class="enroll-formal feature-card">
+                        <?php /* Steht VOR der Überschrift der Liste, nicht darunter:
+                                 erst warum, dann was. Wortlaut unverändert aus dem
+                                 Sektionskopf übernommen – nur der Ort ist neu. */ ?>
+                        <p class="enroll-formal-lead">
+                            Ich bin angestellte Fahrlehrerin, keine eigene Fahrschule. Die Anmeldung
+                            läuft deshalb nicht über diese Seite, sondern über
+                            <?= $school !== '' ? school_link() : 'meine Fahrschule' ?>. Sag dort einfach,
+                            dass du bei mir fahren möchtest.
+                        </p>
                         <h3><?= $school !== '' ? e($school) : 'Die Fahrschule' ?> übernimmt</h3>
                         <ul class="check-list">
                             <li>Anmeldung und Ausbildungsvertrag</li>
@@ -933,12 +944,52 @@ $schoolUrl = trim((string) config('school.url'));
                      Im dunklen und im kontrastreichen Modus bekommt das Logo
                      eine helle Platte (a11y.css). Es schreibt „FAHRSCHULE"
                      in Schwarz, das verschwände sonst. */ ?>
-            <?php $schoolLogo = Partners::find('fahrschule-sander'); ?>
-            <?php if ($school !== '' && $schoolLogo !== null): ?>
-                <img class="enroll-logo" src="<?= asset('img/' . $schoolLogo['logo']) ?>" alt=""
-                     width="<?= (int) $schoolLogo['logo_width'] ?>"
-                     height="<?= (int) $schoolLogo['logo_height'] ?>"
-                     loading="lazy" decoding="async">
+            <?php /* HIER STAND DAS LOGO DER FAHRSCHULE, bis zum 31.08.2026
+                     (SAR-91 → SAR-100). Jetzt steht dort ihr Spot.
+
+                     ER ERSETZT DAS LOGO UND STEHT NICHT DANEBEN: Der Spot trägt
+                     dasselbe Logo im eigenen Bild, oben links und über die ganze
+                     Länge. Beides nebeneinander wäre derselbe Schriftzug zweimal
+                     auf zwei Handbreit – dazu der Name in der Überschrift der
+                     Kachel und auf dem Knopf darunter. Die Aufgabe des Logos war
+                     laut SAR-91, die leere halbe Sektionsbreite mit dem zu
+                     füllen, „um wen es im Text geht". Das leistet der Spot
+                     besser: Er zeigt die Fahrschule UND Sarah.
+
+                     WARUM AUSGERECHNET HIER UND NICHT IM KANAL-ABSCHNITT: Dort
+                     steht „Kein Hochglanz, keine Werbung – einfach das, was ich
+                     sowieso den ganzen Tag erkläre." Ein produzierter Werbespot
+                     danebengestellt widerspricht dem Satz einen Zentimeter
+                     weiter. Hier ist er dagegen am Platz: Es ist der einzige
+                     Abschnitt, dessen Thema die Fahrschule ist, der Spot endet
+                     mit deren Adresse, und seine Bauchbinde sagt „Führerschein
+                     mit Handicap? – Fahrstunden bei Sarah". Genau die
+                     Schnittmenge, die diese Sektion erklärt.
+
+                     Kein autoplay, Ton nur auf Wunsch, `preload="metadata"` –
+                     wie bei den anderen beiden Videos der Seite. */ ?>
+            <?php if ($school !== ''): ?>
+                <figure class="video-frame enroll-video">
+                    <video controls playsinline preload="metadata"
+                           poster="<?= asset('img/fahrschule-sander-spot-poster.jpg') ?>"
+                           width="1024" height="576">
+                        <source src="<?= asset('video/fahrschule-sander-spot.mp4') ?>" type="video/mp4">
+                        Dein Browser kann dieses Video nicht abspielen.
+                    </video>
+                    <?php /* ⚠️ PLATZHALTER: Das Kino fehlt noch (Nils, 31.08.2026 –
+                             „weiß nicht genau, in welchem Kino das läuft").
+                             Sobald der Name da ist, gehört er in diesen Satz.
+                             Bis dahin nennt er nur Monat und Stadt, und beides
+                             ist bestätigt.
+
+                             Die Bildunterschrift ist hier keine Erklärung des
+                             Bildes, sondern eine Nachricht – deshalb steht sie
+                             der Regel „keine Bildunterschriften" nicht entgegen,
+                             genau wie bei den anderen beiden Videos. */ ?>
+                    <figcaption>
+                        Der Spot meiner Fahrschule – ab September im Kino in Hamburg
+                    </figcaption>
+                </figure>
             <?php endif; ?>
         </div>
     </div>

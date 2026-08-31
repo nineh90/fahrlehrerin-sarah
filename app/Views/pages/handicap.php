@@ -188,11 +188,53 @@
                          Einordnung jetzt im alt-Text: Auf dem Bild liegen Teile
                          herum, und ohne den Hinweis liest sich das als Pfusch
                          statt als Zwischenstand. */ ?>
-                <figure class="photo photo--right">
-                    <img src="<?= asset('img/handicap-handbedienung.jpg') ?>"
-                         alt="Fußraum während des Umbaus auf Handbedienung: ein grün lackierter Hebel am Boden, verbunden über grüne Gestänge, daneben eine grüne Abdeckung vor den Pedalen"
-                         width="1200" height="1484" loading="lazy" decoding="async">
-                </figure>
+                <?php /* ZWEITES BILD SEIT DEM 31.08.2026: das Fahrschulauto.
+                         `.photo-pair` ist dieselbe Komponente, die auf
+                         /neurodivergenz zwei Fotos hält (SAR-110) – deshalb war
+                         hier kein CSS zu schreiben.
+
+                         WARUM DAS AUTO AUSGERECHNET NEBEN DIE HANDBEDIENUNG
+                         GEHÖRT: Die Seite zeigte bis dahin ausschließlich
+                         Nahaufnahmen von Fußräumen – Linksgas im Abschnitt
+                         darüber, Handbedienung hier. Lauter Teile, nie das
+                         Ganze. Wer sich fragt, ob es das Auto überhaupt gibt und
+                         ob er da hineindarf, fand nur Pedale. Das Detail und das
+                         Fahrzeug stehen jetzt nebeneinander: hier der Umbau,
+                         daneben das Auto, in dem er steckt.
+
+                         DER ZUSCHNITT IST ABSICHT UND NICHT NUR EINE
+                         GRÖSSENFRAGE. Auf dem Original steht „FAHRSCHULE
+                         SANDER" quer über der Tür, dazu fahrschule-sander.de,
+                         das Kennzeichen, das VW-Logo, Facebook- und
+                         Instagram-Zeichen und zwei fremde Sponsorenlogos. Nichts
+                         davon ist im Ausschnitt: Übrig sind das orangene
+                         Rollstuhlzeichen, der grüne Streifen und ein Stück Dach.
+                         Zwei Gründe dafür – das Kennzeichen ist auf dem Original
+                         scharf lesbar, und Sarah hat am selben Tag „zu viel
+                         Sander" gesagt (SAR-101). Ein ungeschnittenes Foto hätte
+                         ihr genau das zurückgegeben.
+
+                         Damit ist es kein Foto des Betriebs, sondern der Beleg
+                         für ihren Schwerpunkt: ein Auto, das dafür gekennzeichnet
+                         ist. Wer den vollen Wagen doch zeigen will, findet die
+                         Vorlage in assets-quellen/ – aber dann bitte mit dem
+                         Kennzeichen im Blick.
+
+                         Die Reihenfolge im Markup ist die des Paares:
+                         Hochformat zuerst, Querformat versetzt darunter. */ ?>
+                <div class="photo-pair">
+                    <figure class="photo photo--right">
+                        <img src="<?= asset('img/handicap-handbedienung.jpg') ?>"
+                             alt="Fußraum während des Umbaus auf Handbedienung: ein grün lackierter Hebel am Boden, verbunden über grüne Gestänge, daneben eine grüne Abdeckung vor den Pedalen"
+                             width="1200" height="1484" loading="lazy" decoding="async">
+                    </figure>
+                    <figure class="photo">
+                        <img src="<?= asset('img/fahrschulauto-handicap.jpg') ?>"
+                             alt="Heck des weißen Fahrschulautos mit grünem Streifen; auf der
+                                  hinteren Scheibe klebt ein orangefarbenes Rollstuhlzeichen"
+                             width="900" height="665" loading="lazy" decoding="async">
+                    </figure>
+                </div>
             </div>
 
             <div class="duo-text">

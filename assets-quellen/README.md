@@ -92,7 +92,7 @@ voller Auflösung. Das Repo ist öffentlich.
 |---|---|---|
 | `fahrlehrerin_sarah_und_kollegin.jpeg` (1536×2048) | `sarah-und-kollegin.jpg` (900×1200) | `/neurodivergenz`, „Du musst dich bei mir nicht verstellen" |
 | `fahrlehrerin_sarah_fahrstunde_handicap.jpeg` (2048×1536) | `sarah-fahrstunde-handicap.jpg` (900×675) | dieselbe Sektion, darunter versetzt |
-| `fahrlehrerin_sarah_fahrschulauto_sander_handicap_ausbildung.jpeg` | – | **noch nirgends**, kommt später (Nils, 31.08.2026: „merke dir das Auto für später") |
+| `fahrlehrerin_sarah_fahrschulauto_sander_handicap_ausbildung.jpeg` (1600×1200) | `fahrschulauto-handicap.jpg` (900×665) | `/fahren-mit-handicap`, „Welche Lösung passt zu dir?", neben der Handbedienung |
 
 Gebaut mit dem Standardbefehl, nur auf 900 px statt 1400 px – breiter werden die
 beiden nirgends angezeigt (im Paar rund 420 bzw. 360 px, also doppelte
@@ -112,3 +112,30 @@ keiner, aber beim nächsten Telefonfoto kann es anders sein.
 **Offen und nicht von uns zu entscheiden:** Auf beiden Bildern sind Dritte
 erkennbar. Dass sie der Veröffentlichung zugestimmt haben, setzen wir voraus, weil
 Sarah die Fotos zu genau diesem Zweck geliefert hat – geprüft haben wir es nicht.
+
+### Der Zuschnitt des Autos ist eine inhaltliche Entscheidung
+
+Auf dem Original steht „FAHRSCHULE SANDER" quer über der Tür, dazu
+`fahrschule-sander.de`, das **scharf lesbare Kennzeichen**, das VW-Logo,
+Facebook- und Instagram-Zeichen und zwei fremde Sponsorenlogos (clever fit,
+Autohaus Czychy). Der Ausschnitt lässt all das weg. Übrig bleiben das orangene
+Rollstuhlzeichen, der grüne Streifen und ein Stück Dach – der Beleg für Sarahs
+Schwerpunkt, nicht ein Foto ihres Arbeitgebers. Am selben Tag hatte sie „zu
+viel Sander" gemeldet (SAR-101); ein ungeschnittenes Foto hätte ihr genau das
+zurückgegeben.
+
+```bash
+magick assets-quellen/fahrlehrerin_sarah_fahrschulauto_sander_handicap_ausbildung.jpeg \
+  -crop 650x480+350+180 +repage -auto-orient -resize 900x \
+  -strip -interlace Plane -quality 78 public/assets/img/fahrschulauto-handicap.jpg
+```
+
+Zwei weitere Zuschnitte waren zur Auswahl gebaut und sind verworfen: einer nur
+aufs Heck (vom Rücklicht erschlagen) und einer mit **beiden** Rollstuhlzeichen
+– inhaltlich stärker, aber bei rund 360 px Anzeigebreite wird jedes der beiden
+zu klein. Wer den Wagen doch in voller Länge zeigen will, baut neu – dann aber
+mit dem Kennzeichen im Blick.
+
+**Nicht zu verwechseln mit `fahrschulauto.webp`**: Das ist der ältere
+Freisteller aus einer Folie des Theoriematerials, weiterhin nirgends
+eingebunden.

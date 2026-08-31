@@ -139,3 +139,33 @@ mit dem Kennzeichen im Blick.
 **Nicht zu verwechseln mit `fahrschulauto.webp`**: Das ist der ältere
 Freisteller aus einer Folie des Theoriematerials, weiterhin nirgends
 eingebunden.
+## Die Pedalverlängerung (31.08.2026, SAR-112)
+
+`fahrlehrerin_sarah_umbau_fahrschulauto_kleinwuchs.jpeg` (1536×2048) – der Fußraum
+des Fahrschulautos mit der Pedalverlängerung, also dem Umbau, um den es bei
+Kleinwuchs geht. Ausgeliefert als `handicap-pedalverlaengerung.jpg` (900×1200) auf
+`/fahren-mit-handicap`, im Abschnitt „Autofahren mit angepasster Technik" neben dem
+Linksgas-Foto.
+
+Kam wie die drei vom selben Tag direkt in `public/assets/img/` an und ist von dort
+hierher verschoben worden.
+
+**Diese Vorlage bleibt im Repo**, anders als die drei aus SAR-110. Der Grund für
+deren Sperre trifft hier nicht zu: kein Mensch im Bild, kein Kennzeichen, keine
+Beschriftung der Fahrschule – nur Technik, wie bei `handicap-handgas-umbau.jpeg`,
+das aus demselben Grund im Repo liegt. EXIF war schon keines drin (nachgesehen,
+auch kein Standort); `-strip` nimmt trotzdem mit, was käme.
+
+```bash
+magick assets-quellen/fahrlehrerin_sarah_umbau_fahrschulauto_kleinwuchs.jpeg -auto-orient \
+  -crop 1230x1640+230+330 +repage -resize 900x \
+  -strip -interlace Plane -quality 76 public/assets/img/handicap-pedalverlaengerung.jpg
+```
+
+Der Zuschnitt nimmt unten gut ein Drittel leere Fußmatte weg und links die dunkle
+Kante. Angezeigt wird das Bild mit rund 420 px Breite – ungeschnitten wären die
+Pedale darin verloren. Ein Rest Fußmatte bleibt trotzdem stehen: Ohne sie ist nicht
+zu erkennen, dass man in einen Fußraum sieht. Zwei weitere Zuschnitte waren zur
+Auswahl gebaut und sind verworfen: ein weiterer, auf dem die Pedale bei 420 px zu
+klein werden, und ein engerer, auf dem vom grünen Stab nur ein Stummel bleibt –
+und der ist der einzige Farbpunkt der Aufnahme.

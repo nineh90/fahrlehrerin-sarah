@@ -697,8 +697,53 @@
             // `is-in` und verliert es im selben Moment wieder durch den ersten
             // Aufruf des Beobachters. Deshalb steht in beiden Zeilen
             // REVEAL_LINE und keine zweite Zahl.
-            if (el.getBoundingClientRect().top < viewport * REVEAL_LINE) {
-                el.classList.add('is-in');
+            //
+            // ZWEITE BEDINGUNG SEIT SAR-112 (31.08.2026): Der Block muss auch
+            // UNTEN ins Bild passen. Vorher reichte seine Oberkante – und ein
+            // hoher Block, der oben hereinragt und unten weit unter den
+            // Bildschirmrand hinausreicht, galt damit als „schon gesehen". Er
+            // stand fertig da, und der Teil, den man erst beim Scrollen zu
+            // Gesicht bekam, kam ohne die Einblendung herein, die auf dem Rest
+            // der Seite jeder Block hat. Aufgefallen an der Bildspalte auf
+            // /fahren-mit-handicap, als sie durch das zweite Foto 757 px hoch
+            // wurde (Nils, 31.08.2026: „der fade effekt beim scrollen fehlt
+            // auf der section").
+            //
+            // Das Zucken von oben bleibt abgefangen: Dort geht es um Blöcke,
+            // die beim Laden GANZ dastehen, und genau die sind weiter ohne
+            // Auftritt sofort da.
+            //
+            // GEMESSEN WIRD DIE REIHE, NICHT DIE SPALTE. Eine `.duo` hat zwei
+            // Kinder in dieser Liste, Bild und Text, und die sind verschieden
+            // hoch – der kurze Text passt ins Bild, die hohe Bildspalte nicht.
+            // Jede für sich gemessen, blendete die eine Spalte ein, während die
+            // andere schon dastünde: derselbe Abschnitt, zwei Auftritte.
+            var box = el.matches('.duo-text, .duo-media') && el.closest('.duo')
+                ? el.closest('.duo').getBoundingClientRect()
+                : el.getBoundingClientRect();
+
+            if (box.top < viewport * REVEAL_LINE) {
+                if (box.bottom <= viewport) {
+                    el.classList.add('is-in');
+                } else {
+                    // DER TEILWEISE SICHTBARE BLOCK WIRD HIER EINGEBLENDET UND
+                    // NICHT DEM BEOBACHTER ÜBERLASSEN. Nachgemessen am
+                    // 31.08.2026: Überlässt man ihn dem Beobachter, bleibt sein
+                    // erster Aufruf beim Laden aus – der Abschnitt steht dann
+                    // auf `opacity: 0` und taucht erst beim ersten Scrollen
+                    // auf. Wer nicht scrollt, sieht eine leere Fläche. Genau
+                    // deshalb hat diese Stelle überhaupt eine eigene Prüfung:
+                    // Sie ist nicht nur eine Abkürzung, sie ist das Netz.
+                    //
+                    // Zwei Bilder Abstand, nicht eines: Im ersten zeichnet der
+                    // Browser den Anfangszustand (`.reveal`, also opacity 0),
+                    // erst danach ist `is-in` ein Übergang und kein Sprung.
+                    requestAnimationFrame(function () {
+                        requestAnimationFrame(function () {
+                            el.classList.add('is-in');
+                        });
+                    });
+                }
             }
         });
 

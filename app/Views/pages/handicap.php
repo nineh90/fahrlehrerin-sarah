@@ -36,13 +36,55 @@
     <div class="container">
         <div class="duo">
             <div class="duo-media photo-wrap">
-                <figure class="photo">
-                    <img src="<?= asset('img/handicap-linksgas.jpg') ?>"
-                         alt="Fußraum eines Fahrschulautos mit Linksgas-Umbau: links neben der
-                              Bremse sitzt ein zusätzliches Gaspedal, das über ein grünes
-                              Gestänge mit dem originalen Gaspedal verbunden ist"
-                         width="1400" height="1050">
-                </figure>
+                <?php /* ZWEITES BILD SEIT DEM 31.08.2026 (SAR-112): die
+                         Pedalverlängerung. Sie ist der vierte der vier Umbauten,
+                         die eine Kachel weiter unten stehen. Zwei von ihnen waren
+                         zu sehen, zwei nicht: Linksgas steht hier seit Langem,
+                         die Handbedienung im Abschnitt darunter. Vom
+                         Lenkraddrehknopf gibt es bis heute kein Foto (offener
+                         Punkt in der CLAUDE.md), blieb also der Umbau, den es
+                         bei Kleinwuchs braucht und der seit SAR-43 auf dieser
+                         Seite eine eigene Kachel hat.
+
+                         WARUM HIER UND NICHT WEITER UNTEN: Sarahs Text daneben
+                         sagt „können unterschiedliche technische Hilfsmittel zum
+                         Einsatz kommen" – und die Spalte zeigte genau eines.
+                         Zwei Fotos machen aus dem Satz eine Beobachtung: derselbe
+                         Fußraum, zwei verschiedene Lösungen.
+
+                         `.photo-pair` ist die Komponente aus SAR-110, hier zum
+                         dritten Mal und wieder ohne eine Zeile neues CSS.
+                         Hochformat zuerst, Querformat versetzt darunter.
+
+                         ZUM ZUSCHNITT: Auf dem Original liegt gut ein Drittel
+                         der Höhe leere Fußmatte. Bei rund 420 px Anzeigebreite
+                         wären die Pedale darin verloren, deshalb ist unten und
+                         links weggeschnitten. Die Matte bleibt trotzdem im Bild –
+                         ohne sie ist nicht zu erkennen, dass man in einen
+                         Fußraum sieht. Der Befehl steht in
+                         assets-quellen/README.md.
+
+                         KEIN „LOADING=LAZY" an beiden: Der Abschnitt steht
+                         direkt unter dem Seitenkopf und ist auf dem Desktop
+                         beim Laden schon im Bild. Das galt für das Linksgas-Foto
+                         bisher allein und gilt jetzt für das Paar. */ ?>
+                <div class="photo-pair">
+                    <figure class="photo photo--right">
+                        <img src="<?= asset('img/handicap-pedalverlaengerung.jpg') ?>"
+                             alt="Fußraum eines Fahrschulautos mit Pedalverlängerung: Auf Kupplung
+                                  und Bremse sitzen große Metallauflagen, über dem Gaspedal ein
+                                  zweites, aufgesetztes Pedal. Unter dem Armaturenbrett verläuft
+                                  eine Achse, von der Gestänge zu den Pedalen führen"
+                             width="900" height="1200">
+                    </figure>
+                    <figure class="photo">
+                        <img src="<?= asset('img/handicap-linksgas.jpg') ?>"
+                             alt="Fußraum eines Fahrschulautos mit Linksgas-Umbau: links neben der
+                                  Bremse sitzt ein zusätzliches Gaspedal, das über ein grünes
+                                  Gestänge mit dem originalen Gaspedal verbunden ist"
+                             width="1400" height="1050">
+                    </figure>
+                </div>
             </div>
 
             <div class="duo-text">

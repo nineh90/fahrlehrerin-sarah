@@ -45,6 +45,21 @@ final class Router
     public function dispatch(): void
     {
         $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+
+        /* HEAD IST GET OHNE KÖRPER (SAR-10, 31.08.2026). Ohne diese Zeile
+           findet eine HEAD-Anfrage keine einzige Route und bekommt eine 404 –
+           auch auf der Startseite, die per GET brav 200 liefert. Aufgefallen
+           beim Livegang-Check mit `curl -I`.
+
+           Das ist keine Kosmetik: Uptime-Wächter, Linkprüfer und ein Teil der
+           Vorschau-Bots fragen mit HEAD, und wer einen davon einrichtet,
+           bekommt „Seite kaputt" gemeldet, während im Browser alles steht.
+           Den Körper wirft PHP bei HEAD von sich aus weg, der Controller
+           merkt also nichts davon. */
+        if ($method === 'HEAD') {
+            $method = 'GET';
+        }
+
         $path   = $this->currentPath();
 
         foreach ($this->routes as $route) {

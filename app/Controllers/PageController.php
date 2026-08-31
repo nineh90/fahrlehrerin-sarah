@@ -79,9 +79,17 @@ final class PageController
                „Autismus" stehen deshalb vorn, „Neurodivergenz" kennt nicht
                jede:r, der oder die betroffen ist. */
             'metaTitle'       => 'Führerschein mit ADHS oder Autismus – Fahrschule, die anders lernt',
-            'metaDescription' => 'Fahrausbildung für neurodivergente Menschen in '
-                . area_sentence() . ': klare Abläufe, einzelne Schritte, '
-                . 'Wiederholungen ohne Druck. Diagnose ist keine Voraussetzung.',
+            /* SAR-10, 31.08.2026: gekürzt von 186 auf 154 Zeichen. Google
+               schneidet die Beschreibung bei rund 155 ab – der alte Schluss
+               („Diagnose ist keine Voraussetzung") wäre also genau der Satz
+               gewesen, der nie zu sehen ist. Dabei gleich dieselbe Regel wie
+               beim Titel angewandt: Gesucht wird nach der Diagnose, nicht
+               nach dem Oberbegriff, deshalb steht jetzt „ADHS oder Autismus"
+               statt „neurodivergente Menschen". Weggefallen ist „einzelne
+               Schritte" – das sagt neben „klare Abläufe" wenig Eigenes. */
+            'metaDescription' => 'Fahrausbildung mit ADHS oder Autismus in '
+                . area_sentence() . ': klare Abläufe, Wiederholungen ohne '
+                . 'Druck, Diagnose keine Voraussetzung.',
         ]);
     }
 

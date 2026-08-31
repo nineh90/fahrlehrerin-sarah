@@ -59,13 +59,24 @@ services:
       - "traefik.http.middlewares.fls-www.redirectregex.replacement=https://fahrlehrerinsarah.de/$${1}"
       - "traefik.http.middlewares.fls-www.redirectregex.permanent=true"
 
-      # Zweiter Riegel gegen Suchmaschinen, zusätzlich zum noindex in der
-      # Anwendung (ALLOW_INDEXING). Kostet nichts und wirkt auch dann, wenn
-      # jemand die .env auf dem Server versehentlich umstellt.
-      # ZUM LIVEGANG: diese Zeile und den Eintrag in middlewares entfernen.
-      - "traefik.http.middlewares.fls-noindex.headers.customresponseheaders.X-Robots-Tag=noindex, nofollow"
-
-      - "traefik.http.routers.fls.middlewares=fls-www@docker,fls-noindex@docker"
+      # HIER STAND BIS ZUM 31.08.2026 (SAR-10) EIN ZWEITER RIEGEL GEGEN
+      # SUCHMASCHINEN: ein X-Robots-Tag mit "noindex, nofollow" auf jeder
+      # Antwort, zusätzlich zum noindex der Anwendung. Er ist mit dem
+      # Livegang entfallen – die Seite soll gefunden werden.
+      #
+      # Der Riegel war Absicht und kein Übermaß: Er wirkte auch dann, wenn
+      # jemand ALLOW_INDEXING in der .env versehentlich umstellt. Genau
+      # deshalb musste er hier weg, und zwar ZUSÄTZLICH zur .env: Ein
+      # Header schlägt jedes Meta-Tag, und wer ihn stehen lässt, sucht den
+      # Grund wochenlang im HTML, wo alles richtig aussieht.
+      #
+      # Zurücknehmen (falls die Seite noch einmal unsichtbar werden soll):
+      # diese Zeile wieder einfügen und `fls-noindex@docker` an die
+      # middlewares-Liste hängen –
+      #   - "traefik.http.middlewares.fls-noindex.headers.customresponseheaders.X-Robots-Tag=noindex, nofollow"
+      # Die middlewares-Liste selbst bleibt in jedem Fall stehen:
+      # `fls-www@docker` macht die www-Weiterleitung.
+      - "traefik.http.routers.fls.middlewares=fls-www@docker"
 
 networks:
   n8n_default:

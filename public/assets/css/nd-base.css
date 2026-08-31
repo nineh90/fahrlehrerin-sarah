@@ -899,14 +899,29 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
    quadratisch ist (`aspect-ratio: 1`): Ein senkrechter `margin` in Prozent
    bezieht sich in CSS immer auf die BREITE des Elternelements, nie auf die
    Hoehe. Bei einem Quadrat ist beides dasselbe, also stimmen beide Achsen.
-   Ring-Radius 32 %, davon sin(60°) = 27,7 % zur Seite und cos(60°) = 16 %
-   nach oben oder unten. Die Felder sind 32 % breit (Radius 16 %) und stossen
-   damit aneinander, ohne sich zu ueberlappen; nur den Kern (44 %) ueberdecken
-   sie – wie in der Vorlage.
 
-   AUSSENKANTE: 32 % + 16 % = 48 %, also 2 % Luft zum Rand des Kastens. Wer am
-   Radius oder an der Feldgroesse dreht, rechnet das nach, sonst wird
-   abgeschnitten.
+   DIE MASSE SIND AN DER VORLAGE NACHGEMESSEN und nicht geschaetzt. Dort
+   (872 px breit) ist die graue Scheibe 530 px, ein farbiger Kreis 260 px und
+   der Ring-Radius 335 px – in Prozent der Breite also 60,8 / 29,8 / 38,4.
+   Daraus folgt das Entscheidende: Der Mittenabstand zweier Nachbarn ist
+   genauso gross wie der Radius (38,4 %), ihre Radien summieren sich auf
+   29,8 % – die Nachbarn BERUEHREN sich also nicht einmal, sie haben 8,6 %
+   Luft. Ueberlappt wird ausschliesslich die Mitte, und zwar von jedem Kreis
+   gleich weit (6,9 %).
+
+   Genau das ist der Punkt, an dem eine erste Fassung falsch lag: Sie machte
+   die Felder gross (35 %) und den Kern klein (44 %), wodurch sich die
+   NACHBARN um 3 % ueberschnitten. Auf dem Handy sah das unruhig aus, weil
+   sich Kreise kreuzten, die in der Vorlage nur nebeneinander liegen
+   (Nils, 31.08.2026).
+
+   Auf das Quadrat skaliert (Faktor 0,859, damit die Aussenkante hineinpasst):
+   Ring-Radius 33 %, davon sin(60°) = 28,6 % zur Seite und cos(60°) = 16,5 %
+   nach oben oder unten; Felder 26 %, Kern 52 %.
+
+   AUSSENKANTE: 33 % + 13 % = 46 %, also 4 % Luft zum Rand. Wer am Radius oder
+   an der Feldgroesse dreht, rechnet beides nach – die Luft zum Rand UND den
+   Abstand der Nachbarn.
 
    KEINE BEWEGUNG, kein Hover-Effekt, nichts, was sich meldet. Die Seite
    richtet sich an Menschen, die mit vielen Reizen auf einmal schlecht
@@ -945,15 +960,22 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
     line-height: 1.15;
 }
 .spektrum-kern {
-    width: 44%;
+    width: 52%;
+    /* `margin: 0` ist hier kein Aufraeumen, sondern noetig: Der Kern ist ein
+       <p> und traegt sonst den Standardabstand des Browsers (rund 1em oben).
+       Bei `position: absolute` verschiebt der ihn nach unten – nachgemessen
+       sass die Scheibe dadurch so tief, dass der obere Kreis sie nur 4 px
+       ueberlappte und der untere 27 px. Die Ueberlappung MUSS bei allen
+       sechs gleich sein, sonst sieht der Ring schief aus. */
+    margin: 0;
     font-family: var(--font-head);
     font-weight: 700;
     font-size: clamp(.85rem, 4.6cqw, 1.2rem);
     z-index: 1;
 }
 .spektrum-feld {
-    width: 32%;
-    padding: 0 .5em;
+    width: 26%;
+    padding: 0 .35em;
     font-weight: 600;
     font-size: clamp(.6rem, 3.1cqw, .82rem);
     border: 2px solid;
@@ -962,40 +984,35 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
 
 /* Oben beginnen und im Uhrzeigersinn weiter – dieselbe Reihenfolge, in der
    die Liste vorgelesen wird. */
-.spektrum-feld:nth-child(1) { margin-left:     0; margin-top: -32%; }
-.spektrum-feld:nth-child(2) { margin-left: 27.7%; margin-top: -16%; }
-.spektrum-feld:nth-child(3) { margin-left: 27.7%; margin-top:  16%; }
-.spektrum-feld:nth-child(4) { margin-left:     0; margin-top:  32%; }
-.spektrum-feld:nth-child(5) { margin-left:-27.7%; margin-top:  16%; }
-.spektrum-feld:nth-child(6) { margin-left:-27.7%; margin-top: -16%; }
+.spektrum-feld:nth-child(1) { margin-left:     0; margin-top: -33%; }
+.spektrum-feld:nth-child(2) { margin-left: 28.6%; margin-top: -16.5%; }
+.spektrum-feld:nth-child(3) { margin-left: 28.6%; margin-top:  16.5%; }
+.spektrum-feld:nth-child(4) { margin-left:     0; margin-top:  33%; }
+.spektrum-feld:nth-child(5) { margin-left:-28.6%; margin-top:  16.5%; }
+.spektrum-feld:nth-child(6) { margin-left:-28.6%; margin-top: -16.5%; }
 
 /* IN EINER SCHMALEN SPALTE BLEIBT ES EIN KREIS (SAR-114, zweiter Anlauf).
    Eine erste Fassung baute unter 430 px Spaltenbreite auf eine Reihe von
    Pillen um – verworfen (Nils): Der Kreis IST die Aussage, sechs Dinge, die
-   um eine Mitte liegen. Eine Liste sagt „sechs Dinge" und lässt die Mitte
+   um eine Mitte liegen. Eine Liste sagt „sechs Dinge" und laesst die Mitte
    weg.
 
-   Also wird hier nicht die Anordnung geopfert, sondern Platz geschaffen:
-   Die Felder wachsen von 32 auf 35 % (sie überlappen sich dadurch minimal,
-   wie in der Vorlage auch), das Innenfutter schrumpft, und die Schrift darf
-   bis auf 0,68 rem heruntergehen. Zusammen reicht das für das längste Wort.
+   WAS HIER NACHGIBT, IST DIE SCHRIFT – NICHT DIE GEOMETRIE. Ein zweiter
+   Versuch liess dafuer die Felder wachsen; damit ueberschnitten sich die
+   Nachbarkreise, und genau das sieht unruhig aus (siehe die Rechnung oben).
+   Die Anordnung bleibt deshalb in jeder Breite dieselbe, kleiner werden nur
+   Schriftgrad und Innenfutter.
 
    HILFT DABEI: `hyphens: auto` mit `lang="de"` am <html>. „Tourette-Syndrom"
    bricht ohnehin am eigenen Bindestrich, „Hochbegabung" wird zu „Hoch-" und
-   „begabung" – genau so steht es in der Vorlage.
-
-   NACHGEMESSEN, damit niemand daran vorbeirechnet: Ring-Radius bleibt 32 %,
-   Feldradius wird 17,5 %, macht 49,5 % – also ein halbes Prozent Luft zum
-   Rand des Kastens. Wer die Felder weiter vergrößert, schneidet sie ab. */
+   „begabung" – genau so steht es in der Vorlage. */
 @container (max-width: 430px) {
     .spektrum-feld {
-        width: 35%;
-        padding: 0 .25em;
-        font-size: clamp(.68rem, 3.5cqw, .82rem);
+        padding: 0 .2em;
+        font-size: clamp(.62rem, 3.1cqw, .8rem);
     }
     .spektrum-kern {
-        width: 40%;
-        font-size: clamp(.78rem, 4.4cqw, 1.2rem);
+        font-size: clamp(.75rem, 4.2cqw, 1.2rem);
     }
 }
 

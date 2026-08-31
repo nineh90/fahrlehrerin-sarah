@@ -233,8 +233,12 @@ ausgeliefert. Zwei Gründe, jeder für sich ausreichend:
 Der Nachbau erledigt beides und kostet nichts: sechs Listeneinträge, ein
 Absatz, gut hundert Zeilen CSS. Er trägt Sarahs Regenbogen statt der Farben
 der Vorlage, wächst mit der Schriftgröße des Browsers, funktioniert in allen
-drei Farbmodi und bleibt in jeder Spaltenbreite ein Kreis – schmal wachsen
-die Felder und die Schrift darf bis 0,68 rem heruntergehen.
+drei Farbmodi und bleibt in jeder Spaltenbreite ein Kreis, mit
+derselben Geometrie: Die Maße sind an der Vorlage nachgemessen (dort 872 px
+breit: graue Scheibe 530, farbiger Kreis 260, Ring-Radius 335 – also 60,8 /
+29,8 / 38,4 % der Breite). Daraus folgt, dass die farbigen Kreise **nur die
+Mitte überlappen und einander nicht berühren**. Auf das Quadrat skaliert
+sind es 52 / 26 / 33 %. Schmal wird nur die Schrift kleiner.
 
 **Wer die Vorlage doch einmal braucht** (etwa zum Vergleich), findet sie in
 diesem Ordner. Sie gehört nicht ins Repo und nicht auf den Server.

@@ -1230,10 +1230,10 @@
 .enroll-video video { max-width: 100%; height: auto; }
 
 /* Der Spot der Fahrschule in der rechten Spalte des Bandes (SAR-100).
-   Die Spalte ist `auto`, die Breite kommt also von hier. 440 px stehen im
-   Verhältnis zur Kachel daneben (520 px): Das Video ist der Beleg, die Kachel
-   die Sache – sie darf breiter bleiben. `min()` statt fester Breite, damit es
-   auf schmalen Fenstern nicht über die Spalte hinausragt.
+   DIE BREITE KOMMT NICHT VON HIER, sondern von der Spalte (`.enroll-band`,
+   Begründung dort) – hier steht nur, dass das Video sie ausfüllt. Bis zum
+   31.08.2026 stand an dieser Stelle eine feste Breite und darüber der Satz,
+   die Spalte sei `auto`; beides stimmte schon vorher nicht mehr.
 
    `max-width: none` HEBT EINE REGEL AUS nd-base.css AUF, und das ist der
    eigentliche Grund, warum diese Zeilen nötig sind: `.video-frame` ist dort
@@ -1279,8 +1279,48 @@
        der Browser nimmt für `auto` die intrinsische Breite. Die Grenze muss
        deshalb an der SPALTE stehen, nicht am Element darin.
 
-       Wer hier je wieder `auto` einsetzt, prüft vorher, was rechts steht. */
-    grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
+       Wer hier je wieder `auto` einsetzt, prüft vorher, was rechts steht.
+
+       DIE 440 px SIND AM 31.08.2026 EINEM ANTEIL GEWICHEN (Nils: „das Video
+       wirkt rechts neben dem großen Textblock sehr klein"). Sie stammten aus
+       der Stunde, in der rechts noch das Logo stand, und waren gegen eine
+       Kachel von 520 px gerechnet. Die Kachel füllt ihre Spalte inzwischen
+       aus (0d2ef9e) und steht auf einem breiten Schirm bei 625 px – daneben
+       war das Video das kleinere Element geworden, obwohl es der Beleg für
+       den ganzen Abschnitt ist.
+
+       EIN GRÖSSERER FESTER WERT WÄRE DER FALSCHE WEG GEWESEN, nachgemessen:
+       Eine feste Spalte nimmt sich ihre Breite auch dann, wenn links nichts
+       mehr übrig ist. Bei 860 px Containerbreite stand die Kachel mit den
+       alten 440 px schon auf 325 px und war 653 px hoch; mit 520 px wären es
+       285 px und 768 px gewesen – derselbe Fehler wie oben, nur langsamer.
+       Ein Anteil dreht das um: Er gibt auf dem breiten Schirm nach und
+       schont die Kachel auf dem schmalen. Bei 860 px steht sie damit auf
+       373 px, also BREITER als vorher.
+
+       WARUM AUSGERECHNET 46 %, alles bei 1116 px Containerbreite gemessen:
+
+         Anteil   Kachel      Video        Kachelhöhe
+         42 %     596 px      469 px       538 px
+         46 %     551 px      513 px       538 px   ← gewählt
+         48 %     529 px      536 px       538 px
+         50 %     485 px      536 px       576 px   ← Text bricht um
+
+       Zwei Grenzen halten den Wert fest. Nach oben bricht der Text der
+       Kachel um, sobald sie unter rund 505 px fällt – die Kachel wird dann
+       höher, und der Abschnitt gewinnt nichts. 46 % lässt dahin 22 px Luft,
+       genug für eine Textänderung. Und ab 48 % ist das VIDEO das breitere
+       der beiden Elemente; die Kachel soll die breitere bleiben, sie trägt
+       die Sache, das Video ist der Beleg (dieselbe Abwägung wie bei SAR-91).
+
+       Das Video wächst damit von 440 auf 513 px, in der Höhe von 248 auf
+       289 px.
+
+       DER DECKEL VON 560 px GREIFT HEUTE NIE – bei `--container: 1160px`
+       sind 46 % höchstens 513 px. Er steht als Sicherung da, falls jemand
+       den Container verbreitert: Ohne ihn würde das Video mitwachsen, bis
+       es die Kachel überholt. */
+    grid-template-columns: minmax(0, 1fr) minmax(0, min(560px, 46%));
     align-items: center;
     gap: 3.2rem;
 }

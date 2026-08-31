@@ -181,6 +181,9 @@ html[data-kontrast='dunkel'] {
        sich das Verhaeltnis ohnehin schon um: Die Flaeche ist hier hell und
        die Schrift dunkel, also ist `--accent` bereits die richtige Farbe. */
     --accent-surface:       #5BCD3D;
+    /* Dunkelmodus: Die Schrift im Hero ist hier HELL, der Schleier also
+       dunkel. Dieselbe Rechnung wie in theme.css, nur andersherum. */
+    --hero-video-scrim: rgba(27, 23, 34, 0.72);
     --accent-surface-hover: #86DA6F;
     --on-accent-surface:    #1B1722;
 
@@ -275,6 +278,9 @@ html[data-kontrast='hoch'] {
        Aufbau dieses Modus. Ohne diese drei Zeilen bliebe Sanders Gruen
        stehen und der Modus haette seinen Zweck verfehlt. */
     --accent-surface:       #FFFF00;
+    /* Hochkontrast: Der Schleier wird fast undurchsichtig. Hier zählt
+       Lesbarkeit vor Bild – das Video bleibt als Ahnung stehen, mehr nicht. */
+    --hero-video-scrim: rgba(0, 0, 0, 0.92);
     --accent-surface-hover: #FFFF00;
     --on-accent-surface:    #000000;
 

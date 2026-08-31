@@ -5,9 +5,63 @@ $schoolUrl = trim((string) config('school.url'));
 <?php /* hero--photo: In der Medienspalte liegt ein Foto, keine Fläche. Der
          Modifier schaltet auf schmalen Screens die Regel aus nd-base.css ab,
          die die Abbildung hinter den Text legt (Begründung in theme.css). */ ?>
-<section class="hero hero--photo">
+<section class="hero">
+    <?php /* DAS HINTERGRUNDVIDEO (SAR-103, 31.08.2026).
+
+             WAS HIER LÄUFT, IST NICHT DER SPOT. Die Vorlage
+             (`fahrlehrerin_sarah_hero-Video.mp4`) ist ein fertiger Werbefilm
+             der Fahrschule mit eingebrannter Schrift – „Führerschein mit
+             Handicap?" und am Ende „fahrschule-sander.de". Über den Hero
+             gelegt stünden zwei Schlagzeilen übereinander, und die
+             prominenteste Fläche von Sarahs Seite bewürbe eine fremde
+             Domain. Hier laufen deshalb nur die ersten Sekunden, in denen
+             keine Schrift im Bild ist: das Fahrschulauto auf der Landstraße.
+             Ab Sekunde 17 der Vorlage setzt die Bauchbinde ein – wer den
+             Ausschnitt neu schneidet, bleibt darunter.
+
+             DIE SCHLEIFE LÄUFT DURCHGEHEND VORWÄRTS, und das ist eine
+             Korrektur: Die erste Fassung setzte den Ausschnitt vorwärts und
+             rückwärts aneinander, damit er ohne Schnitt schließt. Bei Wolken
+             oder Wasser fällt so etwas nicht auf – bei einem Auto auf der
+             Straße sofort. Rückwärtsfahrt und rückwärts laufende
+             Fahrbahnmarkierungen erkennt jeder, und die Seite sieht dann
+             kaputt aus.
+
+             DER SCHNITT AM ENDE FÄLLT STATTDESSEN IN EINE ÜBERBLENDUNG: Die
+             letzte Sekunde des Ausschnitts liegt ausblendend über der ersten.
+             Das erste Bild der Schleife ist damit zugleich ihr letztes –
+             nachgemessen, beide sind praktisch deckungsgleich. Wer den
+             Ausschnitt neu schneidet, braucht diese eine Sekunde Überlappung,
+             sonst springt es.
+
+             OHNE TONSPUR, und das ist keine Einstellung, sondern eine
+             Eigenschaft der Datei – `muted` allein würde ein Browser
+             irgendwann anders auslegen.
+
+             KEIN `autoplay` IM MARKUP: Gestartet wird in main.js, und nur
+             wenn `prefers-reduced-motion` es erlaubt. Ohne JavaScript und
+             für alle, die Bewegung abbestellt haben, bleibt das Standbild
+             stehen – deshalb trägt das Element ein `poster`. */ ?>
+    <video class="hero-video" muted loop playsinline preload="none"
+           aria-hidden="true" tabindex="-1"
+           poster="<?= asset('img/hero-landstrasse-poster.jpg') ?>"
+           width="768" height="432">
+        <source src="<?= asset('video/hero-landstrasse.mp4') ?>" type="video/mp4">
+    </video>
+    <?php /* Der Schleier trennt das Video von der Schrift. Er ist kein
+             Geschmack, sondern die Bedingung dafür, dass hier überhaupt ein
+             Video liegen darf: Über bewegtem Bild ist Kontrast sonst nicht
+             zusagbar. Der Wert steht in theme.css, nachgerechnet ist er
+             dort. */ ?>
+    <div class="hero-video-scrim" aria-hidden="true"></div>
     <div class="container hero-inner">
-        <div class="duo duo--narrow-media">
+        <?php /* KEIN `.duo` MEHR, seit das Foto weg ist (SAR-103): Ein Raster
+                 mit zwei Spalten und nur einem Kind hätte den Text auf seinen
+                 Rasteranteil eingeschnürt (605 px bei 1280) und rechts eine
+                 leere Spalte gelassen. `.hero-content` bringt seine
+                 Breitenbegrenzung selbst mit – 660 px, also die Zeilenlänge,
+                 die sich gut liest. Kommt das Foto zurück, kommt auch das
+                 Raster zurück. */ ?>
             <?php /* DIE AUGENBRAUE NENNT SEIT DEM 21.08.2026 DIE FAHRSCHULE
                      (Ticket SAR-78) und nicht mehr die Klassen. Hier stand
                      „Fahrlehrerin · Klasse B + BE · Handicap".
@@ -213,51 +267,24 @@ $schoolUrl = trim((string) config('school.url'));
                 </div>
             </div>
 
-            <?php /* SARAH SELBST, seit dem 17.08.2026 (ihr Wunsch, Ticket SAR-21).
+            <?php /* HIER STAND SARAHS FOTO, bis zum 31.08.2026 (SAR-103).
 
-                     Hier lagen vorher zwei Fassungen: bis zum 12.08.2026 ein
-                     Lockup aus drei Ebenen (Bogen als Bühne, Sarah freigestellt
-                     an der Stelle des Lenkrads, Schriftzug darunter), danach auf
-                     ihren Wunsch nur ihr Logo. Beide sind weg – jetzt steht hier
-                     ein Foto von ihr.
+                     Es ist mit dem Hintergrundvideo entfallen: Foto, Video und
+                     Text übereinander waren zusammen zu viel, gerade auf dem
+                     Handy, wo alles in einer Spalte steht. Jetzt trägt das
+                     Video die Fläche und der Text steht davor.
 
-                     Warum das Logo an dieser Stelle inzwischen nicht mehr trägt:
-                     Es schreibt „Klasse B · Klasse BE · Handicapausbildung" mit
-                     aus. Seit die Überschrift daneben „Führerscheinausbildung für
-                     Menschen mit Handicap" heißt (SAR-20), stand zweimal fast
-                     dasselbe auf einem Bildschirm, einmal gezeichnet und einmal
-                     gesetzt. Das Logo trägt weiter den Header, dort steht kein
-                     Text daneben, der mit ihm konkurriert.
+                     WAS DAMIT NEBENBEI AUFGERÄUMT IST: `sarah-hero.jpg` stand
+                     gleichzeitig hier und auf /fahren-mit-handicap. Diese
+                     Doppelung ist seit SAR-92 als offener Punkt vermerkt und
+                     erledigt sich mit dieser Änderung von selbst.
 
-                     SEIT DEM 21.08.2026 STEHT HIER EIN EIGENES FOTO (SAR-80,
-                     Kevin): Sarah am Tisch, den Kopf in die Hand gestützt.
-                     Davor war es derselbe Zuschnitt wie auf /ueber-mich
-                     (`sarah-rollistammtisch-nah.jpg`) – die Startseite und ihre
-                     Über-mich-Seite zeigten also dasselbe Bild. Das ist damit
-                     erledigt, und `/ueber-mich` behält seinen Zuschnitt für
-                     sich.
-
-                     Kein --portrait (das begrenzt die Höhe für Fließtext
-                     daneben, hier trägt das Bild die Spalte). Das Foto ist
-                     hochkantiger als sein Vorgänger, 9:16 statt 3:4 – der Hero
-                     wird dadurch rund 190 px höher. Auf einem 1920 × 956er
-                     Schirm passt er noch auf einen Bildschirm, auf einem
-                     kleinen Laptop nicht mehr ganz. Wer das ändern will, senkt
-                     `.hero-photo { max-width }` in theme.css; am Bild selbst
-                     ist nichts zu schneiden.
-
-                     Auf schmalen Screens legt nd-base.css die Medienspalte hinter
-                     den Text. Das gilt hier NICHT – `hero--photo` schaltet es ab.
-                     Warum, steht in theme.css: Hinter Fließtext taugt eine Fläche,
-                     kein Gesicht. */ ?>
-            <div class="duo-media">
-                <figure class="photo hero-photo">
-                    <img src="<?= asset('img/sarah-hero.jpg') ?>"
-                         alt="Sarah sitzt lächelnd an einem Tisch, den Kopf in die Hand
-                              gestützt, daneben eine Tischlampe und ein Becher mit Stiften"
-                         width="800" height="1421" fetchpriority="high">
-                </figure>
-            </div>
+                     ZURÜCKHOLEN ist eine Sache von Minuten – die Datei bleibt
+                     liegen, die Auszeichnung steht in der Versionsgeschichte.
+                     Dann gehört allerdings auch `hero--photo` wieder an den
+                     Abschnitt: Die Klasse schaltet die Mechanik ab, die auf
+                     schmalen Screens die Medienspalte HINTER den Text legt.
+                     Für eine Fläche ist das richtig, für ein Gesicht nicht. */ ?>
         </div>
     </div>
 </section>
@@ -369,7 +396,6 @@ $schoolUrl = trim((string) config('school.url'));
                     Einwilligung. Handle steht in der .env (TIKTOK_HANDLE).
                 */ ?>
             </div>
-        </div>
     </div>
 </section>
 

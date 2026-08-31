@@ -304,14 +304,31 @@
                      Grauschleier. Die Regel dazu steht bei den Status-Farben
                      in theme.css. */ ?>
             <div class="duo-media photo-wrap">
-                <?php /* Hochformat, deshalb `.photo--portrait`: Ohne die Begrenzung
-                         bestimmt das Bild die Spaltenhöhe und der Text daneben steht
-                         verloren in der Leere. Regel in nd-base.css. */ ?>
+                <?php /* SEIT DEM 31.08.2026 DAS ROLLISTAMMTISCH-FOTO (SAR-103).
+                         Hier lag `sarah-hero.jpg` – dasselbe Bild, das bis dahin
+                         den Hero der Startseite trug. Mit SAR-103 ist es auf
+                         /ueber-mich gezogen, und zweimal dieselbe Aufnahme auf
+                         zwei Seiten ist genau die Doppelung, die dieses Projekt
+                         mehrfach aufgelöst hat (SAR-80, SAR-92).
+
+                         Der enge Ausschnitt vom Rollistammtisch lag seit dem
+                         21.08.2026 ungenutzt in public/assets/img und ist
+                         seinerzeit für genau so einen Platz neben Fließtext
+                         zugeschnitten worden – 680 × 900, also ohne neue
+                         Bildbearbeitung verwendbar. Inhaltlich passt er hier
+                         besser als vorher: Sarah am Infotisch beim
+                         Rollistammtisch, auf einer Seite über das Fahren mit
+                         körperlichem Handicap.
+
+                         Hochformat, deshalb `.photo--portrait`: Ohne die
+                         Begrenzung bestimmt das Bild die Spaltenhöhe und der
+                         Text daneben steht verloren in der Leere. Regel in
+                         nd-base.css. */ ?>
                 <figure class="photo photo--portrait">
-                    <img src="<?= asset('img/sarah-hero.jpg') ?>"
-                         alt="Sarah sitzt lächelnd an einem Tisch, den Kopf in die Hand
-                              gestützt, daneben eine Tischlampe und ein Becher mit Stiften"
-                         width="800" height="1421" loading="lazy" decoding="async">
+                    <img src="<?= asset('img/sarah-rollistammtisch-nah.jpg') ?>"
+                         alt="Sarah an einem Infotisch, daneben eine Tischlampe;
+                              vor ihr liegen Karten der Fahrschule"
+                         width="680" height="900" loading="lazy" decoding="async">
                 </figure>
             </div>
 

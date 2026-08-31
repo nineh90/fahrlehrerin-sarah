@@ -7,6 +7,41 @@
     // schiefgehen könnte – sichtbar ist sie danach auf jeden Fall.
     initTypewriter();
 
+    /* ---------------------------------------------------------------------
+       Hintergrundvideo im Hero (SAR-103)
+
+       Im Markup steht KEIN `autoplay`. Der Start passiert hier, und nur wenn
+       niemand Bewegung abbestellt hat. Ein Video über `autoplay` zu starten
+       und per CSS wieder anzuhalten geht nicht – die Einstellung ist eine
+       Eigenschaft des Elements, keine Frage der Darstellung.
+
+       Ohne JavaScript und bei `prefers-reduced-motion` bleibt damit das
+       Standbild aus dem `poster` stehen. Das ist kein Notbehelf, sondern
+       eine vollwertige Fassung: ein Foto der Landstraße hinter dem Hero.
+
+       `preload="none"` im Markup und erst hier auf `auto`: So lädt das Video
+       nicht mit, wer es ohnehin nicht zu sehen bekommt. Für alle anderen
+       kostet es einen Moment mehr, in dem das Standbild steht – und das ist
+       dasselbe Bild.
+       --------------------------------------------------------------------- */
+    initHeroVideo();
+
+    function initHeroVideo() {
+        var video = document.querySelector('.hero-video');
+        if (!video) { return; }
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
+
+        video.preload = 'auto';
+        video.muted = true;          // ohne das verweigert der Browser den Start
+        var lauf = video.play();
+        /* play() gibt ein Promise zurueck, und ein abgelehntes Promise ohne
+           catch schreibt eine Fehlermeldung in die Konsole. Abgelehnt wird es
+           regelmaessig und voellig harmlos: etwa wenn der Tab im Hintergrund
+           liegt oder der Browser Autoplay grundsaetzlich sperrt. Dann bleibt
+           das Standbild stehen, und das ist in Ordnung. */
+        if (lauf && typeof lauf.catch === 'function') { lauf.catch(function () {}); }
+    }
+
 
     /* Header schrumpfen lassen, sobald man scrollt: Oben trägt er Sarahs
        volles Logo, das unter der Leiste hervorsteht, danach die kompakte

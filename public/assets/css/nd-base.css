@@ -316,6 +316,33 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
     border-bottom: 1px solid var(--border);
     background: var(--bg);
 }
+/* Hintergrundvideo im Hero. Drei Ebenen, und die Reihenfolge ist der ganze
+   Trick: Video ganz unten, Schleier darüber, Inhalt zuoberst. `isolation:
+   isolate` am `.hero` hält diese Stapelung im Abschnitt, sie kann also mit
+   nichts auf der Seite kollidieren.
+
+   `object-fit: cover` füllt den Hero in jedem Seitenverhältnis; das Video ist
+   16:9, der Hero auf dem Handy fast quadratisch. Ohne cover stünden Balken.
+
+   DIE FARBE DES SCHLEIERS STEHT IN theme.css, nicht hier: Diese Datei ist die
+   ND-Signatur und kennt keine festen Farbwerte. Ohne den Token bleibt der
+   Schleier durchsichtig – und dann ist der Kontrast über dem Video nicht mehr
+   zusagbar. Wer die Regel in ein anderes Projekt mitnimmt, setzt ihn dort. */
+.hero-video {
+    position: absolute; inset: 0; z-index: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    /* Rein dekorativ: Klicks gehören den Knöpfen darüber, nicht dem Video. */
+    pointer-events: none;
+}
+.hero-video-scrim {
+    position: absolute; inset: 0; z-index: 1;
+    background: var(--hero-video-scrim, transparent);
+    pointer-events: none;
+}
+/* Ohne diese Zeile läge der Inhalt im selben Stapel wie der Schleier und
+   verschwände darunter. */
+.hero-video ~ .hero-inner { position: relative; z-index: 2; }
 /* Grundfläche (Bild ODER Farbverlauf – kommt als Token aus theme.css) */
 .hero::before {
     content: ""; position: absolute; inset: 0; z-index: -2;

@@ -247,6 +247,30 @@
        (`.photo-wrap::before`). Der steht in `home.php` auf `--c-red` und
        gehört zur Regenbogen-Rotation, nicht zum Rahmen. Sarah hat nach dem
        Lila gefragt, nicht nach dem Fleck. */
+    /* --- DER SCHLEIER ÜBER DEM HERO-VIDEO (SAR-103) -----------------------
+       Er ist die Bedingung dafür, dass im Hero überhaupt ein Video liegen
+       darf. Die Schrift dort ist DUNKEL (`--text`, #2B2434) – sie braucht
+       also einen HELLEN Grund, und über bewegtem Bild ist der sonst nicht
+       zusagbar.
+
+       DIE 0,68 SIND NACHGERECHNET, nicht geschätzt. Maßgeblich ist der
+       schlimmste Fall: ein schwarzes Einzelbild im Video. Gemessen gegen
+       #2B2434 ergibt das
+
+           Schleier 0,50  über schwarzem Bild   3,6:1   ✗
+           Schleier 0,60  über schwarzem Bild   5,0:1   ✓
+           Schleier 0,68  über schwarzem Bild   6,4:1   ✓
+           Schleier 0,68  über hellem Bild     14,4:1   ✓
+
+       gefordert sind 4,5 (WCAG 1.4.3). 0,68 hält also auch dann, wenn das
+       Video im dunkelsten Moment steht, und lässt bei normalen Bildern noch
+       Reserve. Wer den Wert senkt, senkt genau diese Zahl – unter 0,60 ist
+       die Überschrift auf einem dunklen Einzelbild nicht mehr lesbar.
+
+       Im Dunkelmodus dreht sich die Rolle um, dort ist die Schrift hell –
+       siehe a11y.css. */
+    --hero-video-scrim: rgba(253, 248, 240, 0.68);
+
     --video-frame-bg:   #C6E4BE;
     --video-frame-text: #544B60;
 
@@ -941,7 +965,15 @@
    Die Breite ist begrenzt, weil die Spalte halb so breit ist wie die Seite.
    340 px liegen in der Größenordnung des Fotos, das vorher hier stand (max.
    560 px hoch); der Freisteller ist hochformatiger und käme sonst auf über
-   600 px. */
+   600 px.
+
+   ⚠️ SEIT SAR-103 (31.08.2026) NUTZT DIESE REGEL NIEMAND MEHR. Auf
+   /ueber-mich steht an der Stelle jetzt `sarah-hero.jpg` im Rahmen, der
+   Freisteller ist damit aus allen Templates verschwunden. Regel und Datei
+   (`sarah-lockup.webp`) bleiben liegen: Es ist die einzige Fassung, die
+   Sarah frei in der Fläche zeigt, und der weiche Auslauf ist die halbe
+   Arbeit daran. Wer sie wieder einsetzt, braucht beides zusammen – ohne
+   diese Regel steht die Schnittkante als Strich im Bild. */
 .sarah-cutout {
     display: block;
     width: 100%;

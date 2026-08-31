@@ -115,28 +115,41 @@ $school = (string) config('school.name');
                  Foto direkt unter der Hero-Abbildung. So kommt erst ihr Text und
                  das Foto danach. */ ?>
         <div class="duo duo--stack-text-first">
-            <div class="duo-media">
-                <?php /* Sarah freigestellt – seit dem 17.08.2026 hier (SAR-38).
-                         Dieselbe Abbildung, die vorher im Hero dieser Seite stand,
-                         aber OHNE den Regenbogenbogen dahinter (ausdrücklich so
-                         gewünscht). An dieser Stelle lag zuletzt das
-                         Rollistammtisch-Foto im engen Ausschnitt; davor
-                         `sarah-messe.jpg` und der Freisteller am Fass
-                         (`sarah-fass.webp`). Alle drei liegen weiter in
-                         public/assets/img, falls die Entscheidung kippt.
+            <div class="duo-media photo-wrap">
+                <?php /* SARAHS FOTO, seit dem 31.08.2026 (SAR-103).
 
-                         Kein Rahmen und kein `.photo-wrap`: Beides ist für ein
-                         rechteckiges Foto gedacht. Um einen Freisteller gezogen wäre
-                         der Rahmen ein Kasten um eine Silhouette, und der farbige
-                         Fleck läge als getönte Fläche daneben statt dahinter.
+                         Es stand bis dahin im Hero der Startseite. Dort trägt
+                         jetzt ein Hintergrundvideo die Fläche, und ein Foto
+                         zusätzlich davor wäre zu viel gewesen – also ist es
+                         hierher gezogen, wo eine Seite namens „Über mich"
+                         ohnehin ein Bild von ihr verträgt.
 
-                         Der weiche Auslauf nach unten ist nötig und keine Zierde:
-                         Die Freistellung endet an der Hüfte, und ohne ihn steht die
-                         Schnittkante als waagerechter Strich im Bild. Regel dazu in
-                         theme.css (.sarah-cutout). */ ?>
-                <img class="sarah-cutout" src="<?= asset('img/sarah-lockup.webp') ?>"
-                     alt="Sarah, lächelnd, mit hochgestrecktem Daumen"
-                     width="620" height="1130">
+                         HIER LAG VORHER DER FREISTELLER `sarah-lockup.webp`
+                         (SAR-38): dieselbe Sarah ohne Hintergrund, an der Hüfte
+                         beschnitten, mit weichem Auslauf nach unten. Die Datei
+                         bleibt liegen, wie alle anderen Fassungen auch
+                         (`sarah-messe.jpg`, `sarah-fass.webp`,
+                         `sarah-rollistammtisch.jpg`), falls die Entscheidung
+                         kippt. Was dabei verloren geht, gehört gewusst: Der
+                         Freisteller ließ Sarah frei in der Fläche stehen, das
+                         gerahmte Foto setzt sie in einen Kasten. Zwei
+                         verschiedene Bildsprachen, und die Seite hat sich für
+                         die des Rests der Website entschieden.
+
+                         MIT RAHMEN UND `.photo-wrap`, anders als der
+                         Freisteller: Beides ist für ein rechteckiges Foto
+                         gedacht und war um eine Silhouette herum falsch. Der
+                         Fleck dahinter trägt seit SAR-96 das Sander-Grün.
+
+                         `.photo--portrait` begrenzt das Hochformat – ohne die
+                         Regel bestimmt das Bild die Spaltenhöhe und der Text
+                         daneben steht verloren in der Leere. */ ?>
+                <figure class="photo photo--portrait">
+                    <img src="<?= asset('img/sarah-hero.jpg') ?>"
+                         alt="Sarah sitzt lächelnd an einem Tisch, den Kopf in die Hand
+                              gestützt, daneben eine Tischlampe und ein Becher mit Stiften"
+                         width="800" height="1421" loading="lazy" decoding="async">
+                </figure>
             </div>
 
             <div class="duo-text">

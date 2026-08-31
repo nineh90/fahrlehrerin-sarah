@@ -45,3 +45,4 @@ ticket-*.md
 .DS_Store
 Thumbs.db
 desktop.ini
+/public/assets/video/fahrlehrerin_sarah_*

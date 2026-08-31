@@ -89,7 +89,24 @@ $schoolUrl = trim((string) config('school.url'));
                      dieselbe Regel wie überall: Die Seite formuliert ohne die
                      Fahrschule, wenn es sie in der Konfiguration nicht gibt. */ ?>
             <div class="hero-content">
-                <p class="hero-eyebrow" data-typewriter="fast"><?= $school !== '' ? 'Fahrlehrerin Sarah · ' . e($school) : 'Fahrlehrerin · Klasse B + BE · Handicap' ?></p>
+                <?php /* SAR-89, 31.08.2026: Der Name der Fahrschule haelt seine
+                         Leerzeichen fest (U+00A0). Auf schmalen Screens brach die
+                         Zeile sonst mitten im Namen um und „Sander" stand allein
+                         in der zweiten Reihe. Jetzt rutscht „Fahrschule Sander"
+                         als Ganzes hinunter.
+
+                         Das ist keine Formatierung mit Leerzeichen, sondern eine
+                         Aussage: Der Name ist eine Einheit. Aus demselben Grund
+                         steht es hier und nicht als `white-space: nowrap` im CSS –
+                         ein <span> ueberlebt den Schreibmaschineneffekt nicht, der
+                         verarbeitet nur Text und <br>.
+
+                         Damit das trägt, nimmt main.js U+00A0 vom Einebnen der
+                         Leerräume aus; ohne diese Ausnahme macht `\s` daraus
+                         wieder ein gewöhnliches Leerzeichen. */ ?>
+                <p class="hero-eyebrow" data-typewriter="fast"><?= $school !== ''
+                    ? 'Fahrlehrerin Sarah · ' . e(str_replace(' ', "\u{00A0}", $school))
+                    : 'Fahrlehrerin · Klasse B + BE · Handicap' ?></p>
                 <?php /* data-typewriter: main.js baut diese eine Überschrift beim
                          Laden Zeichen für Zeichen auf. Der Satz steht trotzdem
                          vollständig hier im HTML – für Suchmaschinen, für

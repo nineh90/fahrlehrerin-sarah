@@ -450,9 +450,16 @@
                     // Hänger mitten im Satz, bei dem sich nichts tut. Der
                     // Browser fasst denselben Leerraum beim Rendern ohnehin zu
                     // einem Leerzeichen zusammen; hier passiert nur dasselbe.
+                    /* `[^\S\u00A0]` und NICHT `\s`: In JavaScript zählt das
+                       geschützte Leerzeichen (U+00A0) zu `\s`, würde hier also
+                       zu einem gewöhnlichen zusammengefasst – und damit genau
+                       die Eigenschaft verlieren, für die es dasteht. Die
+                       Augenbraue der Startseite hält damit „Fahrschule Sander"
+                       zusammen (SAR-89). Alle übrigen Leerräume werden nach wie
+                       vor eingedampft. */
                     Array.prototype.push.apply(
                         teile,
-                        node.textContent.replace(/\s+/g, ' ').split('')
+                        node.textContent.replace(/[^\S\u00A0]+/g, ' ').split('')
                     );
                 } else if (node.nodeName === 'BR') {
                     teile.push('\n');

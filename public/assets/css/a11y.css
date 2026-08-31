@@ -346,6 +346,21 @@ html[data-kontrast='hoch'] {
     --c-green: #FFFF00; --c-teal: #FFFF00; --c-blue: #FFFF00; --c-violet: #FFFF00;
 }
 /* Links und Knöpfe brauchen ein zweites Merkmal neben der Farbe. */
+/* Der Spektrum-Kreis: Toenung weg, Kante bleibt. In diesem Modus sind alle
+   sieben Regenbogen-Tokens Gelb und der Grund Schwarz – eine transparente
+   Farbflaeche darueber waere ein schmutziger Fleck, der den Kontrast der
+   Schrift senkt, ohne noch etwas zu unterscheiden. Uebrig bleiben gelbe
+   Kreise mit weisser Schrift auf Schwarz; getrennt werden sie durch die
+   Beschriftung, nicht mehr durch die Farbe. */
+html[data-kontrast='hoch'] .spektrum-feld { background: none; border-width: 3px; }
+/* Der Kern traegt sonst ein gedaempftes Grau als Kante – auf Schwarz ist das
+   ein kaum sichtbarer Ring. Hier bekommt er die Schriftfarbe, also Weiss, und
+   hebt sich damit von den gelben Feldern ab: Der Oberbegriff sieht anders aus
+   als seine Auspraegungen, auch ohne Farbe. */
+html[data-kontrast='hoch'] .spektrum-kern {
+    background: none; border-width: 3px; border-color: var(--text);
+}
+
 html[data-kontrast='hoch'] :is(a, button) { text-decoration: underline; }
 html[data-kontrast='hoch'] a.btn { text-decoration: none; border-width: 2px; }
 /* Schatten sind auf Schwarz unsichtbar und nehmen den Karten die Kante. */

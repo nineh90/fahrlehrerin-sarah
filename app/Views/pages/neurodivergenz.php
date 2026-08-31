@@ -31,20 +31,41 @@
          liegt seit SAR-103 ungenutzt in theme.css und ist dieselbe, die dort
          die Startseite getragen hat.
 
-         DAS FOTO ZEIGT DAS AUTO OHNE DAS ROLLSTUHLZEICHEN, und das ist die
-         eine Entscheidung, um die es hier geht. Der Zuschnitt der
-         Schwerpunkt-Schwesterseite hat das orangene Zeichen groß im Bild –
-         auf einer Seite über Autismus, ADHS und andere Reizverarbeitung wäre
-         genau das falsch. Sarahs Anlass für diese Seite war ihr Satz, sie
-         habe „bisher nicht ein Wort über die Menschen mit unsichtbaren
-         Behinderungen gefunden"; ein Rollstuhl über ihrer Überschrift nähme
-         ihn zurück. Übrig bleiben Fensterband, Spiegel, grüner Streifen und
-         die Hecke dahinter – dasselbe Auto, ruhig fotografiert.
+         SEIT SAR-114 (31.08.2026) STEHT HIER EIN SCHAUBILD STATT EINES
+         FOTOS: das Neurodivergenz-Spektrum als Kreisbild – ein Kern, darum
+         sechs Felder (Hochbegabung, Autismus, Tourette-Syndrom, Dyskalkulie,
+         Dyslexie, AD(H)S). Es löst das Autofoto von SAR-113 ab, das ein paar
+         Stunden alt war. Dessen Aufgabe war, das Auto zu zeigen, ohne das
+         Rollstuhlzeichen zu wiederholen – die Seite handelt von
+         Behinderungen, die man nicht sieht. Das Schaubild löst dieselbe
+         Aufgabe direkter: Es sagt, worüber die Seite spricht, statt es zu
+         umgehen. `hero-fahrschulauto-fenster.jpg` bleibt als Rückfall liegen.
 
-         Weggeschnitten ist wie überall jede Schrift: „FAHRSCHULE SANDER" auf
-         der Tür, die Adresse auf der Klappe, Kennzeichen und die fremden
-         Sponsorenlogos. Beide Zuschnitte stammen aus derselben Vorlage, der
-         Befehl steht in assets-quellen/README.md.
+         ES IST KEIN BILD, SONDERN HTML UND CSS – und das ist die eigentliche
+         Arbeit an diesem Ticket. Geliefert wurde eine fertige Grafik. Sie
+         hatte zwei Probleme, die ein Nachbau beide erledigt:
+
+         · HERKUNFT. Die Vorlage war ein Bildschirmfoto aus einer fremden
+           Veröffentlichung, Lizenz ungeklärt – auf einer Seite, die seit
+           demselben Tag öffentlich und indexierbar ist. Der Nachbau gehört
+           uns.
+         · TEXT IM BILD. Jedes Wort darin war gemalt: nicht skalierbar, nicht
+           markierbar, für Vorlesesoftware unsichtbar, für Google unlesbar.
+           Genau das, was die Konvention dieser Seite ausdrücklich vermeidet.
+           Jetzt steht hier eine Liste mit sechs Einträgen. Sie wächst mit der
+           Schriftgröße des Browsers, lässt sich kopieren, wird vorgelesen –
+           und die Suchmaschine liest „Autismus", „AD(H)S" und
+           „Tourette-Syndrom" als Text auf einer Seite, die genau danach
+           gefunden werden soll.
+
+         Die Farben sind Sarahs Regenbogen aus theme.css und nicht die der
+         Vorlage. Sie sitzen so, wie die Vorlage sie hatte (rot oben, dann im
+         Uhrzeigersinn), nur mit den Tönen der Seite.
+
+         DIE REIHENFOLGE IM MARKUP IST DIE VORLESEREIHENFOLGE und zugleich
+         der Weg im Kreis: oben anfangen, im Uhrzeigersinn weiter. Die
+         Positionen stehen in nd-base.css als `:nth-child`, damit hier nur
+         Text steht.
 
          KEIN NEUER TEXT. Überschrift und Vorspann sind Wort für Wort die
          alten, der Vorspann trägt nur `hero-lead` statt `page-lead`.
@@ -68,13 +89,19 @@
             </div>
 
             <div class="duo-media">
-                <figure class="photo hero-photo">
-                    <img src="<?= asset('img/hero-fahrschulauto-fenster.jpg') ?>"
-                         alt="Seitenansicht eines weißen Fahrschulautos: Fensterband,
-                              Außenspiegel und ein grüner Streifen über der Tür, dahinter
-                              eine Hecke"
-                         width="800" height="748" fetchpriority="high">
-                </figure>
+                <div class="spektrum-wrap">
+                    <figure class="spektrum">
+                        <p class="spektrum-kern">Neurodivergenz</p>
+                        <ul class="spektrum-ring">
+                            <li class="spektrum-feld">Hochbegabung</li>
+                            <li class="spektrum-feld">Autismus</li>
+                            <li class="spektrum-feld">Tourette-Syndrom</li>
+                            <li class="spektrum-feld">Dyskalkulie</li>
+                            <li class="spektrum-feld">Dyslexie</li>
+                            <li class="spektrum-feld">AD(H)S</li>
+                        </ul>
+                    </figure>
+                </div>
             </div>
         </div>
     </div>

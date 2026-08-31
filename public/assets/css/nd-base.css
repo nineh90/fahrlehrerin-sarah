@@ -879,6 +879,165 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
     z-index: 1;
 }
 
+/* SPEKTRUM-KREIS  ·  .spektrum                                    (SAR-114)
+   Ein Kern mit sechs beschrifteten Kreisen darum. Gebaut fuer das
+   Neurodivergenz-Schaubild auf /neurodivergenz, aber ohne dessen Begriffe:
+   Die Komponente kennt nur „Kern" und „Feld", der Inhalt steht im Template.
+
+   WARUM ALS HTML UND NICHT ALS BILD: Die Vorlage war eine fremde Grafik, in
+   der jedes Wort gemalter Text war – nicht skalierbar, nicht markierbar, fuer
+   Vorlesesoftware unsichtbar, und die Lizenz ungeklaert. Hier ist es echter
+   Text in einer Liste: Er waechst mit der Schriftgroesse des Browsers, laesst
+   sich kopieren, wird vorgelesen und traegt in jedem der drei Farbmodi die
+   Farben der Seite.
+
+   DIE SECHS PLAETZE STEHEN IM CSS, nicht im Template. Sechs feste Positionen
+   im 60-Grad-Abstand – dafuer braucht es keine Inline-Angaben in der View,
+   `:nth-child` reicht und haelt das Markup sauber.
+
+   GERECHNET WIRD IN PROZENT DER BREITE, und das geht nur, weil der Kasten
+   quadratisch ist (`aspect-ratio: 1`): Ein senkrechter `margin` in Prozent
+   bezieht sich in CSS immer auf die BREITE des Elternelements, nie auf die
+   Hoehe. Bei einem Quadrat ist beides dasselbe, also stimmen beide Achsen.
+   Ring-Radius 32 %, davon sin(60°) = 27,7 % zur Seite und cos(60°) = 16 %
+   nach oben oder unten. Die Felder sind 32 % breit (Radius 16 %) und stossen
+   damit aneinander, ohne sich zu ueberlappen; nur den Kern (44 %) ueberdecken
+   sie – wie in der Vorlage.
+
+   AUSSENKANTE: 32 % + 16 % = 48 %, also 2 % Luft zum Rand des Kastens. Wer am
+   Radius oder an der Feldgroesse dreht, rechnet das nach, sonst wird
+   abgeschnitten.
+
+   KEINE BEWEGUNG, kein Hover-Effekt, nichts, was sich meldet. Die Seite
+   richtet sich an Menschen, die mit vielen Reizen auf einmal schlecht
+   zurechtkommen – dieselbe Ueberlegung, aus der sie ohne Hinweiskaesten
+   auskommt. Ein Schaubild, das beim Darueberfahren wackelt, waere hier
+   falsch.
+
+   Die Schriftgroessen haengen an Container-Einheiten (`cqw`) und nicht am
+   Ansichtsfenster: Der Kreis steht in einer Spalte, die je nach Seite anders
+   breit ist – `vw` wuerde die Schrift nach der Fensterbreite bemessen und in
+   der schmalen Spalte zu gross setzen. Deshalb traegt `.spektrum` selbst
+   `container-type`. */
+.spektrum {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    aspect-ratio: 1;
+    margin: 0 auto;
+    container-type: inline-size;
+}
+.spektrum-ring { list-style: none; margin: 0; padding: 0; }
+
+.spektrum-kern,
+.spektrum-feld {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    text-align: center;
+    text-wrap: balance;
+    hyphens: auto;
+    line-height: 1.15;
+}
+.spektrum-kern {
+    width: 44%;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(.85rem, 4.6cqw, 1.2rem);
+    z-index: 1;
+}
+.spektrum-feld {
+    width: 32%;
+    padding: 0 .5em;
+    font-weight: 600;
+    font-size: clamp(.6rem, 3.1cqw, .82rem);
+    border: 2px solid;
+    z-index: 2;
+}
+
+/* Oben beginnen und im Uhrzeigersinn weiter – dieselbe Reihenfolge, in der
+   die Liste vorgelesen wird. */
+.spektrum-feld:nth-child(1) { margin-left:     0; margin-top: -32%; }
+.spektrum-feld:nth-child(2) { margin-left: 27.7%; margin-top: -16%; }
+.spektrum-feld:nth-child(3) { margin-left: 27.7%; margin-top:  16%; }
+.spektrum-feld:nth-child(4) { margin-left:     0; margin-top:  32%; }
+.spektrum-feld:nth-child(5) { margin-left:-27.7%; margin-top:  16%; }
+.spektrum-feld:nth-child(6) { margin-left:-27.7%; margin-top: -16%; }
+
+/* UNTER 430 PX SPALTENBREITE IST ES KEIN KREIS MEHR, sondern eine Reihe von
+   Feldern (SAR-114). Nachgemessen: Bei einer 328 px breiten Spalte ist ein
+   Feld 105 px breit, und „Tourette-Syndrom" passt dort nur, wenn die Schrift
+   auf 10,5 px fällt. Auf einer Seite, die von Reizverarbeitung und
+   Lesbarkeit handelt, ist das das falsche Ende zum Sparen. Also fällt die
+   Anordnung weg statt der Schrift: Der Kern wird zur Überschrift der Gruppe,
+   die sechs Felder stehen als Pillen darunter. Ein Oberbegriff, sechs
+   Ausprägungen, Sarahs Farben – dieselbe Aussage in einer Form, die auf jede
+   Breite passt.
+
+   GEMESSEN WIRD DIE SPALTE, NICHT DAS FENSTER, und das ist hier keine
+   Feinheit: Der Fall tritt zweimal auf, an zwei ganz verschiedenen
+   Fensterbreiten. Auf dem Handy (Spalte 321 px, gestapelt) und auf einem
+   schmalen Desktop-Fenster zwischen 820 und rund 1150 px, wo der Hero schon
+   zweispaltig steht und die Medienspalte gerade einmal 328 px hat. Eine
+   Media-Query müsste beide Bereiche einzeln treffen und bei jeder Änderung
+   am Raster nachgerechnet werden; die Container-Query fragt einfach die
+   Spalte.
+
+   DAFÜR GIBT ES `.spektrum-wrap`, und der Grund ist eine Regel von
+   Container-Queries, über die man einmal stolpert: Ein Element kann sich mit
+   seiner EIGENEN Query nicht selbst umstellen. Genau das wäre hier nötig
+   (`aspect-ratio`, `max-width`), also trägt die Hülle den Container und
+   `.spektrum` wird als ihr Kind umgestellt. `.spektrum` bleibt trotzdem
+   selbst ein Container – die Schriftgrößen im Kreis rechnen in `cqw` und
+   sollen sich nach dem Kreis richten, nicht nach der Spalte. */
+.spektrum-wrap { container-type: inline-size; }
+
+@container (max-width: 430px) {
+    .spektrum {
+        aspect-ratio: auto;
+        max-width: 22rem;
+        text-align: center;
+    }
+    .spektrum-kern,
+    .spektrum-feld {
+        position: static;
+        translate: none;
+        margin: 0;
+        width: auto;
+        aspect-ratio: auto;
+        border-radius: 999px;
+        display: inline-grid;
+    }
+    /* `:nth-child(n)` trifft alle sechs und ist NUR wegen der Spezifität da:
+       Die Plätze auf dem Ring stehen als `.spektrum-feld:nth-child(1)` usw.
+       geschrieben, also Klasse plus Pseudoklasse. Eine Container-Query erhöht
+       die Spezifität NICHT – das `margin: 0` eine Zeile darüber ist damit
+       schwächer und verliert, obwohl es später steht. Ohne diese Zeile
+       behalten die Pillen ihre Ringabstände und liegen wild verstreut
+       übereinander (nachgemessen: margin-top -102 px am ersten Feld). */
+    .spektrum-feld:nth-child(n) { margin: 0; }
+    .spektrum-kern {
+        padding: .45rem 1.2rem;
+        margin-bottom: .8rem;
+        font-size: 1.05rem;
+    }
+    .spektrum-ring {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: .45rem;
+    }
+    .spektrum-feld {
+        padding: .4rem .85rem;
+        font-size: .82rem;
+    }
+}
+
 /* Freisteller statt Foto: kein Rahmen, kein Schatten, keine Drehung – der
    Gegenstand steht frei auf der Fläche. Die Bildunterschrift rutscht darunter,
    weil es im Bild keine Fläche gibt, auf der sie liegen könnte.

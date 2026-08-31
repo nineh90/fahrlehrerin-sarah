@@ -32,6 +32,13 @@ assets-quellen/fahrlehrerin_sarah_fahrschulauto_sander_handicap_ausbildung.jpeg
 # Sie bleibt lokal, damit sich der Freisteller neu bauen lässt.
 assets-quellen/fahrschulwagen_sander_fahrlehrerin_sarah.jpeg
 
+# Die Vorlage des Neurodivergenz-Schaubilds (SAR-114). Eine fremde Grafik,
+# als Bildschirmfoto geliefert, Herkunft und Lizenz ungeklärt – das Repo ist
+# öffentlich. Auf der Website läuft sie ohnehin nicht: Dort steht der Nachbau
+# in HTML und CSS (.spektrum). Die Datei bleibt lokal liegen, damit man
+# vergleichen kann, wovon der Nachbau abstammt.
+assets-quellen/fahrlehrerin_sarah_hero_neurodivergenz.jpeg
+
 # Interne Arbeitsdokumente. Das Repo ist öffentlich; die CLAUDE.md nennt außerdem den
 # Namen der Fahrschule im Klartext. Die Dateien bleiben lokal im Kundenordner liegen.
 # texte-von-sarah.md sammelt ihre eigenen Texte im Wortlaut – auch die, die noch nicht

@@ -690,6 +690,53 @@
 .enroll-steps > *:nth-child(7n+6) { --card-accent: var(--c-blue);   --card-accent-soft: rgba(59, 125, 216, 0.13); }
 .enroll-steps > *:nth-child(7n+7) { --card-accent: var(--c-violet); --card-accent-soft: rgba(124, 58, 237, 0.12); }
 
+/* Der Spektrum-Kreis auf /neurodivergenz (SAR-114). Struktur in nd-base.css,
+   hier stehen nur die Farben – wie bei jeder Komponente.
+
+   SECHS PLÄTZE, SIEBEN FARBEN: Orange fällt aus. Die übrigen sechs sind so
+   verteilt, wie die Vorlage sie hatte (rot oben, dann gelb, grün, hellblau,
+   blau, violett im Uhrzeigersinn), und nebenbei schließt sich der Bogen
+   damit zum Ring – Rot und Violett, die beiden Enden, liegen oben
+   nebeneinander. Nimmt man Orange dazu und lässt eine andere Farbe weg,
+   stimmt beides nicht mehr.
+
+   FLÄCHE ALS TRANSPARENTES TÖNEN, NICHT ALS FESTE FARBE, und das ist der
+   Grund, warum der Dunkelmodus hier nichts nachziehen muss: Ein rgba-Wert
+   über `--bg` ergibt hell einen Pastellton und dunkel eine gedämpfte Fläche,
+   die Schrift ist in beiden Fällen `--text`. Dieselbe Mechanik wie bei
+   `--card-accent-soft` an den Kacheln, nur kräftiger – dort ist die Farbe
+   Beiwerk, hier ist sie der Gegenstand.
+
+   Die Kante trägt die volle Farbe. Sie ist es, die im Hochkontrastmodus
+   übrig bleibt: Dort sind alle sieben Tokens Gelb und der Grund Schwarz, die
+   Tönung wird abgeschaltet (a11y.css). Sechs gelb umrandete Kreise auf
+   Schwarz – die Farbe unterscheidet sie dann nicht mehr, die Beschriftung
+   schon, und genau darauf kommt es in dem Modus an. */
+/* DER KERN IST EIN NEUTRALER GRAUTON, kein Seitenhintergrund. Erste Fassung
+   nahm `--bg-secondary` – auf dem Hero-Grund derselben Familie war die
+   Scheibe damit praktisch unsichtbar, und „Neurodivergenz" schwebte frei
+   zwischen den farbigen Kreisen. In der Vorlage ist der Kern eine deutlich
+   graue Fläche, und das ist auch inhaltlich richtig: Er ist der Oberbegriff,
+   die Farben sind die Ausprägungen.
+
+   Der Ton ist `--muted` als rgba, und das ist der Trick für alle drei Modi:
+   Ein mittleres Grau bei 22 % dunkelt einen hellen Grund ab und hellt einen
+   dunklen auf – die Scheibe hebt sich also in beiden Richtungen ab, ohne
+   dass der Dunkelmodus eine eigene Zeile braucht. */
+.spektrum-kern {
+    background: rgba(117, 107, 128, .22);
+    border: 2px solid rgba(117, 107, 128, .42);
+    color: var(--text);
+}
+.spektrum-feld { color: var(--text); background: var(--spektrum-tint); border-color: var(--card-accent); }
+
+.spektrum-feld:nth-child(1) { --card-accent: var(--c-red);    --spektrum-tint: rgba(228,  87,  46, .30); }
+.spektrum-feld:nth-child(2) { --card-accent: var(--c-yellow); --spektrum-tint: rgba(232, 181,  23, .34); }
+.spektrum-feld:nth-child(3) { --card-accent: var(--c-green);  --spektrum-tint: rgba( 62, 165,  91, .30); }
+.spektrum-feld:nth-child(4) { --card-accent: var(--c-teal);   --spektrum-tint: rgba( 24, 154, 156, .30); }
+.spektrum-feld:nth-child(5) { --card-accent: var(--c-blue);   --spektrum-tint: rgba( 59, 125, 216, .28); }
+.spektrum-feld:nth-child(6) { --card-accent: var(--c-violet); --spektrum-tint: rgba(124,  58, 237, .24); }
+
 /* Dieselbe Rotation für die Aufklapper. Sie stehen untereinander statt
    nebeneinander, aber es gilt derselbe Gedanke: Jeder Abschnitt ist ein
    eigenes Thema, und die Farbe an der Kante macht die Gliederung auf einen

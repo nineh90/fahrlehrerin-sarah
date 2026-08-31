@@ -206,3 +206,35 @@ zu erkennen, dass man in einen Fußraum sieht. Zwei weitere Zuschnitte waren zur
 Auswahl gebaut und sind verworfen: ein weiterer, auf dem die Pedale bei 420 px zu
 klein werden, und ein engerer, auf dem vom grünen Stab nur ein Stummel bleibt –
 und der ist der einzige Farbpunkt der Aufnahme.
+
+## Das Neurodivergenz-Schaubild (31.08.2026, SAR-114)
+
+**Hier liegt kein Bild – auf der Website steht ein Nachbau in HTML und CSS.**
+Der Kreis auf `/neurodivergenz` (Kern „Neurodivergenz", darum sechs Felder:
+Hochbegabung, Autismus, Tourette-Syndrom, Dyskalkulie, Dyslexie, AD(H)S) ist
+die Komponente `.spektrum` – Struktur in `nd-base.css`, Farben in
+`theme.css`, Sonderfall Hochkontrast in `a11y.css`.
+
+Geliefert worden war eine fertige Grafik
+(`fahrlehrerin_sarah_hero_neurodivergenz.jpeg`, 872 × 1022). Sie liegt lokal
+in diesem Ordner, steht aber **in der `.gitignore`** und wird nirgends
+ausgeliefert. Zwei Gründe, jeder für sich ausreichend:
+
+1. **Herkunft und Lizenz sind ungeklärt.** Die Vorlage ist erkennbar ein
+   Bildschirmfoto aus einer fremden Veröffentlichung. Das Repo ist
+   öffentlich, und die Website ist seit demselben Tag indexierbar.
+2. **Sie besteht ausschließlich aus Text im Bild** – genau das, was die
+   Konvention dieser Seite vermeidet. Gemalter Text skaliert nicht, lässt
+   sich nicht markieren, wird nicht vorgelesen und von Suchmaschinen nicht
+   gelesen. Ausgerechnet auf der Seite, die unter „ADHS" und „Autismus"
+   gefunden werden soll, wären das die wichtigsten Wörter gewesen – als
+   Pixel.
+
+Der Nachbau erledigt beides und kostet nichts: sechs Listeneinträge, ein
+Absatz, gut hundert Zeilen CSS. Er trägt Sarahs Regenbogen statt der Farben
+der Vorlage, wächst mit der Schriftgröße des Browsers, funktioniert in allen
+drei Farbmodi und wird unter 430 px Spaltenbreite zu einer Reihe von Pillen,
+statt die Schrift auf 10 px zu schrumpfen.
+
+**Wer die Vorlage doch einmal braucht** (etwa zum Vergleich), findet sie in
+diesem Ordner. Sie gehört nicht ins Repo und nicht auf den Server.

@@ -304,31 +304,48 @@
                      Grauschleier. Die Regel dazu steht bei den Status-Farben
                      in theme.css. */ ?>
             <div class="duo-media photo-wrap">
-                <?php /* SEIT DEM 31.08.2026 DAS ROLLISTAMMTISCH-FOTO (SAR-103).
-                         Hier lag `sarah-hero.jpg` – dasselbe Bild, das bis dahin
-                         den Hero der Startseite trug. Mit SAR-103 ist es auf
-                         /ueber-mich gezogen, und zweimal dieselbe Aufnahme auf
-                         zwei Seiten ist genau die Doppelung, die dieses Projekt
-                         mehrfach aufgelöst hat (SAR-80, SAR-92).
+                <?php /* WIEDER `sarah-hero.jpg`, seit dem 31.08.2026 (SAR-109).
+                         Sarah: „Wollten wir da nicht das Foto ohne Cola und
+                         Süßigkeiten" – gemeint ist der enge Ausschnitt vom
+                         Rollistammtisch, der hier den halben Tag lang lag
+                         (SAR-103, heute früh). Auf dem stehen unten rechts eine
+                         Getränkedose und eine Schale Bonbons; auf diesem Bild
+                         liegt an derselben Stelle das gezeichnete Auto mit dem
+                         grünen Herz. Nachgesehen, beides stimmt.
 
-                         Der enge Ausschnitt vom Rollistammtisch lag seit dem
-                         21.08.2026 ungenutzt in public/assets/img und ist
-                         seinerzeit für genau so einen Platz neben Fließtext
-                         zugeschnitten worden – 680 × 900, also ohne neue
-                         Bildbearbeitung verwendbar. Inhaltlich passt er hier
-                         besser als vorher: Sarah am Infotisch beim
-                         Rollistammtisch, auf einer Seite über das Fahren mit
-                         körperlichem Handicap.
+                         DIESELBE AUFNAHME STEHT DAMIT AUF ZWEI SEITEN: hier
+                         und auf /ueber-mich. SAR-103 hat das Bild heute früh
+                         von hier weggenommen, um genau das zu vermeiden – es
+                         ist die Doppelung, die das Projekt zweimal aufgelöst
+                         hat (SAR-80, SAR-92).
+
+                         DAS IST GEPRÜFT UND ABGENOMMEN, nicht übersehen
+                         (Nils, 31.08.2026): „Ich denke die Dopplung geht okay,
+                         es war ja so von ihr gewünscht … und so wie ich Sarah
+                         kenne, wird sie, wenn es nicht passt, ein passendes
+                         Foto zur Verfügung stellen." Die Regel gegen doppelte
+                         Bilder gilt weiter, hier steht eine bewusste Ausnahme.
+                         Wer sie aufheben will, tut das nicht als Aufräumen
+                         nebenbei – es braucht ein neues Foto von Sarah, und
+                         das kommt von ihr, nicht aus einem neuen Zuschnitt.
+
+                         DAS ROLLISTAMMTISCH-FOTO IST NICHT GELÖSCHT, es liegt
+                         weiter als `sarah-rollistammtisch-nah.jpg` im Ordner –
+                         wie schon zwischen dem 21. und dem 31.08.2026, als es
+                         ungenutzt dort lag.
 
                          Hochformat, deshalb `.photo--portrait`: Ohne die
                          Begrenzung bestimmt das Bild die Spaltenhöhe und der
                          Text daneben steht verloren in der Leere. Regel in
-                         nd-base.css. */ ?>
+                         nd-base.css. Das Bild ist steiler als sein Vorgänger
+                         (9:16 statt 3:4) und läuft deshalb in die Höhen- statt
+                         in die Breitengrenze: 315 × 560 px statt 360 × 476 px,
+                         nachgerechnet. */ ?>
                 <figure class="photo photo--portrait">
-                    <img src="<?= asset('img/sarah-rollistammtisch-nah.jpg') ?>"
-                         alt="Sarah an einem Infotisch, daneben eine Tischlampe;
-                              vor ihr liegen Karten der Fahrschule"
-                         width="680" height="900" loading="lazy" decoding="async">
+                    <img src="<?= asset('img/sarah-hero.jpg') ?>"
+                         alt="Sarah sitzt lächelnd an einem Tisch, den Kopf in die Hand
+                              gestützt, daneben eine Tischlampe und ein Becher mit Stiften"
+                         width="800" height="1421" loading="lazy" decoding="async">
                 </figure>
             </div>
 

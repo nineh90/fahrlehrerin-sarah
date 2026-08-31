@@ -1224,6 +1224,11 @@
    wegen der die Sektion gequetscht aussah. */
 .enroll-formal-lead { max-width: 58ch; }
 
+/* Gürtel und Hosenträger zur Regel oben: Auch wenn jemand die Spalte wieder
+   auf `auto` stellt, soll das Video wenigstens nicht über seinen Rahmen
+   hinauswachsen. */
+.enroll-video video { max-width: 100%; height: auto; }
+
 /* Der Spot der Fahrschule in der rechten Spalte des Bandes (SAR-100).
    Die Spalte ist `auto`, die Breite kommt also von hier. 440 px stehen im
    Verhältnis zur Kachel daneben (520 px): Das Video ist der Beleg, die Kachel
@@ -1235,7 +1240,7 @@
    auf 300 px begrenzt. Der Wert ist für die hochkanten Kanal-Videos gemacht
    (576 × 1024, angezeigt auf 300 px). Der Spot ist querformatig – auf 300 px
    Breite wäre er 169 px hoch und damit nicht mehr anzusehen. */
-.enroll-video { width: min(440px, 100%); max-width: none; margin: 0; }
+.enroll-video { width: 100%; max-width: none; margin: 0; }
 
 /* --- Das Band um den ganzen Abschnitt  ·  .enroll-band          (SAR-91) ---
    Links alles, was gelesen wird (Überschrift, Einordnungssatz, Kachel), rechts
@@ -1258,7 +1263,24 @@
    Logo dem Einordnungssatz auf den Pelz, sobald der über zwei Zeilen geht. */
 .enroll-band {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    /* ⚠️ `minmax(0, 440px)` UND NICHT `auto` – daran hing ein echter Fehler
+       (SAR-100, gemeldet von Nils am 31.08.2026).
+
+       `auto` war richtig, solange rechts das LOGO stand: Eine Grafik bringt
+       ihre Breite mit, die Spalte nahm sie, fertig. Seit dort der Spot steht,
+       ist es falsch. Das <video> trägt `width="1024"` als Attribut, und das
+       ist seine intrinsische Breite. Eine `auto`-Spalte richtet sich genau
+       danach – sie nahm sich 1024 px, für die linke Spalte blieben 41 px
+       übrig. Nachgemessen bei 1400 px Fensterbreite: Die Kachel stand auf
+       50 px Breite und war dadurch 8185 px hoch.
+
+       `.enroll-video { width: min(440px, 100%) }` half nicht und konnte nicht
+       helfen: Eine Prozentangabe zählt bei der Rasterberechnung nicht mit,
+       der Browser nimmt für `auto` die intrinsische Breite. Die Grenze muss
+       deshalb an der SPALTE stehen, nicht am Element darin.
+
+       Wer hier je wieder `auto` einsetzt, prüft vorher, was rechts steht. */
+    grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
     align-items: center;
     gap: 3.2rem;
 }

@@ -1196,7 +1196,33 @@
    Fahrschule und sonst nichts. Er sitzt am selben Element wie `.enroll`,
    damit klar ist, dass es dasselbe Raster ist – wer den Ablauf zurückholt,
    nimmt ihn wieder weg. */
-.enroll--nur-fahrschule { grid-template-columns: minmax(0, 520px); }
+/* DIE KACHEL FUELLT IHRE SPALTE, seit SAR-100/106 (31.08.2026).
+
+   Hier stand `minmax(0, 520px)`. Der Deckel stammt aus SAR-72: Damals stand
+   die Kachel allein in einer Sektion voller leerer Flaeche, und ueber die
+   ganze Breite gezogen waere sie ein Balken gewesen.
+
+   Beides hat sich geaendert. Rechts steht jetzt der Spot (440 px), die linke
+   Spalte ist damit rund 670 px breit – der Deckel liess also 149 px leer. Und
+   in der Kachel steht seit SAR-100 zusaetzlich der Einordnungssatz. Schmal
+   und hoch neben einem breiten Video sah sie gequetscht aus (Nils,
+   31.08.2026).
+
+   Kommt der Spot je weg, gehoert der Deckel zurueck – sonst zieht sich die
+   Kachel wieder ueber die ganze Sektion. */
+.enroll--nur-fahrschule { grid-template-columns: minmax(0, 1fr); }
+
+/* ... UND DER ABSATZ DARIN BEHAELT SEIN ZEILENMASS. Ohne diese Zeile handelt
+   man sich mit der breiteren Kachel das naechste Problem ein: 669 px ergeben
+   rund 85 Zeichen je Zeile, und ab etwa 75 verliert das Auge beim Ruecksprung
+   die naechste Zeile. Vorher war der Satz durch `.section-lead` auf 64ch
+   begrenzt; die Begrenzung ist mit dem Umzug in die Kachel (SAR-100)
+   verlorengegangen und steht hier wieder.
+
+   Nur der Absatz, nicht die Kachel: Die Punkte der Liste sind kurz, und die
+   Kachel selbst SOLL ihre Spalte fuellen – sonst steht die Luecke wieder da,
+   wegen der die Sektion gequetscht aussah. */
+.enroll-formal-lead { max-width: 58ch; }
 
 /* Der Spot der Fahrschule in der rechten Spalte des Bandes (SAR-100).
    Die Spalte ist `auto`, die Breite kommt also von hier. 440 px stehen im

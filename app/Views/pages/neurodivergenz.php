@@ -25,14 +25,56 @@
          KEINE HINWEISKÄSTEN, KEINE RATSCHLÄGE VON UNS. Die Seite richtet sich
          an Menschen, die zu viele Reize schlecht vertragen; jeder Kasten, den
          wir dazuerfinden, ist einer mehr. Was hier steht, steht von ihr. */ ?>
-<section class="page-head">
-    <div class="container">
-        <h1>Fahrschule &amp; Neurodivergenz</h1>
-        <p class="page-lead">
-            Autismus, ADHS oder eine andere Art der Reizverarbeitung müssen kein
-            Hindernis für den Führerschein sein. Manchmal braucht es einfach eine
-            Fahrausbildung, die anders funktioniert.
-        </p>
+<?php /* SEIT SAR-113 (31.08.2026) EINE ECHTE HERO, wie auf
+         /fahren-mit-handicap. Hier stand eine `.page-head`, also das schmale
+         Band ohne Bild und ohne Weg weiter. Die Mechanik (`hero--photo`)
+         liegt seit SAR-103 ungenutzt in theme.css und ist dieselbe, die dort
+         die Startseite getragen hat.
+
+         DAS FOTO ZEIGT DAS AUTO OHNE DAS ROLLSTUHLZEICHEN, und das ist die
+         eine Entscheidung, um die es hier geht. Der Zuschnitt der
+         Schwerpunkt-Schwesterseite hat das orangene Zeichen groß im Bild –
+         auf einer Seite über Autismus, ADHS und andere Reizverarbeitung wäre
+         genau das falsch. Sarahs Anlass für diese Seite war ihr Satz, sie
+         habe „bisher nicht ein Wort über die Menschen mit unsichtbaren
+         Behinderungen gefunden"; ein Rollstuhl über ihrer Überschrift nähme
+         ihn zurück. Übrig bleiben Fensterband, Spiegel, grüner Streifen und
+         die Hecke dahinter – dasselbe Auto, ruhig fotografiert.
+
+         Weggeschnitten ist wie überall jede Schrift: „FAHRSCHULE SANDER" auf
+         der Tür, die Adresse auf der Klappe, Kennzeichen und die fremden
+         Sponsorenlogos. Beide Zuschnitte stammen aus derselben Vorlage, der
+         Befehl steht in assets-quellen/README.md.
+
+         KEIN NEUER TEXT. Überschrift und Vorspann sind Wort für Wort die
+         alten, der Vorspann trägt nur `hero-lead` statt `page-lead`. Dazu ein
+         Knopf, dieselbe Beschriftung wie auf den anderen Seiten – die Seite
+         hatte oben keinen Weg weiter. */ ?>
+<section class="hero hero--photo hero--photo-auto">
+    <div class="container hero-inner">
+        <div class="duo duo--narrow-media">
+            <div class="hero-content">
+                <h1>Fahrschule &amp; Neurodivergenz</h1>
+                <p class="hero-lead">
+                    Autismus, ADHS oder eine andere Art der Reizverarbeitung müssen kein
+                    Hindernis für den Führerschein sein. Manchmal braucht es einfach eine
+                    Fahrausbildung, die anders funktioniert.
+                </p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Schreib mir</a>
+                </div>
+            </div>
+
+            <div class="duo-media">
+                <figure class="photo hero-photo">
+                    <img src="<?= asset('img/hero-fahrschulauto-fenster.jpg') ?>"
+                         alt="Seitenansicht eines weißen Fahrschulautos: Fensterband,
+                              Außenspiegel und ein grüner Streifen über der Tür, dahinter
+                              eine Hecke"
+                         width="800" height="748" fetchpriority="high">
+                </figure>
+            </div>
+        </div>
     </div>
 </section>
 

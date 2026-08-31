@@ -1,34 +1,90 @@
 <?php $school = (string) config('school.name'); ?>
-<section class="page-head">
-    <div class="container">
-        <?php /* SAR-107, 30.08.2026: „körperlichem" dazu. Die Seite handelt von
-                 Technik – Linksgas, Lenkraddrehknopf, Handbedienung –, und wer
-                 mit ADHS oder Autismus hier landete, fand nichts von dem, was er
-                 gesucht hat. Das steht seit SAR-90 auf /neurodivergenz.
+<?php /* SEIT SAR-113 (31.08.2026) EINE ECHTE HERO, kein Kopfband mehr.
 
-                 Das Wort ist Sarahs eigenes: Ihr Vorspann direkt darunter
-                 beginnt mit „Eine körperliche Einschränkung". Die Überschrift
-                 sagt jetzt dasselbe wie der erste Satz. */ ?>
-        <h1>Fahren mit körperlichem Handicap</h1>
-        <?php /* SARAHS VORSPANN, seit dem 21.08.2026 (Ticket SAR-82). Hier
-                 stand eine kürzere Fassung von uns: „Mit Kleinwuchs, nach einem
-                 Unfall oder mit einer Einschränkung, die dir jemand als
-                 Ausschlussgrund verkauft hat: Lass uns darüber reden, bevor du
-                 es abhakst."
+         Hier stand eine `.page-head`: Überschrift, Vorspann, sonst nichts –
+         dasselbe schmale Band, das Impressum und Login tragen. Für die beiden
+         Schwerpunktseiten war das zu wenig: Sie sind der Grund, warum jemand
+         auf dieser Website landet, und begrüßten ihn mit einer Textzeile auf
+         beigem Grund.
 
-                 Ihre ist länger und sagt dasselbe in vier Sätzen, aber sie sagt
-                 es zu jedem einzeln: kleinwüchsig, nach einem Unfall, eine
-                 andere technische Lösung. Der dritte Satz („Vielleicht wurde dir
-                 sogar schon gesagt, dass Autofahren für dich nicht möglich sei")
-                 nennt beim Namen, was in der alten Fassung nur angedeutet war. */ ?>
-        <p class="page-lead">
-            Eine körperliche Einschränkung bedeutet nicht automatisch, dass du auf den
-            Führerschein verzichten musst. Vielleicht bist du kleinwüchsig, hast nach
-            einem Unfall körperliche Einschränkungen oder brauchst beim Fahren eine
-            andere technische Lösung. Vielleicht wurde dir sogar schon gesagt, dass
-            Autofahren für dich nicht möglich sei. Bevor du diesen Wunsch abhakst, lass
-            uns gemeinsam schauen, was möglich ist.
-        </p>
+         `hero--photo` ist dabei nichts Neues, sondern die Mechanik, die bis
+         SAR-103 die Startseite getragen hat und seither ungenutzt in
+         theme.css lag: Foto in der Medienspalte, unter 820 px stellt es sich
+         VOR den Text statt halbtransparent dahinter. Warum das für ein Foto
+         anders läuft als für eine Fläche, steht dort.
+
+         DAS FOTO IST DAS AUTO, UND ES IST HIERHER GEZOGEN. Bis gestern
+         (SAR-111) stand ein Zuschnitt davon weiter unten neben der
+         Handbedienung. Zwei Zuschnitte desselben Wagens auf einer Seite
+         lesen sich als Wiederholung – und von den vier Bildern der Seite war
+         das Auto das einzige, das nicht eine Einzelheit zeigt, sondern das
+         Ganze. Genau das gehört nach oben: erst das Fahrzeug, dann seine
+         Umbauten. Der Abschnitt unten steht wieder mit einem Foto da, so wie
+         vor SAR-111.
+
+         DER ZUSCHNITT IST ENGER ALS DER VON GESTERN und zeigt das orangene
+         Rollstuhlzeichen groß, dazu den grünen Streifen und ein Stück
+         Rücklicht. Weggeschnitten ist alles, was Text ist: „FAHRSCHULE
+         SANDER" auf der Tür, fahrschule-sander.de auf der Klappe, das
+         Kennzeichen, VW-Logo und die zwei fremden Sponsorenlogos. Es ist
+         damit kein Foto des Betriebs, sondern das Zeichen, um das es auf
+         dieser Seite geht.
+
+         KNOPF STATT NUR TEXT: Die Seite hatte oben keinen einzigen Weg
+         weiter – der erste Knopf kam nach sechs Abschnitten im Schlussband.
+         „Schreib mir" ist dieselbe Beschriftung wie im Hero auf
+         /ueber-mich. */ ?>
+<section class="hero hero--photo hero--photo-auto">
+    <div class="container hero-inner">
+        <div class="duo duo--narrow-media">
+            <div class="hero-content">
+                <?php /* SAR-107, 30.08.2026: „körperlichem" dazu. Die Seite handelt von
+                         Technik – Linksgas, Lenkraddrehknopf, Handbedienung –, und wer
+                         mit ADHS oder Autismus hier landete, fand nichts von dem, was er
+                         gesucht hat. Das steht seit SAR-90 auf /neurodivergenz.
+
+                         Das Wort ist Sarahs eigenes: Ihr Vorspann direkt darunter
+                         beginnt mit „Eine körperliche Einschränkung". Die Überschrift
+                         sagt jetzt dasselbe wie der erste Satz. */ ?>
+                <h1>Fahren mit körperlichem Handicap</h1>
+                <?php /* SARAHS VORSPANN, seit dem 21.08.2026 (Ticket SAR-82). Hier
+                         stand eine kürzere Fassung von uns: „Mit Kleinwuchs, nach einem
+                         Unfall oder mit einer Einschränkung, die dir jemand als
+                         Ausschlussgrund verkauft hat: Lass uns darüber reden, bevor du
+                         es abhakst."
+
+                         Ihre ist länger und sagt dasselbe in vier Sätzen, aber sie sagt
+                         es zu jedem einzeln: kleinwüchsig, nach einem Unfall, eine
+                         andere technische Lösung. Der dritte Satz („Vielleicht wurde dir
+                         sogar schon gesagt, dass Autofahren für dich nicht möglich sei")
+                         nennt beim Namen, was in der alten Fassung nur angedeutet war.
+
+                         Er trägt seit SAR-113 `hero-lead` statt `page-lead` – anderer
+                         Kasten, gleicher Wortlaut. An Sarahs Text ist nichts
+                         geändert. */ ?>
+                <p class="hero-lead">
+                    Eine körperliche Einschränkung bedeutet nicht automatisch, dass du auf den
+                    Führerschein verzichten musst. Vielleicht bist du kleinwüchsig, hast nach
+                    einem Unfall körperliche Einschränkungen oder brauchst beim Fahren eine
+                    andere technische Lösung. Vielleicht wurde dir sogar schon gesagt, dass
+                    Autofahren für dich nicht möglich sei. Bevor du diesen Wunsch abhakst, lass
+                    uns gemeinsam schauen, was möglich ist.
+                </p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Schreib mir</a>
+                </div>
+            </div>
+
+            <div class="duo-media">
+                <figure class="photo hero-photo">
+                    <img src="<?= asset('img/hero-fahrschulauto-zeichen.jpg') ?>"
+                         alt="Seite eines weißen Fahrschulautos: ein orangefarbenes
+                              Rollstuhlzeichen auf der hinteren Scheibe, darunter ein grüner
+                              Streifen über der Tür"
+                         width="800" height="606" fetchpriority="high">
+                </figure>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -230,53 +286,28 @@
                          Einordnung jetzt im alt-Text: Auf dem Bild liegen Teile
                          herum, und ohne den Hinweis liest sich das als Pfusch
                          statt als Zwischenstand. */ ?>
-                <?php /* ZWEITES BILD SEIT DEM 31.08.2026: das Fahrschulauto.
-                         `.photo-pair` ist dieselbe Komponente, die auf
-                         /neurodivergenz zwei Fotos hält (SAR-110) – deshalb war
-                         hier kein CSS zu schreiben.
+                <?php /* HIER STAND VOM 31.08.2026 BIS ZUM SELBEN ABEND EIN
+                         BILDPAAR (SAR-111): die Handbedienung und daneben das
+                         Fahrschulauto. Das Auto ist mit SAR-113 in die Hero
+                         gezogen, und der Abschnitt steht wieder mit einem Foto
+                         da.
 
-                         WARUM DAS AUTO AUSGERECHNET NEBEN DIE HANDBEDIENUNG
-                         GEHÖRT: Die Seite zeigte bis dahin ausschließlich
-                         Nahaufnahmen von Fußräumen – Linksgas im Abschnitt
-                         darüber, Handbedienung hier. Lauter Teile, nie das
-                         Ganze. Wer sich fragt, ob es das Auto überhaupt gibt und
-                         ob er da hineindarf, fand nur Pedale. Das Detail und das
-                         Fahrzeug stehen jetzt nebeneinander: hier der Umbau,
-                         daneben das Auto, in dem er steckt.
-
-                         DER ZUSCHNITT IST ABSICHT UND NICHT NUR EINE
-                         GRÖSSENFRAGE. Auf dem Original steht „FAHRSCHULE
-                         SANDER" quer über der Tür, dazu fahrschule-sander.de,
-                         das Kennzeichen, das VW-Logo, Facebook- und
-                         Instagram-Zeichen und zwei fremde Sponsorenlogos. Nichts
-                         davon ist im Ausschnitt: Übrig sind das orangene
-                         Rollstuhlzeichen, der grüne Streifen und ein Stück Dach.
-                         Zwei Gründe dafür – das Kennzeichen ist auf dem Original
-                         scharf lesbar, und Sarah hat am selben Tag „zu viel
-                         Sander" gesagt (SAR-101). Ein ungeschnittenes Foto hätte
-                         ihr genau das zurückgegeben.
-
-                         Damit ist es kein Foto des Betriebs, sondern der Beleg
-                         für ihren Schwerpunkt: ein Auto, das dafür gekennzeichnet
-                         ist. Wer den vollen Wagen doch zeigen will, findet die
-                         Vorlage in assets-quellen/ – aber dann bitte mit dem
-                         Kennzeichen im Blick.
-
-                         Die Reihenfolge im Markup ist die des Paares:
-                         Hochformat zuerst, Querformat versetzt darunter. */ ?>
-                <div class="photo-pair">
-                    <figure class="photo photo--right">
-                        <img src="<?= asset('img/handicap-handbedienung.jpg') ?>"
-                             alt="Fußraum während des Umbaus auf Handbedienung: ein grün lackierter Hebel am Boden, verbunden über grüne Gestänge, daneben eine grüne Abdeckung vor den Pedalen"
-                             width="1200" height="1484" loading="lazy" decoding="async">
-                    </figure>
-                    <figure class="photo">
-                        <img src="<?= asset('img/fahrschulauto-handicap.jpg') ?>"
-                             alt="Heck des weißen Fahrschulautos mit grünem Streifen; auf der
-                                  hinteren Scheibe klebt ein orangefarbenes Rollstuhlzeichen"
-                             width="900" height="665" loading="lazy" decoding="async">
-                    </figure>
-                </div>
+                         Der Grund von SAR-111 gilt weiter, er wird nur anders
+                         eingelöst: Die Seite zeigte lauter Nahaufnahmen von
+                         Fußräumen und nie das Ganze. Das Ganze steht jetzt
+                         oben – und dort beantwortet es die Frage „gibt es das
+                         Auto überhaupt" schon vor dem ersten Absatz, statt
+                         nach dem dritten Abschnitt. Zwei Zuschnitte desselben
+                         Wagens auf einer Seite wären dagegen eine
+                         Wiederholung. Wer das Paar zurückholt, findet es in
+                         der Versionsgeschichte; `.photo-pair` hält weiter die
+                         beiden Fotos in Abschnitt 1 und die auf
+                         /neurodivergenz. */ ?>
+                <figure class="photo photo--right">
+                    <img src="<?= asset('img/handicap-handbedienung.jpg') ?>"
+                         alt="Fußraum während des Umbaus auf Handbedienung: ein grün lackierter Hebel am Boden, verbunden über grüne Gestänge, daneben eine grüne Abdeckung vor den Pedalen"
+                         width="1200" height="1484" loading="lazy" decoding="async">
+                </figure>
             </div>
 
             <div class="duo-text">

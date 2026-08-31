@@ -136,9 +136,46 @@ aufs Heck (vom Rücklicht erschlagen) und einer mit **beiden** Rollstuhlzeichen
 zu klein. Wer den Wagen doch in voller Länge zeigen will, baut neu – dann aber
 mit dem Kennzeichen im Blick.
 
+**Seit SAR-113 (31.08.2026) kommen zwei weitere Zuschnitte aus derselben
+Vorlage**, je einer für die Hero der beiden Schwerpunktseiten. `-crop` ist
+hier die ganze Aussage: Beide Seiten zeigen dasselbe Auto, aber nicht dasselbe
+davon.
+
+| Ausgeliefert | Wo | Was drauf ist |
+|---|---|---|
+| `hero-fahrschulauto-zeichen.jpg` (800×606) | Hero `/fahren-mit-handicap` | das orangene Rollstuhlzeichen groß, grüner Streifen, Rücklicht |
+| `hero-fahrschulauto-fenster.jpg` (800×748) | Hero `/neurodivergenz` | Fensterband, Außenspiegel, grüner Streifen, ein Stück Hecke – **kein** Rollstuhlzeichen |
+
+```bash
+magick assets-quellen/fahrlehrerin_sarah_fahrschulauto_sander_handicap_ausbildung.jpeg \
+  -auto-orient -crop 620x470+380+230 +repage -resize 800x \
+  -strip -interlace Plane -quality 78 public/assets/img/hero-fahrschulauto-zeichen.jpg
+magick assets-quellen/fahrlehrerin_sarah_fahrschulauto_sander_handicap_ausbildung.jpeg \
+  -auto-orient -crop 460x430+60+230 +repage -resize 800x \
+  -strip -interlace Plane -quality 78 public/assets/img/hero-fahrschulauto-fenster.jpg
+```
+
+**Warum das Fensterbild ohne Rollstuhlzeichen auskommen muss:** Die Seite
+handelt von Autismus, ADHS und anderer Reizverarbeitung, also von
+Behinderungen, die man nicht sieht. Sarahs Anlass für die Seite war ihr Satz,
+sie habe „bisher nicht ein Wort über die Menschen mit unsichtbaren
+Behinderungen gefunden". Ein Rollstuhlsymbol über ihrer Überschrift nähme ihn
+zurück. Der Ausschnitt liegt deshalb links vom Zeichen (das im Original bei
+x ≈ 512 anfängt) und oberhalb der Türbeschriftung (ab y ≈ 680).
+
+Eine zweite Fassung des Fensterbilds mit mehr Hecke (`460x470+60+150`) ist
+verworfen: Bei 400 px Anzeigebreite war die halbe Fläche Grün und das Auto
+Beiwerk.
+
+**`fahrschulauto-handicap.jpg` ist seit SAR-113 nicht mehr eingebunden.** Es
+stand einen Tag lang neben der Handbedienung; das Auto steht jetzt in der
+Hero derselben Seite, und zwei Zuschnitte eines Wagens auf einer Seite lesen
+sich als Wiederholung. Die Datei bleibt liegen.
+
 **Nicht zu verwechseln mit `fahrschulauto.webp`**: Das ist der ältere
 Freisteller aus einer Folie des Theoriematerials, weiterhin nirgends
 eingebunden.
+
 ## Die Pedalverlängerung (31.08.2026, SAR-112)
 
 `fahrlehrerin_sarah_umbau_fahrschulauto_kleinwuchs.jpeg` (1536×2048) – der Fußraum

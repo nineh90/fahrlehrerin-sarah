@@ -925,6 +925,22 @@
     margin-inline: auto;
 }
 
+/* DER BRENNPUNKT DES HERO-FOTOS, falls es beschnitten wird (SAR-113).
+   Beschnitten wird erst unter 820 px: Dort begrenzt `max-height: 44vh` das
+   Bild und `object-fit: cover` schneidet an. Der Standardwert 46 % / 24 %
+   gehört Sarahs Porträt – dort sitzt ihr Gesicht, mittig stünde die
+   Tischlampe im Bild (nachgemessen in SAR-80).
+
+   Für die Autofotos auf den beiden Schwerpunktseiten stimmt er nicht: Sie
+   sind quer bis fast quadratisch, ihr Motiv liegt in der Mitte, und 24 % von
+   oben zeigte vor allem die Hecke. `hero--photo-auto` setzt ihn deshalb auf
+   die Mitte. Nachgemessen greift die Begrenzung nur beim Fensterbild
+   (annähernd quadratisch); das Zeichenbild ist quer genug, um bei jeder
+   Handybreite ungeschnitten hineinzupassen – der Wert steht trotzdem an
+   beiden, damit ein späterer Zuschnitt nicht auf Sarahs Brennpunkt
+   zurückfällt. */
+.hero--photo-auto { --hero-photo-pos: 50% 45%; }
+
 /* KEIN REGENBOGENSTRICH VOR DER AUGENBRAUE, seit dem 21.08.2026 (SAR-74).
    `nd-base.css` setzt ihn als `::before` an `.hero-eyebrow` – 28 × 3 px im
    Verlauf der Marke, links neben der Versalzeile. Auf dem Desktop sitzt er
@@ -1053,7 +1069,7 @@
            Kasten schmaler proportioniert ist als das Bild – er steht
            trotzdem richtig da, damit niemand ihn bei der nächsten
            Bildänderung falsch übernimmt. */
-        object-position: 46% 24%;
+        object-position: var(--hero-photo-pos, 46% 24%);
     }
 
     /* Hier stand die Regel für `.hero-arc`: breiter als die Spalte und auf

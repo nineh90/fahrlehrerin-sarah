@@ -326,27 +326,72 @@ $schoolUrl = trim((string) config('school.url'));
                  zweite Teil von SAR-28 und ist hier gratis mitgekommen. */ ?>
         <div class="duo duo--narrow-media-left">
             <div class="duo-media photo-wrap">
+                <?php /* DAS VIDEO MIT RICARDA, seit dem 31.08.2026 (SAR-89).
+
+                         Hier lief bis dahin `sarah-vorstellung.mp4` – dasselbe
+                         Video, das auch den Hero von /ueber-mich trägt. Die
+                         Doppelung ist damit weg: Jedes der beiden Videos steht
+                         jetzt genau einmal auf der Website.
+
+                         Kein autoplay: Das Video hat Ton und startet nur auf
+                         Wunsch. `preload="metadata"` lädt bloß die Kopfdaten und
+                         nicht die 10 MB – das zählt hier mehr als beim Vorgänger,
+                         der halb so schwer war.
+
+                         DIE BILDUNTERSCHRIFT ZITIERT DEN ANFANG, wie beim
+                         Vorgänger. Sie steht der Regel „keine Bildunterschriften"
+                         (Sarah, 12.08.2026) nicht entgegen: Die gilt für Fotos und
+                         meint Erklärtexte. Hier steht kein Erklärtext, sondern der
+                         Satz, mit dem das Video aufmacht, plus die Quelle.
+
+                         UNTERTITEL SIND DIESMAL IM BILD: Das Video trägt sie
+                         durchgehend eingebrannt. Der offene Punkt „Untertitel für
+                         das Video" aus der CLAUDE.md ist damit für dieses Video
+                         erledigt, für das auf /ueber-mich nicht. Ein
+                         `<track kind="captions">` bleibt trotzdem die bessere
+                         Lösung – eingebrannte Schrift kann niemand vorlesen lassen
+                         und niemand abschalten. */ ?>
                 <figure class="video-frame">
-                    <?php /* Kein autoplay: das Video hat Ton und startet nur auf Wunsch.
-                             preload="metadata" lädt bloß die Kopfdaten, nicht die 5,7 MB. */ ?>
                     <video controls playsinline preload="metadata"
-                           poster="<?= asset('img/sarah-vorstellung-poster.jpg') ?>"
+                           poster="<?= asset('img/fahren-mit-trisomie-21-poster.jpg') ?>"
                            width="576" height="1024">
-                        <source src="<?= asset('video/sarah-vorstellung.mp4') ?>" type="video/mp4">
+                        <source src="<?= asset('video/fahren-mit-trisomie-21.mp4') ?>" type="video/mp4">
                         Dein Browser kann dieses Video nicht abspielen.
                         <a href="<?= e(tiktok_url()) ?>" target="_blank" rel="noopener noreferrer">
                             Schau es dir direkt auf TikTok an.
                         </a>
                     </video>
                     <figcaption>
-                        „Mit einem Handicap ist der Weg zum Führerschein oftmals steinig und
-                        schwer" – ein Ausschnitt von meinem Kanal
+                        „Führerschein mit Trisomie 21 – ist das möglich?" – ein Ausschnitt
+                        von meinem Kanal
                     </figcaption>
                 </figure>
             </div>
 
             <div class="duo-text">
-                <h2>Was im Fahrschulauto wirklich passiert</h2>
+                <?php /* ⚠️ ENTWURF, nicht Sarahs Wortlaut. Überschrift geändert mit
+                         SAR-89 (31.08.2026): Hier stand „Was im Fahrschulauto
+                         wirklich passiert". Das Video darunter ist seither ein
+                         Gespräch – am Tisch, auf dem Sofa, erst am Schluss im
+                         Kofferraum. Eine Überschrift, die einen Ort verspricht, an
+                         dem das Beispiel darunter überwiegend nicht spielt, ist
+                         derselbe Fehler wie die Schlusstexte in SAR-93.
+
+                         NUR DIE ÜBERSCHRIFT, der Absatz darunter bleibt: Er nennt
+                         als Kanalinhalt ausdrücklich „Fragen, die mir jede Woche
+                         gestellt werden", und Ricardas Video ist genau so eine
+                         Frage. „Ein Beispiel siehst du hier direkt" stimmt
+                         ebenfalls weiter, und die beiden Kanal-Knöpfe darunter
+                         sowieso – der Abschnitt bleibt der Weg zu ihren
+                         Kanälen.
+
+                         „WAS WIRKLICH PASSIERT" IST DIE ALTE ÜBERSCHRIFT MINUS
+                         DEM ORT. Eine Zwischenfassung hieß „Was ich auf meinen
+                         Kanälen zeige" – die wiederholte die erste Zeile des
+                         Absatzes darunter fast wörtlich („Auf meinen Kanälen zeige
+                         ich …"). So bleibt der Ton der Vorlage erhalten, und die
+                         einzige Behauptung, die nicht mehr stimmte, ist raus. */ ?>
+                <h2>Was wirklich passiert</h2>
                 <p>
                     Auf meinen Kanälen zeige ich meinen Arbeitsalltag: Situationen, die in
                     der Prüfung immer wieder schiefgehen, Fragen, die mir jede Woche

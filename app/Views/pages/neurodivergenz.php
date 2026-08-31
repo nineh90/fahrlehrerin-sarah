@@ -47,9 +47,14 @@
          Befehl steht in assets-quellen/README.md.
 
          KEIN NEUER TEXT. Überschrift und Vorspann sind Wort für Wort die
-         alten, der Vorspann trägt nur `hero-lead` statt `page-lead`. Dazu ein
-         Knopf, dieselbe Beschriftung wie auf den anderen Seiten – die Seite
-         hatte oben keinen Weg weiter. */ ?>
+         alten, der Vorspann trägt nur `hero-lead` statt `page-lead`.
+
+         UND KEIN KNOPF, wie auf der Schwesterseite (Sarah über Nils,
+         31.08.2026). Kurz stand hier einer. Er ist entfallen: Die Seite
+         richtet sich an Menschen, die mit zu vielen Reizen auf einmal
+         schlecht zurechtkommen – dieselbe Überlegung, aus der sie ohne
+         Hinweiskästen auskommt. Der Weg zum Kontakt steht im Menü, im Fuß und
+         im Schlussband. */ ?>
 <section class="hero hero--photo hero--photo-auto">
     <div class="container hero-inner">
         <div class="duo duo--narrow-media">
@@ -60,9 +65,6 @@
                     Hindernis für den Führerschein sein. Manchmal braucht es einfach eine
                     Fahrausbildung, die anders funktioniert.
                 </p>
-                <div class="hero-actions">
-                    <a class="btn btn-primary btn-lg" href="<?= url('/kontakt') ?>">Kontakt</a>
-                </div>
             </div>
 
             <div class="duo-media">

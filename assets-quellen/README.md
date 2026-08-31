@@ -77,3 +77,38 @@ freigegeben. Liefert er eine eigene Datei, ersetzt sie diese hier.
 
 Sein Favicon (`partner/johannes-springer.webp`, oranger Block auf dunklem Grund) stand
 bis zum 21.08.2026 in der Kachel und liegt weiter im Ordner.
+
+---
+
+## Die drei Aufnahmen vom 31.08.2026 (SAR-110)
+
+Von Sarah geliefert, ursprünglich direkt in `public/assets/img/` abgelegt und von
+dort hierher verschoben – ins Web gehört der verkleinerte Zuschnitt, nicht das
+Original vom Telefon. Alle drei stehen in der `.gitignore`: **Auf zweien ist nicht
+nur Sarah zu sehen**, sondern eine Kollegin und ein Fahrschüler, erkennbar und in
+voller Auflösung. Das Repo ist öffentlich.
+
+| Vorlage | Ausgeliefert | Wo |
+|---|---|---|
+| `fahrlehrerin_sarah_und_kollegin.jpeg` (1536×2048) | `sarah-und-kollegin.jpg` (900×1200) | `/neurodivergenz`, „Du musst dich bei mir nicht verstellen" |
+| `fahrlehrerin_sarah_fahrstunde_handicap.jpeg` (2048×1536) | `sarah-fahrstunde-handicap.jpg` (900×675) | dieselbe Sektion, darunter versetzt |
+| `fahrlehrerin_sarah_fahrschulauto_sander_handicap_ausbildung.jpeg` | – | **noch nirgends**, kommt später (Nils, 31.08.2026: „merke dir das Auto für später") |
+
+Gebaut mit dem Standardbefehl, nur auf 900 px statt 1400 px – breiter werden die
+beiden nirgends angezeigt (im Paar rund 420 bzw. 360 px, also doppelte
+Anzeigebreite):
+
+```bash
+magick assets-quellen/fahrlehrerin_sarah_und_kollegin.jpeg -auto-orient -resize 900x \
+  -strip -interlace Plane -quality 76 public/assets/img/sarah-und-kollegin.jpg
+magick assets-quellen/fahrlehrerin_sarah_fahrstunde_handicap.jpeg -auto-orient -resize 900x \
+  -strip -interlace Plane -quality 76 public/assets/img/sarah-fahrstunde-handicap.jpg
+```
+
+`-strip` ist hier nicht nur eine Größenfrage: Es nimmt die EXIF-Daten mit, also auch
+einen etwaigen Standort. Nachgesehen – in diesen beiden Vorlagen stand ohnehin
+keiner, aber beim nächsten Telefonfoto kann es anders sein.
+
+**Offen und nicht von uns zu entscheiden:** Auf beiden Bildern sind Dritte
+erkennbar. Dass sie der Veröffentlichung zugestimmt haben, setzen wir voraus, weil
+Sarah die Fotos zu genau diesem Zweck geliefert hat – geprüft haben wir es nicht.

@@ -844,6 +844,41 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
     color: var(--footer-text); background: linear-gradient(180deg, transparent, rgba(43, 36, 52, .82));
 }
 
+/* ZWEI FOTOS IN EINER MEDIENSPALTE  ·  .photo-pair            (SAR-110)
+   Das Hochformat oben links, das Querformat darunter nach rechts versetzt und
+   leicht darüberliegend.
+
+   WARUM VERSETZT UND NICHT NEBENEINANDER ODER GESTAPELT: Nebeneinander bekäme
+   jedes Bild die halbe Spalte, also rund 250 px – auf einem Gruppenfoto ist
+   dann kein Gesicht mehr zu erkennen. Sauber gestapelt käme die Spalte auf
+   die Summe beider Höhen und wäre doppelt so hoch wie der Text daneben; die
+   `.duo` zentriert senkrecht, der Text schwämme dann in der Mitte einer
+   langen Bildspalte. Versetzt nutzt jedes Bild rund drei Viertel der Breite,
+   und die Überlappung holt die Gesamthöhe wieder herunter.
+
+   DER VERSATZ LÄUFT ÜBER `margin`, NICHT ÜBER `transform`. Auf `.photo` liegt
+   schon eine Drehung, und ein `transform` hier würde sie überschreiben statt
+   sie zu ergänzen – das Bild stünde gerade. Dieselbe Falle wie beim
+   Scroll-Reveal, der aus demselben Grund `translate` statt `transform`
+   benutzt (Begründung in der CLAUDE.md).
+
+   `z-index` am zweiten Bild: Ohne ihn liegt das erste oben (späteres Element,
+   aber `.photo` bringt `position: relative` mit und beide stehen ohne eigenen
+   z-index auf `auto`) – die Überlappung sähe dann nach Fehler aus. Der Schatten
+   des oberen auf dem unteren ist das, was die beiden als Stapel lesbar macht.
+
+   Gestapelt (unter 820 px) steht die `.duo` ohnehin einspaltig; der Versatz
+   bleibt, wird dort aber kleiner gefahren – zwei stark versetzte Bilder auf
+   einer Handybreite lassen für jedes zu wenig übrig. */
+.photo-pair { display: grid; }
+.photo-pair > .photo { width: 78%; }
+.photo-pair > .photo + .photo {
+    width: 68%;
+    margin-left: auto;
+    margin-top: -11%;
+    z-index: 1;
+}
+
 /* Freisteller statt Foto: kein Rahmen, kein Schatten, keine Drehung – der
    Gegenstand steht frei auf der Fläche. Die Bildunterschrift rutscht darunter,
    weil es im Bild keine Fläche gibt, auf der sie liegen könnte.
@@ -1196,6 +1231,15 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
     .duo--stack-text-first .duo-media { order: 2; }
 
     .photo, .photo--right { transform: none; }
+
+    /* Das Bildpaar rückt zusammen (SAR-110). Auf einer Handybreite ist die
+       Spalte rund 340 px breit; bei 78 % blieben davon 265 px, und auf einem
+       Foto mit zwei Personen ist das wenig. Der Versatz muss trotzdem
+       bleiben, sonst stehen zwei Bilder stumpf untereinander – hier oben
+       fällt zusätzlich die Drehung weg (Regel eine Zeile darüber), er ist
+       also das Einzige, was die beiden noch als Paar zusammenhält. */
+    .photo-pair > .photo { width: 86%; }
+    .photo-pair > .photo + .photo { width: 78%; margin-top: -7%; }
 
     /* Gestapelt sitzt das Bild mittig unter dem Text. Linksbündiger Text über
        einem zentrierten Bild liest sich, als wäre eines von beiden verrutscht –

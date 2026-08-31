@@ -15,6 +15,16 @@ assets-quellen/fahrlehrerin_sarah_ausgeschnitten.png
 assets-quellen/sarah-rollistammtisch.jpeg
 assets-quellen/fahrlehrerin_sarah_hero.jpeg
 
+# Die drei Aufnahmen vom 31.08.2026 (SAR-110). Hier wiegt der Grund von oben
+# noch schwerer: Auf zwei von ihnen ist NICHT NUR SARAH zu sehen, sondern eine
+# Kollegin und ein Fahrschüler – erkennbar, in voller Auflösung, aus einer
+# Fahrstunde. Das gehört in kein öffentliches Repo. Die verkleinerten
+# Zuschnitte, die auf der Website laufen, liegen wie immer in
+# public/assets/img und sind dort ohne EXIF abgelegt.
+assets-quellen/fahrlehrerin_sarah_und_kollegin.jpeg
+assets-quellen/fahrlehrerin_sarah_fahrstunde_handicap.jpeg
+assets-quellen/fahrlehrerin_sarah_fahrschulauto_sander_handicap_ausbildung.jpeg
+
 # Vorlage des Fahrschulautos: eine Folie aus dem Theoriematerial der Fahrschule,
 # also deren Material und nicht Sarahs. Der ausgelieferte Freisteller
 # (public/assets/img/fahrschulauto.webp) steht ohnehin auf der Website – die

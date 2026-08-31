@@ -147,24 +147,57 @@
     <div class="container">
         <div class="duo">
             <div class="duo-media photo-wrap">
-                <?php /* Das Messefoto lag seit dem 17.08.2026 ungenutzt in
-                         public/assets/img – es stand vorher auf /ueber-mich und
-                         ist dort dem Freisteller gewichen (SAR-38).
+                <?php /* ZWEI FOTOS STATT EINEM, seit dem 31.08.2026 (SAR-110,
+                         Sarahs Wunsch). Hier stand `sarah-messe.jpg` – sie
+                         allein am Messestand. Der Abschnitt steht weiterhin
+                         genau hier und aus dem alten Grund: „Du musst dich bei
+                         mir nicht verstellen" ist der Absatz, in dem es um sie
+                         als Person geht und nicht um Methode. Am TEXT ist
+                         nichts geändert.
 
-                         Es steht bei DIESEM Abschnitt und nicht weiter oben:
-                         „Du musst dich bei mir nicht verstellen" ist der Absatz,
-                         in dem es um sie als Person geht und nicht um Methode.
-                         Ein Gesicht dazu tut hier mehr als drei Zeilen weiter
-                         oben neben einer Aufzählung.
+                         WAS DIE BEIDEN BILDER BESSER KÖNNEN als das Messefoto:
+                         Der Absatz spricht von zweien – „sag es", „frag nach",
+                         „wir können darüber sprechen". Auf einem Foto, das nur
+                         sie zeigt, ist der andere nicht da. Hier ist er es
+                         zweimal: einmal die Kollegin, einmal ein Fahrschüler
+                         im Auto.
 
-                         Es ist das einzige Bild der Seite, und das ist Absicht.
-                         Wer wegen Reizverarbeitung hier liest, braucht keine
-                         bebilderte Seite, sondern eine ruhige. */ ?>
-                <figure class="photo">
-                    <img src="<?= asset('img/sarah-messe.jpg') ?>"
-                         alt="Sarah an ihrem Messestand, lächelnd, mit hochgestrecktem Daumen"
-                         width="640" height="800" loading="lazy" decoding="async">
-                </figure>
+                         DAS ARGUMENT VON FRÜHER GILT WEITER, es ist nur enger
+                         geworden: Wer wegen Reizverarbeitung hier liest,
+                         braucht eine ruhige Seite. Zwei Bilder in EINEM
+                         Abschnitt sind noch ruhig – der Rest der Seite bleibt
+                         bildlos, und genau das ist die Grenze. Wer hier ein
+                         drittes anhängt, hat sie überschritten.
+
+                         Sie liegen versetzt und gegeneinander gekippt
+                         (`.photo-pair`, nd-base.css): das Hochformat links
+                         oben, das Querformat rechts darunter und leicht
+                         darüberliegend. Nebeneinander wären beide zu klein,
+                         gestapelt wäre die Spalte doppelt so hoch wie der Text
+                         daneben.
+
+                         `.photo--right` dreht das zweite in die Gegenrichtung.
+                         Beide gleich gekippt sähen aus wie ein Versehen im
+                         Stylesheet; gegeneinander sieht es nach Hand aus –
+                         dieselbe Überlegung wie beim einzelnen Rahmen.
+
+                         DAS MESSEFOTO IST NICHT GELÖSCHT, es liegt weiter als
+                         `sarah-messe.jpg` im Ordner. Es lag dort schon einmal
+                         ungenutzt, zwischen dem 17.08. und heute. */ ?>
+                <div class="photo-pair">
+                    <figure class="photo">
+                        <img src="<?= asset('img/sarah-und-kollegin.jpg') ?>"
+                             alt="Sarah und eine Kollegin am Straßenrand, beide mit
+                                  Headset; die Kollegin zeigt den Daumen nach oben"
+                             width="900" height="1200" loading="lazy" decoding="async">
+                    </figure>
+                    <figure class="photo photo--right">
+                        <img src="<?= asset('img/sarah-fahrstunde-handicap.jpg') ?>"
+                             alt="Sarah und ein Fahrschüler angeschnallt im Auto, hinter
+                                  ihnen liegt ein zusammengeklappter Rollstuhl"
+                             width="900" height="675" loading="lazy" decoding="async">
+                    </figure>
+                </div>
             </div>
 
             <div class="duo-text">

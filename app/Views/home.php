@@ -948,24 +948,41 @@ $schoolUrl = trim((string) config('school.url'));
             <?php if ($school !== ''): ?>
                 <figure class="video-frame enroll-video">
                     <video controls playsinline preload="metadata"
+                           aria-label="Der Werbespot der <?= e($school) ?>"
                            poster="<?= asset('img/fahrschule-sander-spot-poster.jpg') ?>"
                            width="1024" height="576">
                         <source src="<?= asset('video/fahrschule-sander-spot.mp4') ?>" type="video/mp4">
                         Dein Browser kann dieses Video nicht abspielen.
                     </video>
-                    <?php /* ⚠️ PLATZHALTER: Das Kino fehlt noch (Nils, 31.08.2026 –
-                             „weiß nicht genau, in welchem Kino das läuft").
-                             Sobald der Name da ist, gehört er in diesen Satz.
-                             Bis dahin nennt er nur Monat und Stadt, und beides
-                             ist bestätigt.
+                    <?php /* HIER STAND EINE BILDUNTERSCHRIFT – „Der Spot meiner
+                             Fahrschule – ab September im Kino in Hamburg",
+                             entfernt am 31.08.2026 mit SAR-100 auf Sarahs Wort
+                             (dieselbe Nachrichtenrunde wie SAR-101, das die
+                             Schlussbänder abgeräumt hat – ihr „auch" bezieht
+                             sich darauf):
+                             „Und den Text unterm Werbespot würde ich auch
+                             rausnehmen – keine zusätzliche Erklärung. Sonst
+                             müssen wir das wieder anpassen nach September oder?"
 
-                             Die Bildunterschrift ist hier keine Erklärung des
-                             Bildes, sondern eine Nachricht – deshalb steht sie
-                             der Regel „keine Bildunterschriften" nicht entgegen,
-                             genau wie bei den anderen beiden Videos. */ ?>
-                    <figcaption>
-                        Der Spot meiner Fahrschule – ab September im Kino in Hamburg
-                    </figcaption>
+                             SIE HAT MIT BEIDEM RECHT, und das zweite Argument
+                             erledigt einen offenen Punkt: Der Satz war als
+                             Platzhalter markiert, weil der Kinoname fehlte – er
+                             hätte also nachgepflegt werden müssen, und im
+                             Oktober ein zweites Mal, wenn „ab September" nicht
+                             mehr stimmt. Eine Bildunterschrift mit Verfallsdatum
+                             auf einer Seite, die sonst niemand anfasst.
+
+                             DAMIT GILT IHRE REGEL VON 12.08.2026 WIEDER OHNE
+                             AUSNAHME für dieses Video: keine Erklärung unter dem
+                             Bild. Die Begründung, die hier stand – es sei „keine
+                             Erklärung, sondern eine Nachricht" – trug genau so
+                             weit, wie die Nachricht aktuell war.
+
+                             DER SPOT VERLIERT DABEI SEINEN NAMEN NICHT: Er steht
+                             im `aria-label` am Video und wird nur vorgelesen.
+                             Dasselbe Verfahren wie beim alt-Text der Fotos. Was
+                             dort NICHT steht, ist der September – sonst hätte
+                             das Nachpflegen bloß den Ort gewechselt. */ ?>
                 </figure>
             <?php endif; ?>
         </div>

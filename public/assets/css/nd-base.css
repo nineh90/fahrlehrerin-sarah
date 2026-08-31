@@ -969,72 +969,33 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
 .spektrum-feld:nth-child(5) { margin-left:-27.7%; margin-top:  16%; }
 .spektrum-feld:nth-child(6) { margin-left:-27.7%; margin-top: -16%; }
 
-/* UNTER 430 PX SPALTENBREITE IST ES KEIN KREIS MEHR, sondern eine Reihe von
-   Feldern (SAR-114). Nachgemessen: Bei einer 328 px breiten Spalte ist ein
-   Feld 105 px breit, und „Tourette-Syndrom" passt dort nur, wenn die Schrift
-   auf 10,5 px fällt. Auf einer Seite, die von Reizverarbeitung und
-   Lesbarkeit handelt, ist das das falsche Ende zum Sparen. Also fällt die
-   Anordnung weg statt der Schrift: Der Kern wird zur Überschrift der Gruppe,
-   die sechs Felder stehen als Pillen darunter. Ein Oberbegriff, sechs
-   Ausprägungen, Sarahs Farben – dieselbe Aussage in einer Form, die auf jede
-   Breite passt.
+/* IN EINER SCHMALEN SPALTE BLEIBT ES EIN KREIS (SAR-114, zweiter Anlauf).
+   Eine erste Fassung baute unter 430 px Spaltenbreite auf eine Reihe von
+   Pillen um – verworfen (Nils): Der Kreis IST die Aussage, sechs Dinge, die
+   um eine Mitte liegen. Eine Liste sagt „sechs Dinge" und lässt die Mitte
+   weg.
 
-   GEMESSEN WIRD DIE SPALTE, NICHT DAS FENSTER, und das ist hier keine
-   Feinheit: Der Fall tritt zweimal auf, an zwei ganz verschiedenen
-   Fensterbreiten. Auf dem Handy (Spalte 321 px, gestapelt) und auf einem
-   schmalen Desktop-Fenster zwischen 820 und rund 1150 px, wo der Hero schon
-   zweispaltig steht und die Medienspalte gerade einmal 328 px hat. Eine
-   Media-Query müsste beide Bereiche einzeln treffen und bei jeder Änderung
-   am Raster nachgerechnet werden; die Container-Query fragt einfach die
-   Spalte.
+   Also wird hier nicht die Anordnung geopfert, sondern Platz geschaffen:
+   Die Felder wachsen von 32 auf 35 % (sie überlappen sich dadurch minimal,
+   wie in der Vorlage auch), das Innenfutter schrumpft, und die Schrift darf
+   bis auf 0,68 rem heruntergehen. Zusammen reicht das für das längste Wort.
 
-   DAFÜR GIBT ES `.spektrum-wrap`, und der Grund ist eine Regel von
-   Container-Queries, über die man einmal stolpert: Ein Element kann sich mit
-   seiner EIGENEN Query nicht selbst umstellen. Genau das wäre hier nötig
-   (`aspect-ratio`, `max-width`), also trägt die Hülle den Container und
-   `.spektrum` wird als ihr Kind umgestellt. `.spektrum` bleibt trotzdem
-   selbst ein Container – die Schriftgrößen im Kreis rechnen in `cqw` und
-   sollen sich nach dem Kreis richten, nicht nach der Spalte. */
-.spektrum-wrap { container-type: inline-size; }
+   HILFT DABEI: `hyphens: auto` mit `lang="de"` am <html>. „Tourette-Syndrom"
+   bricht ohnehin am eigenen Bindestrich, „Hochbegabung" wird zu „Hoch-" und
+   „begabung" – genau so steht es in der Vorlage.
 
+   NACHGEMESSEN, damit niemand daran vorbeirechnet: Ring-Radius bleibt 32 %,
+   Feldradius wird 17,5 %, macht 49,5 % – also ein halbes Prozent Luft zum
+   Rand des Kastens. Wer die Felder weiter vergrößert, schneidet sie ab. */
 @container (max-width: 430px) {
-    .spektrum {
-        aspect-ratio: auto;
-        max-width: 22rem;
-        text-align: center;
-    }
-    .spektrum-kern,
     .spektrum-feld {
-        position: static;
-        translate: none;
-        margin: 0;
-        width: auto;
-        aspect-ratio: auto;
-        border-radius: 999px;
-        display: inline-grid;
+        width: 35%;
+        padding: 0 .25em;
+        font-size: clamp(.68rem, 3.5cqw, .82rem);
     }
-    /* `:nth-child(n)` trifft alle sechs und ist NUR wegen der Spezifität da:
-       Die Plätze auf dem Ring stehen als `.spektrum-feld:nth-child(1)` usw.
-       geschrieben, also Klasse plus Pseudoklasse. Eine Container-Query erhöht
-       die Spezifität NICHT – das `margin: 0` eine Zeile darüber ist damit
-       schwächer und verliert, obwohl es später steht. Ohne diese Zeile
-       behalten die Pillen ihre Ringabstände und liegen wild verstreut
-       übereinander (nachgemessen: margin-top -102 px am ersten Feld). */
-    .spektrum-feld:nth-child(n) { margin: 0; }
     .spektrum-kern {
-        padding: .45rem 1.2rem;
-        margin-bottom: .8rem;
-        font-size: 1.05rem;
-    }
-    .spektrum-ring {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: .45rem;
-    }
-    .spektrum-feld {
-        padding: .4rem .85rem;
-        font-size: .82rem;
+        width: 40%;
+        font-size: clamp(.78rem, 4.4cqw, 1.2rem);
     }
 }
 

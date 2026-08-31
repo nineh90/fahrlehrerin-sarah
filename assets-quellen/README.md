@@ -233,8 +233,8 @@ ausgeliefert. Zwei Gründe, jeder für sich ausreichend:
 Der Nachbau erledigt beides und kostet nichts: sechs Listeneinträge, ein
 Absatz, gut hundert Zeilen CSS. Er trägt Sarahs Regenbogen statt der Farben
 der Vorlage, wächst mit der Schriftgröße des Browsers, funktioniert in allen
-drei Farbmodi und wird unter 430 px Spaltenbreite zu einer Reihe von Pillen,
-statt die Schrift auf 10 px zu schrumpfen.
+drei Farbmodi und bleibt in jeder Spaltenbreite ein Kreis – schmal wachsen
+die Felder und die Schrift darf bis 0,68 rem heruntergehen.
 
 **Wer die Vorlage doch einmal braucht** (etwa zum Vergleich), findet sie in
 diesem Ordner. Sie gehört nicht ins Repo und nicht auf den Server.

@@ -89,19 +89,17 @@
             </div>
 
             <div class="duo-media">
-                <div class="spektrum-wrap">
-                    <figure class="spektrum">
-                        <p class="spektrum-kern">Neurodivergenz</p>
-                        <ul class="spektrum-ring">
-                            <li class="spektrum-feld">Hochbegabung</li>
-                            <li class="spektrum-feld">Autismus</li>
-                            <li class="spektrum-feld">Tourette-Syndrom</li>
-                            <li class="spektrum-feld">Dyskalkulie</li>
-                            <li class="spektrum-feld">Dyslexie</li>
-                            <li class="spektrum-feld">AD(H)S</li>
-                        </ul>
-                    </figure>
-                </div>
+                <figure class="spektrum">
+                    <p class="spektrum-kern">Neurodivergenz</p>
+                    <ul class="spektrum-ring">
+                        <li class="spektrum-feld">Hochbegabung</li>
+                        <li class="spektrum-feld">Autismus</li>
+                        <li class="spektrum-feld">Tourette-Syndrom</li>
+                        <li class="spektrum-feld">Dyskalkulie</li>
+                        <li class="spektrum-feld">Dyslexie</li>
+                        <li class="spektrum-feld">AD(H)S</li>
+                    </ul>
+                </figure>
             </div>
         </div>
     </div>

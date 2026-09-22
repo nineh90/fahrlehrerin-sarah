@@ -15,9 +15,11 @@
  * Körpers und ist damit der LETZTE Tab-Stopp. Wo sie zu sehen ist, entscheidet
  * das CSS; in welcher Reihenfolge sie bedient wird, entscheidet das Markup.
  *
- * Die Adressen kommen aus der Konfiguration (TIKTOK_HANDLE, INSTAGRAM_HANDLE in
- * der .env) – dieselben Ziele wie im Fuß, auf /kontakt und im TikTok-Band der
- * Startseite. Ändert Sarah einen Handle, ändert sie ihn an einer Stelle.
+ * Die Adressen kommen aus der Konfiguration (TIKTOK_HANDLE, INSTAGRAM_HANDLE,
+ * YOUTUBE_HANDLE in der .env) – dieselben Ziele wie im Fuß, auf /kontakt und im
+ * TikTok-Band der Startseite. Ändert Sarah einen Handle, ändert sie ihn an einer
+ * Stelle. YouTube ist seit SAR-130 der dritte Kanal; die Leiste wächst nach
+ * unten (siehe theme.css), der Knopf darüber bleibt, wo er ist.
  */
 ?>
 <nav class="social-rail" aria-label="Sarah auf Social Media">
@@ -43,5 +45,10 @@
        target="_blank" rel="noopener noreferrer">
         <?= icon('instagram') ?>
         <span class="rand-tab-name">Instagram<span class="sr-only"> – Sarahs Kanal, öffnet in neuem Tab</span></span>
+    </a>
+    <a class="rand-tab social-rail-tab" href="<?= e(youtube_url()) ?>"
+       target="_blank" rel="noopener noreferrer">
+        <?= icon('youtube') ?>
+        <span class="rand-tab-name">YouTube<span class="sr-only"> – Sarahs Kanal, öffnet in neuem Tab</span></span>
     </a>
 </nav>

@@ -117,6 +117,7 @@ $config = [
     'social' => [
         'tiktok_handle'    => ltrim((string) env('TIKTOK_HANDLE', 'fahrlehrerin_sarah'), '@'),
         'instagram_handle' => ltrim((string) env('INSTAGRAM_HANDLE', 'fahrlehrerinsarah'), '@'),
+        'youtube_handle'   => ltrim((string) env('YOUTUBE_HANDLE', 'FahrlehrerinSarah'), '@'),
     ],
     /* KONTAKTDATEN – DIE EINZIGE QUELLE. Seit dem 21.08.2026 stehen sie nicht
        mehr zusätzlich in der .env, und das ist der Punkt: Vorher standen sie

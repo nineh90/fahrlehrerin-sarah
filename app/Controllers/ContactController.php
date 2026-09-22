@@ -125,7 +125,7 @@ final class ContactController
                Vorschau auch stehen, um wen es geht und wo. */
             'metaDescription' => 'So erreichst du Sarah – Fahrlehrerin in '
                 . area_sentence() . '. Telefon, E-Mail, Nachricht über das '
-                . 'Formular, TikTok und Instagram.',
+                . 'Formular, TikTok, Instagram und YouTube.',
             'values'          => $values,
             'errors'          => $errors,
         ]);

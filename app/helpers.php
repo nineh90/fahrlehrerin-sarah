@@ -346,6 +346,10 @@ function icon(string $name): string
         'accessibility' => '<circle cx="12" cy="12" r="9.2"/><circle cx="12" cy="7.4" r="1.5"/><path d="M7.6 10.4h8.8"/><path d="M12 10.4v3.4"/><path d="m12 13.8-1.9 4.4M12 13.8l1.9 4.4"/>',
         'tiktok'    => '<path d="M16 4c.4 2.4 2 4 4.4 4.2v3.1c-1.7.1-3.2-.4-4.4-1.3v5.6a5.9 5.9 0 1 1-5.1-5.8v3.2a2.7 2.7 0 1 0 1.9 2.6V4Z"/>',
         'instagram' => '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/>',
+        /* YouTube (SAR-130): der abgerundete Bildschirm mit dem Abspieldreieck.
+           Das Dreieck ist gefüllt wie der Punkt beim Instagram-Zeichen – als
+           reine Kontur wäre es auf 20 px kaum mehr als ein Strich. */
+        'youtube'   => '<rect x="2.6" y="5.4" width="18.8" height="13.2" rx="4"/><path d="M10 9.3v5.4l4.7-2.7Z" fill="currentColor"/>',
         /* NEURODIVERGENZ: die Unendlichkeitsschleife (SAR-65). Das ist das
            Zeichen, das die neurodivergente Community selbst benutzt – und
            ausdrücklich NICHT das Puzzleteil, das dort als abwertend gilt
@@ -521,6 +525,12 @@ function tiktok_url(): string
 function instagram_url(): string
 {
     return 'https://www.instagram.com/' . config('social.instagram_handle');
+}
+
+/** Profil-URL zu Sarahs YouTube-Kanal (SAR-130). */
+function youtube_url(): string
+{
+    return 'https://www.youtube.com/@' . config('social.youtube_handle');
 }
 
 /**

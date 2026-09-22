@@ -219,7 +219,7 @@
                      hört und findet niemand sie doppelt.
 
                      Die Adressen kommen aus derselben Quelle wie überall
-                     (TIKTOK_HANDLE, INSTAGRAM_HANDLE in der .env). */ ?>
+                     (TIKTOK_HANDLE, INSTAGRAM_HANDLE, YOUTUBE_HANDLE in der .env). */ ?>
             <div class="nav-social">
                 <a href="<?= e(tiktok_url()) ?>" target="_blank" rel="noopener noreferrer">
                     <?= icon('tiktok') ?>
@@ -228,6 +228,10 @@
                 <a href="<?= e(instagram_url()) ?>" target="_blank" rel="noopener noreferrer">
                     <?= icon('instagram') ?>
                     Instagram<span class="sr-only"> – Sarahs Kanal, öffnet in neuem Tab</span>
+                </a>
+                <a href="<?= e(youtube_url()) ?>" target="_blank" rel="noopener noreferrer">
+                    <?= icon('youtube') ?>
+                    YouTube<span class="sr-only"> – Sarahs Kanal, öffnet in neuem Tab</span>
                 </a>
             </div>
         </nav>

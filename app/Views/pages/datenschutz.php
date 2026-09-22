@@ -127,12 +127,12 @@
             fremden Anbieter aufgebaut, deine IP-Adresse verlässt diese Seite also nicht.
         </p>
 
-        <h2>TikTok und Instagram</h2>
+        <h2>TikTok, Instagram und YouTube</h2>
         <p>
             Sarahs Kanäle sind ausschließlich verlinkt, nicht eingebettet. Daten werden
-            also erst dann an TikTok oder Instagram übertragen, wenn du den Link bewusst
-            anklickst und die jeweilige Plattform öffnest. Dort gelten deren
-            Datenschutzbestimmungen.
+            also erst dann an TikTok, Instagram oder YouTube übertragen, wenn du den
+            Link bewusst anklickst und die jeweilige Plattform öffnest. Dort gelten
+            deren Datenschutzbestimmungen.
         </p>
 
         <h2>Deine Rechte</h2>

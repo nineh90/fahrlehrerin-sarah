@@ -129,6 +129,10 @@ final class Seo
         if ($instagram !== '') {
             $kanaele[] = 'https://www.instagram.com/' . $instagram . '/';
         }
+        $youtube = (string) config('social.youtube_handle', '');
+        if ($youtube !== '') {
+            $kanaele[] = 'https://www.youtube.com/@' . $youtube;
+        }
         if ($kanaele !== []) {
             $daten['sameAs'] = $kanaele;
         }

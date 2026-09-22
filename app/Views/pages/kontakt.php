@@ -115,6 +115,12 @@ $hatFehler = static function (array $felder) use ($errors): string {
                     </a>
                 </li>
                 <li>
+                    <span class="contact-label">YouTube</span>
+                    <a href="<?= e(youtube_url()) ?>" target="_blank" rel="noopener noreferrer">
+                        @<?= e(config('social.youtube_handle')) ?>
+                    </a>
+                </li>
+                <li>
                     <span class="contact-label">Unterwegs in</span>
                     <span><?= e(implode(' · ', config('contact.area'))) ?></span>
                 </li>

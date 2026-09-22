@@ -586,7 +586,7 @@
         var BLOCKS = [
             '.duo-text', '.duo-media',
             '.card-grid > *', '.split-grid > *', '.process > *',
-            '.section-head', '.notice', '.quote', '.cta-inner',
+            '.section-head', '.video-feed-head', '.video-grid > *', '.notice', '.quote', '.cta-inner',
             // Die Anlese-Abschnitte kommen einzeln und nacheinander herein,
             // wie Karten in einem Raster. Wichtig ist dabei nur, dass hier
             // der ABSCHNITT steht und nicht sein aufklappbarer Inhalt: Der
@@ -604,7 +604,7 @@
         ].join(', ');
 
         var ZOOM           = '.quote, .cta-inner';
-        var STAGGER_PARENT = '.card-grid, .split-grid, .process, .accordion';
+        var STAGGER_PARENT = '.card-grid, .split-grid, .process, .accordion, .video-grid';
 
         var found = Array.prototype.slice.call(main.querySelectorAll(BLOCKS))
             // Der Hero hat seinen eigenen Auftritt beim Laden (heroDrop /

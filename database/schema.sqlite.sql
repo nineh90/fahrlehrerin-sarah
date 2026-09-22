@@ -4,6 +4,7 @@
 -- Aufruf wiederholbar: jede Migration setzt die Datenbank neu auf.
 -- ACHTUNG: Das löscht vorhandene Daten – im Demo-Betrieb ist das gewollt.
 
+DROP TABLE IF EXISTS videos;
 DROP TABLE IF EXISTS notifications;
 DROP TABLE IF EXISTS booking_log;
 DROP TABLE IF EXISTS bookings;
@@ -133,6 +134,26 @@ CREATE TABLE notifications (
     read_at        DATETIME,
     created_at     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (booking_id) REFERENCES bookings (id) ON DELETE SET NULL
+);
+
+-- Sarahs Videos für die Startseite (SAR-129), eingetragen per Link unter
+-- /admin/videos. Dieselbe Anweisung steht in app/Models/Video.php und legt
+-- die Tabelle auf der Produktionsdatenbank beim ersten Zugriff an – dort
+-- läuft migrate.php nie. Wer hier eine Spalte ändert, ändert sie dort mit.
+CREATE TABLE IF NOT EXISTS videos (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    platform    TEXT    NOT NULL DEFAULT 'tiktok' CHECK (platform IN ('tiktok')),
+    external_id TEXT    NOT NULL,
+    url         TEXT    NOT NULL,
+    caption     TEXT    NOT NULL DEFAULT '',
+    title       TEXT,
+    thumb_file  TEXT    NOT NULL,
+    thumb_w     INTEGER NOT NULL,
+    thumb_h     INTEGER NOT NULL,
+    posted_at   TEXT    NOT NULL,
+    visible     INTEGER NOT NULL DEFAULT 1,
+    created_at  TEXT    NOT NULL DEFAULT (datetime('now','localtime')),
+    UNIQUE (platform, external_id)
 );
 
 CREATE INDEX idx_slots_starts_at     ON slots (starts_at);

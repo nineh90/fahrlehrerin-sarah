@@ -50,6 +50,9 @@ $router->post('/kontakt',            [ContactController::class, 'store']);
    /wegbegleiter gibt es bewusst nicht: Die Übersicht ist der Abschnitt unten
    auf der Startseite. */
 $router->get('/wegbegleiter/{slug}', [PartnerController::class, 'show']);
+/* SAR-129: Vorschaubilder der Videos auf der Startseite. Sie liegen in
+   storage/ und nicht in public/ – siehe VideoController. */
+$router->get('/video-vorschau/{id}', [VideoController::class, 'thumb']);
 $router->get('/impressum',           [PageController::class, 'impressum']);
 $router->get('/datenschutz',         [PageController::class, 'datenschutz']);
 $router->get('/robots.txt',          [RobotsController::class, 'index']);
@@ -107,6 +110,12 @@ $router->post('/admin/buchungen/{id}/stornieren',   [AdminBookingController::cla
 $router->get('/admin/benachrichtigungen',                  [AdminNotificationController::class, 'index']);
 $router->post('/admin/benachrichtigungen/gelesen',         [AdminNotificationController::class, 'markAllRead']);
 $router->post('/admin/benachrichtigungen/{id}/gelesen',    [AdminNotificationController::class, 'markRead']);
+
+$router->get('/admin/videos',                   [AdminVideoController::class, 'index']);
+$router->post('/admin/videos',                  [AdminVideoController::class, 'store']);
+$router->post('/admin/videos/{id}',             [AdminVideoController::class, 'update']);
+$router->post('/admin/videos/{id}/sichtbar',    [AdminVideoController::class, 'toggle']);
+$router->post('/admin/videos/{id}/loeschen',    [AdminVideoController::class, 'destroy']);
 
 try {
     $router->dispatch();

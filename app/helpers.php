@@ -349,6 +349,9 @@ function icon(string $name): string
         /* YouTube (SAR-130): der abgerundete Bildschirm mit dem Abspieldreieck.
            Das Dreieck ist gefüllt wie der Punkt beim Instagram-Zeichen – als
            reine Kontur wäre es auf 20 px kaum mehr als ein Strich. */
+        /* Abspielzeichen auf den Video-Vorschauen der Startseite (SAR-129).
+           Gefüllt, weil es auf einem Foto liegt – eine Kontur ginge darin unter. */
+        'play'      => '<path d="M8.5 5.6v12.8l10-6.4Z" fill="currentColor"/>',
         'youtube'   => '<rect x="2.6" y="5.4" width="18.8" height="13.2" rx="4"/><path d="M10 9.3v5.4l4.7-2.7Z" fill="currentColor"/>',
         /* NEURODIVERGENZ: die Unendlichkeitsschleife (SAR-65). Das ist das
            Zeichen, das die neurodivergente Community selbst benutzt – und

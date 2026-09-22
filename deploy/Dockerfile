@@ -14,6 +14,15 @@ FROM php:8.3-apache
 # bei jedem Seitenaufruf neu geladen.
 RUN a2enmod rewrite headers expires
 
+# GD zum Verkleinern der TikTok-Vorschaubilder (SAR-129, app/TikTok.php).
+# TikTok liefert sie in 2160 × 3840 px; ohne GD landen sie ungekürzt auf der
+# Startseite. Die -dev-Pakete bringen die Laufzeitbibliotheken mit.
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends libjpeg62-turbo-dev libpng-dev libwebp-dev \
+ && docker-php-ext-configure gd --with-jpeg --with-webp \
+ && docker-php-ext-install -j"$(nproc)" gd \
+ && rm -rf /var/lib/apt/lists/*
+
 # Docroot ist public/. Alles darüber – app/, storage/, .env – liegt damit
 # außerhalb der Reichweite des Webservers und ist nicht abrufbar.
 RUN sed -ri 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf \

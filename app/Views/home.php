@@ -458,6 +458,17 @@ $schoolUrl = trim((string) config('school.url'));
                     Einwilligung. Handle steht in der .env (TIKTOK_HANDLE).
                 */ ?>
             </div>
+        </div>
+
+        <?php /* SARAHS NEUESTE TIKTOKS (SAR-129), direkt unter dem Video und
+                 nicht als eigener Abschnitt: Es ist dasselbe Thema – ihre
+                 Kanäle –, und ein eigener Abschnitt hätte den Hell-Dunkel-
+                 Wechsel der Startseite verschoben. Eingetragen werden sie im
+                 Admin unter /admin/videos. Ist die Liste leer, steht hier
+                 nichts, auch keine Überschrift. */ ?>
+        <?php if (!empty($videos)): ?>
+            <?php require APP_ROOT . '/app/Views/partials/video-feed.php'; ?>
+        <?php endif; ?>
     </div>
 </section>
 

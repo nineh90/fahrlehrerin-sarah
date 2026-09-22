@@ -40,6 +40,10 @@ final class HomeController
             /* Sarah als Person plus die Website selbst. Beides nur hier: Die
                Startseite ist die Seite, die für „wer ist das" steht. */
             'jsonLd'          => [Seo::person(), Seo::website()],
+            /* Sarahs neueste TikToks (SAR-129). Wirft nie – fehlt etwas,
+               fehlt nur der Abschnitt. Damit stellt die Startseite wieder
+               eine Datenbankabfrage, siehe den Kommentar oben. */
+            'videos'          => Video::latestVisible(),
         ]);
     }
 }

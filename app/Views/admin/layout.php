@@ -50,6 +50,7 @@
             <a class="<?= trim(nav_active('/admin/termine')) ?>" href="<?= url('/admin/termine') ?>">Termine</a>
             <a class="<?= trim(nav_active('/admin/buchungen')) ?>" href="<?= url('/admin/buchungen') ?>">Buchungen</a>
             <a class="<?= trim(nav_active('/admin/schueler')) ?>" href="<?= url('/admin/schueler') ?>">Fahrschüler:innen</a>
+            <a class="<?= trim(nav_active('/admin/videos')) ?>" href="<?= url('/admin/videos') ?>">Videos</a>
         </nav>
 
         <div class="admin-sidebar-foot">

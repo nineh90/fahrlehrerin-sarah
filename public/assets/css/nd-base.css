@@ -2790,6 +2790,13 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
    demselben Element würde sich gegenseitig überschreiben.
    ========================================================================= */
 .video-feed { margin-top: clamp(2.4rem, 5vw, 3.6rem); }
+/* DREI KACHELN, IMMER EINE REIHE (Nils, 22.09.2026: höchstens drei Videos).
+   Über die volle Containerbreite wäre jede Kachel im Hochformat über 600 px
+   hoch – drei Handybildschirme nebeneinander, die den Abschnitt erschlagen.
+   Deshalb hält der Block eine eigene Breite und steht mittig.
+   Auf dem Handy bleibt es bei drei Spalten statt zwei: Zwei plus eine
+   verwaiste dritte Kachel sähe nach Fehler aus. */
+.video-feed { max-width: 860px; margin-inline: auto; }
 .video-feed-head {
     display: flex; align-items: baseline; justify-content: space-between;
     gap: .6rem 1.2rem; flex-wrap: wrap; margin-bottom: 1.2rem;
@@ -2798,7 +2805,7 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
 
 .video-grid {
     list-style: none; margin: 0; padding: 0;
-    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: clamp(.9rem, 2vw, 1.5rem);
 }
 .video-card a { display: flex; flex-direction: column; gap: .45rem; color: var(--text); text-decoration: none; }
@@ -2832,8 +2839,11 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
 }
 .video-card-meta { color: var(--muted); font-size: var(--fs-xs); }
 
-@media (max-width: 820px) {
-    .video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 559px) {
+    .video-grid { gap: .6rem; }
+    .video-card-title { font-size: var(--fs-xs); -webkit-line-clamp: 2; line-clamp: 2; }
+    .video-card-play { left: .45rem; bottom: .45rem; width: 34px; height: 34px; }
+    .video-card-play svg { width: 18px; height: 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
     .video-card-thumb { transition: none; }

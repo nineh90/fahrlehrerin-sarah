@@ -22,8 +22,8 @@ final class Video
         'tiktok' => 'TikTok',
     ];
 
-    /** So viele stehen auf der Startseite. Vier füllen eine Reihe, gestapelt zwei. */
-    public const HOME_LIMIT = 4;
+    /** So viele stehen auf der Startseite – eine Reihe, auch auf dem Handy (Nils, 22.09.2026). */
+    public const HOME_LIMIT = 3;
 
     private static bool $ready = false;
 

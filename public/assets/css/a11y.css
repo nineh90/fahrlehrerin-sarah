@@ -643,3 +643,34 @@ html[data-kontrast='hoch'] .partner-head-logo--plate {
         border-radius: var(--radius-sm);
     }
 }
+
+/* --- Im Admin: unten rechts statt am linken Rand -------------------------
+   Links klebt dort die dunkle Seitenleiste, und der Reiter lag mitten auf
+   ihren Menüpunkten (Nils, 22.09.2026: „im Weg"). Unten rechts gehört im
+   Admin niemandem – dieselbe Ecke, in die er auf dem Handy ohnehin zieht,
+   mit denselben Maßen. Rechts verankert wächst er beim Aufklappen des
+   Namens nach LINKS, bleibt also im Bild.
+
+   Das Panel öffnet sich darüber, rechts bündig, statt mittig links neben
+   einem Knopf, der dort nicht mehr steht. Auf dem Handy bleibt es bei der
+   Regel oben (volle Breite).
+
+   Der Abstand unter dem Inhalt sorgt dafür, dass der Knopf am Seitenende
+   nicht auf den Aktionsknöpfen der letzten Tabellenzeile liegt. */
+.admin-body .a11y-tab {
+    top: auto; bottom: 14px;
+    left: auto; right: 14px;
+    transform: none;
+    height: 44px;
+    margin-left: 0;
+    border-left: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+}
+.admin-body .admin-content { padding-bottom: 5rem; }
+@media (min-width: 560px) {
+    .admin-body .a11y-panel {
+        left: auto; right: 14px;
+        top: auto; bottom: 70px;
+        transform: none;
+    }
+}

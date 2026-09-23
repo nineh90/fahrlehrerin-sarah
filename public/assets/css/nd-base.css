@@ -1355,6 +1355,31 @@ html:not(.has-js) .nav-group:focus-within > .nav-submenu {
 .notice p { margin: 0; color: var(--text-soft); font-size: var(--fs-md); }
 .notice p + p { margin-top: .5rem; }
 
+/* Ein Dokument zum Öffnen (SAR-131: Zertifikat auf /neurodivergenz):
+   Vorschaubild plus Titel und Linkzeile. Schmal gestapelt, Vorschau oben
+   über die volle Breite; ab 600 px steht sie links neben dem Text, auf
+   ein Drittel begrenzt. Keine Drehung wie bei `.photo` – ein Dokument
+   liegt gerade, sonst liest es sich wie ein Schnappschuss. */
+.doc-card {
+    display: grid; grid-template-columns: 1fr; gap: 1rem; align-items: center;
+    margin-top: 1.6rem; padding: 1.2rem 1.4rem; border-radius: var(--radius);
+    background: var(--bg-card); border: 1px solid var(--border);
+}
+.doc-card-preview {
+    display: block; max-width: 420px; border-radius: var(--radius-sm); overflow: hidden;
+    border: 1px solid var(--border); box-shadow: var(--shadow);
+    transition: box-shadow .15s, translate .15s;
+}
+.doc-card-preview:hover { box-shadow: var(--shadow-lg); translate: 0 -3px; }
+.doc-card-preview img { display: block; width: 100%; height: auto; }
+.doc-card h3 { margin: 0 0 .3rem; font-size: var(--fs-md); }
+.doc-card p { margin: 0; font-size: var(--fs-md); }
+.doc-card p a { font-weight: 700; text-decoration: underline; }
+.doc-card-meta { color: var(--muted); font-size: var(--fs-sm); white-space: nowrap; }
+@media (min-width: 600px) {
+    .doc-card { grid-template-columns: minmax(180px, 280px) 1fr; gap: 1.4rem; }
+}
+
 @media (max-width: 820px) {
     .duo, .duo--narrow-media, .duo--narrow-media-left { grid-template-columns: 1fr; }
     .duo--text-first .duo-media { order: 0; }

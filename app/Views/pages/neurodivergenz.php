@@ -348,6 +348,38 @@
             </div>
         </div>
 
+        <?php /* SARAHS ZERTIFIKAT, seit SAR-131 (23.09.2026). Es steht direkt
+                 unter „Was ich nicht beurteilen kann", weil es die andere Hälfte
+                 davon ist: Ärztin ist sie nicht – ausgebildet für genau diese
+                 Menschen aber schon.
+
+                 GEZEIGT ALS VORSCHAU, GEÖFFNET ALS PDF. Ein eingebetteter
+                 PDF-Viewer taugt auf dem Handy nicht und ist für die Suche
+                 unsichtbar. Die Vorschau ist ein Standbild der einzigen Seite
+                 (pdftoppm → magick, 800 px), das PDF öffnet im neuen Tab, dort
+                 lässt es sich speichern. Kein `download`-Attribut: Auf dem
+                 Handy will man es ansehen, nicht in einem Ordner suchen.
+
+                 Die Wörter hier sind VON UNS – die einzigen auf dieser Seite
+                 (siehe Kopf der Datei). Bewusst nur der Titel des Zertifikats
+                 und eine Linkzeile, keine Erklärung dazu. */ ?>
+        <div class="doc-card">
+            <a class="doc-card-preview"
+               href="<?= asset('docs/sarah-zertifikat-neurodiversitaetscoach.pdf') ?>"
+               target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+                <img src="<?= asset('img/zertifikat-neurodiversitaetscoach.jpg') ?>"
+                     alt="" width="800" height="566" loading="lazy" decoding="async">
+            </a>
+            <div>
+                <h3>Ausbildung zum Neurodiversitätscoach</h3>
+                <p>
+                    <a href="<?= asset('docs/sarah-zertifikat-neurodiversitaetscoach.pdf') ?>"
+                       target="_blank" rel="noopener">Mein Zertifikat ansehen</a>
+                    <span class="doc-card-meta">(PDF, 590 KB)</span>
+                </p>
+            </div>
+        </div>
+
         <?php /* Der Weg zur Nachbarseite. Bewusst eine nüchterne Zeile und kein
                  Kasten mit Werbetext: Die beiden Seiten stehen im Menü
                  nebeneinander, hier steht nur derselbe Weg für alle, die das
